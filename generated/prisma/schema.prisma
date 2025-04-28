@@ -1,0 +1,219 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String            @id @default(uuid())
+  email             String            @unique
+  motDePasse        String            @map("mot_de_passe")
+  nom               String
+  prenom            String
+  image             String?
+  role              RoleUser
+  departement       String
+  faculte           String
+  specialite        String?
+  niveauEtudes      String?           @map("niveau_etudes")
+  dateInscription   DateTime          @default(now()) @map("date_inscription")
+  derniereConnexion DateTime?         @map("derniere_connexion")
+  estActif          Boolean           @default(true) @map("est_actif")
+  universite        String // Nom de l'université de l'utilisateur
+  contributions     Ressource[]
+  favoris           Favori[]
+  commentaires      Commentaire[]
+  notations         Notation[]
+  historiques       HistoriqueAcces[]
+  collections       Collection[]
+}
+
+enum RoleUser {
+  ETUDIANT
+  ENSEIGNANT
+  CHERCHEUR
+  BIBLIOTHECAIRE
+  ADMINISTRATEUR
+}
+
+model Ressource {
+  id                  String                @id @default(uuid())
+  titre               String
+  description         String                @db.Text
+  type                TypeRessource
+  langue              String                @default("fr")
+  urlFichier          String                @map("url_fichier")
+  format              String // pdf, docx, etc.
+  referenceBlockchain String                @unique @map("reference_blockchain")
+  dateCreation        DateTime              @default(now()) @map("date_creation")
+  dateModification    DateTime              @updatedAt @map("date_modification")
+  estPublique         Boolean               @default(true) @map("est_publique")
+  motsCles            String                @map("mots_cles") // Stockage de mots-clés sous forme de texte
+  auteurId            String                @map("auteur_id")
+  universiteSource    String                @map("universite_source") // Université d'origine de la ressource
+  estExterne          Boolean               @default(false) @map("est_externe") // Indique si la ressource provient d'une autre université
+  auteur              User                  @relation(fields: [auteurId], references: [id])
+  favoris             Favori[]
+  commentaires        Commentaire[]
+  notations           Notation[]
+  historiques         HistoriqueAcces[]
+  collections         CollectionRessource[]
+  partages            PartageUniversite[]
+}
+
+enum TypeRessource {
+  MEMOIRE
+  THESE
+  ARTICLE_SCIENTIFIQUE
+  COURS
+  SUPPORT_PEDAGOGIQUE
+  RAPPORT_RECHERCHE
+  LIVRE
+  CONFERENCE
+}
+
+model Favori {
+  id          String    @id @default(uuid())
+  userId      String    @map("user_id")
+  ressourceId String    @map("ressource_id")
+  dateAjout   DateTime  @default(now()) @map("date_ajout")
+  note        String?   @db.Text
+  user        User      @relation(fields: [userId], references: [id])
+  ressource   Ressource @relation(fields: [ressourceId], references: [id])
+
+  @@unique([userId, ressourceId])
+}
+
+model Commentaire {
+  id           String    @id @default(uuid())
+  userId       String    @map("user_id")
+  ressourceId  String    @map("ressource_id")
+  contenu      String    @db.Text
+  dateCreation DateTime  @default(now()) @map("date_creation")
+  estModere    Boolean   @default(false) @map("est_modere")
+  user         User      @relation(fields: [userId], references: [id])
+  ressource    Ressource @relation(fields: [ressourceId], references: [id])
+}
+
+model Notation {
+  id           String    @id @default(uuid())
+  userId       String    @map("user_id")
+  ressourceId  String    @map("ressource_id")
+  note         Int // 1-5
+  dateNotation DateTime  @default(now()) @map("date_notation")
+  user         User      @relation(fields: [userId], references: [id])
+  ressource    Ressource @relation(fields: [ressourceId], references: [id])
+
+  @@unique([userId, ressourceId])
+}
+
+model HistoriqueAcces {
+  id            String    @id @default(uuid())
+  userId        String    @map("user_id")
+  ressourceId   String    @map("ressource_id")
+  dateAcces     DateTime  @default(now()) @map("date_acces")
+  typeAcces     TypeAcces @map("type_acces")
+  ipAcces       String    @map("ip_acces")
+  universiteSrc String?   @map("universite_source") // Si accès externe
+  user          User      @relation(fields: [userId], references: [id])
+  ressource     Ressource @relation(fields: [ressourceId], references: [id])
+}
+
+enum TypeAcces {
+  CONSULTATION
+  TELECHARGEMENT
+  CITATION
+  PARTAGE
+}
+
+model DonneesRecommandation {
+  id              String          @id @default(uuid())
+  userId          String          @map("user_id")
+  ressourceId     String          @map("ressource_id")
+  score           Float // Score de pertinence calculé
+  typeInteraction TypeInteraction @map("type_interaction")
+  dateDonnee      DateTime        @default(now()) @map("date_donnee")
+
+  @@index([userId])
+  @@index([ressourceId])
+}
+
+enum TypeInteraction {
+  VUE
+  TELECHARGEMENT
+  FAVORI
+  NOTATION
+  TEMPS_LECTURE
+  RECHERCHE_SIMILAIRE
+}
+
+model Collection {
+  id           String                @id @default(uuid())
+  userId       String                @map("user_id")
+  nom          String
+  description  String?               @db.Text
+  estPublique  Boolean               @default(false) @map("est_publique")
+  dateCreation DateTime              @default(now()) @map("date_creation")
+  user         User                  @relation(fields: [userId], references: [id])
+  ressources   CollectionRessource[]
+}
+
+model CollectionRessource {
+  id           String     @id @default(uuid())
+  collectionId String     @map("collection_id")
+  ressourceId  String     @map("ressource_id")
+  dateAjout    DateTime   @default(now()) @map("date_ajout")
+  notes        String?    @db.Text
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  ressource    Ressource  @relation(fields: [ressourceId], references: [id])
+
+  @@unique([collectionId, ressourceId])
+}
+
+// Modèle très simplifié pour les partages inter-universitaires
+model PartageUniversite {
+  id                    String    @id @default(uuid())
+  ressourceId           String    @map("ressource_id")
+  universiteSource      String    @map("universite_source")
+  universiteDestination String    @map("universite_destination")
+  datePartage           DateTime  @default(now()) @map("date_partage")
+  estActif              Boolean   @default(true) @map("est_actif")
+  ressource             Ressource @relation(fields: [ressourceId], references: [id])
+
+  @@unique([ressourceId, universiteDestination])
+}
+
+model TransactionBlockchain {
+  id                    String            @id @default(uuid())
+  referenceBlockchain   String            @unique @map("reference_blockchain")
+  typeTransaction       TypeTransaction   @map("type_transaction")
+  ressourceId           String?           @map("ressource_id")
+  universiteOrigine     String            @map("universite_origine")
+  universiteDestination String?           @map("universite_destination")
+  dateTransaction       DateTime          @default(now()) @map("date_transaction")
+  statut                StatutTransaction
+  hashTransaction       String            @unique @map("hash_transaction")
+  donneesTechniques     Json?             @map("donnees_techniques")
+}
+
+enum TypeTransaction {
+  PUBLICATION
+  MODIFICATION
+  ACCES
+  SUPPRESSION
+  PARTAGE
+}
+
+enum StatutTransaction {
+  INITIEE
+  VALIDEE
+  REJETEE
+  ANNULEE
+}
