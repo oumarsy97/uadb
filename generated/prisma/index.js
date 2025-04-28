@@ -427,11 +427,12 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "mysql://oumar:passer123@localhost:3306/dbuadb"
+        "value": null
       }
     }
   },

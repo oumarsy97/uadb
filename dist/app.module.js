@@ -14,6 +14,7 @@ const utilisateurs_module_1 = require("./users/utilisateurs.module");
 const ressources_module_1 = require("./ressources/ressources.module");
 const interactions_module_1 = require("./interactions/interactions.module");
 const collections_module_1 = require("./collections/collections.module");
+const prisma_service_1 = require("./prisma/prisma.service");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -21,7 +22,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [utilisateurs_module_1.UtilisateursModule, ressources_module_1.RessourcesModule, interactions_module_1.InteractionsModule, collections_module_1.CollectionsModule],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, prisma_service_1.PrismaService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

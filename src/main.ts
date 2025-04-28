@@ -1,4 +1,3 @@
-// src/main.ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -11,8 +10,8 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.TCP,
     options: {
-      host: '0.0.0.0',
-      port: 4000,
+      host: 'localhost',
+      port: 4000, // Microservice listens on port 4000
     },
   });
 
@@ -23,10 +22,9 @@ async function bootstrap() {
     }),
   );
   
-  // Démarrer le microservice et l'application HTTP si nécessaire
+  // Démarrer uniquement le microservice
   await app.startAllMicroservices();
-  await app.listen(4000); // Port HTTP optionnel pour les API REST
   
-  console.log(`Microservice utilisateurs démarré sur le port 4000`);
+  console.log(`Microservice démarré sur le port 4000`);
 }
 bootstrap();

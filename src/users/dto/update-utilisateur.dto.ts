@@ -24,4 +24,8 @@ export class LoginUtilisateurDto {
   @IsString()
   @IsNotEmpty({ message: 'Mot de passe obligatoire' })
   motDePasse: string;
+
+  @IsDate()
+  @IsOptional()
+  derniereConnexion: Date;
 }

@@ -1,145 +1,150 @@
-// src/utilisateurs/utilisateurs.service.ts
 import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prism.service';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
 import * as bcrypt from 'bcrypt';
-import { RoleUser } from 'generated/prisma';
+import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
 
 @Injectable()
 export class UtilisateursService {
   constructor(private prisma: PrismaService) {}
 
   async create(createUtilisateurDto: CreateUtilisateurDto) {
-    // Vérifier si l'email existe déjà
-    const utilisateurExistant = await this.prisma.utilisateur.findUnique({
+    // Vérifier si l'utilisateur existe déjà
+    const existingUser = await this.prisma.user.findUnique({
       where: { email: createUtilisateurDto.email },
     });
 
-    if (utilisateurExistant) {
-      throw new ConflictException(`Un utilisateur avec l'email ${createUtilisateurDto.email} existe déjà`);
+    if (existingUser) {
+      throw new ConflictException('Cet email est déjà utilisé');
     }
 
-    // Hachage du mot de passe
+    // Hasher le mot de passe
     const hashedPassword = await bcrypt.hash(createUtilisateurDto.motDePasse, 10);
 
-    // Création de l'utilisateur
-    const utilisateur = await this.prisma.utilisateur.create({
+    // Créer l'utilisateur
+    return this.prisma.user.create({
       data: {
-        email: createUtilisateurDto.email,
+        ...createUtilisateurDto,
         motDePasse: hashedPassword,
-        nom: createUtilisateurDto.nom,
-        prenom: createUtilisateurDto.prenom,
-        role: createUtilisateurDto.role,
-        departement: createUtilisateurDto.departement,
-        faculte: createUtilisateurDto.faculte,
-        specialite: createUtilisateurDto.specialite,
-        niveauEtudes: createUtilisateurDto.niveauEtudes,
+        dateInscription: new Date(),
       },
     });
-
-    // Exclure le mot de passe de la réponse
-    const { motDePasse, ...result } = utilisateur;
-    return result;
   }
 
   async findAll() {
-    return this.prisma.utilisateur.findMany({
+    return this.prisma.user.findMany({
       select: {
         id: true,
         email: true,
         nom: true,
         prenom: true,
+        image: true,
         role: true,
         departement: true,
         faculte: true,
         specialite: true,
         niveauEtudes: true,
-        createdAt: true,
-        updatedAt: true,
+        dateInscription: true,
+        derniereConnexion: true,
+        estActif: true,
+        universite: true,
+        // Exclure le mot de passe pour des raisons de sécurité
       },
     });
   }
 
-  async findOne(id: number) {
-    const utilisateur = await this.prisma.utilisateur.findUnique({
+  async findOne(id: string) {
+    const user = await this.prisma.user.findUnique({
       where: { id },
       select: {
         id: true,
         email: true,
         nom: true,
         prenom: true,
+        image: true,
         role: true,
         departement: true,
         faculte: true,
         specialite: true,
         niveauEtudes: true,
-        createdAt: true,
-        updatedAt: true,
+        dateInscription: true,
+        derniereConnexion: true,
+        estActif: true,
+        universite: true,
+        // Exclure le mot de passe
       },
     });
 
-    if (!utilisateur) {
-      throw new NotFoundException(`Utilisateur avec ID ${id} non trouvé`);
+    if (!user) {
+      throw new NotFoundException(`Utilisateur avec l'ID ${id} non trouvé`);
     }
 
-    return utilisateur;
+    return user;
   }
 
   async findByEmail(email: string) {
-    const utilisateur = await this.prisma.utilisateur.findUnique({
+    const user = await this.prisma.user.findUnique({
       where: { email },
     });
 
-    if (!utilisateur) {
-      throw new NotFoundException(`Utilisateur avec email ${email} non trouvé`);
+    if (!user) {
+      throw new NotFoundException(`Utilisateur avec l'email ${email} non trouvé`);
     }
 
-    return utilisateur;
+    return user;
   }
 
-  async update(id: number, updateData: Partial<CreateUtilisateurDto>) {
+  async update(id: string, updateData: UpdateUtilisateurDto) {
     // Vérifier si l'utilisateur existe
-    await this.findOne(id);
-    
-    // Préparer les données de mise à jour
-    const data: any = { ...updateData };
-    
-    // Hacher le mot de passe si fourni
+    const existingUser = await this.prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (!existingUser) {
+      throw new NotFoundException(`Utilisateur avec l'ID ${id} non trouvé`);
+    }
+
+    // Si le mot de passe est mis à jour, le hasher
     if (updateData.motDePasse) {
-      data.motDePasse = await bcrypt.hash(updateData.motDePasse, 10);
+      updateData.motDePasse = await bcrypt.hash(updateData.motDePasse, 10);
+    }
+
+    // Si l'email est mis à jour, vérifier qu'il n'est pas déjà utilisé
+    if (updateData.email && updateData.email !== existingUser.email) {
+      const emailExists = await this.prisma.user.findUnique({
+        where: { email: updateData.email },
+      });
+
+      if (emailExists) {
+        throw new ConflictException('Cet email est déjà utilisé');
+      }
     }
 
     // Mettre à jour l'utilisateur
-    const updatedUtilisateur = await this.prisma.utilisateur.update({
+    return this.prisma.user.update({
       where: { id },
-      data,
-      select: {
-        id: true,
-        email: true,
-        nom: true,
-        prenom: true,
-        role: true,
-        departement: true,
-        faculte: true,
-        specialite: true,
-        niveauEtudes: true,
-        createdAt: true,
-        updatedAt: true,
+      data: {
+        ...updateData,
+        derniereConnexion: updateData.hasOwnProperty('derniereConnexion') 
+          ? updateData.derniereConnexion
+          : undefined,
       },
     });
-
-    return updatedUtilisateur;
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     // Vérifier si l'utilisateur existe
-    await this.findOne(id);
-    
-    // Supprimer l'utilisateur
-    await this.prisma.utilisateur.delete({
+    const existingUser = await this.prisma.user.findUnique({
       where: { id },
     });
 
-    return { message: `Utilisateur avec ID ${id} supprimé avec succès` };
+    if (!existingUser) {
+      throw new NotFoundException(`Utilisateur avec l'ID ${id} non trouvé`);
+    }
+
+    // Supprimer l'utilisateur
+    return this.prisma.user.delete({
+      where: { id },
+    });
   }
 }

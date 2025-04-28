@@ -1,2 +1,128 @@
+import { UtilisateursService } from './utilisateurs.service';
+import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
 export declare class UtilisateursController {
+    private readonly utilisateursService;
+    constructor(utilisateursService: UtilisateursService);
+    create(createUtilisateurDto: CreateUtilisateurDto): Promise<{
+        email: string;
+        motDePasse: string;
+        nom: string;
+        prenom: string;
+        image: string | null;
+        role: import("generated/prisma").$Enums.RoleUser;
+        departement: string;
+        faculte: string;
+        specialite: string | null;
+        niveauEtudes: string | null;
+        universite: string;
+        derniereConnexion: Date | null;
+        estActif: boolean;
+        id: string;
+        dateInscription: Date;
+    }>;
+    findAll(): Promise<{
+        email: string;
+        nom: string;
+        prenom: string;
+        image: string | null;
+        role: import("generated/prisma").$Enums.RoleUser;
+        departement: string;
+        faculte: string;
+        specialite: string | null;
+        niveauEtudes: string | null;
+        universite: string;
+        derniereConnexion: Date | null;
+        estActif: boolean;
+        id: string;
+        dateInscription: Date;
+    }[]>;
+    findOne(id: string): Promise<{
+        email: string;
+        nom: string;
+        prenom: string;
+        image: string | null;
+        role: import("generated/prisma").$Enums.RoleUser;
+        departement: string;
+        faculte: string;
+        specialite: string | null;
+        niveauEtudes: string | null;
+        universite: string;
+        derniereConnexion: Date | null;
+        estActif: boolean;
+        id: string;
+        dateInscription: Date;
+    }>;
+    findByEmail(email: string): Promise<{
+        email: string;
+        motDePasse: string;
+        nom: string;
+        prenom: string;
+        image: string | null;
+        role: import("generated/prisma").$Enums.RoleUser;
+        departement: string;
+        faculte: string;
+        specialite: string | null;
+        niveauEtudes: string | null;
+        universite: string;
+        derniereConnexion: Date | null;
+        estActif: boolean;
+        id: string;
+        dateInscription: Date;
+    }>;
+    update(data: {
+        id: string;
+        updateData: Partial<CreateUtilisateurDto>;
+    }): Promise<{
+        email: string;
+        motDePasse: string;
+        nom: string;
+        prenom: string;
+        image: string | null;
+        role: import("generated/prisma").$Enums.RoleUser;
+        departement: string;
+        faculte: string;
+        specialite: string | null;
+        niveauEtudes: string | null;
+        universite: string;
+        derniereConnexion: Date | null;
+        estActif: boolean;
+        id: string;
+        dateInscription: Date;
+    }>;
+    remove(id: string): Promise<{
+        email: string;
+        motDePasse: string;
+        nom: string;
+        prenom: string;
+        image: string | null;
+        role: import("generated/prisma").$Enums.RoleUser;
+        departement: string;
+        faculte: string;
+        specialite: string | null;
+        niveauEtudes: string | null;
+        universite: string;
+        derniereConnexion: Date | null;
+        estActif: boolean;
+        id: string;
+        dateInscription: Date;
+    }>;
+    updateDerniereConnexion(data: {
+        id: string;
+    }): Promise<{
+        email: string;
+        motDePasse: string;
+        nom: string;
+        prenom: string;
+        image: string | null;
+        role: import("generated/prisma").$Enums.RoleUser;
+        departement: string;
+        faculte: string;
+        specialite: string | null;
+        niveauEtudes: string | null;
+        universite: string;
+        derniereConnexion: Date | null;
+        estActif: boolean;
+        id: string;
+        dateInscription: Date;
+    }>;
 }

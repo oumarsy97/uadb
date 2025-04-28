@@ -1,4 +1,3 @@
-// src/utilisateurs/utilisateurs.controller.ts
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { UtilisateursService } from './utilisateurs.service';
@@ -19,7 +18,7 @@ export class UtilisateursController {
   }
 
   @MessagePattern('findUtilisateurById')
-  async findOne(@Payload() id: number) {
+  async findOne(@Payload() id: string) {
     return this.utilisateursService.findOne(id);
   }
 
@@ -29,12 +28,19 @@ export class UtilisateursController {
   }
 
   @MessagePattern('updateUtilisateur')
-  async update(@Payload() data: { id: number; updateData: Partial<CreateUtilisateurDto> }) {
+  async update(@Payload() data: { id: string; updateData: Partial<CreateUtilisateurDto> }) {
     return this.utilisateursService.update(data.id, data.updateData);
   }
 
   @MessagePattern('removeUtilisateur')
-  async remove(@Payload() id: number) {
+  async remove(@Payload() id: string) {
     return this.utilisateursService.remove(id);
+  }
+
+  @MessagePattern('updateDerniereConnexion')
+  async updateDerniereConnexion(@Payload() data: { id: string }) {
+    return this.utilisateursService.update(data.id, { 
+      derniereConnexion: new Date() 
+    } as any);
   }
 }

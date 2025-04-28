@@ -32,6 +32,7 @@ const class_validator_2 = require("class-validator");
 class LoginUtilisateurDto {
     email;
     motDePasse;
+    derniereConnexion;
 }
 exports.LoginUtilisateurDto = LoginUtilisateurDto;
 __decorate([
@@ -44,4 +45,9 @@ __decorate([
     (0, class_validator_2.IsNotEmpty)({ message: 'Mot de passe obligatoire' }),
     __metadata("design:type", String)
 ], LoginUtilisateurDto.prototype, "motDePasse", void 0);
+__decorate([
+    (0, class_validator_1.IsDate)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Date)
+], LoginUtilisateurDto.prototype, "derniereConnexion", void 0);
 //# sourceMappingURL=update-utilisateur.dto.js.map

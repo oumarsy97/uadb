@@ -1,47 +1,30 @@
-// src/utilisateurs/dto/create-utilisateur.dto.ts
-import {
-  IsEmail,
-  IsEnum,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  Length,
-  Matches,
-} from 'class-validator';
-import { RoleUser } from 'generated/prisma';
+import { IsEmail, IsEnum, IsString, IsOptional, IsBoolean } from 'class-validator';
+import { RoleUser } from '../../../generated/prisma';
 
 export class CreateUtilisateurDto {
-  @IsEmail({}, { message: 'Format email invalide' })
-  @IsNotEmpty({ message: 'Email obligatoire' })
+  @IsEmail()
   email: string;
 
   @IsString()
-  @Length(8, 32, {
-    message: 'Le mot de passe doit contenir entre 8 et 32 caractères',
-  })
-  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, {
-    message:
-      'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre',
-  })
   motDePasse: string;
 
   @IsString()
-  @IsNotEmpty({ message: 'Nom obligatoire' })
   nom: string;
 
   @IsString()
-  @IsNotEmpty({ message: 'Prénom obligatoire' })
   prenom: string;
 
-  @IsEnum(RoleUser, { message: 'Rôle utilisateur invalide' })
+  @IsOptional()
+  @IsString()
+  image?: string;
+
+  @IsEnum(RoleUser)
   role: RoleUser;
 
   @IsString()
-  @IsNotEmpty({ message: 'Département obligatoire' })
   departement: string;
 
   @IsString()
-  @IsNotEmpty({ message: 'Faculté obligatoire' })
   faculte: string;
 
   @IsOptional()
@@ -51,4 +34,9 @@ export class CreateUtilisateurDto {
   @IsOptional()
   @IsString()
   niveauEtudes?: string;
+
+  @IsString()
+  universite: string;
+
+ 
 }

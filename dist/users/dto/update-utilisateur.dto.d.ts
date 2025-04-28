@@ -7,5 +7,6 @@ export declare class UpdateUtilisateurDto extends UpdateUtilisateurDto_base {
 export declare class LoginUtilisateurDto {
     email: string;
     motDePasse: string;
+    derniereConnexion: Date;
 }
 export {};
