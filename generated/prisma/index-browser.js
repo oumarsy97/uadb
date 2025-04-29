@@ -132,7 +132,7 @@ exports.Prisma.UserScalarFieldEnum = {
   dateInscription: 'dateInscription',
   derniereConnexion: 'derniereConnexion',
   estActif: 'estActif',
-  universite: 'universite'
+  universiteId: 'universiteId'
 };
 
 exports.Prisma.RessourceScalarFieldEnum = {
@@ -150,7 +150,8 @@ exports.Prisma.RessourceScalarFieldEnum = {
   motsCles: 'motsCles',
   auteurId: 'auteurId',
   universiteSource: 'universiteSource',
-  estExterne: 'estExterne'
+  estExterne: 'estExterne',
+  universiteId: 'universiteId'
 };
 
 exports.Prisma.FavoriScalarFieldEnum = {
@@ -159,6 +160,18 @@ exports.Prisma.FavoriScalarFieldEnum = {
   ressourceId: 'ressourceId',
   dateAjout: 'dateAjout',
   note: 'note'
+};
+
+exports.Prisma.UniversiteScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  adresse: 'adresse',
+  ville: 'ville',
+  pays: 'pays',
+  siteWeb: 'siteWeb',
+  dateCreation: 'dateCreation',
+  adresseBlockchain: 'adresseBlockchain',
+  estActive: 'estActive'
 };
 
 exports.Prisma.CommentaireScalarFieldEnum = {
@@ -262,7 +275,7 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   faculte: 'faculte',
   specialite: 'specialite',
   niveauEtudes: 'niveauEtudes',
-  universite: 'universite'
+  universiteId: 'universiteId'
 };
 
 exports.Prisma.RessourceOrderByRelevanceFieldEnum = {
@@ -275,7 +288,8 @@ exports.Prisma.RessourceOrderByRelevanceFieldEnum = {
   referenceBlockchain: 'referenceBlockchain',
   motsCles: 'motsCles',
   auteurId: 'auteurId',
-  universiteSource: 'universiteSource'
+  universiteSource: 'universiteSource',
+  universiteId: 'universiteId'
 };
 
 exports.Prisma.FavoriOrderByRelevanceFieldEnum = {
@@ -283,6 +297,16 @@ exports.Prisma.FavoriOrderByRelevanceFieldEnum = {
   userId: 'userId',
   ressourceId: 'ressourceId',
   note: 'note'
+};
+
+exports.Prisma.UniversiteOrderByRelevanceFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  adresse: 'adresse',
+  ville: 'ville',
+  pays: 'pays',
+  siteWeb: 'siteWeb',
+  adresseBlockchain: 'adresseBlockchain'
 };
 
 exports.Prisma.CommentaireOrderByRelevanceFieldEnum = {
@@ -406,6 +430,7 @@ exports.Prisma.ModelName = {
   User: 'User',
   Ressource: 'Ressource',
   Favori: 'Favori',
+  Universite: 'Universite',
   Commentaire: 'Commentaire',
   Notation: 'Notation',
   HistoriqueAcces: 'HistoriqueAcces',

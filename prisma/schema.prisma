@@ -26,7 +26,9 @@ model User {
   dateInscription   DateTime       @default(now()) @map("date_inscription")
   derniereConnexion DateTime?      @map("derniere_connexion")
   estActif          Boolean        @default(true) @map("est_actif")
-  universite        String         // Nom de l'université de l'utilisateur
+  universiteId      String         @map("universite_id")
+  universite        Universite     @relation(fields: [universiteId], references: [id])
+  
   contributions     Ressource[]
   favoris           Favori[]
   commentaires      Commentaire[]
@@ -60,6 +62,8 @@ model Ressource {
   universiteSource  String         @map("universite_source") // Université d'origine de la ressource
   estExterne        Boolean        @default(false) @map("est_externe") // Indique si la ressource provient d'une autre université
   auteur            User           @relation(fields: [auteurId], references: [id])
+   universiteId      String         @map("universite_id")
+  universite        Universite     @relation(fields: [universiteId], references: [id])
   favoris           Favori[]
   commentaires      Commentaire[]
   notations         Notation[]
@@ -89,6 +93,21 @@ model Favori {
   ressource     Ressource    @relation(fields: [ressourceId], references: [id])
 
   @@unique([userId, ressourceId])
+}
+
+model Universite {
+  id                String         @id @default(uuid())
+  nom               String         @unique
+  adresse           String?
+  ville             String
+  pays              String
+  siteWeb           String?        @map("site_web")
+  dateCreation      DateTime       @default(now()) @map("date_creation")
+  adresseBlockchain String?        @map("adresse_blockchain")
+  estActive         Boolean        @default(true) @map("est_active")
+
+  users User[]
+  ressources Ressource[]
 }
 
 model Commentaire {

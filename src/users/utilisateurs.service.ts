@@ -1,150 +1,85 @@
-import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
-import * as bcrypt from 'bcrypt';
-import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
+import { Injectable, HttpException, HttpStatus, Inject } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
+import { firstValueFrom } from 'rxjs'; // Importez firstValueFrom
+import { PrismaService } from '../prisma/prisma.service';
+import { CreateUtilisateurDto } from 'src/users/dto/create-utilisateur.dto';
 
 @Injectable()
 export class UtilisateursService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    @Inject('UNIVERSITE_SERVICE') private readonly universiteClient: ClientProxy,
+  ) {}
 
   async create(createUtilisateurDto: CreateUtilisateurDto) {
-    // Vérifier si l'utilisateur existe déjà
-    const existingUser = await this.prisma.user.findUnique({
-      where: { email: createUtilisateurDto.email },
-    });
+    const { universiteId } = createUtilisateurDto;
 
-    if (existingUser) {
-      throw new ConflictException('Cet email est déjà utilisé');
+    // Vérification de l'existence de l'université via le microservice Universite
+    const universiteExists = await firstValueFrom(
+      this.universiteClient.send('findUniversiteById', universiteId),
+    );
+
+    if (!universiteExists) {
+      throw new HttpException('L\'université spécifiée n\'existe pas.', HttpStatus.NOT_FOUND);
     }
 
-    // Hasher le mot de passe
-    const hashedPassword = await bcrypt.hash(createUtilisateurDto.motDePasse, 10);
-
-    // Créer l'utilisateur
-    return this.prisma.user.create({
+    // Création de l'utilisateur
+    return this.prisma.user.create({ 
       data: {
-        ...createUtilisateurDto,
-        motDePasse: hashedPassword,
+        nom: createUtilisateurDto.nom,
+        prenom: createUtilisateurDto.prenom,
+        email: createUtilisateurDto.email,
+        motDePasse: createUtilisateurDto.motDePasse,
+        role: createUtilisateurDto.role,
+        departement: createUtilisateurDto.departement,
+        faculte: createUtilisateurDto.faculte,
+        specialite: createUtilisateurDto.specialite,
+        niveauEtudes: createUtilisateurDto.niveauEtudes,
         dateInscription: new Date(),
+        universiteId: createUtilisateurDto.universiteId
       },
     });
   }
 
   async findAll() {
-    return this.prisma.user.findMany({
-      select: {
-        id: true,
-        email: true,
-        nom: true,
-        prenom: true,
-        image: true,
-        role: true,
-        departement: true,
-        faculte: true,
-        specialite: true,
-        niveauEtudes: true,
-        dateInscription: true,
-        derniereConnexion: true,
-        estActif: true,
-        universite: true,
-        // Exclure le mot de passe pour des raisons de sécurité
-      },
-    });
+    return this.prisma.user.findMany();
   }
 
   async findOne(id: string) {
-    const user = await this.prisma.user.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        email: true,
-        nom: true,
-        prenom: true,
-        image: true,
-        role: true,
-        departement: true,
-        faculte: true,
-        specialite: true,
-        niveauEtudes: true,
-        dateInscription: true,
-        derniereConnexion: true,
-        estActif: true,
-        universite: true,
-        // Exclure le mot de passe
-      },
-    });
-
-    if (!user) {
-      throw new NotFoundException(`Utilisateur avec l'ID ${id} non trouvé`);
-    }
-
-    return user;
+    return this.prisma.user.findUnique({ where: { id } });
   }
 
   async findByEmail(email: string) {
-    const user = await this.prisma.user.findUnique({
-      where: { email },
-    });
-
-    if (!user) {
-      throw new NotFoundException(`Utilisateur avec l'email ${email} non trouvé`);
-    }
-
-    return user;
+    return this.prisma.user.findUnique({ where: { email } });
   }
 
-  async update(id: string, updateData: UpdateUtilisateurDto) {
-    // Vérifier si l'utilisateur existe
-    const existingUser = await this.prisma.user.findUnique({
-      where: { id },
-    });
-
-    if (!existingUser) {
-      throw new NotFoundException(`Utilisateur avec l'ID ${id} non trouvé`);
-    }
-
-    // Si le mot de passe est mis à jour, le hasher
-    if (updateData.motDePasse) {
-      updateData.motDePasse = await bcrypt.hash(updateData.motDePasse, 10);
-    }
-
-    // Si l'email est mis à jour, vérifier qu'il n'est pas déjà utilisé
-    if (updateData.email && updateData.email !== existingUser.email) {
-      const emailExists = await this.prisma.user.findUnique({
-        where: { email: updateData.email },
-      });
-
-      if (emailExists) {
-        throw new ConflictException('Cet email est déjà utilisé');
-      }
-    }
-
-    // Mettre à jour l'utilisateur
+  async update(id: string, updateData: Partial<CreateUtilisateurDto>) {
     return this.prisma.user.update({
       where: { id },
       data: {
-        ...updateData,
-        derniereConnexion: updateData.hasOwnProperty('derniereConnexion') 
-          ? updateData.derniereConnexion
-          : undefined,
+        nom: updateData.nom,
+        prenom: updateData.prenom,
+        email: updateData.email,
+        motDePasse: updateData.motDePasse,
+        role: updateData.role,
+        departement: updateData.departement,
+        faculte: updateData.faculte,
+        specialite: updateData.specialite,
+        niveauEtudes: updateData.niveauEtudes,
+        universiteId: updateData.universiteId
       },
+     
     });
   }
 
   async remove(id: string) {
-    // Vérifier si l'utilisateur existe
-    const existingUser = await this.prisma.user.findUnique({
-      where: { id },
-    });
+    return this.prisma.user.delete({ where: { id } });
+  }
 
-    if (!existingUser) {
-      throw new NotFoundException(`Utilisateur avec l'ID ${id} non trouvé`);
-    }
-
-    // Supprimer l'utilisateur
-    return this.prisma.user.delete({
+  async updateDerniereConnexion(id: string) {
+    return this.prisma.user.update({
       where: { id },
+      data: { derniereConnexion: new Date() },
     });
   }
 }

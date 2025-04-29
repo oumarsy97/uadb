@@ -38,5 +38,8 @@ export class CreateUtilisateurDto {
   @IsString()
   universite: string;
 
+  @IsString()
+  universiteId: string;
+
  
 }
