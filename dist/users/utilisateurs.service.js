@@ -11,126 +11,182 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UtilisateursService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma/prisma.service");
+const jwt_1 = require("@nestjs/jwt");
 const bcrypt = require("bcrypt");
+const prisma_service_1 = require("../prisma/prisma.service");
 let UtilisateursService = class UtilisateursService {
     prisma;
-    constructor(prisma) {
+    jwtService;
+    constructor(prisma, jwtService) {
         this.prisma = prisma;
+        this.jwtService = jwtService;
     }
     async create(createUtilisateurDto) {
-        const existingUser = await this.prisma.user.findUnique({
-            where: { email: createUtilisateurDto.email },
-        });
+        const { email } = createUtilisateurDto;
+        const existingUser = await this.prisma.user.findUnique({ where: { email } });
         if (existingUser) {
-            throw new common_1.ConflictException('Cet email est déjà utilisé');
+            throw new common_1.HttpException('Cet email est déjà utilisé.', common_1.HttpStatus.CONFLICT);
         }
         const hashedPassword = await bcrypt.hash(createUtilisateurDto.motDePasse, 10);
         return this.prisma.user.create({
             data: {
-                ...createUtilisateurDto,
+                nom: createUtilisateurDto.nom,
+                prenom: createUtilisateurDto.prenom,
+                email: createUtilisateurDto.email,
                 motDePasse: hashedPassword,
+                role: createUtilisateurDto.role,
+                departement: createUtilisateurDto.departement,
+                faculte: createUtilisateurDto.faculte,
+                specialite: createUtilisateurDto.specialite,
+                niveauEtudes: createUtilisateurDto.niveauEtudes,
+                image: createUtilisateurDto.image,
                 dateInscription: new Date(),
+                universiteId: createUtilisateurDto.universiteId,
             },
         });
     }
-    async findAll() {
-        return this.prisma.user.findMany({
-            select: {
-                id: true,
-                email: true,
-                nom: true,
-                prenom: true,
-                image: true,
-                role: true,
-                departement: true,
-                faculte: true,
-                specialite: true,
-                niveauEtudes: true,
-                dateInscription: true,
-                derniereConnexion: true,
-                estActif: true,
-                universite: true,
-            },
+    async login(loginData) {
+        const user = await this.prisma.user.findUnique({
+            where: { email: loginData.email },
         });
+        if (!user) {
+            throw new common_1.HttpException('Email ou mot de passe incorrect.', common_1.HttpStatus.UNAUTHORIZED);
+        }
+        const isPasswordValid = await bcrypt.compare(loginData.motDePasse, user.motDePasse);
+        if (!isPasswordValid) {
+            throw new common_1.HttpException('Email ou mot de passe incorrect.', common_1.HttpStatus.UNAUTHORIZED);
+        }
+        await this.updateDerniereConnexion(user.id);
+        const payload = {
+            sub: user.id,
+            email: user.email,
+            role: user.role,
+            universite: loginData.universite || null,
+        };
+        const token = this.jwtService.sign(payload);
+        const { motDePasse, ...userData } = user;
+        return {
+            user: {
+                id: userData.id,
+                nom: userData.nom,
+                prenom: userData.prenom,
+                email: userData.email,
+                role: userData.role,
+                image: userData.image,
+                universite: loginData.universite,
+            },
+            token,
+        };
+    }
+    async logout(logoutData) {
+        return { message: 'Déconnexion réussie.' };
+    }
+    async findAll(options = {}) {
+        const { page = 1, limit = 10, search = '' } = options;
+        const skip = (page - 1) * limit;
+        const where = search
+            ? {
+                OR: [
+                    { nom: { contains: search, mode: 'insensitive' } },
+                    { prenom: { contains: search, mode: 'insensitive' } },
+                    { email: { contains: search, mode: 'insensitive' } },
+                ],
+            }
+            : {};
+        const [users, total] = await Promise.all([
+            this.prisma.user.findMany({
+                where,
+                skip,
+                take: limit,
+                include: { universite: true },
+                orderBy: { dateInscription: 'desc' },
+            }),
+            this.prisma.user.count({ where }),
+        ]);
+        const sanitizedUsers = users.map(({ motDePasse, ...user }) => user);
+        return {
+            data: sanitizedUsers,
+            pagination: {
+                page,
+                limit,
+                total,
+                totalPages: Math.ceil(total / limit),
+            },
+        };
     }
     async findOne(id) {
         const user = await this.prisma.user.findUnique({
             where: { id },
-            select: {
-                id: true,
-                email: true,
-                nom: true,
-                prenom: true,
-                image: true,
-                role: true,
-                departement: true,
-                faculte: true,
-                specialite: true,
-                niveauEtudes: true,
-                dateInscription: true,
-                derniereConnexion: true,
-                estActif: true,
-                universite: true,
-            },
+            include: { universite: true },
         });
         if (!user) {
-            throw new common_1.NotFoundException(`Utilisateur avec l'ID ${id} non trouvé`);
+            throw new common_1.HttpException('Utilisateur non trouvé.', common_1.HttpStatus.NOT_FOUND);
         }
-        return user;
+        const { motDePasse, ...userWithoutPassword } = user;
+        return userWithoutPassword;
     }
     async findByEmail(email) {
         const user = await this.prisma.user.findUnique({
             where: { email },
+            include: { universite: true },
         });
         if (!user) {
-            throw new common_1.NotFoundException(`Utilisateur avec l'email ${email} non trouvé`);
+            throw new common_1.HttpException('Utilisateur non trouvé.', common_1.HttpStatus.NOT_FOUND);
         }
-        return user;
+        const { motDePasse, ...userWithoutPassword } = user;
+        return userWithoutPassword;
     }
     async update(id, updateData) {
-        const existingUser = await this.prisma.user.findUnique({
-            where: { id },
-        });
-        if (!existingUser) {
-            throw new common_1.NotFoundException(`Utilisateur avec l'ID ${id} non trouvé`);
+        const user = await this.prisma.user.findUnique({ where: { id } });
+        if (!user) {
+            throw new common_1.HttpException('Utilisateur non trouvé.', common_1.HttpStatus.NOT_FOUND);
         }
+        let hashedPassword;
         if (updateData.motDePasse) {
-            updateData.motDePasse = await bcrypt.hash(updateData.motDePasse, 10);
+            hashedPassword = await bcrypt.hash(updateData.motDePasse, 10);
         }
-        if (updateData.email && updateData.email !== existingUser.email) {
-            const emailExists = await this.prisma.user.findUnique({
-                where: { email: updateData.email },
-            });
-            if (emailExists) {
-                throw new common_1.ConflictException('Cet email est déjà utilisé');
-            }
-        }
-        return this.prisma.user.update({
+        const dataToUpdate = {
+            ...(updateData.nom && { nom: updateData.nom }),
+            ...(updateData.prenom && { prenom: updateData.prenom }),
+            ...(updateData.email && { email: updateData.email }),
+            ...(hashedPassword && { motDePasse: hashedPassword }),
+            ...(updateData.role && { role: updateData.role }),
+            ...(updateData.departement && { departement: updateData.departement }),
+            ...(updateData.faculte && { faculte: updateData.faculte }),
+            ...(updateData.specialite && { specialite: updateData.specialite }),
+            ...(updateData.niveauEtudes && { niveauEtudes: updateData.niveauEtudes }),
+            ...(updateData.image && { image: updateData.image }),
+            ...(updateData.universiteId !== undefined && {
+                universiteId: updateData.universiteId,
+            }),
+        };
+        const updatedUser = await this.prisma.user.update({
             where: { id },
-            data: {
-                ...updateData,
-                derniereConnexion: updateData.hasOwnProperty('derniereConnexion')
-                    ? updateData.derniereConnexion
-                    : undefined,
-            },
+            data: dataToUpdate,
+            include: { universite: true },
         });
+        const { motDePasse, ...userWithoutPassword } = updatedUser;
+        return userWithoutPassword;
     }
     async remove(id) {
-        const existingUser = await this.prisma.user.findUnique({
-            where: { id },
-        });
-        if (!existingUser) {
-            throw new common_1.NotFoundException(`Utilisateur avec l'ID ${id} non trouvé`);
+        const user = await this.prisma.user.findUnique({ where: { id } });
+        if (!user) {
+            throw new common_1.HttpException('Utilisateur non trouvé.', common_1.HttpStatus.NOT_FOUND);
         }
-        return this.prisma.user.delete({
+        await this.prisma.user.delete({ where: { id } });
+        return { message: 'Utilisateur supprimé avec succès.' };
+    }
+    async updateDerniereConnexion(id) {
+        return this.prisma.user.update({
             where: { id },
+            data: { derniereConnexion: new Date() },
         });
     }
 };
 exports.UtilisateursService = UtilisateursService;
 exports.UtilisateursService = UtilisateursService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        jwt_1.JwtService])
 ], UtilisateursService);
 //# sourceMappingURL=utilisateurs.service.js.map

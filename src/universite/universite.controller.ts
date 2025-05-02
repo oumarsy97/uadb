@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { UniversiteService } from './universite.service';
-import { CreateUniversiteDto, UpdateUniversiteDto } from './dto/universite.dto';
+import { CreateUniversiteDto, UpdateUniversiteDto } from '../universite/dto/universite.dto';
 
 @Controller()
 export class UniversiteController {

@@ -11,4 +11,10 @@ export declare class CreateUtilisateurDto {
     specialite?: string;
     niveauEtudes?: string;
     universite: string;
+    universiteId: string;
+}
+export declare class LoginDataDto {
+    email: string;
+    motDePasse: string;
+    universite: string;
 }

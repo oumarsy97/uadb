@@ -11,12 +11,30 @@ const common_1 = require("@nestjs/common");
 const utilisateurs_controller_1 = require("./utilisateurs.controller");
 const utilisateurs_service_1 = require("./utilisateurs.service");
 const prisma_service_1 = require("../prisma/prisma.service");
+const jwt_1 = require("@nestjs/jwt");
+const config_1 = require("@nestjs/config");
 let UtilisateursModule = class UtilisateursModule {
 };
 exports.UtilisateursModule = UtilisateursModule;
 exports.UtilisateursModule = UtilisateursModule = __decorate([
     (0, common_1.Module)({
         controllers: [utilisateurs_controller_1.UtilisateursController],
+        imports: [
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+            }),
+            jwt_1.JwtModule.registerAsync({
+                imports: [config_1.ConfigModule],
+                useFactory: async (configService) => {
+                    const secret = configService.get('JWT_SECRET');
+                    return {
+                        secret: secret,
+                        signOptions: { expiresIn: '1h' },
+                    };
+                },
+                inject: [config_1.ConfigService],
+            }),
+        ],
         providers: [utilisateurs_service_1.UtilisateursService, prisma_service_1.PrismaService],
         exports: [utilisateurs_service_1.UtilisateursService],
     })

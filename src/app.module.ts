@@ -1,15 +1,25 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+
+// Modules personnalisés
+import { PrismaModule } from './prisma/prisma.module';
 import { UtilisateursModule } from './users/utilisateurs.module';
 import { RessourcesModule } from './ressources/ressources.module';
 import { InteractionsModule } from './interactions/interactions.module';
 import { CollectionsModule } from './collections/collections.module';
-import { PrismaService } from './prisma/prisma.service';
+import { UniversiteModule } from './universite/universite.module';
 
 @Module({
-  imports: [UtilisateursModule, RessourcesModule, InteractionsModule, CollectionsModule],
+  imports: [
+    PrismaModule,
+    UtilisateursModule,
+    RessourcesModule,
+    InteractionsModule,
+    CollectionsModule,
+    UniversiteModule,
+  ],
   controllers: [AppController],
-  providers: [AppService, PrismaService],
+  providers: [AppService,],
 })
 export class AppModule {}

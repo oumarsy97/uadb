@@ -9,9 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateUtilisateurDto = void 0;
+exports.LoginDataDto = exports.CreateUtilisateurDto = void 0;
 const class_validator_1 = require("class-validator");
 const prisma_1 = require("../../../generated/prisma");
+const swagger_1 = require("@nestjs/swagger");
 class CreateUtilisateurDto {
     email;
     motDePasse;
@@ -24,6 +25,7 @@ class CreateUtilisateurDto {
     specialite;
     niveauEtudes;
     universite;
+    universiteId;
 }
 exports.CreateUtilisateurDto = CreateUtilisateurDto;
 __decorate([
@@ -73,4 +75,41 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateUtilisateurDto.prototype, "universite", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateUtilisateurDto.prototype, "universiteId", void 0);
+class LoginDataDto {
+    email;
+    motDePasse;
+    universite;
+}
+exports.LoginDataDto = LoginDataDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: "Email de l'utilisateur",
+        example: 'utilisateur@universite.edu',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsEmail)(),
+    __metadata("design:type", String)
+], LoginDataDto.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: "Mot de passe de l'utilisateur",
+        example: 'MotDePasse123',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LoginDataDto.prototype, "motDePasse", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: "Code de l'université",
+        example: 'UCAD',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LoginDataDto.prototype, "universite", void 0);
 //# sourceMappingURL=create-utilisateur.dto.js.map

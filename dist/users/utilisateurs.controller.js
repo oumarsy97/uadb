@@ -25,8 +25,26 @@ let UtilisateursController = class UtilisateursController {
     async create(createUtilisateurDto) {
         return this.utilisateursService.create(createUtilisateurDto);
     }
-    async findAll() {
-        return this.utilisateursService.findAll();
+    async login(loginData) {
+        try {
+            if (!loginData.email || !loginData.motDePasse) {
+                throw new Error('Email and password are required');
+            }
+            return await this.utilisateursService.login(loginData);
+        }
+        catch (error) {
+            return {
+                error: true,
+                message: error.message,
+                statusCode: error.status || 500
+            };
+        }
+    }
+    async logout(logoutData) {
+        return this.utilisateursService.logout(logoutData);
+    }
+    async findAll(options) {
+        return this.utilisateursService.findAll(options);
     }
     async findOne(id) {
         return this.utilisateursService.findOne(id);
@@ -41,9 +59,7 @@ let UtilisateursController = class UtilisateursController {
         return this.utilisateursService.remove(id);
     }
     async updateDerniereConnexion(data) {
-        return this.utilisateursService.update(data.id, {
-            derniereConnexion: new Date()
-        });
+        return this.utilisateursService.updateDerniereConnexion(data.id);
     }
 };
 exports.UtilisateursController = UtilisateursController;
@@ -55,9 +71,24 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UtilisateursController.prototype, "create", null);
 __decorate([
-    (0, microservices_1.MessagePattern)('findAllUtilisateurs'),
+    (0, microservices_1.MessagePattern)('loginUtilisateur'),
+    __param(0, (0, microservices_1.Payload)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [create_utilisateur_dto_1.LoginDataDto]),
+    __metadata("design:returntype", Promise)
+], UtilisateursController.prototype, "login", null);
+__decorate([
+    (0, microservices_1.MessagePattern)('logoutUtilisateur'),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_utilisateur_dto_1.LoginDataDto]),
+    __metadata("design:returntype", Promise)
+], UtilisateursController.prototype, "logout", null);
+__decorate([
+    (0, microservices_1.MessagePattern)('findAllUtilisateurs'),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UtilisateursController.prototype, "findAll", null);
 __decorate([
