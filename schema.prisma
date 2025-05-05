@@ -17,7 +17,7 @@ model User {
   motDePasse        String         @map("mot_de_passe")
   nom               String
   prenom            String
-  image            String?
+  image             String?
   role              RoleUser
   departement       String
   faculte           String
@@ -28,7 +28,6 @@ model User {
   estActif          Boolean        @default(true) @map("est_actif")
   universiteId      String         @map("universite_id")
   universite        Universite     @relation(fields: [universiteId], references: [id])
-  
   contributions     Ressource[]
   favoris           Favori[]
   commentaires      Commentaire[]
@@ -44,6 +43,13 @@ enum RoleUser {
   BIBLIOTHECAIRE
   ADMINISTRATEUR
 }
+// Enum pour les niveaux d'accès
+enum NiveauAcces {
+        PUBLIC             // Accessible à tous
+        AUTHENTIFIE        // Accessible aux utilisateurs authentifiés
+        UNIVERSITE_ORIGINE // Réservé aux membres de l'université d'origine
+        PRIVE               // Accès limité (créateur et administrateurs)
+    }
 
 model Ressource {
   id                String         @id @default(uuid())
@@ -52,18 +58,26 @@ model Ressource {
   type              TypeRessource
   langue            String         @default("fr")
   urlFichier        String         @map("url_fichier")
+  urlFichierLocal   String?         @map("url_fichier_local") @default("file:///tmp/ressource.pdf")
   format            String         // pdf, docx, etc.
-  referenceBlockchain String       @unique @map("reference_blockchain")
   dateCreation      DateTime       @default(now()) @map("date_creation")
   dateModification  DateTime       @updatedAt @map("date_modification")
-  estPublique       Boolean        @default(true) @map("est_publique")
+  estPublique       Boolean        @default(false) @map("est_publique")
   motsCles          String         @map("mots_cles") // Stockage de mots-clés sous forme de texte
-  auteurId          String         @map("auteur_id")
-  universiteSource  String         @map("universite_source") // Université d'origine de la ressource
-  estExterne        Boolean        @default(false) @map("est_externe") // Indique si la ressource provient d'une autre université
-  auteur            User           @relation(fields: [auteurId], references: [id])
-   universiteId      String         @map("universite_id")
+  auteurId          String?        @map("auteur_id")  // Rendu optionnel
+  auteur            User?          @relation(fields: [auteurId], references: [id])
+  universiteId      String         @map("universite_id")
   universite        Universite     @relation(fields: [universiteId], references: [id])
+  image             String?
+  niveauAcces       NiveauAcces    @default(PUBLIC) @map("niveau_acces")
+  datePublication   DateTime?      @map("date_publication")@default(now())
+  estValide        Boolean         @default(true) @map("est_valide")
+  estArchive        Boolean        @default(false) @map("est_archive")
+  // Nouveaux champs pour les auteurs externes
+  nomAuteurExterne  String?        @map("nom_auteur_externe")
+  prenomAuteurExterne String?      @map("prenom_auteur_externe")
+  affiliationAuteurExterne String? @map("affiliation_auteur_externe")
+  
   favoris           Favori[]
   commentaires      Commentaire[]
   notations         Notation[]
@@ -172,6 +186,8 @@ enum TypeInteraction {
   TEMPS_LECTURE
   RECHERCHE_SIMILAIRE
 }
+
+
 
 model Collection {
   id            String       @id @default(uuid())

@@ -142,16 +142,22 @@ exports.Prisma.RessourceScalarFieldEnum = {
   type: 'type',
   langue: 'langue',
   urlFichier: 'urlFichier',
+  urlFichierLocal: 'urlFichierLocal',
   format: 'format',
-  referenceBlockchain: 'referenceBlockchain',
   dateCreation: 'dateCreation',
   dateModification: 'dateModification',
   estPublique: 'estPublique',
   motsCles: 'motsCles',
   auteurId: 'auteurId',
-  universiteSource: 'universiteSource',
-  estExterne: 'estExterne',
-  universiteId: 'universiteId'
+  universiteId: 'universiteId',
+  image: 'image',
+  niveauAcces: 'niveauAcces',
+  datePublication: 'datePublication',
+  estValide: 'estValide',
+  estArchive: 'estArchive',
+  nomAuteurExterne: 'nomAuteurExterne',
+  prenomAuteurExterne: 'prenomAuteurExterne',
+  affiliationAuteurExterne: 'affiliationAuteurExterne'
 };
 
 exports.Prisma.FavoriScalarFieldEnum = {
@@ -284,12 +290,15 @@ exports.Prisma.RessourceOrderByRelevanceFieldEnum = {
   description: 'description',
   langue: 'langue',
   urlFichier: 'urlFichier',
+  urlFichierLocal: 'urlFichierLocal',
   format: 'format',
-  referenceBlockchain: 'referenceBlockchain',
   motsCles: 'motsCles',
   auteurId: 'auteurId',
-  universiteSource: 'universiteSource',
-  universiteId: 'universiteId'
+  universiteId: 'universiteId',
+  image: 'image',
+  nomAuteurExterne: 'nomAuteurExterne',
+  prenomAuteurExterne: 'prenomAuteurExterne',
+  affiliationAuteurExterne: 'affiliationAuteurExterne'
 };
 
 exports.Prisma.FavoriOrderByRelevanceFieldEnum = {
@@ -393,6 +402,13 @@ exports.TypeRessource = exports.$Enums.TypeRessource = {
   RAPPORT_RECHERCHE: 'RAPPORT_RECHERCHE',
   LIVRE: 'LIVRE',
   CONFERENCE: 'CONFERENCE'
+};
+
+exports.NiveauAcces = exports.$Enums.NiveauAcces = {
+  PUBLIC: 'PUBLIC',
+  AUTHENTIFIE: 'AUTHENTIFIE',
+  UNIVERSITE_ORIGINE: 'UNIVERSITE_ORIGINE',
+  PRIVE: 'PRIVE'
 };
 
 exports.TypeAcces = exports.$Enums.TypeAcces = {

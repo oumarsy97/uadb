@@ -56,7 +56,7 @@ let UniversiteService = class UniversiteService {
     async getTopUniversities(limit) {
         return this.prisma.universite.findMany({
             orderBy: { ressources: { _count: 'desc' } },
-            take: limit || 10,
+            take: 10,
         });
     }
 };

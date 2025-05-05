@@ -12,9 +12,9 @@ datasource db {
 }
 
 model User {
-  id                String     @id @default(uuid())
-  email             String     @unique
-  motDePasse        String     @map("mot_de_passe")
+  id                String            @id @default(uuid())
+  email             String            @unique
+  motDePasse        String            @map("mot_de_passe")
   nom               String
   prenom            String
   image             String?
@@ -22,19 +22,18 @@ model User {
   departement       String
   faculte           String
   specialite        String?
-  niveauEtudes      String?    @map("niveau_etudes")
-  dateInscription   DateTime   @default(now()) @map("date_inscription")
-  derniereConnexion DateTime?  @map("derniere_connexion")
-  estActif          Boolean    @default(true) @map("est_actif")
-  universiteId      String     @map("universite_id")
-  universite        Universite @relation(fields: [universiteId], references: [id])
-
-  contributions Ressource[]
-  favoris       Favori[]
-  commentaires  Commentaire[]
-  notations     Notation[]
-  historiques   HistoriqueAcces[]
-  collections   Collection[]
+  niveauEtudes      String?           @map("niveau_etudes")
+  dateInscription   DateTime          @default(now()) @map("date_inscription")
+  derniereConnexion DateTime?         @map("derniere_connexion")
+  estActif          Boolean           @default(true) @map("est_actif")
+  universiteId      String            @map("universite_id")
+  universite        Universite        @relation(fields: [universiteId], references: [id])
+  contributions     Ressource[]
+  favoris           Favori[]
+  commentaires      Commentaire[]
+  notations         Notation[]
+  historiques       HistoriqueAcces[]
+  collections       Collection[]
 }
 
 enum RoleUser {
@@ -45,31 +44,47 @@ enum RoleUser {
   ADMINISTRATEUR
 }
 
+// Enum pour les niveaux d'accès
+enum NiveauAcces {
+  PUBLIC // Accessible à tous
+  AUTHENTIFIE // Accessible aux utilisateurs authentifiés
+  UNIVERSITE_ORIGINE // Réservé aux membres de l'université d'origine
+  PRIVE // Accès limité (créateur et administrateurs)
+}
+
 model Ressource {
-  id                  String                @id @default(uuid())
-  titre               String
-  description         String                @db.Text
-  type                TypeRessource
-  langue              String                @default("fr")
-  urlFichier          String                @map("url_fichier")
-  format              String // pdf, docx, etc.
-  referenceBlockchain String                @unique @map("reference_blockchain")
-  dateCreation        DateTime              @default(now()) @map("date_creation")
-  dateModification    DateTime              @updatedAt @map("date_modification")
-  estPublique         Boolean               @default(true) @map("est_publique")
-  motsCles            String                @map("mots_cles") // Stockage de mots-clés sous forme de texte
-  auteurId            String                @map("auteur_id")
-  universiteSource    String                @map("universite_source") // Université d'origine de la ressource
-  estExterne          Boolean               @default(false) @map("est_externe") // Indique si la ressource provient d'une autre université
-  auteur              User                  @relation(fields: [auteurId], references: [id])
-  universiteId        String                @map("universite_id")
-  universite          Universite            @relation(fields: [universiteId], references: [id])
-  favoris             Favori[]
-  commentaires        Commentaire[]
-  notations           Notation[]
-  historiques         HistoriqueAcces[]
-  collections         CollectionRessource[]
-  partages            PartageUniversite[]
+  id                       String        @id @default(uuid())
+  titre                    String
+  description              String        @db.Text
+  type                     TypeRessource
+  langue                   String        @default("fr")
+  urlFichier               String        @map("url_fichier")
+  urlFichierLocal          String?       @default("file:///tmp/ressource.pdf") @map("url_fichier_local")
+  format                   String // pdf, docx, etc.
+  dateCreation             DateTime      @default(now()) @map("date_creation")
+  dateModification         DateTime      @updatedAt @map("date_modification")
+  estPublique              Boolean       @default(false) @map("est_publique")
+  motsCles                 String        @map("mots_cles") // Stockage de mots-clés sous forme de texte
+  auteurId                 String?       @map("auteur_id") // Rendu optionnel
+  auteur                   User?         @relation(fields: [auteurId], references: [id])
+  universiteId             String        @map("universite_id")
+  universite               Universite    @relation(fields: [universiteId], references: [id])
+  image                    String?
+  niveauAcces              NiveauAcces   @default(PUBLIC) @map("niveau_acces")
+  datePublication          DateTime?     @default(now()) @map("date_publication")
+  estValide                Boolean       @default(true) @map("est_valide")
+  estArchive               Boolean       @default(false) @map("est_archive")
+  // Nouveaux champs pour les auteurs externes
+  nomAuteurExterne         String?       @map("nom_auteur_externe")
+  prenomAuteurExterne      String?       @map("prenom_auteur_externe")
+  affiliationAuteurExterne String?       @map("affiliation_auteur_externe")
+
+  favoris      Favori[]
+  commentaires Commentaire[]
+  notations    Notation[]
+  historiques  HistoriqueAcces[]
+  collections  CollectionRessource[]
+  partages     PartageUniversite[]
 }
 
 enum TypeRessource {

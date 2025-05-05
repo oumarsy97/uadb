@@ -5,11 +5,12 @@ export declare class UtilisateursController {
     constructor(utilisateursService: UtilisateursService);
     create(createUtilisateurDto: CreateUtilisateurDto): Promise<{
         id: string;
+        universiteId: string;
+        image: string | null;
         email: string;
         motDePasse: string;
         nom: string;
         prenom: string;
-        image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
         departement: string;
         faculte: string;
@@ -18,7 +19,6 @@ export declare class UtilisateursController {
         dateInscription: Date;
         derniereConnexion: Date | null;
         estActif: boolean;
-        universiteId: string;
     }>;
     login(loginData: LoginDataDto): Promise<{
         user: {
@@ -47,20 +47,21 @@ export declare class UtilisateursController {
         data: {
             universite: {
                 id: string;
+                dateCreation: Date;
                 nom: string;
                 adresse: string | null;
                 ville: string;
                 pays: string;
                 siteWeb: string | null;
-                dateCreation: Date;
                 adresseBlockchain: string | null;
                 estActive: boolean;
             };
             id: string;
+            universiteId: string;
+            image: string | null;
             email: string;
             nom: string;
             prenom: string;
-            image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
             departement: string;
             faculte: string;
@@ -69,7 +70,6 @@ export declare class UtilisateursController {
             dateInscription: Date;
             derniereConnexion: Date | null;
             estActif: boolean;
-            universiteId: string;
         }[];
         pagination: {
             page: number;
@@ -81,20 +81,21 @@ export declare class UtilisateursController {
     findOne(id: string): Promise<{
         universite: {
             id: string;
+            dateCreation: Date;
             nom: string;
             adresse: string | null;
             ville: string;
             pays: string;
             siteWeb: string | null;
-            dateCreation: Date;
             adresseBlockchain: string | null;
             estActive: boolean;
         };
         id: string;
+        universiteId: string;
+        image: string | null;
         email: string;
         nom: string;
         prenom: string;
-        image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
         departement: string;
         faculte: string;
@@ -103,25 +104,25 @@ export declare class UtilisateursController {
         dateInscription: Date;
         derniereConnexion: Date | null;
         estActif: boolean;
-        universiteId: string;
     }>;
     findByEmail(email: string): Promise<{
         universite: {
             id: string;
+            dateCreation: Date;
             nom: string;
             adresse: string | null;
             ville: string;
             pays: string;
             siteWeb: string | null;
-            dateCreation: Date;
             adresseBlockchain: string | null;
             estActive: boolean;
         };
         id: string;
+        universiteId: string;
+        image: string | null;
         email: string;
         nom: string;
         prenom: string;
-        image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
         departement: string;
         faculte: string;
@@ -130,7 +131,6 @@ export declare class UtilisateursController {
         dateInscription: Date;
         derniereConnexion: Date | null;
         estActif: boolean;
-        universiteId: string;
     }>;
     update(data: {
         id: string;
@@ -138,20 +138,21 @@ export declare class UtilisateursController {
     }): Promise<{
         universite: {
             id: string;
+            dateCreation: Date;
             nom: string;
             adresse: string | null;
             ville: string;
             pays: string;
             siteWeb: string | null;
-            dateCreation: Date;
             adresseBlockchain: string | null;
             estActive: boolean;
         };
         id: string;
+        universiteId: string;
+        image: string | null;
         email: string;
         nom: string;
         prenom: string;
-        image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
         departement: string;
         faculte: string;
@@ -160,7 +161,6 @@ export declare class UtilisateursController {
         dateInscription: Date;
         derniereConnexion: Date | null;
         estActif: boolean;
-        universiteId: string;
     }>;
     remove(id: string): Promise<{
         message: string;
@@ -169,11 +169,12 @@ export declare class UtilisateursController {
         id: string;
     }): Promise<{
         id: string;
+        universiteId: string;
+        image: string | null;
         email: string;
         motDePasse: string;
         nom: string;
         prenom: string;
-        image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
         departement: string;
         faculte: string;
@@ -182,6 +183,5 @@ export declare class UtilisateursController {
         dateInscription: Date;
         derniereConnexion: Date | null;
         estActif: boolean;
-        universiteId: string;
     }>;
 }

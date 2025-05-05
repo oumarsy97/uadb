@@ -52,7 +52,7 @@ export class UniversiteService {
   async getTopUniversities(limit?: number) {
     return this.prisma.universite.findMany({
       orderBy: { ressources: { _count: 'desc' } },
-      take: limit || 10,
+      take:  10,
     });
   }
 }

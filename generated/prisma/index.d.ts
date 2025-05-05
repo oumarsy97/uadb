@@ -89,6 +89,16 @@ export namespace $Enums {
 export type RoleUser = (typeof RoleUser)[keyof typeof RoleUser]
 
 
+export const NiveauAcces: {
+  PUBLIC: 'PUBLIC',
+  AUTHENTIFIE: 'AUTHENTIFIE',
+  UNIVERSITE_ORIGINE: 'UNIVERSITE_ORIGINE',
+  PRIVE: 'PRIVE'
+};
+
+export type NiveauAcces = (typeof NiveauAcces)[keyof typeof NiveauAcces]
+
+
 export const TypeRessource: {
   MEMOIRE: 'MEMOIRE',
   THESE: 'THESE',
@@ -150,6 +160,10 @@ export type StatutTransaction = (typeof StatutTransaction)[keyof typeof StatutTr
 export type RoleUser = $Enums.RoleUser
 
 export const RoleUser: typeof $Enums.RoleUser
+
+export type NiveauAcces = $Enums.NiveauAcces
+
+export const NiveauAcces: typeof $Enums.NiveauAcces
 
 export type TypeRessource = $Enums.TypeRessource
 
@@ -3319,16 +3333,22 @@ export namespace Prisma {
     type: $Enums.TypeRessource | null
     langue: string | null
     urlFichier: string | null
+    urlFichierLocal: string | null
     format: string | null
-    referenceBlockchain: string | null
     dateCreation: Date | null
     dateModification: Date | null
     estPublique: boolean | null
     motsCles: string | null
     auteurId: string | null
-    universiteSource: string | null
-    estExterne: boolean | null
     universiteId: string | null
+    image: string | null
+    niveauAcces: $Enums.NiveauAcces | null
+    datePublication: Date | null
+    estValide: boolean | null
+    estArchive: boolean | null
+    nomAuteurExterne: string | null
+    prenomAuteurExterne: string | null
+    affiliationAuteurExterne: string | null
   }
 
   export type RessourceMaxAggregateOutputType = {
@@ -3338,16 +3358,22 @@ export namespace Prisma {
     type: $Enums.TypeRessource | null
     langue: string | null
     urlFichier: string | null
+    urlFichierLocal: string | null
     format: string | null
-    referenceBlockchain: string | null
     dateCreation: Date | null
     dateModification: Date | null
     estPublique: boolean | null
     motsCles: string | null
     auteurId: string | null
-    universiteSource: string | null
-    estExterne: boolean | null
     universiteId: string | null
+    image: string | null
+    niveauAcces: $Enums.NiveauAcces | null
+    datePublication: Date | null
+    estValide: boolean | null
+    estArchive: boolean | null
+    nomAuteurExterne: string | null
+    prenomAuteurExterne: string | null
+    affiliationAuteurExterne: string | null
   }
 
   export type RessourceCountAggregateOutputType = {
@@ -3357,16 +3383,22 @@ export namespace Prisma {
     type: number
     langue: number
     urlFichier: number
+    urlFichierLocal: number
     format: number
-    referenceBlockchain: number
     dateCreation: number
     dateModification: number
     estPublique: number
     motsCles: number
     auteurId: number
-    universiteSource: number
-    estExterne: number
     universiteId: number
+    image: number
+    niveauAcces: number
+    datePublication: number
+    estValide: number
+    estArchive: number
+    nomAuteurExterne: number
+    prenomAuteurExterne: number
+    affiliationAuteurExterne: number
     _all: number
   }
 
@@ -3378,16 +3410,22 @@ export namespace Prisma {
     type?: true
     langue?: true
     urlFichier?: true
+    urlFichierLocal?: true
     format?: true
-    referenceBlockchain?: true
     dateCreation?: true
     dateModification?: true
     estPublique?: true
     motsCles?: true
     auteurId?: true
-    universiteSource?: true
-    estExterne?: true
     universiteId?: true
+    image?: true
+    niveauAcces?: true
+    datePublication?: true
+    estValide?: true
+    estArchive?: true
+    nomAuteurExterne?: true
+    prenomAuteurExterne?: true
+    affiliationAuteurExterne?: true
   }
 
   export type RessourceMaxAggregateInputType = {
@@ -3397,16 +3435,22 @@ export namespace Prisma {
     type?: true
     langue?: true
     urlFichier?: true
+    urlFichierLocal?: true
     format?: true
-    referenceBlockchain?: true
     dateCreation?: true
     dateModification?: true
     estPublique?: true
     motsCles?: true
     auteurId?: true
-    universiteSource?: true
-    estExterne?: true
     universiteId?: true
+    image?: true
+    niveauAcces?: true
+    datePublication?: true
+    estValide?: true
+    estArchive?: true
+    nomAuteurExterne?: true
+    prenomAuteurExterne?: true
+    affiliationAuteurExterne?: true
   }
 
   export type RessourceCountAggregateInputType = {
@@ -3416,16 +3460,22 @@ export namespace Prisma {
     type?: true
     langue?: true
     urlFichier?: true
+    urlFichierLocal?: true
     format?: true
-    referenceBlockchain?: true
     dateCreation?: true
     dateModification?: true
     estPublique?: true
     motsCles?: true
     auteurId?: true
-    universiteSource?: true
-    estExterne?: true
     universiteId?: true
+    image?: true
+    niveauAcces?: true
+    datePublication?: true
+    estValide?: true
+    estArchive?: true
+    nomAuteurExterne?: true
+    prenomAuteurExterne?: true
+    affiliationAuteurExterne?: true
     _all?: true
   }
 
@@ -3508,16 +3558,22 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue: string
     urlFichier: string
+    urlFichierLocal: string | null
     format: string
-    referenceBlockchain: string
     dateCreation: Date
     dateModification: Date
     estPublique: boolean
     motsCles: string
-    auteurId: string
-    universiteSource: string
-    estExterne: boolean
+    auteurId: string | null
     universiteId: string
+    image: string | null
+    niveauAcces: $Enums.NiveauAcces
+    datePublication: Date | null
+    estValide: boolean
+    estArchive: boolean
+    nomAuteurExterne: string | null
+    prenomAuteurExterne: string | null
+    affiliationAuteurExterne: string | null
     _count: RessourceCountAggregateOutputType | null
     _min: RessourceMinAggregateOutputType | null
     _max: RessourceMaxAggregateOutputType | null
@@ -3544,17 +3600,23 @@ export namespace Prisma {
     type?: boolean
     langue?: boolean
     urlFichier?: boolean
+    urlFichierLocal?: boolean
     format?: boolean
-    referenceBlockchain?: boolean
     dateCreation?: boolean
     dateModification?: boolean
     estPublique?: boolean
     motsCles?: boolean
     auteurId?: boolean
-    universiteSource?: boolean
-    estExterne?: boolean
     universiteId?: boolean
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    image?: boolean
+    niveauAcces?: boolean
+    datePublication?: boolean
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: boolean
+    prenomAuteurExterne?: boolean
+    affiliationAuteurExterne?: boolean
+    auteur?: boolean | Ressource$auteurArgs<ExtArgs>
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
     favoris?: boolean | Ressource$favorisArgs<ExtArgs>
     commentaires?: boolean | Ressource$commentairesArgs<ExtArgs>
@@ -3574,21 +3636,27 @@ export namespace Prisma {
     type?: boolean
     langue?: boolean
     urlFichier?: boolean
+    urlFichierLocal?: boolean
     format?: boolean
-    referenceBlockchain?: boolean
     dateCreation?: boolean
     dateModification?: boolean
     estPublique?: boolean
     motsCles?: boolean
     auteurId?: boolean
-    universiteSource?: boolean
-    estExterne?: boolean
     universiteId?: boolean
+    image?: boolean
+    niveauAcces?: boolean
+    datePublication?: boolean
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: boolean
+    prenomAuteurExterne?: boolean
+    affiliationAuteurExterne?: boolean
   }
 
-  export type RessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "description" | "type" | "langue" | "urlFichier" | "format" | "referenceBlockchain" | "dateCreation" | "dateModification" | "estPublique" | "motsCles" | "auteurId" | "universiteSource" | "estExterne" | "universiteId", ExtArgs["result"]["ressource"]>
+  export type RessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "description" | "type" | "langue" | "urlFichier" | "urlFichierLocal" | "format" | "dateCreation" | "dateModification" | "estPublique" | "motsCles" | "auteurId" | "universiteId" | "image" | "niveauAcces" | "datePublication" | "estValide" | "estArchive" | "nomAuteurExterne" | "prenomAuteurExterne" | "affiliationAuteurExterne", ExtArgs["result"]["ressource"]>
   export type RessourceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    auteur?: boolean | Ressource$auteurArgs<ExtArgs>
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
     favoris?: boolean | Ressource$favorisArgs<ExtArgs>
     commentaires?: boolean | Ressource$commentairesArgs<ExtArgs>
@@ -3602,7 +3670,7 @@ export namespace Prisma {
   export type $RessourcePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Ressource"
     objects: {
-      auteur: Prisma.$UserPayload<ExtArgs>
+      auteur: Prisma.$UserPayload<ExtArgs> | null
       universite: Prisma.$UniversitePayload<ExtArgs>
       favoris: Prisma.$FavoriPayload<ExtArgs>[]
       commentaires: Prisma.$CommentairePayload<ExtArgs>[]
@@ -3618,16 +3686,22 @@ export namespace Prisma {
       type: $Enums.TypeRessource
       langue: string
       urlFichier: string
+      urlFichierLocal: string | null
       format: string
-      referenceBlockchain: string
       dateCreation: Date
       dateModification: Date
       estPublique: boolean
       motsCles: string
-      auteurId: string
-      universiteSource: string
-      estExterne: boolean
+      auteurId: string | null
       universiteId: string
+      image: string | null
+      niveauAcces: $Enums.NiveauAcces
+      datePublication: Date | null
+      estValide: boolean
+      estArchive: boolean
+      nomAuteurExterne: string | null
+      prenomAuteurExterne: string | null
+      affiliationAuteurExterne: string | null
     }, ExtArgs["result"]["ressource"]>
     composites: {}
   }
@@ -3968,7 +4042,7 @@ export namespace Prisma {
    */
   export interface Prisma__RessourceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    auteur<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    auteur<T extends Ressource$auteurArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$auteurArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     universite<T extends UniversiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UniversiteDefaultArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     favoris<T extends Ressource$favorisArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$favorisArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoriPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     commentaires<T extends Ressource$commentairesArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$commentairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4011,16 +4085,22 @@ export namespace Prisma {
     readonly type: FieldRef<"Ressource", 'TypeRessource'>
     readonly langue: FieldRef<"Ressource", 'String'>
     readonly urlFichier: FieldRef<"Ressource", 'String'>
+    readonly urlFichierLocal: FieldRef<"Ressource", 'String'>
     readonly format: FieldRef<"Ressource", 'String'>
-    readonly referenceBlockchain: FieldRef<"Ressource", 'String'>
     readonly dateCreation: FieldRef<"Ressource", 'DateTime'>
     readonly dateModification: FieldRef<"Ressource", 'DateTime'>
     readonly estPublique: FieldRef<"Ressource", 'Boolean'>
     readonly motsCles: FieldRef<"Ressource", 'String'>
     readonly auteurId: FieldRef<"Ressource", 'String'>
-    readonly universiteSource: FieldRef<"Ressource", 'String'>
-    readonly estExterne: FieldRef<"Ressource", 'Boolean'>
     readonly universiteId: FieldRef<"Ressource", 'String'>
+    readonly image: FieldRef<"Ressource", 'String'>
+    readonly niveauAcces: FieldRef<"Ressource", 'NiveauAcces'>
+    readonly datePublication: FieldRef<"Ressource", 'DateTime'>
+    readonly estValide: FieldRef<"Ressource", 'Boolean'>
+    readonly estArchive: FieldRef<"Ressource", 'Boolean'>
+    readonly nomAuteurExterne: FieldRef<"Ressource", 'String'>
+    readonly prenomAuteurExterne: FieldRef<"Ressource", 'String'>
+    readonly affiliationAuteurExterne: FieldRef<"Ressource", 'String'>
   }
     
 
@@ -4361,6 +4441,25 @@ export namespace Prisma {
      * Limit how many Ressources to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Ressource.auteur
+   */
+  export type Ressource$auteurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -14097,16 +14196,22 @@ export namespace Prisma {
     type: 'type',
     langue: 'langue',
     urlFichier: 'urlFichier',
+    urlFichierLocal: 'urlFichierLocal',
     format: 'format',
-    referenceBlockchain: 'referenceBlockchain',
     dateCreation: 'dateCreation',
     dateModification: 'dateModification',
     estPublique: 'estPublique',
     motsCles: 'motsCles',
     auteurId: 'auteurId',
-    universiteSource: 'universiteSource',
-    estExterne: 'estExterne',
-    universiteId: 'universiteId'
+    universiteId: 'universiteId',
+    image: 'image',
+    niveauAcces: 'niveauAcces',
+    datePublication: 'datePublication',
+    estValide: 'estValide',
+    estArchive: 'estArchive',
+    nomAuteurExterne: 'nomAuteurExterne',
+    prenomAuteurExterne: 'prenomAuteurExterne',
+    affiliationAuteurExterne: 'affiliationAuteurExterne'
   };
 
   export type RessourceScalarFieldEnum = (typeof RessourceScalarFieldEnum)[keyof typeof RessourceScalarFieldEnum]
@@ -14284,12 +14389,15 @@ export namespace Prisma {
     description: 'description',
     langue: 'langue',
     urlFichier: 'urlFichier',
+    urlFichierLocal: 'urlFichierLocal',
     format: 'format',
-    referenceBlockchain: 'referenceBlockchain',
     motsCles: 'motsCles',
     auteurId: 'auteurId',
-    universiteSource: 'universiteSource',
-    universiteId: 'universiteId'
+    universiteId: 'universiteId',
+    image: 'image',
+    nomAuteurExterne: 'nomAuteurExterne',
+    prenomAuteurExterne: 'prenomAuteurExterne',
+    affiliationAuteurExterne: 'affiliationAuteurExterne'
   };
 
   export type RessourceOrderByRelevanceFieldEnum = (typeof RessourceOrderByRelevanceFieldEnum)[keyof typeof RessourceOrderByRelevanceFieldEnum]
@@ -14453,6 +14561,13 @@ export namespace Prisma {
    * Reference to a field of type 'TypeRessource'
    */
   export type EnumTypeRessourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeRessource'>
+    
+
+
+  /**
+   * Reference to a field of type 'NiveauAcces'
+   */
+  export type EnumNiveauAccesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NiveauAcces'>
     
 
 
@@ -14649,17 +14764,23 @@ export namespace Prisma {
     type?: EnumTypeRessourceFilter<"Ressource"> | $Enums.TypeRessource
     langue?: StringFilter<"Ressource"> | string
     urlFichier?: StringFilter<"Ressource"> | string
+    urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
     format?: StringFilter<"Ressource"> | string
-    referenceBlockchain?: StringFilter<"Ressource"> | string
     dateCreation?: DateTimeFilter<"Ressource"> | Date | string
     dateModification?: DateTimeFilter<"Ressource"> | Date | string
     estPublique?: BoolFilter<"Ressource"> | boolean
     motsCles?: StringFilter<"Ressource"> | string
-    auteurId?: StringFilter<"Ressource"> | string
-    universiteSource?: StringFilter<"Ressource"> | string
-    estExterne?: BoolFilter<"Ressource"> | boolean
+    auteurId?: StringNullableFilter<"Ressource"> | string | null
     universiteId?: StringFilter<"Ressource"> | string
-    auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
+    image?: StringNullableFilter<"Ressource"> | string | null
+    niveauAcces?: EnumNiveauAccesFilter<"Ressource"> | $Enums.NiveauAcces
+    datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
+    estValide?: BoolFilter<"Ressource"> | boolean
+    estArchive?: BoolFilter<"Ressource"> | boolean
+    nomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
+    prenomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
+    affiliationAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
+    auteur?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
     favoris?: FavoriListRelationFilter
     commentaires?: CommentaireListRelationFilter
@@ -14676,16 +14797,22 @@ export namespace Prisma {
     type?: SortOrder
     langue?: SortOrder
     urlFichier?: SortOrder
+    urlFichierLocal?: SortOrderInput | SortOrder
     format?: SortOrder
-    referenceBlockchain?: SortOrder
     dateCreation?: SortOrder
     dateModification?: SortOrder
     estPublique?: SortOrder
     motsCles?: SortOrder
-    auteurId?: SortOrder
-    universiteSource?: SortOrder
-    estExterne?: SortOrder
+    auteurId?: SortOrderInput | SortOrder
     universiteId?: SortOrder
+    image?: SortOrderInput | SortOrder
+    niveauAcces?: SortOrder
+    datePublication?: SortOrderInput | SortOrder
+    estValide?: SortOrder
+    estArchive?: SortOrder
+    nomAuteurExterne?: SortOrderInput | SortOrder
+    prenomAuteurExterne?: SortOrderInput | SortOrder
+    affiliationAuteurExterne?: SortOrderInput | SortOrder
     auteur?: UserOrderByWithRelationInput
     universite?: UniversiteOrderByWithRelationInput
     favoris?: FavoriOrderByRelationAggregateInput
@@ -14699,7 +14826,6 @@ export namespace Prisma {
 
   export type RessourceWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    referenceBlockchain?: string
     AND?: RessourceWhereInput | RessourceWhereInput[]
     OR?: RessourceWhereInput[]
     NOT?: RessourceWhereInput | RessourceWhereInput[]
@@ -14708,16 +14834,23 @@ export namespace Prisma {
     type?: EnumTypeRessourceFilter<"Ressource"> | $Enums.TypeRessource
     langue?: StringFilter<"Ressource"> | string
     urlFichier?: StringFilter<"Ressource"> | string
+    urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
     format?: StringFilter<"Ressource"> | string
     dateCreation?: DateTimeFilter<"Ressource"> | Date | string
     dateModification?: DateTimeFilter<"Ressource"> | Date | string
     estPublique?: BoolFilter<"Ressource"> | boolean
     motsCles?: StringFilter<"Ressource"> | string
-    auteurId?: StringFilter<"Ressource"> | string
-    universiteSource?: StringFilter<"Ressource"> | string
-    estExterne?: BoolFilter<"Ressource"> | boolean
+    auteurId?: StringNullableFilter<"Ressource"> | string | null
     universiteId?: StringFilter<"Ressource"> | string
-    auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
+    image?: StringNullableFilter<"Ressource"> | string | null
+    niveauAcces?: EnumNiveauAccesFilter<"Ressource"> | $Enums.NiveauAcces
+    datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
+    estValide?: BoolFilter<"Ressource"> | boolean
+    estArchive?: BoolFilter<"Ressource"> | boolean
+    nomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
+    prenomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
+    affiliationAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
+    auteur?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
     favoris?: FavoriListRelationFilter
     commentaires?: CommentaireListRelationFilter
@@ -14725,7 +14858,7 @@ export namespace Prisma {
     historiques?: HistoriqueAccesListRelationFilter
     collections?: CollectionRessourceListRelationFilter
     partages?: PartageUniversiteListRelationFilter
-  }, "id" | "referenceBlockchain">
+  }, "id">
 
   export type RessourceOrderByWithAggregationInput = {
     id?: SortOrder
@@ -14734,16 +14867,22 @@ export namespace Prisma {
     type?: SortOrder
     langue?: SortOrder
     urlFichier?: SortOrder
+    urlFichierLocal?: SortOrderInput | SortOrder
     format?: SortOrder
-    referenceBlockchain?: SortOrder
     dateCreation?: SortOrder
     dateModification?: SortOrder
     estPublique?: SortOrder
     motsCles?: SortOrder
-    auteurId?: SortOrder
-    universiteSource?: SortOrder
-    estExterne?: SortOrder
+    auteurId?: SortOrderInput | SortOrder
     universiteId?: SortOrder
+    image?: SortOrderInput | SortOrder
+    niveauAcces?: SortOrder
+    datePublication?: SortOrderInput | SortOrder
+    estValide?: SortOrder
+    estArchive?: SortOrder
+    nomAuteurExterne?: SortOrderInput | SortOrder
+    prenomAuteurExterne?: SortOrderInput | SortOrder
+    affiliationAuteurExterne?: SortOrderInput | SortOrder
     _count?: RessourceCountOrderByAggregateInput
     _max?: RessourceMaxOrderByAggregateInput
     _min?: RessourceMinOrderByAggregateInput
@@ -14759,16 +14898,22 @@ export namespace Prisma {
     type?: EnumTypeRessourceWithAggregatesFilter<"Ressource"> | $Enums.TypeRessource
     langue?: StringWithAggregatesFilter<"Ressource"> | string
     urlFichier?: StringWithAggregatesFilter<"Ressource"> | string
+    urlFichierLocal?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     format?: StringWithAggregatesFilter<"Ressource"> | string
-    referenceBlockchain?: StringWithAggregatesFilter<"Ressource"> | string
     dateCreation?: DateTimeWithAggregatesFilter<"Ressource"> | Date | string
     dateModification?: DateTimeWithAggregatesFilter<"Ressource"> | Date | string
     estPublique?: BoolWithAggregatesFilter<"Ressource"> | boolean
     motsCles?: StringWithAggregatesFilter<"Ressource"> | string
-    auteurId?: StringWithAggregatesFilter<"Ressource"> | string
-    universiteSource?: StringWithAggregatesFilter<"Ressource"> | string
-    estExterne?: BoolWithAggregatesFilter<"Ressource"> | boolean
+    auteurId?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     universiteId?: StringWithAggregatesFilter<"Ressource"> | string
+    image?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
+    niveauAcces?: EnumNiveauAccesWithAggregatesFilter<"Ressource"> | $Enums.NiveauAcces
+    datePublication?: DateTimeNullableWithAggregatesFilter<"Ressource"> | Date | string | null
+    estValide?: BoolWithAggregatesFilter<"Ressource"> | boolean
+    estArchive?: BoolWithAggregatesFilter<"Ressource"> | boolean
+    nomAuteurExterne?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
+    prenomAuteurExterne?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
+    affiliationAuteurExterne?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
   }
 
   export type FavoriWhereInput = {
@@ -15585,15 +15730,21 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    universiteSource: string
-    estExterne?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -15610,16 +15761,22 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    auteurId: string
-    universiteSource: string
-    estExterne?: boolean
+    auteurId?: string | null
     universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -15635,15 +15792,21 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -15660,16 +15823,22 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -15685,16 +15854,22 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    auteurId: string
-    universiteSource: string
-    estExterne?: boolean
+    auteurId?: string | null
     universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
   }
 
   export type RessourceUpdateManyMutationInput = {
@@ -15704,14 +15879,20 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RessourceUncheckedUpdateManyInput = {
@@ -15721,16 +15902,22 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FavoriCreateInput = {
@@ -16681,9 +16868,16 @@ export namespace Prisma {
     not?: NestedEnumTypeRessourceFilter<$PrismaModel> | $Enums.TypeRessource
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type EnumNiveauAccesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NiveauAcces | EnumNiveauAccesFieldRefInput<$PrismaModel>
+    in?: $Enums.NiveauAcces[]
+    notIn?: $Enums.NiveauAcces[]
+    not?: NestedEnumNiveauAccesFilter<$PrismaModel> | $Enums.NiveauAcces
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type CollectionRessourceListRelationFilter = {
@@ -16719,16 +16913,22 @@ export namespace Prisma {
     type?: SortOrder
     langue?: SortOrder
     urlFichier?: SortOrder
+    urlFichierLocal?: SortOrder
     format?: SortOrder
-    referenceBlockchain?: SortOrder
     dateCreation?: SortOrder
     dateModification?: SortOrder
     estPublique?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
-    universiteSource?: SortOrder
-    estExterne?: SortOrder
     universiteId?: SortOrder
+    image?: SortOrder
+    niveauAcces?: SortOrder
+    datePublication?: SortOrder
+    estValide?: SortOrder
+    estArchive?: SortOrder
+    nomAuteurExterne?: SortOrder
+    prenomAuteurExterne?: SortOrder
+    affiliationAuteurExterne?: SortOrder
   }
 
   export type RessourceMaxOrderByAggregateInput = {
@@ -16738,16 +16938,22 @@ export namespace Prisma {
     type?: SortOrder
     langue?: SortOrder
     urlFichier?: SortOrder
+    urlFichierLocal?: SortOrder
     format?: SortOrder
-    referenceBlockchain?: SortOrder
     dateCreation?: SortOrder
     dateModification?: SortOrder
     estPublique?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
-    universiteSource?: SortOrder
-    estExterne?: SortOrder
     universiteId?: SortOrder
+    image?: SortOrder
+    niveauAcces?: SortOrder
+    datePublication?: SortOrder
+    estValide?: SortOrder
+    estArchive?: SortOrder
+    nomAuteurExterne?: SortOrder
+    prenomAuteurExterne?: SortOrder
+    affiliationAuteurExterne?: SortOrder
   }
 
   export type RessourceMinOrderByAggregateInput = {
@@ -16757,16 +16963,22 @@ export namespace Prisma {
     type?: SortOrder
     langue?: SortOrder
     urlFichier?: SortOrder
+    urlFichierLocal?: SortOrder
     format?: SortOrder
-    referenceBlockchain?: SortOrder
     dateCreation?: SortOrder
     dateModification?: SortOrder
     estPublique?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
-    universiteSource?: SortOrder
-    estExterne?: SortOrder
     universiteId?: SortOrder
+    image?: SortOrder
+    niveauAcces?: SortOrder
+    datePublication?: SortOrder
+    estValide?: SortOrder
+    estArchive?: SortOrder
+    nomAuteurExterne?: SortOrder
+    prenomAuteurExterne?: SortOrder
+    affiliationAuteurExterne?: SortOrder
   }
 
   export type EnumTypeRessourceWithAggregatesFilter<$PrismaModel = never> = {
@@ -16777,6 +16989,21 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTypeRessourceFilter<$PrismaModel>
     _max?: NestedEnumTypeRessourceFilter<$PrismaModel>
+  }
+
+  export type EnumNiveauAccesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NiveauAcces | EnumNiveauAccesFieldRefInput<$PrismaModel>
+    in?: $Enums.NiveauAcces[]
+    notIn?: $Enums.NiveauAcces[]
+    not?: NestedEnumNiveauAccesWithAggregatesFilter<$PrismaModel> | $Enums.NiveauAcces
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNiveauAccesFilter<$PrismaModel>
+    _max?: NestedEnumNiveauAccesFilter<$PrismaModel>
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
   export type RessourceScalarRelationFilter = {
@@ -17739,10 +17966,16 @@ export namespace Prisma {
     set?: $Enums.TypeRessource
   }
 
-  export type UserUpdateOneRequiredWithoutContributionsNestedInput = {
+  export type EnumNiveauAccesFieldUpdateOperationsInput = {
+    set?: $Enums.NiveauAcces
+  }
+
+  export type UserUpdateOneWithoutContributionsNestedInput = {
     create?: XOR<UserCreateWithoutContributionsInput, UserUncheckedCreateWithoutContributionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutContributionsInput
     upsert?: UserUpsertWithoutContributionsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContributionsInput, UserUpdateWithoutContributionsInput>, UserUncheckedUpdateWithoutContributionsInput>
   }
@@ -18424,6 +18657,13 @@ export namespace Prisma {
     not?: NestedEnumTypeRessourceFilter<$PrismaModel> | $Enums.TypeRessource
   }
 
+  export type NestedEnumNiveauAccesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NiveauAcces | EnumNiveauAccesFieldRefInput<$PrismaModel>
+    in?: $Enums.NiveauAcces[]
+    notIn?: $Enums.NiveauAcces[]
+    not?: NestedEnumNiveauAccesFilter<$PrismaModel> | $Enums.NiveauAcces
+  }
+
   export type NestedEnumTypeRessourceWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.TypeRessource | EnumTypeRessourceFieldRefInput<$PrismaModel>
     in?: $Enums.TypeRessource[]
@@ -18432,6 +18672,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTypeRessourceFilter<$PrismaModel>
     _max?: NestedEnumTypeRessourceFilter<$PrismaModel>
+  }
+
+  export type NestedEnumNiveauAccesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NiveauAcces | EnumNiveauAccesFieldRefInput<$PrismaModel>
+    in?: $Enums.NiveauAcces[]
+    notIn?: $Enums.NiveauAcces[]
+    not?: NestedEnumNiveauAccesWithAggregatesFilter<$PrismaModel> | $Enums.NiveauAcces
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNiveauAccesFilter<$PrismaModel>
+    _max?: NestedEnumNiveauAccesFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -18606,14 +18856,20 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    universiteSource: string
-    estExterne?: boolean
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
     universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -18630,15 +18886,21 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    universiteSource: string
-    estExterne?: boolean
     universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -18850,16 +19112,22 @@ export namespace Prisma {
     type?: EnumTypeRessourceFilter<"Ressource"> | $Enums.TypeRessource
     langue?: StringFilter<"Ressource"> | string
     urlFichier?: StringFilter<"Ressource"> | string
+    urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
     format?: StringFilter<"Ressource"> | string
-    referenceBlockchain?: StringFilter<"Ressource"> | string
     dateCreation?: DateTimeFilter<"Ressource"> | Date | string
     dateModification?: DateTimeFilter<"Ressource"> | Date | string
     estPublique?: BoolFilter<"Ressource"> | boolean
     motsCles?: StringFilter<"Ressource"> | string
-    auteurId?: StringFilter<"Ressource"> | string
-    universiteSource?: StringFilter<"Ressource"> | string
-    estExterne?: BoolFilter<"Ressource"> | boolean
+    auteurId?: StringNullableFilter<"Ressource"> | string | null
     universiteId?: StringFilter<"Ressource"> | string
+    image?: StringNullableFilter<"Ressource"> | string | null
+    niveauAcces?: EnumNiveauAccesFilter<"Ressource"> | $Enums.NiveauAcces
+    datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
+    estValide?: BoolFilter<"Ressource"> | boolean
+    estArchive?: BoolFilter<"Ressource"> | boolean
+    nomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
+    prenomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
+    affiliationAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
   }
 
   export type FavoriUpsertWithWhereUniqueWithoutUserInput = {
@@ -19506,15 +19774,21 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    universiteSource: string
-    estExterne?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     universite: UniversiteCreateNestedOneWithoutRessourcesInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -19530,16 +19804,22 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    auteurId: string
-    universiteSource: string
-    estExterne?: boolean
+    auteurId?: string | null
     universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
@@ -19627,15 +19907,21 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -19651,16 +19937,22 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
@@ -19731,15 +20023,21 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    universiteSource: string
-    estExterne?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -19755,15 +20053,21 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    auteurId: string
-    universiteSource: string
-    estExterne?: boolean
+    auteurId?: string | null
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -19893,15 +20197,21 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    universiteSource: string
-    estExterne?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -19917,16 +20227,22 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    auteurId: string
-    universiteSource: string
-    estExterne?: boolean
+    auteurId?: string | null
     universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
@@ -20014,15 +20330,21 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -20038,16 +20360,22 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
@@ -20113,15 +20441,21 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    universiteSource: string
-    estExterne?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -20137,16 +20471,22 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    auteurId: string
-    universiteSource: string
-    estExterne?: boolean
+    auteurId?: string | null
     universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
@@ -20234,15 +20574,21 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -20258,16 +20604,22 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
@@ -20333,15 +20685,21 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    universiteSource: string
-    estExterne?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -20357,16 +20715,22 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    auteurId: string
-    universiteSource: string
-    estExterne?: boolean
+    auteurId?: string | null
     universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -20454,15 +20818,21 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -20478,16 +20848,22 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -20673,15 +21049,21 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    universiteSource: string
-    estExterne?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -20697,16 +21079,22 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    auteurId: string
-    universiteSource: string
-    estExterne?: boolean
+    auteurId?: string | null
     universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -20766,15 +21154,21 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -20790,16 +21184,22 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -20814,15 +21214,21 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    universiteSource: string
-    estExterne?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -20838,16 +21244,22 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    auteurId: string
-    universiteSource: string
-    estExterne?: boolean
+    auteurId?: string | null
     universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -20878,15 +21290,21 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -20902,16 +21320,22 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -20926,15 +21350,21 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    universiteSource: string
-    estExterne?: boolean
     universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
   }
 
   export type FavoriCreateManyUserInput = {
@@ -20983,14 +21413,20 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -21007,15 +21443,21 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
     universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -21031,15 +21473,21 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
     universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FavoriUpdateWithoutUserInput = {
@@ -21369,15 +21817,21 @@ export namespace Prisma {
     type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
+    urlFichierLocal?: string | null
     format: string
-    referenceBlockchain: string
     dateCreation?: Date | string
     dateModification?: Date | string
     estPublique?: boolean
     motsCles: string
-    auteurId: string
-    universiteSource: string
-    estExterne?: boolean
+    auteurId?: string | null
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    affiliationAuteurExterne?: string | null
   }
 
   export type UserUpdateWithoutUniversiteInput = {
@@ -21450,15 +21904,21 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -21474,15 +21934,21 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -21498,15 +21964,21 @@ export namespace Prisma {
     type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    estExterne?: BoolFieldUpdateOperationsInput | boolean
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CollectionRessourceCreateManyCollectionInput = {
