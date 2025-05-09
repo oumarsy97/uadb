@@ -114,9 +114,9 @@ export class UtilisateursService {
     const where = search
       ? {
           OR: [
-            { nom: { contains: search, mode: 'insensitive' } },
-            { prenom: { contains: search, mode: 'insensitive' } },
-            { email: { contains: search, mode: 'insensitive' } },
+            { nom: { contains: search, lte: 'insensitive' } },
+            { prenom: { contains: search, lte: 'insensitive' } },
+            { email: { contains: search, lte: 'insensitive' } },
           ],
         }
       : {};
@@ -125,7 +125,7 @@ export class UtilisateursService {
       this.prisma.user.findMany({
         where,
         skip,
-        take: limit,
+        take: +limit,
         include: { universite: true },
         orderBy: { dateInscription: 'desc' },
       }),
