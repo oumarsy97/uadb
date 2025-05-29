@@ -16,6 +16,7 @@ const ressources_module_1 = require("./ressources/ressources.module");
 const interactions_module_1 = require("./interactions/interactions.module");
 const collections_module_1 = require("./collections/collections.module");
 const universite_module_1 = require("./universite/universite.module");
+const convention_module_1 = require("./convention/convention.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -28,6 +29,7 @@ exports.AppModule = AppModule = __decorate([
             interactions_module_1.InteractionsModule,
             collections_module_1.CollectionsModule,
             universite_module_1.UniversiteModule,
+            convention_module_1.ConventionModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService,],

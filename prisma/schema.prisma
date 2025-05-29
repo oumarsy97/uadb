@@ -16,15 +16,11 @@ model ConventionInteruniversitaire {
   id                String         @id @default(uuid())
   universiteId1     String         @map("universite_id_1")
   universiteId2     String         @map("universite_id_2")
-  dateDebut         DateTime       @map("date_debut")
+  dateDebut         DateTime       @map("date_debut") @default(now())
   dateFin           DateTime?      @map("date_fin")
   estActive         Boolean        @default(true) @map("est_active")
   typeConvention    TypeConvention @default(EMPRUNT_RECIPROQUE)
   detailsConvention String?        @db.Text @map("details_convention")
-  documentsUrl      String?        @map("documents_url") // URL vers les documents de la convention
-  contactUniversite1 String?       @map("contact_universite_1")
-  contactUniversite2 String?       @map("contact_universite_2")
-  
   // Relations avec les universités (manquantes)
   universite1       Universite     @relation("UniversiteConvention1", fields: [universiteId1], references: [id])
   universite2       Universite     @relation("UniversiteConvention2", fields: [universiteId2], references: [id])

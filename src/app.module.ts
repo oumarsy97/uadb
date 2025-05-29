@@ -9,6 +9,7 @@ import { RessourcesModule } from './ressources/ressources.module';
 import { InteractionsModule } from './interactions/interactions.module';
 import { CollectionsModule } from './collections/collections.module';
 import { UniversiteModule } from './universite/universite.module';
+import { ConventionModule } from './convention/convention.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UniversiteModule } from './universite/universite.module';
     InteractionsModule,
     CollectionsModule,
     UniversiteModule,
+    ConventionModule,
   ],
   controllers: [AppController],
   providers: [AppService,],
