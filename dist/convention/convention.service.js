@@ -51,32 +51,15 @@ let ConventionService = class ConventionService {
         });
     }
     findAll(page, limit, search) {
-        const where = search
-            ? {
-                OR: [
-                    { universite1: { nom: { contains: search, mode: 'insensitive' } } },
-                    { universite2: { nom: { contains: search, mode: 'insensitive' } } },
-                ],
-            }
-            : {};
         const skip = ((page || 1) - 1) * (limit || 10);
         return this.prisma.conventionInteruniversitaire.findMany({
-            where,
             skip,
             take: limit,
-            include: {
-                universite1: true,
-                universite2: true,
-            },
         });
     }
     findOne(id) {
         return this.prisma.conventionInteruniversitaire.findUnique({
             where: { id: id },
-            include: {
-                universite1: true,
-                universite2: true,
-            },
         });
     }
     update(id, updateConventionDto) {
@@ -97,19 +80,11 @@ let ConventionService = class ConventionService {
     async findActiveConventions() {
         return this.prisma.conventionInteruniversitaire.findMany({
             where: { estActive: true },
-            include: {
-                universite1: true,
-                universite2: true,
-            },
         });
     }
     async findInactiveConventions() {
         return this.prisma.conventionInteruniversitaire.findMany({
             where: { estActive: false },
-            include: {
-                universite1: true,
-                universite2: true,
-            },
         });
     }
     async activateConvention(id) {
@@ -131,10 +106,6 @@ let ConventionService = class ConventionService {
                     { universiteId1: universiteId },
                     { universiteId2: universiteId },
                 ],
-            },
-            include: {
-                universite1: true,
-                universite2: true,
             },
         });
     }

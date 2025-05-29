@@ -47,33 +47,19 @@ export class ConventionService {
 
   findAll( page?: number, limit?: number, search?: string) {
     // Implémentation de la pagination et de la recherche
-    const where = search
-      ? {
-          OR: [
-            { universite1: { nom: { contains: search, mode: 'insensitive' } } },
-            { universite2: { nom: { contains: search, mode: 'insensitive' } } },
-          ],
-        }
-      : {};
+    
     const skip = ((page || 1) - 1) * (limit || 10); // Default limit to 10 if undefined
     return this.prisma.conventionInteruniversitaire.findMany({
-      where,
       skip,
       take: limit,
-      include: {
-        universite1: true, // Inclure les détails de la première université
-        universite2: true, // Inclure les détails de la deuxième université
-      },
+      
     });
   }
 
   findOne(id: string) {
     return this.prisma.conventionInteruniversitaire.findUnique({
       where: { id: id },
-      include: {
-        universite1: true, // Inclure les détails de la première université
-        universite2: true, // Inclure les détails de la deuxième université
-      },
+    
     });
   }
 
@@ -96,19 +82,13 @@ export class ConventionService {
   async findActiveConventions() {
     return this.prisma.conventionInteruniversitaire.findMany({
       where: { estActive: true },
-      include: {
-        universite1: true,
-        universite2: true,
-      },
+      
     });
   }
   async findInactiveConventions() {
     return this.prisma.conventionInteruniversitaire.findMany({
       where: { estActive: false },
-      include: {
-        universite1: true,
-        universite2: true,
-      },
+      
     });
   }
   async activateConvention(id: string) {
@@ -130,10 +110,6 @@ export class ConventionService {
           { universiteId1: universiteId },
           { universiteId2: universiteId },
         ],
-      },
-      include: {
-        universite1: true,
-        universite2: true,
       },
     });
   }

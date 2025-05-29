@@ -99,7 +99,6 @@ export class RessourcesService {
     if (type) where.type = type;
     if (langue) where.langue = langue;
     if (universiteId) where.universiteId = universiteId;
-    if (estPublique !== undefined) where.estPublique = estPublique;
     if (niveauAcces) where.niveauAcces = niveauAcces;
     if (estValide !== undefined) where.estValide = estValide;
     if (estArchive !== undefined) where.estArchive = estArchive;

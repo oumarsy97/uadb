@@ -13,38 +13,12 @@ export declare class ConventionController {
         estActive: boolean;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-        documentsUrl: string | null;
-        contactUniversite1: string | null;
-        contactUniversite2: string | null;
     }>;
     findAll(query?: {
         page?: number;
         limit?: number;
         search?: string;
-    }): Promise<({
-        universite1: {
-            id: string;
-            estActive: boolean;
-            nom: string;
-            adresse: string | null;
-            ville: string;
-            pays: string;
-            siteWeb: string | null;
-            dateCreation: Date;
-            adresseBlockchain: string | null;
-        };
-        universite2: {
-            id: string;
-            estActive: boolean;
-            nom: string;
-            adresse: string | null;
-            ville: string;
-            pays: string;
-            siteWeb: string | null;
-            dateCreation: Date;
-            adresseBlockchain: string | null;
-        };
-    } & {
+    }): Promise<{
         id: string;
         universiteId1: string;
         universiteId2: string;
@@ -53,34 +27,8 @@ export declare class ConventionController {
         estActive: boolean;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-        documentsUrl: string | null;
-        contactUniversite1: string | null;
-        contactUniversite2: string | null;
-    })[]>;
-    findOne(id: string): Promise<({
-        universite1: {
-            id: string;
-            estActive: boolean;
-            nom: string;
-            adresse: string | null;
-            ville: string;
-            pays: string;
-            siteWeb: string | null;
-            dateCreation: Date;
-            adresseBlockchain: string | null;
-        };
-        universite2: {
-            id: string;
-            estActive: boolean;
-            nom: string;
-            adresse: string | null;
-            ville: string;
-            pays: string;
-            siteWeb: string | null;
-            dateCreation: Date;
-            adresseBlockchain: string | null;
-        };
-    } & {
+    }[]>;
+    findOne(id: string): Promise<{
         id: string;
         universiteId1: string;
         universiteId2: string;
@@ -89,10 +37,7 @@ export declare class ConventionController {
         estActive: boolean;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-        documentsUrl: string | null;
-        contactUniversite1: string | null;
-        contactUniversite2: string | null;
-    }) | null>;
+    } | null>;
     update(data: {
         id: string;
         updateData: UpdateConventionDto;
@@ -105,9 +50,6 @@ export declare class ConventionController {
         estActive: boolean;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-        documentsUrl: string | null;
-        contactUniversite1: string | null;
-        contactUniversite2: string | null;
     }>;
     remove(id: string): Promise<{
         id: string;
@@ -118,34 +60,8 @@ export declare class ConventionController {
         estActive: boolean;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-        documentsUrl: string | null;
-        contactUniversite1: string | null;
-        contactUniversite2: string | null;
     }>;
-    findActiveConventions(): Promise<({
-        universite1: {
-            id: string;
-            estActive: boolean;
-            nom: string;
-            adresse: string | null;
-            ville: string;
-            pays: string;
-            siteWeb: string | null;
-            dateCreation: Date;
-            adresseBlockchain: string | null;
-        };
-        universite2: {
-            id: string;
-            estActive: boolean;
-            nom: string;
-            adresse: string | null;
-            ville: string;
-            pays: string;
-            siteWeb: string | null;
-            dateCreation: Date;
-            adresseBlockchain: string | null;
-        };
-    } & {
+    findActiveConventions(): Promise<{
         id: string;
         universiteId1: string;
         universiteId2: string;
@@ -154,34 +70,8 @@ export declare class ConventionController {
         estActive: boolean;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-        documentsUrl: string | null;
-        contactUniversite1: string | null;
-        contactUniversite2: string | null;
-    })[]>;
-    findInactiveConventions(): Promise<({
-        universite1: {
-            id: string;
-            estActive: boolean;
-            nom: string;
-            adresse: string | null;
-            ville: string;
-            pays: string;
-            siteWeb: string | null;
-            dateCreation: Date;
-            adresseBlockchain: string | null;
-        };
-        universite2: {
-            id: string;
-            estActive: boolean;
-            nom: string;
-            adresse: string | null;
-            ville: string;
-            pays: string;
-            siteWeb: string | null;
-            dateCreation: Date;
-            adresseBlockchain: string | null;
-        };
-    } & {
+    }[]>;
+    findInactiveConventions(): Promise<{
         id: string;
         universiteId1: string;
         universiteId2: string;
@@ -190,10 +80,7 @@ export declare class ConventionController {
         estActive: boolean;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-        documentsUrl: string | null;
-        contactUniversite1: string | null;
-        contactUniversite2: string | null;
-    })[]>;
+    }[]>;
     activateConvention(id: string): Promise<{
         id: string;
         universiteId1: string;
@@ -203,9 +90,6 @@ export declare class ConventionController {
         estActive: boolean;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-        documentsUrl: string | null;
-        contactUniversite1: string | null;
-        contactUniversite2: string | null;
     }>;
     deactivateConvention(id: string): Promise<{
         id: string;
@@ -216,34 +100,8 @@ export declare class ConventionController {
         estActive: boolean;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-        documentsUrl: string | null;
-        contactUniversite1: string | null;
-        contactUniversite2: string | null;
     }>;
-    findConventionsByUniversite(universiteId: string): Promise<({
-        universite1: {
-            id: string;
-            estActive: boolean;
-            nom: string;
-            adresse: string | null;
-            ville: string;
-            pays: string;
-            siteWeb: string | null;
-            dateCreation: Date;
-            adresseBlockchain: string | null;
-        };
-        universite2: {
-            id: string;
-            estActive: boolean;
-            nom: string;
-            adresse: string | null;
-            ville: string;
-            pays: string;
-            siteWeb: string | null;
-            dateCreation: Date;
-            adresseBlockchain: string | null;
-        };
-    } & {
+    findConventionsByUniversite(universiteId: string): Promise<{
         id: string;
         universiteId1: string;
         universiteId2: string;
@@ -252,10 +110,7 @@ export declare class ConventionController {
         estActive: boolean;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-        documentsUrl: string | null;
-        contactUniversite1: string | null;
-        contactUniversite2: string | null;
-    })[]>;
+    }[]>;
     toggleStatus(id: string): Promise<{
         id: string;
         universiteId1: string;
@@ -265,8 +120,5 @@ export declare class ConventionController {
         estActive: boolean;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-        documentsUrl: string | null;
-        contactUniversite1: string | null;
-        contactUniversite2: string | null;
     }>;
 }

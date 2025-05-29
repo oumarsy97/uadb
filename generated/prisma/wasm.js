@@ -125,10 +125,7 @@ exports.Prisma.ConventionInteruniversitaireScalarFieldEnum = {
   dateFin: 'dateFin',
   estActive: 'estActive',
   typeConvention: 'typeConvention',
-  detailsConvention: 'detailsConvention',
-  documentsUrl: 'documentsUrl',
-  contactUniversite1: 'contactUniversite1',
-  contactUniversite2: 'contactUniversite2'
+  detailsConvention: 'detailsConvention'
 };
 
 exports.Prisma.ReglePretScalarFieldEnum = {
@@ -387,7 +384,6 @@ exports.Prisma.RessourceScalarFieldEnum = {
   format: 'format',
   dateCreation: 'dateCreation',
   dateModification: 'dateModification',
-  estPublique: 'estPublique',
   motsCles: 'motsCles',
   auteurId: 'auteurId',
   universiteId: 'universiteId',
@@ -472,10 +468,7 @@ exports.Prisma.ConventionInteruniversitaireOrderByRelevanceFieldEnum = {
   id: 'id',
   universiteId1: 'universiteId1',
   universiteId2: 'universiteId2',
-  detailsConvention: 'detailsConvention',
-  documentsUrl: 'documentsUrl',
-  contactUniversite1: 'contactUniversite1',
-  contactUniversite2: 'contactUniversite2'
+  detailsConvention: 'detailsConvention'
 };
 
 exports.Prisma.ReglePretOrderByRelevanceFieldEnum = {

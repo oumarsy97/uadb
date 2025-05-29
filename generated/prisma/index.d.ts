@@ -3373,8 +3373,6 @@ export namespace Prisma {
   export type UniversiteCountOutputType = {
     users: number
     ressources: number
-    conventionsSource: number
-    conventionsDestination: number
     statistiquesSource: number
     statistiquesDestination: number
     reservations: number
@@ -3391,8 +3389,6 @@ export namespace Prisma {
   export type UniversiteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | UniversiteCountOutputTypeCountUsersArgs
     ressources?: boolean | UniversiteCountOutputTypeCountRessourcesArgs
-    conventionsSource?: boolean | UniversiteCountOutputTypeCountConventionsSourceArgs
-    conventionsDestination?: boolean | UniversiteCountOutputTypeCountConventionsDestinationArgs
     statistiquesSource?: boolean | UniversiteCountOutputTypeCountStatistiquesSourceArgs
     statistiquesDestination?: boolean | UniversiteCountOutputTypeCountStatistiquesDestinationArgs
     reservations?: boolean | UniversiteCountOutputTypeCountReservationsArgs
@@ -3429,20 +3425,6 @@ export namespace Prisma {
    */
   export type UniversiteCountOutputTypeCountRessourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RessourceWhereInput
-  }
-
-  /**
-   * UniversiteCountOutputType without action
-   */
-  export type UniversiteCountOutputTypeCountConventionsSourceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ConventionInteruniversitaireWhereInput
-  }
-
-  /**
-   * UniversiteCountOutputType without action
-   */
-  export type UniversiteCountOutputTypeCountConventionsDestinationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ConventionInteruniversitaireWhereInput
   }
 
   /**
@@ -3904,9 +3886,6 @@ export namespace Prisma {
     estActive: boolean | null
     typeConvention: $Enums.TypeConvention | null
     detailsConvention: string | null
-    documentsUrl: string | null
-    contactUniversite1: string | null
-    contactUniversite2: string | null
   }
 
   export type ConventionInteruniversitaireMaxAggregateOutputType = {
@@ -3918,9 +3897,6 @@ export namespace Prisma {
     estActive: boolean | null
     typeConvention: $Enums.TypeConvention | null
     detailsConvention: string | null
-    documentsUrl: string | null
-    contactUniversite1: string | null
-    contactUniversite2: string | null
   }
 
   export type ConventionInteruniversitaireCountAggregateOutputType = {
@@ -3932,9 +3908,6 @@ export namespace Prisma {
     estActive: number
     typeConvention: number
     detailsConvention: number
-    documentsUrl: number
-    contactUniversite1: number
-    contactUniversite2: number
     _all: number
   }
 
@@ -3948,9 +3921,6 @@ export namespace Prisma {
     estActive?: true
     typeConvention?: true
     detailsConvention?: true
-    documentsUrl?: true
-    contactUniversite1?: true
-    contactUniversite2?: true
   }
 
   export type ConventionInteruniversitaireMaxAggregateInputType = {
@@ -3962,9 +3932,6 @@ export namespace Prisma {
     estActive?: true
     typeConvention?: true
     detailsConvention?: true
-    documentsUrl?: true
-    contactUniversite1?: true
-    contactUniversite2?: true
   }
 
   export type ConventionInteruniversitaireCountAggregateInputType = {
@@ -3976,9 +3943,6 @@ export namespace Prisma {
     estActive?: true
     typeConvention?: true
     detailsConvention?: true
-    documentsUrl?: true
-    contactUniversite1?: true
-    contactUniversite2?: true
     _all?: true
   }
 
@@ -4063,9 +4027,6 @@ export namespace Prisma {
     estActive: boolean
     typeConvention: $Enums.TypeConvention
     detailsConvention: string | null
-    documentsUrl: string | null
-    contactUniversite1: string | null
-    contactUniversite2: string | null
     _count: ConventionInteruniversitaireCountAggregateOutputType | null
     _min: ConventionInteruniversitaireMinAggregateOutputType | null
     _max: ConventionInteruniversitaireMaxAggregateOutputType | null
@@ -4094,11 +4055,6 @@ export namespace Prisma {
     estActive?: boolean
     typeConvention?: boolean
     detailsConvention?: boolean
-    documentsUrl?: boolean
-    contactUniversite1?: boolean
-    contactUniversite2?: boolean
-    universite1?: boolean | UniversiteDefaultArgs<ExtArgs>
-    universite2?: boolean | UniversiteDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["conventionInteruniversitaire"]>
 
 
@@ -4112,23 +4068,13 @@ export namespace Prisma {
     estActive?: boolean
     typeConvention?: boolean
     detailsConvention?: boolean
-    documentsUrl?: boolean
-    contactUniversite1?: boolean
-    contactUniversite2?: boolean
   }
 
-  export type ConventionInteruniversitaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteId1" | "universiteId2" | "dateDebut" | "dateFin" | "estActive" | "typeConvention" | "detailsConvention" | "documentsUrl" | "contactUniversite1" | "contactUniversite2", ExtArgs["result"]["conventionInteruniversitaire"]>
-  export type ConventionInteruniversitaireInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    universite1?: boolean | UniversiteDefaultArgs<ExtArgs>
-    universite2?: boolean | UniversiteDefaultArgs<ExtArgs>
-  }
+  export type ConventionInteruniversitaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteId1" | "universiteId2" | "dateDebut" | "dateFin" | "estActive" | "typeConvention" | "detailsConvention", ExtArgs["result"]["conventionInteruniversitaire"]>
 
   export type $ConventionInteruniversitairePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ConventionInteruniversitaire"
-    objects: {
-      universite1: Prisma.$UniversitePayload<ExtArgs>
-      universite2: Prisma.$UniversitePayload<ExtArgs>
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
       universiteId1: string
@@ -4138,9 +4084,6 @@ export namespace Prisma {
       estActive: boolean
       typeConvention: $Enums.TypeConvention
       detailsConvention: string | null
-      documentsUrl: string | null
-      contactUniversite1: string | null
-      contactUniversite2: string | null
     }, ExtArgs["result"]["conventionInteruniversitaire"]>
     composites: {}
   }
@@ -4481,8 +4424,6 @@ export namespace Prisma {
    */
   export interface Prisma__ConventionInteruniversitaireClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    universite1<T extends UniversiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UniversiteDefaultArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    universite2<T extends UniversiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UniversiteDefaultArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4520,9 +4461,6 @@ export namespace Prisma {
     readonly estActive: FieldRef<"ConventionInteruniversitaire", 'Boolean'>
     readonly typeConvention: FieldRef<"ConventionInteruniversitaire", 'TypeConvention'>
     readonly detailsConvention: FieldRef<"ConventionInteruniversitaire", 'String'>
-    readonly documentsUrl: FieldRef<"ConventionInteruniversitaire", 'String'>
-    readonly contactUniversite1: FieldRef<"ConventionInteruniversitaire", 'String'>
-    readonly contactUniversite2: FieldRef<"ConventionInteruniversitaire", 'String'>
   }
     
 
@@ -4539,10 +4477,6 @@ export namespace Prisma {
      * Omit specific fields from the ConventionInteruniversitaire
      */
     omit?: ConventionInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConventionInteruniversitaireInclude<ExtArgs> | null
     /**
      * Filter, which ConventionInteruniversitaire to fetch.
      */
@@ -4562,10 +4496,6 @@ export namespace Prisma {
      */
     omit?: ConventionInteruniversitaireOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConventionInteruniversitaireInclude<ExtArgs> | null
-    /**
      * Filter, which ConventionInteruniversitaire to fetch.
      */
     where: ConventionInteruniversitaireWhereUniqueInput
@@ -4583,10 +4513,6 @@ export namespace Prisma {
      * Omit specific fields from the ConventionInteruniversitaire
      */
     omit?: ConventionInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConventionInteruniversitaireInclude<ExtArgs> | null
     /**
      * Filter, which ConventionInteruniversitaire to fetch.
      */
@@ -4636,10 +4562,6 @@ export namespace Prisma {
      */
     omit?: ConventionInteruniversitaireOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConventionInteruniversitaireInclude<ExtArgs> | null
-    /**
      * Filter, which ConventionInteruniversitaire to fetch.
      */
     where?: ConventionInteruniversitaireWhereInput
@@ -4688,10 +4610,6 @@ export namespace Prisma {
      */
     omit?: ConventionInteruniversitaireOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConventionInteruniversitaireInclude<ExtArgs> | null
-    /**
      * Filter, which ConventionInteruniversitaires to fetch.
      */
     where?: ConventionInteruniversitaireWhereInput
@@ -4735,10 +4653,6 @@ export namespace Prisma {
      */
     omit?: ConventionInteruniversitaireOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConventionInteruniversitaireInclude<ExtArgs> | null
-    /**
      * The data needed to create a ConventionInteruniversitaire.
      */
     data: XOR<ConventionInteruniversitaireCreateInput, ConventionInteruniversitaireUncheckedCreateInput>
@@ -4767,10 +4681,6 @@ export namespace Prisma {
      * Omit specific fields from the ConventionInteruniversitaire
      */
     omit?: ConventionInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConventionInteruniversitaireInclude<ExtArgs> | null
     /**
      * The data needed to update a ConventionInteruniversitaire.
      */
@@ -4812,10 +4722,6 @@ export namespace Prisma {
      */
     omit?: ConventionInteruniversitaireOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConventionInteruniversitaireInclude<ExtArgs> | null
-    /**
      * The filter to search for the ConventionInteruniversitaire to update in case it exists.
      */
     where: ConventionInteruniversitaireWhereUniqueInput
@@ -4841,10 +4747,6 @@ export namespace Prisma {
      * Omit specific fields from the ConventionInteruniversitaire
      */
     omit?: ConventionInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConventionInteruniversitaireInclude<ExtArgs> | null
     /**
      * Filter which ConventionInteruniversitaire to delete.
      */
@@ -4877,10 +4779,6 @@ export namespace Prisma {
      * Omit specific fields from the ConventionInteruniversitaire
      */
     omit?: ConventionInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConventionInteruniversitaireInclude<ExtArgs> | null
   }
 
 
@@ -13193,8 +13091,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: boolean | Universite$usersArgs<ExtArgs>
     ressources?: boolean | Universite$ressourcesArgs<ExtArgs>
-    conventionsSource?: boolean | Universite$conventionsSourceArgs<ExtArgs>
-    conventionsDestination?: boolean | Universite$conventionsDestinationArgs<ExtArgs>
     statistiquesSource?: boolean | Universite$statistiquesSourceArgs<ExtArgs>
     statistiquesDestination?: boolean | Universite$statistiquesDestinationArgs<ExtArgs>
     reservations?: boolean | Universite$reservationsArgs<ExtArgs>
@@ -13227,8 +13123,6 @@ export namespace Prisma {
   export type UniversiteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Universite$usersArgs<ExtArgs>
     ressources?: boolean | Universite$ressourcesArgs<ExtArgs>
-    conventionsSource?: boolean | Universite$conventionsSourceArgs<ExtArgs>
-    conventionsDestination?: boolean | Universite$conventionsDestinationArgs<ExtArgs>
     statistiquesSource?: boolean | Universite$statistiquesSourceArgs<ExtArgs>
     statistiquesDestination?: boolean | Universite$statistiquesDestinationArgs<ExtArgs>
     reservations?: boolean | Universite$reservationsArgs<ExtArgs>
@@ -13248,8 +13142,6 @@ export namespace Prisma {
     objects: {
       users: Prisma.$UserPayload<ExtArgs>[]
       ressources: Prisma.$RessourcePayload<ExtArgs>[]
-      conventionsSource: Prisma.$ConventionInteruniversitairePayload<ExtArgs>[]
-      conventionsDestination: Prisma.$ConventionInteruniversitairePayload<ExtArgs>[]
       statistiquesSource: Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>[]
       statistiquesDestination: Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>[]
       reservations: Prisma.$ReservationPayload<ExtArgs>[]
@@ -13614,8 +13506,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     users<T extends Universite$usersArgs<ExtArgs> = {}>(args?: Subset<T, Universite$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ressources<T extends Universite$ressourcesArgs<ExtArgs> = {}>(args?: Subset<T, Universite$ressourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    conventionsSource<T extends Universite$conventionsSourceArgs<ExtArgs> = {}>(args?: Subset<T, Universite$conventionsSourceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionInteruniversitairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    conventionsDestination<T extends Universite$conventionsDestinationArgs<ExtArgs> = {}>(args?: Subset<T, Universite$conventionsDestinationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionInteruniversitairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     statistiquesSource<T extends Universite$statistiquesSourceArgs<ExtArgs> = {}>(args?: Subset<T, Universite$statistiquesSourceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     statistiquesDestination<T extends Universite$statistiquesDestinationArgs<ExtArgs> = {}>(args?: Subset<T, Universite$statistiquesDestinationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reservations<T extends Universite$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, Universite$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -14053,54 +13943,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RessourceScalarFieldEnum | RessourceScalarFieldEnum[]
-  }
-
-  /**
-   * Universite.conventionsSource
-   */
-  export type Universite$conventionsSourceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ConventionInteruniversitaire
-     */
-    select?: ConventionInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ConventionInteruniversitaire
-     */
-    omit?: ConventionInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConventionInteruniversitaireInclude<ExtArgs> | null
-    where?: ConventionInteruniversitaireWhereInput
-    orderBy?: ConventionInteruniversitaireOrderByWithRelationInput | ConventionInteruniversitaireOrderByWithRelationInput[]
-    cursor?: ConventionInteruniversitaireWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ConventionInteruniversitaireScalarFieldEnum | ConventionInteruniversitaireScalarFieldEnum[]
-  }
-
-  /**
-   * Universite.conventionsDestination
-   */
-  export type Universite$conventionsDestinationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ConventionInteruniversitaire
-     */
-    select?: ConventionInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ConventionInteruniversitaire
-     */
-    omit?: ConventionInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConventionInteruniversitaireInclude<ExtArgs> | null
-    where?: ConventionInteruniversitaireWhereInput
-    orderBy?: ConventionInteruniversitaireOrderByWithRelationInput | ConventionInteruniversitaireOrderByWithRelationInput[]
-    cursor?: ConventionInteruniversitaireWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ConventionInteruniversitaireScalarFieldEnum | ConventionInteruniversitaireScalarFieldEnum[]
   }
 
   /**
@@ -27533,7 +27375,6 @@ export namespace Prisma {
     format: string | null
     dateCreation: Date | null
     dateModification: Date | null
-    estPublique: boolean | null
     motsCles: string | null
     auteurId: string | null
     universiteId: string | null
@@ -27574,7 +27415,6 @@ export namespace Prisma {
     format: string | null
     dateCreation: Date | null
     dateModification: Date | null
-    estPublique: boolean | null
     motsCles: string | null
     auteurId: string | null
     universiteId: string | null
@@ -27615,7 +27455,6 @@ export namespace Prisma {
     format: number
     dateCreation: number
     dateModification: number
-    estPublique: number
     motsCles: number
     auteurId: number
     universiteId: number
@@ -27676,7 +27515,6 @@ export namespace Prisma {
     format?: true
     dateCreation?: true
     dateModification?: true
-    estPublique?: true
     motsCles?: true
     auteurId?: true
     universiteId?: true
@@ -27717,7 +27555,6 @@ export namespace Prisma {
     format?: true
     dateCreation?: true
     dateModification?: true
-    estPublique?: true
     motsCles?: true
     auteurId?: true
     universiteId?: true
@@ -27758,7 +27595,6 @@ export namespace Prisma {
     format?: true
     dateCreation?: true
     dateModification?: true
-    estPublique?: true
     motsCles?: true
     auteurId?: true
     universiteId?: true
@@ -27886,7 +27722,6 @@ export namespace Prisma {
     format: string
     dateCreation: Date
     dateModification: Date
-    estPublique: boolean
     motsCles: string
     auteurId: string | null
     universiteId: string
@@ -27946,7 +27781,6 @@ export namespace Prisma {
     format?: boolean
     dateCreation?: boolean
     dateModification?: boolean
-    estPublique?: boolean
     motsCles?: boolean
     auteurId?: boolean
     universiteId?: boolean
@@ -28003,7 +27837,6 @@ export namespace Prisma {
     format?: boolean
     dateCreation?: boolean
     dateModification?: boolean
-    estPublique?: boolean
     motsCles?: boolean
     auteurId?: boolean
     universiteId?: boolean
@@ -28033,7 +27866,7 @@ export namespace Prisma {
     necessiteAutorisation?: boolean
   }
 
-  export type RessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "description" | "type" | "langue" | "urlFichier" | "urlFichierLocal" | "format" | "dateCreation" | "dateModification" | "estPublique" | "motsCles" | "auteurId" | "universiteId" | "image" | "niveauAcces" | "datePublication" | "estValide" | "estArchive" | "nomAuteurExterne" | "prenomAuteurExterne" | "affiliationAuteurExterne" | "validation" | "isbn" | "doi" | "edition" | "anneePublication" | "editeur" | "nbPages" | "categorieBiblio" | "estEmpruntable" | "nbExemplaires" | "nbDisponibles" | "coteClassification" | "estEmpruntableExterne" | "dureeMaxEmpruntExterne" | "nbMaxExemplairesExterne" | "necessiteAutorisation", ExtArgs["result"]["ressource"]>
+  export type RessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "description" | "type" | "langue" | "urlFichier" | "urlFichierLocal" | "format" | "dateCreation" | "dateModification" | "motsCles" | "auteurId" | "universiteId" | "image" | "niveauAcces" | "datePublication" | "estValide" | "estArchive" | "nomAuteurExterne" | "prenomAuteurExterne" | "affiliationAuteurExterne" | "validation" | "isbn" | "doi" | "edition" | "anneePublication" | "editeur" | "nbPages" | "categorieBiblio" | "estEmpruntable" | "nbExemplaires" | "nbDisponibles" | "coteClassification" | "estEmpruntableExterne" | "dureeMaxEmpruntExterne" | "nbMaxExemplairesExterne" | "necessiteAutorisation", ExtArgs["result"]["ressource"]>
   export type RessourceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     auteur?: boolean | Ressource$auteurArgs<ExtArgs>
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
@@ -28079,7 +27912,6 @@ export namespace Prisma {
       format: string
       dateCreation: Date
       dateModification: Date
-      estPublique: boolean
       motsCles: string
       auteurId: string | null
       universiteId: string
@@ -28499,7 +28331,6 @@ export namespace Prisma {
     readonly format: FieldRef<"Ressource", 'String'>
     readonly dateCreation: FieldRef<"Ressource", 'DateTime'>
     readonly dateModification: FieldRef<"Ressource", 'DateTime'>
-    readonly estPublique: FieldRef<"Ressource", 'Boolean'>
     readonly motsCles: FieldRef<"Ressource", 'String'>
     readonly auteurId: FieldRef<"Ressource", 'String'>
     readonly universiteId: FieldRef<"Ressource", 'String'>
@@ -32223,10 +32054,7 @@ export namespace Prisma {
     dateFin: 'dateFin',
     estActive: 'estActive',
     typeConvention: 'typeConvention',
-    detailsConvention: 'detailsConvention',
-    documentsUrl: 'documentsUrl',
-    contactUniversite1: 'contactUniversite1',
-    contactUniversite2: 'contactUniversite2'
+    detailsConvention: 'detailsConvention'
   };
 
   export type ConventionInteruniversitaireScalarFieldEnum = (typeof ConventionInteruniversitaireScalarFieldEnum)[keyof typeof ConventionInteruniversitaireScalarFieldEnum]
@@ -32554,7 +32382,6 @@ export namespace Prisma {
     format: 'format',
     dateCreation: 'dateCreation',
     dateModification: 'dateModification',
-    estPublique: 'estPublique',
     motsCles: 'motsCles',
     auteurId: 'auteurId',
     universiteId: 'universiteId',
@@ -32660,10 +32487,7 @@ export namespace Prisma {
     id: 'id',
     universiteId1: 'universiteId1',
     universiteId2: 'universiteId2',
-    detailsConvention: 'detailsConvention',
-    documentsUrl: 'documentsUrl',
-    contactUniversite1: 'contactUniversite1',
-    contactUniversite2: 'contactUniversite2'
+    detailsConvention: 'detailsConvention'
   };
 
   export type ConventionInteruniversitaireOrderByRelevanceFieldEnum = (typeof ConventionInteruniversitaireOrderByRelevanceFieldEnum)[keyof typeof ConventionInteruniversitaireOrderByRelevanceFieldEnum]
@@ -33186,11 +33010,6 @@ export namespace Prisma {
     estActive?: BoolFilter<"ConventionInteruniversitaire"> | boolean
     typeConvention?: EnumTypeConventionFilter<"ConventionInteruniversitaire"> | $Enums.TypeConvention
     detailsConvention?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
-    documentsUrl?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
-    contactUniversite1?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
-    contactUniversite2?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
-    universite1?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
-    universite2?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
   }
 
   export type ConventionInteruniversitaireOrderByWithRelationInput = {
@@ -33202,11 +33021,6 @@ export namespace Prisma {
     estActive?: SortOrder
     typeConvention?: SortOrder
     detailsConvention?: SortOrderInput | SortOrder
-    documentsUrl?: SortOrderInput | SortOrder
-    contactUniversite1?: SortOrderInput | SortOrder
-    contactUniversite2?: SortOrderInput | SortOrder
-    universite1?: UniversiteOrderByWithRelationInput
-    universite2?: UniversiteOrderByWithRelationInput
     _relevance?: ConventionInteruniversitaireOrderByRelevanceInput
   }
 
@@ -33223,11 +33037,6 @@ export namespace Prisma {
     estActive?: BoolFilter<"ConventionInteruniversitaire"> | boolean
     typeConvention?: EnumTypeConventionFilter<"ConventionInteruniversitaire"> | $Enums.TypeConvention
     detailsConvention?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
-    documentsUrl?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
-    contactUniversite1?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
-    contactUniversite2?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
-    universite1?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
-    universite2?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
   }, "id" | "universiteId1_universiteId2">
 
   export type ConventionInteruniversitaireOrderByWithAggregationInput = {
@@ -33239,9 +33048,6 @@ export namespace Prisma {
     estActive?: SortOrder
     typeConvention?: SortOrder
     detailsConvention?: SortOrderInput | SortOrder
-    documentsUrl?: SortOrderInput | SortOrder
-    contactUniversite1?: SortOrderInput | SortOrder
-    contactUniversite2?: SortOrderInput | SortOrder
     _count?: ConventionInteruniversitaireCountOrderByAggregateInput
     _max?: ConventionInteruniversitaireMaxOrderByAggregateInput
     _min?: ConventionInteruniversitaireMinOrderByAggregateInput
@@ -33259,9 +33065,6 @@ export namespace Prisma {
     estActive?: BoolWithAggregatesFilter<"ConventionInteruniversitaire"> | boolean
     typeConvention?: EnumTypeConventionWithAggregatesFilter<"ConventionInteruniversitaire"> | $Enums.TypeConvention
     detailsConvention?: StringNullableWithAggregatesFilter<"ConventionInteruniversitaire"> | string | null
-    documentsUrl?: StringNullableWithAggregatesFilter<"ConventionInteruniversitaire"> | string | null
-    contactUniversite1?: StringNullableWithAggregatesFilter<"ConventionInteruniversitaire"> | string | null
-    contactUniversite2?: StringNullableWithAggregatesFilter<"ConventionInteruniversitaire"> | string | null
   }
 
   export type ReglePretWhereInput = {
@@ -33943,8 +33746,6 @@ export namespace Prisma {
     estActive?: BoolFilter<"Universite"> | boolean
     users?: UserListRelationFilter
     ressources?: RessourceListRelationFilter
-    conventionsSource?: ConventionInteruniversitaireListRelationFilter
-    conventionsDestination?: ConventionInteruniversitaireListRelationFilter
     statistiquesSource?: StatistiqueInteruniversitaireListRelationFilter
     statistiquesDestination?: StatistiqueInteruniversitaireListRelationFilter
     reservations?: ReservationListRelationFilter
@@ -33970,8 +33771,6 @@ export namespace Prisma {
     estActive?: SortOrder
     users?: UserOrderByRelationAggregateInput
     ressources?: RessourceOrderByRelationAggregateInput
-    conventionsSource?: ConventionInteruniversitaireOrderByRelationAggregateInput
-    conventionsDestination?: ConventionInteruniversitaireOrderByRelationAggregateInput
     statistiquesSource?: StatistiqueInteruniversitaireOrderByRelationAggregateInput
     statistiquesDestination?: StatistiqueInteruniversitaireOrderByRelationAggregateInput
     reservations?: ReservationOrderByRelationAggregateInput
@@ -34001,8 +33800,6 @@ export namespace Prisma {
     estActive?: BoolFilter<"Universite"> | boolean
     users?: UserListRelationFilter
     ressources?: RessourceListRelationFilter
-    conventionsSource?: ConventionInteruniversitaireListRelationFilter
-    conventionsDestination?: ConventionInteruniversitaireListRelationFilter
     statistiquesSource?: StatistiqueInteruniversitaireListRelationFilter
     statistiquesDestination?: StatistiqueInteruniversitaireListRelationFilter
     reservations?: ReservationListRelationFilter
@@ -35029,7 +34826,6 @@ export namespace Prisma {
     format?: StringFilter<"Ressource"> | string
     dateCreation?: DateTimeFilter<"Ressource"> | Date | string
     dateModification?: DateTimeFilter<"Ressource"> | Date | string
-    estPublique?: BoolFilter<"Ressource"> | boolean
     motsCles?: StringFilter<"Ressource"> | string
     auteurId?: StringNullableFilter<"Ressource"> | string | null
     universiteId?: StringFilter<"Ressource"> | string
@@ -35083,7 +34879,6 @@ export namespace Prisma {
     format?: SortOrder
     dateCreation?: SortOrder
     dateModification?: SortOrder
-    estPublique?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrderInput | SortOrder
     universiteId?: SortOrder
@@ -35141,7 +34936,6 @@ export namespace Prisma {
     format?: StringFilter<"Ressource"> | string
     dateCreation?: DateTimeFilter<"Ressource"> | Date | string
     dateModification?: DateTimeFilter<"Ressource"> | Date | string
-    estPublique?: BoolFilter<"Ressource"> | boolean
     motsCles?: StringFilter<"Ressource"> | string
     auteurId?: StringNullableFilter<"Ressource"> | string | null
     universiteId?: StringFilter<"Ressource"> | string
@@ -35195,7 +34989,6 @@ export namespace Prisma {
     format?: SortOrder
     dateCreation?: SortOrder
     dateModification?: SortOrder
-    estPublique?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrderInput | SortOrder
     universiteId?: SortOrder
@@ -35244,7 +35037,6 @@ export namespace Prisma {
     format?: StringWithAggregatesFilter<"Ressource"> | string
     dateCreation?: DateTimeWithAggregatesFilter<"Ressource"> | Date | string
     dateModification?: DateTimeWithAggregatesFilter<"Ressource"> | Date | string
-    estPublique?: BoolWithAggregatesFilter<"Ressource"> | boolean
     motsCles?: StringWithAggregatesFilter<"Ressource"> | string
     auteurId?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     universiteId?: StringWithAggregatesFilter<"Ressource"> | string
@@ -35515,44 +35307,35 @@ export namespace Prisma {
 
   export type ConventionInteruniversitaireCreateInput = {
     id?: string
-    dateDebut: Date | string
+    universiteId1: string
+    universiteId2: string
+    dateDebut?: Date | string
     dateFin?: Date | string | null
     estActive?: boolean
     typeConvention?: $Enums.TypeConvention
     detailsConvention?: string | null
-    documentsUrl?: string | null
-    contactUniversite1?: string | null
-    contactUniversite2?: string | null
-    universite1: UniversiteCreateNestedOneWithoutConventionsSourceInput
-    universite2: UniversiteCreateNestedOneWithoutConventionsDestinationInput
   }
 
   export type ConventionInteruniversitaireUncheckedCreateInput = {
     id?: string
     universiteId1: string
     universiteId2: string
-    dateDebut: Date | string
+    dateDebut?: Date | string
     dateFin?: Date | string | null
     estActive?: boolean
     typeConvention?: $Enums.TypeConvention
     detailsConvention?: string | null
-    documentsUrl?: string | null
-    contactUniversite1?: string | null
-    contactUniversite2?: string | null
   }
 
   export type ConventionInteruniversitaireUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    universiteId1?: StringFieldUpdateOperationsInput | string
+    universiteId2?: StringFieldUpdateOperationsInput | string
     dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActive?: BoolFieldUpdateOperationsInput | boolean
     typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
     detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
-    documentsUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite1?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite2?: NullableStringFieldUpdateOperationsInput | string | null
-    universite1?: UniversiteUpdateOneRequiredWithoutConventionsSourceNestedInput
-    universite2?: UniversiteUpdateOneRequiredWithoutConventionsDestinationNestedInput
   }
 
   export type ConventionInteruniversitaireUncheckedUpdateInput = {
@@ -35564,35 +35347,28 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
     detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
-    documentsUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite1?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite2?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ConventionInteruniversitaireCreateManyInput = {
     id?: string
     universiteId1: string
     universiteId2: string
-    dateDebut: Date | string
+    dateDebut?: Date | string
     dateFin?: Date | string | null
     estActive?: boolean
     typeConvention?: $Enums.TypeConvention
     detailsConvention?: string | null
-    documentsUrl?: string | null
-    contactUniversite1?: string | null
-    contactUniversite2?: string | null
   }
 
   export type ConventionInteruniversitaireUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    universiteId1?: StringFieldUpdateOperationsInput | string
+    universiteId2?: StringFieldUpdateOperationsInput | string
     dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActive?: BoolFieldUpdateOperationsInput | boolean
     typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
     detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
-    documentsUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite1?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite2?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ConventionInteruniversitaireUncheckedUpdateManyInput = {
@@ -35604,9 +35380,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
     detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
-    documentsUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite1?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite2?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ReglePretCreateInput = {
@@ -36305,8 +36078,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -36332,8 +36103,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -36359,8 +36128,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -36386,8 +36153,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -37440,7 +37205,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -37492,7 +37256,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -37544,7 +37307,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -37596,7 +37358,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -37648,7 +37409,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -37689,7 +37449,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -37728,7 +37487,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -38077,11 +37835,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type UniversiteScalarRelationFilter = {
-    is?: UniversiteWhereInput
-    isNot?: UniversiteWhereInput
-  }
-
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -38107,9 +37860,6 @@ export namespace Prisma {
     estActive?: SortOrder
     typeConvention?: SortOrder
     detailsConvention?: SortOrder
-    documentsUrl?: SortOrder
-    contactUniversite1?: SortOrder
-    contactUniversite2?: SortOrder
   }
 
   export type ConventionInteruniversitaireMaxOrderByAggregateInput = {
@@ -38121,9 +37871,6 @@ export namespace Prisma {
     estActive?: SortOrder
     typeConvention?: SortOrder
     detailsConvention?: SortOrder
-    documentsUrl?: SortOrder
-    contactUniversite1?: SortOrder
-    contactUniversite2?: SortOrder
   }
 
   export type ConventionInteruniversitaireMinOrderByAggregateInput = {
@@ -38135,9 +37882,6 @@ export namespace Prisma {
     estActive?: SortOrder
     typeConvention?: SortOrder
     detailsConvention?: SortOrder
-    documentsUrl?: SortOrder
-    contactUniversite1?: SortOrder
-    contactUniversite2?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -38238,6 +37982,11 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type UniversiteScalarRelationFilter = {
+    is?: UniversiteWhereInput
+    isNot?: UniversiteWhereInput
   }
 
   export type ReglePretOrderByRelevanceInput = {
@@ -38849,12 +38598,6 @@ export namespace Prisma {
     none?: RessourceWhereInput
   }
 
-  export type ConventionInteruniversitaireListRelationFilter = {
-    every?: ConventionInteruniversitaireWhereInput
-    some?: ConventionInteruniversitaireWhereInput
-    none?: ConventionInteruniversitaireWhereInput
-  }
-
   export type StatistiqueInteruniversitaireListRelationFilter = {
     every?: StatistiqueInteruniversitaireWhereInput
     some?: StatistiqueInteruniversitaireWhereInput
@@ -38908,10 +38651,6 @@ export namespace Prisma {
   }
 
   export type RessourceOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ConventionInteruniversitaireOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -39798,7 +39537,6 @@ export namespace Prisma {
     format?: SortOrder
     dateCreation?: SortOrder
     dateModification?: SortOrder
-    estPublique?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
     universiteId?: SortOrder
@@ -39848,7 +39586,6 @@ export namespace Prisma {
     format?: SortOrder
     dateCreation?: SortOrder
     dateModification?: SortOrder
-    estPublique?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
     universiteId?: SortOrder
@@ -39889,7 +39626,6 @@ export namespace Prisma {
     format?: SortOrder
     dateCreation?: SortOrder
     dateModification?: SortOrder
-    estPublique?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
     universiteId?: SortOrder
@@ -40232,18 +39968,6 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
-  export type UniversiteCreateNestedOneWithoutConventionsSourceInput = {
-    create?: XOR<UniversiteCreateWithoutConventionsSourceInput, UniversiteUncheckedCreateWithoutConventionsSourceInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutConventionsSourceInput
-    connect?: UniversiteWhereUniqueInput
-  }
-
-  export type UniversiteCreateNestedOneWithoutConventionsDestinationInput = {
-    create?: XOR<UniversiteCreateWithoutConventionsDestinationInput, UniversiteUncheckedCreateWithoutConventionsDestinationInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutConventionsDestinationInput
-    connect?: UniversiteWhereUniqueInput
-  }
-
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -40266,22 +39990,6 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type UniversiteUpdateOneRequiredWithoutConventionsSourceNestedInput = {
-    create?: XOR<UniversiteCreateWithoutConventionsSourceInput, UniversiteUncheckedCreateWithoutConventionsSourceInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutConventionsSourceInput
-    upsert?: UniversiteUpsertWithoutConventionsSourceInput
-    connect?: UniversiteWhereUniqueInput
-    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutConventionsSourceInput, UniversiteUpdateWithoutConventionsSourceInput>, UniversiteUncheckedUpdateWithoutConventionsSourceInput>
-  }
-
-  export type UniversiteUpdateOneRequiredWithoutConventionsDestinationNestedInput = {
-    create?: XOR<UniversiteCreateWithoutConventionsDestinationInput, UniversiteUncheckedCreateWithoutConventionsDestinationInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutConventionsDestinationInput
-    upsert?: UniversiteUpsertWithoutConventionsDestinationInput
-    connect?: UniversiteWhereUniqueInput
-    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutConventionsDestinationInput, UniversiteUpdateWithoutConventionsDestinationInput>, UniversiteUncheckedUpdateWithoutConventionsDestinationInput>
   }
 
   export type UniversiteCreateNestedOneWithoutReglePretsInput = {
@@ -40672,20 +40380,6 @@ export namespace Prisma {
     connect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
   }
 
-  export type ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input = {
-    create?: XOR<ConventionInteruniversitaireCreateWithoutUniversite1Input, ConventionInteruniversitaireUncheckedCreateWithoutUniversite1Input> | ConventionInteruniversitaireCreateWithoutUniversite1Input[] | ConventionInteruniversitaireUncheckedCreateWithoutUniversite1Input[]
-    connectOrCreate?: ConventionInteruniversitaireCreateOrConnectWithoutUniversite1Input | ConventionInteruniversitaireCreateOrConnectWithoutUniversite1Input[]
-    createMany?: ConventionInteruniversitaireCreateManyUniversite1InputEnvelope
-    connect?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-  }
-
-  export type ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input = {
-    create?: XOR<ConventionInteruniversitaireCreateWithoutUniversite2Input, ConventionInteruniversitaireUncheckedCreateWithoutUniversite2Input> | ConventionInteruniversitaireCreateWithoutUniversite2Input[] | ConventionInteruniversitaireUncheckedCreateWithoutUniversite2Input[]
-    connectOrCreate?: ConventionInteruniversitaireCreateOrConnectWithoutUniversite2Input | ConventionInteruniversitaireCreateOrConnectWithoutUniversite2Input[]
-    createMany?: ConventionInteruniversitaireCreateManyUniversite2InputEnvelope
-    connect?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-  }
-
   export type StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput = {
     create?: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput> | StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput[] | StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput[]
     connectOrCreate?: StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteSourceRelInput | StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteSourceRelInput[]
@@ -40775,20 +40469,6 @@ export namespace Prisma {
     connectOrCreate?: RessourceCreateOrConnectWithoutUniversiteInput | RessourceCreateOrConnectWithoutUniversiteInput[]
     createMany?: RessourceCreateManyUniversiteInputEnvelope
     connect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
-  }
-
-  export type ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input = {
-    create?: XOR<ConventionInteruniversitaireCreateWithoutUniversite1Input, ConventionInteruniversitaireUncheckedCreateWithoutUniversite1Input> | ConventionInteruniversitaireCreateWithoutUniversite1Input[] | ConventionInteruniversitaireUncheckedCreateWithoutUniversite1Input[]
-    connectOrCreate?: ConventionInteruniversitaireCreateOrConnectWithoutUniversite1Input | ConventionInteruniversitaireCreateOrConnectWithoutUniversite1Input[]
-    createMany?: ConventionInteruniversitaireCreateManyUniversite1InputEnvelope
-    connect?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-  }
-
-  export type ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input = {
-    create?: XOR<ConventionInteruniversitaireCreateWithoutUniversite2Input, ConventionInteruniversitaireUncheckedCreateWithoutUniversite2Input> | ConventionInteruniversitaireCreateWithoutUniversite2Input[] | ConventionInteruniversitaireUncheckedCreateWithoutUniversite2Input[]
-    connectOrCreate?: ConventionInteruniversitaireCreateOrConnectWithoutUniversite2Input | ConventionInteruniversitaireCreateOrConnectWithoutUniversite2Input[]
-    createMany?: ConventionInteruniversitaireCreateManyUniversite2InputEnvelope
-    connect?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
   }
 
   export type StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput = {
@@ -40894,34 +40574,6 @@ export namespace Prisma {
     update?: RessourceUpdateWithWhereUniqueWithoutUniversiteInput | RessourceUpdateWithWhereUniqueWithoutUniversiteInput[]
     updateMany?: RessourceUpdateManyWithWhereWithoutUniversiteInput | RessourceUpdateManyWithWhereWithoutUniversiteInput[]
     deleteMany?: RessourceScalarWhereInput | RessourceScalarWhereInput[]
-  }
-
-  export type ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput = {
-    create?: XOR<ConventionInteruniversitaireCreateWithoutUniversite1Input, ConventionInteruniversitaireUncheckedCreateWithoutUniversite1Input> | ConventionInteruniversitaireCreateWithoutUniversite1Input[] | ConventionInteruniversitaireUncheckedCreateWithoutUniversite1Input[]
-    connectOrCreate?: ConventionInteruniversitaireCreateOrConnectWithoutUniversite1Input | ConventionInteruniversitaireCreateOrConnectWithoutUniversite1Input[]
-    upsert?: ConventionInteruniversitaireUpsertWithWhereUniqueWithoutUniversite1Input | ConventionInteruniversitaireUpsertWithWhereUniqueWithoutUniversite1Input[]
-    createMany?: ConventionInteruniversitaireCreateManyUniversite1InputEnvelope
-    set?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    disconnect?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    delete?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    connect?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    update?: ConventionInteruniversitaireUpdateWithWhereUniqueWithoutUniversite1Input | ConventionInteruniversitaireUpdateWithWhereUniqueWithoutUniversite1Input[]
-    updateMany?: ConventionInteruniversitaireUpdateManyWithWhereWithoutUniversite1Input | ConventionInteruniversitaireUpdateManyWithWhereWithoutUniversite1Input[]
-    deleteMany?: ConventionInteruniversitaireScalarWhereInput | ConventionInteruniversitaireScalarWhereInput[]
-  }
-
-  export type ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput = {
-    create?: XOR<ConventionInteruniversitaireCreateWithoutUniversite2Input, ConventionInteruniversitaireUncheckedCreateWithoutUniversite2Input> | ConventionInteruniversitaireCreateWithoutUniversite2Input[] | ConventionInteruniversitaireUncheckedCreateWithoutUniversite2Input[]
-    connectOrCreate?: ConventionInteruniversitaireCreateOrConnectWithoutUniversite2Input | ConventionInteruniversitaireCreateOrConnectWithoutUniversite2Input[]
-    upsert?: ConventionInteruniversitaireUpsertWithWhereUniqueWithoutUniversite2Input | ConventionInteruniversitaireUpsertWithWhereUniqueWithoutUniversite2Input[]
-    createMany?: ConventionInteruniversitaireCreateManyUniversite2InputEnvelope
-    set?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    disconnect?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    delete?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    connect?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    update?: ConventionInteruniversitaireUpdateWithWhereUniqueWithoutUniversite2Input | ConventionInteruniversitaireUpdateWithWhereUniqueWithoutUniversite2Input[]
-    updateMany?: ConventionInteruniversitaireUpdateManyWithWhereWithoutUniversite2Input | ConventionInteruniversitaireUpdateManyWithWhereWithoutUniversite2Input[]
-    deleteMany?: ConventionInteruniversitaireScalarWhereInput | ConventionInteruniversitaireScalarWhereInput[]
   }
 
   export type StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput = {
@@ -41104,34 +40756,6 @@ export namespace Prisma {
     update?: RessourceUpdateWithWhereUniqueWithoutUniversiteInput | RessourceUpdateWithWhereUniqueWithoutUniversiteInput[]
     updateMany?: RessourceUpdateManyWithWhereWithoutUniversiteInput | RessourceUpdateManyWithWhereWithoutUniversiteInput[]
     deleteMany?: RessourceScalarWhereInput | RessourceScalarWhereInput[]
-  }
-
-  export type ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput = {
-    create?: XOR<ConventionInteruniversitaireCreateWithoutUniversite1Input, ConventionInteruniversitaireUncheckedCreateWithoutUniversite1Input> | ConventionInteruniversitaireCreateWithoutUniversite1Input[] | ConventionInteruniversitaireUncheckedCreateWithoutUniversite1Input[]
-    connectOrCreate?: ConventionInteruniversitaireCreateOrConnectWithoutUniversite1Input | ConventionInteruniversitaireCreateOrConnectWithoutUniversite1Input[]
-    upsert?: ConventionInteruniversitaireUpsertWithWhereUniqueWithoutUniversite1Input | ConventionInteruniversitaireUpsertWithWhereUniqueWithoutUniversite1Input[]
-    createMany?: ConventionInteruniversitaireCreateManyUniversite1InputEnvelope
-    set?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    disconnect?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    delete?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    connect?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    update?: ConventionInteruniversitaireUpdateWithWhereUniqueWithoutUniversite1Input | ConventionInteruniversitaireUpdateWithWhereUniqueWithoutUniversite1Input[]
-    updateMany?: ConventionInteruniversitaireUpdateManyWithWhereWithoutUniversite1Input | ConventionInteruniversitaireUpdateManyWithWhereWithoutUniversite1Input[]
-    deleteMany?: ConventionInteruniversitaireScalarWhereInput | ConventionInteruniversitaireScalarWhereInput[]
-  }
-
-  export type ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput = {
-    create?: XOR<ConventionInteruniversitaireCreateWithoutUniversite2Input, ConventionInteruniversitaireUncheckedCreateWithoutUniversite2Input> | ConventionInteruniversitaireCreateWithoutUniversite2Input[] | ConventionInteruniversitaireUncheckedCreateWithoutUniversite2Input[]
-    connectOrCreate?: ConventionInteruniversitaireCreateOrConnectWithoutUniversite2Input | ConventionInteruniversitaireCreateOrConnectWithoutUniversite2Input[]
-    upsert?: ConventionInteruniversitaireUpsertWithWhereUniqueWithoutUniversite2Input | ConventionInteruniversitaireUpsertWithWhereUniqueWithoutUniversite2Input[]
-    createMany?: ConventionInteruniversitaireCreateManyUniversite2InputEnvelope
-    set?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    disconnect?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    delete?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    connect?: ConventionInteruniversitaireWhereUniqueInput | ConventionInteruniversitaireWhereUniqueInput[]
-    update?: ConventionInteruniversitaireUpdateWithWhereUniqueWithoutUniversite2Input | ConventionInteruniversitaireUpdateWithWhereUniqueWithoutUniversite2Input[]
-    updateMany?: ConventionInteruniversitaireUpdateManyWithWhereWithoutUniversite2Input | ConventionInteruniversitaireUpdateManyWithWhereWithoutUniversite2Input[]
-    deleteMany?: ConventionInteruniversitaireScalarWhereInput | ConventionInteruniversitaireScalarWhereInput[]
   }
 
   export type StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput = {
@@ -43591,246 +43215,6 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type UniversiteCreateWithoutConventionsSourceInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteUncheckedCreateWithoutConventionsSourceInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteCreateOrConnectWithoutConventionsSourceInput = {
-    where: UniversiteWhereUniqueInput
-    create: XOR<UniversiteCreateWithoutConventionsSourceInput, UniversiteUncheckedCreateWithoutConventionsSourceInput>
-  }
-
-  export type UniversiteCreateWithoutConventionsDestinationInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteUncheckedCreateWithoutConventionsDestinationInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteCreateOrConnectWithoutConventionsDestinationInput = {
-    where: UniversiteWhereUniqueInput
-    create: XOR<UniversiteCreateWithoutConventionsDestinationInput, UniversiteUncheckedCreateWithoutConventionsDestinationInput>
-  }
-
-  export type UniversiteUpsertWithoutConventionsSourceInput = {
-    update: XOR<UniversiteUpdateWithoutConventionsSourceInput, UniversiteUncheckedUpdateWithoutConventionsSourceInput>
-    create: XOR<UniversiteCreateWithoutConventionsSourceInput, UniversiteUncheckedCreateWithoutConventionsSourceInput>
-    where?: UniversiteWhereInput
-  }
-
-  export type UniversiteUpdateToOneWithWhereWithoutConventionsSourceInput = {
-    where?: UniversiteWhereInput
-    data: XOR<UniversiteUpdateWithoutConventionsSourceInput, UniversiteUncheckedUpdateWithoutConventionsSourceInput>
-  }
-
-  export type UniversiteUpdateWithoutConventionsSourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUncheckedUpdateWithoutConventionsSourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUpsertWithoutConventionsDestinationInput = {
-    update: XOR<UniversiteUpdateWithoutConventionsDestinationInput, UniversiteUncheckedUpdateWithoutConventionsDestinationInput>
-    create: XOR<UniversiteCreateWithoutConventionsDestinationInput, UniversiteUncheckedCreateWithoutConventionsDestinationInput>
-    where?: UniversiteWhereInput
-  }
-
-  export type UniversiteUpdateToOneWithWhereWithoutConventionsDestinationInput = {
-    where?: UniversiteWhereInput
-    data: XOR<UniversiteUpdateWithoutConventionsDestinationInput, UniversiteUncheckedUpdateWithoutConventionsDestinationInput>
-  }
-
-  export type UniversiteUpdateWithoutConventionsDestinationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUncheckedUpdateWithoutConventionsDestinationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-  }
-
   export type UniversiteCreateWithoutReglePretsInput = {
     id?: string
     nom: string
@@ -43843,8 +43227,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -43869,8 +43251,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -43911,8 +43291,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -43937,8 +43315,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -43963,8 +43339,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -43989,8 +43363,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -44031,8 +43403,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -44057,8 +43427,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -44303,8 +43671,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
     emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -44329,8 +43695,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -44360,8 +43724,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
     emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -44386,8 +43748,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -44428,8 +43788,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
     emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -44454,8 +43812,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -44491,8 +43847,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
     emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -44517,8 +43871,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -44611,7 +43963,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -44662,7 +44013,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -44719,8 +44069,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -44745,8 +44093,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -44886,7 +44232,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -44937,7 +44282,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -45000,8 +44344,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -45026,8 +44368,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -45082,7 +44422,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -45133,7 +44472,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -45240,7 +44578,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -45291,7 +44628,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -45477,8 +44813,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -45503,8 +44837,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -45687,8 +45019,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -45713,8 +45043,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -45837,7 +45165,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -45888,7 +45215,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -45945,8 +45271,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -45971,8 +45295,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -46087,7 +45409,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -46138,7 +45459,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -46201,8 +45521,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -46227,8 +45545,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -46326,7 +45642,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -46377,7 +45692,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     image?: string | null
@@ -46424,78 +45738,6 @@ export namespace Prisma {
 
   export type RessourceCreateManyUniversiteInputEnvelope = {
     data: RessourceCreateManyUniversiteInput | RessourceCreateManyUniversiteInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ConventionInteruniversitaireCreateWithoutUniversite1Input = {
-    id?: string
-    dateDebut: Date | string
-    dateFin?: Date | string | null
-    estActive?: boolean
-    typeConvention?: $Enums.TypeConvention
-    detailsConvention?: string | null
-    documentsUrl?: string | null
-    contactUniversite1?: string | null
-    contactUniversite2?: string | null
-    universite2: UniversiteCreateNestedOneWithoutConventionsDestinationInput
-  }
-
-  export type ConventionInteruniversitaireUncheckedCreateWithoutUniversite1Input = {
-    id?: string
-    universiteId2: string
-    dateDebut: Date | string
-    dateFin?: Date | string | null
-    estActive?: boolean
-    typeConvention?: $Enums.TypeConvention
-    detailsConvention?: string | null
-    documentsUrl?: string | null
-    contactUniversite1?: string | null
-    contactUniversite2?: string | null
-  }
-
-  export type ConventionInteruniversitaireCreateOrConnectWithoutUniversite1Input = {
-    where: ConventionInteruniversitaireWhereUniqueInput
-    create: XOR<ConventionInteruniversitaireCreateWithoutUniversite1Input, ConventionInteruniversitaireUncheckedCreateWithoutUniversite1Input>
-  }
-
-  export type ConventionInteruniversitaireCreateManyUniversite1InputEnvelope = {
-    data: ConventionInteruniversitaireCreateManyUniversite1Input | ConventionInteruniversitaireCreateManyUniversite1Input[]
-    skipDuplicates?: boolean
-  }
-
-  export type ConventionInteruniversitaireCreateWithoutUniversite2Input = {
-    id?: string
-    dateDebut: Date | string
-    dateFin?: Date | string | null
-    estActive?: boolean
-    typeConvention?: $Enums.TypeConvention
-    detailsConvention?: string | null
-    documentsUrl?: string | null
-    contactUniversite1?: string | null
-    contactUniversite2?: string | null
-    universite1: UniversiteCreateNestedOneWithoutConventionsSourceInput
-  }
-
-  export type ConventionInteruniversitaireUncheckedCreateWithoutUniversite2Input = {
-    id?: string
-    universiteId1: string
-    dateDebut: Date | string
-    dateFin?: Date | string | null
-    estActive?: boolean
-    typeConvention?: $Enums.TypeConvention
-    detailsConvention?: string | null
-    documentsUrl?: string | null
-    contactUniversite1?: string | null
-    contactUniversite2?: string | null
-  }
-
-  export type ConventionInteruniversitaireCreateOrConnectWithoutUniversite2Input = {
-    where: ConventionInteruniversitaireWhereUniqueInput
-    create: XOR<ConventionInteruniversitaireCreateWithoutUniversite2Input, ConventionInteruniversitaireUncheckedCreateWithoutUniversite2Input>
-  }
-
-  export type ConventionInteruniversitaireCreateManyUniversite2InputEnvelope = {
-    data: ConventionInteruniversitaireCreateManyUniversite2Input | ConventionInteruniversitaireCreateManyUniversite2Input[]
     skipDuplicates?: boolean
   }
 
@@ -46926,7 +46168,6 @@ export namespace Prisma {
     format?: StringFilter<"Ressource"> | string
     dateCreation?: DateTimeFilter<"Ressource"> | Date | string
     dateModification?: DateTimeFilter<"Ressource"> | Date | string
-    estPublique?: BoolFilter<"Ressource"> | boolean
     motsCles?: StringFilter<"Ressource"> | string
     auteurId?: StringNullableFilter<"Ressource"> | string | null
     universiteId?: StringFilter<"Ressource"> | string
@@ -46954,55 +46195,6 @@ export namespace Prisma {
     dureeMaxEmpruntExterne?: IntFilter<"Ressource"> | number
     nbMaxExemplairesExterne?: IntFilter<"Ressource"> | number
     necessiteAutorisation?: BoolFilter<"Ressource"> | boolean
-  }
-
-  export type ConventionInteruniversitaireUpsertWithWhereUniqueWithoutUniversite1Input = {
-    where: ConventionInteruniversitaireWhereUniqueInput
-    update: XOR<ConventionInteruniversitaireUpdateWithoutUniversite1Input, ConventionInteruniversitaireUncheckedUpdateWithoutUniversite1Input>
-    create: XOR<ConventionInteruniversitaireCreateWithoutUniversite1Input, ConventionInteruniversitaireUncheckedCreateWithoutUniversite1Input>
-  }
-
-  export type ConventionInteruniversitaireUpdateWithWhereUniqueWithoutUniversite1Input = {
-    where: ConventionInteruniversitaireWhereUniqueInput
-    data: XOR<ConventionInteruniversitaireUpdateWithoutUniversite1Input, ConventionInteruniversitaireUncheckedUpdateWithoutUniversite1Input>
-  }
-
-  export type ConventionInteruniversitaireUpdateManyWithWhereWithoutUniversite1Input = {
-    where: ConventionInteruniversitaireScalarWhereInput
-    data: XOR<ConventionInteruniversitaireUpdateManyMutationInput, ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1Input>
-  }
-
-  export type ConventionInteruniversitaireScalarWhereInput = {
-    AND?: ConventionInteruniversitaireScalarWhereInput | ConventionInteruniversitaireScalarWhereInput[]
-    OR?: ConventionInteruniversitaireScalarWhereInput[]
-    NOT?: ConventionInteruniversitaireScalarWhereInput | ConventionInteruniversitaireScalarWhereInput[]
-    id?: StringFilter<"ConventionInteruniversitaire"> | string
-    universiteId1?: StringFilter<"ConventionInteruniversitaire"> | string
-    universiteId2?: StringFilter<"ConventionInteruniversitaire"> | string
-    dateDebut?: DateTimeFilter<"ConventionInteruniversitaire"> | Date | string
-    dateFin?: DateTimeNullableFilter<"ConventionInteruniversitaire"> | Date | string | null
-    estActive?: BoolFilter<"ConventionInteruniversitaire"> | boolean
-    typeConvention?: EnumTypeConventionFilter<"ConventionInteruniversitaire"> | $Enums.TypeConvention
-    detailsConvention?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
-    documentsUrl?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
-    contactUniversite1?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
-    contactUniversite2?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
-  }
-
-  export type ConventionInteruniversitaireUpsertWithWhereUniqueWithoutUniversite2Input = {
-    where: ConventionInteruniversitaireWhereUniqueInput
-    update: XOR<ConventionInteruniversitaireUpdateWithoutUniversite2Input, ConventionInteruniversitaireUncheckedUpdateWithoutUniversite2Input>
-    create: XOR<ConventionInteruniversitaireCreateWithoutUniversite2Input, ConventionInteruniversitaireUncheckedCreateWithoutUniversite2Input>
-  }
-
-  export type ConventionInteruniversitaireUpdateWithWhereUniqueWithoutUniversite2Input = {
-    where: ConventionInteruniversitaireWhereUniqueInput
-    data: XOR<ConventionInteruniversitaireUpdateWithoutUniversite2Input, ConventionInteruniversitaireUncheckedUpdateWithoutUniversite2Input>
-  }
-
-  export type ConventionInteruniversitaireUpdateManyWithWhereWithoutUniversite2Input = {
-    where: ConventionInteruniversitaireScalarWhereInput
-    data: XOR<ConventionInteruniversitaireUpdateManyMutationInput, ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2Input>
   }
 
   export type StatistiqueInteruniversitaireUpsertWithWhereUniqueWithoutUniversiteSourceRelInput = {
@@ -47313,8 +46505,6 @@ export namespace Prisma {
     adresseBlockchain?: string | null
     estActive?: boolean
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -47339,8 +46529,6 @@ export namespace Prisma {
     adresseBlockchain?: string | null
     estActive?: boolean
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -47370,7 +46558,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -47421,7 +46608,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     universiteId: string
     image?: string | null
@@ -47969,8 +47155,6 @@ export namespace Prisma {
     adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
     estActive?: BoolFieldUpdateOperationsInput | boolean
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -47995,8 +47179,6 @@ export namespace Prisma {
     adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
     estActive?: BoolFieldUpdateOperationsInput | boolean
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -49131,7 +48313,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -49182,7 +48363,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -49324,7 +48504,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -49375,7 +48554,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -49495,7 +48673,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -49546,7 +48723,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -49688,7 +48864,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -49739,7 +48914,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -49859,7 +49033,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -49910,7 +49083,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -50052,7 +49224,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -50103,7 +49274,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -50223,7 +49393,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -50274,7 +49443,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -50331,8 +49499,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -50357,8 +49523,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -50473,7 +49637,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -50524,7 +49687,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -50587,8 +49749,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -50613,8 +49773,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -50707,7 +49865,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -50758,7 +49915,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -50900,7 +50056,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -50951,7 +50106,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -51220,7 +50374,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -51271,7 +50424,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -51367,7 +50519,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -51418,7 +50569,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -51469,7 +50619,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -51520,7 +50669,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -51577,8 +50725,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -51603,8 +50749,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -51634,8 +50778,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -51660,8 +50802,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -51701,7 +50841,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -51752,7 +50891,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -51815,8 +50953,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -51841,8 +50977,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -51878,8 +51012,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -51904,8 +51036,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -51998,8 +51128,6 @@ export namespace Prisma {
     adresseBlockchain?: string | null
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -52024,8 +51152,6 @@ export namespace Prisma {
     adresseBlockchain?: string | null
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -52467,8 +51593,6 @@ export namespace Prisma {
     adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -52493,8 +51617,6 @@ export namespace Prisma {
     adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -52712,8 +51834,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -52738,8 +51858,6 @@ export namespace Prisma {
     estActive?: boolean
     users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
     ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite1Input
-    conventionsDestination?: ConventionInteruniversitaireUncheckedCreateNestedManyWithoutUniversite2Input
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
@@ -52780,8 +51898,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -52806,8 +51922,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
     ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    conventionsSource?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1NestedInput
-    conventionsDestination?: ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2NestedInput
     statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
@@ -52900,7 +52014,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
@@ -52951,7 +52064,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     universiteId: string
@@ -53093,7 +52205,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -53144,7 +52255,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -53452,7 +52562,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     auteurId?: string | null
     image?: string | null
@@ -53479,32 +52588,6 @@ export namespace Prisma {
     dureeMaxEmpruntExterne?: number
     nbMaxExemplairesExterne?: number
     necessiteAutorisation?: boolean
-  }
-
-  export type ConventionInteruniversitaireCreateManyUniversite1Input = {
-    id?: string
-    universiteId2: string
-    dateDebut: Date | string
-    dateFin?: Date | string | null
-    estActive?: boolean
-    typeConvention?: $Enums.TypeConvention
-    detailsConvention?: string | null
-    documentsUrl?: string | null
-    contactUniversite1?: string | null
-    contactUniversite2?: string | null
-  }
-
-  export type ConventionInteruniversitaireCreateManyUniversite2Input = {
-    id?: string
-    universiteId1: string
-    dateDebut: Date | string
-    dateFin?: Date | string | null
-    estActive?: boolean
-    typeConvention?: $Enums.TypeConvention
-    detailsConvention?: string | null
-    documentsUrl?: string | null
-    contactUniversite1?: string | null
-    contactUniversite2?: string | null
   }
 
   export type StatistiqueInteruniversitaireCreateManyUniversiteSourceRelInput = {
@@ -53722,7 +52805,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -53773,7 +52855,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53824,7 +52905,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53851,84 +52931,6 @@ export namespace Prisma {
     dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
     nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
     necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type ConventionInteruniversitaireUpdateWithoutUniversite1Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
-    detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
-    documentsUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite1?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite2?: NullableStringFieldUpdateOperationsInput | string | null
-    universite2?: UniversiteUpdateOneRequiredWithoutConventionsDestinationNestedInput
-  }
-
-  export type ConventionInteruniversitaireUncheckedUpdateWithoutUniversite1Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    universiteId2?: StringFieldUpdateOperationsInput | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
-    detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
-    documentsUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite1?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite2?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite1Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    universiteId2?: StringFieldUpdateOperationsInput | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
-    detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
-    documentsUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite1?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite2?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ConventionInteruniversitaireUpdateWithoutUniversite2Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
-    detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
-    documentsUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite1?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite2?: NullableStringFieldUpdateOperationsInput | string | null
-    universite1?: UniversiteUpdateOneRequiredWithoutConventionsSourceNestedInput
-  }
-
-  export type ConventionInteruniversitaireUncheckedUpdateWithoutUniversite2Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    universiteId1?: StringFieldUpdateOperationsInput | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
-    detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
-    documentsUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite1?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite2?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ConventionInteruniversitaireUncheckedUpdateManyWithoutUniversite2Input = {
-    id?: StringFieldUpdateOperationsInput | string
-    universiteId1?: StringFieldUpdateOperationsInput | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
-    detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
-    documentsUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite1?: NullableStringFieldUpdateOperationsInput | string | null
-    contactUniversite2?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StatistiqueInteruniversitaireUpdateWithoutUniversiteSourceRelInput = {
@@ -54319,7 +53321,6 @@ export namespace Prisma {
     format: string
     dateCreation?: Date | string
     dateModification?: Date | string
-    estPublique?: boolean
     motsCles: string
     universiteId: string
     image?: string | null
@@ -54514,7 +53515,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
@@ -54565,7 +53565,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54616,7 +53615,6 @@ export namespace Prisma {
     format?: StringFieldUpdateOperationsInput | string
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     motsCles?: StringFieldUpdateOperationsInput | string
     universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null

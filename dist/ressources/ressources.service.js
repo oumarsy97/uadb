@@ -81,8 +81,6 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             where.langue = langue;
         if (universiteId)
             where.universiteId = universiteId;
-        if (estPublique !== undefined)
-            where.estPublique = estPublique;
         if (niveauAcces)
             where.niveauAcces = niveauAcces;
         if (estValide !== undefined)

@@ -13,21 +13,14 @@ datasource db {
 
 // Modèle pour les conventions entre universités
 model ConventionInteruniversitaire {
-  id                 String         @id @default(uuid())
-  universiteId1      String         @map("universite_id_1")
-  universiteId2      String         @map("universite_id_2")
-  dateDebut          DateTime       @map("date_debut")
-  dateFin            DateTime?      @map("date_fin")
-  estActive          Boolean        @default(true) @map("est_active")
-  typeConvention     TypeConvention @default(EMPRUNT_RECIPROQUE)
-  detailsConvention  String?        @map("details_convention") @db.Text
-  documentsUrl       String?        @map("documents_url") // URL vers les documents de la convention
-  contactUniversite1 String?        @map("contact_universite_1")
-  contactUniversite2 String?        @map("contact_universite_2")
-
-  // Relations avec les universités (manquantes)
-  universite1 Universite @relation("UniversiteConvention1", fields: [universiteId1], references: [id])
-  universite2 Universite @relation("UniversiteConvention2", fields: [universiteId2], references: [id])
+  id                String         @id @default(uuid())
+  universiteId1     String         @map("universite_id_1")
+  universiteId2     String         @map("universite_id_2")
+  dateDebut         DateTime       @default(now()) @map("date_debut")
+  dateFin           DateTime?      @map("date_fin")
+  estActive         Boolean        @default(true) @map("est_active")
+  typeConvention    TypeConvention @default(EMPRUNT_RECIPROQUE)
+  detailsConvention String?        @map("details_convention") @db.Text
 
   @@unique([universiteId1, universiteId2])
 }
@@ -264,8 +257,6 @@ model Universite {
   ressources Ressource[]
 
   // Relations manquantes
-  conventionsSource       ConventionInteruniversitaire[]  @relation("UniversiteConvention1")
-  conventionsDestination  ConventionInteruniversitaire[]  @relation("UniversiteConvention2")
   statistiquesSource      StatistiqueInteruniversitaire[] @relation("StatistiqueSource")
   statistiquesDestination StatistiqueInteruniversitaire[] @relation("StatistiqueDestination")
   reservations            Reservation[]                   @relation("UniversiteReservation")
@@ -623,7 +614,6 @@ model Ressource {
   format                   String // pdf, docx, etc.
   dateCreation             DateTime       @default(now()) @map("date_creation")
   dateModification         DateTime       @updatedAt @map("date_modification")
-  estPublique              Boolean        @default(false) @map("est_publique")
   motsCles                 String         @map("mots_cles")
   auteurId                 String?        @map("auteur_id")
   universiteId             String         @map("universite_id")

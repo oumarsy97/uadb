@@ -21,9 +21,6 @@ model ConventionInteruniversitaire {
   estActive         Boolean        @default(true) @map("est_active")
   typeConvention    TypeConvention @default(EMPRUNT_RECIPROQUE)
   detailsConvention String?        @db.Text @map("details_convention")
-  // Relations avec les universités (manquantes)
-  universite1       Universite     @relation("UniversiteConvention1", fields: [universiteId1], references: [id])
-  universite2       Universite     @relation("UniversiteConvention2", fields: [universiteId2], references: [id])
   
   @@unique([universiteId1, universiteId2])
 }
@@ -261,8 +258,6 @@ model Universite {
   ressources        Ressource[]
   
   // Relations manquantes
-  conventionsSource ConventionInteruniversitaire[] @relation("UniversiteConvention1")
-  conventionsDestination ConventionInteruniversitaire[] @relation("UniversiteConvention2")
   statistiquesSource StatistiqueInteruniversitaire[] @relation("StatistiqueSource")
   statistiquesDestination StatistiqueInteruniversitaire[] @relation("StatistiqueDestination")
   reservations      Reservation[] @relation("UniversiteReservation")
