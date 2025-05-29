@@ -26,6 +26,7 @@ export declare class RessourcesController {
         nomAuteurExterne: string | null;
         prenomAuteurExterne: string | null;
         affiliationAuteurExterne: string | null;
+        validation: import("generated/prisma").$Enums.TypeValidation;
         isbn: string | null;
         doi: string | null;
         edition: string | null;
@@ -65,9 +66,6 @@ export declare class RessourcesController {
                 nom: string;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                departement: string | null;
-                faculte: string | null;
-                specialite: string | null;
                 id: string;
             } | null;
             image: string | null;
@@ -92,6 +90,7 @@ export declare class RessourcesController {
             nomAuteurExterne: string | null;
             prenomAuteurExterne: string | null;
             affiliationAuteurExterne: string | null;
+            validation: import("generated/prisma").$Enums.TypeValidation;
             isbn: string | null;
             doi: string | null;
             edition: string | null;
@@ -139,7 +138,8 @@ export declare class RessourcesController {
             dateCreation: Date;
             userId: string;
             ressourceId: string;
-            estModere: boolean;
+            universiteSrc: string | null;
+            universiteUser: string | null;
             contenu: string;
         })[];
         notations: {
@@ -157,8 +157,6 @@ export declare class RessourcesController {
             nom: string;
             prenom: string;
             role: import("generated/prisma").$Enums.RoleUser;
-            departement: string | null;
-            faculte: string | null;
             id: string;
         } | null;
         image: string | null;
@@ -183,6 +181,7 @@ export declare class RessourcesController {
         nomAuteurExterne: string | null;
         prenomAuteurExterne: string | null;
         affiliationAuteurExterne: string | null;
+        validation: import("generated/prisma").$Enums.TypeValidation;
         isbn: string | null;
         doi: string | null;
         edition: string | null;
@@ -225,23 +224,13 @@ export declare class RessourcesController {
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            departement: string | null;
-            faculte: string | null;
-            specialite: string | null;
-            niveauEtudes: string | null;
             universiteId: string;
             id: string;
-            dateInscription: Date;
+            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
-            droitEmpruntExterieur: boolean;
-            droitReservationExterieure: boolean;
-            universiteAutorisees: string | null;
-            nbMaxEmpruntsExternes: number;
-            statutValidation: string | null;
-            dateValidation: Date | null;
         } | null;
     } & {
         image: string | null;
@@ -266,6 +255,7 @@ export declare class RessourcesController {
         nomAuteurExterne: string | null;
         prenomAuteurExterne: string | null;
         affiliationAuteurExterne: string | null;
+        validation: import("generated/prisma").$Enums.TypeValidation;
         isbn: string | null;
         doi: string | null;
         edition: string | null;
@@ -316,9 +306,6 @@ export declare class RessourcesController {
                 nom: string;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                departement: string | null;
-                faculte: string | null;
-                specialite: string | null;
                 id: string;
             } | null;
             image: string | null;
@@ -343,6 +330,7 @@ export declare class RessourcesController {
             nomAuteurExterne: string | null;
             prenomAuteurExterne: string | null;
             affiliationAuteurExterne: string | null;
+            validation: import("generated/prisma").$Enums.TypeValidation;
             isbn: string | null;
             doi: string | null;
             edition: string | null;
@@ -392,9 +380,6 @@ export declare class RessourcesController {
                 nom: string;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                departement: string | null;
-                faculte: string | null;
-                specialite: string | null;
                 id: string;
             } | null;
             image: string | null;
@@ -419,6 +404,7 @@ export declare class RessourcesController {
             nomAuteurExterne: string | null;
             prenomAuteurExterne: string | null;
             affiliationAuteurExterne: string | null;
+            validation: import("generated/prisma").$Enums.TypeValidation;
             isbn: string | null;
             doi: string | null;
             edition: string | null;
@@ -469,6 +455,7 @@ export declare class RessourcesController {
         nomAuteurExterne: string | null;
         prenomAuteurExterne: string | null;
         affiliationAuteurExterne: string | null;
+        validation: import("generated/prisma").$Enums.TypeValidation;
         isbn: string | null;
         doi: string | null;
         edition: string | null;
@@ -512,6 +499,7 @@ export declare class RessourcesController {
         nomAuteurExterne: string | null;
         prenomAuteurExterne: string | null;
         affiliationAuteurExterne: string | null;
+        validation: import("generated/prisma").$Enums.TypeValidation;
         isbn: string | null;
         doi: string | null;
         edition: string | null;
@@ -542,10 +530,10 @@ export declare class RessourcesController {
         id: string;
         userId: string;
         ressourceId: string;
+        universiteSrc: string | null;
+        universiteUser: string | null;
         dateAcces: Date;
         typeAcces: import("generated/prisma").$Enums.TypeAcces;
-        ipAcces: string;
-        universiteSrc: string | null;
     } | {
         error: boolean;
         message: any;

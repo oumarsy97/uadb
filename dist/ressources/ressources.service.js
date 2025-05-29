@@ -105,9 +105,6 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                             nom: true,
                             prenom: true,
                             role: true,
-                            departement: true,
-                            faculte: true,
-                            specialite: true,
                         },
                     },
                     universite: {
@@ -167,8 +164,6 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                             nom: true,
                             prenom: true,
                             role: true,
-                            departement: true,
-                            faculte: true,
                         },
                     },
                     universite: {
@@ -193,9 +188,6 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                         orderBy: {
                             dateCreation: 'desc'
                         },
-                        where: {
-                            estModere: true
-                        }
                     },
                     notations: {
                         select: {
@@ -266,7 +258,6 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                 this.prisma.notation.deleteMany({ where: { ressourceId: id } }),
                 this.prisma.historiqueAcces.deleteMany({ where: { ressourceId: id } }),
                 this.prisma.collectionRessource.deleteMany({ where: { ressourceId: id } }),
-                this.prisma.partageUniversite.deleteMany({ where: { ressourceId: id } }),
                 this.prisma.ressource.delete({ where: { id } }),
             ]);
             return { id, message: 'Ressource supprimée avec succès' };
@@ -331,7 +322,6 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                     userId: data.userId,
                     ressourceId: data.ressourceId,
                     typeAcces: data.typeAcces,
-                    ipAcces: data.ipAcces,
                     universiteSrc: data.universiteSrc,
                 },
             });

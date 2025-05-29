@@ -35,12 +35,7 @@ let UtilisateursService = class UtilisateursService {
                 email: createUtilisateurDto.email,
                 motDePasse: hashedPassword,
                 role: createUtilisateurDto.role,
-                departement: createUtilisateurDto.departement,
-                faculte: createUtilisateurDto.faculte,
-                specialite: createUtilisateurDto.specialite,
-                niveauEtudes: createUtilisateurDto.niveauEtudes,
                 image: createUtilisateurDto.image,
-                dateInscription: new Date(),
                 universiteId: createUtilisateurDto.universiteId,
             },
         });
@@ -99,7 +94,6 @@ let UtilisateursService = class UtilisateursService {
                 skip,
                 take: +limit,
                 include: { universite: true },
-                orderBy: { dateInscription: 'desc' },
             }),
             this.prisma.user.count({ where }),
         ]);

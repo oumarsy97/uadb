@@ -10,23 +10,13 @@ export declare class UtilisateursController {
         prenom: string;
         image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
-        departement: string | null;
-        faculte: string | null;
-        specialite: string | null;
-        niveauEtudes: string | null;
         universiteId: string;
         id: string;
-        dateInscription: Date;
+        telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
         preferencesRecommandation: string | null;
         frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
-        droitEmpruntExterieur: boolean;
-        droitReservationExterieure: boolean;
-        universiteAutorisees: string | null;
-        nbMaxEmpruntsExternes: number;
-        statutValidation: string | null;
-        dateValidation: Date | null;
     }>;
     login(loginData: LoginDataDto): Promise<{
         user: {
@@ -69,23 +59,13 @@ export declare class UtilisateursController {
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            departement: string | null;
-            faculte: string | null;
-            specialite: string | null;
-            niveauEtudes: string | null;
             universiteId: string;
             id: string;
-            dateInscription: Date;
+            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
-            droitEmpruntExterieur: boolean;
-            droitReservationExterieure: boolean;
-            universiteAutorisees: string | null;
-            nbMaxEmpruntsExternes: number;
-            statutValidation: string | null;
-            dateValidation: Date | null;
         }[];
         pagination: {
             page: number;
@@ -111,23 +91,13 @@ export declare class UtilisateursController {
         prenom: string;
         image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
-        departement: string | null;
-        faculte: string | null;
-        specialite: string | null;
-        niveauEtudes: string | null;
         universiteId: string;
         id: string;
-        dateInscription: Date;
+        telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
         preferencesRecommandation: string | null;
         frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
-        droitEmpruntExterieur: boolean;
-        droitReservationExterieure: boolean;
-        universiteAutorisees: string | null;
-        nbMaxEmpruntsExternes: number;
-        statutValidation: string | null;
-        dateValidation: Date | null;
     }>;
     findByEmail(email: string): Promise<{
         universite: {
@@ -146,23 +116,13 @@ export declare class UtilisateursController {
         prenom: string;
         image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
-        departement: string | null;
-        faculte: string | null;
-        specialite: string | null;
-        niveauEtudes: string | null;
         universiteId: string;
         id: string;
-        dateInscription: Date;
+        telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
         preferencesRecommandation: string | null;
         frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
-        droitEmpruntExterieur: boolean;
-        droitReservationExterieure: boolean;
-        universiteAutorisees: string | null;
-        nbMaxEmpruntsExternes: number;
-        statutValidation: string | null;
-        dateValidation: Date | null;
     }>;
     update(data: {
         id: string;
@@ -184,23 +144,13 @@ export declare class UtilisateursController {
         prenom: string;
         image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
-        departement: string | null;
-        faculte: string | null;
-        specialite: string | null;
-        niveauEtudes: string | null;
         universiteId: string;
         id: string;
-        dateInscription: Date;
+        telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
         preferencesRecommandation: string | null;
         frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
-        droitEmpruntExterieur: boolean;
-        droitReservationExterieure: boolean;
-        universiteAutorisees: string | null;
-        nbMaxEmpruntsExternes: number;
-        statutValidation: string | null;
-        dateValidation: Date | null;
     }>;
     remove(id: string): Promise<{
         message: string;
@@ -214,22 +164,12 @@ export declare class UtilisateursController {
         prenom: string;
         image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
-        departement: string | null;
-        faculte: string | null;
-        specialite: string | null;
-        niveauEtudes: string | null;
         universiteId: string;
         id: string;
-        dateInscription: Date;
+        telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
         preferencesRecommandation: string | null;
         frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
-        droitEmpruntExterieur: boolean;
-        droitReservationExterieure: boolean;
-        universiteAutorisees: string | null;
-        nbMaxEmpruntsExternes: number;
-        statutValidation: string | null;
-        dateValidation: Date | null;
     }>;
 }

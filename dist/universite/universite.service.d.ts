@@ -66,23 +66,13 @@ export declare class UniversiteService {
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            departement: string | null;
-            faculte: string | null;
-            specialite: string | null;
-            niveauEtudes: string | null;
             universiteId: string;
             id: string;
-            dateInscription: Date;
+            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
-            droitEmpruntExterieur: boolean;
-            droitReservationExterieure: boolean;
-            universiteAutorisees: string | null;
-            nbMaxEmpruntsExternes: number;
-            statutValidation: string | null;
-            dateValidation: Date | null;
         }[];
         ressources: {
             image: string | null;
@@ -107,6 +97,7 @@ export declare class UniversiteService {
             nomAuteurExterne: string | null;
             prenomAuteurExterne: string | null;
             affiliationAuteurExterne: string | null;
+            validation: import("generated/prisma").$Enums.TypeValidation;
             isbn: string | null;
             doi: string | null;
             edition: string | null;
