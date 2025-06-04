@@ -21,23 +21,9 @@ export class CreateUtilisateurDto {
 
   @IsEnum(RoleUser)
   role: RoleUser;
+  
 
-  @IsString()
-  departement: string;
-
-  @IsString()
-  faculte: string;
-
-  @IsOptional()
-  @IsString()
-  specialite?: string;
-
-  @IsOptional()
-  @IsString()
-  niveauEtudes?: string;
-
-  @IsString()
-  universite: string;
+  
 
   @IsString()
   universiteId: string;

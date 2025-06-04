@@ -41,6 +41,7 @@ let UtilisateursService = class UtilisateursService {
         });
     }
     async login(loginData) {
+        console.log('Login attempt with data:', loginData);
         const user = await this.prisma.user.findUnique({
             where: { email: loginData.email },
         });
@@ -145,10 +146,6 @@ let UtilisateursService = class UtilisateursService {
             ...(updateData.email && { email: updateData.email }),
             ...(hashedPassword && { motDePasse: hashedPassword }),
             ...(updateData.role && { role: updateData.role }),
-            ...(updateData.departement && { departement: updateData.departement }),
-            ...(updateData.faculte && { faculte: updateData.faculte }),
-            ...(updateData.specialite && { specialite: updateData.specialite }),
-            ...(updateData.niveauEtudes && { niveauEtudes: updateData.niveauEtudes }),
             ...(updateData.image && { image: updateData.image }),
             ...(updateData.universiteId !== undefined && {
                 universiteId: updateData.universiteId,

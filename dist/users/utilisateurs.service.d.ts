@@ -6,15 +6,15 @@ export declare class UtilisateursService {
     private readonly jwtService;
     constructor(prisma: PrismaService, jwtService: JwtService);
     create(createUtilisateurDto: CreateUtilisateurDto): Promise<{
-        id: string;
-        universiteId: string;
-        image: string | null;
         email: string;
         motDePasse: string;
         nom: string;
-        telephone: string | null;
         prenom: string;
+        image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
+        universiteId: string;
+        id: string;
+        telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
         preferencesRecommandation: string | null;
@@ -42,24 +42,24 @@ export declare class UtilisateursService {
     }): Promise<{
         data: {
             universite: {
-                id: string;
-                dateCreation: Date;
                 nom: string;
+                id: string;
                 adresse: string | null;
                 ville: string;
                 pays: string;
                 siteWeb: string | null;
+                dateCreation: Date;
                 adresseBlockchain: string | null;
                 estActive: boolean;
             };
-            id: string;
-            universiteId: string;
-            image: string | null;
             email: string;
             nom: string;
-            telephone: string | null;
             prenom: string;
+            image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
+            universiteId: string;
+            id: string;
+            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
             preferencesRecommandation: string | null;
@@ -74,24 +74,24 @@ export declare class UtilisateursService {
     }>;
     findOne(id: string): Promise<{
         universite: {
-            id: string;
-            dateCreation: Date;
             nom: string;
+            id: string;
             adresse: string | null;
             ville: string;
             pays: string;
             siteWeb: string | null;
+            dateCreation: Date;
             adresseBlockchain: string | null;
             estActive: boolean;
         };
-        id: string;
-        universiteId: string;
-        image: string | null;
         email: string;
         nom: string;
-        telephone: string | null;
         prenom: string;
+        image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
+        universiteId: string;
+        id: string;
+        telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
         preferencesRecommandation: string | null;
@@ -99,24 +99,24 @@ export declare class UtilisateursService {
     }>;
     findByEmail(email: string): Promise<{
         universite: {
-            id: string;
-            dateCreation: Date;
             nom: string;
+            id: string;
             adresse: string | null;
             ville: string;
             pays: string;
             siteWeb: string | null;
+            dateCreation: Date;
             adresseBlockchain: string | null;
             estActive: boolean;
         };
-        id: string;
-        universiteId: string;
-        image: string | null;
         email: string;
         nom: string;
-        telephone: string | null;
         prenom: string;
+        image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
+        universiteId: string;
+        id: string;
+        telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
         preferencesRecommandation: string | null;
@@ -124,24 +124,24 @@ export declare class UtilisateursService {
     }>;
     update(id: string, updateData: Partial<CreateUtilisateurDto>): Promise<{
         universite: {
-            id: string;
-            dateCreation: Date;
             nom: string;
+            id: string;
             adresse: string | null;
             ville: string;
             pays: string;
             siteWeb: string | null;
+            dateCreation: Date;
             adresseBlockchain: string | null;
             estActive: boolean;
         };
-        id: string;
-        universiteId: string;
-        image: string | null;
         email: string;
         nom: string;
-        telephone: string | null;
         prenom: string;
+        image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
+        universiteId: string;
+        id: string;
+        telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
         preferencesRecommandation: string | null;
@@ -151,15 +151,15 @@ export declare class UtilisateursService {
         message: string;
     }>;
     updateDerniereConnexion(id: string): Promise<{
-        id: string;
-        universiteId: string;
-        image: string | null;
         email: string;
         motDePasse: string;
         nom: string;
-        telephone: string | null;
         prenom: string;
+        image: string | null;
         role: import("generated/prisma").$Enums.RoleUser;
+        universiteId: string;
+        id: string;
+        telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
         preferencesRecommandation: string | null;

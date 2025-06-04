@@ -9,15 +9,9 @@ export declare class RessourcesService {
     findAll(options?: SearchRessourceDto): Promise<{
         data: {
             noteMoyenne: number;
-            auteur: {
-                id: string;
-                nom: string;
-                prenom: string;
-                role: import("generated/prisma").$Enums.RoleUser;
-            } | null;
             universite: {
-                id: string;
                 nom: string;
+                id: string;
                 ville: string;
                 pays: string;
             };
@@ -27,20 +21,26 @@ export declare class RessourcesService {
                 notations: number;
                 historiques: number;
             };
-            id: string;
-            titre: string;
+            auteur: {
+                nom: string;
+                prenom: string;
+                role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+            } | null;
+            image: string | null;
+            universiteId: string;
             description: string;
             type: import("generated/prisma").$Enums.TypeRessource;
+            format: string;
+            id: string;
+            dateCreation: Date;
+            titre: string;
             langue: string;
             urlFichier: string;
             urlFichierLocal: string | null;
-            format: string;
-            dateCreation: Date;
             dateModification: Date;
             motsCles: string;
             auteurId: string | null;
-            universiteId: string;
-            image: string | null;
             niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
             datePublication: Date | null;
             estValide: boolean;
@@ -74,24 +74,18 @@ export declare class RessourcesService {
     }>;
     findOne(id: string): Promise<{
         noteMoyenne: number;
-        auteur: {
-            id: string;
-            nom: string;
-            prenom: string;
-            role: import("generated/prisma").$Enums.RoleUser;
-        } | null;
         universite: {
-            id: string;
             nom: string;
+            id: string;
             ville: string;
             pays: string;
         };
         commentaires: ({
             user: {
-                id: string;
                 nom: string;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
             };
         } & {
             id: string;
@@ -113,20 +107,26 @@ export declare class RessourcesService {
             notations: number;
             historiques: number;
         };
-        id: string;
-        titre: string;
+        auteur: {
+            nom: string;
+            prenom: string;
+            role: import("generated/prisma").$Enums.RoleUser;
+            id: string;
+        } | null;
+        image: string | null;
+        universiteId: string;
         description: string;
         type: import("generated/prisma").$Enums.TypeRessource;
+        format: string;
+        id: string;
+        dateCreation: Date;
+        titre: string;
         langue: string;
         urlFichier: string;
         urlFichierLocal: string | null;
-        format: string;
-        dateCreation: Date;
         dateModification: Date;
         motsCles: string;
         auteurId: string | null;
-        universiteId: string;
-        image: string | null;
         niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
         datePublication: Date | null;
         estValide: boolean;
@@ -152,47 +152,47 @@ export declare class RessourcesService {
         necessiteAutorisation: boolean;
     }>;
     update(id: string, updateRessourceDto: UpdateRessourceDto): Promise<{
-        auteur: {
+        universite: {
+            nom: string;
             id: string;
-            universiteId: string;
-            image: string | null;
+            adresse: string | null;
+            ville: string;
+            pays: string;
+            siteWeb: string | null;
+            dateCreation: Date;
+            adresseBlockchain: string | null;
+            estActive: boolean;
+        };
+        auteur: {
             email: string;
             motDePasse: string;
             nom: string;
-            telephone: string | null;
             prenom: string;
+            image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
+            universiteId: string;
+            id: string;
+            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         } | null;
-        universite: {
-            id: string;
-            dateCreation: Date;
-            nom: string;
-            adresse: string | null;
-            ville: string;
-            pays: string;
-            siteWeb: string | null;
-            adresseBlockchain: string | null;
-            estActive: boolean;
-        };
     } & {
-        id: string;
-        titre: string;
+        image: string | null;
+        universiteId: string;
         description: string;
         type: import("generated/prisma").$Enums.TypeRessource;
+        format: string;
+        id: string;
+        dateCreation: Date;
+        titre: string;
         langue: string;
         urlFichier: string;
         urlFichierLocal: string | null;
-        format: string;
-        dateCreation: Date;
         dateModification: Date;
         motsCles: string;
         auteurId: string | null;
-        universiteId: string;
-        image: string | null;
         niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
         datePublication: Date | null;
         estValide: boolean;
@@ -224,15 +224,9 @@ export declare class RessourcesService {
     findByAuteur(auteurId: string, options?: SearchRessourceDto): Promise<{
         data: {
             noteMoyenne: number;
-            auteur: {
-                id: string;
-                nom: string;
-                prenom: string;
-                role: import("generated/prisma").$Enums.RoleUser;
-            } | null;
             universite: {
-                id: string;
                 nom: string;
+                id: string;
                 ville: string;
                 pays: string;
             };
@@ -242,20 +236,26 @@ export declare class RessourcesService {
                 notations: number;
                 historiques: number;
             };
-            id: string;
-            titre: string;
+            auteur: {
+                nom: string;
+                prenom: string;
+                role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+            } | null;
+            image: string | null;
+            universiteId: string;
             description: string;
             type: import("generated/prisma").$Enums.TypeRessource;
+            format: string;
+            id: string;
+            dateCreation: Date;
+            titre: string;
             langue: string;
             urlFichier: string;
             urlFichierLocal: string | null;
-            format: string;
-            dateCreation: Date;
             dateModification: Date;
             motsCles: string;
             auteurId: string | null;
-            universiteId: string;
-            image: string | null;
             niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
             datePublication: Date | null;
             estValide: boolean;
@@ -290,15 +290,9 @@ export declare class RessourcesService {
     findByUniversite(universiteId: string, options?: SearchRessourceDto): Promise<{
         data: {
             noteMoyenne: number;
-            auteur: {
-                id: string;
-                nom: string;
-                prenom: string;
-                role: import("generated/prisma").$Enums.RoleUser;
-            } | null;
             universite: {
-                id: string;
                 nom: string;
+                id: string;
                 ville: string;
                 pays: string;
             };
@@ -308,20 +302,26 @@ export declare class RessourcesService {
                 notations: number;
                 historiques: number;
             };
-            id: string;
-            titre: string;
+            auteur: {
+                nom: string;
+                prenom: string;
+                role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+            } | null;
+            image: string | null;
+            universiteId: string;
             description: string;
             type: import("generated/prisma").$Enums.TypeRessource;
+            format: string;
+            id: string;
+            dateCreation: Date;
+            titre: string;
             langue: string;
             urlFichier: string;
             urlFichierLocal: string | null;
-            format: string;
-            dateCreation: Date;
             dateModification: Date;
             motsCles: string;
             auteurId: string | null;
-            universiteId: string;
-            image: string | null;
             niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
             datePublication: Date | null;
             estValide: boolean;
@@ -354,20 +354,20 @@ export declare class RessourcesService {
         };
     }>;
     toggleValidation(id: string): Promise<{
-        id: string;
-        titre: string;
+        image: string | null;
+        universiteId: string;
         description: string;
         type: import("generated/prisma").$Enums.TypeRessource;
+        format: string;
+        id: string;
+        dateCreation: Date;
+        titre: string;
         langue: string;
         urlFichier: string;
         urlFichierLocal: string | null;
-        format: string;
-        dateCreation: Date;
         dateModification: Date;
         motsCles: string;
         auteurId: string | null;
-        universiteId: string;
-        image: string | null;
         niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
         datePublication: Date | null;
         estValide: boolean;
@@ -393,20 +393,20 @@ export declare class RessourcesService {
         necessiteAutorisation: boolean;
     }>;
     toggleArchivage(id: string): Promise<{
-        id: string;
-        titre: string;
+        image: string | null;
+        universiteId: string;
         description: string;
         type: import("generated/prisma").$Enums.TypeRessource;
+        format: string;
+        id: string;
+        dateCreation: Date;
+        titre: string;
         langue: string;
         urlFichier: string;
         urlFichierLocal: string | null;
-        format: string;
-        dateCreation: Date;
         dateModification: Date;
         motsCles: string;
         auteurId: string | null;
-        universiteId: string;
-        image: string | null;
         niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
         datePublication: Date | null;
         estValide: boolean;

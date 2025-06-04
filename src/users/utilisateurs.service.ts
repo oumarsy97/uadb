@@ -41,10 +41,12 @@ export class UtilisateursService {
   }
 
   async login(loginData: LoginDataDto) {
+    console.log('Login attempt with data:', loginData);
     // Trouver l'utilisateur par email
     const user = await this.prisma.user.findUnique({
       where: { email: loginData.email },
     });
+    
 
     // Vérifier si l'utilisateur existe
     if (!user) {
@@ -184,10 +186,6 @@ export class UtilisateursService {
       ...(updateData.email && { email: updateData.email }),
       ...(hashedPassword && { motDePasse: hashedPassword }),
       ...(updateData.role && { role: updateData.role }),
-      ...(updateData.departement && { departement: updateData.departement }),
-      ...(updateData.faculte && { faculte: updateData.faculte }),
-      ...(updateData.specialite && { specialite: updateData.specialite }),
-      ...(updateData.niveauEtudes && { niveauEtudes: updateData.niveauEtudes }),
       ...(updateData.image && { image: updateData.image }),
       ...(updateData.universiteId !== undefined && {
         universiteId: updateData.universiteId,

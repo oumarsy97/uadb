@@ -10,6 +10,7 @@ import { InteractionsModule } from './interactions/interactions.module';
 import { CollectionsModule } from './collections/collections.module';
 import { UniversiteModule } from './universite/universite.module';
 import { ConventionModule } from './convention/convention.module';
+import { EtudiantModule } from './etudiant/etudiant.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ConventionModule } from './convention/convention.module';
     CollectionsModule,
     UniversiteModule,
     ConventionModule,
+    EtudiantModule,
   ],
   controllers: [AppController],
   providers: [AppService,],

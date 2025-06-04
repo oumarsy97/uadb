@@ -6,11 +6,6 @@ export declare class CreateUtilisateurDto {
     prenom: string;
     image?: string;
     role: RoleUser;
-    departement: string;
-    faculte: string;
-    specialite?: string;
-    niveauEtudes?: string;
-    universite: string;
     universiteId: string;
 }
 export declare class LoginDataDto {

@@ -20,11 +20,6 @@ class CreateUtilisateurDto {
     prenom;
     image;
     role;
-    departement;
-    faculte;
-    specialite;
-    niveauEtudes;
-    universite;
     universiteId;
 }
 exports.CreateUtilisateurDto = CreateUtilisateurDto;
@@ -53,28 +48,6 @@ __decorate([
     (0, class_validator_1.IsEnum)(prisma_1.RoleUser),
     __metadata("design:type", String)
 ], CreateUtilisateurDto.prototype, "role", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateUtilisateurDto.prototype, "departement", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateUtilisateurDto.prototype, "faculte", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateUtilisateurDto.prototype, "specialite", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateUtilisateurDto.prototype, "niveauEtudes", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateUtilisateurDto.prototype, "universite", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
