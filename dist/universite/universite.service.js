@@ -41,21 +41,10 @@ let UniversiteService = class UniversiteService {
     async getStatistics(id) {
         return this.prisma.universite.findUnique({
             where: { id },
-            include: { ressources: true, users: true },
-        });
-    }
-    async toggleStatus(id) {
-        const universite = await this.prisma.universite.findUnique({ where: { id } });
-        if (!universite)
-            throw new Error('Université non trouvée');
-        return this.prisma.universite.update({
-            where: { id },
-            data: { estActive: !universite.estActive },
         });
     }
     async getTopUniversities(limit) {
         return this.prisma.universite.findMany({
-            orderBy: { ressources: { _count: 'desc' } },
             take: 10,
         });
     }

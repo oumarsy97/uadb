@@ -87,14 +87,7 @@ export class EtudiantService {
               telephone: true,
               role: true,
               estActif: true,
-              universite: {
-                select: {
-                  id: true,
-                  nom: true,
-                  ville: true,
-                  pays: true
-                }
-              }
+              
             }
           }
         }
@@ -178,14 +171,6 @@ export class EtudiantService {
               role: true,
               estActif: true,
               derniereConnexion: true,
-              universite: {
-                select: {
-                  id: true,
-                  nom: true,
-                  ville: true,
-                  pays: true
-                }
-              }
             }
           }
         },
@@ -225,14 +210,7 @@ export class EtudiantService {
             role: true,
             estActif: true,
             derniereConnexion: true,
-            universite: {
-              select: {
-                id: true,
-                nom: true,
-                ville: true,
-                pays: true
-              }
-            }
+            
           }
         }
       }
@@ -265,14 +243,7 @@ export class EtudiantService {
             role: true,
             estActif: true,
             derniereConnexion: true,
-            universite: {
-              select: {
-                id: true,
-                nom: true,
-                ville: true,
-                pays: true
-              }
-            }
+            
           }
         }
       }
@@ -305,14 +276,7 @@ export class EtudiantService {
             role: true,
             estActif: true,
             derniereConnexion: true,
-            universite: {
-              select: {
-                id: true,
-                nom: true,
-                ville: true,
-                pays: true
-              }
-            }
+            
           }
         }
       }
@@ -381,14 +345,7 @@ export class EtudiantService {
               telephone: true,
               role: true,
               estActif: true,
-              universite: {
-                select: {
-                  id: true,
-                  nom: true,
-                  ville: true,
-                  pays: true
-                }
-              }
+            
             }
           }
         }

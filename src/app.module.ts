@@ -11,6 +11,10 @@ import { CollectionsModule } from './collections/collections.module';
 import { UniversiteModule } from './universite/universite.module';
 import { ConventionModule } from './convention/convention.module';
 import { EtudiantModule } from './etudiant/etudiant.module';
+import { CategorieModule } from './categorie/categorie.module';
+import { UfrModule } from './ufr/ufr.module';
+import { DepartementModule } from './departement/departement.module';
+import { FiliereModule } from './filiere/filiere.module';
 
 @Module({
   imports: [
@@ -22,6 +26,10 @@ import { EtudiantModule } from './etudiant/etudiant.module';
     UniversiteModule,
     ConventionModule,
     EtudiantModule,
+    CategorieModule,
+    UfrModule,
+    DepartementModule,
+    FiliereModule,
   ],
   controllers: [AppController],
   providers: [AppService,],

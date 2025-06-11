@@ -32,28 +32,27 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                     throw new common_1.BadRequestException('Une ressource avec le même titre existe déjà pour cet auteur');
                 }
             }
+            const data = {
+                titre: createRessourceDto.titre,
+                description: createRessourceDto.description,
+                type: createRessourceDto.type,
+                langue: createRessourceDto.langue || 'fr',
+                urlFichier: createRessourceDto.urlFichier,
+                format: createRessourceDto.format,
+                motsCles: createRessourceDto.motsCles,
+                universiteId: createRessourceDto.universiteId,
+                image: createRessourceDto.image,
+                niveauAcces: createRessourceDto.niveauAcces || 'PUBLIC',
+                urlFichierLocal: createRessourceDto.urlFichierLocal,
+                datePublication: new Date(),
+            };
+            if (createRessourceDto.auteurId) {
+                data.auteurId = createRessourceDto.auteurId;
+            }
             return this.prisma.ressource.create({
-                data: {
-                    titre: createRessourceDto.titre,
-                    description: createRessourceDto.description,
-                    type: createRessourceDto.type,
-                    langue: createRessourceDto.langue || 'fr',
-                    urlFichier: createRessourceDto.urlFichier,
-                    format: createRessourceDto.format,
-                    motsCles: createRessourceDto.motsCles,
-                    auteurId: createRessourceDto.auteurId,
-                    universiteId: createRessourceDto.universiteId,
-                    image: createRessourceDto.image,
-                    niveauAcces: createRessourceDto.niveauAcces || 'PUBLIC',
-                    nomAuteurExterne: createRessourceDto.nomAuteurExterne,
-                    prenomAuteurExterne: createRessourceDto.prenomAuteurExterne,
-                    affiliationAuteurExterne: createRessourceDto.affiliationAuteurExterne,
-                    urlFichierLocal: createRessourceDto.urlFichierLocal,
-                    datePublication: new Date(),
-                },
+                data,
                 include: {
                     auteur: true,
-                    universite: true,
                 },
             });
         }
@@ -63,7 +62,7 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
         }
     }
     async findAll(options = {}) {
-        const { page = 1, limit = 10, search = '', type, langue, universiteId, estPublique, niveauAcces, estValide, estArchive, auteurId, orderBy = 'dateCreation', orderDirection = 'desc', } = options;
+        const { page = 1, limit = 10, search = '', type, langue, universiteId, niveauAcces, estValide, estArchive, auteurId, orderBy = 'dateCreation', orderDirection = 'desc', } = options;
         const skip = (page - 1) * limit;
         const where = {};
         if (search) {
@@ -103,14 +102,6 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                             nom: true,
                             prenom: true,
                             role: true,
-                        },
-                    },
-                    universite: {
-                        select: {
-                            id: true,
-                            nom: true,
-                            ville: true,
-                            pays: true,
                         },
                     },
                     _count: {
@@ -164,14 +155,6 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                             role: true,
                         },
                     },
-                    universite: {
-                        select: {
-                            id: true,
-                            nom: true,
-                            ville: true,
-                            pays: true,
-                        },
-                    },
                     commentaires: {
                         include: {
                             user: {
@@ -207,12 +190,8 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             if (!ressource) {
                 throw new common_1.NotFoundException(`Ressource avec l'ID ${id} non trouvée`);
             }
-            const noteMoyenne = ressource.notations.length > 0
-                ? ressource.notations.reduce((sum, notation) => sum + notation.note, 0) / ressource.notations.length
-                : 0;
             return {
                 ...ressource,
-                noteMoyenne: parseFloat(noteMoyenne.toFixed(1)),
             };
         }
         catch (error) {
@@ -233,7 +212,6 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                 data: updateRessourceDto,
                 include: {
                     auteur: true,
-                    universite: true,
                 },
             });
         }

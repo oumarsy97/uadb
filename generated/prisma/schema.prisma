@@ -11,6 +11,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Modèle pour les transactions inter-universitaires
+
 // Modèle pour les conventions entre universités
 model ConventionInteruniversitaire {
   id                String         @id @default(uuid())
@@ -39,8 +41,6 @@ model ReglePret {
   dureeEmpruntJours   Int      @default(15) @map("duree_emprunt_jours")
   nbRenouvellements   Int      @default(1) @map("nb_renouvellements")
   penaliteRetardJours Boolean  @default(true) @map("penalite_retard_jours")
-  exigeCarteValide    Boolean  @default(true) @map("exige_carte_valide")
-  dateMiseAJour       DateTime @updatedAt @map("date_mise_a_jour")
   estActif            Boolean  @default(true) @map("est_actif")
 
   // Relation avec l'université
@@ -106,41 +106,21 @@ enum TypeValidation {
   ANNULEE
 }
 
-// Modèle pour les statistiques d'emprunts inter-universitaires
-model StatistiqueInteruniversitaire {
-  id                       String  @id @default(uuid())
-  universiteSource         String  @map("universite_source")
-  universiteDestination    String  @map("universite_destination")
-  mois                     Int
-  annee                    Int
-  nbEmprunts               Int     @default(0) @map("nb_emprunts")
-  nbReservations           Int     @default(0) @map("nb_reservations")
-  ressourcesPlusConsultees String? @map("ressources_plus_consultees") // JSON array
-  domainesPlusConsultes    String? @map("domaines_plus_consultes") // JSON array
-
-  // Relations avec les universités (manquantes)
-  universiteSourceRel      Universite @relation("StatistiqueSource", fields: [universiteSource], references: [id])
-  universiteDestinationRel Universite @relation("StatistiqueDestination", fields: [universiteDestination], references: [id])
-
-  @@unique([universiteSource, universiteDestination, mois, annee])
-}
-
 // Système de réservation des ressources
 model Reservation {
-  id                      String            @id @default(uuid())
-  userId                  String?           @map("user_id")
-  ressourceId             String            @map("ressource_id")
-  dateReservation         DateTime          @default(now()) @map("date_reservation")
-  dateDebut               DateTime          @map("date_debut")
-  dateFin                 DateTime          @map("date_fin")
-  statut                  StatutReservation @default(EN_ATTENTE)
-  commentaire             String?           @db.Text
-  universiteEmprunteur    String            @map("universite_emprunteur") // Université d'origine du réservateur
-  validePar               String?           @map("valide_par") // ID de l'administrateur qui a validé la réservation externe
-  user                    User?             @relation(fields: [userId], references: [id])
-  ressource               Ressource         @relation(fields: [ressourceId], references: [id])
-  universiteEmprunteurRel Universite        @relation("UniversiteReservation", fields: [universiteEmprunteur], references: [id])
-  valideur                Bibliothecaire?   @relation(fields: [validePar], references: [id]) // ID de l'administrateur qui a validé la réservation
+  id                   String            @id @default(uuid())
+  userId               String?           @map("user_id")
+  ressourceId          String            @map("ressource_id")
+  dateReservation      DateTime          @default(now()) @map("date_reservation")
+  dateDebut            DateTime          @map("date_debut")
+  dateFin              DateTime          @map("date_fin")
+  statut               StatutReservation @default(EN_ATTENTE)
+  commentaire          String?           @db.Text
+  universiteEmprunteur String            @map("universite_emprunteur") // Université d'origine du réservateur
+  validePar            String?           @map("valide_par") // ID de l'administrateur qui a validé la réservation externe
+  user                 User?             @relation(fields: [userId], references: [id])
+  ressource            Ressource         @relation(fields: [ressourceId], references: [id])
+  valideur             Bibliothecaire?   @relation(fields: [validePar], references: [id]) // ID de l'administrateur qui a validé la réservation
 
   @@index([dateDebut, dateFin]) // Index pour optimiser les recherches par date
 }
@@ -155,18 +135,21 @@ enum StatutReservation {
 
 // Gestion des exemplaires physiques
 model ExemplairePhysique {
-  id                    String         @id @default(uuid())
-  ressourceId           String         @map("ressource_id")
-  cote                  String // Référence bibliothécaire
-  etat                  EtatExemplaire @default(BON)
-  disponible            Boolean        @default(true)
-  localisation          String // Salle, étage, étagère
-  dateAcquisition       DateTime?      @default(now()) @map("date_acquisition")
-  estReservableExterne  Boolean?       @default(false) @map("est_reservable_externe") // Disponible pour réservation externe
-  estEmpruntableExterne Boolean?       @default(false) @map("est_empruntable_externe") // Disponible pour emprunt externe
-  qrCode                String?        @map("qr_code") // QR code pour identification
-  ressource             Ressource      @relation(fields: [ressourceId], references: [id])
-  emprunts              Emprunt[]
+  id              String         @id @default(uuid())
+  ressourceId     String         @map("ressource_id")
+  cote            String // Référence bibliothécaire
+  etat            EtatExemplaire @default(BON)
+  disponible      Boolean        @default(true)
+  localisation    String // Salle, étage, étagère
+  dateAcquisition DateTime?      @default(now()) @map("date_acquisition")
+  qrCode          String?        @map("qr_code") // QR code pour identification
+
+  // Champs pour emprunts inter-universitaires
+  dureeMaxEmpruntExterne  Int @default(14) @map("duree_max_emprunt_externe") // Durée en jours
+  nbMaxExemplairesExterne Int @default(1) @map("nb_max_exemplaires_externe") // Nombre max d'exemplaires pour emprunt externe
+
+  ressource Ressource @relation(fields: [ressourceId], references: [id])
+  emprunts  Emprunt[]
 
   @@index([ressourceId])
   @@index([disponible])
@@ -184,23 +167,20 @@ enum EtatExemplaire {
 
 // Gestion des emprunts physiques
 model Emprunt {
-  id                   String        @id @default(uuid())
-  exemplaireId         String        @map("exemplaire_id")
-  userId               String        @map("user_id")
-  dateEmprunt          DateTime      @default(now()) @map("date_emprunt")
-  dateRetourPrevue     DateTime      @map("date_retour_prevue")
-  dateRetourEffective  DateTime?     @map("date_retour_effective")
-  statut               StatutEmprunt @default(EN_COURS)
-  commentaire          String?       @db.Text
-  universiteEmprunteur String        @map("universite_emprunteur") // Université d'origine de l'emprunteur
-  estEmpruntExterne    Boolean       @default(false) @map("est_emprunt_externe") // Flag pour les emprunts inter-universitaires
-  motifEmprunt         String?       @map("motif_emprunt") // Justification pour emprunt externe
-  validePar            String?       @map("valide_par") // ID de l'administrateur qui a validé l'emprunt externe
-
-  exemplaire              ExemplairePhysique    @relation(fields: [exemplaireId], references: [id])
-  user                    User                  @relation(fields: [userId], references: [id])
-  universiteEmprunteurRel Universite            @relation("UniversiteEmprunt", fields: [universiteEmprunteur], references: [id])
-  SanctionUtilisateur     SanctionUtilisateur[]
+  id                   String                @id @default(uuid())
+  exemplaireId         String                @map("exemplaire_id")
+  userId               String                @map("user_id")
+  dateEmprunt          DateTime              @default(now()) @map("date_emprunt")
+  dateRetourPrevue     DateTime              @map("date_retour_prevue")
+  dateRetourEffective  DateTime?             @map("date_retour_effective")
+  statut               StatutEmprunt         @default(EN_COURS)
+  commentaire          String?               @db.Text
+  universiteEmprunteur String                @map("universite_emprunteur") // Université d'origine de l'emprunteur
+  motifEmprunt         String?               @map("motif_emprunt") // Justification pour emprunt externe
+  validePar            String?               @map("valide_par") // ID de l'administrateur qui a validé l'emprunt externe
+  exemplaire           ExemplairePhysique    @relation(fields: [exemplaireId], references: [id])
+  user                 User?                 @relation(fields: [userId], references: [id])
+  SanctionUtilisateur  SanctionUtilisateur[]
 
   @@index([dateEmprunt, dateRetourPrevue])
   @@index([statut])
@@ -225,9 +205,8 @@ model Recommandation {
   estInteruniversitaire Boolean             @default(false) @map("est_interuniversitaire") // Recommandation qui vient d'une autre université
   universiteSource      String?             @map("universite_source") // ID de l'université source pour recommandations interuniversitaires
 
-  user                User        @relation(fields: [userId], references: [id])
-  ressource           Ressource   @relation(fields: [ressourceId], references: [id])
-  universiteSourceRel Universite? @relation("UniversiteRecommandation", fields: [universiteSource], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
+  ressource Ressource @relation(fields: [ressourceId], references: [id])
 
   @@index([userId, estVue])
   @@index([ressourceId])
@@ -242,49 +221,61 @@ enum MotifRecommandation {
 }
 
 model Universite {
-  id                String   @id @default(uuid())
-  nom               String   @unique
-  adresse           String?
-  ville             String
-  pays              String
-  siteWeb           String?  @map("site_web")
-  dateCreation      DateTime @default(now()) @map("date_creation")
-  adresseBlockchain String?  @map("adresse_blockchain")
-  estActive         Boolean  @default(true) @map("est_active")
-
-  // Relations existantes
-  users      User[]
-  ressources Ressource[]
-
+  id                       String                    @id @default(uuid())
+  nom                      String                    @unique
+  adresse                  String?
+  ville                    String
+  siteWeb                  String?                   @map("site_web")
   // Relations manquantes
-  statistiquesSource      StatistiqueInteruniversitaire[] @relation("StatistiqueSource")
-  statistiquesDestination StatistiqueInteruniversitaire[] @relation("StatistiqueDestination")
-  reservations            Reservation[]                   @relation("UniversiteReservation")
-  emprunts                Emprunt[]                       @relation("UniversiteEmprunt")
-  recommandationsSource   Recommandation[]                @relation("UniversiteRecommandation")
-
-  // Relations avec les statistiques biblio
   statistiquesBibliotheque StatistiqueBibliotheque[]
-
-  // Relations avec les partages
-  // partagesSource    PartageUniversite[] @relation("UniversitePartageSource")
-  // partagesDestination PartageUniversite[] @relation("UniversitePartageDestination")
-
-  // Relations avec les transactions blockchain
-  transactionsOrigine     TransactionBlockchain[] @relation("UniversiteTransactionOrigine")
-  transactionsDestination TransactionBlockchain[] @relation("UniversiteTransactionDestination")
-
-  HistoriqueAcces HistoriqueAcces[] @relation("UniversiteHistoriqueAcces")
-
-  reglePrets ReglePret[]
+  reglePrets               ReglePret[]
 
   politiqueBibliotheques PolitiqueBibliotheque[]
+
+  ufrs Ufr[]
+}
+
+model Ufr {
+  id           String  @id @default(uuid())
+  nom          String
+  description  String? @db.Text
+  universiteId String  @map("universite_id")
+
+  // Relations
+  universite   Universite    @relation(fields: [universiteId], references: [id])
+  departements Departement[]
+
+  @@index([universiteId])
+}
+
+model Departement {
+  id          String  @id @default(uuid())
+  nom         String
+  description String? @db.Text
+  ufrId       String  @map("ufr_id")
+
+  // Relations
+  ufr      Ufr       @relation(fields: [ufrId], references: [id])
+  filieres Filiere[]
+
+  @@index([ufrId])
+}
+
+model Filiere {
+  id            String  @id @default(uuid())
+  nom           String
+  description   String? @db.Text
+  departementId String  @map("departement_id")
+
+  // Relations
+  departement Departement @relation(fields: [departementId], references: [id])
+
+  @@index([departementId])
 }
 
 enum RoleUser {
   ETUDIANT
   ENSEIGNANT
-  CHERCHEUR
   BIBLIOTHECAIRE
   ADMIN
 }
@@ -303,8 +294,7 @@ model User {
   estActif          Boolean   @default(true) @map("est_actif")
   universiteId      String    @map("universite_id")
 
-  // Relations existantes
-  universite                Universite              @relation(fields: [universiteId], references: [id])
+  // Relations existantesregle
   contributions             Ressource[]
   favoris                   Favori[]
   commentaires              Commentaire[]
@@ -461,9 +451,8 @@ model HistoriqueAcces {
   universiteSrc  String?   @map("universite_source") // Si accès externe
   universiteUser String?   @map("universite_utilisateur") // Université de l'utilisateur
 
-  user             User        @relation(fields: [userId], references: [id])
-  ressource        Ressource   @relation(fields: [ressourceId], references: [id])
-  universiteSrcRel Universite? @relation("UniversiteHistoriqueAcces", fields: [universiteSrc], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
+  ressource Ressource @relation(fields: [ressourceId], references: [id])
 
   @@index([dateAcces])
   @@index([ressourceId, typeAcces])
@@ -498,74 +487,34 @@ enum TypeInteraction {
   TELECHARGEMENT
   FAVORI
   NOTATION
-  TEMPS_LECTURE
+  EMPRUNT
+  RESERVATION
   RECHERCHE_SIMILAIRE
 }
 
 model Collection {
-  id           String   @id @default(uuid())
-  userId       String   @map("user_id")
+  id           String                @id @default(uuid())
+  userId       String                @map("user_id")
   nom          String
-  description  String?  @db.Text
-  estPublique  Boolean  @default(false) @map("est_publique")
-  dateCreation DateTime @default(now()) @map("date_creation")
-
-  user       User                  @relation(fields: [userId], references: [id])
-  ressources CollectionRessource[]
+  description  String?               @db.Text
+  dateCreation DateTime              @default(now()) @map("date_creation")
+  user         User                  @relation(fields: [userId], references: [id])
+  ressources   CollectionRessource[]
 
   @@index([userId])
-  @@index([estPublique])
 }
 
 model CollectionRessource {
-  id           String   @id @default(uuid())
-  collectionId String   @map("collection_id")
-  ressourceId  String   @map("ressource_id")
-  dateAjout    DateTime @default(now()) @map("date_ajout")
-  notes        String?  @db.Text
-
-  collection Collection @relation(fields: [collectionId], references: [id])
-  ressource  Ressource  @relation(fields: [ressourceId], references: [id])
+  id           String     @id @default(uuid())
+  collectionId String     @map("collection_id")
+  ressourceId  String     @map("ressource_id")
+  dateAjout    DateTime   @default(now()) @map("date_ajout")
+  notes        String?    @db.Text
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  ressource    Ressource  @relation(fields: [ressourceId], references: [id])
 
   @@unique([collectionId, ressourceId])
   @@index([dateAjout])
-}
-
-// Modèle pour les partages inter-universitaires
-// model PartageUniversite {
-//   id                    String    @id @default(uuid())
-//   ressourceId           String    @map("ressource_id")
-//   universiteSource      String    @map("universite_source")
-//   universiteDestination String    @map("universite_destination")
-//   datePartage           DateTime  @default(now()) @map("date_partage")
-//   estActif              Boolean   @default(true) @map("est_actif")
-
-//   ressource             Ressource @relation(fields: [ressourceId], references: [id])
-//   universiteSourceRel   Universite @relation("UniversitePartageSource", fields: [universiteSource], references: [id])
-//   universiteDestinationRel Universite @relation("UniversitePartageDestination", fields: [universiteDestination], references: [id])
-
-//   @@unique([ressourceId, universiteDestination])
-//   @@index([datePartage])
-//   @@index([estActif])
-// }
-
-model TransactionBlockchain {
-  id                       String            @id @default(uuid())
-  referenceBlockchain      String            @unique @map("reference_blockchain")
-  typeTransaction          TypeTransaction   @map("type_transaction")
-  ressourceId              String?           @map("ressource_id")
-  universiteOrigine        String            @map("universite_origine")
-  universiteDestination    String?           @map("universite_destination")
-  dateTransaction          DateTime          @default(now()) @map("date_transaction")
-  statut                   StatutTransaction
-  hashTransaction          String            @unique @map("hash_transaction")
-  // Relations manquantes
-  ressource                Ressource?        @relation(fields: [ressourceId], references: [id])
-  universiteOrigineRel     Universite        @relation("UniversiteTransactionOrigine", fields: [universiteOrigine], references: [id])
-  universiteDestinationRel Universite?       @relation("UniversiteTransactionDestination", fields: [universiteDestination], references: [id])
-
-  @@index([typeTransaction, statut])
-  @@index([dateTransaction])
 }
 
 enum TypeTransaction {
@@ -604,51 +553,38 @@ enum NiveauAcces {
 // Modèle Ressource pour bibliothèque
 model Ressource {
   // Champs existants
-  id                       String         @id @default(uuid())
-  titre                    String
-  description              String         @db.Text
-  type                     TypeRessource
-  langue                   String         @default("fr")
-  urlFichier               String         @map("url_fichier")
-  urlFichierLocal          String?        @default("file:///tmp/ressource.pdf") @map("url_fichier_local")
-  format                   String // pdf, docx, etc.
-  dateCreation             DateTime       @default(now()) @map("date_creation")
-  dateModification         DateTime       @updatedAt @map("date_modification")
-  motsCles                 String         @map("mots_cles")
-  auteurId                 String?        @map("auteur_id")
-  universiteId             String         @map("universite_id")
-  image                    String?
-  niveauAcces              NiveauAcces    @default(PUBLIC) @map("niveau_acces")
-  datePublication          DateTime?      @default(now()) @map("date_publication")
-  estValide                Boolean        @default(true) @map("est_valide")
-  estArchive               Boolean        @default(false) @map("est_archive")
-  nomAuteurExterne         String?        @map("nom_auteur_externe")
-  prenomAuteurExterne      String?        @map("prenom_auteur_externe")
-  affiliationAuteurExterne String?        @map("affiliation_auteur_externe")
-  validation               TypeValidation @default(EN_ATTENTE) @map("validation")
+  id                  String         @id @default(uuid())
+  titre               String
+  description         String         @db.Text
+  type                TypeRessource
+  langue              String         @default("fr")
+  urlFichier          String         @map("url_fichier")
+  urlFichierLocal     String?        @default("file:///tmp/ressource.pdf") @map("url_fichier_local")
+  format              String // pdf, docx, etc.
+  dateModification    DateTime       @updatedAt @map("date_modification")
+  motsCles            String         @map("mots_cles")
+  auteurId            String?        @map("auteur_id")
+  universiteId        String         @map("universite_id")
+  image               String?
+  niveauAcces         NiveauAcces    @default(PUBLIC) @map("niveau_acces")
+  datePublication     DateTime?      @default(now()) @map("date_publication")
+  estValide           Boolean        @default(true) @map("est_valide")
+  estArchive          Boolean        @default(false) @map("est_archive")
+  nomAuteurExterne    String?        @map("nom_auteur_externe")
+  prenomAuteurExterne String?        @map("prenom_auteur_externe")
+  validation          TypeValidation @default(EN_ATTENTE) @map("validation")
 
   // Champs pour bibliothèque
   isbn               String?
   doi                String?
-  edition            String?
-  anneePublication   Int?             @map("annee_publication")
-  editeur            String?
-  nbPages            Int?             @map("nb_pages")
-  categorieBiblio    CategorieBiblio? @map("categorie_biblio")
-  estEmpruntable     Boolean          @default(false) @map("est_empruntable")
-  nbExemplaires      Int              @default(0) @map("nb_exemplaires")
-  nbDisponibles      Int              @default(0) @map("nb_disponibles")
-  coteClassification String?          @map("cote_classification") // Classification Dewey ou autre
-
-  // Champs pour emprunts inter-universitaires
-  estEmpruntableExterne   Boolean @default(false) @map("est_empruntable_externe") // Peut être emprunté par d'autres universités
-  dureeMaxEmpruntExterne  Int     @default(14) @map("duree_max_emprunt_externe") // Durée en jours
-  nbMaxExemplairesExterne Int     @default(1) @map("nb_max_exemplaires_externe") // Nombre max d'exemplaires pour emprunt externe
-  necessiteAutorisation   Boolean @default(true) @map("necessite_autorisation") // Requiert validation
+  anneePublication   Int?    @map("annee_publication")
+  nbPages            Int?    @map("nb_pages")
+  nbExemplaires      Int     @default(0) @map("nb_exemplaires")
+  nbDisponibles      Int     @default(0) @map("nb_disponibles")
+  coteClassification String? @map("cote_classification") // Classification Dewey ou autre
 
   // Relations
-  auteur     User?      @relation(fields: [auteurId], references: [id])
-  universite Universite @relation(fields: [universiteId], references: [id])
+  auteur User? @relation(fields: [auteurId], references: [id])
 
   favoris                Favori[]
   commentaires           Commentaire[]
@@ -660,27 +596,23 @@ model Ressource {
   reservations           Reservation[]
   recommandations        Recommandation[]
   donneesRecommandations DonneesRecommandation[]
-  transactions           TransactionBlockchain[]
   notifications          Notification[]
+  categorieId            String
+  categorie              Categorie?              @relation(fields: [categorieId], references: [id])
 
-  @@index([dateCreation, datePublication])
-  @@index([type, categorieBiblio])
+  @@index([datePublication])
   @@index([universiteId])
-  @@index([estEmpruntable, estEmpruntableExterne])
   @@index([estValide, estArchive])
 }
 
-enum CategorieBiblio {
-  LIVRE
-  MANUEL_SCOLAIRE
-  THESE_DOCTORAT
-  MEMOIRE_MASTER
-  MEMOIRE_LICENCE
-  RAPPORT_RECHERCHE
-  PERIODIQUE
-  ARTICLE_JOURNAL
-  RESSOURCE_MULTIMEDIA
-  DOCUMENT_TECHNIQUE
+model Categorie {
+  id           String      @id @default(uuid())
+  libelle      String      @unique
+  description  String?     @db.Text
+  dateCreation DateTime    @default(now()) @map("date_creation")
+  ressources   Ressource[]
+
+  @@index([libelle])
 }
 
 // Statistiques des prêts et réservations

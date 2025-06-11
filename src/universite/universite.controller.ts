@@ -39,10 +39,6 @@ export class UniversiteController {
     return this.universiteService.getStatistics(id);
   }
 
-  @MessagePattern('toggleUniversiteStatus')
-  async toggleStatus(@Payload() id: string) {
-    return this.universiteService.toggleStatus(id);
-  }
 
   @MessagePattern('getTopUniversitesByResources')
   async getTopUniversites(@Payload() limit?: number) {

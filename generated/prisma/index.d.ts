@@ -34,11 +34,6 @@ export type PolitiqueBibliotheque = $Result.DefaultSelection<Prisma.$PolitiqueBi
  */
 export type SanctionUtilisateur = $Result.DefaultSelection<Prisma.$SanctionUtilisateurPayload>
 /**
- * Model StatistiqueInteruniversitaire
- * 
- */
-export type StatistiqueInteruniversitaire = $Result.DefaultSelection<Prisma.$StatistiqueInteruniversitairePayload>
-/**
  * Model Reservation
  * 
  */
@@ -63,6 +58,21 @@ export type Recommandation = $Result.DefaultSelection<Prisma.$RecommandationPayl
  * 
  */
 export type Universite = $Result.DefaultSelection<Prisma.$UniversitePayload>
+/**
+ * Model Ufr
+ * 
+ */
+export type Ufr = $Result.DefaultSelection<Prisma.$UfrPayload>
+/**
+ * Model Departement
+ * 
+ */
+export type Departement = $Result.DefaultSelection<Prisma.$DepartementPayload>
+/**
+ * Model Filiere
+ * 
+ */
+export type Filiere = $Result.DefaultSelection<Prisma.$FilierePayload>
 /**
  * Model User
  * 
@@ -124,15 +134,15 @@ export type Collection = $Result.DefaultSelection<Prisma.$CollectionPayload>
  */
 export type CollectionRessource = $Result.DefaultSelection<Prisma.$CollectionRessourcePayload>
 /**
- * Model TransactionBlockchain
- * 
- */
-export type TransactionBlockchain = $Result.DefaultSelection<Prisma.$TransactionBlockchainPayload>
-/**
  * Model Ressource
  * 
  */
 export type Ressource = $Result.DefaultSelection<Prisma.$RessourcePayload>
+/**
+ * Model Categorie
+ * 
+ */
+export type Categorie = $Result.DefaultSelection<Prisma.$CategoriePayload>
 /**
  * Model StatistiqueBibliotheque
  * 
@@ -237,7 +247,6 @@ export type MotifRecommandation = (typeof MotifRecommandation)[keyof typeof Moti
 export const RoleUser: {
   ETUDIANT: 'ETUDIANT',
   ENSEIGNANT: 'ENSEIGNANT',
-  CHERCHEUR: 'CHERCHEUR',
   BIBLIOTHECAIRE: 'BIBLIOTHECAIRE',
   ADMIN: 'ADMIN'
 };
@@ -280,7 +289,8 @@ export const TypeInteraction: {
   TELECHARGEMENT: 'TELECHARGEMENT',
   FAVORI: 'FAVORI',
   NOTATION: 'NOTATION',
-  TEMPS_LECTURE: 'TEMPS_LECTURE',
+  EMPRUNT: 'EMPRUNT',
+  RESERVATION: 'RESERVATION',
   RECHERCHE_SIMILAIRE: 'RECHERCHE_SIMILAIRE'
 };
 
@@ -330,22 +340,6 @@ export const NiveauAcces: {
 };
 
 export type NiveauAcces = (typeof NiveauAcces)[keyof typeof NiveauAcces]
-
-
-export const CategorieBiblio: {
-  LIVRE: 'LIVRE',
-  MANUEL_SCOLAIRE: 'MANUEL_SCOLAIRE',
-  THESE_DOCTORAT: 'THESE_DOCTORAT',
-  MEMOIRE_MASTER: 'MEMOIRE_MASTER',
-  MEMOIRE_LICENCE: 'MEMOIRE_LICENCE',
-  RAPPORT_RECHERCHE: 'RAPPORT_RECHERCHE',
-  PERIODIQUE: 'PERIODIQUE',
-  ARTICLE_JOURNAL: 'ARTICLE_JOURNAL',
-  RESSOURCE_MULTIMEDIA: 'RESSOURCE_MULTIMEDIA',
-  DOCUMENT_TECHNIQUE: 'DOCUMENT_TECHNIQUE'
-};
-
-export type CategorieBiblio = (typeof CategorieBiblio)[keyof typeof CategorieBiblio]
 
 
 export const TypeNotification: {
@@ -430,10 +424,6 @@ export const TypeRessource: typeof $Enums.TypeRessource
 export type NiveauAcces = $Enums.NiveauAcces
 
 export const NiveauAcces: typeof $Enums.NiveauAcces
-
-export type CategorieBiblio = $Enums.CategorieBiblio
-
-export const CategorieBiblio: typeof $Enums.CategorieBiblio
 
 export type TypeNotification = $Enums.TypeNotification
 
@@ -605,16 +595,6 @@ export class PrismaClient<
   get sanctionUtilisateur(): Prisma.SanctionUtilisateurDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.statistiqueInteruniversitaire`: Exposes CRUD operations for the **StatistiqueInteruniversitaire** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more StatistiqueInteruniversitaires
-    * const statistiqueInteruniversitaires = await prisma.statistiqueInteruniversitaire.findMany()
-    * ```
-    */
-  get statistiqueInteruniversitaire(): Prisma.StatistiqueInteruniversitaireDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.reservation`: Exposes CRUD operations for the **Reservation** model.
     * Example usage:
     * ```ts
@@ -663,6 +643,36 @@ export class PrismaClient<
     * ```
     */
   get universite(): Prisma.UniversiteDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.ufr`: Exposes CRUD operations for the **Ufr** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Ufrs
+    * const ufrs = await prisma.ufr.findMany()
+    * ```
+    */
+  get ufr(): Prisma.UfrDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.departement`: Exposes CRUD operations for the **Departement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Departements
+    * const departements = await prisma.departement.findMany()
+    * ```
+    */
+  get departement(): Prisma.DepartementDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.filiere`: Exposes CRUD operations for the **Filiere** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Filieres
+    * const filieres = await prisma.filiere.findMany()
+    * ```
+    */
+  get filiere(): Prisma.FiliereDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -785,16 +795,6 @@ export class PrismaClient<
   get collectionRessource(): Prisma.CollectionRessourceDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.transactionBlockchain`: Exposes CRUD operations for the **TransactionBlockchain** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TransactionBlockchains
-    * const transactionBlockchains = await prisma.transactionBlockchain.findMany()
-    * ```
-    */
-  get transactionBlockchain(): Prisma.TransactionBlockchainDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.ressource`: Exposes CRUD operations for the **Ressource** model.
     * Example usage:
     * ```ts
@@ -803,6 +803,16 @@ export class PrismaClient<
     * ```
     */
   get ressource(): Prisma.RessourceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.categorie`: Exposes CRUD operations for the **Categorie** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Categories
+    * const categories = await prisma.categorie.findMany()
+    * ```
+    */
+  get categorie(): Prisma.CategorieDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.statistiqueBibliotheque`: Exposes CRUD operations for the **StatistiqueBibliotheque** model.
@@ -1277,12 +1287,14 @@ export namespace Prisma {
     ReglePret: 'ReglePret',
     PolitiqueBibliotheque: 'PolitiqueBibliotheque',
     SanctionUtilisateur: 'SanctionUtilisateur',
-    StatistiqueInteruniversitaire: 'StatistiqueInteruniversitaire',
     Reservation: 'Reservation',
     ExemplairePhysique: 'ExemplairePhysique',
     Emprunt: 'Emprunt',
     Recommandation: 'Recommandation',
     Universite: 'Universite',
+    Ufr: 'Ufr',
+    Departement: 'Departement',
+    Filiere: 'Filiere',
     User: 'User',
     Etudiant: 'Etudiant',
     Enseignant: 'Enseignant',
@@ -1295,8 +1307,8 @@ export namespace Prisma {
     DonneesRecommandation: 'DonneesRecommandation',
     Collection: 'Collection',
     CollectionRessource: 'CollectionRessource',
-    TransactionBlockchain: 'TransactionBlockchain',
     Ressource: 'Ressource',
+    Categorie: 'Categorie',
     StatistiqueBibliotheque: 'StatistiqueBibliotheque',
     Notification: 'Notification',
     JournalAudit: 'JournalAudit'
@@ -1318,7 +1330,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "conventionInteruniversitaire" | "reglePret" | "politiqueBibliotheque" | "sanctionUtilisateur" | "statistiqueInteruniversitaire" | "reservation" | "exemplairePhysique" | "emprunt" | "recommandation" | "universite" | "user" | "etudiant" | "enseignant" | "bibliothecaire" | "administrateur" | "favori" | "commentaire" | "notation" | "historiqueAcces" | "donneesRecommandation" | "collection" | "collectionRessource" | "transactionBlockchain" | "ressource" | "statistiqueBibliotheque" | "notification" | "journalAudit"
+      modelProps: "conventionInteruniversitaire" | "reglePret" | "politiqueBibliotheque" | "sanctionUtilisateur" | "reservation" | "exemplairePhysique" | "emprunt" | "recommandation" | "universite" | "ufr" | "departement" | "filiere" | "user" | "etudiant" | "enseignant" | "bibliothecaire" | "administrateur" | "favori" | "commentaire" | "notation" | "historiqueAcces" | "donneesRecommandation" | "collection" | "collectionRessource" | "ressource" | "categorie" | "statistiqueBibliotheque" | "notification" | "journalAudit"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1583,72 +1595,6 @@ export namespace Prisma {
           count: {
             args: Prisma.SanctionUtilisateurCountArgs<ExtArgs>
             result: $Utils.Optional<SanctionUtilisateurCountAggregateOutputType> | number
-          }
-        }
-      }
-      StatistiqueInteruniversitaire: {
-        payload: Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>
-        fields: Prisma.StatistiqueInteruniversitaireFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.StatistiqueInteruniversitaireFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StatistiqueInteruniversitairePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.StatistiqueInteruniversitaireFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StatistiqueInteruniversitairePayload>
-          }
-          findFirst: {
-            args: Prisma.StatistiqueInteruniversitaireFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StatistiqueInteruniversitairePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.StatistiqueInteruniversitaireFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StatistiqueInteruniversitairePayload>
-          }
-          findMany: {
-            args: Prisma.StatistiqueInteruniversitaireFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StatistiqueInteruniversitairePayload>[]
-          }
-          create: {
-            args: Prisma.StatistiqueInteruniversitaireCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StatistiqueInteruniversitairePayload>
-          }
-          createMany: {
-            args: Prisma.StatistiqueInteruniversitaireCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.StatistiqueInteruniversitaireDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StatistiqueInteruniversitairePayload>
-          }
-          update: {
-            args: Prisma.StatistiqueInteruniversitaireUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StatistiqueInteruniversitairePayload>
-          }
-          deleteMany: {
-            args: Prisma.StatistiqueInteruniversitaireDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.StatistiqueInteruniversitaireUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.StatistiqueInteruniversitaireUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StatistiqueInteruniversitairePayload>
-          }
-          aggregate: {
-            args: Prisma.StatistiqueInteruniversitaireAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateStatistiqueInteruniversitaire>
-          }
-          groupBy: {
-            args: Prisma.StatistiqueInteruniversitaireGroupByArgs<ExtArgs>
-            result: $Utils.Optional<StatistiqueInteruniversitaireGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.StatistiqueInteruniversitaireCountArgs<ExtArgs>
-            result: $Utils.Optional<StatistiqueInteruniversitaireCountAggregateOutputType> | number
           }
         }
       }
@@ -1979,6 +1925,204 @@ export namespace Prisma {
           count: {
             args: Prisma.UniversiteCountArgs<ExtArgs>
             result: $Utils.Optional<UniversiteCountAggregateOutputType> | number
+          }
+        }
+      }
+      Ufr: {
+        payload: Prisma.$UfrPayload<ExtArgs>
+        fields: Prisma.UfrFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UfrFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UfrPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UfrFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UfrPayload>
+          }
+          findFirst: {
+            args: Prisma.UfrFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UfrPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UfrFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UfrPayload>
+          }
+          findMany: {
+            args: Prisma.UfrFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UfrPayload>[]
+          }
+          create: {
+            args: Prisma.UfrCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UfrPayload>
+          }
+          createMany: {
+            args: Prisma.UfrCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.UfrDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UfrPayload>
+          }
+          update: {
+            args: Prisma.UfrUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UfrPayload>
+          }
+          deleteMany: {
+            args: Prisma.UfrDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UfrUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UfrUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UfrPayload>
+          }
+          aggregate: {
+            args: Prisma.UfrAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUfr>
+          }
+          groupBy: {
+            args: Prisma.UfrGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UfrGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UfrCountArgs<ExtArgs>
+            result: $Utils.Optional<UfrCountAggregateOutputType> | number
+          }
+        }
+      }
+      Departement: {
+        payload: Prisma.$DepartementPayload<ExtArgs>
+        fields: Prisma.DepartementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DepartementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DepartementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>
+          }
+          findFirst: {
+            args: Prisma.DepartementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DepartementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>
+          }
+          findMany: {
+            args: Prisma.DepartementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>[]
+          }
+          create: {
+            args: Prisma.DepartementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>
+          }
+          createMany: {
+            args: Prisma.DepartementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.DepartementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>
+          }
+          update: {
+            args: Prisma.DepartementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>
+          }
+          deleteMany: {
+            args: Prisma.DepartementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DepartementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.DepartementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>
+          }
+          aggregate: {
+            args: Prisma.DepartementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDepartement>
+          }
+          groupBy: {
+            args: Prisma.DepartementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DepartementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DepartementCountArgs<ExtArgs>
+            result: $Utils.Optional<DepartementCountAggregateOutputType> | number
+          }
+        }
+      }
+      Filiere: {
+        payload: Prisma.$FilierePayload<ExtArgs>
+        fields: Prisma.FiliereFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FiliereFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilierePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FiliereFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilierePayload>
+          }
+          findFirst: {
+            args: Prisma.FiliereFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilierePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FiliereFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilierePayload>
+          }
+          findMany: {
+            args: Prisma.FiliereFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilierePayload>[]
+          }
+          create: {
+            args: Prisma.FiliereCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilierePayload>
+          }
+          createMany: {
+            args: Prisma.FiliereCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.FiliereDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilierePayload>
+          }
+          update: {
+            args: Prisma.FiliereUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilierePayload>
+          }
+          deleteMany: {
+            args: Prisma.FiliereDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FiliereUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.FiliereUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FilierePayload>
+          }
+          aggregate: {
+            args: Prisma.FiliereAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFiliere>
+          }
+          groupBy: {
+            args: Prisma.FiliereGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FiliereGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FiliereCountArgs<ExtArgs>
+            result: $Utils.Optional<FiliereCountAggregateOutputType> | number
           }
         }
       }
@@ -2774,72 +2918,6 @@ export namespace Prisma {
           }
         }
       }
-      TransactionBlockchain: {
-        payload: Prisma.$TransactionBlockchainPayload<ExtArgs>
-        fields: Prisma.TransactionBlockchainFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TransactionBlockchainFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TransactionBlockchainPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TransactionBlockchainFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TransactionBlockchainPayload>
-          }
-          findFirst: {
-            args: Prisma.TransactionBlockchainFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TransactionBlockchainPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TransactionBlockchainFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TransactionBlockchainPayload>
-          }
-          findMany: {
-            args: Prisma.TransactionBlockchainFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TransactionBlockchainPayload>[]
-          }
-          create: {
-            args: Prisma.TransactionBlockchainCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TransactionBlockchainPayload>
-          }
-          createMany: {
-            args: Prisma.TransactionBlockchainCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.TransactionBlockchainDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TransactionBlockchainPayload>
-          }
-          update: {
-            args: Prisma.TransactionBlockchainUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TransactionBlockchainPayload>
-          }
-          deleteMany: {
-            args: Prisma.TransactionBlockchainDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TransactionBlockchainUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.TransactionBlockchainUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TransactionBlockchainPayload>
-          }
-          aggregate: {
-            args: Prisma.TransactionBlockchainAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTransactionBlockchain>
-          }
-          groupBy: {
-            args: Prisma.TransactionBlockchainGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TransactionBlockchainGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TransactionBlockchainCountArgs<ExtArgs>
-            result: $Utils.Optional<TransactionBlockchainCountAggregateOutputType> | number
-          }
-        }
-      }
       Ressource: {
         payload: Prisma.$RessourcePayload<ExtArgs>
         fields: Prisma.RessourceFieldRefs
@@ -2903,6 +2981,72 @@ export namespace Prisma {
           count: {
             args: Prisma.RessourceCountArgs<ExtArgs>
             result: $Utils.Optional<RessourceCountAggregateOutputType> | number
+          }
+        }
+      }
+      Categorie: {
+        payload: Prisma.$CategoriePayload<ExtArgs>
+        fields: Prisma.CategorieFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CategorieFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoriePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CategorieFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoriePayload>
+          }
+          findFirst: {
+            args: Prisma.CategorieFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoriePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CategorieFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoriePayload>
+          }
+          findMany: {
+            args: Prisma.CategorieFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoriePayload>[]
+          }
+          create: {
+            args: Prisma.CategorieCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoriePayload>
+          }
+          createMany: {
+            args: Prisma.CategorieCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.CategorieDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoriePayload>
+          }
+          update: {
+            args: Prisma.CategorieUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoriePayload>
+          }
+          deleteMany: {
+            args: Prisma.CategorieDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CategorieUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.CategorieUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoriePayload>
+          }
+          aggregate: {
+            args: Prisma.CategorieAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCategorie>
+          }
+          groupBy: {
+            args: Prisma.CategorieGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CategorieGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CategorieCountArgs<ExtArgs>
+            result: $Utils.Optional<CategorieCountAggregateOutputType> | number
           }
         }
       }
@@ -3192,12 +3336,14 @@ export namespace Prisma {
     reglePret?: ReglePretOmit
     politiqueBibliotheque?: PolitiqueBibliothequeOmit
     sanctionUtilisateur?: SanctionUtilisateurOmit
-    statistiqueInteruniversitaire?: StatistiqueInteruniversitaireOmit
     reservation?: ReservationOmit
     exemplairePhysique?: ExemplairePhysiqueOmit
     emprunt?: EmpruntOmit
     recommandation?: RecommandationOmit
     universite?: UniversiteOmit
+    ufr?: UfrOmit
+    departement?: DepartementOmit
+    filiere?: FiliereOmit
     user?: UserOmit
     etudiant?: EtudiantOmit
     enseignant?: EnseignantOmit
@@ -3210,8 +3356,8 @@ export namespace Prisma {
     donneesRecommandation?: DonneesRecommandationOmit
     collection?: CollectionOmit
     collectionRessource?: CollectionRessourceOmit
-    transactionBlockchain?: TransactionBlockchainOmit
     ressource?: RessourceOmit
+    categorie?: CategorieOmit
     statistiqueBibliotheque?: StatistiqueBibliothequeOmit
     notification?: NotificationOmit
     journalAudit?: JournalAuditOmit
@@ -3371,35 +3517,17 @@ export namespace Prisma {
    */
 
   export type UniversiteCountOutputType = {
-    users: number
-    ressources: number
-    statistiquesSource: number
-    statistiquesDestination: number
-    reservations: number
-    emprunts: number
-    recommandationsSource: number
     statistiquesBibliotheque: number
-    transactionsOrigine: number
-    transactionsDestination: number
-    HistoriqueAcces: number
     reglePrets: number
     politiqueBibliotheques: number
+    ufrs: number
   }
 
   export type UniversiteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users?: boolean | UniversiteCountOutputTypeCountUsersArgs
-    ressources?: boolean | UniversiteCountOutputTypeCountRessourcesArgs
-    statistiquesSource?: boolean | UniversiteCountOutputTypeCountStatistiquesSourceArgs
-    statistiquesDestination?: boolean | UniversiteCountOutputTypeCountStatistiquesDestinationArgs
-    reservations?: boolean | UniversiteCountOutputTypeCountReservationsArgs
-    emprunts?: boolean | UniversiteCountOutputTypeCountEmpruntsArgs
-    recommandationsSource?: boolean | UniversiteCountOutputTypeCountRecommandationsSourceArgs
     statistiquesBibliotheque?: boolean | UniversiteCountOutputTypeCountStatistiquesBibliothequeArgs
-    transactionsOrigine?: boolean | UniversiteCountOutputTypeCountTransactionsOrigineArgs
-    transactionsDestination?: boolean | UniversiteCountOutputTypeCountTransactionsDestinationArgs
-    HistoriqueAcces?: boolean | UniversiteCountOutputTypeCountHistoriqueAccesArgs
     reglePrets?: boolean | UniversiteCountOutputTypeCountReglePretsArgs
     politiqueBibliotheques?: boolean | UniversiteCountOutputTypeCountPolitiqueBibliothequesArgs
+    ufrs?: boolean | UniversiteCountOutputTypeCountUfrsArgs
   }
 
   // Custom InputTypes
@@ -3416,78 +3544,8 @@ export namespace Prisma {
   /**
    * UniversiteCountOutputType without action
    */
-  export type UniversiteCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
-  }
-
-  /**
-   * UniversiteCountOutputType without action
-   */
-  export type UniversiteCountOutputTypeCountRessourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RessourceWhereInput
-  }
-
-  /**
-   * UniversiteCountOutputType without action
-   */
-  export type UniversiteCountOutputTypeCountStatistiquesSourceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StatistiqueInteruniversitaireWhereInput
-  }
-
-  /**
-   * UniversiteCountOutputType without action
-   */
-  export type UniversiteCountOutputTypeCountStatistiquesDestinationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StatistiqueInteruniversitaireWhereInput
-  }
-
-  /**
-   * UniversiteCountOutputType without action
-   */
-  export type UniversiteCountOutputTypeCountReservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReservationWhereInput
-  }
-
-  /**
-   * UniversiteCountOutputType without action
-   */
-  export type UniversiteCountOutputTypeCountEmpruntsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EmpruntWhereInput
-  }
-
-  /**
-   * UniversiteCountOutputType without action
-   */
-  export type UniversiteCountOutputTypeCountRecommandationsSourceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RecommandationWhereInput
-  }
-
-  /**
-   * UniversiteCountOutputType without action
-   */
   export type UniversiteCountOutputTypeCountStatistiquesBibliothequeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: StatistiqueBibliothequeWhereInput
-  }
-
-  /**
-   * UniversiteCountOutputType without action
-   */
-  export type UniversiteCountOutputTypeCountTransactionsOrigineArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TransactionBlockchainWhereInput
-  }
-
-  /**
-   * UniversiteCountOutputType without action
-   */
-  export type UniversiteCountOutputTypeCountTransactionsDestinationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TransactionBlockchainWhereInput
-  }
-
-  /**
-   * UniversiteCountOutputType without action
-   */
-  export type UniversiteCountOutputTypeCountHistoriqueAccesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: HistoriqueAccesWhereInput
   }
 
   /**
@@ -3502,6 +3560,75 @@ export namespace Prisma {
    */
   export type UniversiteCountOutputTypeCountPolitiqueBibliothequesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PolitiqueBibliothequeWhereInput
+  }
+
+  /**
+   * UniversiteCountOutputType without action
+   */
+  export type UniversiteCountOutputTypeCountUfrsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UfrWhereInput
+  }
+
+
+  /**
+   * Count Type UfrCountOutputType
+   */
+
+  export type UfrCountOutputType = {
+    departements: number
+  }
+
+  export type UfrCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    departements?: boolean | UfrCountOutputTypeCountDepartementsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UfrCountOutputType without action
+   */
+  export type UfrCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UfrCountOutputType
+     */
+    select?: UfrCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UfrCountOutputType without action
+   */
+  export type UfrCountOutputTypeCountDepartementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartementWhereInput
+  }
+
+
+  /**
+   * Count Type DepartementCountOutputType
+   */
+
+  export type DepartementCountOutputType = {
+    filieres: number
+  }
+
+  export type DepartementCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    filieres?: boolean | DepartementCountOutputTypeCountFilieresArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DepartementCountOutputType without action
+   */
+  export type DepartementCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartementCountOutputType
+     */
+    select?: DepartementCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DepartementCountOutputType without action
+   */
+  export type DepartementCountOutputTypeCountFilieresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FiliereWhereInput
   }
 
 
@@ -3756,7 +3883,6 @@ export namespace Prisma {
     reservations: number
     recommandations: number
     donneesRecommandations: number
-    transactions: number
     notifications: number
   }
 
@@ -3770,7 +3896,6 @@ export namespace Prisma {
     reservations?: boolean | RessourceCountOutputTypeCountReservationsArgs
     recommandations?: boolean | RessourceCountOutputTypeCountRecommandationsArgs
     donneesRecommandations?: boolean | RessourceCountOutputTypeCountDonneesRecommandationsArgs
-    transactions?: boolean | RessourceCountOutputTypeCountTransactionsArgs
     notifications?: boolean | RessourceCountOutputTypeCountNotificationsArgs
   }
 
@@ -3851,15 +3976,39 @@ export namespace Prisma {
   /**
    * RessourceCountOutputType without action
    */
-  export type RessourceCountOutputTypeCountTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TransactionBlockchainWhereInput
+  export type RessourceCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
+  }
+
+
+  /**
+   * Count Type CategorieCountOutputType
+   */
+
+  export type CategorieCountOutputType = {
+    ressources: number
+  }
+
+  export type CategorieCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ressources?: boolean | CategorieCountOutputTypeCountRessourcesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CategorieCountOutputType without action
+   */
+  export type CategorieCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CategorieCountOutputType
+     */
+    select?: CategorieCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * RessourceCountOutputType without action
+   * CategorieCountOutputType without action
    */
-  export type RessourceCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NotificationWhereInput
+  export type CategorieCountOutputTypeCountRessourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RessourceWhereInput
   }
 
 
@@ -4814,8 +4963,6 @@ export namespace Prisma {
     dureeEmpruntJours: number | null
     nbRenouvellements: number | null
     penaliteRetardJours: boolean | null
-    exigeCarteValide: boolean | null
-    dateMiseAJour: Date | null
     estActif: boolean | null
   }
 
@@ -4827,8 +4974,6 @@ export namespace Prisma {
     dureeEmpruntJours: number | null
     nbRenouvellements: number | null
     penaliteRetardJours: boolean | null
-    exigeCarteValide: boolean | null
-    dateMiseAJour: Date | null
     estActif: boolean | null
   }
 
@@ -4840,8 +4985,6 @@ export namespace Prisma {
     dureeEmpruntJours: number
     nbRenouvellements: number
     penaliteRetardJours: number
-    exigeCarteValide: number
-    dateMiseAJour: number
     estActif: number
     _all: number
   }
@@ -4867,8 +5010,6 @@ export namespace Prisma {
     dureeEmpruntJours?: true
     nbRenouvellements?: true
     penaliteRetardJours?: true
-    exigeCarteValide?: true
-    dateMiseAJour?: true
     estActif?: true
   }
 
@@ -4880,8 +5021,6 @@ export namespace Prisma {
     dureeEmpruntJours?: true
     nbRenouvellements?: true
     penaliteRetardJours?: true
-    exigeCarteValide?: true
-    dateMiseAJour?: true
     estActif?: true
   }
 
@@ -4893,8 +5032,6 @@ export namespace Prisma {
     dureeEmpruntJours?: true
     nbRenouvellements?: true
     penaliteRetardJours?: true
-    exigeCarteValide?: true
-    dateMiseAJour?: true
     estActif?: true
     _all?: true
   }
@@ -4993,8 +5130,6 @@ export namespace Prisma {
     dureeEmpruntJours: number
     nbRenouvellements: number
     penaliteRetardJours: boolean
-    exigeCarteValide: boolean
-    dateMiseAJour: Date
     estActif: boolean
     _count: ReglePretCountAggregateOutputType | null
     _avg: ReglePretAvgAggregateOutputType | null
@@ -5025,8 +5160,6 @@ export namespace Prisma {
     dureeEmpruntJours?: boolean
     nbRenouvellements?: boolean
     penaliteRetardJours?: boolean
-    exigeCarteValide?: boolean
-    dateMiseAJour?: boolean
     estActif?: boolean
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reglePret"]>
@@ -5041,12 +5174,10 @@ export namespace Prisma {
     dureeEmpruntJours?: boolean
     nbRenouvellements?: boolean
     penaliteRetardJours?: boolean
-    exigeCarteValide?: boolean
-    dateMiseAJour?: boolean
     estActif?: boolean
   }
 
-  export type ReglePretOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteId" | "roleUtilisateur" | "nombreMaxOuvrages" | "dureeEmpruntJours" | "nbRenouvellements" | "penaliteRetardJours" | "exigeCarteValide" | "dateMiseAJour" | "estActif", ExtArgs["result"]["reglePret"]>
+  export type ReglePretOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteId" | "roleUtilisateur" | "nombreMaxOuvrages" | "dureeEmpruntJours" | "nbRenouvellements" | "penaliteRetardJours" | "estActif", ExtArgs["result"]["reglePret"]>
   export type ReglePretInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
   }
@@ -5064,8 +5195,6 @@ export namespace Prisma {
       dureeEmpruntJours: number
       nbRenouvellements: number
       penaliteRetardJours: boolean
-      exigeCarteValide: boolean
-      dateMiseAJour: Date
       estActif: boolean
     }, ExtArgs["result"]["reglePret"]>
     composites: {}
@@ -5444,8 +5573,6 @@ export namespace Prisma {
     readonly dureeEmpruntJours: FieldRef<"ReglePret", 'Int'>
     readonly nbRenouvellements: FieldRef<"ReglePret", 'Int'>
     readonly penaliteRetardJours: FieldRef<"ReglePret", 'Boolean'>
-    readonly exigeCarteValide: FieldRef<"ReglePret", 'Boolean'>
-    readonly dateMiseAJour: FieldRef<"ReglePret", 'DateTime'>
     readonly estActif: FieldRef<"ReglePret", 'Boolean'>
   }
     
@@ -7745,1029 +7872,6 @@ export namespace Prisma {
 
 
   /**
-   * Model StatistiqueInteruniversitaire
-   */
-
-  export type AggregateStatistiqueInteruniversitaire = {
-    _count: StatistiqueInteruniversitaireCountAggregateOutputType | null
-    _avg: StatistiqueInteruniversitaireAvgAggregateOutputType | null
-    _sum: StatistiqueInteruniversitaireSumAggregateOutputType | null
-    _min: StatistiqueInteruniversitaireMinAggregateOutputType | null
-    _max: StatistiqueInteruniversitaireMaxAggregateOutputType | null
-  }
-
-  export type StatistiqueInteruniversitaireAvgAggregateOutputType = {
-    mois: number | null
-    annee: number | null
-    nbEmprunts: number | null
-    nbReservations: number | null
-  }
-
-  export type StatistiqueInteruniversitaireSumAggregateOutputType = {
-    mois: number | null
-    annee: number | null
-    nbEmprunts: number | null
-    nbReservations: number | null
-  }
-
-  export type StatistiqueInteruniversitaireMinAggregateOutputType = {
-    id: string | null
-    universiteSource: string | null
-    universiteDestination: string | null
-    mois: number | null
-    annee: number | null
-    nbEmprunts: number | null
-    nbReservations: number | null
-    ressourcesPlusConsultees: string | null
-    domainesPlusConsultes: string | null
-  }
-
-  export type StatistiqueInteruniversitaireMaxAggregateOutputType = {
-    id: string | null
-    universiteSource: string | null
-    universiteDestination: string | null
-    mois: number | null
-    annee: number | null
-    nbEmprunts: number | null
-    nbReservations: number | null
-    ressourcesPlusConsultees: string | null
-    domainesPlusConsultes: string | null
-  }
-
-  export type StatistiqueInteruniversitaireCountAggregateOutputType = {
-    id: number
-    universiteSource: number
-    universiteDestination: number
-    mois: number
-    annee: number
-    nbEmprunts: number
-    nbReservations: number
-    ressourcesPlusConsultees: number
-    domainesPlusConsultes: number
-    _all: number
-  }
-
-
-  export type StatistiqueInteruniversitaireAvgAggregateInputType = {
-    mois?: true
-    annee?: true
-    nbEmprunts?: true
-    nbReservations?: true
-  }
-
-  export type StatistiqueInteruniversitaireSumAggregateInputType = {
-    mois?: true
-    annee?: true
-    nbEmprunts?: true
-    nbReservations?: true
-  }
-
-  export type StatistiqueInteruniversitaireMinAggregateInputType = {
-    id?: true
-    universiteSource?: true
-    universiteDestination?: true
-    mois?: true
-    annee?: true
-    nbEmprunts?: true
-    nbReservations?: true
-    ressourcesPlusConsultees?: true
-    domainesPlusConsultes?: true
-  }
-
-  export type StatistiqueInteruniversitaireMaxAggregateInputType = {
-    id?: true
-    universiteSource?: true
-    universiteDestination?: true
-    mois?: true
-    annee?: true
-    nbEmprunts?: true
-    nbReservations?: true
-    ressourcesPlusConsultees?: true
-    domainesPlusConsultes?: true
-  }
-
-  export type StatistiqueInteruniversitaireCountAggregateInputType = {
-    id?: true
-    universiteSource?: true
-    universiteDestination?: true
-    mois?: true
-    annee?: true
-    nbEmprunts?: true
-    nbReservations?: true
-    ressourcesPlusConsultees?: true
-    domainesPlusConsultes?: true
-    _all?: true
-  }
-
-  export type StatistiqueInteruniversitaireAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which StatistiqueInteruniversitaire to aggregate.
-     */
-    where?: StatistiqueInteruniversitaireWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of StatistiqueInteruniversitaires to fetch.
-     */
-    orderBy?: StatistiqueInteruniversitaireOrderByWithRelationInput | StatistiqueInteruniversitaireOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: StatistiqueInteruniversitaireWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` StatistiqueInteruniversitaires from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` StatistiqueInteruniversitaires.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned StatistiqueInteruniversitaires
-    **/
-    _count?: true | StatistiqueInteruniversitaireCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: StatistiqueInteruniversitaireAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: StatistiqueInteruniversitaireSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: StatistiqueInteruniversitaireMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: StatistiqueInteruniversitaireMaxAggregateInputType
-  }
-
-  export type GetStatistiqueInteruniversitaireAggregateType<T extends StatistiqueInteruniversitaireAggregateArgs> = {
-        [P in keyof T & keyof AggregateStatistiqueInteruniversitaire]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateStatistiqueInteruniversitaire[P]>
-      : GetScalarType<T[P], AggregateStatistiqueInteruniversitaire[P]>
-  }
-
-
-
-
-  export type StatistiqueInteruniversitaireGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StatistiqueInteruniversitaireWhereInput
-    orderBy?: StatistiqueInteruniversitaireOrderByWithAggregationInput | StatistiqueInteruniversitaireOrderByWithAggregationInput[]
-    by: StatistiqueInteruniversitaireScalarFieldEnum[] | StatistiqueInteruniversitaireScalarFieldEnum
-    having?: StatistiqueInteruniversitaireScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: StatistiqueInteruniversitaireCountAggregateInputType | true
-    _avg?: StatistiqueInteruniversitaireAvgAggregateInputType
-    _sum?: StatistiqueInteruniversitaireSumAggregateInputType
-    _min?: StatistiqueInteruniversitaireMinAggregateInputType
-    _max?: StatistiqueInteruniversitaireMaxAggregateInputType
-  }
-
-  export type StatistiqueInteruniversitaireGroupByOutputType = {
-    id: string
-    universiteSource: string
-    universiteDestination: string
-    mois: number
-    annee: number
-    nbEmprunts: number
-    nbReservations: number
-    ressourcesPlusConsultees: string | null
-    domainesPlusConsultes: string | null
-    _count: StatistiqueInteruniversitaireCountAggregateOutputType | null
-    _avg: StatistiqueInteruniversitaireAvgAggregateOutputType | null
-    _sum: StatistiqueInteruniversitaireSumAggregateOutputType | null
-    _min: StatistiqueInteruniversitaireMinAggregateOutputType | null
-    _max: StatistiqueInteruniversitaireMaxAggregateOutputType | null
-  }
-
-  type GetStatistiqueInteruniversitaireGroupByPayload<T extends StatistiqueInteruniversitaireGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<StatistiqueInteruniversitaireGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof StatistiqueInteruniversitaireGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], StatistiqueInteruniversitaireGroupByOutputType[P]>
-            : GetScalarType<T[P], StatistiqueInteruniversitaireGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type StatistiqueInteruniversitaireSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    universiteSource?: boolean
-    universiteDestination?: boolean
-    mois?: boolean
-    annee?: boolean
-    nbEmprunts?: boolean
-    nbReservations?: boolean
-    ressourcesPlusConsultees?: boolean
-    domainesPlusConsultes?: boolean
-    universiteSourceRel?: boolean | UniversiteDefaultArgs<ExtArgs>
-    universiteDestinationRel?: boolean | UniversiteDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["statistiqueInteruniversitaire"]>
-
-
-
-  export type StatistiqueInteruniversitaireSelectScalar = {
-    id?: boolean
-    universiteSource?: boolean
-    universiteDestination?: boolean
-    mois?: boolean
-    annee?: boolean
-    nbEmprunts?: boolean
-    nbReservations?: boolean
-    ressourcesPlusConsultees?: boolean
-    domainesPlusConsultes?: boolean
-  }
-
-  export type StatistiqueInteruniversitaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteSource" | "universiteDestination" | "mois" | "annee" | "nbEmprunts" | "nbReservations" | "ressourcesPlusConsultees" | "domainesPlusConsultes", ExtArgs["result"]["statistiqueInteruniversitaire"]>
-  export type StatistiqueInteruniversitaireInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    universiteSourceRel?: boolean | UniversiteDefaultArgs<ExtArgs>
-    universiteDestinationRel?: boolean | UniversiteDefaultArgs<ExtArgs>
-  }
-
-  export type $StatistiqueInteruniversitairePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "StatistiqueInteruniversitaire"
-    objects: {
-      universiteSourceRel: Prisma.$UniversitePayload<ExtArgs>
-      universiteDestinationRel: Prisma.$UniversitePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      universiteSource: string
-      universiteDestination: string
-      mois: number
-      annee: number
-      nbEmprunts: number
-      nbReservations: number
-      ressourcesPlusConsultees: string | null
-      domainesPlusConsultes: string | null
-    }, ExtArgs["result"]["statistiqueInteruniversitaire"]>
-    composites: {}
-  }
-
-  type StatistiqueInteruniversitaireGetPayload<S extends boolean | null | undefined | StatistiqueInteruniversitaireDefaultArgs> = $Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload, S>
-
-  type StatistiqueInteruniversitaireCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<StatistiqueInteruniversitaireFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: StatistiqueInteruniversitaireCountAggregateInputType | true
-    }
-
-  export interface StatistiqueInteruniversitaireDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StatistiqueInteruniversitaire'], meta: { name: 'StatistiqueInteruniversitaire' } }
-    /**
-     * Find zero or one StatistiqueInteruniversitaire that matches the filter.
-     * @param {StatistiqueInteruniversitaireFindUniqueArgs} args - Arguments to find a StatistiqueInteruniversitaire
-     * @example
-     * // Get one StatistiqueInteruniversitaire
-     * const statistiqueInteruniversitaire = await prisma.statistiqueInteruniversitaire.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends StatistiqueInteruniversitaireFindUniqueArgs>(args: SelectSubset<T, StatistiqueInteruniversitaireFindUniqueArgs<ExtArgs>>): Prisma__StatistiqueInteruniversitaireClient<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one StatistiqueInteruniversitaire that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {StatistiqueInteruniversitaireFindUniqueOrThrowArgs} args - Arguments to find a StatistiqueInteruniversitaire
-     * @example
-     * // Get one StatistiqueInteruniversitaire
-     * const statistiqueInteruniversitaire = await prisma.statistiqueInteruniversitaire.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends StatistiqueInteruniversitaireFindUniqueOrThrowArgs>(args: SelectSubset<T, StatistiqueInteruniversitaireFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StatistiqueInteruniversitaireClient<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first StatistiqueInteruniversitaire that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StatistiqueInteruniversitaireFindFirstArgs} args - Arguments to find a StatistiqueInteruniversitaire
-     * @example
-     * // Get one StatistiqueInteruniversitaire
-     * const statistiqueInteruniversitaire = await prisma.statistiqueInteruniversitaire.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends StatistiqueInteruniversitaireFindFirstArgs>(args?: SelectSubset<T, StatistiqueInteruniversitaireFindFirstArgs<ExtArgs>>): Prisma__StatistiqueInteruniversitaireClient<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first StatistiqueInteruniversitaire that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StatistiqueInteruniversitaireFindFirstOrThrowArgs} args - Arguments to find a StatistiqueInteruniversitaire
-     * @example
-     * // Get one StatistiqueInteruniversitaire
-     * const statistiqueInteruniversitaire = await prisma.statistiqueInteruniversitaire.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends StatistiqueInteruniversitaireFindFirstOrThrowArgs>(args?: SelectSubset<T, StatistiqueInteruniversitaireFindFirstOrThrowArgs<ExtArgs>>): Prisma__StatistiqueInteruniversitaireClient<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more StatistiqueInteruniversitaires that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StatistiqueInteruniversitaireFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all StatistiqueInteruniversitaires
-     * const statistiqueInteruniversitaires = await prisma.statistiqueInteruniversitaire.findMany()
-     * 
-     * // Get first 10 StatistiqueInteruniversitaires
-     * const statistiqueInteruniversitaires = await prisma.statistiqueInteruniversitaire.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const statistiqueInteruniversitaireWithIdOnly = await prisma.statistiqueInteruniversitaire.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends StatistiqueInteruniversitaireFindManyArgs>(args?: SelectSubset<T, StatistiqueInteruniversitaireFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a StatistiqueInteruniversitaire.
-     * @param {StatistiqueInteruniversitaireCreateArgs} args - Arguments to create a StatistiqueInteruniversitaire.
-     * @example
-     * // Create one StatistiqueInteruniversitaire
-     * const StatistiqueInteruniversitaire = await prisma.statistiqueInteruniversitaire.create({
-     *   data: {
-     *     // ... data to create a StatistiqueInteruniversitaire
-     *   }
-     * })
-     * 
-     */
-    create<T extends StatistiqueInteruniversitaireCreateArgs>(args: SelectSubset<T, StatistiqueInteruniversitaireCreateArgs<ExtArgs>>): Prisma__StatistiqueInteruniversitaireClient<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many StatistiqueInteruniversitaires.
-     * @param {StatistiqueInteruniversitaireCreateManyArgs} args - Arguments to create many StatistiqueInteruniversitaires.
-     * @example
-     * // Create many StatistiqueInteruniversitaires
-     * const statistiqueInteruniversitaire = await prisma.statistiqueInteruniversitaire.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends StatistiqueInteruniversitaireCreateManyArgs>(args?: SelectSubset<T, StatistiqueInteruniversitaireCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a StatistiqueInteruniversitaire.
-     * @param {StatistiqueInteruniversitaireDeleteArgs} args - Arguments to delete one StatistiqueInteruniversitaire.
-     * @example
-     * // Delete one StatistiqueInteruniversitaire
-     * const StatistiqueInteruniversitaire = await prisma.statistiqueInteruniversitaire.delete({
-     *   where: {
-     *     // ... filter to delete one StatistiqueInteruniversitaire
-     *   }
-     * })
-     * 
-     */
-    delete<T extends StatistiqueInteruniversitaireDeleteArgs>(args: SelectSubset<T, StatistiqueInteruniversitaireDeleteArgs<ExtArgs>>): Prisma__StatistiqueInteruniversitaireClient<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one StatistiqueInteruniversitaire.
-     * @param {StatistiqueInteruniversitaireUpdateArgs} args - Arguments to update one StatistiqueInteruniversitaire.
-     * @example
-     * // Update one StatistiqueInteruniversitaire
-     * const statistiqueInteruniversitaire = await prisma.statistiqueInteruniversitaire.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends StatistiqueInteruniversitaireUpdateArgs>(args: SelectSubset<T, StatistiqueInteruniversitaireUpdateArgs<ExtArgs>>): Prisma__StatistiqueInteruniversitaireClient<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more StatistiqueInteruniversitaires.
-     * @param {StatistiqueInteruniversitaireDeleteManyArgs} args - Arguments to filter StatistiqueInteruniversitaires to delete.
-     * @example
-     * // Delete a few StatistiqueInteruniversitaires
-     * const { count } = await prisma.statistiqueInteruniversitaire.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends StatistiqueInteruniversitaireDeleteManyArgs>(args?: SelectSubset<T, StatistiqueInteruniversitaireDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more StatistiqueInteruniversitaires.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StatistiqueInteruniversitaireUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many StatistiqueInteruniversitaires
-     * const statistiqueInteruniversitaire = await prisma.statistiqueInteruniversitaire.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends StatistiqueInteruniversitaireUpdateManyArgs>(args: SelectSubset<T, StatistiqueInteruniversitaireUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one StatistiqueInteruniversitaire.
-     * @param {StatistiqueInteruniversitaireUpsertArgs} args - Arguments to update or create a StatistiqueInteruniversitaire.
-     * @example
-     * // Update or create a StatistiqueInteruniversitaire
-     * const statistiqueInteruniversitaire = await prisma.statistiqueInteruniversitaire.upsert({
-     *   create: {
-     *     // ... data to create a StatistiqueInteruniversitaire
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the StatistiqueInteruniversitaire we want to update
-     *   }
-     * })
-     */
-    upsert<T extends StatistiqueInteruniversitaireUpsertArgs>(args: SelectSubset<T, StatistiqueInteruniversitaireUpsertArgs<ExtArgs>>): Prisma__StatistiqueInteruniversitaireClient<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of StatistiqueInteruniversitaires.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StatistiqueInteruniversitaireCountArgs} args - Arguments to filter StatistiqueInteruniversitaires to count.
-     * @example
-     * // Count the number of StatistiqueInteruniversitaires
-     * const count = await prisma.statistiqueInteruniversitaire.count({
-     *   where: {
-     *     // ... the filter for the StatistiqueInteruniversitaires we want to count
-     *   }
-     * })
-    **/
-    count<T extends StatistiqueInteruniversitaireCountArgs>(
-      args?: Subset<T, StatistiqueInteruniversitaireCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], StatistiqueInteruniversitaireCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a StatistiqueInteruniversitaire.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StatistiqueInteruniversitaireAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends StatistiqueInteruniversitaireAggregateArgs>(args: Subset<T, StatistiqueInteruniversitaireAggregateArgs>): Prisma.PrismaPromise<GetStatistiqueInteruniversitaireAggregateType<T>>
-
-    /**
-     * Group by StatistiqueInteruniversitaire.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {StatistiqueInteruniversitaireGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends StatistiqueInteruniversitaireGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: StatistiqueInteruniversitaireGroupByArgs['orderBy'] }
-        : { orderBy?: StatistiqueInteruniversitaireGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, StatistiqueInteruniversitaireGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStatistiqueInteruniversitaireGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the StatistiqueInteruniversitaire model
-   */
-  readonly fields: StatistiqueInteruniversitaireFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for StatistiqueInteruniversitaire.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__StatistiqueInteruniversitaireClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    universiteSourceRel<T extends UniversiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UniversiteDefaultArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    universiteDestinationRel<T extends UniversiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UniversiteDefaultArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the StatistiqueInteruniversitaire model
-   */
-  interface StatistiqueInteruniversitaireFieldRefs {
-    readonly id: FieldRef<"StatistiqueInteruniversitaire", 'String'>
-    readonly universiteSource: FieldRef<"StatistiqueInteruniversitaire", 'String'>
-    readonly universiteDestination: FieldRef<"StatistiqueInteruniversitaire", 'String'>
-    readonly mois: FieldRef<"StatistiqueInteruniversitaire", 'Int'>
-    readonly annee: FieldRef<"StatistiqueInteruniversitaire", 'Int'>
-    readonly nbEmprunts: FieldRef<"StatistiqueInteruniversitaire", 'Int'>
-    readonly nbReservations: FieldRef<"StatistiqueInteruniversitaire", 'Int'>
-    readonly ressourcesPlusConsultees: FieldRef<"StatistiqueInteruniversitaire", 'String'>
-    readonly domainesPlusConsultes: FieldRef<"StatistiqueInteruniversitaire", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * StatistiqueInteruniversitaire findUnique
-   */
-  export type StatistiqueInteruniversitaireFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StatistiqueInteruniversitaire
-     */
-    select?: StatistiqueInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StatistiqueInteruniversitaire
-     */
-    omit?: StatistiqueInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StatistiqueInteruniversitaireInclude<ExtArgs> | null
-    /**
-     * Filter, which StatistiqueInteruniversitaire to fetch.
-     */
-    where: StatistiqueInteruniversitaireWhereUniqueInput
-  }
-
-  /**
-   * StatistiqueInteruniversitaire findUniqueOrThrow
-   */
-  export type StatistiqueInteruniversitaireFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StatistiqueInteruniversitaire
-     */
-    select?: StatistiqueInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StatistiqueInteruniversitaire
-     */
-    omit?: StatistiqueInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StatistiqueInteruniversitaireInclude<ExtArgs> | null
-    /**
-     * Filter, which StatistiqueInteruniversitaire to fetch.
-     */
-    where: StatistiqueInteruniversitaireWhereUniqueInput
-  }
-
-  /**
-   * StatistiqueInteruniversitaire findFirst
-   */
-  export type StatistiqueInteruniversitaireFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StatistiqueInteruniversitaire
-     */
-    select?: StatistiqueInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StatistiqueInteruniversitaire
-     */
-    omit?: StatistiqueInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StatistiqueInteruniversitaireInclude<ExtArgs> | null
-    /**
-     * Filter, which StatistiqueInteruniversitaire to fetch.
-     */
-    where?: StatistiqueInteruniversitaireWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of StatistiqueInteruniversitaires to fetch.
-     */
-    orderBy?: StatistiqueInteruniversitaireOrderByWithRelationInput | StatistiqueInteruniversitaireOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for StatistiqueInteruniversitaires.
-     */
-    cursor?: StatistiqueInteruniversitaireWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` StatistiqueInteruniversitaires from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` StatistiqueInteruniversitaires.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of StatistiqueInteruniversitaires.
-     */
-    distinct?: StatistiqueInteruniversitaireScalarFieldEnum | StatistiqueInteruniversitaireScalarFieldEnum[]
-  }
-
-  /**
-   * StatistiqueInteruniversitaire findFirstOrThrow
-   */
-  export type StatistiqueInteruniversitaireFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StatistiqueInteruniversitaire
-     */
-    select?: StatistiqueInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StatistiqueInteruniversitaire
-     */
-    omit?: StatistiqueInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StatistiqueInteruniversitaireInclude<ExtArgs> | null
-    /**
-     * Filter, which StatistiqueInteruniversitaire to fetch.
-     */
-    where?: StatistiqueInteruniversitaireWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of StatistiqueInteruniversitaires to fetch.
-     */
-    orderBy?: StatistiqueInteruniversitaireOrderByWithRelationInput | StatistiqueInteruniversitaireOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for StatistiqueInteruniversitaires.
-     */
-    cursor?: StatistiqueInteruniversitaireWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` StatistiqueInteruniversitaires from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` StatistiqueInteruniversitaires.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of StatistiqueInteruniversitaires.
-     */
-    distinct?: StatistiqueInteruniversitaireScalarFieldEnum | StatistiqueInteruniversitaireScalarFieldEnum[]
-  }
-
-  /**
-   * StatistiqueInteruniversitaire findMany
-   */
-  export type StatistiqueInteruniversitaireFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StatistiqueInteruniversitaire
-     */
-    select?: StatistiqueInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StatistiqueInteruniversitaire
-     */
-    omit?: StatistiqueInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StatistiqueInteruniversitaireInclude<ExtArgs> | null
-    /**
-     * Filter, which StatistiqueInteruniversitaires to fetch.
-     */
-    where?: StatistiqueInteruniversitaireWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of StatistiqueInteruniversitaires to fetch.
-     */
-    orderBy?: StatistiqueInteruniversitaireOrderByWithRelationInput | StatistiqueInteruniversitaireOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing StatistiqueInteruniversitaires.
-     */
-    cursor?: StatistiqueInteruniversitaireWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` StatistiqueInteruniversitaires from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` StatistiqueInteruniversitaires.
-     */
-    skip?: number
-    distinct?: StatistiqueInteruniversitaireScalarFieldEnum | StatistiqueInteruniversitaireScalarFieldEnum[]
-  }
-
-  /**
-   * StatistiqueInteruniversitaire create
-   */
-  export type StatistiqueInteruniversitaireCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StatistiqueInteruniversitaire
-     */
-    select?: StatistiqueInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StatistiqueInteruniversitaire
-     */
-    omit?: StatistiqueInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StatistiqueInteruniversitaireInclude<ExtArgs> | null
-    /**
-     * The data needed to create a StatistiqueInteruniversitaire.
-     */
-    data: XOR<StatistiqueInteruniversitaireCreateInput, StatistiqueInteruniversitaireUncheckedCreateInput>
-  }
-
-  /**
-   * StatistiqueInteruniversitaire createMany
-   */
-  export type StatistiqueInteruniversitaireCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many StatistiqueInteruniversitaires.
-     */
-    data: StatistiqueInteruniversitaireCreateManyInput | StatistiqueInteruniversitaireCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * StatistiqueInteruniversitaire update
-   */
-  export type StatistiqueInteruniversitaireUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StatistiqueInteruniversitaire
-     */
-    select?: StatistiqueInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StatistiqueInteruniversitaire
-     */
-    omit?: StatistiqueInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StatistiqueInteruniversitaireInclude<ExtArgs> | null
-    /**
-     * The data needed to update a StatistiqueInteruniversitaire.
-     */
-    data: XOR<StatistiqueInteruniversitaireUpdateInput, StatistiqueInteruniversitaireUncheckedUpdateInput>
-    /**
-     * Choose, which StatistiqueInteruniversitaire to update.
-     */
-    where: StatistiqueInteruniversitaireWhereUniqueInput
-  }
-
-  /**
-   * StatistiqueInteruniversitaire updateMany
-   */
-  export type StatistiqueInteruniversitaireUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update StatistiqueInteruniversitaires.
-     */
-    data: XOR<StatistiqueInteruniversitaireUpdateManyMutationInput, StatistiqueInteruniversitaireUncheckedUpdateManyInput>
-    /**
-     * Filter which StatistiqueInteruniversitaires to update
-     */
-    where?: StatistiqueInteruniversitaireWhereInput
-    /**
-     * Limit how many StatistiqueInteruniversitaires to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * StatistiqueInteruniversitaire upsert
-   */
-  export type StatistiqueInteruniversitaireUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StatistiqueInteruniversitaire
-     */
-    select?: StatistiqueInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StatistiqueInteruniversitaire
-     */
-    omit?: StatistiqueInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StatistiqueInteruniversitaireInclude<ExtArgs> | null
-    /**
-     * The filter to search for the StatistiqueInteruniversitaire to update in case it exists.
-     */
-    where: StatistiqueInteruniversitaireWhereUniqueInput
-    /**
-     * In case the StatistiqueInteruniversitaire found by the `where` argument doesn't exist, create a new StatistiqueInteruniversitaire with this data.
-     */
-    create: XOR<StatistiqueInteruniversitaireCreateInput, StatistiqueInteruniversitaireUncheckedCreateInput>
-    /**
-     * In case the StatistiqueInteruniversitaire was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<StatistiqueInteruniversitaireUpdateInput, StatistiqueInteruniversitaireUncheckedUpdateInput>
-  }
-
-  /**
-   * StatistiqueInteruniversitaire delete
-   */
-  export type StatistiqueInteruniversitaireDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StatistiqueInteruniversitaire
-     */
-    select?: StatistiqueInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StatistiqueInteruniversitaire
-     */
-    omit?: StatistiqueInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StatistiqueInteruniversitaireInclude<ExtArgs> | null
-    /**
-     * Filter which StatistiqueInteruniversitaire to delete.
-     */
-    where: StatistiqueInteruniversitaireWhereUniqueInput
-  }
-
-  /**
-   * StatistiqueInteruniversitaire deleteMany
-   */
-  export type StatistiqueInteruniversitaireDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which StatistiqueInteruniversitaires to delete
-     */
-    where?: StatistiqueInteruniversitaireWhereInput
-    /**
-     * Limit how many StatistiqueInteruniversitaires to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * StatistiqueInteruniversitaire without action
-   */
-  export type StatistiqueInteruniversitaireDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StatistiqueInteruniversitaire
-     */
-    select?: StatistiqueInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StatistiqueInteruniversitaire
-     */
-    omit?: StatistiqueInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StatistiqueInteruniversitaireInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Reservation
    */
 
@@ -8973,7 +8077,6 @@ export namespace Prisma {
     validePar?: boolean
     user?: boolean | Reservation$userArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
-    universiteEmprunteurRel?: boolean | UniversiteDefaultArgs<ExtArgs>
     valideur?: boolean | Reservation$valideurArgs<ExtArgs>
   }, ExtArgs["result"]["reservation"]>
 
@@ -8996,7 +8099,6 @@ export namespace Prisma {
   export type ReservationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Reservation$userArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
-    universiteEmprunteurRel?: boolean | UniversiteDefaultArgs<ExtArgs>
     valideur?: boolean | Reservation$valideurArgs<ExtArgs>
   }
 
@@ -9005,7 +8107,6 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null
       ressource: Prisma.$RessourcePayload<ExtArgs>
-      universiteEmprunteurRel: Prisma.$UniversitePayload<ExtArgs>
       valideur: Prisma.$BibliothecairePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -9361,7 +8462,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends Reservation$userArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     ressource<T extends RessourceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RessourceDefaultArgs<ExtArgs>>): Prisma__RessourceClient<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    universiteEmprunteurRel<T extends UniversiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UniversiteDefaultArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     valideur<T extends Reservation$valideurArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$valideurArgs<ExtArgs>>): Prisma__BibliothecaireClient<$Result.GetResult<Prisma.$BibliothecairePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -9807,8 +8907,20 @@ export namespace Prisma {
 
   export type AggregateExemplairePhysique = {
     _count: ExemplairePhysiqueCountAggregateOutputType | null
+    _avg: ExemplairePhysiqueAvgAggregateOutputType | null
+    _sum: ExemplairePhysiqueSumAggregateOutputType | null
     _min: ExemplairePhysiqueMinAggregateOutputType | null
     _max: ExemplairePhysiqueMaxAggregateOutputType | null
+  }
+
+  export type ExemplairePhysiqueAvgAggregateOutputType = {
+    dureeMaxEmpruntExterne: number | null
+    nbMaxExemplairesExterne: number | null
+  }
+
+  export type ExemplairePhysiqueSumAggregateOutputType = {
+    dureeMaxEmpruntExterne: number | null
+    nbMaxExemplairesExterne: number | null
   }
 
   export type ExemplairePhysiqueMinAggregateOutputType = {
@@ -9819,9 +8931,9 @@ export namespace Prisma {
     disponible: boolean | null
     localisation: string | null
     dateAcquisition: Date | null
-    estReservableExterne: boolean | null
-    estEmpruntableExterne: boolean | null
     qrCode: string | null
+    dureeMaxEmpruntExterne: number | null
+    nbMaxExemplairesExterne: number | null
   }
 
   export type ExemplairePhysiqueMaxAggregateOutputType = {
@@ -9832,9 +8944,9 @@ export namespace Prisma {
     disponible: boolean | null
     localisation: string | null
     dateAcquisition: Date | null
-    estReservableExterne: boolean | null
-    estEmpruntableExterne: boolean | null
     qrCode: string | null
+    dureeMaxEmpruntExterne: number | null
+    nbMaxExemplairesExterne: number | null
   }
 
   export type ExemplairePhysiqueCountAggregateOutputType = {
@@ -9845,12 +8957,22 @@ export namespace Prisma {
     disponible: number
     localisation: number
     dateAcquisition: number
-    estReservableExterne: number
-    estEmpruntableExterne: number
     qrCode: number
+    dureeMaxEmpruntExterne: number
+    nbMaxExemplairesExterne: number
     _all: number
   }
 
+
+  export type ExemplairePhysiqueAvgAggregateInputType = {
+    dureeMaxEmpruntExterne?: true
+    nbMaxExemplairesExterne?: true
+  }
+
+  export type ExemplairePhysiqueSumAggregateInputType = {
+    dureeMaxEmpruntExterne?: true
+    nbMaxExemplairesExterne?: true
+  }
 
   export type ExemplairePhysiqueMinAggregateInputType = {
     id?: true
@@ -9860,9 +8982,9 @@ export namespace Prisma {
     disponible?: true
     localisation?: true
     dateAcquisition?: true
-    estReservableExterne?: true
-    estEmpruntableExterne?: true
     qrCode?: true
+    dureeMaxEmpruntExterne?: true
+    nbMaxExemplairesExterne?: true
   }
 
   export type ExemplairePhysiqueMaxAggregateInputType = {
@@ -9873,9 +8995,9 @@ export namespace Prisma {
     disponible?: true
     localisation?: true
     dateAcquisition?: true
-    estReservableExterne?: true
-    estEmpruntableExterne?: true
     qrCode?: true
+    dureeMaxEmpruntExterne?: true
+    nbMaxExemplairesExterne?: true
   }
 
   export type ExemplairePhysiqueCountAggregateInputType = {
@@ -9886,9 +9008,9 @@ export namespace Prisma {
     disponible?: true
     localisation?: true
     dateAcquisition?: true
-    estReservableExterne?: true
-    estEmpruntableExterne?: true
     qrCode?: true
+    dureeMaxEmpruntExterne?: true
+    nbMaxExemplairesExterne?: true
     _all?: true
   }
 
@@ -9930,6 +9052,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ExemplairePhysiqueAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ExemplairePhysiqueSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ExemplairePhysiqueMinAggregateInputType
@@ -9960,6 +9094,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ExemplairePhysiqueCountAggregateInputType | true
+    _avg?: ExemplairePhysiqueAvgAggregateInputType
+    _sum?: ExemplairePhysiqueSumAggregateInputType
     _min?: ExemplairePhysiqueMinAggregateInputType
     _max?: ExemplairePhysiqueMaxAggregateInputType
   }
@@ -9972,10 +9108,12 @@ export namespace Prisma {
     disponible: boolean
     localisation: string
     dateAcquisition: Date | null
-    estReservableExterne: boolean | null
-    estEmpruntableExterne: boolean | null
     qrCode: string | null
+    dureeMaxEmpruntExterne: number
+    nbMaxExemplairesExterne: number
     _count: ExemplairePhysiqueCountAggregateOutputType | null
+    _avg: ExemplairePhysiqueAvgAggregateOutputType | null
+    _sum: ExemplairePhysiqueSumAggregateOutputType | null
     _min: ExemplairePhysiqueMinAggregateOutputType | null
     _max: ExemplairePhysiqueMaxAggregateOutputType | null
   }
@@ -10002,9 +9140,9 @@ export namespace Prisma {
     disponible?: boolean
     localisation?: boolean
     dateAcquisition?: boolean
-    estReservableExterne?: boolean
-    estEmpruntableExterne?: boolean
     qrCode?: boolean
+    dureeMaxEmpruntExterne?: boolean
+    nbMaxExemplairesExterne?: boolean
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
     emprunts?: boolean | ExemplairePhysique$empruntsArgs<ExtArgs>
     _count?: boolean | ExemplairePhysiqueCountOutputTypeDefaultArgs<ExtArgs>
@@ -10020,12 +9158,12 @@ export namespace Prisma {
     disponible?: boolean
     localisation?: boolean
     dateAcquisition?: boolean
-    estReservableExterne?: boolean
-    estEmpruntableExterne?: boolean
     qrCode?: boolean
+    dureeMaxEmpruntExterne?: boolean
+    nbMaxExemplairesExterne?: boolean
   }
 
-  export type ExemplairePhysiqueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ressourceId" | "cote" | "etat" | "disponible" | "localisation" | "dateAcquisition" | "estReservableExterne" | "estEmpruntableExterne" | "qrCode", ExtArgs["result"]["exemplairePhysique"]>
+  export type ExemplairePhysiqueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ressourceId" | "cote" | "etat" | "disponible" | "localisation" | "dateAcquisition" | "qrCode" | "dureeMaxEmpruntExterne" | "nbMaxExemplairesExterne", ExtArgs["result"]["exemplairePhysique"]>
   export type ExemplairePhysiqueInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
     emprunts?: boolean | ExemplairePhysique$empruntsArgs<ExtArgs>
@@ -10046,9 +9184,9 @@ export namespace Prisma {
       disponible: boolean
       localisation: string
       dateAcquisition: Date | null
-      estReservableExterne: boolean | null
-      estEmpruntableExterne: boolean | null
       qrCode: string | null
+      dureeMaxEmpruntExterne: number
+      nbMaxExemplairesExterne: number
     }, ExtArgs["result"]["exemplairePhysique"]>
     composites: {}
   }
@@ -10427,9 +9565,9 @@ export namespace Prisma {
     readonly disponible: FieldRef<"ExemplairePhysique", 'Boolean'>
     readonly localisation: FieldRef<"ExemplairePhysique", 'String'>
     readonly dateAcquisition: FieldRef<"ExemplairePhysique", 'DateTime'>
-    readonly estReservableExterne: FieldRef<"ExemplairePhysique", 'Boolean'>
-    readonly estEmpruntableExterne: FieldRef<"ExemplairePhysique", 'Boolean'>
     readonly qrCode: FieldRef<"ExemplairePhysique", 'String'>
+    readonly dureeMaxEmpruntExterne: FieldRef<"ExemplairePhysique", 'Int'>
+    readonly nbMaxExemplairesExterne: FieldRef<"ExemplairePhysique", 'Int'>
   }
     
 
@@ -10835,7 +9973,6 @@ export namespace Prisma {
     statut: $Enums.StatutEmprunt | null
     commentaire: string | null
     universiteEmprunteur: string | null
-    estEmpruntExterne: boolean | null
     motifEmprunt: string | null
     validePar: string | null
   }
@@ -10850,7 +9987,6 @@ export namespace Prisma {
     statut: $Enums.StatutEmprunt | null
     commentaire: string | null
     universiteEmprunteur: string | null
-    estEmpruntExterne: boolean | null
     motifEmprunt: string | null
     validePar: string | null
   }
@@ -10865,7 +10001,6 @@ export namespace Prisma {
     statut: number
     commentaire: number
     universiteEmprunteur: number
-    estEmpruntExterne: number
     motifEmprunt: number
     validePar: number
     _all: number
@@ -10882,7 +10017,6 @@ export namespace Prisma {
     statut?: true
     commentaire?: true
     universiteEmprunteur?: true
-    estEmpruntExterne?: true
     motifEmprunt?: true
     validePar?: true
   }
@@ -10897,7 +10031,6 @@ export namespace Prisma {
     statut?: true
     commentaire?: true
     universiteEmprunteur?: true
-    estEmpruntExterne?: true
     motifEmprunt?: true
     validePar?: true
   }
@@ -10912,7 +10045,6 @@ export namespace Prisma {
     statut?: true
     commentaire?: true
     universiteEmprunteur?: true
-    estEmpruntExterne?: true
     motifEmprunt?: true
     validePar?: true
     _all?: true
@@ -11000,7 +10132,6 @@ export namespace Prisma {
     statut: $Enums.StatutEmprunt
     commentaire: string | null
     universiteEmprunteur: string
-    estEmpruntExterne: boolean
     motifEmprunt: string | null
     validePar: string | null
     _count: EmpruntCountAggregateOutputType | null
@@ -11032,12 +10163,10 @@ export namespace Prisma {
     statut?: boolean
     commentaire?: boolean
     universiteEmprunteur?: boolean
-    estEmpruntExterne?: boolean
     motifEmprunt?: boolean
     validePar?: boolean
     exemplaire?: boolean | ExemplairePhysiqueDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    universiteEmprunteurRel?: boolean | UniversiteDefaultArgs<ExtArgs>
+    user?: boolean | Emprunt$userArgs<ExtArgs>
     SanctionUtilisateur?: boolean | Emprunt$SanctionUtilisateurArgs<ExtArgs>
     _count?: boolean | EmpruntCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emprunt"]>
@@ -11054,16 +10183,14 @@ export namespace Prisma {
     statut?: boolean
     commentaire?: boolean
     universiteEmprunteur?: boolean
-    estEmpruntExterne?: boolean
     motifEmprunt?: boolean
     validePar?: boolean
   }
 
-  export type EmpruntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "exemplaireId" | "userId" | "dateEmprunt" | "dateRetourPrevue" | "dateRetourEffective" | "statut" | "commentaire" | "universiteEmprunteur" | "estEmpruntExterne" | "motifEmprunt" | "validePar", ExtArgs["result"]["emprunt"]>
+  export type EmpruntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "exemplaireId" | "userId" | "dateEmprunt" | "dateRetourPrevue" | "dateRetourEffective" | "statut" | "commentaire" | "universiteEmprunteur" | "motifEmprunt" | "validePar", ExtArgs["result"]["emprunt"]>
   export type EmpruntInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     exemplaire?: boolean | ExemplairePhysiqueDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    universiteEmprunteurRel?: boolean | UniversiteDefaultArgs<ExtArgs>
+    user?: boolean | Emprunt$userArgs<ExtArgs>
     SanctionUtilisateur?: boolean | Emprunt$SanctionUtilisateurArgs<ExtArgs>
     _count?: boolean | EmpruntCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -11072,8 +10199,7 @@ export namespace Prisma {
     name: "Emprunt"
     objects: {
       exemplaire: Prisma.$ExemplairePhysiquePayload<ExtArgs>
-      user: Prisma.$UserPayload<ExtArgs>
-      universiteEmprunteurRel: Prisma.$UniversitePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs> | null
       SanctionUtilisateur: Prisma.$SanctionUtilisateurPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -11086,7 +10212,6 @@ export namespace Prisma {
       statut: $Enums.StatutEmprunt
       commentaire: string | null
       universiteEmprunteur: string
-      estEmpruntExterne: boolean
       motifEmprunt: string | null
       validePar: string | null
     }, ExtArgs["result"]["emprunt"]>
@@ -11430,8 +10555,7 @@ export namespace Prisma {
   export interface Prisma__EmpruntClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     exemplaire<T extends ExemplairePhysiqueDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExemplairePhysiqueDefaultArgs<ExtArgs>>): Prisma__ExemplairePhysiqueClient<$Result.GetResult<Prisma.$ExemplairePhysiquePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    universiteEmprunteurRel<T extends UniversiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UniversiteDefaultArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends Emprunt$userArgs<ExtArgs> = {}>(args?: Subset<T, Emprunt$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     SanctionUtilisateur<T extends Emprunt$SanctionUtilisateurArgs<ExtArgs> = {}>(args?: Subset<T, Emprunt$SanctionUtilisateurArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -11471,7 +10595,6 @@ export namespace Prisma {
     readonly statut: FieldRef<"Emprunt", 'StatutEmprunt'>
     readonly commentaire: FieldRef<"Emprunt", 'String'>
     readonly universiteEmprunteur: FieldRef<"Emprunt", 'String'>
-    readonly estEmpruntExterne: FieldRef<"Emprunt", 'Boolean'>
     readonly motifEmprunt: FieldRef<"Emprunt", 'String'>
     readonly validePar: FieldRef<"Emprunt", 'String'>
   }
@@ -11817,6 +10940,25 @@ export namespace Prisma {
   }
 
   /**
+   * Emprunt.user
+   */
+  export type Emprunt$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Emprunt.SanctionUtilisateur
    */
   export type Emprunt$SanctionUtilisateurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12091,7 +11233,6 @@ export namespace Prisma {
     universiteSource?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
-    universiteSourceRel?: boolean | Recommandation$universiteSourceRelArgs<ExtArgs>
   }, ExtArgs["result"]["recommandation"]>
 
 
@@ -12112,7 +11253,6 @@ export namespace Prisma {
   export type RecommandationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
-    universiteSourceRel?: boolean | Recommandation$universiteSourceRelArgs<ExtArgs>
   }
 
   export type $RecommandationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12120,7 +11260,6 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       ressource: Prisma.$RessourcePayload<ExtArgs>
-      universiteSourceRel: Prisma.$UniversitePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12474,7 +11613,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     ressource<T extends RessourceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RessourceDefaultArgs<ExtArgs>>): Prisma__RessourceClient<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    universiteSourceRel<T extends Recommandation$universiteSourceRelArgs<ExtArgs> = {}>(args?: Subset<T, Recommandation$universiteSourceRelArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12856,25 +11994,6 @@ export namespace Prisma {
   }
 
   /**
-   * Recommandation.universiteSourceRel
-   */
-  export type Recommandation$universiteSourceRelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Universite
-     */
-    select?: UniversiteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Universite
-     */
-    omit?: UniversiteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UniversiteInclude<ExtArgs> | null
-    where?: UniversiteWhereInput
-  }
-
-  /**
    * Recommandation without action
    */
   export type RecommandationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12908,11 +12027,7 @@ export namespace Prisma {
     nom: string | null
     adresse: string | null
     ville: string | null
-    pays: string | null
     siteWeb: string | null
-    dateCreation: Date | null
-    adresseBlockchain: string | null
-    estActive: boolean | null
   }
 
   export type UniversiteMaxAggregateOutputType = {
@@ -12920,11 +12035,7 @@ export namespace Prisma {
     nom: string | null
     adresse: string | null
     ville: string | null
-    pays: string | null
     siteWeb: string | null
-    dateCreation: Date | null
-    adresseBlockchain: string | null
-    estActive: boolean | null
   }
 
   export type UniversiteCountAggregateOutputType = {
@@ -12932,11 +12043,7 @@ export namespace Prisma {
     nom: number
     adresse: number
     ville: number
-    pays: number
     siteWeb: number
-    dateCreation: number
-    adresseBlockchain: number
-    estActive: number
     _all: number
   }
 
@@ -12946,11 +12053,7 @@ export namespace Prisma {
     nom?: true
     adresse?: true
     ville?: true
-    pays?: true
     siteWeb?: true
-    dateCreation?: true
-    adresseBlockchain?: true
-    estActive?: true
   }
 
   export type UniversiteMaxAggregateInputType = {
@@ -12958,11 +12061,7 @@ export namespace Prisma {
     nom?: true
     adresse?: true
     ville?: true
-    pays?: true
     siteWeb?: true
-    dateCreation?: true
-    adresseBlockchain?: true
-    estActive?: true
   }
 
   export type UniversiteCountAggregateInputType = {
@@ -12970,11 +12069,7 @@ export namespace Prisma {
     nom?: true
     adresse?: true
     ville?: true
-    pays?: true
     siteWeb?: true
-    dateCreation?: true
-    adresseBlockchain?: true
-    estActive?: true
     _all?: true
   }
 
@@ -13055,11 +12150,7 @@ export namespace Prisma {
     nom: string
     adresse: string | null
     ville: string
-    pays: string
     siteWeb: string | null
-    dateCreation: Date
-    adresseBlockchain: string | null
-    estActive: boolean
     _count: UniversiteCountAggregateOutputType | null
     _min: UniversiteMinAggregateOutputType | null
     _max: UniversiteMaxAggregateOutputType | null
@@ -13084,24 +12175,11 @@ export namespace Prisma {
     nom?: boolean
     adresse?: boolean
     ville?: boolean
-    pays?: boolean
     siteWeb?: boolean
-    dateCreation?: boolean
-    adresseBlockchain?: boolean
-    estActive?: boolean
-    users?: boolean | Universite$usersArgs<ExtArgs>
-    ressources?: boolean | Universite$ressourcesArgs<ExtArgs>
-    statistiquesSource?: boolean | Universite$statistiquesSourceArgs<ExtArgs>
-    statistiquesDestination?: boolean | Universite$statistiquesDestinationArgs<ExtArgs>
-    reservations?: boolean | Universite$reservationsArgs<ExtArgs>
-    emprunts?: boolean | Universite$empruntsArgs<ExtArgs>
-    recommandationsSource?: boolean | Universite$recommandationsSourceArgs<ExtArgs>
     statistiquesBibliotheque?: boolean | Universite$statistiquesBibliothequeArgs<ExtArgs>
-    transactionsOrigine?: boolean | Universite$transactionsOrigineArgs<ExtArgs>
-    transactionsDestination?: boolean | Universite$transactionsDestinationArgs<ExtArgs>
-    HistoriqueAcces?: boolean | Universite$HistoriqueAccesArgs<ExtArgs>
     reglePrets?: boolean | Universite$reglePretsArgs<ExtArgs>
     politiqueBibliotheques?: boolean | Universite$politiqueBibliothequesArgs<ExtArgs>
+    ufrs?: boolean | Universite$ufrsArgs<ExtArgs>
     _count?: boolean | UniversiteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["universite"]>
 
@@ -13112,58 +12190,32 @@ export namespace Prisma {
     nom?: boolean
     adresse?: boolean
     ville?: boolean
-    pays?: boolean
     siteWeb?: boolean
-    dateCreation?: boolean
-    adresseBlockchain?: boolean
-    estActive?: boolean
   }
 
-  export type UniversiteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "adresse" | "ville" | "pays" | "siteWeb" | "dateCreation" | "adresseBlockchain" | "estActive", ExtArgs["result"]["universite"]>
+  export type UniversiteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "adresse" | "ville" | "siteWeb", ExtArgs["result"]["universite"]>
   export type UniversiteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users?: boolean | Universite$usersArgs<ExtArgs>
-    ressources?: boolean | Universite$ressourcesArgs<ExtArgs>
-    statistiquesSource?: boolean | Universite$statistiquesSourceArgs<ExtArgs>
-    statistiquesDestination?: boolean | Universite$statistiquesDestinationArgs<ExtArgs>
-    reservations?: boolean | Universite$reservationsArgs<ExtArgs>
-    emprunts?: boolean | Universite$empruntsArgs<ExtArgs>
-    recommandationsSource?: boolean | Universite$recommandationsSourceArgs<ExtArgs>
     statistiquesBibliotheque?: boolean | Universite$statistiquesBibliothequeArgs<ExtArgs>
-    transactionsOrigine?: boolean | Universite$transactionsOrigineArgs<ExtArgs>
-    transactionsDestination?: boolean | Universite$transactionsDestinationArgs<ExtArgs>
-    HistoriqueAcces?: boolean | Universite$HistoriqueAccesArgs<ExtArgs>
     reglePrets?: boolean | Universite$reglePretsArgs<ExtArgs>
     politiqueBibliotheques?: boolean | Universite$politiqueBibliothequesArgs<ExtArgs>
+    ufrs?: boolean | Universite$ufrsArgs<ExtArgs>
     _count?: boolean | UniversiteCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $UniversitePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Universite"
     objects: {
-      users: Prisma.$UserPayload<ExtArgs>[]
-      ressources: Prisma.$RessourcePayload<ExtArgs>[]
-      statistiquesSource: Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>[]
-      statistiquesDestination: Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>[]
-      reservations: Prisma.$ReservationPayload<ExtArgs>[]
-      emprunts: Prisma.$EmpruntPayload<ExtArgs>[]
-      recommandationsSource: Prisma.$RecommandationPayload<ExtArgs>[]
       statistiquesBibliotheque: Prisma.$StatistiqueBibliothequePayload<ExtArgs>[]
-      transactionsOrigine: Prisma.$TransactionBlockchainPayload<ExtArgs>[]
-      transactionsDestination: Prisma.$TransactionBlockchainPayload<ExtArgs>[]
-      HistoriqueAcces: Prisma.$HistoriqueAccesPayload<ExtArgs>[]
       reglePrets: Prisma.$ReglePretPayload<ExtArgs>[]
       politiqueBibliotheques: Prisma.$PolitiqueBibliothequePayload<ExtArgs>[]
+      ufrs: Prisma.$UfrPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       nom: string
       adresse: string | null
       ville: string
-      pays: string
       siteWeb: string | null
-      dateCreation: Date
-      adresseBlockchain: string | null
-      estActive: boolean
     }, ExtArgs["result"]["universite"]>
     composites: {}
   }
@@ -13504,19 +12556,10 @@ export namespace Prisma {
    */
   export interface Prisma__UniversiteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    users<T extends Universite$usersArgs<ExtArgs> = {}>(args?: Subset<T, Universite$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    ressources<T extends Universite$ressourcesArgs<ExtArgs> = {}>(args?: Subset<T, Universite$ressourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    statistiquesSource<T extends Universite$statistiquesSourceArgs<ExtArgs> = {}>(args?: Subset<T, Universite$statistiquesSourceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    statistiquesDestination<T extends Universite$statistiquesDestinationArgs<ExtArgs> = {}>(args?: Subset<T, Universite$statistiquesDestinationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StatistiqueInteruniversitairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    reservations<T extends Universite$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, Universite$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    emprunts<T extends Universite$empruntsArgs<ExtArgs> = {}>(args?: Subset<T, Universite$empruntsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmpruntPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    recommandationsSource<T extends Universite$recommandationsSourceArgs<ExtArgs> = {}>(args?: Subset<T, Universite$recommandationsSourceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecommandationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     statistiquesBibliotheque<T extends Universite$statistiquesBibliothequeArgs<ExtArgs> = {}>(args?: Subset<T, Universite$statistiquesBibliothequeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StatistiqueBibliothequePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    transactionsOrigine<T extends Universite$transactionsOrigineArgs<ExtArgs> = {}>(args?: Subset<T, Universite$transactionsOrigineArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionBlockchainPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    transactionsDestination<T extends Universite$transactionsDestinationArgs<ExtArgs> = {}>(args?: Subset<T, Universite$transactionsDestinationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionBlockchainPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    HistoriqueAcces<T extends Universite$HistoriqueAccesArgs<ExtArgs> = {}>(args?: Subset<T, Universite$HistoriqueAccesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoriqueAccesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reglePrets<T extends Universite$reglePretsArgs<ExtArgs> = {}>(args?: Subset<T, Universite$reglePretsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReglePretPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     politiqueBibliotheques<T extends Universite$politiqueBibliothequesArgs<ExtArgs> = {}>(args?: Subset<T, Universite$politiqueBibliothequesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolitiqueBibliothequePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ufrs<T extends Universite$ufrsArgs<ExtArgs> = {}>(args?: Subset<T, Universite$ufrsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UfrPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13550,11 +12593,7 @@ export namespace Prisma {
     readonly nom: FieldRef<"Universite", 'String'>
     readonly adresse: FieldRef<"Universite", 'String'>
     readonly ville: FieldRef<"Universite", 'String'>
-    readonly pays: FieldRef<"Universite", 'String'>
     readonly siteWeb: FieldRef<"Universite", 'String'>
-    readonly dateCreation: FieldRef<"Universite", 'DateTime'>
-    readonly adresseBlockchain: FieldRef<"Universite", 'String'>
-    readonly estActive: FieldRef<"Universite", 'Boolean'>
   }
     
 
@@ -13898,174 +12937,6 @@ export namespace Prisma {
   }
 
   /**
-   * Universite.users
-   */
-  export type Universite$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    cursor?: UserWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
-
-  /**
-   * Universite.ressources
-   */
-  export type Universite$ressourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ressource
-     */
-    select?: RessourceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ressource
-     */
-    omit?: RessourceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RessourceInclude<ExtArgs> | null
-    where?: RessourceWhereInput
-    orderBy?: RessourceOrderByWithRelationInput | RessourceOrderByWithRelationInput[]
-    cursor?: RessourceWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: RessourceScalarFieldEnum | RessourceScalarFieldEnum[]
-  }
-
-  /**
-   * Universite.statistiquesSource
-   */
-  export type Universite$statistiquesSourceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StatistiqueInteruniversitaire
-     */
-    select?: StatistiqueInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StatistiqueInteruniversitaire
-     */
-    omit?: StatistiqueInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StatistiqueInteruniversitaireInclude<ExtArgs> | null
-    where?: StatistiqueInteruniversitaireWhereInput
-    orderBy?: StatistiqueInteruniversitaireOrderByWithRelationInput | StatistiqueInteruniversitaireOrderByWithRelationInput[]
-    cursor?: StatistiqueInteruniversitaireWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: StatistiqueInteruniversitaireScalarFieldEnum | StatistiqueInteruniversitaireScalarFieldEnum[]
-  }
-
-  /**
-   * Universite.statistiquesDestination
-   */
-  export type Universite$statistiquesDestinationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StatistiqueInteruniversitaire
-     */
-    select?: StatistiqueInteruniversitaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StatistiqueInteruniversitaire
-     */
-    omit?: StatistiqueInteruniversitaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StatistiqueInteruniversitaireInclude<ExtArgs> | null
-    where?: StatistiqueInteruniversitaireWhereInput
-    orderBy?: StatistiqueInteruniversitaireOrderByWithRelationInput | StatistiqueInteruniversitaireOrderByWithRelationInput[]
-    cursor?: StatistiqueInteruniversitaireWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: StatistiqueInteruniversitaireScalarFieldEnum | StatistiqueInteruniversitaireScalarFieldEnum[]
-  }
-
-  /**
-   * Universite.reservations
-   */
-  export type Universite$reservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    where?: ReservationWhereInput
-    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
-    cursor?: ReservationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
-  }
-
-  /**
-   * Universite.emprunts
-   */
-  export type Universite$empruntsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Emprunt
-     */
-    select?: EmpruntSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Emprunt
-     */
-    omit?: EmpruntOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmpruntInclude<ExtArgs> | null
-    where?: EmpruntWhereInput
-    orderBy?: EmpruntOrderByWithRelationInput | EmpruntOrderByWithRelationInput[]
-    cursor?: EmpruntWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EmpruntScalarFieldEnum | EmpruntScalarFieldEnum[]
-  }
-
-  /**
-   * Universite.recommandationsSource
-   */
-  export type Universite$recommandationsSourceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Recommandation
-     */
-    select?: RecommandationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Recommandation
-     */
-    omit?: RecommandationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RecommandationInclude<ExtArgs> | null
-    where?: RecommandationWhereInput
-    orderBy?: RecommandationOrderByWithRelationInput | RecommandationOrderByWithRelationInput[]
-    cursor?: RecommandationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: RecommandationScalarFieldEnum | RecommandationScalarFieldEnum[]
-  }
-
-  /**
    * Universite.statistiquesBibliotheque
    */
   export type Universite$statistiquesBibliothequeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14087,78 +12958,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: StatistiqueBibliothequeScalarFieldEnum | StatistiqueBibliothequeScalarFieldEnum[]
-  }
-
-  /**
-   * Universite.transactionsOrigine
-   */
-  export type Universite$transactionsOrigineArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-    where?: TransactionBlockchainWhereInput
-    orderBy?: TransactionBlockchainOrderByWithRelationInput | TransactionBlockchainOrderByWithRelationInput[]
-    cursor?: TransactionBlockchainWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TransactionBlockchainScalarFieldEnum | TransactionBlockchainScalarFieldEnum[]
-  }
-
-  /**
-   * Universite.transactionsDestination
-   */
-  export type Universite$transactionsDestinationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-    where?: TransactionBlockchainWhereInput
-    orderBy?: TransactionBlockchainOrderByWithRelationInput | TransactionBlockchainOrderByWithRelationInput[]
-    cursor?: TransactionBlockchainWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TransactionBlockchainScalarFieldEnum | TransactionBlockchainScalarFieldEnum[]
-  }
-
-  /**
-   * Universite.HistoriqueAcces
-   */
-  export type Universite$HistoriqueAccesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the HistoriqueAcces
-     */
-    select?: HistoriqueAccesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the HistoriqueAcces
-     */
-    omit?: HistoriqueAccesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HistoriqueAccesInclude<ExtArgs> | null
-    where?: HistoriqueAccesWhereInput
-    orderBy?: HistoriqueAccesOrderByWithRelationInput | HistoriqueAccesOrderByWithRelationInput[]
-    cursor?: HistoriqueAccesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: HistoriqueAccesScalarFieldEnum | HistoriqueAccesScalarFieldEnum[]
   }
 
   /**
@@ -14210,6 +13009,30 @@ export namespace Prisma {
   }
 
   /**
+   * Universite.ufrs
+   */
+  export type Universite$ufrsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ufr
+     */
+    select?: UfrSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ufr
+     */
+    omit?: UfrOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UfrInclude<ExtArgs> | null
+    where?: UfrWhereInput
+    orderBy?: UfrOrderByWithRelationInput | UfrOrderByWithRelationInput[]
+    cursor?: UfrWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UfrScalarFieldEnum | UfrScalarFieldEnum[]
+  }
+
+  /**
    * Universite without action
    */
   export type UniversiteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14225,6 +13048,2820 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UniversiteInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Ufr
+   */
+
+  export type AggregateUfr = {
+    _count: UfrCountAggregateOutputType | null
+    _min: UfrMinAggregateOutputType | null
+    _max: UfrMaxAggregateOutputType | null
+  }
+
+  export type UfrMinAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    description: string | null
+    universiteId: string | null
+  }
+
+  export type UfrMaxAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    description: string | null
+    universiteId: string | null
+  }
+
+  export type UfrCountAggregateOutputType = {
+    id: number
+    nom: number
+    description: number
+    universiteId: number
+    _all: number
+  }
+
+
+  export type UfrMinAggregateInputType = {
+    id?: true
+    nom?: true
+    description?: true
+    universiteId?: true
+  }
+
+  export type UfrMaxAggregateInputType = {
+    id?: true
+    nom?: true
+    description?: true
+    universiteId?: true
+  }
+
+  export type UfrCountAggregateInputType = {
+    id?: true
+    nom?: true
+    description?: true
+    universiteId?: true
+    _all?: true
+  }
+
+  export type UfrAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Ufr to aggregate.
+     */
+    where?: UfrWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Ufrs to fetch.
+     */
+    orderBy?: UfrOrderByWithRelationInput | UfrOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UfrWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Ufrs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Ufrs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Ufrs
+    **/
+    _count?: true | UfrCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UfrMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UfrMaxAggregateInputType
+  }
+
+  export type GetUfrAggregateType<T extends UfrAggregateArgs> = {
+        [P in keyof T & keyof AggregateUfr]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUfr[P]>
+      : GetScalarType<T[P], AggregateUfr[P]>
+  }
+
+
+
+
+  export type UfrGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UfrWhereInput
+    orderBy?: UfrOrderByWithAggregationInput | UfrOrderByWithAggregationInput[]
+    by: UfrScalarFieldEnum[] | UfrScalarFieldEnum
+    having?: UfrScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UfrCountAggregateInputType | true
+    _min?: UfrMinAggregateInputType
+    _max?: UfrMaxAggregateInputType
+  }
+
+  export type UfrGroupByOutputType = {
+    id: string
+    nom: string
+    description: string | null
+    universiteId: string
+    _count: UfrCountAggregateOutputType | null
+    _min: UfrMinAggregateOutputType | null
+    _max: UfrMaxAggregateOutputType | null
+  }
+
+  type GetUfrGroupByPayload<T extends UfrGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UfrGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UfrGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UfrGroupByOutputType[P]>
+            : GetScalarType<T[P], UfrGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UfrSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    description?: boolean
+    universiteId?: boolean
+    universite?: boolean | UniversiteDefaultArgs<ExtArgs>
+    departements?: boolean | Ufr$departementsArgs<ExtArgs>
+    _count?: boolean | UfrCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ufr"]>
+
+
+
+  export type UfrSelectScalar = {
+    id?: boolean
+    nom?: boolean
+    description?: boolean
+    universiteId?: boolean
+  }
+
+  export type UfrOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "universiteId", ExtArgs["result"]["ufr"]>
+  export type UfrInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    universite?: boolean | UniversiteDefaultArgs<ExtArgs>
+    departements?: boolean | Ufr$departementsArgs<ExtArgs>
+    _count?: boolean | UfrCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $UfrPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Ufr"
+    objects: {
+      universite: Prisma.$UniversitePayload<ExtArgs>
+      departements: Prisma.$DepartementPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nom: string
+      description: string | null
+      universiteId: string
+    }, ExtArgs["result"]["ufr"]>
+    composites: {}
+  }
+
+  type UfrGetPayload<S extends boolean | null | undefined | UfrDefaultArgs> = $Result.GetResult<Prisma.$UfrPayload, S>
+
+  type UfrCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UfrFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UfrCountAggregateInputType | true
+    }
+
+  export interface UfrDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Ufr'], meta: { name: 'Ufr' } }
+    /**
+     * Find zero or one Ufr that matches the filter.
+     * @param {UfrFindUniqueArgs} args - Arguments to find a Ufr
+     * @example
+     * // Get one Ufr
+     * const ufr = await prisma.ufr.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UfrFindUniqueArgs>(args: SelectSubset<T, UfrFindUniqueArgs<ExtArgs>>): Prisma__UfrClient<$Result.GetResult<Prisma.$UfrPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Ufr that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UfrFindUniqueOrThrowArgs} args - Arguments to find a Ufr
+     * @example
+     * // Get one Ufr
+     * const ufr = await prisma.ufr.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UfrFindUniqueOrThrowArgs>(args: SelectSubset<T, UfrFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UfrClient<$Result.GetResult<Prisma.$UfrPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Ufr that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UfrFindFirstArgs} args - Arguments to find a Ufr
+     * @example
+     * // Get one Ufr
+     * const ufr = await prisma.ufr.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UfrFindFirstArgs>(args?: SelectSubset<T, UfrFindFirstArgs<ExtArgs>>): Prisma__UfrClient<$Result.GetResult<Prisma.$UfrPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Ufr that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UfrFindFirstOrThrowArgs} args - Arguments to find a Ufr
+     * @example
+     * // Get one Ufr
+     * const ufr = await prisma.ufr.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UfrFindFirstOrThrowArgs>(args?: SelectSubset<T, UfrFindFirstOrThrowArgs<ExtArgs>>): Prisma__UfrClient<$Result.GetResult<Prisma.$UfrPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Ufrs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UfrFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Ufrs
+     * const ufrs = await prisma.ufr.findMany()
+     * 
+     * // Get first 10 Ufrs
+     * const ufrs = await prisma.ufr.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ufrWithIdOnly = await prisma.ufr.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UfrFindManyArgs>(args?: SelectSubset<T, UfrFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UfrPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Ufr.
+     * @param {UfrCreateArgs} args - Arguments to create a Ufr.
+     * @example
+     * // Create one Ufr
+     * const Ufr = await prisma.ufr.create({
+     *   data: {
+     *     // ... data to create a Ufr
+     *   }
+     * })
+     * 
+     */
+    create<T extends UfrCreateArgs>(args: SelectSubset<T, UfrCreateArgs<ExtArgs>>): Prisma__UfrClient<$Result.GetResult<Prisma.$UfrPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Ufrs.
+     * @param {UfrCreateManyArgs} args - Arguments to create many Ufrs.
+     * @example
+     * // Create many Ufrs
+     * const ufr = await prisma.ufr.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UfrCreateManyArgs>(args?: SelectSubset<T, UfrCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Ufr.
+     * @param {UfrDeleteArgs} args - Arguments to delete one Ufr.
+     * @example
+     * // Delete one Ufr
+     * const Ufr = await prisma.ufr.delete({
+     *   where: {
+     *     // ... filter to delete one Ufr
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UfrDeleteArgs>(args: SelectSubset<T, UfrDeleteArgs<ExtArgs>>): Prisma__UfrClient<$Result.GetResult<Prisma.$UfrPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Ufr.
+     * @param {UfrUpdateArgs} args - Arguments to update one Ufr.
+     * @example
+     * // Update one Ufr
+     * const ufr = await prisma.ufr.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UfrUpdateArgs>(args: SelectSubset<T, UfrUpdateArgs<ExtArgs>>): Prisma__UfrClient<$Result.GetResult<Prisma.$UfrPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Ufrs.
+     * @param {UfrDeleteManyArgs} args - Arguments to filter Ufrs to delete.
+     * @example
+     * // Delete a few Ufrs
+     * const { count } = await prisma.ufr.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UfrDeleteManyArgs>(args?: SelectSubset<T, UfrDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Ufrs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UfrUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Ufrs
+     * const ufr = await prisma.ufr.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UfrUpdateManyArgs>(args: SelectSubset<T, UfrUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Ufr.
+     * @param {UfrUpsertArgs} args - Arguments to update or create a Ufr.
+     * @example
+     * // Update or create a Ufr
+     * const ufr = await prisma.ufr.upsert({
+     *   create: {
+     *     // ... data to create a Ufr
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Ufr we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UfrUpsertArgs>(args: SelectSubset<T, UfrUpsertArgs<ExtArgs>>): Prisma__UfrClient<$Result.GetResult<Prisma.$UfrPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Ufrs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UfrCountArgs} args - Arguments to filter Ufrs to count.
+     * @example
+     * // Count the number of Ufrs
+     * const count = await prisma.ufr.count({
+     *   where: {
+     *     // ... the filter for the Ufrs we want to count
+     *   }
+     * })
+    **/
+    count<T extends UfrCountArgs>(
+      args?: Subset<T, UfrCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UfrCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Ufr.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UfrAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UfrAggregateArgs>(args: Subset<T, UfrAggregateArgs>): Prisma.PrismaPromise<GetUfrAggregateType<T>>
+
+    /**
+     * Group by Ufr.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UfrGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UfrGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UfrGroupByArgs['orderBy'] }
+        : { orderBy?: UfrGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UfrGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUfrGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Ufr model
+   */
+  readonly fields: UfrFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Ufr.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UfrClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    universite<T extends UniversiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UniversiteDefaultArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    departements<T extends Ufr$departementsArgs<ExtArgs> = {}>(args?: Subset<T, Ufr$departementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Ufr model
+   */
+  interface UfrFieldRefs {
+    readonly id: FieldRef<"Ufr", 'String'>
+    readonly nom: FieldRef<"Ufr", 'String'>
+    readonly description: FieldRef<"Ufr", 'String'>
+    readonly universiteId: FieldRef<"Ufr", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Ufr findUnique
+   */
+  export type UfrFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ufr
+     */
+    select?: UfrSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ufr
+     */
+    omit?: UfrOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UfrInclude<ExtArgs> | null
+    /**
+     * Filter, which Ufr to fetch.
+     */
+    where: UfrWhereUniqueInput
+  }
+
+  /**
+   * Ufr findUniqueOrThrow
+   */
+  export type UfrFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ufr
+     */
+    select?: UfrSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ufr
+     */
+    omit?: UfrOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UfrInclude<ExtArgs> | null
+    /**
+     * Filter, which Ufr to fetch.
+     */
+    where: UfrWhereUniqueInput
+  }
+
+  /**
+   * Ufr findFirst
+   */
+  export type UfrFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ufr
+     */
+    select?: UfrSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ufr
+     */
+    omit?: UfrOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UfrInclude<ExtArgs> | null
+    /**
+     * Filter, which Ufr to fetch.
+     */
+    where?: UfrWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Ufrs to fetch.
+     */
+    orderBy?: UfrOrderByWithRelationInput | UfrOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Ufrs.
+     */
+    cursor?: UfrWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Ufrs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Ufrs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Ufrs.
+     */
+    distinct?: UfrScalarFieldEnum | UfrScalarFieldEnum[]
+  }
+
+  /**
+   * Ufr findFirstOrThrow
+   */
+  export type UfrFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ufr
+     */
+    select?: UfrSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ufr
+     */
+    omit?: UfrOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UfrInclude<ExtArgs> | null
+    /**
+     * Filter, which Ufr to fetch.
+     */
+    where?: UfrWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Ufrs to fetch.
+     */
+    orderBy?: UfrOrderByWithRelationInput | UfrOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Ufrs.
+     */
+    cursor?: UfrWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Ufrs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Ufrs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Ufrs.
+     */
+    distinct?: UfrScalarFieldEnum | UfrScalarFieldEnum[]
+  }
+
+  /**
+   * Ufr findMany
+   */
+  export type UfrFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ufr
+     */
+    select?: UfrSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ufr
+     */
+    omit?: UfrOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UfrInclude<ExtArgs> | null
+    /**
+     * Filter, which Ufrs to fetch.
+     */
+    where?: UfrWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Ufrs to fetch.
+     */
+    orderBy?: UfrOrderByWithRelationInput | UfrOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Ufrs.
+     */
+    cursor?: UfrWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Ufrs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Ufrs.
+     */
+    skip?: number
+    distinct?: UfrScalarFieldEnum | UfrScalarFieldEnum[]
+  }
+
+  /**
+   * Ufr create
+   */
+  export type UfrCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ufr
+     */
+    select?: UfrSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ufr
+     */
+    omit?: UfrOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UfrInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Ufr.
+     */
+    data: XOR<UfrCreateInput, UfrUncheckedCreateInput>
+  }
+
+  /**
+   * Ufr createMany
+   */
+  export type UfrCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Ufrs.
+     */
+    data: UfrCreateManyInput | UfrCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Ufr update
+   */
+  export type UfrUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ufr
+     */
+    select?: UfrSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ufr
+     */
+    omit?: UfrOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UfrInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Ufr.
+     */
+    data: XOR<UfrUpdateInput, UfrUncheckedUpdateInput>
+    /**
+     * Choose, which Ufr to update.
+     */
+    where: UfrWhereUniqueInput
+  }
+
+  /**
+   * Ufr updateMany
+   */
+  export type UfrUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Ufrs.
+     */
+    data: XOR<UfrUpdateManyMutationInput, UfrUncheckedUpdateManyInput>
+    /**
+     * Filter which Ufrs to update
+     */
+    where?: UfrWhereInput
+    /**
+     * Limit how many Ufrs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Ufr upsert
+   */
+  export type UfrUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ufr
+     */
+    select?: UfrSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ufr
+     */
+    omit?: UfrOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UfrInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Ufr to update in case it exists.
+     */
+    where: UfrWhereUniqueInput
+    /**
+     * In case the Ufr found by the `where` argument doesn't exist, create a new Ufr with this data.
+     */
+    create: XOR<UfrCreateInput, UfrUncheckedCreateInput>
+    /**
+     * In case the Ufr was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UfrUpdateInput, UfrUncheckedUpdateInput>
+  }
+
+  /**
+   * Ufr delete
+   */
+  export type UfrDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ufr
+     */
+    select?: UfrSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ufr
+     */
+    omit?: UfrOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UfrInclude<ExtArgs> | null
+    /**
+     * Filter which Ufr to delete.
+     */
+    where: UfrWhereUniqueInput
+  }
+
+  /**
+   * Ufr deleteMany
+   */
+  export type UfrDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Ufrs to delete
+     */
+    where?: UfrWhereInput
+    /**
+     * Limit how many Ufrs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Ufr.departements
+   */
+  export type Ufr$departementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    where?: DepartementWhereInput
+    orderBy?: DepartementOrderByWithRelationInput | DepartementOrderByWithRelationInput[]
+    cursor?: DepartementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DepartementScalarFieldEnum | DepartementScalarFieldEnum[]
+  }
+
+  /**
+   * Ufr without action
+   */
+  export type UfrDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ufr
+     */
+    select?: UfrSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ufr
+     */
+    omit?: UfrOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UfrInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Departement
+   */
+
+  export type AggregateDepartement = {
+    _count: DepartementCountAggregateOutputType | null
+    _min: DepartementMinAggregateOutputType | null
+    _max: DepartementMaxAggregateOutputType | null
+  }
+
+  export type DepartementMinAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    description: string | null
+    ufrId: string | null
+  }
+
+  export type DepartementMaxAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    description: string | null
+    ufrId: string | null
+  }
+
+  export type DepartementCountAggregateOutputType = {
+    id: number
+    nom: number
+    description: number
+    ufrId: number
+    _all: number
+  }
+
+
+  export type DepartementMinAggregateInputType = {
+    id?: true
+    nom?: true
+    description?: true
+    ufrId?: true
+  }
+
+  export type DepartementMaxAggregateInputType = {
+    id?: true
+    nom?: true
+    description?: true
+    ufrId?: true
+  }
+
+  export type DepartementCountAggregateInputType = {
+    id?: true
+    nom?: true
+    description?: true
+    ufrId?: true
+    _all?: true
+  }
+
+  export type DepartementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Departement to aggregate.
+     */
+    where?: DepartementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departements to fetch.
+     */
+    orderBy?: DepartementOrderByWithRelationInput | DepartementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DepartementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Departements
+    **/
+    _count?: true | DepartementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DepartementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DepartementMaxAggregateInputType
+  }
+
+  export type GetDepartementAggregateType<T extends DepartementAggregateArgs> = {
+        [P in keyof T & keyof AggregateDepartement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDepartement[P]>
+      : GetScalarType<T[P], AggregateDepartement[P]>
+  }
+
+
+
+
+  export type DepartementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartementWhereInput
+    orderBy?: DepartementOrderByWithAggregationInput | DepartementOrderByWithAggregationInput[]
+    by: DepartementScalarFieldEnum[] | DepartementScalarFieldEnum
+    having?: DepartementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DepartementCountAggregateInputType | true
+    _min?: DepartementMinAggregateInputType
+    _max?: DepartementMaxAggregateInputType
+  }
+
+  export type DepartementGroupByOutputType = {
+    id: string
+    nom: string
+    description: string | null
+    ufrId: string
+    _count: DepartementCountAggregateOutputType | null
+    _min: DepartementMinAggregateOutputType | null
+    _max: DepartementMaxAggregateOutputType | null
+  }
+
+  type GetDepartementGroupByPayload<T extends DepartementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DepartementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DepartementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DepartementGroupByOutputType[P]>
+            : GetScalarType<T[P], DepartementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DepartementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    description?: boolean
+    ufrId?: boolean
+    ufr?: boolean | UfrDefaultArgs<ExtArgs>
+    filieres?: boolean | Departement$filieresArgs<ExtArgs>
+    _count?: boolean | DepartementCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["departement"]>
+
+
+
+  export type DepartementSelectScalar = {
+    id?: boolean
+    nom?: boolean
+    description?: boolean
+    ufrId?: boolean
+  }
+
+  export type DepartementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "ufrId", ExtArgs["result"]["departement"]>
+  export type DepartementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ufr?: boolean | UfrDefaultArgs<ExtArgs>
+    filieres?: boolean | Departement$filieresArgs<ExtArgs>
+    _count?: boolean | DepartementCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $DepartementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Departement"
+    objects: {
+      ufr: Prisma.$UfrPayload<ExtArgs>
+      filieres: Prisma.$FilierePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nom: string
+      description: string | null
+      ufrId: string
+    }, ExtArgs["result"]["departement"]>
+    composites: {}
+  }
+
+  type DepartementGetPayload<S extends boolean | null | undefined | DepartementDefaultArgs> = $Result.GetResult<Prisma.$DepartementPayload, S>
+
+  type DepartementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DepartementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DepartementCountAggregateInputType | true
+    }
+
+  export interface DepartementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Departement'], meta: { name: 'Departement' } }
+    /**
+     * Find zero or one Departement that matches the filter.
+     * @param {DepartementFindUniqueArgs} args - Arguments to find a Departement
+     * @example
+     * // Get one Departement
+     * const departement = await prisma.departement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DepartementFindUniqueArgs>(args: SelectSubset<T, DepartementFindUniqueArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Departement that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DepartementFindUniqueOrThrowArgs} args - Arguments to find a Departement
+     * @example
+     * // Get one Departement
+     * const departement = await prisma.departement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DepartementFindUniqueOrThrowArgs>(args: SelectSubset<T, DepartementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Departement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementFindFirstArgs} args - Arguments to find a Departement
+     * @example
+     * // Get one Departement
+     * const departement = await prisma.departement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DepartementFindFirstArgs>(args?: SelectSubset<T, DepartementFindFirstArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Departement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementFindFirstOrThrowArgs} args - Arguments to find a Departement
+     * @example
+     * // Get one Departement
+     * const departement = await prisma.departement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DepartementFindFirstOrThrowArgs>(args?: SelectSubset<T, DepartementFindFirstOrThrowArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Departements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Departements
+     * const departements = await prisma.departement.findMany()
+     * 
+     * // Get first 10 Departements
+     * const departements = await prisma.departement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const departementWithIdOnly = await prisma.departement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DepartementFindManyArgs>(args?: SelectSubset<T, DepartementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Departement.
+     * @param {DepartementCreateArgs} args - Arguments to create a Departement.
+     * @example
+     * // Create one Departement
+     * const Departement = await prisma.departement.create({
+     *   data: {
+     *     // ... data to create a Departement
+     *   }
+     * })
+     * 
+     */
+    create<T extends DepartementCreateArgs>(args: SelectSubset<T, DepartementCreateArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Departements.
+     * @param {DepartementCreateManyArgs} args - Arguments to create many Departements.
+     * @example
+     * // Create many Departements
+     * const departement = await prisma.departement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DepartementCreateManyArgs>(args?: SelectSubset<T, DepartementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Departement.
+     * @param {DepartementDeleteArgs} args - Arguments to delete one Departement.
+     * @example
+     * // Delete one Departement
+     * const Departement = await prisma.departement.delete({
+     *   where: {
+     *     // ... filter to delete one Departement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DepartementDeleteArgs>(args: SelectSubset<T, DepartementDeleteArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Departement.
+     * @param {DepartementUpdateArgs} args - Arguments to update one Departement.
+     * @example
+     * // Update one Departement
+     * const departement = await prisma.departement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DepartementUpdateArgs>(args: SelectSubset<T, DepartementUpdateArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Departements.
+     * @param {DepartementDeleteManyArgs} args - Arguments to filter Departements to delete.
+     * @example
+     * // Delete a few Departements
+     * const { count } = await prisma.departement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DepartementDeleteManyArgs>(args?: SelectSubset<T, DepartementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Departements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Departements
+     * const departement = await prisma.departement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DepartementUpdateManyArgs>(args: SelectSubset<T, DepartementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Departement.
+     * @param {DepartementUpsertArgs} args - Arguments to update or create a Departement.
+     * @example
+     * // Update or create a Departement
+     * const departement = await prisma.departement.upsert({
+     *   create: {
+     *     // ... data to create a Departement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Departement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DepartementUpsertArgs>(args: SelectSubset<T, DepartementUpsertArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Departements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementCountArgs} args - Arguments to filter Departements to count.
+     * @example
+     * // Count the number of Departements
+     * const count = await prisma.departement.count({
+     *   where: {
+     *     // ... the filter for the Departements we want to count
+     *   }
+     * })
+    **/
+    count<T extends DepartementCountArgs>(
+      args?: Subset<T, DepartementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DepartementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Departement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DepartementAggregateArgs>(args: Subset<T, DepartementAggregateArgs>): Prisma.PrismaPromise<GetDepartementAggregateType<T>>
+
+    /**
+     * Group by Departement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DepartementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DepartementGroupByArgs['orderBy'] }
+        : { orderBy?: DepartementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DepartementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDepartementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Departement model
+   */
+  readonly fields: DepartementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Departement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DepartementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    ufr<T extends UfrDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UfrDefaultArgs<ExtArgs>>): Prisma__UfrClient<$Result.GetResult<Prisma.$UfrPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    filieres<T extends Departement$filieresArgs<ExtArgs> = {}>(args?: Subset<T, Departement$filieresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FilierePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Departement model
+   */
+  interface DepartementFieldRefs {
+    readonly id: FieldRef<"Departement", 'String'>
+    readonly nom: FieldRef<"Departement", 'String'>
+    readonly description: FieldRef<"Departement", 'String'>
+    readonly ufrId: FieldRef<"Departement", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Departement findUnique
+   */
+  export type DepartementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * Filter, which Departement to fetch.
+     */
+    where: DepartementWhereUniqueInput
+  }
+
+  /**
+   * Departement findUniqueOrThrow
+   */
+  export type DepartementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * Filter, which Departement to fetch.
+     */
+    where: DepartementWhereUniqueInput
+  }
+
+  /**
+   * Departement findFirst
+   */
+  export type DepartementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * Filter, which Departement to fetch.
+     */
+    where?: DepartementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departements to fetch.
+     */
+    orderBy?: DepartementOrderByWithRelationInput | DepartementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Departements.
+     */
+    cursor?: DepartementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Departements.
+     */
+    distinct?: DepartementScalarFieldEnum | DepartementScalarFieldEnum[]
+  }
+
+  /**
+   * Departement findFirstOrThrow
+   */
+  export type DepartementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * Filter, which Departement to fetch.
+     */
+    where?: DepartementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departements to fetch.
+     */
+    orderBy?: DepartementOrderByWithRelationInput | DepartementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Departements.
+     */
+    cursor?: DepartementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Departements.
+     */
+    distinct?: DepartementScalarFieldEnum | DepartementScalarFieldEnum[]
+  }
+
+  /**
+   * Departement findMany
+   */
+  export type DepartementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * Filter, which Departements to fetch.
+     */
+    where?: DepartementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departements to fetch.
+     */
+    orderBy?: DepartementOrderByWithRelationInput | DepartementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Departements.
+     */
+    cursor?: DepartementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departements.
+     */
+    skip?: number
+    distinct?: DepartementScalarFieldEnum | DepartementScalarFieldEnum[]
+  }
+
+  /**
+   * Departement create
+   */
+  export type DepartementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Departement.
+     */
+    data: XOR<DepartementCreateInput, DepartementUncheckedCreateInput>
+  }
+
+  /**
+   * Departement createMany
+   */
+  export type DepartementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Departements.
+     */
+    data: DepartementCreateManyInput | DepartementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Departement update
+   */
+  export type DepartementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Departement.
+     */
+    data: XOR<DepartementUpdateInput, DepartementUncheckedUpdateInput>
+    /**
+     * Choose, which Departement to update.
+     */
+    where: DepartementWhereUniqueInput
+  }
+
+  /**
+   * Departement updateMany
+   */
+  export type DepartementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Departements.
+     */
+    data: XOR<DepartementUpdateManyMutationInput, DepartementUncheckedUpdateManyInput>
+    /**
+     * Filter which Departements to update
+     */
+    where?: DepartementWhereInput
+    /**
+     * Limit how many Departements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Departement upsert
+   */
+  export type DepartementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Departement to update in case it exists.
+     */
+    where: DepartementWhereUniqueInput
+    /**
+     * In case the Departement found by the `where` argument doesn't exist, create a new Departement with this data.
+     */
+    create: XOR<DepartementCreateInput, DepartementUncheckedCreateInput>
+    /**
+     * In case the Departement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DepartementUpdateInput, DepartementUncheckedUpdateInput>
+  }
+
+  /**
+   * Departement delete
+   */
+  export type DepartementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * Filter which Departement to delete.
+     */
+    where: DepartementWhereUniqueInput
+  }
+
+  /**
+   * Departement deleteMany
+   */
+  export type DepartementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Departements to delete
+     */
+    where?: DepartementWhereInput
+    /**
+     * Limit how many Departements to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Departement.filieres
+   */
+  export type Departement$filieresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Filiere
+     */
+    select?: FiliereSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Filiere
+     */
+    omit?: FiliereOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FiliereInclude<ExtArgs> | null
+    where?: FiliereWhereInput
+    orderBy?: FiliereOrderByWithRelationInput | FiliereOrderByWithRelationInput[]
+    cursor?: FiliereWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FiliereScalarFieldEnum | FiliereScalarFieldEnum[]
+  }
+
+  /**
+   * Departement without action
+   */
+  export type DepartementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Filiere
+   */
+
+  export type AggregateFiliere = {
+    _count: FiliereCountAggregateOutputType | null
+    _min: FiliereMinAggregateOutputType | null
+    _max: FiliereMaxAggregateOutputType | null
+  }
+
+  export type FiliereMinAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    description: string | null
+    departementId: string | null
+  }
+
+  export type FiliereMaxAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    description: string | null
+    departementId: string | null
+  }
+
+  export type FiliereCountAggregateOutputType = {
+    id: number
+    nom: number
+    description: number
+    departementId: number
+    _all: number
+  }
+
+
+  export type FiliereMinAggregateInputType = {
+    id?: true
+    nom?: true
+    description?: true
+    departementId?: true
+  }
+
+  export type FiliereMaxAggregateInputType = {
+    id?: true
+    nom?: true
+    description?: true
+    departementId?: true
+  }
+
+  export type FiliereCountAggregateInputType = {
+    id?: true
+    nom?: true
+    description?: true
+    departementId?: true
+    _all?: true
+  }
+
+  export type FiliereAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Filiere to aggregate.
+     */
+    where?: FiliereWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Filieres to fetch.
+     */
+    orderBy?: FiliereOrderByWithRelationInput | FiliereOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FiliereWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Filieres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Filieres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Filieres
+    **/
+    _count?: true | FiliereCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FiliereMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FiliereMaxAggregateInputType
+  }
+
+  export type GetFiliereAggregateType<T extends FiliereAggregateArgs> = {
+        [P in keyof T & keyof AggregateFiliere]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFiliere[P]>
+      : GetScalarType<T[P], AggregateFiliere[P]>
+  }
+
+
+
+
+  export type FiliereGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FiliereWhereInput
+    orderBy?: FiliereOrderByWithAggregationInput | FiliereOrderByWithAggregationInput[]
+    by: FiliereScalarFieldEnum[] | FiliereScalarFieldEnum
+    having?: FiliereScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FiliereCountAggregateInputType | true
+    _min?: FiliereMinAggregateInputType
+    _max?: FiliereMaxAggregateInputType
+  }
+
+  export type FiliereGroupByOutputType = {
+    id: string
+    nom: string
+    description: string | null
+    departementId: string
+    _count: FiliereCountAggregateOutputType | null
+    _min: FiliereMinAggregateOutputType | null
+    _max: FiliereMaxAggregateOutputType | null
+  }
+
+  type GetFiliereGroupByPayload<T extends FiliereGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FiliereGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FiliereGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FiliereGroupByOutputType[P]>
+            : GetScalarType<T[P], FiliereGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FiliereSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    description?: boolean
+    departementId?: boolean
+    departement?: boolean | DepartementDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["filiere"]>
+
+
+
+  export type FiliereSelectScalar = {
+    id?: boolean
+    nom?: boolean
+    description?: boolean
+    departementId?: boolean
+  }
+
+  export type FiliereOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "departementId", ExtArgs["result"]["filiere"]>
+  export type FiliereInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    departement?: boolean | DepartementDefaultArgs<ExtArgs>
+  }
+
+  export type $FilierePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Filiere"
+    objects: {
+      departement: Prisma.$DepartementPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nom: string
+      description: string | null
+      departementId: string
+    }, ExtArgs["result"]["filiere"]>
+    composites: {}
+  }
+
+  type FiliereGetPayload<S extends boolean | null | undefined | FiliereDefaultArgs> = $Result.GetResult<Prisma.$FilierePayload, S>
+
+  type FiliereCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FiliereFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FiliereCountAggregateInputType | true
+    }
+
+  export interface FiliereDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Filiere'], meta: { name: 'Filiere' } }
+    /**
+     * Find zero or one Filiere that matches the filter.
+     * @param {FiliereFindUniqueArgs} args - Arguments to find a Filiere
+     * @example
+     * // Get one Filiere
+     * const filiere = await prisma.filiere.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FiliereFindUniqueArgs>(args: SelectSubset<T, FiliereFindUniqueArgs<ExtArgs>>): Prisma__FiliereClient<$Result.GetResult<Prisma.$FilierePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Filiere that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FiliereFindUniqueOrThrowArgs} args - Arguments to find a Filiere
+     * @example
+     * // Get one Filiere
+     * const filiere = await prisma.filiere.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FiliereFindUniqueOrThrowArgs>(args: SelectSubset<T, FiliereFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FiliereClient<$Result.GetResult<Prisma.$FilierePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Filiere that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FiliereFindFirstArgs} args - Arguments to find a Filiere
+     * @example
+     * // Get one Filiere
+     * const filiere = await prisma.filiere.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FiliereFindFirstArgs>(args?: SelectSubset<T, FiliereFindFirstArgs<ExtArgs>>): Prisma__FiliereClient<$Result.GetResult<Prisma.$FilierePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Filiere that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FiliereFindFirstOrThrowArgs} args - Arguments to find a Filiere
+     * @example
+     * // Get one Filiere
+     * const filiere = await prisma.filiere.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FiliereFindFirstOrThrowArgs>(args?: SelectSubset<T, FiliereFindFirstOrThrowArgs<ExtArgs>>): Prisma__FiliereClient<$Result.GetResult<Prisma.$FilierePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Filieres that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FiliereFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Filieres
+     * const filieres = await prisma.filiere.findMany()
+     * 
+     * // Get first 10 Filieres
+     * const filieres = await prisma.filiere.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const filiereWithIdOnly = await prisma.filiere.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FiliereFindManyArgs>(args?: SelectSubset<T, FiliereFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FilierePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Filiere.
+     * @param {FiliereCreateArgs} args - Arguments to create a Filiere.
+     * @example
+     * // Create one Filiere
+     * const Filiere = await prisma.filiere.create({
+     *   data: {
+     *     // ... data to create a Filiere
+     *   }
+     * })
+     * 
+     */
+    create<T extends FiliereCreateArgs>(args: SelectSubset<T, FiliereCreateArgs<ExtArgs>>): Prisma__FiliereClient<$Result.GetResult<Prisma.$FilierePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Filieres.
+     * @param {FiliereCreateManyArgs} args - Arguments to create many Filieres.
+     * @example
+     * // Create many Filieres
+     * const filiere = await prisma.filiere.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FiliereCreateManyArgs>(args?: SelectSubset<T, FiliereCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Filiere.
+     * @param {FiliereDeleteArgs} args - Arguments to delete one Filiere.
+     * @example
+     * // Delete one Filiere
+     * const Filiere = await prisma.filiere.delete({
+     *   where: {
+     *     // ... filter to delete one Filiere
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FiliereDeleteArgs>(args: SelectSubset<T, FiliereDeleteArgs<ExtArgs>>): Prisma__FiliereClient<$Result.GetResult<Prisma.$FilierePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Filiere.
+     * @param {FiliereUpdateArgs} args - Arguments to update one Filiere.
+     * @example
+     * // Update one Filiere
+     * const filiere = await prisma.filiere.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FiliereUpdateArgs>(args: SelectSubset<T, FiliereUpdateArgs<ExtArgs>>): Prisma__FiliereClient<$Result.GetResult<Prisma.$FilierePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Filieres.
+     * @param {FiliereDeleteManyArgs} args - Arguments to filter Filieres to delete.
+     * @example
+     * // Delete a few Filieres
+     * const { count } = await prisma.filiere.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FiliereDeleteManyArgs>(args?: SelectSubset<T, FiliereDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Filieres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FiliereUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Filieres
+     * const filiere = await prisma.filiere.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FiliereUpdateManyArgs>(args: SelectSubset<T, FiliereUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Filiere.
+     * @param {FiliereUpsertArgs} args - Arguments to update or create a Filiere.
+     * @example
+     * // Update or create a Filiere
+     * const filiere = await prisma.filiere.upsert({
+     *   create: {
+     *     // ... data to create a Filiere
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Filiere we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FiliereUpsertArgs>(args: SelectSubset<T, FiliereUpsertArgs<ExtArgs>>): Prisma__FiliereClient<$Result.GetResult<Prisma.$FilierePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Filieres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FiliereCountArgs} args - Arguments to filter Filieres to count.
+     * @example
+     * // Count the number of Filieres
+     * const count = await prisma.filiere.count({
+     *   where: {
+     *     // ... the filter for the Filieres we want to count
+     *   }
+     * })
+    **/
+    count<T extends FiliereCountArgs>(
+      args?: Subset<T, FiliereCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FiliereCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Filiere.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FiliereAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FiliereAggregateArgs>(args: Subset<T, FiliereAggregateArgs>): Prisma.PrismaPromise<GetFiliereAggregateType<T>>
+
+    /**
+     * Group by Filiere.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FiliereGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FiliereGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FiliereGroupByArgs['orderBy'] }
+        : { orderBy?: FiliereGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FiliereGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFiliereGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Filiere model
+   */
+  readonly fields: FiliereFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Filiere.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FiliereClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    departement<T extends DepartementDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartementDefaultArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Filiere model
+   */
+  interface FiliereFieldRefs {
+    readonly id: FieldRef<"Filiere", 'String'>
+    readonly nom: FieldRef<"Filiere", 'String'>
+    readonly description: FieldRef<"Filiere", 'String'>
+    readonly departementId: FieldRef<"Filiere", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Filiere findUnique
+   */
+  export type FiliereFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Filiere
+     */
+    select?: FiliereSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Filiere
+     */
+    omit?: FiliereOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FiliereInclude<ExtArgs> | null
+    /**
+     * Filter, which Filiere to fetch.
+     */
+    where: FiliereWhereUniqueInput
+  }
+
+  /**
+   * Filiere findUniqueOrThrow
+   */
+  export type FiliereFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Filiere
+     */
+    select?: FiliereSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Filiere
+     */
+    omit?: FiliereOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FiliereInclude<ExtArgs> | null
+    /**
+     * Filter, which Filiere to fetch.
+     */
+    where: FiliereWhereUniqueInput
+  }
+
+  /**
+   * Filiere findFirst
+   */
+  export type FiliereFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Filiere
+     */
+    select?: FiliereSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Filiere
+     */
+    omit?: FiliereOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FiliereInclude<ExtArgs> | null
+    /**
+     * Filter, which Filiere to fetch.
+     */
+    where?: FiliereWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Filieres to fetch.
+     */
+    orderBy?: FiliereOrderByWithRelationInput | FiliereOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Filieres.
+     */
+    cursor?: FiliereWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Filieres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Filieres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Filieres.
+     */
+    distinct?: FiliereScalarFieldEnum | FiliereScalarFieldEnum[]
+  }
+
+  /**
+   * Filiere findFirstOrThrow
+   */
+  export type FiliereFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Filiere
+     */
+    select?: FiliereSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Filiere
+     */
+    omit?: FiliereOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FiliereInclude<ExtArgs> | null
+    /**
+     * Filter, which Filiere to fetch.
+     */
+    where?: FiliereWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Filieres to fetch.
+     */
+    orderBy?: FiliereOrderByWithRelationInput | FiliereOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Filieres.
+     */
+    cursor?: FiliereWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Filieres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Filieres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Filieres.
+     */
+    distinct?: FiliereScalarFieldEnum | FiliereScalarFieldEnum[]
+  }
+
+  /**
+   * Filiere findMany
+   */
+  export type FiliereFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Filiere
+     */
+    select?: FiliereSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Filiere
+     */
+    omit?: FiliereOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FiliereInclude<ExtArgs> | null
+    /**
+     * Filter, which Filieres to fetch.
+     */
+    where?: FiliereWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Filieres to fetch.
+     */
+    orderBy?: FiliereOrderByWithRelationInput | FiliereOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Filieres.
+     */
+    cursor?: FiliereWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Filieres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Filieres.
+     */
+    skip?: number
+    distinct?: FiliereScalarFieldEnum | FiliereScalarFieldEnum[]
+  }
+
+  /**
+   * Filiere create
+   */
+  export type FiliereCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Filiere
+     */
+    select?: FiliereSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Filiere
+     */
+    omit?: FiliereOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FiliereInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Filiere.
+     */
+    data: XOR<FiliereCreateInput, FiliereUncheckedCreateInput>
+  }
+
+  /**
+   * Filiere createMany
+   */
+  export type FiliereCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Filieres.
+     */
+    data: FiliereCreateManyInput | FiliereCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Filiere update
+   */
+  export type FiliereUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Filiere
+     */
+    select?: FiliereSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Filiere
+     */
+    omit?: FiliereOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FiliereInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Filiere.
+     */
+    data: XOR<FiliereUpdateInput, FiliereUncheckedUpdateInput>
+    /**
+     * Choose, which Filiere to update.
+     */
+    where: FiliereWhereUniqueInput
+  }
+
+  /**
+   * Filiere updateMany
+   */
+  export type FiliereUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Filieres.
+     */
+    data: XOR<FiliereUpdateManyMutationInput, FiliereUncheckedUpdateManyInput>
+    /**
+     * Filter which Filieres to update
+     */
+    where?: FiliereWhereInput
+    /**
+     * Limit how many Filieres to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Filiere upsert
+   */
+  export type FiliereUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Filiere
+     */
+    select?: FiliereSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Filiere
+     */
+    omit?: FiliereOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FiliereInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Filiere to update in case it exists.
+     */
+    where: FiliereWhereUniqueInput
+    /**
+     * In case the Filiere found by the `where` argument doesn't exist, create a new Filiere with this data.
+     */
+    create: XOR<FiliereCreateInput, FiliereUncheckedCreateInput>
+    /**
+     * In case the Filiere was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FiliereUpdateInput, FiliereUncheckedUpdateInput>
+  }
+
+  /**
+   * Filiere delete
+   */
+  export type FiliereDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Filiere
+     */
+    select?: FiliereSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Filiere
+     */
+    omit?: FiliereOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FiliereInclude<ExtArgs> | null
+    /**
+     * Filter which Filiere to delete.
+     */
+    where: FiliereWhereUniqueInput
+  }
+
+  /**
+   * Filiere deleteMany
+   */
+  export type FiliereDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Filieres to delete
+     */
+    where?: FiliereWhereInput
+    /**
+     * Limit how many Filieres to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Filiere without action
+   */
+  export type FiliereDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Filiere
+     */
+    select?: FiliereSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Filiere
+     */
+    omit?: FiliereOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FiliereInclude<ExtArgs> | null
   }
 
 
@@ -14456,7 +16093,6 @@ export namespace Prisma {
     universiteId?: boolean
     preferencesRecommandation?: boolean
     frequenceRecommandation?: boolean
-    universite?: boolean | UniversiteDefaultArgs<ExtArgs>
     contributions?: boolean | User$contributionsArgs<ExtArgs>
     favoris?: boolean | User$favorisArgs<ExtArgs>
     commentaires?: boolean | User$commentairesArgs<ExtArgs>
@@ -14497,7 +16133,6 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "motDePasse" | "nom" | "telephone" | "prenom" | "image" | "role" | "derniereConnexion" | "estActif" | "universiteId" | "preferencesRecommandation" | "frequenceRecommandation", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    universite?: boolean | UniversiteDefaultArgs<ExtArgs>
     contributions?: boolean | User$contributionsArgs<ExtArgs>
     favoris?: boolean | User$favorisArgs<ExtArgs>
     commentaires?: boolean | User$commentairesArgs<ExtArgs>
@@ -14521,7 +16156,6 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      universite: Prisma.$UniversitePayload<ExtArgs>
       contributions: Prisma.$RessourcePayload<ExtArgs>[]
       favoris: Prisma.$FavoriPayload<ExtArgs>[]
       commentaires: Prisma.$CommentairePayload<ExtArgs>[]
@@ -14894,7 +16528,6 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    universite<T extends UniversiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UniversiteDefaultArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     contributions<T extends User$contributionsArgs<ExtArgs> = {}>(args?: Subset<T, User$contributionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     favoris<T extends User$favorisArgs<ExtArgs> = {}>(args?: Subset<T, User$favorisArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoriPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     commentaires<T extends User$commentairesArgs<ExtArgs> = {}>(args?: Subset<T, User$commentairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -22638,7 +24271,6 @@ export namespace Prisma {
     universiteUser?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
-    universiteSrcRel?: boolean | HistoriqueAcces$universiteSrcRelArgs<ExtArgs>
   }, ExtArgs["result"]["historiqueAcces"]>
 
 
@@ -22657,7 +24289,6 @@ export namespace Prisma {
   export type HistoriqueAccesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
-    universiteSrcRel?: boolean | HistoriqueAcces$universiteSrcRelArgs<ExtArgs>
   }
 
   export type $HistoriqueAccesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -22665,7 +24296,6 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       ressource: Prisma.$RessourcePayload<ExtArgs>
-      universiteSrcRel: Prisma.$UniversitePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -23017,7 +24647,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     ressource<T extends RessourceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RessourceDefaultArgs<ExtArgs>>): Prisma__RessourceClient<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    universiteSrcRel<T extends HistoriqueAcces$universiteSrcRelArgs<ExtArgs> = {}>(args?: Subset<T, HistoriqueAcces$universiteSrcRelArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23394,25 +25023,6 @@ export namespace Prisma {
      * Limit how many HistoriqueAcces to delete.
      */
     limit?: number
-  }
-
-  /**
-   * HistoriqueAcces.universiteSrcRel
-   */
-  export type HistoriqueAcces$universiteSrcRelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Universite
-     */
-    select?: UniversiteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Universite
-     */
-    omit?: UniversiteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UniversiteInclude<ExtArgs> | null
-    where?: UniversiteWhereInput
   }
 
   /**
@@ -24427,7 +26037,6 @@ export namespace Prisma {
     userId: string | null
     nom: string | null
     description: string | null
-    estPublique: boolean | null
     dateCreation: Date | null
   }
 
@@ -24436,7 +26045,6 @@ export namespace Prisma {
     userId: string | null
     nom: string | null
     description: string | null
-    estPublique: boolean | null
     dateCreation: Date | null
   }
 
@@ -24445,7 +26053,6 @@ export namespace Prisma {
     userId: number
     nom: number
     description: number
-    estPublique: number
     dateCreation: number
     _all: number
   }
@@ -24456,7 +26063,6 @@ export namespace Prisma {
     userId?: true
     nom?: true
     description?: true
-    estPublique?: true
     dateCreation?: true
   }
 
@@ -24465,7 +26071,6 @@ export namespace Prisma {
     userId?: true
     nom?: true
     description?: true
-    estPublique?: true
     dateCreation?: true
   }
 
@@ -24474,7 +26079,6 @@ export namespace Prisma {
     userId?: true
     nom?: true
     description?: true
-    estPublique?: true
     dateCreation?: true
     _all?: true
   }
@@ -24556,7 +26160,6 @@ export namespace Prisma {
     userId: string
     nom: string
     description: string | null
-    estPublique: boolean
     dateCreation: Date
     _count: CollectionCountAggregateOutputType | null
     _min: CollectionMinAggregateOutputType | null
@@ -24582,7 +26185,6 @@ export namespace Prisma {
     userId?: boolean
     nom?: boolean
     description?: boolean
-    estPublique?: boolean
     dateCreation?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressources?: boolean | Collection$ressourcesArgs<ExtArgs>
@@ -24596,11 +26198,10 @@ export namespace Prisma {
     userId?: boolean
     nom?: boolean
     description?: boolean
-    estPublique?: boolean
     dateCreation?: boolean
   }
 
-  export type CollectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "nom" | "description" | "estPublique" | "dateCreation", ExtArgs["result"]["collection"]>
+  export type CollectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "nom" | "description" | "dateCreation", ExtArgs["result"]["collection"]>
   export type CollectionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressources?: boolean | Collection$ressourcesArgs<ExtArgs>
@@ -24618,7 +26219,6 @@ export namespace Prisma {
       userId: string
       nom: string
       description: string | null
-      estPublique: boolean
       dateCreation: Date
     }, ExtArgs["result"]["collection"]>
     composites: {}
@@ -24995,7 +26595,6 @@ export namespace Prisma {
     readonly userId: FieldRef<"Collection", 'String'>
     readonly nom: FieldRef<"Collection", 'String'>
     readonly description: FieldRef<"Collection", 'String'>
-    readonly estPublique: FieldRef<"Collection", 'Boolean'>
     readonly dateCreation: FieldRef<"Collection", 'DateTime'>
   }
     
@@ -26316,1025 +27915,6 @@ export namespace Prisma {
 
 
   /**
-   * Model TransactionBlockchain
-   */
-
-  export type AggregateTransactionBlockchain = {
-    _count: TransactionBlockchainCountAggregateOutputType | null
-    _min: TransactionBlockchainMinAggregateOutputType | null
-    _max: TransactionBlockchainMaxAggregateOutputType | null
-  }
-
-  export type TransactionBlockchainMinAggregateOutputType = {
-    id: string | null
-    referenceBlockchain: string | null
-    typeTransaction: $Enums.TypeTransaction | null
-    ressourceId: string | null
-    universiteOrigine: string | null
-    universiteDestination: string | null
-    dateTransaction: Date | null
-    statut: $Enums.StatutTransaction | null
-    hashTransaction: string | null
-  }
-
-  export type TransactionBlockchainMaxAggregateOutputType = {
-    id: string | null
-    referenceBlockchain: string | null
-    typeTransaction: $Enums.TypeTransaction | null
-    ressourceId: string | null
-    universiteOrigine: string | null
-    universiteDestination: string | null
-    dateTransaction: Date | null
-    statut: $Enums.StatutTransaction | null
-    hashTransaction: string | null
-  }
-
-  export type TransactionBlockchainCountAggregateOutputType = {
-    id: number
-    referenceBlockchain: number
-    typeTransaction: number
-    ressourceId: number
-    universiteOrigine: number
-    universiteDestination: number
-    dateTransaction: number
-    statut: number
-    hashTransaction: number
-    _all: number
-  }
-
-
-  export type TransactionBlockchainMinAggregateInputType = {
-    id?: true
-    referenceBlockchain?: true
-    typeTransaction?: true
-    ressourceId?: true
-    universiteOrigine?: true
-    universiteDestination?: true
-    dateTransaction?: true
-    statut?: true
-    hashTransaction?: true
-  }
-
-  export type TransactionBlockchainMaxAggregateInputType = {
-    id?: true
-    referenceBlockchain?: true
-    typeTransaction?: true
-    ressourceId?: true
-    universiteOrigine?: true
-    universiteDestination?: true
-    dateTransaction?: true
-    statut?: true
-    hashTransaction?: true
-  }
-
-  export type TransactionBlockchainCountAggregateInputType = {
-    id?: true
-    referenceBlockchain?: true
-    typeTransaction?: true
-    ressourceId?: true
-    universiteOrigine?: true
-    universiteDestination?: true
-    dateTransaction?: true
-    statut?: true
-    hashTransaction?: true
-    _all?: true
-  }
-
-  export type TransactionBlockchainAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TransactionBlockchain to aggregate.
-     */
-    where?: TransactionBlockchainWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TransactionBlockchains to fetch.
-     */
-    orderBy?: TransactionBlockchainOrderByWithRelationInput | TransactionBlockchainOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TransactionBlockchainWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TransactionBlockchains from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TransactionBlockchains.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TransactionBlockchains
-    **/
-    _count?: true | TransactionBlockchainCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TransactionBlockchainMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TransactionBlockchainMaxAggregateInputType
-  }
-
-  export type GetTransactionBlockchainAggregateType<T extends TransactionBlockchainAggregateArgs> = {
-        [P in keyof T & keyof AggregateTransactionBlockchain]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTransactionBlockchain[P]>
-      : GetScalarType<T[P], AggregateTransactionBlockchain[P]>
-  }
-
-
-
-
-  export type TransactionBlockchainGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TransactionBlockchainWhereInput
-    orderBy?: TransactionBlockchainOrderByWithAggregationInput | TransactionBlockchainOrderByWithAggregationInput[]
-    by: TransactionBlockchainScalarFieldEnum[] | TransactionBlockchainScalarFieldEnum
-    having?: TransactionBlockchainScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TransactionBlockchainCountAggregateInputType | true
-    _min?: TransactionBlockchainMinAggregateInputType
-    _max?: TransactionBlockchainMaxAggregateInputType
-  }
-
-  export type TransactionBlockchainGroupByOutputType = {
-    id: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    ressourceId: string | null
-    universiteOrigine: string
-    universiteDestination: string | null
-    dateTransaction: Date
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
-    _count: TransactionBlockchainCountAggregateOutputType | null
-    _min: TransactionBlockchainMinAggregateOutputType | null
-    _max: TransactionBlockchainMaxAggregateOutputType | null
-  }
-
-  type GetTransactionBlockchainGroupByPayload<T extends TransactionBlockchainGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TransactionBlockchainGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TransactionBlockchainGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TransactionBlockchainGroupByOutputType[P]>
-            : GetScalarType<T[P], TransactionBlockchainGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TransactionBlockchainSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    referenceBlockchain?: boolean
-    typeTransaction?: boolean
-    ressourceId?: boolean
-    universiteOrigine?: boolean
-    universiteDestination?: boolean
-    dateTransaction?: boolean
-    statut?: boolean
-    hashTransaction?: boolean
-    ressource?: boolean | TransactionBlockchain$ressourceArgs<ExtArgs>
-    universiteOrigineRel?: boolean | UniversiteDefaultArgs<ExtArgs>
-    universiteDestinationRel?: boolean | TransactionBlockchain$universiteDestinationRelArgs<ExtArgs>
-  }, ExtArgs["result"]["transactionBlockchain"]>
-
-
-
-  export type TransactionBlockchainSelectScalar = {
-    id?: boolean
-    referenceBlockchain?: boolean
-    typeTransaction?: boolean
-    ressourceId?: boolean
-    universiteOrigine?: boolean
-    universiteDestination?: boolean
-    dateTransaction?: boolean
-    statut?: boolean
-    hashTransaction?: boolean
-  }
-
-  export type TransactionBlockchainOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "referenceBlockchain" | "typeTransaction" | "ressourceId" | "universiteOrigine" | "universiteDestination" | "dateTransaction" | "statut" | "hashTransaction", ExtArgs["result"]["transactionBlockchain"]>
-  export type TransactionBlockchainInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    ressource?: boolean | TransactionBlockchain$ressourceArgs<ExtArgs>
-    universiteOrigineRel?: boolean | UniversiteDefaultArgs<ExtArgs>
-    universiteDestinationRel?: boolean | TransactionBlockchain$universiteDestinationRelArgs<ExtArgs>
-  }
-
-  export type $TransactionBlockchainPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TransactionBlockchain"
-    objects: {
-      ressource: Prisma.$RessourcePayload<ExtArgs> | null
-      universiteOrigineRel: Prisma.$UniversitePayload<ExtArgs>
-      universiteDestinationRel: Prisma.$UniversitePayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      referenceBlockchain: string
-      typeTransaction: $Enums.TypeTransaction
-      ressourceId: string | null
-      universiteOrigine: string
-      universiteDestination: string | null
-      dateTransaction: Date
-      statut: $Enums.StatutTransaction
-      hashTransaction: string
-    }, ExtArgs["result"]["transactionBlockchain"]>
-    composites: {}
-  }
-
-  type TransactionBlockchainGetPayload<S extends boolean | null | undefined | TransactionBlockchainDefaultArgs> = $Result.GetResult<Prisma.$TransactionBlockchainPayload, S>
-
-  type TransactionBlockchainCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TransactionBlockchainFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TransactionBlockchainCountAggregateInputType | true
-    }
-
-  export interface TransactionBlockchainDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TransactionBlockchain'], meta: { name: 'TransactionBlockchain' } }
-    /**
-     * Find zero or one TransactionBlockchain that matches the filter.
-     * @param {TransactionBlockchainFindUniqueArgs} args - Arguments to find a TransactionBlockchain
-     * @example
-     * // Get one TransactionBlockchain
-     * const transactionBlockchain = await prisma.transactionBlockchain.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TransactionBlockchainFindUniqueArgs>(args: SelectSubset<T, TransactionBlockchainFindUniqueArgs<ExtArgs>>): Prisma__TransactionBlockchainClient<$Result.GetResult<Prisma.$TransactionBlockchainPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one TransactionBlockchain that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TransactionBlockchainFindUniqueOrThrowArgs} args - Arguments to find a TransactionBlockchain
-     * @example
-     * // Get one TransactionBlockchain
-     * const transactionBlockchain = await prisma.transactionBlockchain.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TransactionBlockchainFindUniqueOrThrowArgs>(args: SelectSubset<T, TransactionBlockchainFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TransactionBlockchainClient<$Result.GetResult<Prisma.$TransactionBlockchainPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TransactionBlockchain that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TransactionBlockchainFindFirstArgs} args - Arguments to find a TransactionBlockchain
-     * @example
-     * // Get one TransactionBlockchain
-     * const transactionBlockchain = await prisma.transactionBlockchain.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TransactionBlockchainFindFirstArgs>(args?: SelectSubset<T, TransactionBlockchainFindFirstArgs<ExtArgs>>): Prisma__TransactionBlockchainClient<$Result.GetResult<Prisma.$TransactionBlockchainPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TransactionBlockchain that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TransactionBlockchainFindFirstOrThrowArgs} args - Arguments to find a TransactionBlockchain
-     * @example
-     * // Get one TransactionBlockchain
-     * const transactionBlockchain = await prisma.transactionBlockchain.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TransactionBlockchainFindFirstOrThrowArgs>(args?: SelectSubset<T, TransactionBlockchainFindFirstOrThrowArgs<ExtArgs>>): Prisma__TransactionBlockchainClient<$Result.GetResult<Prisma.$TransactionBlockchainPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more TransactionBlockchains that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TransactionBlockchainFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TransactionBlockchains
-     * const transactionBlockchains = await prisma.transactionBlockchain.findMany()
-     * 
-     * // Get first 10 TransactionBlockchains
-     * const transactionBlockchains = await prisma.transactionBlockchain.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const transactionBlockchainWithIdOnly = await prisma.transactionBlockchain.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TransactionBlockchainFindManyArgs>(args?: SelectSubset<T, TransactionBlockchainFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionBlockchainPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a TransactionBlockchain.
-     * @param {TransactionBlockchainCreateArgs} args - Arguments to create a TransactionBlockchain.
-     * @example
-     * // Create one TransactionBlockchain
-     * const TransactionBlockchain = await prisma.transactionBlockchain.create({
-     *   data: {
-     *     // ... data to create a TransactionBlockchain
-     *   }
-     * })
-     * 
-     */
-    create<T extends TransactionBlockchainCreateArgs>(args: SelectSubset<T, TransactionBlockchainCreateArgs<ExtArgs>>): Prisma__TransactionBlockchainClient<$Result.GetResult<Prisma.$TransactionBlockchainPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many TransactionBlockchains.
-     * @param {TransactionBlockchainCreateManyArgs} args - Arguments to create many TransactionBlockchains.
-     * @example
-     * // Create many TransactionBlockchains
-     * const transactionBlockchain = await prisma.transactionBlockchain.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TransactionBlockchainCreateManyArgs>(args?: SelectSubset<T, TransactionBlockchainCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a TransactionBlockchain.
-     * @param {TransactionBlockchainDeleteArgs} args - Arguments to delete one TransactionBlockchain.
-     * @example
-     * // Delete one TransactionBlockchain
-     * const TransactionBlockchain = await prisma.transactionBlockchain.delete({
-     *   where: {
-     *     // ... filter to delete one TransactionBlockchain
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TransactionBlockchainDeleteArgs>(args: SelectSubset<T, TransactionBlockchainDeleteArgs<ExtArgs>>): Prisma__TransactionBlockchainClient<$Result.GetResult<Prisma.$TransactionBlockchainPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one TransactionBlockchain.
-     * @param {TransactionBlockchainUpdateArgs} args - Arguments to update one TransactionBlockchain.
-     * @example
-     * // Update one TransactionBlockchain
-     * const transactionBlockchain = await prisma.transactionBlockchain.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TransactionBlockchainUpdateArgs>(args: SelectSubset<T, TransactionBlockchainUpdateArgs<ExtArgs>>): Prisma__TransactionBlockchainClient<$Result.GetResult<Prisma.$TransactionBlockchainPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more TransactionBlockchains.
-     * @param {TransactionBlockchainDeleteManyArgs} args - Arguments to filter TransactionBlockchains to delete.
-     * @example
-     * // Delete a few TransactionBlockchains
-     * const { count } = await prisma.transactionBlockchain.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TransactionBlockchainDeleteManyArgs>(args?: SelectSubset<T, TransactionBlockchainDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TransactionBlockchains.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TransactionBlockchainUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TransactionBlockchains
-     * const transactionBlockchain = await prisma.transactionBlockchain.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TransactionBlockchainUpdateManyArgs>(args: SelectSubset<T, TransactionBlockchainUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one TransactionBlockchain.
-     * @param {TransactionBlockchainUpsertArgs} args - Arguments to update or create a TransactionBlockchain.
-     * @example
-     * // Update or create a TransactionBlockchain
-     * const transactionBlockchain = await prisma.transactionBlockchain.upsert({
-     *   create: {
-     *     // ... data to create a TransactionBlockchain
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TransactionBlockchain we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TransactionBlockchainUpsertArgs>(args: SelectSubset<T, TransactionBlockchainUpsertArgs<ExtArgs>>): Prisma__TransactionBlockchainClient<$Result.GetResult<Prisma.$TransactionBlockchainPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of TransactionBlockchains.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TransactionBlockchainCountArgs} args - Arguments to filter TransactionBlockchains to count.
-     * @example
-     * // Count the number of TransactionBlockchains
-     * const count = await prisma.transactionBlockchain.count({
-     *   where: {
-     *     // ... the filter for the TransactionBlockchains we want to count
-     *   }
-     * })
-    **/
-    count<T extends TransactionBlockchainCountArgs>(
-      args?: Subset<T, TransactionBlockchainCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TransactionBlockchainCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TransactionBlockchain.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TransactionBlockchainAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TransactionBlockchainAggregateArgs>(args: Subset<T, TransactionBlockchainAggregateArgs>): Prisma.PrismaPromise<GetTransactionBlockchainAggregateType<T>>
-
-    /**
-     * Group by TransactionBlockchain.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TransactionBlockchainGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TransactionBlockchainGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TransactionBlockchainGroupByArgs['orderBy'] }
-        : { orderBy?: TransactionBlockchainGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TransactionBlockchainGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTransactionBlockchainGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TransactionBlockchain model
-   */
-  readonly fields: TransactionBlockchainFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TransactionBlockchain.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TransactionBlockchainClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    ressource<T extends TransactionBlockchain$ressourceArgs<ExtArgs> = {}>(args?: Subset<T, TransactionBlockchain$ressourceArgs<ExtArgs>>): Prisma__RessourceClient<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    universiteOrigineRel<T extends UniversiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UniversiteDefaultArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    universiteDestinationRel<T extends TransactionBlockchain$universiteDestinationRelArgs<ExtArgs> = {}>(args?: Subset<T, TransactionBlockchain$universiteDestinationRelArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TransactionBlockchain model
-   */
-  interface TransactionBlockchainFieldRefs {
-    readonly id: FieldRef<"TransactionBlockchain", 'String'>
-    readonly referenceBlockchain: FieldRef<"TransactionBlockchain", 'String'>
-    readonly typeTransaction: FieldRef<"TransactionBlockchain", 'TypeTransaction'>
-    readonly ressourceId: FieldRef<"TransactionBlockchain", 'String'>
-    readonly universiteOrigine: FieldRef<"TransactionBlockchain", 'String'>
-    readonly universiteDestination: FieldRef<"TransactionBlockchain", 'String'>
-    readonly dateTransaction: FieldRef<"TransactionBlockchain", 'DateTime'>
-    readonly statut: FieldRef<"TransactionBlockchain", 'StatutTransaction'>
-    readonly hashTransaction: FieldRef<"TransactionBlockchain", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TransactionBlockchain findUnique
-   */
-  export type TransactionBlockchainFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-    /**
-     * Filter, which TransactionBlockchain to fetch.
-     */
-    where: TransactionBlockchainWhereUniqueInput
-  }
-
-  /**
-   * TransactionBlockchain findUniqueOrThrow
-   */
-  export type TransactionBlockchainFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-    /**
-     * Filter, which TransactionBlockchain to fetch.
-     */
-    where: TransactionBlockchainWhereUniqueInput
-  }
-
-  /**
-   * TransactionBlockchain findFirst
-   */
-  export type TransactionBlockchainFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-    /**
-     * Filter, which TransactionBlockchain to fetch.
-     */
-    where?: TransactionBlockchainWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TransactionBlockchains to fetch.
-     */
-    orderBy?: TransactionBlockchainOrderByWithRelationInput | TransactionBlockchainOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TransactionBlockchains.
-     */
-    cursor?: TransactionBlockchainWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TransactionBlockchains from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TransactionBlockchains.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TransactionBlockchains.
-     */
-    distinct?: TransactionBlockchainScalarFieldEnum | TransactionBlockchainScalarFieldEnum[]
-  }
-
-  /**
-   * TransactionBlockchain findFirstOrThrow
-   */
-  export type TransactionBlockchainFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-    /**
-     * Filter, which TransactionBlockchain to fetch.
-     */
-    where?: TransactionBlockchainWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TransactionBlockchains to fetch.
-     */
-    orderBy?: TransactionBlockchainOrderByWithRelationInput | TransactionBlockchainOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TransactionBlockchains.
-     */
-    cursor?: TransactionBlockchainWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TransactionBlockchains from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TransactionBlockchains.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TransactionBlockchains.
-     */
-    distinct?: TransactionBlockchainScalarFieldEnum | TransactionBlockchainScalarFieldEnum[]
-  }
-
-  /**
-   * TransactionBlockchain findMany
-   */
-  export type TransactionBlockchainFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-    /**
-     * Filter, which TransactionBlockchains to fetch.
-     */
-    where?: TransactionBlockchainWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TransactionBlockchains to fetch.
-     */
-    orderBy?: TransactionBlockchainOrderByWithRelationInput | TransactionBlockchainOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TransactionBlockchains.
-     */
-    cursor?: TransactionBlockchainWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TransactionBlockchains from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TransactionBlockchains.
-     */
-    skip?: number
-    distinct?: TransactionBlockchainScalarFieldEnum | TransactionBlockchainScalarFieldEnum[]
-  }
-
-  /**
-   * TransactionBlockchain create
-   */
-  export type TransactionBlockchainCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-    /**
-     * The data needed to create a TransactionBlockchain.
-     */
-    data: XOR<TransactionBlockchainCreateInput, TransactionBlockchainUncheckedCreateInput>
-  }
-
-  /**
-   * TransactionBlockchain createMany
-   */
-  export type TransactionBlockchainCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TransactionBlockchains.
-     */
-    data: TransactionBlockchainCreateManyInput | TransactionBlockchainCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TransactionBlockchain update
-   */
-  export type TransactionBlockchainUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-    /**
-     * The data needed to update a TransactionBlockchain.
-     */
-    data: XOR<TransactionBlockchainUpdateInput, TransactionBlockchainUncheckedUpdateInput>
-    /**
-     * Choose, which TransactionBlockchain to update.
-     */
-    where: TransactionBlockchainWhereUniqueInput
-  }
-
-  /**
-   * TransactionBlockchain updateMany
-   */
-  export type TransactionBlockchainUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TransactionBlockchains.
-     */
-    data: XOR<TransactionBlockchainUpdateManyMutationInput, TransactionBlockchainUncheckedUpdateManyInput>
-    /**
-     * Filter which TransactionBlockchains to update
-     */
-    where?: TransactionBlockchainWhereInput
-    /**
-     * Limit how many TransactionBlockchains to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TransactionBlockchain upsert
-   */
-  export type TransactionBlockchainUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-    /**
-     * The filter to search for the TransactionBlockchain to update in case it exists.
-     */
-    where: TransactionBlockchainWhereUniqueInput
-    /**
-     * In case the TransactionBlockchain found by the `where` argument doesn't exist, create a new TransactionBlockchain with this data.
-     */
-    create: XOR<TransactionBlockchainCreateInput, TransactionBlockchainUncheckedCreateInput>
-    /**
-     * In case the TransactionBlockchain was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TransactionBlockchainUpdateInput, TransactionBlockchainUncheckedUpdateInput>
-  }
-
-  /**
-   * TransactionBlockchain delete
-   */
-  export type TransactionBlockchainDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-    /**
-     * Filter which TransactionBlockchain to delete.
-     */
-    where: TransactionBlockchainWhereUniqueInput
-  }
-
-  /**
-   * TransactionBlockchain deleteMany
-   */
-  export type TransactionBlockchainDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TransactionBlockchains to delete
-     */
-    where?: TransactionBlockchainWhereInput
-    /**
-     * Limit how many TransactionBlockchains to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TransactionBlockchain.ressource
-   */
-  export type TransactionBlockchain$ressourceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ressource
-     */
-    select?: RessourceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ressource
-     */
-    omit?: RessourceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RessourceInclude<ExtArgs> | null
-    where?: RessourceWhereInput
-  }
-
-  /**
-   * TransactionBlockchain.universiteDestinationRel
-   */
-  export type TransactionBlockchain$universiteDestinationRelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Universite
-     */
-    select?: UniversiteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Universite
-     */
-    omit?: UniversiteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UniversiteInclude<ExtArgs> | null
-    where?: UniversiteWhereInput
-  }
-
-  /**
-   * TransactionBlockchain without action
-   */
-  export type TransactionBlockchainDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Ressource
    */
 
@@ -27351,8 +27931,6 @@ export namespace Prisma {
     nbPages: number | null
     nbExemplaires: number | null
     nbDisponibles: number | null
-    dureeMaxEmpruntExterne: number | null
-    nbMaxExemplairesExterne: number | null
   }
 
   export type RessourceSumAggregateOutputType = {
@@ -27360,8 +27938,6 @@ export namespace Prisma {
     nbPages: number | null
     nbExemplaires: number | null
     nbDisponibles: number | null
-    dureeMaxEmpruntExterne: number | null
-    nbMaxExemplairesExterne: number | null
   }
 
   export type RessourceMinAggregateOutputType = {
@@ -27373,7 +27949,6 @@ export namespace Prisma {
     urlFichier: string | null
     urlFichierLocal: string | null
     format: string | null
-    dateCreation: Date | null
     dateModification: Date | null
     motsCles: string | null
     auteurId: string | null
@@ -27385,23 +27960,15 @@ export namespace Prisma {
     estArchive: boolean | null
     nomAuteurExterne: string | null
     prenomAuteurExterne: string | null
-    affiliationAuteurExterne: string | null
     validation: $Enums.TypeValidation | null
     isbn: string | null
     doi: string | null
-    edition: string | null
     anneePublication: number | null
-    editeur: string | null
     nbPages: number | null
-    categorieBiblio: $Enums.CategorieBiblio | null
-    estEmpruntable: boolean | null
     nbExemplaires: number | null
     nbDisponibles: number | null
     coteClassification: string | null
-    estEmpruntableExterne: boolean | null
-    dureeMaxEmpruntExterne: number | null
-    nbMaxExemplairesExterne: number | null
-    necessiteAutorisation: boolean | null
+    categorieId: string | null
   }
 
   export type RessourceMaxAggregateOutputType = {
@@ -27413,7 +27980,6 @@ export namespace Prisma {
     urlFichier: string | null
     urlFichierLocal: string | null
     format: string | null
-    dateCreation: Date | null
     dateModification: Date | null
     motsCles: string | null
     auteurId: string | null
@@ -27425,23 +27991,15 @@ export namespace Prisma {
     estArchive: boolean | null
     nomAuteurExterne: string | null
     prenomAuteurExterne: string | null
-    affiliationAuteurExterne: string | null
     validation: $Enums.TypeValidation | null
     isbn: string | null
     doi: string | null
-    edition: string | null
     anneePublication: number | null
-    editeur: string | null
     nbPages: number | null
-    categorieBiblio: $Enums.CategorieBiblio | null
-    estEmpruntable: boolean | null
     nbExemplaires: number | null
     nbDisponibles: number | null
     coteClassification: string | null
-    estEmpruntableExterne: boolean | null
-    dureeMaxEmpruntExterne: number | null
-    nbMaxExemplairesExterne: number | null
-    necessiteAutorisation: boolean | null
+    categorieId: string | null
   }
 
   export type RessourceCountAggregateOutputType = {
@@ -27453,7 +28011,6 @@ export namespace Prisma {
     urlFichier: number
     urlFichierLocal: number
     format: number
-    dateCreation: number
     dateModification: number
     motsCles: number
     auteurId: number
@@ -27465,23 +28022,15 @@ export namespace Prisma {
     estArchive: number
     nomAuteurExterne: number
     prenomAuteurExterne: number
-    affiliationAuteurExterne: number
     validation: number
     isbn: number
     doi: number
-    edition: number
     anneePublication: number
-    editeur: number
     nbPages: number
-    categorieBiblio: number
-    estEmpruntable: number
     nbExemplaires: number
     nbDisponibles: number
     coteClassification: number
-    estEmpruntableExterne: number
-    dureeMaxEmpruntExterne: number
-    nbMaxExemplairesExterne: number
-    necessiteAutorisation: number
+    categorieId: number
     _all: number
   }
 
@@ -27491,8 +28040,6 @@ export namespace Prisma {
     nbPages?: true
     nbExemplaires?: true
     nbDisponibles?: true
-    dureeMaxEmpruntExterne?: true
-    nbMaxExemplairesExterne?: true
   }
 
   export type RessourceSumAggregateInputType = {
@@ -27500,8 +28047,6 @@ export namespace Prisma {
     nbPages?: true
     nbExemplaires?: true
     nbDisponibles?: true
-    dureeMaxEmpruntExterne?: true
-    nbMaxExemplairesExterne?: true
   }
 
   export type RessourceMinAggregateInputType = {
@@ -27513,7 +28058,6 @@ export namespace Prisma {
     urlFichier?: true
     urlFichierLocal?: true
     format?: true
-    dateCreation?: true
     dateModification?: true
     motsCles?: true
     auteurId?: true
@@ -27525,23 +28069,15 @@ export namespace Prisma {
     estArchive?: true
     nomAuteurExterne?: true
     prenomAuteurExterne?: true
-    affiliationAuteurExterne?: true
     validation?: true
     isbn?: true
     doi?: true
-    edition?: true
     anneePublication?: true
-    editeur?: true
     nbPages?: true
-    categorieBiblio?: true
-    estEmpruntable?: true
     nbExemplaires?: true
     nbDisponibles?: true
     coteClassification?: true
-    estEmpruntableExterne?: true
-    dureeMaxEmpruntExterne?: true
-    nbMaxExemplairesExterne?: true
-    necessiteAutorisation?: true
+    categorieId?: true
   }
 
   export type RessourceMaxAggregateInputType = {
@@ -27553,7 +28089,6 @@ export namespace Prisma {
     urlFichier?: true
     urlFichierLocal?: true
     format?: true
-    dateCreation?: true
     dateModification?: true
     motsCles?: true
     auteurId?: true
@@ -27565,23 +28100,15 @@ export namespace Prisma {
     estArchive?: true
     nomAuteurExterne?: true
     prenomAuteurExterne?: true
-    affiliationAuteurExterne?: true
     validation?: true
     isbn?: true
     doi?: true
-    edition?: true
     anneePublication?: true
-    editeur?: true
     nbPages?: true
-    categorieBiblio?: true
-    estEmpruntable?: true
     nbExemplaires?: true
     nbDisponibles?: true
     coteClassification?: true
-    estEmpruntableExterne?: true
-    dureeMaxEmpruntExterne?: true
-    nbMaxExemplairesExterne?: true
-    necessiteAutorisation?: true
+    categorieId?: true
   }
 
   export type RessourceCountAggregateInputType = {
@@ -27593,7 +28120,6 @@ export namespace Prisma {
     urlFichier?: true
     urlFichierLocal?: true
     format?: true
-    dateCreation?: true
     dateModification?: true
     motsCles?: true
     auteurId?: true
@@ -27605,23 +28131,15 @@ export namespace Prisma {
     estArchive?: true
     nomAuteurExterne?: true
     prenomAuteurExterne?: true
-    affiliationAuteurExterne?: true
     validation?: true
     isbn?: true
     doi?: true
-    edition?: true
     anneePublication?: true
-    editeur?: true
     nbPages?: true
-    categorieBiblio?: true
-    estEmpruntable?: true
     nbExemplaires?: true
     nbDisponibles?: true
     coteClassification?: true
-    estEmpruntableExterne?: true
-    dureeMaxEmpruntExterne?: true
-    nbMaxExemplairesExterne?: true
-    necessiteAutorisation?: true
+    categorieId?: true
     _all?: true
   }
 
@@ -27720,7 +28238,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal: string | null
     format: string
-    dateCreation: Date
     dateModification: Date
     motsCles: string
     auteurId: string | null
@@ -27732,23 +28249,15 @@ export namespace Prisma {
     estArchive: boolean
     nomAuteurExterne: string | null
     prenomAuteurExterne: string | null
-    affiliationAuteurExterne: string | null
     validation: $Enums.TypeValidation
     isbn: string | null
     doi: string | null
-    edition: string | null
     anneePublication: number | null
-    editeur: string | null
     nbPages: number | null
-    categorieBiblio: $Enums.CategorieBiblio | null
-    estEmpruntable: boolean
     nbExemplaires: number
     nbDisponibles: number
     coteClassification: string | null
-    estEmpruntableExterne: boolean
-    dureeMaxEmpruntExterne: number
-    nbMaxExemplairesExterne: number
-    necessiteAutorisation: boolean
+    categorieId: string
     _count: RessourceCountAggregateOutputType | null
     _avg: RessourceAvgAggregateOutputType | null
     _sum: RessourceSumAggregateOutputType | null
@@ -27779,7 +28288,6 @@ export namespace Prisma {
     urlFichier?: boolean
     urlFichierLocal?: boolean
     format?: boolean
-    dateCreation?: boolean
     dateModification?: boolean
     motsCles?: boolean
     auteurId?: boolean
@@ -27791,25 +28299,16 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: boolean
     prenomAuteurExterne?: boolean
-    affiliationAuteurExterne?: boolean
     validation?: boolean
     isbn?: boolean
     doi?: boolean
-    edition?: boolean
     anneePublication?: boolean
-    editeur?: boolean
     nbPages?: boolean
-    categorieBiblio?: boolean
-    estEmpruntable?: boolean
     nbExemplaires?: boolean
     nbDisponibles?: boolean
     coteClassification?: boolean
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: boolean
-    nbMaxExemplairesExterne?: boolean
-    necessiteAutorisation?: boolean
+    categorieId?: boolean
     auteur?: boolean | Ressource$auteurArgs<ExtArgs>
-    universite?: boolean | UniversiteDefaultArgs<ExtArgs>
     favoris?: boolean | Ressource$favorisArgs<ExtArgs>
     commentaires?: boolean | Ressource$commentairesArgs<ExtArgs>
     notations?: boolean | Ressource$notationsArgs<ExtArgs>
@@ -27819,8 +28318,8 @@ export namespace Prisma {
     reservations?: boolean | Ressource$reservationsArgs<ExtArgs>
     recommandations?: boolean | Ressource$recommandationsArgs<ExtArgs>
     donneesRecommandations?: boolean | Ressource$donneesRecommandationsArgs<ExtArgs>
-    transactions?: boolean | Ressource$transactionsArgs<ExtArgs>
     notifications?: boolean | Ressource$notificationsArgs<ExtArgs>
+    categorie?: boolean | Ressource$categorieArgs<ExtArgs>
     _count?: boolean | RessourceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ressource"]>
 
@@ -27835,7 +28334,6 @@ export namespace Prisma {
     urlFichier?: boolean
     urlFichierLocal?: boolean
     format?: boolean
-    dateCreation?: boolean
     dateModification?: boolean
     motsCles?: boolean
     auteurId?: boolean
@@ -27847,29 +28345,20 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: boolean
     prenomAuteurExterne?: boolean
-    affiliationAuteurExterne?: boolean
     validation?: boolean
     isbn?: boolean
     doi?: boolean
-    edition?: boolean
     anneePublication?: boolean
-    editeur?: boolean
     nbPages?: boolean
-    categorieBiblio?: boolean
-    estEmpruntable?: boolean
     nbExemplaires?: boolean
     nbDisponibles?: boolean
     coteClassification?: boolean
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: boolean
-    nbMaxExemplairesExterne?: boolean
-    necessiteAutorisation?: boolean
+    categorieId?: boolean
   }
 
-  export type RessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "description" | "type" | "langue" | "urlFichier" | "urlFichierLocal" | "format" | "dateCreation" | "dateModification" | "motsCles" | "auteurId" | "universiteId" | "image" | "niveauAcces" | "datePublication" | "estValide" | "estArchive" | "nomAuteurExterne" | "prenomAuteurExterne" | "affiliationAuteurExterne" | "validation" | "isbn" | "doi" | "edition" | "anneePublication" | "editeur" | "nbPages" | "categorieBiblio" | "estEmpruntable" | "nbExemplaires" | "nbDisponibles" | "coteClassification" | "estEmpruntableExterne" | "dureeMaxEmpruntExterne" | "nbMaxExemplairesExterne" | "necessiteAutorisation", ExtArgs["result"]["ressource"]>
+  export type RessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "description" | "type" | "langue" | "urlFichier" | "urlFichierLocal" | "format" | "dateModification" | "motsCles" | "auteurId" | "universiteId" | "image" | "niveauAcces" | "datePublication" | "estValide" | "estArchive" | "nomAuteurExterne" | "prenomAuteurExterne" | "validation" | "isbn" | "doi" | "anneePublication" | "nbPages" | "nbExemplaires" | "nbDisponibles" | "coteClassification" | "categorieId", ExtArgs["result"]["ressource"]>
   export type RessourceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     auteur?: boolean | Ressource$auteurArgs<ExtArgs>
-    universite?: boolean | UniversiteDefaultArgs<ExtArgs>
     favoris?: boolean | Ressource$favorisArgs<ExtArgs>
     commentaires?: boolean | Ressource$commentairesArgs<ExtArgs>
     notations?: boolean | Ressource$notationsArgs<ExtArgs>
@@ -27879,8 +28368,8 @@ export namespace Prisma {
     reservations?: boolean | Ressource$reservationsArgs<ExtArgs>
     recommandations?: boolean | Ressource$recommandationsArgs<ExtArgs>
     donneesRecommandations?: boolean | Ressource$donneesRecommandationsArgs<ExtArgs>
-    transactions?: boolean | Ressource$transactionsArgs<ExtArgs>
     notifications?: boolean | Ressource$notificationsArgs<ExtArgs>
+    categorie?: boolean | Ressource$categorieArgs<ExtArgs>
     _count?: boolean | RessourceCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -27888,7 +28377,6 @@ export namespace Prisma {
     name: "Ressource"
     objects: {
       auteur: Prisma.$UserPayload<ExtArgs> | null
-      universite: Prisma.$UniversitePayload<ExtArgs>
       favoris: Prisma.$FavoriPayload<ExtArgs>[]
       commentaires: Prisma.$CommentairePayload<ExtArgs>[]
       notations: Prisma.$NotationPayload<ExtArgs>[]
@@ -27898,8 +28386,8 @@ export namespace Prisma {
       reservations: Prisma.$ReservationPayload<ExtArgs>[]
       recommandations: Prisma.$RecommandationPayload<ExtArgs>[]
       donneesRecommandations: Prisma.$DonneesRecommandationPayload<ExtArgs>[]
-      transactions: Prisma.$TransactionBlockchainPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
+      categorie: Prisma.$CategoriePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -27910,7 +28398,6 @@ export namespace Prisma {
       urlFichier: string
       urlFichierLocal: string | null
       format: string
-      dateCreation: Date
       dateModification: Date
       motsCles: string
       auteurId: string | null
@@ -27922,23 +28409,15 @@ export namespace Prisma {
       estArchive: boolean
       nomAuteurExterne: string | null
       prenomAuteurExterne: string | null
-      affiliationAuteurExterne: string | null
       validation: $Enums.TypeValidation
       isbn: string | null
       doi: string | null
-      edition: string | null
       anneePublication: number | null
-      editeur: string | null
       nbPages: number | null
-      categorieBiblio: $Enums.CategorieBiblio | null
-      estEmpruntable: boolean
       nbExemplaires: number
       nbDisponibles: number
       coteClassification: string | null
-      estEmpruntableExterne: boolean
-      dureeMaxEmpruntExterne: number
-      nbMaxExemplairesExterne: number
-      necessiteAutorisation: boolean
+      categorieId: string
     }, ExtArgs["result"]["ressource"]>
     composites: {}
   }
@@ -28280,7 +28759,6 @@ export namespace Prisma {
   export interface Prisma__RessourceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     auteur<T extends Ressource$auteurArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$auteurArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    universite<T extends UniversiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UniversiteDefaultArgs<ExtArgs>>): Prisma__UniversiteClient<$Result.GetResult<Prisma.$UniversitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     favoris<T extends Ressource$favorisArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$favorisArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoriPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     commentaires<T extends Ressource$commentairesArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$commentairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notations<T extends Ressource$notationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$notationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -28290,8 +28768,8 @@ export namespace Prisma {
     reservations<T extends Ressource$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     recommandations<T extends Ressource$recommandationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$recommandationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecommandationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     donneesRecommandations<T extends Ressource$donneesRecommandationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$donneesRecommandationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonneesRecommandationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    transactions<T extends Ressource$transactionsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionBlockchainPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends Ressource$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    categorie<T extends Ressource$categorieArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$categorieArgs<ExtArgs>>): Prisma__CategorieClient<$Result.GetResult<Prisma.$CategoriePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -28329,7 +28807,6 @@ export namespace Prisma {
     readonly urlFichier: FieldRef<"Ressource", 'String'>
     readonly urlFichierLocal: FieldRef<"Ressource", 'String'>
     readonly format: FieldRef<"Ressource", 'String'>
-    readonly dateCreation: FieldRef<"Ressource", 'DateTime'>
     readonly dateModification: FieldRef<"Ressource", 'DateTime'>
     readonly motsCles: FieldRef<"Ressource", 'String'>
     readonly auteurId: FieldRef<"Ressource", 'String'>
@@ -28341,23 +28818,15 @@ export namespace Prisma {
     readonly estArchive: FieldRef<"Ressource", 'Boolean'>
     readonly nomAuteurExterne: FieldRef<"Ressource", 'String'>
     readonly prenomAuteurExterne: FieldRef<"Ressource", 'String'>
-    readonly affiliationAuteurExterne: FieldRef<"Ressource", 'String'>
     readonly validation: FieldRef<"Ressource", 'TypeValidation'>
     readonly isbn: FieldRef<"Ressource", 'String'>
     readonly doi: FieldRef<"Ressource", 'String'>
-    readonly edition: FieldRef<"Ressource", 'String'>
     readonly anneePublication: FieldRef<"Ressource", 'Int'>
-    readonly editeur: FieldRef<"Ressource", 'String'>
     readonly nbPages: FieldRef<"Ressource", 'Int'>
-    readonly categorieBiblio: FieldRef<"Ressource", 'CategorieBiblio'>
-    readonly estEmpruntable: FieldRef<"Ressource", 'Boolean'>
     readonly nbExemplaires: FieldRef<"Ressource", 'Int'>
     readonly nbDisponibles: FieldRef<"Ressource", 'Int'>
     readonly coteClassification: FieldRef<"Ressource", 'String'>
-    readonly estEmpruntableExterne: FieldRef<"Ressource", 'Boolean'>
-    readonly dureeMaxEmpruntExterne: FieldRef<"Ressource", 'Int'>
-    readonly nbMaxExemplairesExterne: FieldRef<"Ressource", 'Int'>
-    readonly necessiteAutorisation: FieldRef<"Ressource", 'Boolean'>
+    readonly categorieId: FieldRef<"Ressource", 'String'>
   }
     
 
@@ -28936,30 +29405,6 @@ export namespace Prisma {
   }
 
   /**
-   * Ressource.transactions
-   */
-  export type Ressource$transactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TransactionBlockchain
-     */
-    select?: TransactionBlockchainSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TransactionBlockchain
-     */
-    omit?: TransactionBlockchainOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TransactionBlockchainInclude<ExtArgs> | null
-    where?: TransactionBlockchainWhereInput
-    orderBy?: TransactionBlockchainOrderByWithRelationInput | TransactionBlockchainOrderByWithRelationInput[]
-    cursor?: TransactionBlockchainWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TransactionBlockchainScalarFieldEnum | TransactionBlockchainScalarFieldEnum[]
-  }
-
-  /**
    * Ressource.notifications
    */
   export type Ressource$notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -28984,6 +29429,25 @@ export namespace Prisma {
   }
 
   /**
+   * Ressource.categorie
+   */
+  export type Ressource$categorieArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Categorie
+     */
+    select?: CategorieSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Categorie
+     */
+    omit?: CategorieOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategorieInclude<ExtArgs> | null
+    where?: CategorieWhereInput
+  }
+
+  /**
    * Ressource without action
    */
   export type RessourceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -28999,6 +29463,950 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: RessourceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Categorie
+   */
+
+  export type AggregateCategorie = {
+    _count: CategorieCountAggregateOutputType | null
+    _min: CategorieMinAggregateOutputType | null
+    _max: CategorieMaxAggregateOutputType | null
+  }
+
+  export type CategorieMinAggregateOutputType = {
+    id: string | null
+    libelle: string | null
+    description: string | null
+    dateCreation: Date | null
+  }
+
+  export type CategorieMaxAggregateOutputType = {
+    id: string | null
+    libelle: string | null
+    description: string | null
+    dateCreation: Date | null
+  }
+
+  export type CategorieCountAggregateOutputType = {
+    id: number
+    libelle: number
+    description: number
+    dateCreation: number
+    _all: number
+  }
+
+
+  export type CategorieMinAggregateInputType = {
+    id?: true
+    libelle?: true
+    description?: true
+    dateCreation?: true
+  }
+
+  export type CategorieMaxAggregateInputType = {
+    id?: true
+    libelle?: true
+    description?: true
+    dateCreation?: true
+  }
+
+  export type CategorieCountAggregateInputType = {
+    id?: true
+    libelle?: true
+    description?: true
+    dateCreation?: true
+    _all?: true
+  }
+
+  export type CategorieAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Categorie to aggregate.
+     */
+    where?: CategorieWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategorieOrderByWithRelationInput | CategorieOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CategorieWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Categories
+    **/
+    _count?: true | CategorieCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CategorieMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CategorieMaxAggregateInputType
+  }
+
+  export type GetCategorieAggregateType<T extends CategorieAggregateArgs> = {
+        [P in keyof T & keyof AggregateCategorie]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCategorie[P]>
+      : GetScalarType<T[P], AggregateCategorie[P]>
+  }
+
+
+
+
+  export type CategorieGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CategorieWhereInput
+    orderBy?: CategorieOrderByWithAggregationInput | CategorieOrderByWithAggregationInput[]
+    by: CategorieScalarFieldEnum[] | CategorieScalarFieldEnum
+    having?: CategorieScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CategorieCountAggregateInputType | true
+    _min?: CategorieMinAggregateInputType
+    _max?: CategorieMaxAggregateInputType
+  }
+
+  export type CategorieGroupByOutputType = {
+    id: string
+    libelle: string
+    description: string | null
+    dateCreation: Date
+    _count: CategorieCountAggregateOutputType | null
+    _min: CategorieMinAggregateOutputType | null
+    _max: CategorieMaxAggregateOutputType | null
+  }
+
+  type GetCategorieGroupByPayload<T extends CategorieGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CategorieGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CategorieGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CategorieGroupByOutputType[P]>
+            : GetScalarType<T[P], CategorieGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CategorieSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    libelle?: boolean
+    description?: boolean
+    dateCreation?: boolean
+    ressources?: boolean | Categorie$ressourcesArgs<ExtArgs>
+    _count?: boolean | CategorieCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["categorie"]>
+
+
+
+  export type CategorieSelectScalar = {
+    id?: boolean
+    libelle?: boolean
+    description?: boolean
+    dateCreation?: boolean
+  }
+
+  export type CategorieOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "libelle" | "description" | "dateCreation", ExtArgs["result"]["categorie"]>
+  export type CategorieInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ressources?: boolean | Categorie$ressourcesArgs<ExtArgs>
+    _count?: boolean | CategorieCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $CategoriePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Categorie"
+    objects: {
+      ressources: Prisma.$RessourcePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      libelle: string
+      description: string | null
+      dateCreation: Date
+    }, ExtArgs["result"]["categorie"]>
+    composites: {}
+  }
+
+  type CategorieGetPayload<S extends boolean | null | undefined | CategorieDefaultArgs> = $Result.GetResult<Prisma.$CategoriePayload, S>
+
+  type CategorieCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CategorieFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CategorieCountAggregateInputType | true
+    }
+
+  export interface CategorieDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Categorie'], meta: { name: 'Categorie' } }
+    /**
+     * Find zero or one Categorie that matches the filter.
+     * @param {CategorieFindUniqueArgs} args - Arguments to find a Categorie
+     * @example
+     * // Get one Categorie
+     * const categorie = await prisma.categorie.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CategorieFindUniqueArgs>(args: SelectSubset<T, CategorieFindUniqueArgs<ExtArgs>>): Prisma__CategorieClient<$Result.GetResult<Prisma.$CategoriePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Categorie that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CategorieFindUniqueOrThrowArgs} args - Arguments to find a Categorie
+     * @example
+     * // Get one Categorie
+     * const categorie = await prisma.categorie.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CategorieFindUniqueOrThrowArgs>(args: SelectSubset<T, CategorieFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CategorieClient<$Result.GetResult<Prisma.$CategoriePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Categorie that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategorieFindFirstArgs} args - Arguments to find a Categorie
+     * @example
+     * // Get one Categorie
+     * const categorie = await prisma.categorie.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CategorieFindFirstArgs>(args?: SelectSubset<T, CategorieFindFirstArgs<ExtArgs>>): Prisma__CategorieClient<$Result.GetResult<Prisma.$CategoriePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Categorie that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategorieFindFirstOrThrowArgs} args - Arguments to find a Categorie
+     * @example
+     * // Get one Categorie
+     * const categorie = await prisma.categorie.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CategorieFindFirstOrThrowArgs>(args?: SelectSubset<T, CategorieFindFirstOrThrowArgs<ExtArgs>>): Prisma__CategorieClient<$Result.GetResult<Prisma.$CategoriePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Categories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategorieFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Categories
+     * const categories = await prisma.categorie.findMany()
+     * 
+     * // Get first 10 Categories
+     * const categories = await prisma.categorie.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const categorieWithIdOnly = await prisma.categorie.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CategorieFindManyArgs>(args?: SelectSubset<T, CategorieFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoriePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Categorie.
+     * @param {CategorieCreateArgs} args - Arguments to create a Categorie.
+     * @example
+     * // Create one Categorie
+     * const Categorie = await prisma.categorie.create({
+     *   data: {
+     *     // ... data to create a Categorie
+     *   }
+     * })
+     * 
+     */
+    create<T extends CategorieCreateArgs>(args: SelectSubset<T, CategorieCreateArgs<ExtArgs>>): Prisma__CategorieClient<$Result.GetResult<Prisma.$CategoriePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Categories.
+     * @param {CategorieCreateManyArgs} args - Arguments to create many Categories.
+     * @example
+     * // Create many Categories
+     * const categorie = await prisma.categorie.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CategorieCreateManyArgs>(args?: SelectSubset<T, CategorieCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Categorie.
+     * @param {CategorieDeleteArgs} args - Arguments to delete one Categorie.
+     * @example
+     * // Delete one Categorie
+     * const Categorie = await prisma.categorie.delete({
+     *   where: {
+     *     // ... filter to delete one Categorie
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CategorieDeleteArgs>(args: SelectSubset<T, CategorieDeleteArgs<ExtArgs>>): Prisma__CategorieClient<$Result.GetResult<Prisma.$CategoriePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Categorie.
+     * @param {CategorieUpdateArgs} args - Arguments to update one Categorie.
+     * @example
+     * // Update one Categorie
+     * const categorie = await prisma.categorie.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CategorieUpdateArgs>(args: SelectSubset<T, CategorieUpdateArgs<ExtArgs>>): Prisma__CategorieClient<$Result.GetResult<Prisma.$CategoriePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Categories.
+     * @param {CategorieDeleteManyArgs} args - Arguments to filter Categories to delete.
+     * @example
+     * // Delete a few Categories
+     * const { count } = await prisma.categorie.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CategorieDeleteManyArgs>(args?: SelectSubset<T, CategorieDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategorieUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Categories
+     * const categorie = await prisma.categorie.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CategorieUpdateManyArgs>(args: SelectSubset<T, CategorieUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Categorie.
+     * @param {CategorieUpsertArgs} args - Arguments to update or create a Categorie.
+     * @example
+     * // Update or create a Categorie
+     * const categorie = await prisma.categorie.upsert({
+     *   create: {
+     *     // ... data to create a Categorie
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Categorie we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CategorieUpsertArgs>(args: SelectSubset<T, CategorieUpsertArgs<ExtArgs>>): Prisma__CategorieClient<$Result.GetResult<Prisma.$CategoriePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategorieCountArgs} args - Arguments to filter Categories to count.
+     * @example
+     * // Count the number of Categories
+     * const count = await prisma.categorie.count({
+     *   where: {
+     *     // ... the filter for the Categories we want to count
+     *   }
+     * })
+    **/
+    count<T extends CategorieCountArgs>(
+      args?: Subset<T, CategorieCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CategorieCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Categorie.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategorieAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CategorieAggregateArgs>(args: Subset<T, CategorieAggregateArgs>): Prisma.PrismaPromise<GetCategorieAggregateType<T>>
+
+    /**
+     * Group by Categorie.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategorieGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CategorieGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CategorieGroupByArgs['orderBy'] }
+        : { orderBy?: CategorieGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CategorieGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategorieGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Categorie model
+   */
+  readonly fields: CategorieFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Categorie.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CategorieClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    ressources<T extends Categorie$ressourcesArgs<ExtArgs> = {}>(args?: Subset<T, Categorie$ressourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Categorie model
+   */
+  interface CategorieFieldRefs {
+    readonly id: FieldRef<"Categorie", 'String'>
+    readonly libelle: FieldRef<"Categorie", 'String'>
+    readonly description: FieldRef<"Categorie", 'String'>
+    readonly dateCreation: FieldRef<"Categorie", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Categorie findUnique
+   */
+  export type CategorieFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Categorie
+     */
+    select?: CategorieSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Categorie
+     */
+    omit?: CategorieOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategorieInclude<ExtArgs> | null
+    /**
+     * Filter, which Categorie to fetch.
+     */
+    where: CategorieWhereUniqueInput
+  }
+
+  /**
+   * Categorie findUniqueOrThrow
+   */
+  export type CategorieFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Categorie
+     */
+    select?: CategorieSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Categorie
+     */
+    omit?: CategorieOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategorieInclude<ExtArgs> | null
+    /**
+     * Filter, which Categorie to fetch.
+     */
+    where: CategorieWhereUniqueInput
+  }
+
+  /**
+   * Categorie findFirst
+   */
+  export type CategorieFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Categorie
+     */
+    select?: CategorieSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Categorie
+     */
+    omit?: CategorieOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategorieInclude<ExtArgs> | null
+    /**
+     * Filter, which Categorie to fetch.
+     */
+    where?: CategorieWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategorieOrderByWithRelationInput | CategorieOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Categories.
+     */
+    cursor?: CategorieWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Categories.
+     */
+    distinct?: CategorieScalarFieldEnum | CategorieScalarFieldEnum[]
+  }
+
+  /**
+   * Categorie findFirstOrThrow
+   */
+  export type CategorieFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Categorie
+     */
+    select?: CategorieSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Categorie
+     */
+    omit?: CategorieOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategorieInclude<ExtArgs> | null
+    /**
+     * Filter, which Categorie to fetch.
+     */
+    where?: CategorieWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategorieOrderByWithRelationInput | CategorieOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Categories.
+     */
+    cursor?: CategorieWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Categories.
+     */
+    distinct?: CategorieScalarFieldEnum | CategorieScalarFieldEnum[]
+  }
+
+  /**
+   * Categorie findMany
+   */
+  export type CategorieFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Categorie
+     */
+    select?: CategorieSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Categorie
+     */
+    omit?: CategorieOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategorieInclude<ExtArgs> | null
+    /**
+     * Filter, which Categories to fetch.
+     */
+    where?: CategorieWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategorieOrderByWithRelationInput | CategorieOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Categories.
+     */
+    cursor?: CategorieWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    distinct?: CategorieScalarFieldEnum | CategorieScalarFieldEnum[]
+  }
+
+  /**
+   * Categorie create
+   */
+  export type CategorieCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Categorie
+     */
+    select?: CategorieSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Categorie
+     */
+    omit?: CategorieOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategorieInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Categorie.
+     */
+    data: XOR<CategorieCreateInput, CategorieUncheckedCreateInput>
+  }
+
+  /**
+   * Categorie createMany
+   */
+  export type CategorieCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Categories.
+     */
+    data: CategorieCreateManyInput | CategorieCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Categorie update
+   */
+  export type CategorieUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Categorie
+     */
+    select?: CategorieSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Categorie
+     */
+    omit?: CategorieOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategorieInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Categorie.
+     */
+    data: XOR<CategorieUpdateInput, CategorieUncheckedUpdateInput>
+    /**
+     * Choose, which Categorie to update.
+     */
+    where: CategorieWhereUniqueInput
+  }
+
+  /**
+   * Categorie updateMany
+   */
+  export type CategorieUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Categories.
+     */
+    data: XOR<CategorieUpdateManyMutationInput, CategorieUncheckedUpdateManyInput>
+    /**
+     * Filter which Categories to update
+     */
+    where?: CategorieWhereInput
+    /**
+     * Limit how many Categories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Categorie upsert
+   */
+  export type CategorieUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Categorie
+     */
+    select?: CategorieSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Categorie
+     */
+    omit?: CategorieOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategorieInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Categorie to update in case it exists.
+     */
+    where: CategorieWhereUniqueInput
+    /**
+     * In case the Categorie found by the `where` argument doesn't exist, create a new Categorie with this data.
+     */
+    create: XOR<CategorieCreateInput, CategorieUncheckedCreateInput>
+    /**
+     * In case the Categorie was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CategorieUpdateInput, CategorieUncheckedUpdateInput>
+  }
+
+  /**
+   * Categorie delete
+   */
+  export type CategorieDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Categorie
+     */
+    select?: CategorieSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Categorie
+     */
+    omit?: CategorieOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategorieInclude<ExtArgs> | null
+    /**
+     * Filter which Categorie to delete.
+     */
+    where: CategorieWhereUniqueInput
+  }
+
+  /**
+   * Categorie deleteMany
+   */
+  export type CategorieDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Categories to delete
+     */
+    where?: CategorieWhereInput
+    /**
+     * Limit how many Categories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Categorie.ressources
+   */
+  export type Categorie$ressourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ressource
+     */
+    select?: RessourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ressource
+     */
+    omit?: RessourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RessourceInclude<ExtArgs> | null
+    where?: RessourceWhereInput
+    orderBy?: RessourceOrderByWithRelationInput | RessourceOrderByWithRelationInput[]
+    cursor?: RessourceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RessourceScalarFieldEnum | RessourceScalarFieldEnum[]
+  }
+
+  /**
+   * Categorie without action
+   */
+  export type CategorieDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Categorie
+     */
+    select?: CategorieSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Categorie
+     */
+    omit?: CategorieOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategorieInclude<ExtArgs> | null
   }
 
 
@@ -32068,8 +33476,6 @@ export namespace Prisma {
     dureeEmpruntJours: 'dureeEmpruntJours',
     nbRenouvellements: 'nbRenouvellements',
     penaliteRetardJours: 'penaliteRetardJours',
-    exigeCarteValide: 'exigeCarteValide',
-    dateMiseAJour: 'dateMiseAJour',
     estActif: 'estActif'
   };
 
@@ -32103,21 +33509,6 @@ export namespace Prisma {
   export type SanctionUtilisateurScalarFieldEnum = (typeof SanctionUtilisateurScalarFieldEnum)[keyof typeof SanctionUtilisateurScalarFieldEnum]
 
 
-  export const StatistiqueInteruniversitaireScalarFieldEnum: {
-    id: 'id',
-    universiteSource: 'universiteSource',
-    universiteDestination: 'universiteDestination',
-    mois: 'mois',
-    annee: 'annee',
-    nbEmprunts: 'nbEmprunts',
-    nbReservations: 'nbReservations',
-    ressourcesPlusConsultees: 'ressourcesPlusConsultees',
-    domainesPlusConsultes: 'domainesPlusConsultes'
-  };
-
-  export type StatistiqueInteruniversitaireScalarFieldEnum = (typeof StatistiqueInteruniversitaireScalarFieldEnum)[keyof typeof StatistiqueInteruniversitaireScalarFieldEnum]
-
-
   export const ReservationScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -32142,9 +33533,9 @@ export namespace Prisma {
     disponible: 'disponible',
     localisation: 'localisation',
     dateAcquisition: 'dateAcquisition',
-    estReservableExterne: 'estReservableExterne',
-    estEmpruntableExterne: 'estEmpruntableExterne',
-    qrCode: 'qrCode'
+    qrCode: 'qrCode',
+    dureeMaxEmpruntExterne: 'dureeMaxEmpruntExterne',
+    nbMaxExemplairesExterne: 'nbMaxExemplairesExterne'
   };
 
   export type ExemplairePhysiqueScalarFieldEnum = (typeof ExemplairePhysiqueScalarFieldEnum)[keyof typeof ExemplairePhysiqueScalarFieldEnum]
@@ -32160,7 +33551,6 @@ export namespace Prisma {
     statut: 'statut',
     commentaire: 'commentaire',
     universiteEmprunteur: 'universiteEmprunteur',
-    estEmpruntExterne: 'estEmpruntExterne',
     motifEmprunt: 'motifEmprunt',
     validePar: 'validePar'
   };
@@ -32188,14 +33578,40 @@ export namespace Prisma {
     nom: 'nom',
     adresse: 'adresse',
     ville: 'ville',
-    pays: 'pays',
-    siteWeb: 'siteWeb',
-    dateCreation: 'dateCreation',
-    adresseBlockchain: 'adresseBlockchain',
-    estActive: 'estActive'
+    siteWeb: 'siteWeb'
   };
 
   export type UniversiteScalarFieldEnum = (typeof UniversiteScalarFieldEnum)[keyof typeof UniversiteScalarFieldEnum]
+
+
+  export const UfrScalarFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    description: 'description',
+    universiteId: 'universiteId'
+  };
+
+  export type UfrScalarFieldEnum = (typeof UfrScalarFieldEnum)[keyof typeof UfrScalarFieldEnum]
+
+
+  export const DepartementScalarFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    description: 'description',
+    ufrId: 'ufrId'
+  };
+
+  export type DepartementScalarFieldEnum = (typeof DepartementScalarFieldEnum)[keyof typeof DepartementScalarFieldEnum]
+
+
+  export const FiliereScalarFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    description: 'description',
+    departementId: 'departementId'
+  };
+
+  export type FiliereScalarFieldEnum = (typeof FiliereScalarFieldEnum)[keyof typeof FiliereScalarFieldEnum]
 
 
   export const UserScalarFieldEnum: {
@@ -32338,7 +33754,6 @@ export namespace Prisma {
     userId: 'userId',
     nom: 'nom',
     description: 'description',
-    estPublique: 'estPublique',
     dateCreation: 'dateCreation'
   };
 
@@ -32356,21 +33771,6 @@ export namespace Prisma {
   export type CollectionRessourceScalarFieldEnum = (typeof CollectionRessourceScalarFieldEnum)[keyof typeof CollectionRessourceScalarFieldEnum]
 
 
-  export const TransactionBlockchainScalarFieldEnum: {
-    id: 'id',
-    referenceBlockchain: 'referenceBlockchain',
-    typeTransaction: 'typeTransaction',
-    ressourceId: 'ressourceId',
-    universiteOrigine: 'universiteOrigine',
-    universiteDestination: 'universiteDestination',
-    dateTransaction: 'dateTransaction',
-    statut: 'statut',
-    hashTransaction: 'hashTransaction'
-  };
-
-  export type TransactionBlockchainScalarFieldEnum = (typeof TransactionBlockchainScalarFieldEnum)[keyof typeof TransactionBlockchainScalarFieldEnum]
-
-
   export const RessourceScalarFieldEnum: {
     id: 'id',
     titre: 'titre',
@@ -32380,7 +33780,6 @@ export namespace Prisma {
     urlFichier: 'urlFichier',
     urlFichierLocal: 'urlFichierLocal',
     format: 'format',
-    dateCreation: 'dateCreation',
     dateModification: 'dateModification',
     motsCles: 'motsCles',
     auteurId: 'auteurId',
@@ -32392,26 +33791,28 @@ export namespace Prisma {
     estArchive: 'estArchive',
     nomAuteurExterne: 'nomAuteurExterne',
     prenomAuteurExterne: 'prenomAuteurExterne',
-    affiliationAuteurExterne: 'affiliationAuteurExterne',
     validation: 'validation',
     isbn: 'isbn',
     doi: 'doi',
-    edition: 'edition',
     anneePublication: 'anneePublication',
-    editeur: 'editeur',
     nbPages: 'nbPages',
-    categorieBiblio: 'categorieBiblio',
-    estEmpruntable: 'estEmpruntable',
     nbExemplaires: 'nbExemplaires',
     nbDisponibles: 'nbDisponibles',
     coteClassification: 'coteClassification',
-    estEmpruntableExterne: 'estEmpruntableExterne',
-    dureeMaxEmpruntExterne: 'dureeMaxEmpruntExterne',
-    nbMaxExemplairesExterne: 'nbMaxExemplairesExterne',
-    necessiteAutorisation: 'necessiteAutorisation'
+    categorieId: 'categorieId'
   };
 
   export type RessourceScalarFieldEnum = (typeof RessourceScalarFieldEnum)[keyof typeof RessourceScalarFieldEnum]
+
+
+  export const CategorieScalarFieldEnum: {
+    id: 'id',
+    libelle: 'libelle',
+    description: 'description',
+    dateCreation: 'dateCreation'
+  };
+
+  export type CategorieScalarFieldEnum = (typeof CategorieScalarFieldEnum)[keyof typeof CategorieScalarFieldEnum]
 
 
   export const StatistiqueBibliothequeScalarFieldEnum: {
@@ -32522,17 +33923,6 @@ export namespace Prisma {
   export type SanctionUtilisateurOrderByRelevanceFieldEnum = (typeof SanctionUtilisateurOrderByRelevanceFieldEnum)[keyof typeof SanctionUtilisateurOrderByRelevanceFieldEnum]
 
 
-  export const StatistiqueInteruniversitaireOrderByRelevanceFieldEnum: {
-    id: 'id',
-    universiteSource: 'universiteSource',
-    universiteDestination: 'universiteDestination',
-    ressourcesPlusConsultees: 'ressourcesPlusConsultees',
-    domainesPlusConsultes: 'domainesPlusConsultes'
-  };
-
-  export type StatistiqueInteruniversitaireOrderByRelevanceFieldEnum = (typeof StatistiqueInteruniversitaireOrderByRelevanceFieldEnum)[keyof typeof StatistiqueInteruniversitaireOrderByRelevanceFieldEnum]
-
-
   export const ReservationOrderByRelevanceFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -32584,12 +33974,40 @@ export namespace Prisma {
     nom: 'nom',
     adresse: 'adresse',
     ville: 'ville',
-    pays: 'pays',
-    siteWeb: 'siteWeb',
-    adresseBlockchain: 'adresseBlockchain'
+    siteWeb: 'siteWeb'
   };
 
   export type UniversiteOrderByRelevanceFieldEnum = (typeof UniversiteOrderByRelevanceFieldEnum)[keyof typeof UniversiteOrderByRelevanceFieldEnum]
+
+
+  export const UfrOrderByRelevanceFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    description: 'description',
+    universiteId: 'universiteId'
+  };
+
+  export type UfrOrderByRelevanceFieldEnum = (typeof UfrOrderByRelevanceFieldEnum)[keyof typeof UfrOrderByRelevanceFieldEnum]
+
+
+  export const DepartementOrderByRelevanceFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    description: 'description',
+    ufrId: 'ufrId'
+  };
+
+  export type DepartementOrderByRelevanceFieldEnum = (typeof DepartementOrderByRelevanceFieldEnum)[keyof typeof DepartementOrderByRelevanceFieldEnum]
+
+
+  export const FiliereOrderByRelevanceFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    description: 'description',
+    departementId: 'departementId'
+  };
+
+  export type FiliereOrderByRelevanceFieldEnum = (typeof FiliereOrderByRelevanceFieldEnum)[keyof typeof FiliereOrderByRelevanceFieldEnum]
 
 
   export const UserOrderByRelevanceFieldEnum: {
@@ -32728,18 +34146,6 @@ export namespace Prisma {
   export type CollectionRessourceOrderByRelevanceFieldEnum = (typeof CollectionRessourceOrderByRelevanceFieldEnum)[keyof typeof CollectionRessourceOrderByRelevanceFieldEnum]
 
 
-  export const TransactionBlockchainOrderByRelevanceFieldEnum: {
-    id: 'id',
-    referenceBlockchain: 'referenceBlockchain',
-    ressourceId: 'ressourceId',
-    universiteOrigine: 'universiteOrigine',
-    universiteDestination: 'universiteDestination',
-    hashTransaction: 'hashTransaction'
-  };
-
-  export type TransactionBlockchainOrderByRelevanceFieldEnum = (typeof TransactionBlockchainOrderByRelevanceFieldEnum)[keyof typeof TransactionBlockchainOrderByRelevanceFieldEnum]
-
-
   export const RessourceOrderByRelevanceFieldEnum: {
     id: 'id',
     titre: 'titre',
@@ -32754,15 +34160,22 @@ export namespace Prisma {
     image: 'image',
     nomAuteurExterne: 'nomAuteurExterne',
     prenomAuteurExterne: 'prenomAuteurExterne',
-    affiliationAuteurExterne: 'affiliationAuteurExterne',
     isbn: 'isbn',
     doi: 'doi',
-    edition: 'edition',
-    editeur: 'editeur',
-    coteClassification: 'coteClassification'
+    coteClassification: 'coteClassification',
+    categorieId: 'categorieId'
   };
 
   export type RessourceOrderByRelevanceFieldEnum = (typeof RessourceOrderByRelevanceFieldEnum)[keyof typeof RessourceOrderByRelevanceFieldEnum]
+
+
+  export const CategorieOrderByRelevanceFieldEnum: {
+    id: 'id',
+    libelle: 'libelle',
+    description: 'description'
+  };
+
+  export type CategorieOrderByRelevanceFieldEnum = (typeof CategorieOrderByRelevanceFieldEnum)[keyof typeof CategorieOrderByRelevanceFieldEnum]
 
 
   export const StatistiqueBibliothequeOrderByRelevanceFieldEnum: {
@@ -32933,20 +34346,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'TypeTransaction'
-   */
-  export type EnumTypeTransactionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeTransaction'>
-    
-
-
-  /**
-   * Reference to a field of type 'StatutTransaction'
-   */
-  export type EnumStatutTransactionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutTransaction'>
-    
-
-
-  /**
    * Reference to a field of type 'TypeRessource'
    */
   export type EnumTypeRessourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeRessource'>
@@ -32964,13 +34363,6 @@ export namespace Prisma {
    * Reference to a field of type 'TypeValidation'
    */
   export type EnumTypeValidationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeValidation'>
-    
-
-
-  /**
-   * Reference to a field of type 'CategorieBiblio'
-   */
-  export type EnumCategorieBiblioFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CategorieBiblio'>
     
 
 
@@ -33078,8 +34470,6 @@ export namespace Prisma {
     dureeEmpruntJours?: IntFilter<"ReglePret"> | number
     nbRenouvellements?: IntFilter<"ReglePret"> | number
     penaliteRetardJours?: BoolFilter<"ReglePret"> | boolean
-    exigeCarteValide?: BoolFilter<"ReglePret"> | boolean
-    dateMiseAJour?: DateTimeFilter<"ReglePret"> | Date | string
     estActif?: BoolFilter<"ReglePret"> | boolean
     universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
   }
@@ -33092,8 +34482,6 @@ export namespace Prisma {
     dureeEmpruntJours?: SortOrder
     nbRenouvellements?: SortOrder
     penaliteRetardJours?: SortOrder
-    exigeCarteValide?: SortOrder
-    dateMiseAJour?: SortOrder
     estActif?: SortOrder
     universite?: UniversiteOrderByWithRelationInput
     _relevance?: ReglePretOrderByRelevanceInput
@@ -33111,8 +34499,6 @@ export namespace Prisma {
     dureeEmpruntJours?: IntFilter<"ReglePret"> | number
     nbRenouvellements?: IntFilter<"ReglePret"> | number
     penaliteRetardJours?: BoolFilter<"ReglePret"> | boolean
-    exigeCarteValide?: BoolFilter<"ReglePret"> | boolean
-    dateMiseAJour?: DateTimeFilter<"ReglePret"> | Date | string
     estActif?: BoolFilter<"ReglePret"> | boolean
     universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
   }, "id" | "universiteId_roleUtilisateur">
@@ -33125,8 +34511,6 @@ export namespace Prisma {
     dureeEmpruntJours?: SortOrder
     nbRenouvellements?: SortOrder
     penaliteRetardJours?: SortOrder
-    exigeCarteValide?: SortOrder
-    dateMiseAJour?: SortOrder
     estActif?: SortOrder
     _count?: ReglePretCountOrderByAggregateInput
     _avg?: ReglePretAvgOrderByAggregateInput
@@ -33146,8 +34530,6 @@ export namespace Prisma {
     dureeEmpruntJours?: IntWithAggregatesFilter<"ReglePret"> | number
     nbRenouvellements?: IntWithAggregatesFilter<"ReglePret"> | number
     penaliteRetardJours?: BoolWithAggregatesFilter<"ReglePret"> | boolean
-    exigeCarteValide?: BoolWithAggregatesFilter<"ReglePret"> | boolean
-    dateMiseAJour?: DateTimeWithAggregatesFilter<"ReglePret"> | Date | string
     estActif?: BoolWithAggregatesFilter<"ReglePret"> | boolean
   }
 
@@ -33291,88 +34673,6 @@ export namespace Prisma {
     estActive?: BoolWithAggregatesFilter<"SanctionUtilisateur"> | boolean
   }
 
-  export type StatistiqueInteruniversitaireWhereInput = {
-    AND?: StatistiqueInteruniversitaireWhereInput | StatistiqueInteruniversitaireWhereInput[]
-    OR?: StatistiqueInteruniversitaireWhereInput[]
-    NOT?: StatistiqueInteruniversitaireWhereInput | StatistiqueInteruniversitaireWhereInput[]
-    id?: StringFilter<"StatistiqueInteruniversitaire"> | string
-    universiteSource?: StringFilter<"StatistiqueInteruniversitaire"> | string
-    universiteDestination?: StringFilter<"StatistiqueInteruniversitaire"> | string
-    mois?: IntFilter<"StatistiqueInteruniversitaire"> | number
-    annee?: IntFilter<"StatistiqueInteruniversitaire"> | number
-    nbEmprunts?: IntFilter<"StatistiqueInteruniversitaire"> | number
-    nbReservations?: IntFilter<"StatistiqueInteruniversitaire"> | number
-    ressourcesPlusConsultees?: StringNullableFilter<"StatistiqueInteruniversitaire"> | string | null
-    domainesPlusConsultes?: StringNullableFilter<"StatistiqueInteruniversitaire"> | string | null
-    universiteSourceRel?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
-    universiteDestinationRel?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
-  }
-
-  export type StatistiqueInteruniversitaireOrderByWithRelationInput = {
-    id?: SortOrder
-    universiteSource?: SortOrder
-    universiteDestination?: SortOrder
-    mois?: SortOrder
-    annee?: SortOrder
-    nbEmprunts?: SortOrder
-    nbReservations?: SortOrder
-    ressourcesPlusConsultees?: SortOrderInput | SortOrder
-    domainesPlusConsultes?: SortOrderInput | SortOrder
-    universiteSourceRel?: UniversiteOrderByWithRelationInput
-    universiteDestinationRel?: UniversiteOrderByWithRelationInput
-    _relevance?: StatistiqueInteruniversitaireOrderByRelevanceInput
-  }
-
-  export type StatistiqueInteruniversitaireWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    universiteSource_universiteDestination_mois_annee?: StatistiqueInteruniversitaireUniversiteSourceUniversiteDestinationMoisAnneeCompoundUniqueInput
-    AND?: StatistiqueInteruniversitaireWhereInput | StatistiqueInteruniversitaireWhereInput[]
-    OR?: StatistiqueInteruniversitaireWhereInput[]
-    NOT?: StatistiqueInteruniversitaireWhereInput | StatistiqueInteruniversitaireWhereInput[]
-    universiteSource?: StringFilter<"StatistiqueInteruniversitaire"> | string
-    universiteDestination?: StringFilter<"StatistiqueInteruniversitaire"> | string
-    mois?: IntFilter<"StatistiqueInteruniversitaire"> | number
-    annee?: IntFilter<"StatistiqueInteruniversitaire"> | number
-    nbEmprunts?: IntFilter<"StatistiqueInteruniversitaire"> | number
-    nbReservations?: IntFilter<"StatistiqueInteruniversitaire"> | number
-    ressourcesPlusConsultees?: StringNullableFilter<"StatistiqueInteruniversitaire"> | string | null
-    domainesPlusConsultes?: StringNullableFilter<"StatistiqueInteruniversitaire"> | string | null
-    universiteSourceRel?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
-    universiteDestinationRel?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
-  }, "id" | "universiteSource_universiteDestination_mois_annee">
-
-  export type StatistiqueInteruniversitaireOrderByWithAggregationInput = {
-    id?: SortOrder
-    universiteSource?: SortOrder
-    universiteDestination?: SortOrder
-    mois?: SortOrder
-    annee?: SortOrder
-    nbEmprunts?: SortOrder
-    nbReservations?: SortOrder
-    ressourcesPlusConsultees?: SortOrderInput | SortOrder
-    domainesPlusConsultes?: SortOrderInput | SortOrder
-    _count?: StatistiqueInteruniversitaireCountOrderByAggregateInput
-    _avg?: StatistiqueInteruniversitaireAvgOrderByAggregateInput
-    _max?: StatistiqueInteruniversitaireMaxOrderByAggregateInput
-    _min?: StatistiqueInteruniversitaireMinOrderByAggregateInput
-    _sum?: StatistiqueInteruniversitaireSumOrderByAggregateInput
-  }
-
-  export type StatistiqueInteruniversitaireScalarWhereWithAggregatesInput = {
-    AND?: StatistiqueInteruniversitaireScalarWhereWithAggregatesInput | StatistiqueInteruniversitaireScalarWhereWithAggregatesInput[]
-    OR?: StatistiqueInteruniversitaireScalarWhereWithAggregatesInput[]
-    NOT?: StatistiqueInteruniversitaireScalarWhereWithAggregatesInput | StatistiqueInteruniversitaireScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"StatistiqueInteruniversitaire"> | string
-    universiteSource?: StringWithAggregatesFilter<"StatistiqueInteruniversitaire"> | string
-    universiteDestination?: StringWithAggregatesFilter<"StatistiqueInteruniversitaire"> | string
-    mois?: IntWithAggregatesFilter<"StatistiqueInteruniversitaire"> | number
-    annee?: IntWithAggregatesFilter<"StatistiqueInteruniversitaire"> | number
-    nbEmprunts?: IntWithAggregatesFilter<"StatistiqueInteruniversitaire"> | number
-    nbReservations?: IntWithAggregatesFilter<"StatistiqueInteruniversitaire"> | number
-    ressourcesPlusConsultees?: StringNullableWithAggregatesFilter<"StatistiqueInteruniversitaire"> | string | null
-    domainesPlusConsultes?: StringNullableWithAggregatesFilter<"StatistiqueInteruniversitaire"> | string | null
-  }
-
   export type ReservationWhereInput = {
     AND?: ReservationWhereInput | ReservationWhereInput[]
     OR?: ReservationWhereInput[]
@@ -33389,7 +34689,6 @@ export namespace Prisma {
     validePar?: StringNullableFilter<"Reservation"> | string | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
-    universiteEmprunteurRel?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
     valideur?: XOR<BibliothecaireNullableScalarRelationFilter, BibliothecaireWhereInput> | null
   }
 
@@ -33406,7 +34705,6 @@ export namespace Prisma {
     validePar?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     ressource?: RessourceOrderByWithRelationInput
-    universiteEmprunteurRel?: UniversiteOrderByWithRelationInput
     valideur?: BibliothecaireOrderByWithRelationInput
     _relevance?: ReservationOrderByRelevanceInput
   }
@@ -33427,7 +34725,6 @@ export namespace Prisma {
     validePar?: StringNullableFilter<"Reservation"> | string | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
-    universiteEmprunteurRel?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
     valideur?: XOR<BibliothecaireNullableScalarRelationFilter, BibliothecaireWhereInput> | null
   }, "id">
 
@@ -33474,9 +34771,9 @@ export namespace Prisma {
     disponible?: BoolFilter<"ExemplairePhysique"> | boolean
     localisation?: StringFilter<"ExemplairePhysique"> | string
     dateAcquisition?: DateTimeNullableFilter<"ExemplairePhysique"> | Date | string | null
-    estReservableExterne?: BoolNullableFilter<"ExemplairePhysique"> | boolean | null
-    estEmpruntableExterne?: BoolNullableFilter<"ExemplairePhysique"> | boolean | null
     qrCode?: StringNullableFilter<"ExemplairePhysique"> | string | null
+    dureeMaxEmpruntExterne?: IntFilter<"ExemplairePhysique"> | number
+    nbMaxExemplairesExterne?: IntFilter<"ExemplairePhysique"> | number
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
     emprunts?: EmpruntListRelationFilter
   }
@@ -33489,9 +34786,9 @@ export namespace Prisma {
     disponible?: SortOrder
     localisation?: SortOrder
     dateAcquisition?: SortOrderInput | SortOrder
-    estReservableExterne?: SortOrderInput | SortOrder
-    estEmpruntableExterne?: SortOrderInput | SortOrder
     qrCode?: SortOrderInput | SortOrder
+    dureeMaxEmpruntExterne?: SortOrder
+    nbMaxExemplairesExterne?: SortOrder
     ressource?: RessourceOrderByWithRelationInput
     emprunts?: EmpruntOrderByRelationAggregateInput
     _relevance?: ExemplairePhysiqueOrderByRelevanceInput
@@ -33508,9 +34805,9 @@ export namespace Prisma {
     disponible?: BoolFilter<"ExemplairePhysique"> | boolean
     localisation?: StringFilter<"ExemplairePhysique"> | string
     dateAcquisition?: DateTimeNullableFilter<"ExemplairePhysique"> | Date | string | null
-    estReservableExterne?: BoolNullableFilter<"ExemplairePhysique"> | boolean | null
-    estEmpruntableExterne?: BoolNullableFilter<"ExemplairePhysique"> | boolean | null
     qrCode?: StringNullableFilter<"ExemplairePhysique"> | string | null
+    dureeMaxEmpruntExterne?: IntFilter<"ExemplairePhysique"> | number
+    nbMaxExemplairesExterne?: IntFilter<"ExemplairePhysique"> | number
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
     emprunts?: EmpruntListRelationFilter
   }, "id">
@@ -33523,12 +34820,14 @@ export namespace Prisma {
     disponible?: SortOrder
     localisation?: SortOrder
     dateAcquisition?: SortOrderInput | SortOrder
-    estReservableExterne?: SortOrderInput | SortOrder
-    estEmpruntableExterne?: SortOrderInput | SortOrder
     qrCode?: SortOrderInput | SortOrder
+    dureeMaxEmpruntExterne?: SortOrder
+    nbMaxExemplairesExterne?: SortOrder
     _count?: ExemplairePhysiqueCountOrderByAggregateInput
+    _avg?: ExemplairePhysiqueAvgOrderByAggregateInput
     _max?: ExemplairePhysiqueMaxOrderByAggregateInput
     _min?: ExemplairePhysiqueMinOrderByAggregateInput
+    _sum?: ExemplairePhysiqueSumOrderByAggregateInput
   }
 
   export type ExemplairePhysiqueScalarWhereWithAggregatesInput = {
@@ -33542,9 +34841,9 @@ export namespace Prisma {
     disponible?: BoolWithAggregatesFilter<"ExemplairePhysique"> | boolean
     localisation?: StringWithAggregatesFilter<"ExemplairePhysique"> | string
     dateAcquisition?: DateTimeNullableWithAggregatesFilter<"ExemplairePhysique"> | Date | string | null
-    estReservableExterne?: BoolNullableWithAggregatesFilter<"ExemplairePhysique"> | boolean | null
-    estEmpruntableExterne?: BoolNullableWithAggregatesFilter<"ExemplairePhysique"> | boolean | null
     qrCode?: StringNullableWithAggregatesFilter<"ExemplairePhysique"> | string | null
+    dureeMaxEmpruntExterne?: IntWithAggregatesFilter<"ExemplairePhysique"> | number
+    nbMaxExemplairesExterne?: IntWithAggregatesFilter<"ExemplairePhysique"> | number
   }
 
   export type EmpruntWhereInput = {
@@ -33560,12 +34859,10 @@ export namespace Prisma {
     statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
     commentaire?: StringNullableFilter<"Emprunt"> | string | null
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
-    estEmpruntExterne?: BoolFilter<"Emprunt"> | boolean
     motifEmprunt?: StringNullableFilter<"Emprunt"> | string | null
     validePar?: StringNullableFilter<"Emprunt"> | string | null
     exemplaire?: XOR<ExemplairePhysiqueScalarRelationFilter, ExemplairePhysiqueWhereInput>
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    universiteEmprunteurRel?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     SanctionUtilisateur?: SanctionUtilisateurListRelationFilter
   }
 
@@ -33579,12 +34876,10 @@ export namespace Prisma {
     statut?: SortOrder
     commentaire?: SortOrderInput | SortOrder
     universiteEmprunteur?: SortOrder
-    estEmpruntExterne?: SortOrder
     motifEmprunt?: SortOrderInput | SortOrder
     validePar?: SortOrderInput | SortOrder
     exemplaire?: ExemplairePhysiqueOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
-    universiteEmprunteurRel?: UniversiteOrderByWithRelationInput
     SanctionUtilisateur?: SanctionUtilisateurOrderByRelationAggregateInput
     _relevance?: EmpruntOrderByRelevanceInput
   }
@@ -33602,12 +34897,10 @@ export namespace Prisma {
     statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
     commentaire?: StringNullableFilter<"Emprunt"> | string | null
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
-    estEmpruntExterne?: BoolFilter<"Emprunt"> | boolean
     motifEmprunt?: StringNullableFilter<"Emprunt"> | string | null
     validePar?: StringNullableFilter<"Emprunt"> | string | null
     exemplaire?: XOR<ExemplairePhysiqueScalarRelationFilter, ExemplairePhysiqueWhereInput>
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    universiteEmprunteurRel?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     SanctionUtilisateur?: SanctionUtilisateurListRelationFilter
   }, "id">
 
@@ -33621,7 +34914,6 @@ export namespace Prisma {
     statut?: SortOrder
     commentaire?: SortOrderInput | SortOrder
     universiteEmprunteur?: SortOrder
-    estEmpruntExterne?: SortOrder
     motifEmprunt?: SortOrderInput | SortOrder
     validePar?: SortOrderInput | SortOrder
     _count?: EmpruntCountOrderByAggregateInput
@@ -33642,7 +34934,6 @@ export namespace Prisma {
     statut?: EnumStatutEmpruntWithAggregatesFilter<"Emprunt"> | $Enums.StatutEmprunt
     commentaire?: StringNullableWithAggregatesFilter<"Emprunt"> | string | null
     universiteEmprunteur?: StringWithAggregatesFilter<"Emprunt"> | string
-    estEmpruntExterne?: BoolWithAggregatesFilter<"Emprunt"> | boolean
     motifEmprunt?: StringNullableWithAggregatesFilter<"Emprunt"> | string | null
     validePar?: StringNullableWithAggregatesFilter<"Emprunt"> | string | null
   }
@@ -33662,7 +34953,6 @@ export namespace Prisma {
     universiteSource?: StringNullableFilter<"Recommandation"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
-    universiteSourceRel?: XOR<UniversiteNullableScalarRelationFilter, UniversiteWhereInput> | null
   }
 
   export type RecommandationOrderByWithRelationInput = {
@@ -33677,7 +34967,6 @@ export namespace Prisma {
     universiteSource?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     ressource?: RessourceOrderByWithRelationInput
-    universiteSourceRel?: UniversiteOrderByWithRelationInput
     _relevance?: RecommandationOrderByRelevanceInput
   }
 
@@ -33696,7 +34985,6 @@ export namespace Prisma {
     universiteSource?: StringNullableFilter<"Recommandation"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
-    universiteSourceRel?: XOR<UniversiteNullableScalarRelationFilter, UniversiteWhereInput> | null
   }, "id">
 
   export type RecommandationOrderByWithAggregationInput = {
@@ -33739,24 +35027,11 @@ export namespace Prisma {
     nom?: StringFilter<"Universite"> | string
     adresse?: StringNullableFilter<"Universite"> | string | null
     ville?: StringFilter<"Universite"> | string
-    pays?: StringFilter<"Universite"> | string
     siteWeb?: StringNullableFilter<"Universite"> | string | null
-    dateCreation?: DateTimeFilter<"Universite"> | Date | string
-    adresseBlockchain?: StringNullableFilter<"Universite"> | string | null
-    estActive?: BoolFilter<"Universite"> | boolean
-    users?: UserListRelationFilter
-    ressources?: RessourceListRelationFilter
-    statistiquesSource?: StatistiqueInteruniversitaireListRelationFilter
-    statistiquesDestination?: StatistiqueInteruniversitaireListRelationFilter
-    reservations?: ReservationListRelationFilter
-    emprunts?: EmpruntListRelationFilter
-    recommandationsSource?: RecommandationListRelationFilter
     statistiquesBibliotheque?: StatistiqueBibliothequeListRelationFilter
-    transactionsOrigine?: TransactionBlockchainListRelationFilter
-    transactionsDestination?: TransactionBlockchainListRelationFilter
-    HistoriqueAcces?: HistoriqueAccesListRelationFilter
     reglePrets?: ReglePretListRelationFilter
     politiqueBibliotheques?: PolitiqueBibliothequeListRelationFilter
+    ufrs?: UfrListRelationFilter
   }
 
   export type UniversiteOrderByWithRelationInput = {
@@ -33764,24 +35039,11 @@ export namespace Prisma {
     nom?: SortOrder
     adresse?: SortOrderInput | SortOrder
     ville?: SortOrder
-    pays?: SortOrder
     siteWeb?: SortOrderInput | SortOrder
-    dateCreation?: SortOrder
-    adresseBlockchain?: SortOrderInput | SortOrder
-    estActive?: SortOrder
-    users?: UserOrderByRelationAggregateInput
-    ressources?: RessourceOrderByRelationAggregateInput
-    statistiquesSource?: StatistiqueInteruniversitaireOrderByRelationAggregateInput
-    statistiquesDestination?: StatistiqueInteruniversitaireOrderByRelationAggregateInput
-    reservations?: ReservationOrderByRelationAggregateInput
-    emprunts?: EmpruntOrderByRelationAggregateInput
-    recommandationsSource?: RecommandationOrderByRelationAggregateInput
     statistiquesBibliotheque?: StatistiqueBibliothequeOrderByRelationAggregateInput
-    transactionsOrigine?: TransactionBlockchainOrderByRelationAggregateInput
-    transactionsDestination?: TransactionBlockchainOrderByRelationAggregateInput
-    HistoriqueAcces?: HistoriqueAccesOrderByRelationAggregateInput
     reglePrets?: ReglePretOrderByRelationAggregateInput
     politiqueBibliotheques?: PolitiqueBibliothequeOrderByRelationAggregateInput
+    ufrs?: UfrOrderByRelationAggregateInput
     _relevance?: UniversiteOrderByRelevanceInput
   }
 
@@ -33793,24 +35055,11 @@ export namespace Prisma {
     NOT?: UniversiteWhereInput | UniversiteWhereInput[]
     adresse?: StringNullableFilter<"Universite"> | string | null
     ville?: StringFilter<"Universite"> | string
-    pays?: StringFilter<"Universite"> | string
     siteWeb?: StringNullableFilter<"Universite"> | string | null
-    dateCreation?: DateTimeFilter<"Universite"> | Date | string
-    adresseBlockchain?: StringNullableFilter<"Universite"> | string | null
-    estActive?: BoolFilter<"Universite"> | boolean
-    users?: UserListRelationFilter
-    ressources?: RessourceListRelationFilter
-    statistiquesSource?: StatistiqueInteruniversitaireListRelationFilter
-    statistiquesDestination?: StatistiqueInteruniversitaireListRelationFilter
-    reservations?: ReservationListRelationFilter
-    emprunts?: EmpruntListRelationFilter
-    recommandationsSource?: RecommandationListRelationFilter
     statistiquesBibliotheque?: StatistiqueBibliothequeListRelationFilter
-    transactionsOrigine?: TransactionBlockchainListRelationFilter
-    transactionsDestination?: TransactionBlockchainListRelationFilter
-    HistoriqueAcces?: HistoriqueAccesListRelationFilter
     reglePrets?: ReglePretListRelationFilter
     politiqueBibliotheques?: PolitiqueBibliothequeListRelationFilter
+    ufrs?: UfrListRelationFilter
   }, "id" | "nom">
 
   export type UniversiteOrderByWithAggregationInput = {
@@ -33818,11 +35067,7 @@ export namespace Prisma {
     nom?: SortOrder
     adresse?: SortOrderInput | SortOrder
     ville?: SortOrder
-    pays?: SortOrder
     siteWeb?: SortOrderInput | SortOrder
-    dateCreation?: SortOrder
-    adresseBlockchain?: SortOrderInput | SortOrder
-    estActive?: SortOrder
     _count?: UniversiteCountOrderByAggregateInput
     _max?: UniversiteMaxOrderByAggregateInput
     _min?: UniversiteMinOrderByAggregateInput
@@ -33836,11 +35081,166 @@ export namespace Prisma {
     nom?: StringWithAggregatesFilter<"Universite"> | string
     adresse?: StringNullableWithAggregatesFilter<"Universite"> | string | null
     ville?: StringWithAggregatesFilter<"Universite"> | string
-    pays?: StringWithAggregatesFilter<"Universite"> | string
     siteWeb?: StringNullableWithAggregatesFilter<"Universite"> | string | null
-    dateCreation?: DateTimeWithAggregatesFilter<"Universite"> | Date | string
-    adresseBlockchain?: StringNullableWithAggregatesFilter<"Universite"> | string | null
-    estActive?: BoolWithAggregatesFilter<"Universite"> | boolean
+  }
+
+  export type UfrWhereInput = {
+    AND?: UfrWhereInput | UfrWhereInput[]
+    OR?: UfrWhereInput[]
+    NOT?: UfrWhereInput | UfrWhereInput[]
+    id?: StringFilter<"Ufr"> | string
+    nom?: StringFilter<"Ufr"> | string
+    description?: StringNullableFilter<"Ufr"> | string | null
+    universiteId?: StringFilter<"Ufr"> | string
+    universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
+    departements?: DepartementListRelationFilter
+  }
+
+  export type UfrOrderByWithRelationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrderInput | SortOrder
+    universiteId?: SortOrder
+    universite?: UniversiteOrderByWithRelationInput
+    departements?: DepartementOrderByRelationAggregateInput
+    _relevance?: UfrOrderByRelevanceInput
+  }
+
+  export type UfrWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UfrWhereInput | UfrWhereInput[]
+    OR?: UfrWhereInput[]
+    NOT?: UfrWhereInput | UfrWhereInput[]
+    nom?: StringFilter<"Ufr"> | string
+    description?: StringNullableFilter<"Ufr"> | string | null
+    universiteId?: StringFilter<"Ufr"> | string
+    universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
+    departements?: DepartementListRelationFilter
+  }, "id">
+
+  export type UfrOrderByWithAggregationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrderInput | SortOrder
+    universiteId?: SortOrder
+    _count?: UfrCountOrderByAggregateInput
+    _max?: UfrMaxOrderByAggregateInput
+    _min?: UfrMinOrderByAggregateInput
+  }
+
+  export type UfrScalarWhereWithAggregatesInput = {
+    AND?: UfrScalarWhereWithAggregatesInput | UfrScalarWhereWithAggregatesInput[]
+    OR?: UfrScalarWhereWithAggregatesInput[]
+    NOT?: UfrScalarWhereWithAggregatesInput | UfrScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Ufr"> | string
+    nom?: StringWithAggregatesFilter<"Ufr"> | string
+    description?: StringNullableWithAggregatesFilter<"Ufr"> | string | null
+    universiteId?: StringWithAggregatesFilter<"Ufr"> | string
+  }
+
+  export type DepartementWhereInput = {
+    AND?: DepartementWhereInput | DepartementWhereInput[]
+    OR?: DepartementWhereInput[]
+    NOT?: DepartementWhereInput | DepartementWhereInput[]
+    id?: StringFilter<"Departement"> | string
+    nom?: StringFilter<"Departement"> | string
+    description?: StringNullableFilter<"Departement"> | string | null
+    ufrId?: StringFilter<"Departement"> | string
+    ufr?: XOR<UfrScalarRelationFilter, UfrWhereInput>
+    filieres?: FiliereListRelationFilter
+  }
+
+  export type DepartementOrderByWithRelationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrderInput | SortOrder
+    ufrId?: SortOrder
+    ufr?: UfrOrderByWithRelationInput
+    filieres?: FiliereOrderByRelationAggregateInput
+    _relevance?: DepartementOrderByRelevanceInput
+  }
+
+  export type DepartementWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DepartementWhereInput | DepartementWhereInput[]
+    OR?: DepartementWhereInput[]
+    NOT?: DepartementWhereInput | DepartementWhereInput[]
+    nom?: StringFilter<"Departement"> | string
+    description?: StringNullableFilter<"Departement"> | string | null
+    ufrId?: StringFilter<"Departement"> | string
+    ufr?: XOR<UfrScalarRelationFilter, UfrWhereInput>
+    filieres?: FiliereListRelationFilter
+  }, "id">
+
+  export type DepartementOrderByWithAggregationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrderInput | SortOrder
+    ufrId?: SortOrder
+    _count?: DepartementCountOrderByAggregateInput
+    _max?: DepartementMaxOrderByAggregateInput
+    _min?: DepartementMinOrderByAggregateInput
+  }
+
+  export type DepartementScalarWhereWithAggregatesInput = {
+    AND?: DepartementScalarWhereWithAggregatesInput | DepartementScalarWhereWithAggregatesInput[]
+    OR?: DepartementScalarWhereWithAggregatesInput[]
+    NOT?: DepartementScalarWhereWithAggregatesInput | DepartementScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Departement"> | string
+    nom?: StringWithAggregatesFilter<"Departement"> | string
+    description?: StringNullableWithAggregatesFilter<"Departement"> | string | null
+    ufrId?: StringWithAggregatesFilter<"Departement"> | string
+  }
+
+  export type FiliereWhereInput = {
+    AND?: FiliereWhereInput | FiliereWhereInput[]
+    OR?: FiliereWhereInput[]
+    NOT?: FiliereWhereInput | FiliereWhereInput[]
+    id?: StringFilter<"Filiere"> | string
+    nom?: StringFilter<"Filiere"> | string
+    description?: StringNullableFilter<"Filiere"> | string | null
+    departementId?: StringFilter<"Filiere"> | string
+    departement?: XOR<DepartementScalarRelationFilter, DepartementWhereInput>
+  }
+
+  export type FiliereOrderByWithRelationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrderInput | SortOrder
+    departementId?: SortOrder
+    departement?: DepartementOrderByWithRelationInput
+    _relevance?: FiliereOrderByRelevanceInput
+  }
+
+  export type FiliereWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FiliereWhereInput | FiliereWhereInput[]
+    OR?: FiliereWhereInput[]
+    NOT?: FiliereWhereInput | FiliereWhereInput[]
+    nom?: StringFilter<"Filiere"> | string
+    description?: StringNullableFilter<"Filiere"> | string | null
+    departementId?: StringFilter<"Filiere"> | string
+    departement?: XOR<DepartementScalarRelationFilter, DepartementWhereInput>
+  }, "id">
+
+  export type FiliereOrderByWithAggregationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrderInput | SortOrder
+    departementId?: SortOrder
+    _count?: FiliereCountOrderByAggregateInput
+    _max?: FiliereMaxOrderByAggregateInput
+    _min?: FiliereMinOrderByAggregateInput
+  }
+
+  export type FiliereScalarWhereWithAggregatesInput = {
+    AND?: FiliereScalarWhereWithAggregatesInput | FiliereScalarWhereWithAggregatesInput[]
+    OR?: FiliereScalarWhereWithAggregatesInput[]
+    NOT?: FiliereScalarWhereWithAggregatesInput | FiliereScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Filiere"> | string
+    nom?: StringWithAggregatesFilter<"Filiere"> | string
+    description?: StringNullableWithAggregatesFilter<"Filiere"> | string | null
+    departementId?: StringWithAggregatesFilter<"Filiere"> | string
   }
 
   export type UserWhereInput = {
@@ -33860,7 +35260,6 @@ export namespace Prisma {
     universiteId?: StringFilter<"User"> | string
     preferencesRecommandation?: StringNullableFilter<"User"> | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFilter<"User"> | $Enums.FrequenceRecommandation
-    universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
     contributions?: RessourceListRelationFilter
     favoris?: FavoriListRelationFilter
     commentaires?: CommentaireListRelationFilter
@@ -33894,7 +35293,6 @@ export namespace Prisma {
     universiteId?: SortOrder
     preferencesRecommandation?: SortOrderInput | SortOrder
     frequenceRecommandation?: SortOrder
-    universite?: UniversiteOrderByWithRelationInput
     contributions?: RessourceOrderByRelationAggregateInput
     favoris?: FavoriOrderByRelationAggregateInput
     commentaires?: CommentaireOrderByRelationAggregateInput
@@ -33932,7 +35330,6 @@ export namespace Prisma {
     universiteId?: StringFilter<"User"> | string
     preferencesRecommandation?: StringNullableFilter<"User"> | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFilter<"User"> | $Enums.FrequenceRecommandation
-    universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
     contributions?: RessourceListRelationFilter
     favoris?: FavoriListRelationFilter
     commentaires?: CommentaireListRelationFilter
@@ -34481,7 +35878,6 @@ export namespace Prisma {
     universiteUser?: StringNullableFilter<"HistoriqueAcces"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
-    universiteSrcRel?: XOR<UniversiteNullableScalarRelationFilter, UniversiteWhereInput> | null
   }
 
   export type HistoriqueAccesOrderByWithRelationInput = {
@@ -34494,7 +35890,6 @@ export namespace Prisma {
     universiteUser?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     ressource?: RessourceOrderByWithRelationInput
-    universiteSrcRel?: UniversiteOrderByWithRelationInput
     _relevance?: HistoriqueAccesOrderByRelevanceInput
   }
 
@@ -34511,7 +35906,6 @@ export namespace Prisma {
     universiteUser?: StringNullableFilter<"HistoriqueAcces"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
-    universiteSrcRel?: XOR<UniversiteNullableScalarRelationFilter, UniversiteWhereInput> | null
   }, "id">
 
   export type HistoriqueAccesOrderByWithAggregationInput = {
@@ -34614,7 +36008,6 @@ export namespace Prisma {
     userId?: StringFilter<"Collection"> | string
     nom?: StringFilter<"Collection"> | string
     description?: StringNullableFilter<"Collection"> | string | null
-    estPublique?: BoolFilter<"Collection"> | boolean
     dateCreation?: DateTimeFilter<"Collection"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressources?: CollectionRessourceListRelationFilter
@@ -34625,7 +36018,6 @@ export namespace Prisma {
     userId?: SortOrder
     nom?: SortOrder
     description?: SortOrderInput | SortOrder
-    estPublique?: SortOrder
     dateCreation?: SortOrder
     user?: UserOrderByWithRelationInput
     ressources?: CollectionRessourceOrderByRelationAggregateInput
@@ -34640,7 +36032,6 @@ export namespace Prisma {
     userId?: StringFilter<"Collection"> | string
     nom?: StringFilter<"Collection"> | string
     description?: StringNullableFilter<"Collection"> | string | null
-    estPublique?: BoolFilter<"Collection"> | boolean
     dateCreation?: DateTimeFilter<"Collection"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressources?: CollectionRessourceListRelationFilter
@@ -34651,7 +36042,6 @@ export namespace Prisma {
     userId?: SortOrder
     nom?: SortOrder
     description?: SortOrderInput | SortOrder
-    estPublique?: SortOrder
     dateCreation?: SortOrder
     _count?: CollectionCountOrderByAggregateInput
     _max?: CollectionMaxOrderByAggregateInput
@@ -34666,7 +36056,6 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Collection"> | string
     nom?: StringWithAggregatesFilter<"Collection"> | string
     description?: StringNullableWithAggregatesFilter<"Collection"> | string | null
-    estPublique?: BoolWithAggregatesFilter<"Collection"> | boolean
     dateCreation?: DateTimeWithAggregatesFilter<"Collection"> | Date | string
   }
 
@@ -34730,88 +36119,6 @@ export namespace Prisma {
     notes?: StringNullableWithAggregatesFilter<"CollectionRessource"> | string | null
   }
 
-  export type TransactionBlockchainWhereInput = {
-    AND?: TransactionBlockchainWhereInput | TransactionBlockchainWhereInput[]
-    OR?: TransactionBlockchainWhereInput[]
-    NOT?: TransactionBlockchainWhereInput | TransactionBlockchainWhereInput[]
-    id?: StringFilter<"TransactionBlockchain"> | string
-    referenceBlockchain?: StringFilter<"TransactionBlockchain"> | string
-    typeTransaction?: EnumTypeTransactionFilter<"TransactionBlockchain"> | $Enums.TypeTransaction
-    ressourceId?: StringNullableFilter<"TransactionBlockchain"> | string | null
-    universiteOrigine?: StringFilter<"TransactionBlockchain"> | string
-    universiteDestination?: StringNullableFilter<"TransactionBlockchain"> | string | null
-    dateTransaction?: DateTimeFilter<"TransactionBlockchain"> | Date | string
-    statut?: EnumStatutTransactionFilter<"TransactionBlockchain"> | $Enums.StatutTransaction
-    hashTransaction?: StringFilter<"TransactionBlockchain"> | string
-    ressource?: XOR<RessourceNullableScalarRelationFilter, RessourceWhereInput> | null
-    universiteOrigineRel?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
-    universiteDestinationRel?: XOR<UniversiteNullableScalarRelationFilter, UniversiteWhereInput> | null
-  }
-
-  export type TransactionBlockchainOrderByWithRelationInput = {
-    id?: SortOrder
-    referenceBlockchain?: SortOrder
-    typeTransaction?: SortOrder
-    ressourceId?: SortOrderInput | SortOrder
-    universiteOrigine?: SortOrder
-    universiteDestination?: SortOrderInput | SortOrder
-    dateTransaction?: SortOrder
-    statut?: SortOrder
-    hashTransaction?: SortOrder
-    ressource?: RessourceOrderByWithRelationInput
-    universiteOrigineRel?: UniversiteOrderByWithRelationInput
-    universiteDestinationRel?: UniversiteOrderByWithRelationInput
-    _relevance?: TransactionBlockchainOrderByRelevanceInput
-  }
-
-  export type TransactionBlockchainWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    referenceBlockchain?: string
-    hashTransaction?: string
-    AND?: TransactionBlockchainWhereInput | TransactionBlockchainWhereInput[]
-    OR?: TransactionBlockchainWhereInput[]
-    NOT?: TransactionBlockchainWhereInput | TransactionBlockchainWhereInput[]
-    typeTransaction?: EnumTypeTransactionFilter<"TransactionBlockchain"> | $Enums.TypeTransaction
-    ressourceId?: StringNullableFilter<"TransactionBlockchain"> | string | null
-    universiteOrigine?: StringFilter<"TransactionBlockchain"> | string
-    universiteDestination?: StringNullableFilter<"TransactionBlockchain"> | string | null
-    dateTransaction?: DateTimeFilter<"TransactionBlockchain"> | Date | string
-    statut?: EnumStatutTransactionFilter<"TransactionBlockchain"> | $Enums.StatutTransaction
-    ressource?: XOR<RessourceNullableScalarRelationFilter, RessourceWhereInput> | null
-    universiteOrigineRel?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
-    universiteDestinationRel?: XOR<UniversiteNullableScalarRelationFilter, UniversiteWhereInput> | null
-  }, "id" | "referenceBlockchain" | "hashTransaction">
-
-  export type TransactionBlockchainOrderByWithAggregationInput = {
-    id?: SortOrder
-    referenceBlockchain?: SortOrder
-    typeTransaction?: SortOrder
-    ressourceId?: SortOrderInput | SortOrder
-    universiteOrigine?: SortOrder
-    universiteDestination?: SortOrderInput | SortOrder
-    dateTransaction?: SortOrder
-    statut?: SortOrder
-    hashTransaction?: SortOrder
-    _count?: TransactionBlockchainCountOrderByAggregateInput
-    _max?: TransactionBlockchainMaxOrderByAggregateInput
-    _min?: TransactionBlockchainMinOrderByAggregateInput
-  }
-
-  export type TransactionBlockchainScalarWhereWithAggregatesInput = {
-    AND?: TransactionBlockchainScalarWhereWithAggregatesInput | TransactionBlockchainScalarWhereWithAggregatesInput[]
-    OR?: TransactionBlockchainScalarWhereWithAggregatesInput[]
-    NOT?: TransactionBlockchainScalarWhereWithAggregatesInput | TransactionBlockchainScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"TransactionBlockchain"> | string
-    referenceBlockchain?: StringWithAggregatesFilter<"TransactionBlockchain"> | string
-    typeTransaction?: EnumTypeTransactionWithAggregatesFilter<"TransactionBlockchain"> | $Enums.TypeTransaction
-    ressourceId?: StringNullableWithAggregatesFilter<"TransactionBlockchain"> | string | null
-    universiteOrigine?: StringWithAggregatesFilter<"TransactionBlockchain"> | string
-    universiteDestination?: StringNullableWithAggregatesFilter<"TransactionBlockchain"> | string | null
-    dateTransaction?: DateTimeWithAggregatesFilter<"TransactionBlockchain"> | Date | string
-    statut?: EnumStatutTransactionWithAggregatesFilter<"TransactionBlockchain"> | $Enums.StatutTransaction
-    hashTransaction?: StringWithAggregatesFilter<"TransactionBlockchain"> | string
-  }
-
   export type RessourceWhereInput = {
     AND?: RessourceWhereInput | RessourceWhereInput[]
     OR?: RessourceWhereInput[]
@@ -34824,7 +36131,6 @@ export namespace Prisma {
     urlFichier?: StringFilter<"Ressource"> | string
     urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
     format?: StringFilter<"Ressource"> | string
-    dateCreation?: DateTimeFilter<"Ressource"> | Date | string
     dateModification?: DateTimeFilter<"Ressource"> | Date | string
     motsCles?: StringFilter<"Ressource"> | string
     auteurId?: StringNullableFilter<"Ressource"> | string | null
@@ -34836,25 +36142,16 @@ export namespace Prisma {
     estArchive?: BoolFilter<"Ressource"> | boolean
     nomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
     prenomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
-    affiliationAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
     validation?: EnumTypeValidationFilter<"Ressource"> | $Enums.TypeValidation
     isbn?: StringNullableFilter<"Ressource"> | string | null
     doi?: StringNullableFilter<"Ressource"> | string | null
-    edition?: StringNullableFilter<"Ressource"> | string | null
     anneePublication?: IntNullableFilter<"Ressource"> | number | null
-    editeur?: StringNullableFilter<"Ressource"> | string | null
     nbPages?: IntNullableFilter<"Ressource"> | number | null
-    categorieBiblio?: EnumCategorieBiblioNullableFilter<"Ressource"> | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFilter<"Ressource"> | boolean
     nbExemplaires?: IntFilter<"Ressource"> | number
     nbDisponibles?: IntFilter<"Ressource"> | number
     coteClassification?: StringNullableFilter<"Ressource"> | string | null
-    estEmpruntableExterne?: BoolFilter<"Ressource"> | boolean
-    dureeMaxEmpruntExterne?: IntFilter<"Ressource"> | number
-    nbMaxExemplairesExterne?: IntFilter<"Ressource"> | number
-    necessiteAutorisation?: BoolFilter<"Ressource"> | boolean
+    categorieId?: StringFilter<"Ressource"> | string
     auteur?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
     favoris?: FavoriListRelationFilter
     commentaires?: CommentaireListRelationFilter
     notations?: NotationListRelationFilter
@@ -34864,8 +36161,8 @@ export namespace Prisma {
     reservations?: ReservationListRelationFilter
     recommandations?: RecommandationListRelationFilter
     donneesRecommandations?: DonneesRecommandationListRelationFilter
-    transactions?: TransactionBlockchainListRelationFilter
     notifications?: NotificationListRelationFilter
+    categorie?: XOR<CategorieNullableScalarRelationFilter, CategorieWhereInput> | null
   }
 
   export type RessourceOrderByWithRelationInput = {
@@ -34877,7 +36174,6 @@ export namespace Prisma {
     urlFichier?: SortOrder
     urlFichierLocal?: SortOrderInput | SortOrder
     format?: SortOrder
-    dateCreation?: SortOrder
     dateModification?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrderInput | SortOrder
@@ -34889,25 +36185,16 @@ export namespace Prisma {
     estArchive?: SortOrder
     nomAuteurExterne?: SortOrderInput | SortOrder
     prenomAuteurExterne?: SortOrderInput | SortOrder
-    affiliationAuteurExterne?: SortOrderInput | SortOrder
     validation?: SortOrder
     isbn?: SortOrderInput | SortOrder
     doi?: SortOrderInput | SortOrder
-    edition?: SortOrderInput | SortOrder
     anneePublication?: SortOrderInput | SortOrder
-    editeur?: SortOrderInput | SortOrder
     nbPages?: SortOrderInput | SortOrder
-    categorieBiblio?: SortOrderInput | SortOrder
-    estEmpruntable?: SortOrder
     nbExemplaires?: SortOrder
     nbDisponibles?: SortOrder
     coteClassification?: SortOrderInput | SortOrder
-    estEmpruntableExterne?: SortOrder
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
-    necessiteAutorisation?: SortOrder
+    categorieId?: SortOrder
     auteur?: UserOrderByWithRelationInput
-    universite?: UniversiteOrderByWithRelationInput
     favoris?: FavoriOrderByRelationAggregateInput
     commentaires?: CommentaireOrderByRelationAggregateInput
     notations?: NotationOrderByRelationAggregateInput
@@ -34917,8 +36204,8 @@ export namespace Prisma {
     reservations?: ReservationOrderByRelationAggregateInput
     recommandations?: RecommandationOrderByRelationAggregateInput
     donneesRecommandations?: DonneesRecommandationOrderByRelationAggregateInput
-    transactions?: TransactionBlockchainOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
+    categorie?: CategorieOrderByWithRelationInput
     _relevance?: RessourceOrderByRelevanceInput
   }
 
@@ -34934,7 +36221,6 @@ export namespace Prisma {
     urlFichier?: StringFilter<"Ressource"> | string
     urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
     format?: StringFilter<"Ressource"> | string
-    dateCreation?: DateTimeFilter<"Ressource"> | Date | string
     dateModification?: DateTimeFilter<"Ressource"> | Date | string
     motsCles?: StringFilter<"Ressource"> | string
     auteurId?: StringNullableFilter<"Ressource"> | string | null
@@ -34946,25 +36232,16 @@ export namespace Prisma {
     estArchive?: BoolFilter<"Ressource"> | boolean
     nomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
     prenomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
-    affiliationAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
     validation?: EnumTypeValidationFilter<"Ressource"> | $Enums.TypeValidation
     isbn?: StringNullableFilter<"Ressource"> | string | null
     doi?: StringNullableFilter<"Ressource"> | string | null
-    edition?: StringNullableFilter<"Ressource"> | string | null
     anneePublication?: IntNullableFilter<"Ressource"> | number | null
-    editeur?: StringNullableFilter<"Ressource"> | string | null
     nbPages?: IntNullableFilter<"Ressource"> | number | null
-    categorieBiblio?: EnumCategorieBiblioNullableFilter<"Ressource"> | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFilter<"Ressource"> | boolean
     nbExemplaires?: IntFilter<"Ressource"> | number
     nbDisponibles?: IntFilter<"Ressource"> | number
     coteClassification?: StringNullableFilter<"Ressource"> | string | null
-    estEmpruntableExterne?: BoolFilter<"Ressource"> | boolean
-    dureeMaxEmpruntExterne?: IntFilter<"Ressource"> | number
-    nbMaxExemplairesExterne?: IntFilter<"Ressource"> | number
-    necessiteAutorisation?: BoolFilter<"Ressource"> | boolean
+    categorieId?: StringFilter<"Ressource"> | string
     auteur?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
     favoris?: FavoriListRelationFilter
     commentaires?: CommentaireListRelationFilter
     notations?: NotationListRelationFilter
@@ -34974,8 +36251,8 @@ export namespace Prisma {
     reservations?: ReservationListRelationFilter
     recommandations?: RecommandationListRelationFilter
     donneesRecommandations?: DonneesRecommandationListRelationFilter
-    transactions?: TransactionBlockchainListRelationFilter
     notifications?: NotificationListRelationFilter
+    categorie?: XOR<CategorieNullableScalarRelationFilter, CategorieWhereInput> | null
   }, "id">
 
   export type RessourceOrderByWithAggregationInput = {
@@ -34987,7 +36264,6 @@ export namespace Prisma {
     urlFichier?: SortOrder
     urlFichierLocal?: SortOrderInput | SortOrder
     format?: SortOrder
-    dateCreation?: SortOrder
     dateModification?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrderInput | SortOrder
@@ -34999,23 +36275,15 @@ export namespace Prisma {
     estArchive?: SortOrder
     nomAuteurExterne?: SortOrderInput | SortOrder
     prenomAuteurExterne?: SortOrderInput | SortOrder
-    affiliationAuteurExterne?: SortOrderInput | SortOrder
     validation?: SortOrder
     isbn?: SortOrderInput | SortOrder
     doi?: SortOrderInput | SortOrder
-    edition?: SortOrderInput | SortOrder
     anneePublication?: SortOrderInput | SortOrder
-    editeur?: SortOrderInput | SortOrder
     nbPages?: SortOrderInput | SortOrder
-    categorieBiblio?: SortOrderInput | SortOrder
-    estEmpruntable?: SortOrder
     nbExemplaires?: SortOrder
     nbDisponibles?: SortOrder
     coteClassification?: SortOrderInput | SortOrder
-    estEmpruntableExterne?: SortOrder
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
-    necessiteAutorisation?: SortOrder
+    categorieId?: SortOrder
     _count?: RessourceCountOrderByAggregateInput
     _avg?: RessourceAvgOrderByAggregateInput
     _max?: RessourceMaxOrderByAggregateInput
@@ -35035,7 +36303,6 @@ export namespace Prisma {
     urlFichier?: StringWithAggregatesFilter<"Ressource"> | string
     urlFichierLocal?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     format?: StringWithAggregatesFilter<"Ressource"> | string
-    dateCreation?: DateTimeWithAggregatesFilter<"Ressource"> | Date | string
     dateModification?: DateTimeWithAggregatesFilter<"Ressource"> | Date | string
     motsCles?: StringWithAggregatesFilter<"Ressource"> | string
     auteurId?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
@@ -35047,23 +36314,66 @@ export namespace Prisma {
     estArchive?: BoolWithAggregatesFilter<"Ressource"> | boolean
     nomAuteurExterne?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     prenomAuteurExterne?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
-    affiliationAuteurExterne?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     validation?: EnumTypeValidationWithAggregatesFilter<"Ressource"> | $Enums.TypeValidation
     isbn?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     doi?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
-    edition?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     anneePublication?: IntNullableWithAggregatesFilter<"Ressource"> | number | null
-    editeur?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     nbPages?: IntNullableWithAggregatesFilter<"Ressource"> | number | null
-    categorieBiblio?: EnumCategorieBiblioNullableWithAggregatesFilter<"Ressource"> | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolWithAggregatesFilter<"Ressource"> | boolean
     nbExemplaires?: IntWithAggregatesFilter<"Ressource"> | number
     nbDisponibles?: IntWithAggregatesFilter<"Ressource"> | number
     coteClassification?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
-    estEmpruntableExterne?: BoolWithAggregatesFilter<"Ressource"> | boolean
-    dureeMaxEmpruntExterne?: IntWithAggregatesFilter<"Ressource"> | number
-    nbMaxExemplairesExterne?: IntWithAggregatesFilter<"Ressource"> | number
-    necessiteAutorisation?: BoolWithAggregatesFilter<"Ressource"> | boolean
+    categorieId?: StringWithAggregatesFilter<"Ressource"> | string
+  }
+
+  export type CategorieWhereInput = {
+    AND?: CategorieWhereInput | CategorieWhereInput[]
+    OR?: CategorieWhereInput[]
+    NOT?: CategorieWhereInput | CategorieWhereInput[]
+    id?: StringFilter<"Categorie"> | string
+    libelle?: StringFilter<"Categorie"> | string
+    description?: StringNullableFilter<"Categorie"> | string | null
+    dateCreation?: DateTimeFilter<"Categorie"> | Date | string
+    ressources?: RessourceListRelationFilter
+  }
+
+  export type CategorieOrderByWithRelationInput = {
+    id?: SortOrder
+    libelle?: SortOrder
+    description?: SortOrderInput | SortOrder
+    dateCreation?: SortOrder
+    ressources?: RessourceOrderByRelationAggregateInput
+    _relevance?: CategorieOrderByRelevanceInput
+  }
+
+  export type CategorieWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    libelle?: string
+    AND?: CategorieWhereInput | CategorieWhereInput[]
+    OR?: CategorieWhereInput[]
+    NOT?: CategorieWhereInput | CategorieWhereInput[]
+    description?: StringNullableFilter<"Categorie"> | string | null
+    dateCreation?: DateTimeFilter<"Categorie"> | Date | string
+    ressources?: RessourceListRelationFilter
+  }, "id" | "libelle">
+
+  export type CategorieOrderByWithAggregationInput = {
+    id?: SortOrder
+    libelle?: SortOrder
+    description?: SortOrderInput | SortOrder
+    dateCreation?: SortOrder
+    _count?: CategorieCountOrderByAggregateInput
+    _max?: CategorieMaxOrderByAggregateInput
+    _min?: CategorieMinOrderByAggregateInput
+  }
+
+  export type CategorieScalarWhereWithAggregatesInput = {
+    AND?: CategorieScalarWhereWithAggregatesInput | CategorieScalarWhereWithAggregatesInput[]
+    OR?: CategorieScalarWhereWithAggregatesInput[]
+    NOT?: CategorieScalarWhereWithAggregatesInput | CategorieScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Categorie"> | string
+    libelle?: StringWithAggregatesFilter<"Categorie"> | string
+    description?: StringNullableWithAggregatesFilter<"Categorie"> | string | null
+    dateCreation?: DateTimeWithAggregatesFilter<"Categorie"> | Date | string
   }
 
   export type StatistiqueBibliothequeWhereInput = {
@@ -35389,8 +36699,6 @@ export namespace Prisma {
     dureeEmpruntJours?: number
     nbRenouvellements?: number
     penaliteRetardJours?: boolean
-    exigeCarteValide?: boolean
-    dateMiseAJour?: Date | string
     estActif?: boolean
     universite: UniversiteCreateNestedOneWithoutReglePretsInput
   }
@@ -35403,8 +36711,6 @@ export namespace Prisma {
     dureeEmpruntJours?: number
     nbRenouvellements?: number
     penaliteRetardJours?: boolean
-    exigeCarteValide?: boolean
-    dateMiseAJour?: Date | string
     estActif?: boolean
   }
 
@@ -35415,8 +36721,6 @@ export namespace Prisma {
     dureeEmpruntJours?: IntFieldUpdateOperationsInput | number
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
-    exigeCarteValide?: BoolFieldUpdateOperationsInput | boolean
-    dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
     estActif?: BoolFieldUpdateOperationsInput | boolean
     universite?: UniversiteUpdateOneRequiredWithoutReglePretsNestedInput
   }
@@ -35429,8 +36733,6 @@ export namespace Prisma {
     dureeEmpruntJours?: IntFieldUpdateOperationsInput | number
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
-    exigeCarteValide?: BoolFieldUpdateOperationsInput | boolean
-    dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
     estActif?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -35442,8 +36744,6 @@ export namespace Prisma {
     dureeEmpruntJours?: number
     nbRenouvellements?: number
     penaliteRetardJours?: boolean
-    exigeCarteValide?: boolean
-    dateMiseAJour?: Date | string
     estActif?: boolean
   }
 
@@ -35454,8 +36754,6 @@ export namespace Prisma {
     dureeEmpruntJours?: IntFieldUpdateOperationsInput | number
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
-    exigeCarteValide?: BoolFieldUpdateOperationsInput | boolean
-    dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
     estActif?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -35467,8 +36765,6 @@ export namespace Prisma {
     dureeEmpruntJours?: IntFieldUpdateOperationsInput | number
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
-    exigeCarteValide?: BoolFieldUpdateOperationsInput | boolean
-    dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
     estActif?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -35616,88 +36912,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type StatistiqueInteruniversitaireCreateInput = {
-    id?: string
-    mois: number
-    annee: number
-    nbEmprunts?: number
-    nbReservations?: number
-    ressourcesPlusConsultees?: string | null
-    domainesPlusConsultes?: string | null
-    universiteSourceRel: UniversiteCreateNestedOneWithoutStatistiquesSourceInput
-    universiteDestinationRel: UniversiteCreateNestedOneWithoutStatistiquesDestinationInput
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedCreateInput = {
-    id?: string
-    universiteSource: string
-    universiteDestination: string
-    mois: number
-    annee: number
-    nbEmprunts?: number
-    nbReservations?: number
-    ressourcesPlusConsultees?: string | null
-    domainesPlusConsultes?: string | null
-  }
-
-  export type StatistiqueInteruniversitaireUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    mois?: IntFieldUpdateOperationsInput | number
-    annee?: IntFieldUpdateOperationsInput | number
-    nbEmprunts?: IntFieldUpdateOperationsInput | number
-    nbReservations?: IntFieldUpdateOperationsInput | number
-    ressourcesPlusConsultees?: NullableStringFieldUpdateOperationsInput | string | null
-    domainesPlusConsultes?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteSourceRel?: UniversiteUpdateOneRequiredWithoutStatistiquesSourceNestedInput
-    universiteDestinationRel?: UniversiteUpdateOneRequiredWithoutStatistiquesDestinationNestedInput
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    universiteDestination?: StringFieldUpdateOperationsInput | string
-    mois?: IntFieldUpdateOperationsInput | number
-    annee?: IntFieldUpdateOperationsInput | number
-    nbEmprunts?: IntFieldUpdateOperationsInput | number
-    nbReservations?: IntFieldUpdateOperationsInput | number
-    ressourcesPlusConsultees?: NullableStringFieldUpdateOperationsInput | string | null
-    domainesPlusConsultes?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type StatistiqueInteruniversitaireCreateManyInput = {
-    id?: string
-    universiteSource: string
-    universiteDestination: string
-    mois: number
-    annee: number
-    nbEmprunts?: number
-    nbReservations?: number
-    ressourcesPlusConsultees?: string | null
-    domainesPlusConsultes?: string | null
-  }
-
-  export type StatistiqueInteruniversitaireUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    mois?: IntFieldUpdateOperationsInput | number
-    annee?: IntFieldUpdateOperationsInput | number
-    nbEmprunts?: IntFieldUpdateOperationsInput | number
-    nbReservations?: IntFieldUpdateOperationsInput | number
-    ressourcesPlusConsultees?: NullableStringFieldUpdateOperationsInput | string | null
-    domainesPlusConsultes?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    universiteDestination?: StringFieldUpdateOperationsInput | string
-    mois?: IntFieldUpdateOperationsInput | number
-    annee?: IntFieldUpdateOperationsInput | number
-    nbEmprunts?: IntFieldUpdateOperationsInput | number
-    nbReservations?: IntFieldUpdateOperationsInput | number
-    ressourcesPlusConsultees?: NullableStringFieldUpdateOperationsInput | string | null
-    domainesPlusConsultes?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type ReservationCreateInput = {
     id?: string
     dateReservation?: Date | string
@@ -35705,9 +36919,9 @@ export namespace Prisma {
     dateFin: Date | string
     statut?: $Enums.StatutReservation
     commentaire?: string | null
+    universiteEmprunteur: string
     user?: UserCreateNestedOneWithoutReservationsInput
     ressource: RessourceCreateNestedOneWithoutReservationsInput
-    universiteEmprunteurRel: UniversiteCreateNestedOneWithoutReservationsInput
     valideur?: BibliothecaireCreateNestedOneWithoutReservationsInput
   }
 
@@ -35731,9 +36945,9 @@ export namespace Prisma {
     dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
     statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneWithoutReservationsNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutReservationsNestedInput
-    universiteEmprunteurRel?: UniversiteUpdateOneRequiredWithoutReservationsNestedInput
     valideur?: BibliothecaireUpdateOneWithoutReservationsNestedInput
   }
 
@@ -35770,6 +36984,7 @@ export namespace Prisma {
     dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
     statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
   }
 
   export type ReservationUncheckedUpdateManyInput = {
@@ -35792,9 +37007,9 @@ export namespace Prisma {
     disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
-    estReservableExterne?: boolean | null
-    estEmpruntableExterne?: boolean | null
     qrCode?: string | null
+    dureeMaxEmpruntExterne?: number
+    nbMaxExemplairesExterne?: number
     ressource: RessourceCreateNestedOneWithoutExemplairesInput
     emprunts?: EmpruntCreateNestedManyWithoutExemplaireInput
   }
@@ -35807,9 +37022,9 @@ export namespace Prisma {
     disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
-    estReservableExterne?: boolean | null
-    estEmpruntableExterne?: boolean | null
     qrCode?: string | null
+    dureeMaxEmpruntExterne?: number
+    nbMaxExemplairesExterne?: number
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutExemplaireInput
   }
 
@@ -35820,9 +37035,9 @@ export namespace Prisma {
     disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estReservableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    estEmpruntableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
+    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
     ressource?: RessourceUpdateOneRequiredWithoutExemplairesNestedInput
     emprunts?: EmpruntUpdateManyWithoutExemplaireNestedInput
   }
@@ -35835,9 +37050,9 @@ export namespace Prisma {
     disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estReservableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    estEmpruntableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
+    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
     emprunts?: EmpruntUncheckedUpdateManyWithoutExemplaireNestedInput
   }
 
@@ -35849,9 +37064,9 @@ export namespace Prisma {
     disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
-    estReservableExterne?: boolean | null
-    estEmpruntableExterne?: boolean | null
     qrCode?: string | null
+    dureeMaxEmpruntExterne?: number
+    nbMaxExemplairesExterne?: number
   }
 
   export type ExemplairePhysiqueUpdateManyMutationInput = {
@@ -35861,9 +37076,9 @@ export namespace Prisma {
     disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estReservableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    estEmpruntableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
+    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
   }
 
   export type ExemplairePhysiqueUncheckedUpdateManyInput = {
@@ -35874,9 +37089,9 @@ export namespace Prisma {
     disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estReservableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    estEmpruntableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
+    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
   }
 
   export type EmpruntCreateInput = {
@@ -35886,12 +37101,11 @@ export namespace Prisma {
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
-    estEmpruntExterne?: boolean
+    universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
     exemplaire: ExemplairePhysiqueCreateNestedOneWithoutEmpruntsInput
-    user: UserCreateNestedOneWithoutEmpruntsInput
-    universiteEmprunteurRel: UniversiteCreateNestedOneWithoutEmpruntsInput
+    user?: UserCreateNestedOneWithoutEmpruntsInput
     SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
   }
 
@@ -35905,7 +37119,6 @@ export namespace Prisma {
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
     universiteEmprunteur: string
-    estEmpruntExterne?: boolean
     motifEmprunt?: string | null
     validePar?: string | null
     SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
@@ -35918,12 +37131,11 @@ export namespace Prisma {
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
     exemplaire?: ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntsNestedInput
-    user?: UserUpdateOneRequiredWithoutEmpruntsNestedInput
-    universiteEmprunteurRel?: UniversiteUpdateOneRequiredWithoutEmpruntsNestedInput
+    user?: UserUpdateOneWithoutEmpruntsNestedInput
     SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
   }
 
@@ -35937,7 +37149,6 @@ export namespace Prisma {
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
     SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
@@ -35953,7 +37164,6 @@ export namespace Prisma {
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
     universiteEmprunteur: string
-    estEmpruntExterne?: boolean
     motifEmprunt?: string | null
     validePar?: string | null
   }
@@ -35965,7 +37175,7 @@ export namespace Prisma {
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -35980,7 +37190,6 @@ export namespace Prisma {
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -35992,9 +37201,9 @@ export namespace Prisma {
     motif: $Enums.MotifRecommandation
     estVue?: boolean
     estInteruniversitaire?: boolean
+    universiteSource?: string | null
     user: UserCreateNestedOneWithoutRecommandationsInput
     ressource: RessourceCreateNestedOneWithoutRecommandationsInput
-    universiteSourceRel?: UniversiteCreateNestedOneWithoutRecommandationsSourceInput
   }
 
   export type RecommandationUncheckedCreateInput = {
@@ -36016,9 +37225,9 @@ export namespace Prisma {
     motif?: EnumMotifRecommandationFieldUpdateOperationsInput | $Enums.MotifRecommandation
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
+    universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutRecommandationsNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutRecommandationsNestedInput
-    universiteSourceRel?: UniversiteUpdateOneWithoutRecommandationsSourceNestedInput
   }
 
   export type RecommandationUncheckedUpdateInput = {
@@ -36052,6 +37261,7 @@ export namespace Prisma {
     motif?: EnumMotifRecommandationFieldUpdateOperationsInput | $Enums.MotifRecommandation
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
+    universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RecommandationUncheckedUpdateManyInput = {
@@ -36071,24 +37281,11 @@ export namespace Prisma {
     nom: string
     adresse?: string | null
     ville: string
-    pays: string
     siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
     reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
+    ufrs?: UfrCreateNestedManyWithoutUniversiteInput
   }
 
   export type UniversiteUncheckedCreateInput = {
@@ -36096,24 +37293,11 @@ export namespace Prisma {
     nom: string
     adresse?: string | null
     ville: string
-    pays: string
     siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
     reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
+    ufrs?: UfrUncheckedCreateNestedManyWithoutUniversiteInput
   }
 
   export type UniversiteUpdateInput = {
@@ -36121,24 +37305,11 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
     reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
+    ufrs?: UfrUpdateManyWithoutUniversiteNestedInput
   }
 
   export type UniversiteUncheckedUpdateInput = {
@@ -36146,24 +37317,11 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
     reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
+    ufrs?: UfrUncheckedUpdateManyWithoutUniversiteNestedInput
   }
 
   export type UniversiteCreateManyInput = {
@@ -36171,11 +37329,7 @@ export namespace Prisma {
     nom: string
     adresse?: string | null
     ville: string
-    pays: string
     siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
   }
 
   export type UniversiteUpdateManyMutationInput = {
@@ -36183,11 +37337,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UniversiteUncheckedUpdateManyInput = {
@@ -36195,11 +37345,159 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UfrCreateInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    universite: UniversiteCreateNestedOneWithoutUfrsInput
+    departements?: DepartementCreateNestedManyWithoutUfrInput
+  }
+
+  export type UfrUncheckedCreateInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    universiteId: string
+    departements?: DepartementUncheckedCreateNestedManyWithoutUfrInput
+  }
+
+  export type UfrUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    universite?: UniversiteUpdateOneRequiredWithoutUfrsNestedInput
+    departements?: DepartementUpdateManyWithoutUfrNestedInput
+  }
+
+  export type UfrUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteId?: StringFieldUpdateOperationsInput | string
+    departements?: DepartementUncheckedUpdateManyWithoutUfrNestedInput
+  }
+
+  export type UfrCreateManyInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    universiteId: string
+  }
+
+  export type UfrUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UfrUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DepartementCreateInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    ufr: UfrCreateNestedOneWithoutDepartementsInput
+    filieres?: FiliereCreateNestedManyWithoutDepartementInput
+  }
+
+  export type DepartementUncheckedCreateInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    ufrId: string
+    filieres?: FiliereUncheckedCreateNestedManyWithoutDepartementInput
+  }
+
+  export type DepartementUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ufr?: UfrUpdateOneRequiredWithoutDepartementsNestedInput
+    filieres?: FiliereUpdateManyWithoutDepartementNestedInput
+  }
+
+  export type DepartementUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ufrId?: StringFieldUpdateOperationsInput | string
+    filieres?: FiliereUncheckedUpdateManyWithoutDepartementNestedInput
+  }
+
+  export type DepartementCreateManyInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    ufrId: string
+  }
+
+  export type DepartementUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DepartementUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ufrId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type FiliereCreateInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    departement: DepartementCreateNestedOneWithoutFilieresInput
+  }
+
+  export type FiliereUncheckedCreateInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    departementId: string
+  }
+
+  export type FiliereUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    departement?: DepartementUpdateOneRequiredWithoutFilieresNestedInput
+  }
+
+  export type FiliereUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    departementId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type FiliereCreateManyInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    departementId: string
+  }
+
+  export type FiliereUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FiliereUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    departementId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateInput = {
@@ -36213,9 +37511,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -36279,9 +37577,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -36361,6 +37659,7 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
   }
@@ -36869,10 +38168,10 @@ export namespace Prisma {
     id?: string
     dateAcces?: Date | string
     typeAcces: $Enums.TypeAcces
+    universiteSrc?: string | null
     universiteUser?: string | null
     user: UserCreateNestedOneWithoutHistoriquesInput
     ressource: RessourceCreateNestedOneWithoutHistoriquesInput
-    universiteSrcRel?: UniversiteCreateNestedOneWithoutHistoriqueAccesInput
   }
 
   export type HistoriqueAccesUncheckedCreateInput = {
@@ -36889,10 +38188,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
+    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutHistoriquesNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutHistoriquesNestedInput
-    universiteSrcRel?: UniversiteUpdateOneWithoutHistoriqueAccesNestedInput
   }
 
   export type HistoriqueAccesUncheckedUpdateInput = {
@@ -36919,6 +38218,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
+    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -36997,7 +38297,6 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
-    estPublique?: boolean
     dateCreation?: Date | string
     user: UserCreateNestedOneWithoutCollectionsInput
     ressources?: CollectionRessourceCreateNestedManyWithoutCollectionInput
@@ -37008,7 +38307,6 @@ export namespace Prisma {
     userId: string
     nom: string
     description?: string | null
-    estPublique?: boolean
     dateCreation?: Date | string
     ressources?: CollectionRessourceUncheckedCreateNestedManyWithoutCollectionInput
   }
@@ -37017,7 +38315,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCollectionsNestedInput
     ressources?: CollectionRessourceUpdateManyWithoutCollectionNestedInput
@@ -37028,7 +38325,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     ressources?: CollectionRessourceUncheckedUpdateManyWithoutCollectionNestedInput
   }
@@ -37038,7 +38334,6 @@ export namespace Prisma {
     userId: string
     nom: string
     description?: string | null
-    estPublique?: boolean
     dateCreation?: Date | string
   }
 
@@ -37046,7 +38341,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -37055,7 +38349,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -37113,87 +38406,6 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type TransactionBlockchainCreateInput = {
-    id?: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    dateTransaction?: Date | string
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
-    ressource?: RessourceCreateNestedOneWithoutTransactionsInput
-    universiteOrigineRel: UniversiteCreateNestedOneWithoutTransactionsOrigineInput
-    universiteDestinationRel?: UniversiteCreateNestedOneWithoutTransactionsDestinationInput
-  }
-
-  export type TransactionBlockchainUncheckedCreateInput = {
-    id?: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    ressourceId?: string | null
-    universiteOrigine: string
-    universiteDestination?: string | null
-    dateTransaction?: Date | string
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
-  }
-
-  export type TransactionBlockchainUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-    ressource?: RessourceUpdateOneWithoutTransactionsNestedInput
-    universiteOrigineRel?: UniversiteUpdateOneRequiredWithoutTransactionsOrigineNestedInput
-    universiteDestinationRel?: UniversiteUpdateOneWithoutTransactionsDestinationNestedInput
-  }
-
-  export type TransactionBlockchainUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteOrigine?: StringFieldUpdateOperationsInput | string
-    universiteDestination?: NullableStringFieldUpdateOperationsInput | string | null
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TransactionBlockchainCreateManyInput = {
-    id?: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    ressourceId?: string | null
-    universiteOrigine: string
-    universiteDestination?: string | null
-    dateTransaction?: Date | string
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
-  }
-
-  export type TransactionBlockchainUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TransactionBlockchainUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteOrigine?: StringFieldUpdateOperationsInput | string
-    universiteDestination?: NullableStringFieldUpdateOperationsInput | string | null
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-  }
-
   export type RessourceCreateInput = {
     id?: string
     titre: string
@@ -37203,9 +38415,9 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
+    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
@@ -37213,25 +38425,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
     auteur?: UserCreateNestedOneWithoutContributionsInput
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -37241,8 +38443,8 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
     notifications?: NotificationCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
   export type RessourceUncheckedCreateInput = {
@@ -37254,7 +38456,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     auteurId?: string | null
@@ -37266,23 +38467,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -37292,7 +38485,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
@@ -37305,9 +38497,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37315,25 +38507,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
     auteur?: UserUpdateOneWithoutContributionsNestedInput
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -37343,8 +38525,8 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
   export type RessourceUncheckedUpdateInput = {
@@ -37356,7 +38538,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -37368,23 +38549,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -37394,7 +38567,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
@@ -37407,7 +38579,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     auteurId?: string | null
@@ -37419,23 +38590,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
   }
 
   export type RessourceUpdateManyMutationInput = {
@@ -37447,9 +38610,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37457,23 +38620,14 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type RessourceUncheckedUpdateManyInput = {
@@ -37485,7 +38639,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -37497,23 +38650,68 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CategorieCreateInput = {
+    id?: string
+    libelle: string
+    description?: string | null
+    dateCreation?: Date | string
+    ressources?: RessourceCreateNestedManyWithoutCategorieInput
+  }
+
+  export type CategorieUncheckedCreateInput = {
+    id?: string
+    libelle: string
+    description?: string | null
+    dateCreation?: Date | string
+    ressources?: RessourceUncheckedCreateNestedManyWithoutCategorieInput
+  }
+
+  export type CategorieUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    libelle?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
+    ressources?: RessourceUpdateManyWithoutCategorieNestedInput
+  }
+
+  export type CategorieUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    libelle?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
+    ressources?: RessourceUncheckedUpdateManyWithoutCategorieNestedInput
+  }
+
+  export type CategorieCreateManyInput = {
+    id?: string
+    libelle: string
+    description?: string | null
+    dateCreation?: Date | string
+  }
+
+  export type CategorieUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    libelle?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CategorieUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    libelle?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StatistiqueBibliothequeCreateInput = {
@@ -38008,8 +39206,6 @@ export namespace Prisma {
     dureeEmpruntJours?: SortOrder
     nbRenouvellements?: SortOrder
     penaliteRetardJours?: SortOrder
-    exigeCarteValide?: SortOrder
-    dateMiseAJour?: SortOrder
     estActif?: SortOrder
   }
 
@@ -38027,8 +39223,6 @@ export namespace Prisma {
     dureeEmpruntJours?: SortOrder
     nbRenouvellements?: SortOrder
     penaliteRetardJours?: SortOrder
-    exigeCarteValide?: SortOrder
-    dateMiseAJour?: SortOrder
     estActif?: SortOrder
   }
 
@@ -38040,8 +39234,6 @@ export namespace Prisma {
     dureeEmpruntJours?: SortOrder
     nbRenouvellements?: SortOrder
     penaliteRetardJours?: SortOrder
-    exigeCarteValide?: SortOrder
-    dateMiseAJour?: SortOrder
     estActif?: SortOrder
   }
 
@@ -38179,69 +39371,6 @@ export namespace Prisma {
     _max?: NestedEnumTypeSanctionFilter<$PrismaModel>
   }
 
-  export type StatistiqueInteruniversitaireOrderByRelevanceInput = {
-    fields: StatistiqueInteruniversitaireOrderByRelevanceFieldEnum | StatistiqueInteruniversitaireOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type StatistiqueInteruniversitaireUniversiteSourceUniversiteDestinationMoisAnneeCompoundUniqueInput = {
-    universiteSource: string
-    universiteDestination: string
-    mois: number
-    annee: number
-  }
-
-  export type StatistiqueInteruniversitaireCountOrderByAggregateInput = {
-    id?: SortOrder
-    universiteSource?: SortOrder
-    universiteDestination?: SortOrder
-    mois?: SortOrder
-    annee?: SortOrder
-    nbEmprunts?: SortOrder
-    nbReservations?: SortOrder
-    ressourcesPlusConsultees?: SortOrder
-    domainesPlusConsultes?: SortOrder
-  }
-
-  export type StatistiqueInteruniversitaireAvgOrderByAggregateInput = {
-    mois?: SortOrder
-    annee?: SortOrder
-    nbEmprunts?: SortOrder
-    nbReservations?: SortOrder
-  }
-
-  export type StatistiqueInteruniversitaireMaxOrderByAggregateInput = {
-    id?: SortOrder
-    universiteSource?: SortOrder
-    universiteDestination?: SortOrder
-    mois?: SortOrder
-    annee?: SortOrder
-    nbEmprunts?: SortOrder
-    nbReservations?: SortOrder
-    ressourcesPlusConsultees?: SortOrder
-    domainesPlusConsultes?: SortOrder
-  }
-
-  export type StatistiqueInteruniversitaireMinOrderByAggregateInput = {
-    id?: SortOrder
-    universiteSource?: SortOrder
-    universiteDestination?: SortOrder
-    mois?: SortOrder
-    annee?: SortOrder
-    nbEmprunts?: SortOrder
-    nbReservations?: SortOrder
-    ressourcesPlusConsultees?: SortOrder
-    domainesPlusConsultes?: SortOrder
-  }
-
-  export type StatistiqueInteruniversitaireSumOrderByAggregateInput = {
-    mois?: SortOrder
-    annee?: SortOrder
-    nbEmprunts?: SortOrder
-    nbReservations?: SortOrder
-  }
-
   export type EnumStatutReservationFilter<$PrismaModel = never> = {
     equals?: $Enums.StatutReservation | EnumStatutReservationFieldRefInput<$PrismaModel>
     in?: $Enums.StatutReservation[]
@@ -38326,11 +39455,6 @@ export namespace Prisma {
     not?: NestedEnumEtatExemplaireFilter<$PrismaModel> | $Enums.EtatExemplaire
   }
 
-  export type BoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
   export type EmpruntListRelationFilter = {
     every?: EmpruntWhereInput
     some?: EmpruntWhereInput
@@ -38355,9 +39479,14 @@ export namespace Prisma {
     disponible?: SortOrder
     localisation?: SortOrder
     dateAcquisition?: SortOrder
-    estReservableExterne?: SortOrder
-    estEmpruntableExterne?: SortOrder
     qrCode?: SortOrder
+    dureeMaxEmpruntExterne?: SortOrder
+    nbMaxExemplairesExterne?: SortOrder
+  }
+
+  export type ExemplairePhysiqueAvgOrderByAggregateInput = {
+    dureeMaxEmpruntExterne?: SortOrder
+    nbMaxExemplairesExterne?: SortOrder
   }
 
   export type ExemplairePhysiqueMaxOrderByAggregateInput = {
@@ -38368,9 +39497,9 @@ export namespace Prisma {
     disponible?: SortOrder
     localisation?: SortOrder
     dateAcquisition?: SortOrder
-    estReservableExterne?: SortOrder
-    estEmpruntableExterne?: SortOrder
     qrCode?: SortOrder
+    dureeMaxEmpruntExterne?: SortOrder
+    nbMaxExemplairesExterne?: SortOrder
   }
 
   export type ExemplairePhysiqueMinOrderByAggregateInput = {
@@ -38381,9 +39510,14 @@ export namespace Prisma {
     disponible?: SortOrder
     localisation?: SortOrder
     dateAcquisition?: SortOrder
-    estReservableExterne?: SortOrder
-    estEmpruntableExterne?: SortOrder
     qrCode?: SortOrder
+    dureeMaxEmpruntExterne?: SortOrder
+    nbMaxExemplairesExterne?: SortOrder
+  }
+
+  export type ExemplairePhysiqueSumOrderByAggregateInput = {
+    dureeMaxEmpruntExterne?: SortOrder
+    nbMaxExemplairesExterne?: SortOrder
   }
 
   export type EnumEtatExemplaireWithAggregatesFilter<$PrismaModel = never> = {
@@ -38394,14 +39528,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumEtatExemplaireFilter<$PrismaModel>
     _max?: NestedEnumEtatExemplaireFilter<$PrismaModel>
-  }
-
-  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type EnumStatutEmpruntFilter<$PrismaModel = never> = {
@@ -38442,7 +39568,6 @@ export namespace Prisma {
     statut?: SortOrder
     commentaire?: SortOrder
     universiteEmprunteur?: SortOrder
-    estEmpruntExterne?: SortOrder
     motifEmprunt?: SortOrder
     validePar?: SortOrder
   }
@@ -38457,7 +39582,6 @@ export namespace Prisma {
     statut?: SortOrder
     commentaire?: SortOrder
     universiteEmprunteur?: SortOrder
-    estEmpruntExterne?: SortOrder
     motifEmprunt?: SortOrder
     validePar?: SortOrder
   }
@@ -38472,7 +39596,6 @@ export namespace Prisma {
     statut?: SortOrder
     commentaire?: SortOrder
     universiteEmprunteur?: SortOrder
-    estEmpruntExterne?: SortOrder
     motifEmprunt?: SortOrder
     validePar?: SortOrder
   }
@@ -38503,11 +39626,6 @@ export namespace Prisma {
     in?: $Enums.MotifRecommandation[]
     notIn?: $Enums.MotifRecommandation[]
     not?: NestedEnumMotifRecommandationFilter<$PrismaModel> | $Enums.MotifRecommandation
-  }
-
-  export type UniversiteNullableScalarRelationFilter = {
-    is?: UniversiteWhereInput | null
-    isNot?: UniversiteWhereInput | null
   }
 
   export type RecommandationOrderByRelevanceInput = {
@@ -38586,52 +39704,10 @@ export namespace Prisma {
     _max?: NestedEnumMotifRecommandationFilter<$PrismaModel>
   }
 
-  export type UserListRelationFilter = {
-    every?: UserWhereInput
-    some?: UserWhereInput
-    none?: UserWhereInput
-  }
-
-  export type RessourceListRelationFilter = {
-    every?: RessourceWhereInput
-    some?: RessourceWhereInput
-    none?: RessourceWhereInput
-  }
-
-  export type StatistiqueInteruniversitaireListRelationFilter = {
-    every?: StatistiqueInteruniversitaireWhereInput
-    some?: StatistiqueInteruniversitaireWhereInput
-    none?: StatistiqueInteruniversitaireWhereInput
-  }
-
-  export type ReservationListRelationFilter = {
-    every?: ReservationWhereInput
-    some?: ReservationWhereInput
-    none?: ReservationWhereInput
-  }
-
-  export type RecommandationListRelationFilter = {
-    every?: RecommandationWhereInput
-    some?: RecommandationWhereInput
-    none?: RecommandationWhereInput
-  }
-
   export type StatistiqueBibliothequeListRelationFilter = {
     every?: StatistiqueBibliothequeWhereInput
     some?: StatistiqueBibliothequeWhereInput
     none?: StatistiqueBibliothequeWhereInput
-  }
-
-  export type TransactionBlockchainListRelationFilter = {
-    every?: TransactionBlockchainWhereInput
-    some?: TransactionBlockchainWhereInput
-    none?: TransactionBlockchainWhereInput
-  }
-
-  export type HistoriqueAccesListRelationFilter = {
-    every?: HistoriqueAccesWhereInput
-    some?: HistoriqueAccesWhereInput
-    none?: HistoriqueAccesWhereInput
   }
 
   export type ReglePretListRelationFilter = {
@@ -38646,35 +39722,13 @@ export namespace Prisma {
     none?: PolitiqueBibliothequeWhereInput
   }
 
-  export type UserOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type RessourceOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type StatistiqueInteruniversitaireOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ReservationOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type RecommandationOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type UfrListRelationFilter = {
+    every?: UfrWhereInput
+    some?: UfrWhereInput
+    none?: UfrWhereInput
   }
 
   export type StatistiqueBibliothequeOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type TransactionBlockchainOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type HistoriqueAccesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -38683,6 +39737,10 @@ export namespace Prisma {
   }
 
   export type PolitiqueBibliothequeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UfrOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -38697,11 +39755,7 @@ export namespace Prisma {
     nom?: SortOrder
     adresse?: SortOrder
     ville?: SortOrder
-    pays?: SortOrder
     siteWeb?: SortOrder
-    dateCreation?: SortOrder
-    adresseBlockchain?: SortOrder
-    estActive?: SortOrder
   }
 
   export type UniversiteMaxOrderByAggregateInput = {
@@ -38709,11 +39763,7 @@ export namespace Prisma {
     nom?: SortOrder
     adresse?: SortOrder
     ville?: SortOrder
-    pays?: SortOrder
     siteWeb?: SortOrder
-    dateCreation?: SortOrder
-    adresseBlockchain?: SortOrder
-    estActive?: SortOrder
   }
 
   export type UniversiteMinOrderByAggregateInput = {
@@ -38721,11 +39771,118 @@ export namespace Prisma {
     nom?: SortOrder
     adresse?: SortOrder
     ville?: SortOrder
-    pays?: SortOrder
     siteWeb?: SortOrder
-    dateCreation?: SortOrder
-    adresseBlockchain?: SortOrder
-    estActive?: SortOrder
+  }
+
+  export type DepartementListRelationFilter = {
+    every?: DepartementWhereInput
+    some?: DepartementWhereInput
+    none?: DepartementWhereInput
+  }
+
+  export type DepartementOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UfrOrderByRelevanceInput = {
+    fields: UfrOrderByRelevanceFieldEnum | UfrOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type UfrCountOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrder
+    universiteId?: SortOrder
+  }
+
+  export type UfrMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrder
+    universiteId?: SortOrder
+  }
+
+  export type UfrMinOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrder
+    universiteId?: SortOrder
+  }
+
+  export type UfrScalarRelationFilter = {
+    is?: UfrWhereInput
+    isNot?: UfrWhereInput
+  }
+
+  export type FiliereListRelationFilter = {
+    every?: FiliereWhereInput
+    some?: FiliereWhereInput
+    none?: FiliereWhereInput
+  }
+
+  export type FiliereOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DepartementOrderByRelevanceInput = {
+    fields: DepartementOrderByRelevanceFieldEnum | DepartementOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type DepartementCountOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrder
+    ufrId?: SortOrder
+  }
+
+  export type DepartementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrder
+    ufrId?: SortOrder
+  }
+
+  export type DepartementMinOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrder
+    ufrId?: SortOrder
+  }
+
+  export type DepartementScalarRelationFilter = {
+    is?: DepartementWhereInput
+    isNot?: DepartementWhereInput
+  }
+
+  export type FiliereOrderByRelevanceInput = {
+    fields: FiliereOrderByRelevanceFieldEnum | FiliereOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type FiliereCountOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrder
+    departementId?: SortOrder
+  }
+
+  export type FiliereMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrder
+    departementId?: SortOrder
+  }
+
+  export type FiliereMinOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    description?: SortOrder
+    departementId?: SortOrder
   }
 
   export type EnumFrequenceRecommandationFilter<$PrismaModel = never> = {
@@ -38733,6 +39890,12 @@ export namespace Prisma {
     in?: $Enums.FrequenceRecommandation[]
     notIn?: $Enums.FrequenceRecommandation[]
     not?: NestedEnumFrequenceRecommandationFilter<$PrismaModel> | $Enums.FrequenceRecommandation
+  }
+
+  export type RessourceListRelationFilter = {
+    every?: RessourceWhereInput
+    some?: RessourceWhereInput
+    none?: RessourceWhereInput
   }
 
   export type FavoriListRelationFilter = {
@@ -38753,10 +39916,28 @@ export namespace Prisma {
     none?: NotationWhereInput
   }
 
+  export type HistoriqueAccesListRelationFilter = {
+    every?: HistoriqueAccesWhereInput
+    some?: HistoriqueAccesWhereInput
+    none?: HistoriqueAccesWhereInput
+  }
+
   export type CollectionListRelationFilter = {
     every?: CollectionWhereInput
     some?: CollectionWhereInput
     none?: CollectionWhereInput
+  }
+
+  export type ReservationListRelationFilter = {
+    every?: ReservationWhereInput
+    some?: ReservationWhereInput
+    none?: ReservationWhereInput
+  }
+
+  export type RecommandationListRelationFilter = {
+    every?: RecommandationWhereInput
+    some?: RecommandationWhereInput
+    none?: RecommandationWhereInput
   }
 
   export type JournalAuditListRelationFilter = {
@@ -38801,6 +39982,10 @@ export namespace Prisma {
     none?: AdministrateurWhereInput
   }
 
+  export type RessourceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type FavoriOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -38813,7 +39998,19 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type HistoriqueAccesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type CollectionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ReservationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RecommandationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -39328,7 +40525,6 @@ export namespace Prisma {
     userId?: SortOrder
     nom?: SortOrder
     description?: SortOrder
-    estPublique?: SortOrder
     dateCreation?: SortOrder
   }
 
@@ -39337,7 +40533,6 @@ export namespace Prisma {
     userId?: SortOrder
     nom?: SortOrder
     description?: SortOrder
-    estPublique?: SortOrder
     dateCreation?: SortOrder
   }
 
@@ -39346,7 +40541,6 @@ export namespace Prisma {
     userId?: SortOrder
     nom?: SortOrder
     description?: SortOrder
-    estPublique?: SortOrder
     dateCreation?: SortOrder
   }
 
@@ -39390,87 +40584,6 @@ export namespace Prisma {
     notes?: SortOrder
   }
 
-  export type EnumTypeTransactionFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeTransaction | EnumTypeTransactionFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeTransaction[]
-    notIn?: $Enums.TypeTransaction[]
-    not?: NestedEnumTypeTransactionFilter<$PrismaModel> | $Enums.TypeTransaction
-  }
-
-  export type EnumStatutTransactionFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatutTransaction | EnumStatutTransactionFieldRefInput<$PrismaModel>
-    in?: $Enums.StatutTransaction[]
-    notIn?: $Enums.StatutTransaction[]
-    not?: NestedEnumStatutTransactionFilter<$PrismaModel> | $Enums.StatutTransaction
-  }
-
-  export type RessourceNullableScalarRelationFilter = {
-    is?: RessourceWhereInput | null
-    isNot?: RessourceWhereInput | null
-  }
-
-  export type TransactionBlockchainOrderByRelevanceInput = {
-    fields: TransactionBlockchainOrderByRelevanceFieldEnum | TransactionBlockchainOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type TransactionBlockchainCountOrderByAggregateInput = {
-    id?: SortOrder
-    referenceBlockchain?: SortOrder
-    typeTransaction?: SortOrder
-    ressourceId?: SortOrder
-    universiteOrigine?: SortOrder
-    universiteDestination?: SortOrder
-    dateTransaction?: SortOrder
-    statut?: SortOrder
-    hashTransaction?: SortOrder
-  }
-
-  export type TransactionBlockchainMaxOrderByAggregateInput = {
-    id?: SortOrder
-    referenceBlockchain?: SortOrder
-    typeTransaction?: SortOrder
-    ressourceId?: SortOrder
-    universiteOrigine?: SortOrder
-    universiteDestination?: SortOrder
-    dateTransaction?: SortOrder
-    statut?: SortOrder
-    hashTransaction?: SortOrder
-  }
-
-  export type TransactionBlockchainMinOrderByAggregateInput = {
-    id?: SortOrder
-    referenceBlockchain?: SortOrder
-    typeTransaction?: SortOrder
-    ressourceId?: SortOrder
-    universiteOrigine?: SortOrder
-    universiteDestination?: SortOrder
-    dateTransaction?: SortOrder
-    statut?: SortOrder
-    hashTransaction?: SortOrder
-  }
-
-  export type EnumTypeTransactionWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeTransaction | EnumTypeTransactionFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeTransaction[]
-    notIn?: $Enums.TypeTransaction[]
-    not?: NestedEnumTypeTransactionWithAggregatesFilter<$PrismaModel> | $Enums.TypeTransaction
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeTransactionFilter<$PrismaModel>
-    _max?: NestedEnumTypeTransactionFilter<$PrismaModel>
-  }
-
-  export type EnumStatutTransactionWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatutTransaction | EnumStatutTransactionFieldRefInput<$PrismaModel>
-    in?: $Enums.StatutTransaction[]
-    notIn?: $Enums.StatutTransaction[]
-    not?: NestedEnumStatutTransactionWithAggregatesFilter<$PrismaModel> | $Enums.StatutTransaction
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatutTransactionFilter<$PrismaModel>
-    _max?: NestedEnumStatutTransactionFilter<$PrismaModel>
-  }
-
   export type EnumTypeRessourceFilter<$PrismaModel = never> = {
     equals?: $Enums.TypeRessource | EnumTypeRessourceFieldRefInput<$PrismaModel>
     in?: $Enums.TypeRessource[]
@@ -39503,17 +40616,15 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type EnumCategorieBiblioNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.CategorieBiblio | EnumCategorieBiblioFieldRefInput<$PrismaModel> | null
-    in?: $Enums.CategorieBiblio[] | null
-    notIn?: $Enums.CategorieBiblio[] | null
-    not?: NestedEnumCategorieBiblioNullableFilter<$PrismaModel> | $Enums.CategorieBiblio | null
-  }
-
   export type ExemplairePhysiqueListRelationFilter = {
     every?: ExemplairePhysiqueWhereInput
     some?: ExemplairePhysiqueWhereInput
     none?: ExemplairePhysiqueWhereInput
+  }
+
+  export type CategorieNullableScalarRelationFilter = {
+    is?: CategorieWhereInput | null
+    isNot?: CategorieWhereInput | null
   }
 
   export type ExemplairePhysiqueOrderByRelationAggregateInput = {
@@ -39535,7 +40646,6 @@ export namespace Prisma {
     urlFichier?: SortOrder
     urlFichierLocal?: SortOrder
     format?: SortOrder
-    dateCreation?: SortOrder
     dateModification?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
@@ -39547,23 +40657,15 @@ export namespace Prisma {
     estArchive?: SortOrder
     nomAuteurExterne?: SortOrder
     prenomAuteurExterne?: SortOrder
-    affiliationAuteurExterne?: SortOrder
     validation?: SortOrder
     isbn?: SortOrder
     doi?: SortOrder
-    edition?: SortOrder
     anneePublication?: SortOrder
-    editeur?: SortOrder
     nbPages?: SortOrder
-    categorieBiblio?: SortOrder
-    estEmpruntable?: SortOrder
     nbExemplaires?: SortOrder
     nbDisponibles?: SortOrder
     coteClassification?: SortOrder
-    estEmpruntableExterne?: SortOrder
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
-    necessiteAutorisation?: SortOrder
+    categorieId?: SortOrder
   }
 
   export type RessourceAvgOrderByAggregateInput = {
@@ -39571,8 +40673,6 @@ export namespace Prisma {
     nbPages?: SortOrder
     nbExemplaires?: SortOrder
     nbDisponibles?: SortOrder
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
   }
 
   export type RessourceMaxOrderByAggregateInput = {
@@ -39584,7 +40684,6 @@ export namespace Prisma {
     urlFichier?: SortOrder
     urlFichierLocal?: SortOrder
     format?: SortOrder
-    dateCreation?: SortOrder
     dateModification?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
@@ -39596,23 +40695,15 @@ export namespace Prisma {
     estArchive?: SortOrder
     nomAuteurExterne?: SortOrder
     prenomAuteurExterne?: SortOrder
-    affiliationAuteurExterne?: SortOrder
     validation?: SortOrder
     isbn?: SortOrder
     doi?: SortOrder
-    edition?: SortOrder
     anneePublication?: SortOrder
-    editeur?: SortOrder
     nbPages?: SortOrder
-    categorieBiblio?: SortOrder
-    estEmpruntable?: SortOrder
     nbExemplaires?: SortOrder
     nbDisponibles?: SortOrder
     coteClassification?: SortOrder
-    estEmpruntableExterne?: SortOrder
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
-    necessiteAutorisation?: SortOrder
+    categorieId?: SortOrder
   }
 
   export type RessourceMinOrderByAggregateInput = {
@@ -39624,7 +40715,6 @@ export namespace Prisma {
     urlFichier?: SortOrder
     urlFichierLocal?: SortOrder
     format?: SortOrder
-    dateCreation?: SortOrder
     dateModification?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
@@ -39636,23 +40726,15 @@ export namespace Prisma {
     estArchive?: SortOrder
     nomAuteurExterne?: SortOrder
     prenomAuteurExterne?: SortOrder
-    affiliationAuteurExterne?: SortOrder
     validation?: SortOrder
     isbn?: SortOrder
     doi?: SortOrder
-    edition?: SortOrder
     anneePublication?: SortOrder
-    editeur?: SortOrder
     nbPages?: SortOrder
-    categorieBiblio?: SortOrder
-    estEmpruntable?: SortOrder
     nbExemplaires?: SortOrder
     nbDisponibles?: SortOrder
     coteClassification?: SortOrder
-    estEmpruntableExterne?: SortOrder
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
-    necessiteAutorisation?: SortOrder
+    categorieId?: SortOrder
   }
 
   export type RessourceSumOrderByAggregateInput = {
@@ -39660,8 +40742,6 @@ export namespace Prisma {
     nbPages?: SortOrder
     nbExemplaires?: SortOrder
     nbDisponibles?: SortOrder
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
   }
 
   export type EnumTypeRessourceWithAggregatesFilter<$PrismaModel = never> = {
@@ -39710,14 +40790,31 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type EnumCategorieBiblioNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.CategorieBiblio | EnumCategorieBiblioFieldRefInput<$PrismaModel> | null
-    in?: $Enums.CategorieBiblio[] | null
-    notIn?: $Enums.CategorieBiblio[] | null
-    not?: NestedEnumCategorieBiblioNullableWithAggregatesFilter<$PrismaModel> | $Enums.CategorieBiblio | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumCategorieBiblioNullableFilter<$PrismaModel>
-    _max?: NestedEnumCategorieBiblioNullableFilter<$PrismaModel>
+  export type CategorieOrderByRelevanceInput = {
+    fields: CategorieOrderByRelevanceFieldEnum | CategorieOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type CategorieCountOrderByAggregateInput = {
+    id?: SortOrder
+    libelle?: SortOrder
+    description?: SortOrder
+    dateCreation?: SortOrder
+  }
+
+  export type CategorieMaxOrderByAggregateInput = {
+    id?: SortOrder
+    libelle?: SortOrder
+    description?: SortOrder
+    dateCreation?: SortOrder
+  }
+
+  export type CategorieMinOrderByAggregateInput = {
+    id?: SortOrder
+    libelle?: SortOrder
+    description?: SortOrder
+    dateCreation?: SortOrder
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -39831,6 +40928,11 @@ export namespace Prisma {
     in?: $Enums.TypeNotification[]
     notIn?: $Enums.TypeNotification[]
     not?: NestedEnumTypeNotificationFilter<$PrismaModel> | $Enums.TypeNotification
+  }
+
+  export type RessourceNullableScalarRelationFilter = {
+    is?: RessourceWhereInput | null
+    isNot?: RessourceWhereInput | null
   }
 
   export type NotificationOrderByRelevanceInput = {
@@ -40066,34 +41168,6 @@ export namespace Prisma {
     update?: XOR<XOR<EmpruntUpdateToOneWithWhereWithoutSanctionUtilisateurInput, EmpruntUpdateWithoutSanctionUtilisateurInput>, EmpruntUncheckedUpdateWithoutSanctionUtilisateurInput>
   }
 
-  export type UniversiteCreateNestedOneWithoutStatistiquesSourceInput = {
-    create?: XOR<UniversiteCreateWithoutStatistiquesSourceInput, UniversiteUncheckedCreateWithoutStatistiquesSourceInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutStatistiquesSourceInput
-    connect?: UniversiteWhereUniqueInput
-  }
-
-  export type UniversiteCreateNestedOneWithoutStatistiquesDestinationInput = {
-    create?: XOR<UniversiteCreateWithoutStatistiquesDestinationInput, UniversiteUncheckedCreateWithoutStatistiquesDestinationInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutStatistiquesDestinationInput
-    connect?: UniversiteWhereUniqueInput
-  }
-
-  export type UniversiteUpdateOneRequiredWithoutStatistiquesSourceNestedInput = {
-    create?: XOR<UniversiteCreateWithoutStatistiquesSourceInput, UniversiteUncheckedCreateWithoutStatistiquesSourceInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutStatistiquesSourceInput
-    upsert?: UniversiteUpsertWithoutStatistiquesSourceInput
-    connect?: UniversiteWhereUniqueInput
-    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutStatistiquesSourceInput, UniversiteUpdateWithoutStatistiquesSourceInput>, UniversiteUncheckedUpdateWithoutStatistiquesSourceInput>
-  }
-
-  export type UniversiteUpdateOneRequiredWithoutStatistiquesDestinationNestedInput = {
-    create?: XOR<UniversiteCreateWithoutStatistiquesDestinationInput, UniversiteUncheckedCreateWithoutStatistiquesDestinationInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutStatistiquesDestinationInput
-    upsert?: UniversiteUpsertWithoutStatistiquesDestinationInput
-    connect?: UniversiteWhereUniqueInput
-    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutStatistiquesDestinationInput, UniversiteUpdateWithoutStatistiquesDestinationInput>, UniversiteUncheckedUpdateWithoutStatistiquesDestinationInput>
-  }
-
   export type UserCreateNestedOneWithoutReservationsInput = {
     create?: XOR<UserCreateWithoutReservationsInput, UserUncheckedCreateWithoutReservationsInput>
     connectOrCreate?: UserCreateOrConnectWithoutReservationsInput
@@ -40104,12 +41178,6 @@ export namespace Prisma {
     create?: XOR<RessourceCreateWithoutReservationsInput, RessourceUncheckedCreateWithoutReservationsInput>
     connectOrCreate?: RessourceCreateOrConnectWithoutReservationsInput
     connect?: RessourceWhereUniqueInput
-  }
-
-  export type UniversiteCreateNestedOneWithoutReservationsInput = {
-    create?: XOR<UniversiteCreateWithoutReservationsInput, UniversiteUncheckedCreateWithoutReservationsInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutReservationsInput
-    connect?: UniversiteWhereUniqueInput
   }
 
   export type BibliothecaireCreateNestedOneWithoutReservationsInput = {
@@ -40138,14 +41206,6 @@ export namespace Prisma {
     upsert?: RessourceUpsertWithoutReservationsInput
     connect?: RessourceWhereUniqueInput
     update?: XOR<XOR<RessourceUpdateToOneWithWhereWithoutReservationsInput, RessourceUpdateWithoutReservationsInput>, RessourceUncheckedUpdateWithoutReservationsInput>
-  }
-
-  export type UniversiteUpdateOneRequiredWithoutReservationsNestedInput = {
-    create?: XOR<UniversiteCreateWithoutReservationsInput, UniversiteUncheckedCreateWithoutReservationsInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutReservationsInput
-    upsert?: UniversiteUpsertWithoutReservationsInput
-    connect?: UniversiteWhereUniqueInput
-    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutReservationsInput, UniversiteUpdateWithoutReservationsInput>, UniversiteUncheckedUpdateWithoutReservationsInput>
   }
 
   export type BibliothecaireUpdateOneWithoutReservationsNestedInput = {
@@ -40180,10 +41240,6 @@ export namespace Prisma {
 
   export type EnumEtatExemplaireFieldUpdateOperationsInput = {
     set?: $Enums.EtatExemplaire
-  }
-
-  export type NullableBoolFieldUpdateOperationsInput = {
-    set?: boolean | null
   }
 
   export type RessourceUpdateOneRequiredWithoutExemplairesNestedInput = {
@@ -40234,12 +41290,6 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type UniversiteCreateNestedOneWithoutEmpruntsInput = {
-    create?: XOR<UniversiteCreateWithoutEmpruntsInput, UniversiteUncheckedCreateWithoutEmpruntsInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutEmpruntsInput
-    connect?: UniversiteWhereUniqueInput
-  }
-
   export type SanctionUtilisateurCreateNestedManyWithoutEmpruntInput = {
     create?: XOR<SanctionUtilisateurCreateWithoutEmpruntInput, SanctionUtilisateurUncheckedCreateWithoutEmpruntInput> | SanctionUtilisateurCreateWithoutEmpruntInput[] | SanctionUtilisateurUncheckedCreateWithoutEmpruntInput[]
     connectOrCreate?: SanctionUtilisateurCreateOrConnectWithoutEmpruntInput | SanctionUtilisateurCreateOrConnectWithoutEmpruntInput[]
@@ -40266,20 +41316,14 @@ export namespace Prisma {
     update?: XOR<XOR<ExemplairePhysiqueUpdateToOneWithWhereWithoutEmpruntsInput, ExemplairePhysiqueUpdateWithoutEmpruntsInput>, ExemplairePhysiqueUncheckedUpdateWithoutEmpruntsInput>
   }
 
-  export type UserUpdateOneRequiredWithoutEmpruntsNestedInput = {
+  export type UserUpdateOneWithoutEmpruntsNestedInput = {
     create?: XOR<UserCreateWithoutEmpruntsInput, UserUncheckedCreateWithoutEmpruntsInput>
     connectOrCreate?: UserCreateOrConnectWithoutEmpruntsInput
     upsert?: UserUpsertWithoutEmpruntsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEmpruntsInput, UserUpdateWithoutEmpruntsInput>, UserUncheckedUpdateWithoutEmpruntsInput>
-  }
-
-  export type UniversiteUpdateOneRequiredWithoutEmpruntsNestedInput = {
-    create?: XOR<UniversiteCreateWithoutEmpruntsInput, UniversiteUncheckedCreateWithoutEmpruntsInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutEmpruntsInput
-    upsert?: UniversiteUpsertWithoutEmpruntsInput
-    connect?: UniversiteWhereUniqueInput
-    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutEmpruntsInput, UniversiteUpdateWithoutEmpruntsInput>, UniversiteUncheckedUpdateWithoutEmpruntsInput>
   }
 
   export type SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput = {
@@ -40322,12 +41366,6 @@ export namespace Prisma {
     connect?: RessourceWhereUniqueInput
   }
 
-  export type UniversiteCreateNestedOneWithoutRecommandationsSourceInput = {
-    create?: XOR<UniversiteCreateWithoutRecommandationsSourceInput, UniversiteUncheckedCreateWithoutRecommandationsSourceInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutRecommandationsSourceInput
-    connect?: UniversiteWhereUniqueInput
-  }
-
   export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -40356,91 +41394,11 @@ export namespace Prisma {
     update?: XOR<XOR<RessourceUpdateToOneWithWhereWithoutRecommandationsInput, RessourceUpdateWithoutRecommandationsInput>, RessourceUncheckedUpdateWithoutRecommandationsInput>
   }
 
-  export type UniversiteUpdateOneWithoutRecommandationsSourceNestedInput = {
-    create?: XOR<UniversiteCreateWithoutRecommandationsSourceInput, UniversiteUncheckedCreateWithoutRecommandationsSourceInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutRecommandationsSourceInput
-    upsert?: UniversiteUpsertWithoutRecommandationsSourceInput
-    disconnect?: UniversiteWhereInput | boolean
-    delete?: UniversiteWhereInput | boolean
-    connect?: UniversiteWhereUniqueInput
-    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutRecommandationsSourceInput, UniversiteUpdateWithoutRecommandationsSourceInput>, UniversiteUncheckedUpdateWithoutRecommandationsSourceInput>
-  }
-
-  export type UserCreateNestedManyWithoutUniversiteInput = {
-    create?: XOR<UserCreateWithoutUniversiteInput, UserUncheckedCreateWithoutUniversiteInput> | UserCreateWithoutUniversiteInput[] | UserUncheckedCreateWithoutUniversiteInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutUniversiteInput | UserCreateOrConnectWithoutUniversiteInput[]
-    createMany?: UserCreateManyUniversiteInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-  }
-
-  export type RessourceCreateNestedManyWithoutUniversiteInput = {
-    create?: XOR<RessourceCreateWithoutUniversiteInput, RessourceUncheckedCreateWithoutUniversiteInput> | RessourceCreateWithoutUniversiteInput[] | RessourceUncheckedCreateWithoutUniversiteInput[]
-    connectOrCreate?: RessourceCreateOrConnectWithoutUniversiteInput | RessourceCreateOrConnectWithoutUniversiteInput[]
-    createMany?: RessourceCreateManyUniversiteInputEnvelope
-    connect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
-  }
-
-  export type StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput = {
-    create?: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput> | StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput[] | StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput[]
-    connectOrCreate?: StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteSourceRelInput | StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteSourceRelInput[]
-    createMany?: StatistiqueInteruniversitaireCreateManyUniversiteSourceRelInputEnvelope
-    connect?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-  }
-
-  export type StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput = {
-    create?: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteDestinationRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteDestinationRelInput> | StatistiqueInteruniversitaireCreateWithoutUniversiteDestinationRelInput[] | StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteDestinationRelInput[]
-    connectOrCreate?: StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteDestinationRelInput | StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteDestinationRelInput[]
-    createMany?: StatistiqueInteruniversitaireCreateManyUniversiteDestinationRelInputEnvelope
-    connect?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-  }
-
-  export type ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput = {
-    create?: XOR<ReservationCreateWithoutUniversiteEmprunteurRelInput, ReservationUncheckedCreateWithoutUniversiteEmprunteurRelInput> | ReservationCreateWithoutUniversiteEmprunteurRelInput[] | ReservationUncheckedCreateWithoutUniversiteEmprunteurRelInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutUniversiteEmprunteurRelInput | ReservationCreateOrConnectWithoutUniversiteEmprunteurRelInput[]
-    createMany?: ReservationCreateManyUniversiteEmprunteurRelInputEnvelope
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-  }
-
-  export type EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput = {
-    create?: XOR<EmpruntCreateWithoutUniversiteEmprunteurRelInput, EmpruntUncheckedCreateWithoutUniversiteEmprunteurRelInput> | EmpruntCreateWithoutUniversiteEmprunteurRelInput[] | EmpruntUncheckedCreateWithoutUniversiteEmprunteurRelInput[]
-    connectOrCreate?: EmpruntCreateOrConnectWithoutUniversiteEmprunteurRelInput | EmpruntCreateOrConnectWithoutUniversiteEmprunteurRelInput[]
-    createMany?: EmpruntCreateManyUniversiteEmprunteurRelInputEnvelope
-    connect?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-  }
-
-  export type RecommandationCreateNestedManyWithoutUniversiteSourceRelInput = {
-    create?: XOR<RecommandationCreateWithoutUniversiteSourceRelInput, RecommandationUncheckedCreateWithoutUniversiteSourceRelInput> | RecommandationCreateWithoutUniversiteSourceRelInput[] | RecommandationUncheckedCreateWithoutUniversiteSourceRelInput[]
-    connectOrCreate?: RecommandationCreateOrConnectWithoutUniversiteSourceRelInput | RecommandationCreateOrConnectWithoutUniversiteSourceRelInput[]
-    createMany?: RecommandationCreateManyUniversiteSourceRelInputEnvelope
-    connect?: RecommandationWhereUniqueInput | RecommandationWhereUniqueInput[]
-  }
-
   export type StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput = {
     create?: XOR<StatistiqueBibliothequeCreateWithoutUniversiteInput, StatistiqueBibliothequeUncheckedCreateWithoutUniversiteInput> | StatistiqueBibliothequeCreateWithoutUniversiteInput[] | StatistiqueBibliothequeUncheckedCreateWithoutUniversiteInput[]
     connectOrCreate?: StatistiqueBibliothequeCreateOrConnectWithoutUniversiteInput | StatistiqueBibliothequeCreateOrConnectWithoutUniversiteInput[]
     createMany?: StatistiqueBibliothequeCreateManyUniversiteInputEnvelope
     connect?: StatistiqueBibliothequeWhereUniqueInput | StatistiqueBibliothequeWhereUniqueInput[]
-  }
-
-  export type TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput = {
-    create?: XOR<TransactionBlockchainCreateWithoutUniversiteOrigineRelInput, TransactionBlockchainUncheckedCreateWithoutUniversiteOrigineRelInput> | TransactionBlockchainCreateWithoutUniversiteOrigineRelInput[] | TransactionBlockchainUncheckedCreateWithoutUniversiteOrigineRelInput[]
-    connectOrCreate?: TransactionBlockchainCreateOrConnectWithoutUniversiteOrigineRelInput | TransactionBlockchainCreateOrConnectWithoutUniversiteOrigineRelInput[]
-    createMany?: TransactionBlockchainCreateManyUniversiteOrigineRelInputEnvelope
-    connect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-  }
-
-  export type TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput = {
-    create?: XOR<TransactionBlockchainCreateWithoutUniversiteDestinationRelInput, TransactionBlockchainUncheckedCreateWithoutUniversiteDestinationRelInput> | TransactionBlockchainCreateWithoutUniversiteDestinationRelInput[] | TransactionBlockchainUncheckedCreateWithoutUniversiteDestinationRelInput[]
-    connectOrCreate?: TransactionBlockchainCreateOrConnectWithoutUniversiteDestinationRelInput | TransactionBlockchainCreateOrConnectWithoutUniversiteDestinationRelInput[]
-    createMany?: TransactionBlockchainCreateManyUniversiteDestinationRelInputEnvelope
-    connect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-  }
-
-  export type HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput = {
-    create?: XOR<HistoriqueAccesCreateWithoutUniversiteSrcRelInput, HistoriqueAccesUncheckedCreateWithoutUniversiteSrcRelInput> | HistoriqueAccesCreateWithoutUniversiteSrcRelInput[] | HistoriqueAccesUncheckedCreateWithoutUniversiteSrcRelInput[]
-    connectOrCreate?: HistoriqueAccesCreateOrConnectWithoutUniversiteSrcRelInput | HistoriqueAccesCreateOrConnectWithoutUniversiteSrcRelInput[]
-    createMany?: HistoriqueAccesCreateManyUniversiteSrcRelInputEnvelope
-    connect?: HistoriqueAccesWhereUniqueInput | HistoriqueAccesWhereUniqueInput[]
   }
 
   export type ReglePretCreateNestedManyWithoutUniversiteInput = {
@@ -40457,53 +41415,11 @@ export namespace Prisma {
     connect?: PolitiqueBibliothequeWhereUniqueInput | PolitiqueBibliothequeWhereUniqueInput[]
   }
 
-  export type UserUncheckedCreateNestedManyWithoutUniversiteInput = {
-    create?: XOR<UserCreateWithoutUniversiteInput, UserUncheckedCreateWithoutUniversiteInput> | UserCreateWithoutUniversiteInput[] | UserUncheckedCreateWithoutUniversiteInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutUniversiteInput | UserCreateOrConnectWithoutUniversiteInput[]
-    createMany?: UserCreateManyUniversiteInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-  }
-
-  export type RessourceUncheckedCreateNestedManyWithoutUniversiteInput = {
-    create?: XOR<RessourceCreateWithoutUniversiteInput, RessourceUncheckedCreateWithoutUniversiteInput> | RessourceCreateWithoutUniversiteInput[] | RessourceUncheckedCreateWithoutUniversiteInput[]
-    connectOrCreate?: RessourceCreateOrConnectWithoutUniversiteInput | RessourceCreateOrConnectWithoutUniversiteInput[]
-    createMany?: RessourceCreateManyUniversiteInputEnvelope
-    connect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput = {
-    create?: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput> | StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput[] | StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput[]
-    connectOrCreate?: StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteSourceRelInput | StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteSourceRelInput[]
-    createMany?: StatistiqueInteruniversitaireCreateManyUniversiteSourceRelInputEnvelope
-    connect?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput = {
-    create?: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteDestinationRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteDestinationRelInput> | StatistiqueInteruniversitaireCreateWithoutUniversiteDestinationRelInput[] | StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteDestinationRelInput[]
-    connectOrCreate?: StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteDestinationRelInput | StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteDestinationRelInput[]
-    createMany?: StatistiqueInteruniversitaireCreateManyUniversiteDestinationRelInputEnvelope
-    connect?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-  }
-
-  export type ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput = {
-    create?: XOR<ReservationCreateWithoutUniversiteEmprunteurRelInput, ReservationUncheckedCreateWithoutUniversiteEmprunteurRelInput> | ReservationCreateWithoutUniversiteEmprunteurRelInput[] | ReservationUncheckedCreateWithoutUniversiteEmprunteurRelInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutUniversiteEmprunteurRelInput | ReservationCreateOrConnectWithoutUniversiteEmprunteurRelInput[]
-    createMany?: ReservationCreateManyUniversiteEmprunteurRelInputEnvelope
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-  }
-
-  export type EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput = {
-    create?: XOR<EmpruntCreateWithoutUniversiteEmprunteurRelInput, EmpruntUncheckedCreateWithoutUniversiteEmprunteurRelInput> | EmpruntCreateWithoutUniversiteEmprunteurRelInput[] | EmpruntUncheckedCreateWithoutUniversiteEmprunteurRelInput[]
-    connectOrCreate?: EmpruntCreateOrConnectWithoutUniversiteEmprunteurRelInput | EmpruntCreateOrConnectWithoutUniversiteEmprunteurRelInput[]
-    createMany?: EmpruntCreateManyUniversiteEmprunteurRelInputEnvelope
-    connect?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-  }
-
-  export type RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput = {
-    create?: XOR<RecommandationCreateWithoutUniversiteSourceRelInput, RecommandationUncheckedCreateWithoutUniversiteSourceRelInput> | RecommandationCreateWithoutUniversiteSourceRelInput[] | RecommandationUncheckedCreateWithoutUniversiteSourceRelInput[]
-    connectOrCreate?: RecommandationCreateOrConnectWithoutUniversiteSourceRelInput | RecommandationCreateOrConnectWithoutUniversiteSourceRelInput[]
-    createMany?: RecommandationCreateManyUniversiteSourceRelInputEnvelope
-    connect?: RecommandationWhereUniqueInput | RecommandationWhereUniqueInput[]
+  export type UfrCreateNestedManyWithoutUniversiteInput = {
+    create?: XOR<UfrCreateWithoutUniversiteInput, UfrUncheckedCreateWithoutUniversiteInput> | UfrCreateWithoutUniversiteInput[] | UfrUncheckedCreateWithoutUniversiteInput[]
+    connectOrCreate?: UfrCreateOrConnectWithoutUniversiteInput | UfrCreateOrConnectWithoutUniversiteInput[]
+    createMany?: UfrCreateManyUniversiteInputEnvelope
+    connect?: UfrWhereUniqueInput | UfrWhereUniqueInput[]
   }
 
   export type StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput = {
@@ -40511,27 +41427,6 @@ export namespace Prisma {
     connectOrCreate?: StatistiqueBibliothequeCreateOrConnectWithoutUniversiteInput | StatistiqueBibliothequeCreateOrConnectWithoutUniversiteInput[]
     createMany?: StatistiqueBibliothequeCreateManyUniversiteInputEnvelope
     connect?: StatistiqueBibliothequeWhereUniqueInput | StatistiqueBibliothequeWhereUniqueInput[]
-  }
-
-  export type TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput = {
-    create?: XOR<TransactionBlockchainCreateWithoutUniversiteOrigineRelInput, TransactionBlockchainUncheckedCreateWithoutUniversiteOrigineRelInput> | TransactionBlockchainCreateWithoutUniversiteOrigineRelInput[] | TransactionBlockchainUncheckedCreateWithoutUniversiteOrigineRelInput[]
-    connectOrCreate?: TransactionBlockchainCreateOrConnectWithoutUniversiteOrigineRelInput | TransactionBlockchainCreateOrConnectWithoutUniversiteOrigineRelInput[]
-    createMany?: TransactionBlockchainCreateManyUniversiteOrigineRelInputEnvelope
-    connect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-  }
-
-  export type TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput = {
-    create?: XOR<TransactionBlockchainCreateWithoutUniversiteDestinationRelInput, TransactionBlockchainUncheckedCreateWithoutUniversiteDestinationRelInput> | TransactionBlockchainCreateWithoutUniversiteDestinationRelInput[] | TransactionBlockchainUncheckedCreateWithoutUniversiteDestinationRelInput[]
-    connectOrCreate?: TransactionBlockchainCreateOrConnectWithoutUniversiteDestinationRelInput | TransactionBlockchainCreateOrConnectWithoutUniversiteDestinationRelInput[]
-    createMany?: TransactionBlockchainCreateManyUniversiteDestinationRelInputEnvelope
-    connect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-  }
-
-  export type HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput = {
-    create?: XOR<HistoriqueAccesCreateWithoutUniversiteSrcRelInput, HistoriqueAccesUncheckedCreateWithoutUniversiteSrcRelInput> | HistoriqueAccesCreateWithoutUniversiteSrcRelInput[] | HistoriqueAccesUncheckedCreateWithoutUniversiteSrcRelInput[]
-    connectOrCreate?: HistoriqueAccesCreateOrConnectWithoutUniversiteSrcRelInput | HistoriqueAccesCreateOrConnectWithoutUniversiteSrcRelInput[]
-    createMany?: HistoriqueAccesCreateManyUniversiteSrcRelInputEnvelope
-    connect?: HistoriqueAccesWhereUniqueInput | HistoriqueAccesWhereUniqueInput[]
   }
 
   export type ReglePretUncheckedCreateNestedManyWithoutUniversiteInput = {
@@ -40548,102 +41443,11 @@ export namespace Prisma {
     connect?: PolitiqueBibliothequeWhereUniqueInput | PolitiqueBibliothequeWhereUniqueInput[]
   }
 
-  export type UserUpdateManyWithoutUniversiteNestedInput = {
-    create?: XOR<UserCreateWithoutUniversiteInput, UserUncheckedCreateWithoutUniversiteInput> | UserCreateWithoutUniversiteInput[] | UserUncheckedCreateWithoutUniversiteInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutUniversiteInput | UserCreateOrConnectWithoutUniversiteInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutUniversiteInput | UserUpsertWithWhereUniqueWithoutUniversiteInput[]
-    createMany?: UserCreateManyUniversiteInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutUniversiteInput | UserUpdateWithWhereUniqueWithoutUniversiteInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutUniversiteInput | UserUpdateManyWithWhereWithoutUniversiteInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
-  }
-
-  export type RessourceUpdateManyWithoutUniversiteNestedInput = {
-    create?: XOR<RessourceCreateWithoutUniversiteInput, RessourceUncheckedCreateWithoutUniversiteInput> | RessourceCreateWithoutUniversiteInput[] | RessourceUncheckedCreateWithoutUniversiteInput[]
-    connectOrCreate?: RessourceCreateOrConnectWithoutUniversiteInput | RessourceCreateOrConnectWithoutUniversiteInput[]
-    upsert?: RessourceUpsertWithWhereUniqueWithoutUniversiteInput | RessourceUpsertWithWhereUniqueWithoutUniversiteInput[]
-    createMany?: RessourceCreateManyUniversiteInputEnvelope
-    set?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
-    disconnect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
-    delete?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
-    connect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
-    update?: RessourceUpdateWithWhereUniqueWithoutUniversiteInput | RessourceUpdateWithWhereUniqueWithoutUniversiteInput[]
-    updateMany?: RessourceUpdateManyWithWhereWithoutUniversiteInput | RessourceUpdateManyWithWhereWithoutUniversiteInput[]
-    deleteMany?: RessourceScalarWhereInput | RessourceScalarWhereInput[]
-  }
-
-  export type StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput = {
-    create?: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput> | StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput[] | StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput[]
-    connectOrCreate?: StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteSourceRelInput | StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteSourceRelInput[]
-    upsert?: StatistiqueInteruniversitaireUpsertWithWhereUniqueWithoutUniversiteSourceRelInput | StatistiqueInteruniversitaireUpsertWithWhereUniqueWithoutUniversiteSourceRelInput[]
-    createMany?: StatistiqueInteruniversitaireCreateManyUniversiteSourceRelInputEnvelope
-    set?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    disconnect?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    delete?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    connect?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    update?: StatistiqueInteruniversitaireUpdateWithWhereUniqueWithoutUniversiteSourceRelInput | StatistiqueInteruniversitaireUpdateWithWhereUniqueWithoutUniversiteSourceRelInput[]
-    updateMany?: StatistiqueInteruniversitaireUpdateManyWithWhereWithoutUniversiteSourceRelInput | StatistiqueInteruniversitaireUpdateManyWithWhereWithoutUniversiteSourceRelInput[]
-    deleteMany?: StatistiqueInteruniversitaireScalarWhereInput | StatistiqueInteruniversitaireScalarWhereInput[]
-  }
-
-  export type StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput = {
-    create?: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteDestinationRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteDestinationRelInput> | StatistiqueInteruniversitaireCreateWithoutUniversiteDestinationRelInput[] | StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteDestinationRelInput[]
-    connectOrCreate?: StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteDestinationRelInput | StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteDestinationRelInput[]
-    upsert?: StatistiqueInteruniversitaireUpsertWithWhereUniqueWithoutUniversiteDestinationRelInput | StatistiqueInteruniversitaireUpsertWithWhereUniqueWithoutUniversiteDestinationRelInput[]
-    createMany?: StatistiqueInteruniversitaireCreateManyUniversiteDestinationRelInputEnvelope
-    set?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    disconnect?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    delete?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    connect?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    update?: StatistiqueInteruniversitaireUpdateWithWhereUniqueWithoutUniversiteDestinationRelInput | StatistiqueInteruniversitaireUpdateWithWhereUniqueWithoutUniversiteDestinationRelInput[]
-    updateMany?: StatistiqueInteruniversitaireUpdateManyWithWhereWithoutUniversiteDestinationRelInput | StatistiqueInteruniversitaireUpdateManyWithWhereWithoutUniversiteDestinationRelInput[]
-    deleteMany?: StatistiqueInteruniversitaireScalarWhereInput | StatistiqueInteruniversitaireScalarWhereInput[]
-  }
-
-  export type ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput = {
-    create?: XOR<ReservationCreateWithoutUniversiteEmprunteurRelInput, ReservationUncheckedCreateWithoutUniversiteEmprunteurRelInput> | ReservationCreateWithoutUniversiteEmprunteurRelInput[] | ReservationUncheckedCreateWithoutUniversiteEmprunteurRelInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutUniversiteEmprunteurRelInput | ReservationCreateOrConnectWithoutUniversiteEmprunteurRelInput[]
-    upsert?: ReservationUpsertWithWhereUniqueWithoutUniversiteEmprunteurRelInput | ReservationUpsertWithWhereUniqueWithoutUniversiteEmprunteurRelInput[]
-    createMany?: ReservationCreateManyUniversiteEmprunteurRelInputEnvelope
-    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    update?: ReservationUpdateWithWhereUniqueWithoutUniversiteEmprunteurRelInput | ReservationUpdateWithWhereUniqueWithoutUniversiteEmprunteurRelInput[]
-    updateMany?: ReservationUpdateManyWithWhereWithoutUniversiteEmprunteurRelInput | ReservationUpdateManyWithWhereWithoutUniversiteEmprunteurRelInput[]
-    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-  }
-
-  export type EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput = {
-    create?: XOR<EmpruntCreateWithoutUniversiteEmprunteurRelInput, EmpruntUncheckedCreateWithoutUniversiteEmprunteurRelInput> | EmpruntCreateWithoutUniversiteEmprunteurRelInput[] | EmpruntUncheckedCreateWithoutUniversiteEmprunteurRelInput[]
-    connectOrCreate?: EmpruntCreateOrConnectWithoutUniversiteEmprunteurRelInput | EmpruntCreateOrConnectWithoutUniversiteEmprunteurRelInput[]
-    upsert?: EmpruntUpsertWithWhereUniqueWithoutUniversiteEmprunteurRelInput | EmpruntUpsertWithWhereUniqueWithoutUniversiteEmprunteurRelInput[]
-    createMany?: EmpruntCreateManyUniversiteEmprunteurRelInputEnvelope
-    set?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    disconnect?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    delete?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    connect?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    update?: EmpruntUpdateWithWhereUniqueWithoutUniversiteEmprunteurRelInput | EmpruntUpdateWithWhereUniqueWithoutUniversiteEmprunteurRelInput[]
-    updateMany?: EmpruntUpdateManyWithWhereWithoutUniversiteEmprunteurRelInput | EmpruntUpdateManyWithWhereWithoutUniversiteEmprunteurRelInput[]
-    deleteMany?: EmpruntScalarWhereInput | EmpruntScalarWhereInput[]
-  }
-
-  export type RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput = {
-    create?: XOR<RecommandationCreateWithoutUniversiteSourceRelInput, RecommandationUncheckedCreateWithoutUniversiteSourceRelInput> | RecommandationCreateWithoutUniversiteSourceRelInput[] | RecommandationUncheckedCreateWithoutUniversiteSourceRelInput[]
-    connectOrCreate?: RecommandationCreateOrConnectWithoutUniversiteSourceRelInput | RecommandationCreateOrConnectWithoutUniversiteSourceRelInput[]
-    upsert?: RecommandationUpsertWithWhereUniqueWithoutUniversiteSourceRelInput | RecommandationUpsertWithWhereUniqueWithoutUniversiteSourceRelInput[]
-    createMany?: RecommandationCreateManyUniversiteSourceRelInputEnvelope
-    set?: RecommandationWhereUniqueInput | RecommandationWhereUniqueInput[]
-    disconnect?: RecommandationWhereUniqueInput | RecommandationWhereUniqueInput[]
-    delete?: RecommandationWhereUniqueInput | RecommandationWhereUniqueInput[]
-    connect?: RecommandationWhereUniqueInput | RecommandationWhereUniqueInput[]
-    update?: RecommandationUpdateWithWhereUniqueWithoutUniversiteSourceRelInput | RecommandationUpdateWithWhereUniqueWithoutUniversiteSourceRelInput[]
-    updateMany?: RecommandationUpdateManyWithWhereWithoutUniversiteSourceRelInput | RecommandationUpdateManyWithWhereWithoutUniversiteSourceRelInput[]
-    deleteMany?: RecommandationScalarWhereInput | RecommandationScalarWhereInput[]
+  export type UfrUncheckedCreateNestedManyWithoutUniversiteInput = {
+    create?: XOR<UfrCreateWithoutUniversiteInput, UfrUncheckedCreateWithoutUniversiteInput> | UfrCreateWithoutUniversiteInput[] | UfrUncheckedCreateWithoutUniversiteInput[]
+    connectOrCreate?: UfrCreateOrConnectWithoutUniversiteInput | UfrCreateOrConnectWithoutUniversiteInput[]
+    createMany?: UfrCreateManyUniversiteInputEnvelope
+    connect?: UfrWhereUniqueInput | UfrWhereUniqueInput[]
   }
 
   export type StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput = {
@@ -40658,48 +41462,6 @@ export namespace Prisma {
     update?: StatistiqueBibliothequeUpdateWithWhereUniqueWithoutUniversiteInput | StatistiqueBibliothequeUpdateWithWhereUniqueWithoutUniversiteInput[]
     updateMany?: StatistiqueBibliothequeUpdateManyWithWhereWithoutUniversiteInput | StatistiqueBibliothequeUpdateManyWithWhereWithoutUniversiteInput[]
     deleteMany?: StatistiqueBibliothequeScalarWhereInput | StatistiqueBibliothequeScalarWhereInput[]
-  }
-
-  export type TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput = {
-    create?: XOR<TransactionBlockchainCreateWithoutUniversiteOrigineRelInput, TransactionBlockchainUncheckedCreateWithoutUniversiteOrigineRelInput> | TransactionBlockchainCreateWithoutUniversiteOrigineRelInput[] | TransactionBlockchainUncheckedCreateWithoutUniversiteOrigineRelInput[]
-    connectOrCreate?: TransactionBlockchainCreateOrConnectWithoutUniversiteOrigineRelInput | TransactionBlockchainCreateOrConnectWithoutUniversiteOrigineRelInput[]
-    upsert?: TransactionBlockchainUpsertWithWhereUniqueWithoutUniversiteOrigineRelInput | TransactionBlockchainUpsertWithWhereUniqueWithoutUniversiteOrigineRelInput[]
-    createMany?: TransactionBlockchainCreateManyUniversiteOrigineRelInputEnvelope
-    set?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    disconnect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    delete?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    connect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    update?: TransactionBlockchainUpdateWithWhereUniqueWithoutUniversiteOrigineRelInput | TransactionBlockchainUpdateWithWhereUniqueWithoutUniversiteOrigineRelInput[]
-    updateMany?: TransactionBlockchainUpdateManyWithWhereWithoutUniversiteOrigineRelInput | TransactionBlockchainUpdateManyWithWhereWithoutUniversiteOrigineRelInput[]
-    deleteMany?: TransactionBlockchainScalarWhereInput | TransactionBlockchainScalarWhereInput[]
-  }
-
-  export type TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput = {
-    create?: XOR<TransactionBlockchainCreateWithoutUniversiteDestinationRelInput, TransactionBlockchainUncheckedCreateWithoutUniversiteDestinationRelInput> | TransactionBlockchainCreateWithoutUniversiteDestinationRelInput[] | TransactionBlockchainUncheckedCreateWithoutUniversiteDestinationRelInput[]
-    connectOrCreate?: TransactionBlockchainCreateOrConnectWithoutUniversiteDestinationRelInput | TransactionBlockchainCreateOrConnectWithoutUniversiteDestinationRelInput[]
-    upsert?: TransactionBlockchainUpsertWithWhereUniqueWithoutUniversiteDestinationRelInput | TransactionBlockchainUpsertWithWhereUniqueWithoutUniversiteDestinationRelInput[]
-    createMany?: TransactionBlockchainCreateManyUniversiteDestinationRelInputEnvelope
-    set?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    disconnect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    delete?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    connect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    update?: TransactionBlockchainUpdateWithWhereUniqueWithoutUniversiteDestinationRelInput | TransactionBlockchainUpdateWithWhereUniqueWithoutUniversiteDestinationRelInput[]
-    updateMany?: TransactionBlockchainUpdateManyWithWhereWithoutUniversiteDestinationRelInput | TransactionBlockchainUpdateManyWithWhereWithoutUniversiteDestinationRelInput[]
-    deleteMany?: TransactionBlockchainScalarWhereInput | TransactionBlockchainScalarWhereInput[]
-  }
-
-  export type HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput = {
-    create?: XOR<HistoriqueAccesCreateWithoutUniversiteSrcRelInput, HistoriqueAccesUncheckedCreateWithoutUniversiteSrcRelInput> | HistoriqueAccesCreateWithoutUniversiteSrcRelInput[] | HistoriqueAccesUncheckedCreateWithoutUniversiteSrcRelInput[]
-    connectOrCreate?: HistoriqueAccesCreateOrConnectWithoutUniversiteSrcRelInput | HistoriqueAccesCreateOrConnectWithoutUniversiteSrcRelInput[]
-    upsert?: HistoriqueAccesUpsertWithWhereUniqueWithoutUniversiteSrcRelInput | HistoriqueAccesUpsertWithWhereUniqueWithoutUniversiteSrcRelInput[]
-    createMany?: HistoriqueAccesCreateManyUniversiteSrcRelInputEnvelope
-    set?: HistoriqueAccesWhereUniqueInput | HistoriqueAccesWhereUniqueInput[]
-    disconnect?: HistoriqueAccesWhereUniqueInput | HistoriqueAccesWhereUniqueInput[]
-    delete?: HistoriqueAccesWhereUniqueInput | HistoriqueAccesWhereUniqueInput[]
-    connect?: HistoriqueAccesWhereUniqueInput | HistoriqueAccesWhereUniqueInput[]
-    update?: HistoriqueAccesUpdateWithWhereUniqueWithoutUniversiteSrcRelInput | HistoriqueAccesUpdateWithWhereUniqueWithoutUniversiteSrcRelInput[]
-    updateMany?: HistoriqueAccesUpdateManyWithWhereWithoutUniversiteSrcRelInput | HistoriqueAccesUpdateManyWithWhereWithoutUniversiteSrcRelInput[]
-    deleteMany?: HistoriqueAccesScalarWhereInput | HistoriqueAccesScalarWhereInput[]
   }
 
   export type ReglePretUpdateManyWithoutUniversiteNestedInput = {
@@ -40730,102 +41492,18 @@ export namespace Prisma {
     deleteMany?: PolitiqueBibliothequeScalarWhereInput | PolitiqueBibliothequeScalarWhereInput[]
   }
 
-  export type UserUncheckedUpdateManyWithoutUniversiteNestedInput = {
-    create?: XOR<UserCreateWithoutUniversiteInput, UserUncheckedCreateWithoutUniversiteInput> | UserCreateWithoutUniversiteInput[] | UserUncheckedCreateWithoutUniversiteInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutUniversiteInput | UserCreateOrConnectWithoutUniversiteInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutUniversiteInput | UserUpsertWithWhereUniqueWithoutUniversiteInput[]
-    createMany?: UserCreateManyUniversiteInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutUniversiteInput | UserUpdateWithWhereUniqueWithoutUniversiteInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutUniversiteInput | UserUpdateManyWithWhereWithoutUniversiteInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
-  }
-
-  export type RessourceUncheckedUpdateManyWithoutUniversiteNestedInput = {
-    create?: XOR<RessourceCreateWithoutUniversiteInput, RessourceUncheckedCreateWithoutUniversiteInput> | RessourceCreateWithoutUniversiteInput[] | RessourceUncheckedCreateWithoutUniversiteInput[]
-    connectOrCreate?: RessourceCreateOrConnectWithoutUniversiteInput | RessourceCreateOrConnectWithoutUniversiteInput[]
-    upsert?: RessourceUpsertWithWhereUniqueWithoutUniversiteInput | RessourceUpsertWithWhereUniqueWithoutUniversiteInput[]
-    createMany?: RessourceCreateManyUniversiteInputEnvelope
-    set?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
-    disconnect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
-    delete?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
-    connect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
-    update?: RessourceUpdateWithWhereUniqueWithoutUniversiteInput | RessourceUpdateWithWhereUniqueWithoutUniversiteInput[]
-    updateMany?: RessourceUpdateManyWithWhereWithoutUniversiteInput | RessourceUpdateManyWithWhereWithoutUniversiteInput[]
-    deleteMany?: RessourceScalarWhereInput | RessourceScalarWhereInput[]
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput = {
-    create?: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput> | StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput[] | StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput[]
-    connectOrCreate?: StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteSourceRelInput | StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteSourceRelInput[]
-    upsert?: StatistiqueInteruniversitaireUpsertWithWhereUniqueWithoutUniversiteSourceRelInput | StatistiqueInteruniversitaireUpsertWithWhereUniqueWithoutUniversiteSourceRelInput[]
-    createMany?: StatistiqueInteruniversitaireCreateManyUniversiteSourceRelInputEnvelope
-    set?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    disconnect?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    delete?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    connect?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    update?: StatistiqueInteruniversitaireUpdateWithWhereUniqueWithoutUniversiteSourceRelInput | StatistiqueInteruniversitaireUpdateWithWhereUniqueWithoutUniversiteSourceRelInput[]
-    updateMany?: StatistiqueInteruniversitaireUpdateManyWithWhereWithoutUniversiteSourceRelInput | StatistiqueInteruniversitaireUpdateManyWithWhereWithoutUniversiteSourceRelInput[]
-    deleteMany?: StatistiqueInteruniversitaireScalarWhereInput | StatistiqueInteruniversitaireScalarWhereInput[]
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput = {
-    create?: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteDestinationRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteDestinationRelInput> | StatistiqueInteruniversitaireCreateWithoutUniversiteDestinationRelInput[] | StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteDestinationRelInput[]
-    connectOrCreate?: StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteDestinationRelInput | StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteDestinationRelInput[]
-    upsert?: StatistiqueInteruniversitaireUpsertWithWhereUniqueWithoutUniversiteDestinationRelInput | StatistiqueInteruniversitaireUpsertWithWhereUniqueWithoutUniversiteDestinationRelInput[]
-    createMany?: StatistiqueInteruniversitaireCreateManyUniversiteDestinationRelInputEnvelope
-    set?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    disconnect?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    delete?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    connect?: StatistiqueInteruniversitaireWhereUniqueInput | StatistiqueInteruniversitaireWhereUniqueInput[]
-    update?: StatistiqueInteruniversitaireUpdateWithWhereUniqueWithoutUniversiteDestinationRelInput | StatistiqueInteruniversitaireUpdateWithWhereUniqueWithoutUniversiteDestinationRelInput[]
-    updateMany?: StatistiqueInteruniversitaireUpdateManyWithWhereWithoutUniversiteDestinationRelInput | StatistiqueInteruniversitaireUpdateManyWithWhereWithoutUniversiteDestinationRelInput[]
-    deleteMany?: StatistiqueInteruniversitaireScalarWhereInput | StatistiqueInteruniversitaireScalarWhereInput[]
-  }
-
-  export type ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput = {
-    create?: XOR<ReservationCreateWithoutUniversiteEmprunteurRelInput, ReservationUncheckedCreateWithoutUniversiteEmprunteurRelInput> | ReservationCreateWithoutUniversiteEmprunteurRelInput[] | ReservationUncheckedCreateWithoutUniversiteEmprunteurRelInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutUniversiteEmprunteurRelInput | ReservationCreateOrConnectWithoutUniversiteEmprunteurRelInput[]
-    upsert?: ReservationUpsertWithWhereUniqueWithoutUniversiteEmprunteurRelInput | ReservationUpsertWithWhereUniqueWithoutUniversiteEmprunteurRelInput[]
-    createMany?: ReservationCreateManyUniversiteEmprunteurRelInputEnvelope
-    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    update?: ReservationUpdateWithWhereUniqueWithoutUniversiteEmprunteurRelInput | ReservationUpdateWithWhereUniqueWithoutUniversiteEmprunteurRelInput[]
-    updateMany?: ReservationUpdateManyWithWhereWithoutUniversiteEmprunteurRelInput | ReservationUpdateManyWithWhereWithoutUniversiteEmprunteurRelInput[]
-    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-  }
-
-  export type EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput = {
-    create?: XOR<EmpruntCreateWithoutUniversiteEmprunteurRelInput, EmpruntUncheckedCreateWithoutUniversiteEmprunteurRelInput> | EmpruntCreateWithoutUniversiteEmprunteurRelInput[] | EmpruntUncheckedCreateWithoutUniversiteEmprunteurRelInput[]
-    connectOrCreate?: EmpruntCreateOrConnectWithoutUniversiteEmprunteurRelInput | EmpruntCreateOrConnectWithoutUniversiteEmprunteurRelInput[]
-    upsert?: EmpruntUpsertWithWhereUniqueWithoutUniversiteEmprunteurRelInput | EmpruntUpsertWithWhereUniqueWithoutUniversiteEmprunteurRelInput[]
-    createMany?: EmpruntCreateManyUniversiteEmprunteurRelInputEnvelope
-    set?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    disconnect?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    delete?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    connect?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    update?: EmpruntUpdateWithWhereUniqueWithoutUniversiteEmprunteurRelInput | EmpruntUpdateWithWhereUniqueWithoutUniversiteEmprunteurRelInput[]
-    updateMany?: EmpruntUpdateManyWithWhereWithoutUniversiteEmprunteurRelInput | EmpruntUpdateManyWithWhereWithoutUniversiteEmprunteurRelInput[]
-    deleteMany?: EmpruntScalarWhereInput | EmpruntScalarWhereInput[]
-  }
-
-  export type RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput = {
-    create?: XOR<RecommandationCreateWithoutUniversiteSourceRelInput, RecommandationUncheckedCreateWithoutUniversiteSourceRelInput> | RecommandationCreateWithoutUniversiteSourceRelInput[] | RecommandationUncheckedCreateWithoutUniversiteSourceRelInput[]
-    connectOrCreate?: RecommandationCreateOrConnectWithoutUniversiteSourceRelInput | RecommandationCreateOrConnectWithoutUniversiteSourceRelInput[]
-    upsert?: RecommandationUpsertWithWhereUniqueWithoutUniversiteSourceRelInput | RecommandationUpsertWithWhereUniqueWithoutUniversiteSourceRelInput[]
-    createMany?: RecommandationCreateManyUniversiteSourceRelInputEnvelope
-    set?: RecommandationWhereUniqueInput | RecommandationWhereUniqueInput[]
-    disconnect?: RecommandationWhereUniqueInput | RecommandationWhereUniqueInput[]
-    delete?: RecommandationWhereUniqueInput | RecommandationWhereUniqueInput[]
-    connect?: RecommandationWhereUniqueInput | RecommandationWhereUniqueInput[]
-    update?: RecommandationUpdateWithWhereUniqueWithoutUniversiteSourceRelInput | RecommandationUpdateWithWhereUniqueWithoutUniversiteSourceRelInput[]
-    updateMany?: RecommandationUpdateManyWithWhereWithoutUniversiteSourceRelInput | RecommandationUpdateManyWithWhereWithoutUniversiteSourceRelInput[]
-    deleteMany?: RecommandationScalarWhereInput | RecommandationScalarWhereInput[]
+  export type UfrUpdateManyWithoutUniversiteNestedInput = {
+    create?: XOR<UfrCreateWithoutUniversiteInput, UfrUncheckedCreateWithoutUniversiteInput> | UfrCreateWithoutUniversiteInput[] | UfrUncheckedCreateWithoutUniversiteInput[]
+    connectOrCreate?: UfrCreateOrConnectWithoutUniversiteInput | UfrCreateOrConnectWithoutUniversiteInput[]
+    upsert?: UfrUpsertWithWhereUniqueWithoutUniversiteInput | UfrUpsertWithWhereUniqueWithoutUniversiteInput[]
+    createMany?: UfrCreateManyUniversiteInputEnvelope
+    set?: UfrWhereUniqueInput | UfrWhereUniqueInput[]
+    disconnect?: UfrWhereUniqueInput | UfrWhereUniqueInput[]
+    delete?: UfrWhereUniqueInput | UfrWhereUniqueInput[]
+    connect?: UfrWhereUniqueInput | UfrWhereUniqueInput[]
+    update?: UfrUpdateWithWhereUniqueWithoutUniversiteInput | UfrUpdateWithWhereUniqueWithoutUniversiteInput[]
+    updateMany?: UfrUpdateManyWithWhereWithoutUniversiteInput | UfrUpdateManyWithWhereWithoutUniversiteInput[]
+    deleteMany?: UfrScalarWhereInput | UfrScalarWhereInput[]
   }
 
   export type StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput = {
@@ -40840,48 +41518,6 @@ export namespace Prisma {
     update?: StatistiqueBibliothequeUpdateWithWhereUniqueWithoutUniversiteInput | StatistiqueBibliothequeUpdateWithWhereUniqueWithoutUniversiteInput[]
     updateMany?: StatistiqueBibliothequeUpdateManyWithWhereWithoutUniversiteInput | StatistiqueBibliothequeUpdateManyWithWhereWithoutUniversiteInput[]
     deleteMany?: StatistiqueBibliothequeScalarWhereInput | StatistiqueBibliothequeScalarWhereInput[]
-  }
-
-  export type TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput = {
-    create?: XOR<TransactionBlockchainCreateWithoutUniversiteOrigineRelInput, TransactionBlockchainUncheckedCreateWithoutUniversiteOrigineRelInput> | TransactionBlockchainCreateWithoutUniversiteOrigineRelInput[] | TransactionBlockchainUncheckedCreateWithoutUniversiteOrigineRelInput[]
-    connectOrCreate?: TransactionBlockchainCreateOrConnectWithoutUniversiteOrigineRelInput | TransactionBlockchainCreateOrConnectWithoutUniversiteOrigineRelInput[]
-    upsert?: TransactionBlockchainUpsertWithWhereUniqueWithoutUniversiteOrigineRelInput | TransactionBlockchainUpsertWithWhereUniqueWithoutUniversiteOrigineRelInput[]
-    createMany?: TransactionBlockchainCreateManyUniversiteOrigineRelInputEnvelope
-    set?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    disconnect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    delete?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    connect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    update?: TransactionBlockchainUpdateWithWhereUniqueWithoutUniversiteOrigineRelInput | TransactionBlockchainUpdateWithWhereUniqueWithoutUniversiteOrigineRelInput[]
-    updateMany?: TransactionBlockchainUpdateManyWithWhereWithoutUniversiteOrigineRelInput | TransactionBlockchainUpdateManyWithWhereWithoutUniversiteOrigineRelInput[]
-    deleteMany?: TransactionBlockchainScalarWhereInput | TransactionBlockchainScalarWhereInput[]
-  }
-
-  export type TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput = {
-    create?: XOR<TransactionBlockchainCreateWithoutUniversiteDestinationRelInput, TransactionBlockchainUncheckedCreateWithoutUniversiteDestinationRelInput> | TransactionBlockchainCreateWithoutUniversiteDestinationRelInput[] | TransactionBlockchainUncheckedCreateWithoutUniversiteDestinationRelInput[]
-    connectOrCreate?: TransactionBlockchainCreateOrConnectWithoutUniversiteDestinationRelInput | TransactionBlockchainCreateOrConnectWithoutUniversiteDestinationRelInput[]
-    upsert?: TransactionBlockchainUpsertWithWhereUniqueWithoutUniversiteDestinationRelInput | TransactionBlockchainUpsertWithWhereUniqueWithoutUniversiteDestinationRelInput[]
-    createMany?: TransactionBlockchainCreateManyUniversiteDestinationRelInputEnvelope
-    set?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    disconnect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    delete?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    connect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    update?: TransactionBlockchainUpdateWithWhereUniqueWithoutUniversiteDestinationRelInput | TransactionBlockchainUpdateWithWhereUniqueWithoutUniversiteDestinationRelInput[]
-    updateMany?: TransactionBlockchainUpdateManyWithWhereWithoutUniversiteDestinationRelInput | TransactionBlockchainUpdateManyWithWhereWithoutUniversiteDestinationRelInput[]
-    deleteMany?: TransactionBlockchainScalarWhereInput | TransactionBlockchainScalarWhereInput[]
-  }
-
-  export type HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput = {
-    create?: XOR<HistoriqueAccesCreateWithoutUniversiteSrcRelInput, HistoriqueAccesUncheckedCreateWithoutUniversiteSrcRelInput> | HistoriqueAccesCreateWithoutUniversiteSrcRelInput[] | HistoriqueAccesUncheckedCreateWithoutUniversiteSrcRelInput[]
-    connectOrCreate?: HistoriqueAccesCreateOrConnectWithoutUniversiteSrcRelInput | HistoriqueAccesCreateOrConnectWithoutUniversiteSrcRelInput[]
-    upsert?: HistoriqueAccesUpsertWithWhereUniqueWithoutUniversiteSrcRelInput | HistoriqueAccesUpsertWithWhereUniqueWithoutUniversiteSrcRelInput[]
-    createMany?: HistoriqueAccesCreateManyUniversiteSrcRelInputEnvelope
-    set?: HistoriqueAccesWhereUniqueInput | HistoriqueAccesWhereUniqueInput[]
-    disconnect?: HistoriqueAccesWhereUniqueInput | HistoriqueAccesWhereUniqueInput[]
-    delete?: HistoriqueAccesWhereUniqueInput | HistoriqueAccesWhereUniqueInput[]
-    connect?: HistoriqueAccesWhereUniqueInput | HistoriqueAccesWhereUniqueInput[]
-    update?: HistoriqueAccesUpdateWithWhereUniqueWithoutUniversiteSrcRelInput | HistoriqueAccesUpdateWithWhereUniqueWithoutUniversiteSrcRelInput[]
-    updateMany?: HistoriqueAccesUpdateManyWithWhereWithoutUniversiteSrcRelInput | HistoriqueAccesUpdateManyWithWhereWithoutUniversiteSrcRelInput[]
-    deleteMany?: HistoriqueAccesScalarWhereInput | HistoriqueAccesScalarWhereInput[]
   }
 
   export type ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput = {
@@ -40912,10 +41548,144 @@ export namespace Prisma {
     deleteMany?: PolitiqueBibliothequeScalarWhereInput | PolitiqueBibliothequeScalarWhereInput[]
   }
 
-  export type UniversiteCreateNestedOneWithoutUsersInput = {
-    create?: XOR<UniversiteCreateWithoutUsersInput, UniversiteUncheckedCreateWithoutUsersInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutUsersInput
+  export type UfrUncheckedUpdateManyWithoutUniversiteNestedInput = {
+    create?: XOR<UfrCreateWithoutUniversiteInput, UfrUncheckedCreateWithoutUniversiteInput> | UfrCreateWithoutUniversiteInput[] | UfrUncheckedCreateWithoutUniversiteInput[]
+    connectOrCreate?: UfrCreateOrConnectWithoutUniversiteInput | UfrCreateOrConnectWithoutUniversiteInput[]
+    upsert?: UfrUpsertWithWhereUniqueWithoutUniversiteInput | UfrUpsertWithWhereUniqueWithoutUniversiteInput[]
+    createMany?: UfrCreateManyUniversiteInputEnvelope
+    set?: UfrWhereUniqueInput | UfrWhereUniqueInput[]
+    disconnect?: UfrWhereUniqueInput | UfrWhereUniqueInput[]
+    delete?: UfrWhereUniqueInput | UfrWhereUniqueInput[]
+    connect?: UfrWhereUniqueInput | UfrWhereUniqueInput[]
+    update?: UfrUpdateWithWhereUniqueWithoutUniversiteInput | UfrUpdateWithWhereUniqueWithoutUniversiteInput[]
+    updateMany?: UfrUpdateManyWithWhereWithoutUniversiteInput | UfrUpdateManyWithWhereWithoutUniversiteInput[]
+    deleteMany?: UfrScalarWhereInput | UfrScalarWhereInput[]
+  }
+
+  export type UniversiteCreateNestedOneWithoutUfrsInput = {
+    create?: XOR<UniversiteCreateWithoutUfrsInput, UniversiteUncheckedCreateWithoutUfrsInput>
+    connectOrCreate?: UniversiteCreateOrConnectWithoutUfrsInput
     connect?: UniversiteWhereUniqueInput
+  }
+
+  export type DepartementCreateNestedManyWithoutUfrInput = {
+    create?: XOR<DepartementCreateWithoutUfrInput, DepartementUncheckedCreateWithoutUfrInput> | DepartementCreateWithoutUfrInput[] | DepartementUncheckedCreateWithoutUfrInput[]
+    connectOrCreate?: DepartementCreateOrConnectWithoutUfrInput | DepartementCreateOrConnectWithoutUfrInput[]
+    createMany?: DepartementCreateManyUfrInputEnvelope
+    connect?: DepartementWhereUniqueInput | DepartementWhereUniqueInput[]
+  }
+
+  export type DepartementUncheckedCreateNestedManyWithoutUfrInput = {
+    create?: XOR<DepartementCreateWithoutUfrInput, DepartementUncheckedCreateWithoutUfrInput> | DepartementCreateWithoutUfrInput[] | DepartementUncheckedCreateWithoutUfrInput[]
+    connectOrCreate?: DepartementCreateOrConnectWithoutUfrInput | DepartementCreateOrConnectWithoutUfrInput[]
+    createMany?: DepartementCreateManyUfrInputEnvelope
+    connect?: DepartementWhereUniqueInput | DepartementWhereUniqueInput[]
+  }
+
+  export type UniversiteUpdateOneRequiredWithoutUfrsNestedInput = {
+    create?: XOR<UniversiteCreateWithoutUfrsInput, UniversiteUncheckedCreateWithoutUfrsInput>
+    connectOrCreate?: UniversiteCreateOrConnectWithoutUfrsInput
+    upsert?: UniversiteUpsertWithoutUfrsInput
+    connect?: UniversiteWhereUniqueInput
+    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutUfrsInput, UniversiteUpdateWithoutUfrsInput>, UniversiteUncheckedUpdateWithoutUfrsInput>
+  }
+
+  export type DepartementUpdateManyWithoutUfrNestedInput = {
+    create?: XOR<DepartementCreateWithoutUfrInput, DepartementUncheckedCreateWithoutUfrInput> | DepartementCreateWithoutUfrInput[] | DepartementUncheckedCreateWithoutUfrInput[]
+    connectOrCreate?: DepartementCreateOrConnectWithoutUfrInput | DepartementCreateOrConnectWithoutUfrInput[]
+    upsert?: DepartementUpsertWithWhereUniqueWithoutUfrInput | DepartementUpsertWithWhereUniqueWithoutUfrInput[]
+    createMany?: DepartementCreateManyUfrInputEnvelope
+    set?: DepartementWhereUniqueInput | DepartementWhereUniqueInput[]
+    disconnect?: DepartementWhereUniqueInput | DepartementWhereUniqueInput[]
+    delete?: DepartementWhereUniqueInput | DepartementWhereUniqueInput[]
+    connect?: DepartementWhereUniqueInput | DepartementWhereUniqueInput[]
+    update?: DepartementUpdateWithWhereUniqueWithoutUfrInput | DepartementUpdateWithWhereUniqueWithoutUfrInput[]
+    updateMany?: DepartementUpdateManyWithWhereWithoutUfrInput | DepartementUpdateManyWithWhereWithoutUfrInput[]
+    deleteMany?: DepartementScalarWhereInput | DepartementScalarWhereInput[]
+  }
+
+  export type DepartementUncheckedUpdateManyWithoutUfrNestedInput = {
+    create?: XOR<DepartementCreateWithoutUfrInput, DepartementUncheckedCreateWithoutUfrInput> | DepartementCreateWithoutUfrInput[] | DepartementUncheckedCreateWithoutUfrInput[]
+    connectOrCreate?: DepartementCreateOrConnectWithoutUfrInput | DepartementCreateOrConnectWithoutUfrInput[]
+    upsert?: DepartementUpsertWithWhereUniqueWithoutUfrInput | DepartementUpsertWithWhereUniqueWithoutUfrInput[]
+    createMany?: DepartementCreateManyUfrInputEnvelope
+    set?: DepartementWhereUniqueInput | DepartementWhereUniqueInput[]
+    disconnect?: DepartementWhereUniqueInput | DepartementWhereUniqueInput[]
+    delete?: DepartementWhereUniqueInput | DepartementWhereUniqueInput[]
+    connect?: DepartementWhereUniqueInput | DepartementWhereUniqueInput[]
+    update?: DepartementUpdateWithWhereUniqueWithoutUfrInput | DepartementUpdateWithWhereUniqueWithoutUfrInput[]
+    updateMany?: DepartementUpdateManyWithWhereWithoutUfrInput | DepartementUpdateManyWithWhereWithoutUfrInput[]
+    deleteMany?: DepartementScalarWhereInput | DepartementScalarWhereInput[]
+  }
+
+  export type UfrCreateNestedOneWithoutDepartementsInput = {
+    create?: XOR<UfrCreateWithoutDepartementsInput, UfrUncheckedCreateWithoutDepartementsInput>
+    connectOrCreate?: UfrCreateOrConnectWithoutDepartementsInput
+    connect?: UfrWhereUniqueInput
+  }
+
+  export type FiliereCreateNestedManyWithoutDepartementInput = {
+    create?: XOR<FiliereCreateWithoutDepartementInput, FiliereUncheckedCreateWithoutDepartementInput> | FiliereCreateWithoutDepartementInput[] | FiliereUncheckedCreateWithoutDepartementInput[]
+    connectOrCreate?: FiliereCreateOrConnectWithoutDepartementInput | FiliereCreateOrConnectWithoutDepartementInput[]
+    createMany?: FiliereCreateManyDepartementInputEnvelope
+    connect?: FiliereWhereUniqueInput | FiliereWhereUniqueInput[]
+  }
+
+  export type FiliereUncheckedCreateNestedManyWithoutDepartementInput = {
+    create?: XOR<FiliereCreateWithoutDepartementInput, FiliereUncheckedCreateWithoutDepartementInput> | FiliereCreateWithoutDepartementInput[] | FiliereUncheckedCreateWithoutDepartementInput[]
+    connectOrCreate?: FiliereCreateOrConnectWithoutDepartementInput | FiliereCreateOrConnectWithoutDepartementInput[]
+    createMany?: FiliereCreateManyDepartementInputEnvelope
+    connect?: FiliereWhereUniqueInput | FiliereWhereUniqueInput[]
+  }
+
+  export type UfrUpdateOneRequiredWithoutDepartementsNestedInput = {
+    create?: XOR<UfrCreateWithoutDepartementsInput, UfrUncheckedCreateWithoutDepartementsInput>
+    connectOrCreate?: UfrCreateOrConnectWithoutDepartementsInput
+    upsert?: UfrUpsertWithoutDepartementsInput
+    connect?: UfrWhereUniqueInput
+    update?: XOR<XOR<UfrUpdateToOneWithWhereWithoutDepartementsInput, UfrUpdateWithoutDepartementsInput>, UfrUncheckedUpdateWithoutDepartementsInput>
+  }
+
+  export type FiliereUpdateManyWithoutDepartementNestedInput = {
+    create?: XOR<FiliereCreateWithoutDepartementInput, FiliereUncheckedCreateWithoutDepartementInput> | FiliereCreateWithoutDepartementInput[] | FiliereUncheckedCreateWithoutDepartementInput[]
+    connectOrCreate?: FiliereCreateOrConnectWithoutDepartementInput | FiliereCreateOrConnectWithoutDepartementInput[]
+    upsert?: FiliereUpsertWithWhereUniqueWithoutDepartementInput | FiliereUpsertWithWhereUniqueWithoutDepartementInput[]
+    createMany?: FiliereCreateManyDepartementInputEnvelope
+    set?: FiliereWhereUniqueInput | FiliereWhereUniqueInput[]
+    disconnect?: FiliereWhereUniqueInput | FiliereWhereUniqueInput[]
+    delete?: FiliereWhereUniqueInput | FiliereWhereUniqueInput[]
+    connect?: FiliereWhereUniqueInput | FiliereWhereUniqueInput[]
+    update?: FiliereUpdateWithWhereUniqueWithoutDepartementInput | FiliereUpdateWithWhereUniqueWithoutDepartementInput[]
+    updateMany?: FiliereUpdateManyWithWhereWithoutDepartementInput | FiliereUpdateManyWithWhereWithoutDepartementInput[]
+    deleteMany?: FiliereScalarWhereInput | FiliereScalarWhereInput[]
+  }
+
+  export type FiliereUncheckedUpdateManyWithoutDepartementNestedInput = {
+    create?: XOR<FiliereCreateWithoutDepartementInput, FiliereUncheckedCreateWithoutDepartementInput> | FiliereCreateWithoutDepartementInput[] | FiliereUncheckedCreateWithoutDepartementInput[]
+    connectOrCreate?: FiliereCreateOrConnectWithoutDepartementInput | FiliereCreateOrConnectWithoutDepartementInput[]
+    upsert?: FiliereUpsertWithWhereUniqueWithoutDepartementInput | FiliereUpsertWithWhereUniqueWithoutDepartementInput[]
+    createMany?: FiliereCreateManyDepartementInputEnvelope
+    set?: FiliereWhereUniqueInput | FiliereWhereUniqueInput[]
+    disconnect?: FiliereWhereUniqueInput | FiliereWhereUniqueInput[]
+    delete?: FiliereWhereUniqueInput | FiliereWhereUniqueInput[]
+    connect?: FiliereWhereUniqueInput | FiliereWhereUniqueInput[]
+    update?: FiliereUpdateWithWhereUniqueWithoutDepartementInput | FiliereUpdateWithWhereUniqueWithoutDepartementInput[]
+    updateMany?: FiliereUpdateManyWithWhereWithoutDepartementInput | FiliereUpdateManyWithWhereWithoutDepartementInput[]
+    deleteMany?: FiliereScalarWhereInput | FiliereScalarWhereInput[]
+  }
+
+  export type DepartementCreateNestedOneWithoutFilieresInput = {
+    create?: XOR<DepartementCreateWithoutFilieresInput, DepartementUncheckedCreateWithoutFilieresInput>
+    connectOrCreate?: DepartementCreateOrConnectWithoutFilieresInput
+    connect?: DepartementWhereUniqueInput
+  }
+
+  export type DepartementUpdateOneRequiredWithoutFilieresNestedInput = {
+    create?: XOR<DepartementCreateWithoutFilieresInput, DepartementUncheckedCreateWithoutFilieresInput>
+    connectOrCreate?: DepartementCreateOrConnectWithoutFilieresInput
+    upsert?: DepartementUpsertWithoutFilieresInput
+    connect?: DepartementWhereUniqueInput
+    update?: XOR<XOR<DepartementUpdateToOneWithWhereWithoutFilieresInput, DepartementUpdateWithoutFilieresInput>, DepartementUncheckedUpdateWithoutFilieresInput>
   }
 
   export type RessourceCreateNestedManyWithoutAuteurInput = {
@@ -41158,14 +41928,6 @@ export namespace Prisma {
 
   export type EnumFrequenceRecommandationFieldUpdateOperationsInput = {
     set?: $Enums.FrequenceRecommandation
-  }
-
-  export type UniversiteUpdateOneRequiredWithoutUsersNestedInput = {
-    create?: XOR<UniversiteCreateWithoutUsersInput, UniversiteUncheckedCreateWithoutUsersInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutUsersInput
-    upsert?: UniversiteUpsertWithoutUsersInput
-    connect?: UniversiteWhereUniqueInput
-    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutUsersInput, UniversiteUpdateWithoutUsersInput>, UniversiteUncheckedUpdateWithoutUsersInput>
   }
 
   export type RessourceUpdateManyWithoutAuteurNestedInput = {
@@ -41842,12 +42604,6 @@ export namespace Prisma {
     connect?: RessourceWhereUniqueInput
   }
 
-  export type UniversiteCreateNestedOneWithoutHistoriqueAccesInput = {
-    create?: XOR<UniversiteCreateWithoutHistoriqueAccesInput, UniversiteUncheckedCreateWithoutHistoriqueAccesInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutHistoriqueAccesInput
-    connect?: UniversiteWhereUniqueInput
-  }
-
   export type EnumTypeAccesFieldUpdateOperationsInput = {
     set?: $Enums.TypeAcces
   }
@@ -41866,16 +42622,6 @@ export namespace Prisma {
     upsert?: RessourceUpsertWithoutHistoriquesInput
     connect?: RessourceWhereUniqueInput
     update?: XOR<XOR<RessourceUpdateToOneWithWhereWithoutHistoriquesInput, RessourceUpdateWithoutHistoriquesInput>, RessourceUncheckedUpdateWithoutHistoriquesInput>
-  }
-
-  export type UniversiteUpdateOneWithoutHistoriqueAccesNestedInput = {
-    create?: XOR<UniversiteCreateWithoutHistoriqueAccesInput, UniversiteUncheckedCreateWithoutHistoriqueAccesInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutHistoriqueAccesInput
-    upsert?: UniversiteUpsertWithoutHistoriqueAccesInput
-    disconnect?: UniversiteWhereInput | boolean
-    delete?: UniversiteWhereInput | boolean
-    connect?: UniversiteWhereUniqueInput
-    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutHistoriqueAccesInput, UniversiteUpdateWithoutHistoriqueAccesInput>, UniversiteUncheckedUpdateWithoutHistoriqueAccesInput>
   }
 
   export type UserCreateNestedOneWithoutDonneesRecommandationsInput = {
@@ -41994,70 +42740,10 @@ export namespace Prisma {
     update?: XOR<XOR<RessourceUpdateToOneWithWhereWithoutCollectionsInput, RessourceUpdateWithoutCollectionsInput>, RessourceUncheckedUpdateWithoutCollectionsInput>
   }
 
-  export type RessourceCreateNestedOneWithoutTransactionsInput = {
-    create?: XOR<RessourceCreateWithoutTransactionsInput, RessourceUncheckedCreateWithoutTransactionsInput>
-    connectOrCreate?: RessourceCreateOrConnectWithoutTransactionsInput
-    connect?: RessourceWhereUniqueInput
-  }
-
-  export type UniversiteCreateNestedOneWithoutTransactionsOrigineInput = {
-    create?: XOR<UniversiteCreateWithoutTransactionsOrigineInput, UniversiteUncheckedCreateWithoutTransactionsOrigineInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutTransactionsOrigineInput
-    connect?: UniversiteWhereUniqueInput
-  }
-
-  export type UniversiteCreateNestedOneWithoutTransactionsDestinationInput = {
-    create?: XOR<UniversiteCreateWithoutTransactionsDestinationInput, UniversiteUncheckedCreateWithoutTransactionsDestinationInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutTransactionsDestinationInput
-    connect?: UniversiteWhereUniqueInput
-  }
-
-  export type EnumTypeTransactionFieldUpdateOperationsInput = {
-    set?: $Enums.TypeTransaction
-  }
-
-  export type EnumStatutTransactionFieldUpdateOperationsInput = {
-    set?: $Enums.StatutTransaction
-  }
-
-  export type RessourceUpdateOneWithoutTransactionsNestedInput = {
-    create?: XOR<RessourceCreateWithoutTransactionsInput, RessourceUncheckedCreateWithoutTransactionsInput>
-    connectOrCreate?: RessourceCreateOrConnectWithoutTransactionsInput
-    upsert?: RessourceUpsertWithoutTransactionsInput
-    disconnect?: RessourceWhereInput | boolean
-    delete?: RessourceWhereInput | boolean
-    connect?: RessourceWhereUniqueInput
-    update?: XOR<XOR<RessourceUpdateToOneWithWhereWithoutTransactionsInput, RessourceUpdateWithoutTransactionsInput>, RessourceUncheckedUpdateWithoutTransactionsInput>
-  }
-
-  export type UniversiteUpdateOneRequiredWithoutTransactionsOrigineNestedInput = {
-    create?: XOR<UniversiteCreateWithoutTransactionsOrigineInput, UniversiteUncheckedCreateWithoutTransactionsOrigineInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutTransactionsOrigineInput
-    upsert?: UniversiteUpsertWithoutTransactionsOrigineInput
-    connect?: UniversiteWhereUniqueInput
-    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutTransactionsOrigineInput, UniversiteUpdateWithoutTransactionsOrigineInput>, UniversiteUncheckedUpdateWithoutTransactionsOrigineInput>
-  }
-
-  export type UniversiteUpdateOneWithoutTransactionsDestinationNestedInput = {
-    create?: XOR<UniversiteCreateWithoutTransactionsDestinationInput, UniversiteUncheckedCreateWithoutTransactionsDestinationInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutTransactionsDestinationInput
-    upsert?: UniversiteUpsertWithoutTransactionsDestinationInput
-    disconnect?: UniversiteWhereInput | boolean
-    delete?: UniversiteWhereInput | boolean
-    connect?: UniversiteWhereUniqueInput
-    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutTransactionsDestinationInput, UniversiteUpdateWithoutTransactionsDestinationInput>, UniversiteUncheckedUpdateWithoutTransactionsDestinationInput>
-  }
-
   export type UserCreateNestedOneWithoutContributionsInput = {
     create?: XOR<UserCreateWithoutContributionsInput, UserUncheckedCreateWithoutContributionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutContributionsInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type UniversiteCreateNestedOneWithoutRessourcesInput = {
-    create?: XOR<UniversiteCreateWithoutRessourcesInput, UniversiteUncheckedCreateWithoutRessourcesInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutRessourcesInput
-    connect?: UniversiteWhereUniqueInput
   }
 
   export type FavoriCreateNestedManyWithoutRessourceInput = {
@@ -42123,18 +42809,17 @@ export namespace Prisma {
     connect?: DonneesRecommandationWhereUniqueInput | DonneesRecommandationWhereUniqueInput[]
   }
 
-  export type TransactionBlockchainCreateNestedManyWithoutRessourceInput = {
-    create?: XOR<TransactionBlockchainCreateWithoutRessourceInput, TransactionBlockchainUncheckedCreateWithoutRessourceInput> | TransactionBlockchainCreateWithoutRessourceInput[] | TransactionBlockchainUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: TransactionBlockchainCreateOrConnectWithoutRessourceInput | TransactionBlockchainCreateOrConnectWithoutRessourceInput[]
-    createMany?: TransactionBlockchainCreateManyRessourceInputEnvelope
-    connect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-  }
-
   export type NotificationCreateNestedManyWithoutRessourceInput = {
     create?: XOR<NotificationCreateWithoutRessourceInput, NotificationUncheckedCreateWithoutRessourceInput> | NotificationCreateWithoutRessourceInput[] | NotificationUncheckedCreateWithoutRessourceInput[]
     connectOrCreate?: NotificationCreateOrConnectWithoutRessourceInput | NotificationCreateOrConnectWithoutRessourceInput[]
     createMany?: NotificationCreateManyRessourceInputEnvelope
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type CategorieCreateNestedOneWithoutRessourcesInput = {
+    create?: XOR<CategorieCreateWithoutRessourcesInput, CategorieUncheckedCreateWithoutRessourcesInput>
+    connectOrCreate?: CategorieCreateOrConnectWithoutRessourcesInput
+    connect?: CategorieWhereUniqueInput
   }
 
   export type FavoriUncheckedCreateNestedManyWithoutRessourceInput = {
@@ -42200,13 +42885,6 @@ export namespace Prisma {
     connect?: DonneesRecommandationWhereUniqueInput | DonneesRecommandationWhereUniqueInput[]
   }
 
-  export type TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput = {
-    create?: XOR<TransactionBlockchainCreateWithoutRessourceInput, TransactionBlockchainUncheckedCreateWithoutRessourceInput> | TransactionBlockchainCreateWithoutRessourceInput[] | TransactionBlockchainUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: TransactionBlockchainCreateOrConnectWithoutRessourceInput | TransactionBlockchainCreateOrConnectWithoutRessourceInput[]
-    createMany?: TransactionBlockchainCreateManyRessourceInputEnvelope
-    connect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-  }
-
   export type NotificationUncheckedCreateNestedManyWithoutRessourceInput = {
     create?: XOR<NotificationCreateWithoutRessourceInput, NotificationUncheckedCreateWithoutRessourceInput> | NotificationCreateWithoutRessourceInput[] | NotificationUncheckedCreateWithoutRessourceInput[]
     connectOrCreate?: NotificationCreateOrConnectWithoutRessourceInput | NotificationCreateOrConnectWithoutRessourceInput[]
@@ -42234,10 +42912,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type NullableEnumCategorieBiblioFieldUpdateOperationsInput = {
-    set?: $Enums.CategorieBiblio | null
-  }
-
   export type UserUpdateOneWithoutContributionsNestedInput = {
     create?: XOR<UserCreateWithoutContributionsInput, UserUncheckedCreateWithoutContributionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutContributionsInput
@@ -42246,14 +42920,6 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContributionsInput, UserUpdateWithoutContributionsInput>, UserUncheckedUpdateWithoutContributionsInput>
-  }
-
-  export type UniversiteUpdateOneRequiredWithoutRessourcesNestedInput = {
-    create?: XOR<UniversiteCreateWithoutRessourcesInput, UniversiteUncheckedCreateWithoutRessourcesInput>
-    connectOrCreate?: UniversiteCreateOrConnectWithoutRessourcesInput
-    upsert?: UniversiteUpsertWithoutRessourcesInput
-    connect?: UniversiteWhereUniqueInput
-    update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutRessourcesInput, UniversiteUpdateWithoutRessourcesInput>, UniversiteUncheckedUpdateWithoutRessourcesInput>
   }
 
   export type FavoriUpdateManyWithoutRessourceNestedInput = {
@@ -42382,20 +43048,6 @@ export namespace Prisma {
     deleteMany?: DonneesRecommandationScalarWhereInput | DonneesRecommandationScalarWhereInput[]
   }
 
-  export type TransactionBlockchainUpdateManyWithoutRessourceNestedInput = {
-    create?: XOR<TransactionBlockchainCreateWithoutRessourceInput, TransactionBlockchainUncheckedCreateWithoutRessourceInput> | TransactionBlockchainCreateWithoutRessourceInput[] | TransactionBlockchainUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: TransactionBlockchainCreateOrConnectWithoutRessourceInput | TransactionBlockchainCreateOrConnectWithoutRessourceInput[]
-    upsert?: TransactionBlockchainUpsertWithWhereUniqueWithoutRessourceInput | TransactionBlockchainUpsertWithWhereUniqueWithoutRessourceInput[]
-    createMany?: TransactionBlockchainCreateManyRessourceInputEnvelope
-    set?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    disconnect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    delete?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    connect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    update?: TransactionBlockchainUpdateWithWhereUniqueWithoutRessourceInput | TransactionBlockchainUpdateWithWhereUniqueWithoutRessourceInput[]
-    updateMany?: TransactionBlockchainUpdateManyWithWhereWithoutRessourceInput | TransactionBlockchainUpdateManyWithWhereWithoutRessourceInput[]
-    deleteMany?: TransactionBlockchainScalarWhereInput | TransactionBlockchainScalarWhereInput[]
-  }
-
   export type NotificationUpdateManyWithoutRessourceNestedInput = {
     create?: XOR<NotificationCreateWithoutRessourceInput, NotificationUncheckedCreateWithoutRessourceInput> | NotificationCreateWithoutRessourceInput[] | NotificationUncheckedCreateWithoutRessourceInput[]
     connectOrCreate?: NotificationCreateOrConnectWithoutRessourceInput | NotificationCreateOrConnectWithoutRessourceInput[]
@@ -42408,6 +43060,16 @@ export namespace Prisma {
     update?: NotificationUpdateWithWhereUniqueWithoutRessourceInput | NotificationUpdateWithWhereUniqueWithoutRessourceInput[]
     updateMany?: NotificationUpdateManyWithWhereWithoutRessourceInput | NotificationUpdateManyWithWhereWithoutRessourceInput[]
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type CategorieUpdateOneWithoutRessourcesNestedInput = {
+    create?: XOR<CategorieCreateWithoutRessourcesInput, CategorieUncheckedCreateWithoutRessourcesInput>
+    connectOrCreate?: CategorieCreateOrConnectWithoutRessourcesInput
+    upsert?: CategorieUpsertWithoutRessourcesInput
+    disconnect?: CategorieWhereInput | boolean
+    delete?: CategorieWhereInput | boolean
+    connect?: CategorieWhereUniqueInput
+    update?: XOR<XOR<CategorieUpdateToOneWithWhereWithoutRessourcesInput, CategorieUpdateWithoutRessourcesInput>, CategorieUncheckedUpdateWithoutRessourcesInput>
   }
 
   export type FavoriUncheckedUpdateManyWithoutRessourceNestedInput = {
@@ -42536,20 +43198,6 @@ export namespace Prisma {
     deleteMany?: DonneesRecommandationScalarWhereInput | DonneesRecommandationScalarWhereInput[]
   }
 
-  export type TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput = {
-    create?: XOR<TransactionBlockchainCreateWithoutRessourceInput, TransactionBlockchainUncheckedCreateWithoutRessourceInput> | TransactionBlockchainCreateWithoutRessourceInput[] | TransactionBlockchainUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: TransactionBlockchainCreateOrConnectWithoutRessourceInput | TransactionBlockchainCreateOrConnectWithoutRessourceInput[]
-    upsert?: TransactionBlockchainUpsertWithWhereUniqueWithoutRessourceInput | TransactionBlockchainUpsertWithWhereUniqueWithoutRessourceInput[]
-    createMany?: TransactionBlockchainCreateManyRessourceInputEnvelope
-    set?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    disconnect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    delete?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    connect?: TransactionBlockchainWhereUniqueInput | TransactionBlockchainWhereUniqueInput[]
-    update?: TransactionBlockchainUpdateWithWhereUniqueWithoutRessourceInput | TransactionBlockchainUpdateWithWhereUniqueWithoutRessourceInput[]
-    updateMany?: TransactionBlockchainUpdateManyWithWhereWithoutRessourceInput | TransactionBlockchainUpdateManyWithWhereWithoutRessourceInput[]
-    deleteMany?: TransactionBlockchainScalarWhereInput | TransactionBlockchainScalarWhereInput[]
-  }
-
   export type NotificationUncheckedUpdateManyWithoutRessourceNestedInput = {
     create?: XOR<NotificationCreateWithoutRessourceInput, NotificationUncheckedCreateWithoutRessourceInput> | NotificationCreateWithoutRessourceInput[] | NotificationUncheckedCreateWithoutRessourceInput[]
     connectOrCreate?: NotificationCreateOrConnectWithoutRessourceInput | NotificationCreateOrConnectWithoutRessourceInput[]
@@ -42562,6 +43210,48 @@ export namespace Prisma {
     update?: NotificationUpdateWithWhereUniqueWithoutRessourceInput | NotificationUpdateWithWhereUniqueWithoutRessourceInput[]
     updateMany?: NotificationUpdateManyWithWhereWithoutRessourceInput | NotificationUpdateManyWithWhereWithoutRessourceInput[]
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type RessourceCreateNestedManyWithoutCategorieInput = {
+    create?: XOR<RessourceCreateWithoutCategorieInput, RessourceUncheckedCreateWithoutCategorieInput> | RessourceCreateWithoutCategorieInput[] | RessourceUncheckedCreateWithoutCategorieInput[]
+    connectOrCreate?: RessourceCreateOrConnectWithoutCategorieInput | RessourceCreateOrConnectWithoutCategorieInput[]
+    createMany?: RessourceCreateManyCategorieInputEnvelope
+    connect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
+  }
+
+  export type RessourceUncheckedCreateNestedManyWithoutCategorieInput = {
+    create?: XOR<RessourceCreateWithoutCategorieInput, RessourceUncheckedCreateWithoutCategorieInput> | RessourceCreateWithoutCategorieInput[] | RessourceUncheckedCreateWithoutCategorieInput[]
+    connectOrCreate?: RessourceCreateOrConnectWithoutCategorieInput | RessourceCreateOrConnectWithoutCategorieInput[]
+    createMany?: RessourceCreateManyCategorieInputEnvelope
+    connect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
+  }
+
+  export type RessourceUpdateManyWithoutCategorieNestedInput = {
+    create?: XOR<RessourceCreateWithoutCategorieInput, RessourceUncheckedCreateWithoutCategorieInput> | RessourceCreateWithoutCategorieInput[] | RessourceUncheckedCreateWithoutCategorieInput[]
+    connectOrCreate?: RessourceCreateOrConnectWithoutCategorieInput | RessourceCreateOrConnectWithoutCategorieInput[]
+    upsert?: RessourceUpsertWithWhereUniqueWithoutCategorieInput | RessourceUpsertWithWhereUniqueWithoutCategorieInput[]
+    createMany?: RessourceCreateManyCategorieInputEnvelope
+    set?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
+    disconnect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
+    delete?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
+    connect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
+    update?: RessourceUpdateWithWhereUniqueWithoutCategorieInput | RessourceUpdateWithWhereUniqueWithoutCategorieInput[]
+    updateMany?: RessourceUpdateManyWithWhereWithoutCategorieInput | RessourceUpdateManyWithWhereWithoutCategorieInput[]
+    deleteMany?: RessourceScalarWhereInput | RessourceScalarWhereInput[]
+  }
+
+  export type RessourceUncheckedUpdateManyWithoutCategorieNestedInput = {
+    create?: XOR<RessourceCreateWithoutCategorieInput, RessourceUncheckedCreateWithoutCategorieInput> | RessourceCreateWithoutCategorieInput[] | RessourceUncheckedCreateWithoutCategorieInput[]
+    connectOrCreate?: RessourceCreateOrConnectWithoutCategorieInput | RessourceCreateOrConnectWithoutCategorieInput[]
+    upsert?: RessourceUpsertWithWhereUniqueWithoutCategorieInput | RessourceUpsertWithWhereUniqueWithoutCategorieInput[]
+    createMany?: RessourceCreateManyCategorieInputEnvelope
+    set?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
+    disconnect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
+    delete?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
+    connect?: RessourceWhereUniqueInput | RessourceWhereUniqueInput[]
+    update?: RessourceUpdateWithWhereUniqueWithoutCategorieInput | RessourceUpdateWithWhereUniqueWithoutCategorieInput[]
+    updateMany?: RessourceUpdateManyWithWhereWithoutCategorieInput | RessourceUpdateManyWithWhereWithoutCategorieInput[]
+    deleteMany?: RessourceScalarWhereInput | RessourceScalarWhereInput[]
   }
 
   export type UniversiteCreateNestedOneWithoutStatistiquesBibliothequeInput = {
@@ -42889,11 +43579,6 @@ export namespace Prisma {
     not?: NestedEnumEtatExemplaireFilter<$PrismaModel> | $Enums.EtatExemplaire
   }
 
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
   export type NestedEnumEtatExemplaireWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.EtatExemplaire | EnumEtatExemplaireFieldRefInput<$PrismaModel>
     in?: $Enums.EtatExemplaire[]
@@ -42902,14 +43587,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumEtatExemplaireFilter<$PrismaModel>
     _max?: NestedEnumEtatExemplaireFilter<$PrismaModel>
-  }
-
-  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumStatutEmpruntFilter<$PrismaModel = never> = {
@@ -43030,40 +43707,6 @@ export namespace Prisma {
     _max?: NestedEnumTypeInteractionFilter<$PrismaModel>
   }
 
-  export type NestedEnumTypeTransactionFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeTransaction | EnumTypeTransactionFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeTransaction[]
-    notIn?: $Enums.TypeTransaction[]
-    not?: NestedEnumTypeTransactionFilter<$PrismaModel> | $Enums.TypeTransaction
-  }
-
-  export type NestedEnumStatutTransactionFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatutTransaction | EnumStatutTransactionFieldRefInput<$PrismaModel>
-    in?: $Enums.StatutTransaction[]
-    notIn?: $Enums.StatutTransaction[]
-    not?: NestedEnumStatutTransactionFilter<$PrismaModel> | $Enums.StatutTransaction
-  }
-
-  export type NestedEnumTypeTransactionWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeTransaction | EnumTypeTransactionFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeTransaction[]
-    notIn?: $Enums.TypeTransaction[]
-    not?: NestedEnumTypeTransactionWithAggregatesFilter<$PrismaModel> | $Enums.TypeTransaction
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeTransactionFilter<$PrismaModel>
-    _max?: NestedEnumTypeTransactionFilter<$PrismaModel>
-  }
-
-  export type NestedEnumStatutTransactionWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatutTransaction | EnumStatutTransactionFieldRefInput<$PrismaModel>
-    in?: $Enums.StatutTransaction[]
-    notIn?: $Enums.StatutTransaction[]
-    not?: NestedEnumStatutTransactionWithAggregatesFilter<$PrismaModel> | $Enums.StatutTransaction
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatutTransactionFilter<$PrismaModel>
-    _max?: NestedEnumStatutTransactionFilter<$PrismaModel>
-  }
-
   export type NestedEnumTypeRessourceFilter<$PrismaModel = never> = {
     equals?: $Enums.TypeRessource | EnumTypeRessourceFieldRefInput<$PrismaModel>
     in?: $Enums.TypeRessource[]
@@ -43083,13 +43726,6 @@ export namespace Prisma {
     in?: $Enums.TypeValidation[]
     notIn?: $Enums.TypeValidation[]
     not?: NestedEnumTypeValidationFilter<$PrismaModel> | $Enums.TypeValidation
-  }
-
-  export type NestedEnumCategorieBiblioNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.CategorieBiblio | EnumCategorieBiblioFieldRefInput<$PrismaModel> | null
-    in?: $Enums.CategorieBiblio[] | null
-    notIn?: $Enums.CategorieBiblio[] | null
-    not?: NestedEnumCategorieBiblioNullableFilter<$PrismaModel> | $Enums.CategorieBiblio | null
   }
 
   export type NestedEnumTypeRessourceWithAggregatesFilter<$PrismaModel = never> = {
@@ -43147,16 +43783,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedEnumCategorieBiblioNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.CategorieBiblio | EnumCategorieBiblioFieldRefInput<$PrismaModel> | null
-    in?: $Enums.CategorieBiblio[] | null
-    notIn?: $Enums.CategorieBiblio[] | null
-    not?: NestedEnumCategorieBiblioNullableWithAggregatesFilter<$PrismaModel> | $Enums.CategorieBiblio | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumCategorieBiblioNullableFilter<$PrismaModel>
-    _max?: NestedEnumCategorieBiblioNullableFilter<$PrismaModel>
   }
 
   export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -43220,23 +43846,10 @@ export namespace Prisma {
     nom: string
     adresse?: string | null
     ville: string
-    pays: string
     siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
     politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
+    ufrs?: UfrCreateNestedManyWithoutUniversiteInput
   }
 
   export type UniversiteUncheckedCreateWithoutReglePretsInput = {
@@ -43244,23 +43857,10 @@ export namespace Prisma {
     nom: string
     adresse?: string | null
     ville: string
-    pays: string
     siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
+    ufrs?: UfrUncheckedCreateNestedManyWithoutUniversiteInput
   }
 
   export type UniversiteCreateOrConnectWithoutReglePretsInput = {
@@ -43284,23 +43884,10 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
+    ufrs?: UfrUpdateManyWithoutUniversiteNestedInput
   }
 
   export type UniversiteUncheckedUpdateWithoutReglePretsInput = {
@@ -43308,23 +43895,10 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
+    ufrs?: UfrUncheckedUpdateManyWithoutUniversiteNestedInput
   }
 
   export type UniversiteCreateWithoutPolitiqueBibliothequesInput = {
@@ -43332,23 +43906,10 @@ export namespace Prisma {
     nom: string
     adresse?: string | null
     ville: string
-    pays: string
     siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
     reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
+    ufrs?: UfrCreateNestedManyWithoutUniversiteInput
   }
 
   export type UniversiteUncheckedCreateWithoutPolitiqueBibliothequesInput = {
@@ -43356,23 +43917,10 @@ export namespace Prisma {
     nom: string
     adresse?: string | null
     ville: string
-    pays: string
     siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
     reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
+    ufrs?: UfrUncheckedCreateNestedManyWithoutUniversiteInput
   }
 
   export type UniversiteCreateOrConnectWithoutPolitiqueBibliothequesInput = {
@@ -43396,23 +43944,10 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
     reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
+    ufrs?: UfrUpdateManyWithoutUniversiteNestedInput
   }
 
   export type UniversiteUncheckedUpdateWithoutPolitiqueBibliothequesInput = {
@@ -43420,23 +43955,10 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
     reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
+    ufrs?: UfrUncheckedUpdateManyWithoutUniversiteNestedInput
   }
 
   export type UserCreateWithoutSanctionsInput = {
@@ -43450,9 +43972,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -43515,12 +44037,11 @@ export namespace Prisma {
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
-    estEmpruntExterne?: boolean
+    universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
     exemplaire: ExemplairePhysiqueCreateNestedOneWithoutEmpruntsInput
-    user: UserCreateNestedOneWithoutEmpruntsInput
-    universiteEmprunteurRel: UniversiteCreateNestedOneWithoutEmpruntsInput
+    user?: UserCreateNestedOneWithoutEmpruntsInput
   }
 
   export type EmpruntUncheckedCreateWithoutSanctionUtilisateurInput = {
@@ -43533,7 +44054,6 @@ export namespace Prisma {
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
     universiteEmprunteur: string
-    estEmpruntExterne?: boolean
     motifEmprunt?: string | null
     validePar?: string | null
   }
@@ -43565,9 +44085,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -43636,12 +44156,11 @@ export namespace Prisma {
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
     exemplaire?: ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntsNestedInput
-    user?: UserUpdateOneRequiredWithoutEmpruntsNestedInput
-    universiteEmprunteurRel?: UniversiteUpdateOneRequiredWithoutEmpruntsNestedInput
+    user?: UserUpdateOneWithoutEmpruntsNestedInput
   }
 
   export type EmpruntUncheckedUpdateWithoutSanctionUtilisateurInput = {
@@ -43654,233 +44173,8 @@ export namespace Prisma {
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type UniversiteCreateWithoutStatistiquesSourceInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteUncheckedCreateWithoutStatistiquesSourceInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteCreateOrConnectWithoutStatistiquesSourceInput = {
-    where: UniversiteWhereUniqueInput
-    create: XOR<UniversiteCreateWithoutStatistiquesSourceInput, UniversiteUncheckedCreateWithoutStatistiquesSourceInput>
-  }
-
-  export type UniversiteCreateWithoutStatistiquesDestinationInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteUncheckedCreateWithoutStatistiquesDestinationInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteCreateOrConnectWithoutStatistiquesDestinationInput = {
-    where: UniversiteWhereUniqueInput
-    create: XOR<UniversiteCreateWithoutStatistiquesDestinationInput, UniversiteUncheckedCreateWithoutStatistiquesDestinationInput>
-  }
-
-  export type UniversiteUpsertWithoutStatistiquesSourceInput = {
-    update: XOR<UniversiteUpdateWithoutStatistiquesSourceInput, UniversiteUncheckedUpdateWithoutStatistiquesSourceInput>
-    create: XOR<UniversiteCreateWithoutStatistiquesSourceInput, UniversiteUncheckedCreateWithoutStatistiquesSourceInput>
-    where?: UniversiteWhereInput
-  }
-
-  export type UniversiteUpdateToOneWithWhereWithoutStatistiquesSourceInput = {
-    where?: UniversiteWhereInput
-    data: XOR<UniversiteUpdateWithoutStatistiquesSourceInput, UniversiteUncheckedUpdateWithoutStatistiquesSourceInput>
-  }
-
-  export type UniversiteUpdateWithoutStatistiquesSourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUncheckedUpdateWithoutStatistiquesSourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUpsertWithoutStatistiquesDestinationInput = {
-    update: XOR<UniversiteUpdateWithoutStatistiquesDestinationInput, UniversiteUncheckedUpdateWithoutStatistiquesDestinationInput>
-    create: XOR<UniversiteCreateWithoutStatistiquesDestinationInput, UniversiteUncheckedCreateWithoutStatistiquesDestinationInput>
-    where?: UniversiteWhereInput
-  }
-
-  export type UniversiteUpdateToOneWithWhereWithoutStatistiquesDestinationInput = {
-    where?: UniversiteWhereInput
-    data: XOR<UniversiteUpdateWithoutStatistiquesDestinationInput, UniversiteUncheckedUpdateWithoutStatistiquesDestinationInput>
-  }
-
-  export type UniversiteUpdateWithoutStatistiquesDestinationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUncheckedUpdateWithoutStatistiquesDestinationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
   }
 
   export type UserCreateWithoutReservationsInput = {
@@ -43894,9 +44188,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -43961,9 +44255,9 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
+    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
@@ -43971,25 +44265,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
     auteur?: UserCreateNestedOneWithoutContributionsInput
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -43998,8 +44282,8 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
     notifications?: NotificationCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
   export type RessourceUncheckedCreateWithoutReservationsInput = {
@@ -44011,7 +44295,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     auteurId?: string | null
@@ -44023,23 +44306,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -44048,66 +44323,12 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutReservationsInput = {
     where: RessourceWhereUniqueInput
     create: XOR<RessourceCreateWithoutReservationsInput, RessourceUncheckedCreateWithoutReservationsInput>
-  }
-
-  export type UniversiteCreateWithoutReservationsInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteUncheckedCreateWithoutReservationsInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteCreateOrConnectWithoutReservationsInput = {
-    where: UniversiteWhereUniqueInput
-    create: XOR<UniversiteCreateWithoutReservationsInput, UniversiteUncheckedCreateWithoutReservationsInput>
   }
 
   export type BibliothecaireCreateWithoutReservationsInput = {
@@ -44157,9 +44378,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -44230,9 +44451,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -44240,25 +44461,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
     auteur?: UserUpdateOneWithoutContributionsNestedInput
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -44267,8 +44478,8 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
   export type RessourceUncheckedUpdateWithoutReservationsInput = {
@@ -44280,7 +44491,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44292,23 +44502,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -44317,67 +44519,7 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
-  }
-
-  export type UniversiteUpsertWithoutReservationsInput = {
-    update: XOR<UniversiteUpdateWithoutReservationsInput, UniversiteUncheckedUpdateWithoutReservationsInput>
-    create: XOR<UniversiteCreateWithoutReservationsInput, UniversiteUncheckedCreateWithoutReservationsInput>
-    where?: UniversiteWhereInput
-  }
-
-  export type UniversiteUpdateToOneWithWhereWithoutReservationsInput = {
-    where?: UniversiteWhereInput
-    data: XOR<UniversiteUpdateWithoutReservationsInput, UniversiteUncheckedUpdateWithoutReservationsInput>
-  }
-
-  export type UniversiteUpdateWithoutReservationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUncheckedUpdateWithoutReservationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
   }
 
   export type BibliothecaireUpsertWithoutReservationsInput = {
@@ -44420,9 +44562,9 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
+    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
@@ -44430,25 +44572,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
     auteur?: UserCreateNestedOneWithoutContributionsInput
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -44457,8 +44589,8 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
     notifications?: NotificationCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
   export type RessourceUncheckedCreateWithoutExemplairesInput = {
@@ -44470,7 +44602,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     auteurId?: string | null
@@ -44482,23 +44613,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -44507,7 +44630,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
@@ -44523,11 +44645,10 @@ export namespace Prisma {
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
-    estEmpruntExterne?: boolean
+    universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
-    user: UserCreateNestedOneWithoutEmpruntsInput
-    universiteEmprunteurRel: UniversiteCreateNestedOneWithoutEmpruntsInput
+    user?: UserCreateNestedOneWithoutEmpruntsInput
     SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
   }
 
@@ -44540,7 +44661,6 @@ export namespace Prisma {
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
     universiteEmprunteur: string
-    estEmpruntExterne?: boolean
     motifEmprunt?: string | null
     validePar?: string | null
     SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
@@ -44576,9 +44696,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -44586,25 +44706,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
     auteur?: UserUpdateOneWithoutContributionsNestedInput
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -44613,8 +44723,8 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
   export type RessourceUncheckedUpdateWithoutExemplairesInput = {
@@ -44626,7 +44736,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44638,23 +44747,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -44663,7 +44764,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
@@ -44696,7 +44796,6 @@ export namespace Prisma {
     statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
     commentaire?: StringNullableFilter<"Emprunt"> | string | null
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
-    estEmpruntExterne?: BoolFilter<"Emprunt"> | boolean
     motifEmprunt?: StringNullableFilter<"Emprunt"> | string | null
     validePar?: StringNullableFilter<"Emprunt"> | string | null
   }
@@ -44708,9 +44807,9 @@ export namespace Prisma {
     disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
-    estReservableExterne?: boolean | null
-    estEmpruntableExterne?: boolean | null
     qrCode?: string | null
+    dureeMaxEmpruntExterne?: number
+    nbMaxExemplairesExterne?: number
     ressource: RessourceCreateNestedOneWithoutExemplairesInput
   }
 
@@ -44722,9 +44821,9 @@ export namespace Prisma {
     disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
-    estReservableExterne?: boolean | null
-    estEmpruntableExterne?: boolean | null
     qrCode?: string | null
+    dureeMaxEmpruntExterne?: number
+    nbMaxExemplairesExterne?: number
   }
 
   export type ExemplairePhysiqueCreateOrConnectWithoutEmpruntsInput = {
@@ -44743,9 +44842,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -44801,59 +44900,6 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutEmpruntsInput, UserUncheckedCreateWithoutEmpruntsInput>
   }
 
-  export type UniversiteCreateWithoutEmpruntsInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteUncheckedCreateWithoutEmpruntsInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteCreateOrConnectWithoutEmpruntsInput = {
-    where: UniversiteWhereUniqueInput
-    create: XOR<UniversiteCreateWithoutEmpruntsInput, UniversiteUncheckedCreateWithoutEmpruntsInput>
-  }
-
   export type SanctionUtilisateurCreateWithoutEmpruntInput = {
     id?: string
     typeRestriction: $Enums.TypeSanction
@@ -44902,9 +44948,9 @@ export namespace Prisma {
     disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estReservableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    estEmpruntableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
+    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
     ressource?: RessourceUpdateOneRequiredWithoutExemplairesNestedInput
   }
 
@@ -44916,9 +44962,9 @@ export namespace Prisma {
     disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estReservableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    estEmpruntableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
+    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserUpsertWithoutEmpruntsInput = {
@@ -44943,9 +44989,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -44996,65 +45042,6 @@ export namespace Prisma {
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UniversiteUpsertWithoutEmpruntsInput = {
-    update: XOR<UniversiteUpdateWithoutEmpruntsInput, UniversiteUncheckedUpdateWithoutEmpruntsInput>
-    create: XOR<UniversiteCreateWithoutEmpruntsInput, UniversiteUncheckedCreateWithoutEmpruntsInput>
-    where?: UniversiteWhereInput
-  }
-
-  export type UniversiteUpdateToOneWithWhereWithoutEmpruntsInput = {
-    where?: UniversiteWhereInput
-    data: XOR<UniversiteUpdateWithoutEmpruntsInput, UniversiteUncheckedUpdateWithoutEmpruntsInput>
-  }
-
-  export type UniversiteUpdateWithoutEmpruntsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUncheckedUpdateWithoutEmpruntsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-  }
-
   export type SanctionUtilisateurUpsertWithWhereUniqueWithoutEmpruntInput = {
     where: SanctionUtilisateurWhereUniqueInput
     update: XOR<SanctionUtilisateurUpdateWithoutEmpruntInput, SanctionUtilisateurUncheckedUpdateWithoutEmpruntInput>
@@ -45096,9 +45083,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -45163,9 +45150,9 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
+    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
@@ -45173,25 +45160,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
     auteur?: UserCreateNestedOneWithoutContributionsInput
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -45200,8 +45177,8 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
     notifications?: NotificationCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
   export type RessourceUncheckedCreateWithoutRecommandationsInput = {
@@ -45213,7 +45190,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     auteurId?: string | null
@@ -45225,23 +45201,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -45250,66 +45218,12 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutRecommandationsInput = {
     where: RessourceWhereUniqueInput
     create: XOR<RessourceCreateWithoutRecommandationsInput, RessourceUncheckedCreateWithoutRecommandationsInput>
-  }
-
-  export type UniversiteCreateWithoutRecommandationsSourceInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteUncheckedCreateWithoutRecommandationsSourceInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteCreateOrConnectWithoutRecommandationsSourceInput = {
-    where: UniversiteWhereUniqueInput
-    create: XOR<UniversiteCreateWithoutRecommandationsSourceInput, UniversiteUncheckedCreateWithoutRecommandationsSourceInput>
   }
 
   export type UserUpsertWithoutRecommandationsInput = {
@@ -45334,9 +45248,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -45407,9 +45321,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -45417,25 +45331,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
     auteur?: UserUpdateOneWithoutContributionsNestedInput
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -45444,8 +45348,8 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
   export type RessourceUncheckedUpdateWithoutRecommandationsInput = {
@@ -45457,7 +45361,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45469,23 +45372,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -45494,421 +45389,7 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
-  }
-
-  export type UniversiteUpsertWithoutRecommandationsSourceInput = {
-    update: XOR<UniversiteUpdateWithoutRecommandationsSourceInput, UniversiteUncheckedUpdateWithoutRecommandationsSourceInput>
-    create: XOR<UniversiteCreateWithoutRecommandationsSourceInput, UniversiteUncheckedCreateWithoutRecommandationsSourceInput>
-    where?: UniversiteWhereInput
-  }
-
-  export type UniversiteUpdateToOneWithWhereWithoutRecommandationsSourceInput = {
-    where?: UniversiteWhereInput
-    data: XOR<UniversiteUpdateWithoutRecommandationsSourceInput, UniversiteUncheckedUpdateWithoutRecommandationsSourceInput>
-  }
-
-  export type UniversiteUpdateWithoutRecommandationsSourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUncheckedUpdateWithoutRecommandationsSourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UserCreateWithoutUniversiteInput = {
-    id?: string
-    email: string
-    motDePasse: string
-    nom: string
-    telephone?: string | null
-    prenom: string
-    image?: string | null
-    role: $Enums.RoleUser
-    derniereConnexion?: Date | string | null
-    estActif?: boolean
-    preferencesRecommandation?: string | null
-    frequenceRecommandation?: $Enums.FrequenceRecommandation
-    contributions?: RessourceCreateNestedManyWithoutAuteurInput
-    favoris?: FavoriCreateNestedManyWithoutUserInput
-    commentaires?: CommentaireCreateNestedManyWithoutUserInput
-    notations?: NotationCreateNestedManyWithoutUserInput
-    historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
-    collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
-    emprunts?: EmpruntCreateNestedManyWithoutUserInput
-    recommandations?: RecommandationCreateNestedManyWithoutUserInput
-    JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
-    donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutUniversiteInput = {
-    id?: string
-    email: string
-    motDePasse: string
-    nom: string
-    telephone?: string | null
-    prenom: string
-    image?: string | null
-    role: $Enums.RoleUser
-    derniereConnexion?: Date | string | null
-    estActif?: boolean
-    preferencesRecommandation?: string | null
-    frequenceRecommandation?: $Enums.FrequenceRecommandation
-    contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
-    favoris?: FavoriUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentaireUncheckedCreateNestedManyWithoutUserInput
-    notations?: NotationUncheckedCreateNestedManyWithoutUserInput
-    historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
-    collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
-    recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
-    JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
-    donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutUniversiteInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutUniversiteInput, UserUncheckedCreateWithoutUniversiteInput>
-  }
-
-  export type UserCreateManyUniversiteInputEnvelope = {
-    data: UserCreateManyUniversiteInput | UserCreateManyUniversiteInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type RessourceCreateWithoutUniversiteInput = {
-    id?: string
-    titre: string
-    description: string
-    type: $Enums.TypeRessource
-    langue?: string
-    urlFichier: string
-    urlFichierLocal?: string | null
-    format: string
-    dateCreation?: Date | string
-    dateModification?: Date | string
-    motsCles: string
-    image?: string | null
-    niveauAcces?: $Enums.NiveauAcces
-    datePublication?: Date | string | null
-    estValide?: boolean
-    estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
-    validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    edition?: string | null
-    anneePublication?: number | null
-    editeur?: string | null
-    nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
-    auteur?: UserCreateNestedOneWithoutContributionsInput
-    favoris?: FavoriCreateNestedManyWithoutRessourceInput
-    commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
-    notations?: NotationCreateNestedManyWithoutRessourceInput
-    historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
-    collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
-    recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
-    donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
-  }
-
-  export type RessourceUncheckedCreateWithoutUniversiteInput = {
-    id?: string
-    titre: string
-    description: string
-    type: $Enums.TypeRessource
-    langue?: string
-    urlFichier: string
-    urlFichierLocal?: string | null
-    format: string
-    dateCreation?: Date | string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    image?: string | null
-    niveauAcces?: $Enums.NiveauAcces
-    datePublication?: Date | string | null
-    estValide?: boolean
-    estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
-    validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    edition?: string | null
-    anneePublication?: number | null
-    editeur?: string | null
-    nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
-    favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
-    commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
-    notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
-    historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
-    collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
-    recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
-  }
-
-  export type RessourceCreateOrConnectWithoutUniversiteInput = {
-    where: RessourceWhereUniqueInput
-    create: XOR<RessourceCreateWithoutUniversiteInput, RessourceUncheckedCreateWithoutUniversiteInput>
-  }
-
-  export type RessourceCreateManyUniversiteInputEnvelope = {
-    data: RessourceCreateManyUniversiteInput | RessourceCreateManyUniversiteInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput = {
-    id?: string
-    mois: number
-    annee: number
-    nbEmprunts?: number
-    nbReservations?: number
-    ressourcesPlusConsultees?: string | null
-    domainesPlusConsultes?: string | null
-    universiteDestinationRel: UniversiteCreateNestedOneWithoutStatistiquesDestinationInput
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput = {
-    id?: string
-    universiteDestination: string
-    mois: number
-    annee: number
-    nbEmprunts?: number
-    nbReservations?: number
-    ressourcesPlusConsultees?: string | null
-    domainesPlusConsultes?: string | null
-  }
-
-  export type StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteSourceRelInput = {
-    where: StatistiqueInteruniversitaireWhereUniqueInput
-    create: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput>
-  }
-
-  export type StatistiqueInteruniversitaireCreateManyUniversiteSourceRelInputEnvelope = {
-    data: StatistiqueInteruniversitaireCreateManyUniversiteSourceRelInput | StatistiqueInteruniversitaireCreateManyUniversiteSourceRelInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type StatistiqueInteruniversitaireCreateWithoutUniversiteDestinationRelInput = {
-    id?: string
-    mois: number
-    annee: number
-    nbEmprunts?: number
-    nbReservations?: number
-    ressourcesPlusConsultees?: string | null
-    domainesPlusConsultes?: string | null
-    universiteSourceRel: UniversiteCreateNestedOneWithoutStatistiquesSourceInput
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteDestinationRelInput = {
-    id?: string
-    universiteSource: string
-    mois: number
-    annee: number
-    nbEmprunts?: number
-    nbReservations?: number
-    ressourcesPlusConsultees?: string | null
-    domainesPlusConsultes?: string | null
-  }
-
-  export type StatistiqueInteruniversitaireCreateOrConnectWithoutUniversiteDestinationRelInput = {
-    where: StatistiqueInteruniversitaireWhereUniqueInput
-    create: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteDestinationRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteDestinationRelInput>
-  }
-
-  export type StatistiqueInteruniversitaireCreateManyUniversiteDestinationRelInputEnvelope = {
-    data: StatistiqueInteruniversitaireCreateManyUniversiteDestinationRelInput | StatistiqueInteruniversitaireCreateManyUniversiteDestinationRelInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ReservationCreateWithoutUniversiteEmprunteurRelInput = {
-    id?: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    user?: UserCreateNestedOneWithoutReservationsInput
-    ressource: RessourceCreateNestedOneWithoutReservationsInput
-    valideur?: BibliothecaireCreateNestedOneWithoutReservationsInput
-  }
-
-  export type ReservationUncheckedCreateWithoutUniversiteEmprunteurRelInput = {
-    id?: string
-    userId?: string | null
-    ressourceId: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    validePar?: string | null
-  }
-
-  export type ReservationCreateOrConnectWithoutUniversiteEmprunteurRelInput = {
-    where: ReservationWhereUniqueInput
-    create: XOR<ReservationCreateWithoutUniversiteEmprunteurRelInput, ReservationUncheckedCreateWithoutUniversiteEmprunteurRelInput>
-  }
-
-  export type ReservationCreateManyUniversiteEmprunteurRelInputEnvelope = {
-    data: ReservationCreateManyUniversiteEmprunteurRelInput | ReservationCreateManyUniversiteEmprunteurRelInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type EmpruntCreateWithoutUniversiteEmprunteurRelInput = {
-    id?: string
-    dateEmprunt?: Date | string
-    dateRetourPrevue: Date | string
-    dateRetourEffective?: Date | string | null
-    statut?: $Enums.StatutEmprunt
-    commentaire?: string | null
-    estEmpruntExterne?: boolean
-    motifEmprunt?: string | null
-    validePar?: string | null
-    exemplaire: ExemplairePhysiqueCreateNestedOneWithoutEmpruntsInput
-    user: UserCreateNestedOneWithoutEmpruntsInput
-    SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
-  }
-
-  export type EmpruntUncheckedCreateWithoutUniversiteEmprunteurRelInput = {
-    id?: string
-    exemplaireId: string
-    userId: string
-    dateEmprunt?: Date | string
-    dateRetourPrevue: Date | string
-    dateRetourEffective?: Date | string | null
-    statut?: $Enums.StatutEmprunt
-    commentaire?: string | null
-    estEmpruntExterne?: boolean
-    motifEmprunt?: string | null
-    validePar?: string | null
-    SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
-  }
-
-  export type EmpruntCreateOrConnectWithoutUniversiteEmprunteurRelInput = {
-    where: EmpruntWhereUniqueInput
-    create: XOR<EmpruntCreateWithoutUniversiteEmprunteurRelInput, EmpruntUncheckedCreateWithoutUniversiteEmprunteurRelInput>
-  }
-
-  export type EmpruntCreateManyUniversiteEmprunteurRelInputEnvelope = {
-    data: EmpruntCreateManyUniversiteEmprunteurRelInput | EmpruntCreateManyUniversiteEmprunteurRelInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type RecommandationCreateWithoutUniversiteSourceRelInput = {
-    id?: string
-    dateRecommandation?: Date | string
-    score: number
-    motif: $Enums.MotifRecommandation
-    estVue?: boolean
-    estInteruniversitaire?: boolean
-    user: UserCreateNestedOneWithoutRecommandationsInput
-    ressource: RessourceCreateNestedOneWithoutRecommandationsInput
-  }
-
-  export type RecommandationUncheckedCreateWithoutUniversiteSourceRelInput = {
-    id?: string
-    userId: string
-    ressourceId: string
-    dateRecommandation?: Date | string
-    score: number
-    motif: $Enums.MotifRecommandation
-    estVue?: boolean
-    estInteruniversitaire?: boolean
-  }
-
-  export type RecommandationCreateOrConnectWithoutUniversiteSourceRelInput = {
-    where: RecommandationWhereUniqueInput
-    create: XOR<RecommandationCreateWithoutUniversiteSourceRelInput, RecommandationUncheckedCreateWithoutUniversiteSourceRelInput>
-  }
-
-  export type RecommandationCreateManyUniversiteSourceRelInputEnvelope = {
-    data: RecommandationCreateManyUniversiteSourceRelInput | RecommandationCreateManyUniversiteSourceRelInput[]
-    skipDuplicates?: boolean
   }
 
   export type StatistiqueBibliothequeCreateWithoutUniversiteInput = {
@@ -45949,98 +45430,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type TransactionBlockchainCreateWithoutUniversiteOrigineRelInput = {
-    id?: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    dateTransaction?: Date | string
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
-    ressource?: RessourceCreateNestedOneWithoutTransactionsInput
-    universiteDestinationRel?: UniversiteCreateNestedOneWithoutTransactionsDestinationInput
-  }
-
-  export type TransactionBlockchainUncheckedCreateWithoutUniversiteOrigineRelInput = {
-    id?: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    ressourceId?: string | null
-    universiteDestination?: string | null
-    dateTransaction?: Date | string
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
-  }
-
-  export type TransactionBlockchainCreateOrConnectWithoutUniversiteOrigineRelInput = {
-    where: TransactionBlockchainWhereUniqueInput
-    create: XOR<TransactionBlockchainCreateWithoutUniversiteOrigineRelInput, TransactionBlockchainUncheckedCreateWithoutUniversiteOrigineRelInput>
-  }
-
-  export type TransactionBlockchainCreateManyUniversiteOrigineRelInputEnvelope = {
-    data: TransactionBlockchainCreateManyUniversiteOrigineRelInput | TransactionBlockchainCreateManyUniversiteOrigineRelInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TransactionBlockchainCreateWithoutUniversiteDestinationRelInput = {
-    id?: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    dateTransaction?: Date | string
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
-    ressource?: RessourceCreateNestedOneWithoutTransactionsInput
-    universiteOrigineRel: UniversiteCreateNestedOneWithoutTransactionsOrigineInput
-  }
-
-  export type TransactionBlockchainUncheckedCreateWithoutUniversiteDestinationRelInput = {
-    id?: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    ressourceId?: string | null
-    universiteOrigine: string
-    dateTransaction?: Date | string
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
-  }
-
-  export type TransactionBlockchainCreateOrConnectWithoutUniversiteDestinationRelInput = {
-    where: TransactionBlockchainWhereUniqueInput
-    create: XOR<TransactionBlockchainCreateWithoutUniversiteDestinationRelInput, TransactionBlockchainUncheckedCreateWithoutUniversiteDestinationRelInput>
-  }
-
-  export type TransactionBlockchainCreateManyUniversiteDestinationRelInputEnvelope = {
-    data: TransactionBlockchainCreateManyUniversiteDestinationRelInput | TransactionBlockchainCreateManyUniversiteDestinationRelInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type HistoriqueAccesCreateWithoutUniversiteSrcRelInput = {
-    id?: string
-    dateAcces?: Date | string
-    typeAcces: $Enums.TypeAcces
-    universiteUser?: string | null
-    user: UserCreateNestedOneWithoutHistoriquesInput
-    ressource: RessourceCreateNestedOneWithoutHistoriquesInput
-  }
-
-  export type HistoriqueAccesUncheckedCreateWithoutUniversiteSrcRelInput = {
-    id?: string
-    userId: string
-    ressourceId: string
-    dateAcces?: Date | string
-    typeAcces: $Enums.TypeAcces
-    universiteUser?: string | null
-  }
-
-  export type HistoriqueAccesCreateOrConnectWithoutUniversiteSrcRelInput = {
-    where: HistoriqueAccesWhereUniqueInput
-    create: XOR<HistoriqueAccesCreateWithoutUniversiteSrcRelInput, HistoriqueAccesUncheckedCreateWithoutUniversiteSrcRelInput>
-  }
-
-  export type HistoriqueAccesCreateManyUniversiteSrcRelInputEnvelope = {
-    data: HistoriqueAccesCreateManyUniversiteSrcRelInput | HistoriqueAccesCreateManyUniversiteSrcRelInput[]
-    skipDuplicates?: boolean
-  }
-
   export type ReglePretCreateWithoutUniversiteInput = {
     id?: string
     roleUtilisateur: $Enums.RoleUser
@@ -46048,8 +45437,6 @@ export namespace Prisma {
     dureeEmpruntJours?: number
     nbRenouvellements?: number
     penaliteRetardJours?: boolean
-    exigeCarteValide?: boolean
-    dateMiseAJour?: Date | string
     estActif?: boolean
   }
 
@@ -46060,8 +45447,6 @@ export namespace Prisma {
     dureeEmpruntJours?: number
     nbRenouvellements?: number
     penaliteRetardJours?: boolean
-    exigeCarteValide?: boolean
-    dateMiseAJour?: Date | string
     estActif?: boolean
   }
 
@@ -46103,224 +45488,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserUpsertWithWhereUniqueWithoutUniversiteInput = {
-    where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutUniversiteInput, UserUncheckedUpdateWithoutUniversiteInput>
-    create: XOR<UserCreateWithoutUniversiteInput, UserUncheckedCreateWithoutUniversiteInput>
+  export type UfrCreateWithoutUniversiteInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    departements?: DepartementCreateNestedManyWithoutUfrInput
   }
 
-  export type UserUpdateWithWhereUniqueWithoutUniversiteInput = {
-    where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutUniversiteInput, UserUncheckedUpdateWithoutUniversiteInput>
+  export type UfrUncheckedCreateWithoutUniversiteInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    departements?: DepartementUncheckedCreateNestedManyWithoutUfrInput
   }
 
-  export type UserUpdateManyWithWhereWithoutUniversiteInput = {
-    where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutUniversiteInput>
+  export type UfrCreateOrConnectWithoutUniversiteInput = {
+    where: UfrWhereUniqueInput
+    create: XOR<UfrCreateWithoutUniversiteInput, UfrUncheckedCreateWithoutUniversiteInput>
   }
 
-  export type UserScalarWhereInput = {
-    AND?: UserScalarWhereInput | UserScalarWhereInput[]
-    OR?: UserScalarWhereInput[]
-    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
-    id?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-    motDePasse?: StringFilter<"User"> | string
-    nom?: StringFilter<"User"> | string
-    telephone?: StringNullableFilter<"User"> | string | null
-    prenom?: StringFilter<"User"> | string
-    image?: StringNullableFilter<"User"> | string | null
-    role?: EnumRoleUserFilter<"User"> | $Enums.RoleUser
-    derniereConnexion?: DateTimeNullableFilter<"User"> | Date | string | null
-    estActif?: BoolFilter<"User"> | boolean
-    universiteId?: StringFilter<"User"> | string
-    preferencesRecommandation?: StringNullableFilter<"User"> | string | null
-    frequenceRecommandation?: EnumFrequenceRecommandationFilter<"User"> | $Enums.FrequenceRecommandation
-  }
-
-  export type RessourceUpsertWithWhereUniqueWithoutUniversiteInput = {
-    where: RessourceWhereUniqueInput
-    update: XOR<RessourceUpdateWithoutUniversiteInput, RessourceUncheckedUpdateWithoutUniversiteInput>
-    create: XOR<RessourceCreateWithoutUniversiteInput, RessourceUncheckedCreateWithoutUniversiteInput>
-  }
-
-  export type RessourceUpdateWithWhereUniqueWithoutUniversiteInput = {
-    where: RessourceWhereUniqueInput
-    data: XOR<RessourceUpdateWithoutUniversiteInput, RessourceUncheckedUpdateWithoutUniversiteInput>
-  }
-
-  export type RessourceUpdateManyWithWhereWithoutUniversiteInput = {
-    where: RessourceScalarWhereInput
-    data: XOR<RessourceUpdateManyMutationInput, RessourceUncheckedUpdateManyWithoutUniversiteInput>
-  }
-
-  export type RessourceScalarWhereInput = {
-    AND?: RessourceScalarWhereInput | RessourceScalarWhereInput[]
-    OR?: RessourceScalarWhereInput[]
-    NOT?: RessourceScalarWhereInput | RessourceScalarWhereInput[]
-    id?: StringFilter<"Ressource"> | string
-    titre?: StringFilter<"Ressource"> | string
-    description?: StringFilter<"Ressource"> | string
-    type?: EnumTypeRessourceFilter<"Ressource"> | $Enums.TypeRessource
-    langue?: StringFilter<"Ressource"> | string
-    urlFichier?: StringFilter<"Ressource"> | string
-    urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
-    format?: StringFilter<"Ressource"> | string
-    dateCreation?: DateTimeFilter<"Ressource"> | Date | string
-    dateModification?: DateTimeFilter<"Ressource"> | Date | string
-    motsCles?: StringFilter<"Ressource"> | string
-    auteurId?: StringNullableFilter<"Ressource"> | string | null
-    universiteId?: StringFilter<"Ressource"> | string
-    image?: StringNullableFilter<"Ressource"> | string | null
-    niveauAcces?: EnumNiveauAccesFilter<"Ressource"> | $Enums.NiveauAcces
-    datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
-    estValide?: BoolFilter<"Ressource"> | boolean
-    estArchive?: BoolFilter<"Ressource"> | boolean
-    nomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
-    prenomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
-    affiliationAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
-    validation?: EnumTypeValidationFilter<"Ressource"> | $Enums.TypeValidation
-    isbn?: StringNullableFilter<"Ressource"> | string | null
-    doi?: StringNullableFilter<"Ressource"> | string | null
-    edition?: StringNullableFilter<"Ressource"> | string | null
-    anneePublication?: IntNullableFilter<"Ressource"> | number | null
-    editeur?: StringNullableFilter<"Ressource"> | string | null
-    nbPages?: IntNullableFilter<"Ressource"> | number | null
-    categorieBiblio?: EnumCategorieBiblioNullableFilter<"Ressource"> | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFilter<"Ressource"> | boolean
-    nbExemplaires?: IntFilter<"Ressource"> | number
-    nbDisponibles?: IntFilter<"Ressource"> | number
-    coteClassification?: StringNullableFilter<"Ressource"> | string | null
-    estEmpruntableExterne?: BoolFilter<"Ressource"> | boolean
-    dureeMaxEmpruntExterne?: IntFilter<"Ressource"> | number
-    nbMaxExemplairesExterne?: IntFilter<"Ressource"> | number
-    necessiteAutorisation?: BoolFilter<"Ressource"> | boolean
-  }
-
-  export type StatistiqueInteruniversitaireUpsertWithWhereUniqueWithoutUniversiteSourceRelInput = {
-    where: StatistiqueInteruniversitaireWhereUniqueInput
-    update: XOR<StatistiqueInteruniversitaireUpdateWithoutUniversiteSourceRelInput, StatistiqueInteruniversitaireUncheckedUpdateWithoutUniversiteSourceRelInput>
-    create: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteSourceRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteSourceRelInput>
-  }
-
-  export type StatistiqueInteruniversitaireUpdateWithWhereUniqueWithoutUniversiteSourceRelInput = {
-    where: StatistiqueInteruniversitaireWhereUniqueInput
-    data: XOR<StatistiqueInteruniversitaireUpdateWithoutUniversiteSourceRelInput, StatistiqueInteruniversitaireUncheckedUpdateWithoutUniversiteSourceRelInput>
-  }
-
-  export type StatistiqueInteruniversitaireUpdateManyWithWhereWithoutUniversiteSourceRelInput = {
-    where: StatistiqueInteruniversitaireScalarWhereInput
-    data: XOR<StatistiqueInteruniversitaireUpdateManyMutationInput, StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelInput>
-  }
-
-  export type StatistiqueInteruniversitaireScalarWhereInput = {
-    AND?: StatistiqueInteruniversitaireScalarWhereInput | StatistiqueInteruniversitaireScalarWhereInput[]
-    OR?: StatistiqueInteruniversitaireScalarWhereInput[]
-    NOT?: StatistiqueInteruniversitaireScalarWhereInput | StatistiqueInteruniversitaireScalarWhereInput[]
-    id?: StringFilter<"StatistiqueInteruniversitaire"> | string
-    universiteSource?: StringFilter<"StatistiqueInteruniversitaire"> | string
-    universiteDestination?: StringFilter<"StatistiqueInteruniversitaire"> | string
-    mois?: IntFilter<"StatistiqueInteruniversitaire"> | number
-    annee?: IntFilter<"StatistiqueInteruniversitaire"> | number
-    nbEmprunts?: IntFilter<"StatistiqueInteruniversitaire"> | number
-    nbReservations?: IntFilter<"StatistiqueInteruniversitaire"> | number
-    ressourcesPlusConsultees?: StringNullableFilter<"StatistiqueInteruniversitaire"> | string | null
-    domainesPlusConsultes?: StringNullableFilter<"StatistiqueInteruniversitaire"> | string | null
-  }
-
-  export type StatistiqueInteruniversitaireUpsertWithWhereUniqueWithoutUniversiteDestinationRelInput = {
-    where: StatistiqueInteruniversitaireWhereUniqueInput
-    update: XOR<StatistiqueInteruniversitaireUpdateWithoutUniversiteDestinationRelInput, StatistiqueInteruniversitaireUncheckedUpdateWithoutUniversiteDestinationRelInput>
-    create: XOR<StatistiqueInteruniversitaireCreateWithoutUniversiteDestinationRelInput, StatistiqueInteruniversitaireUncheckedCreateWithoutUniversiteDestinationRelInput>
-  }
-
-  export type StatistiqueInteruniversitaireUpdateWithWhereUniqueWithoutUniversiteDestinationRelInput = {
-    where: StatistiqueInteruniversitaireWhereUniqueInput
-    data: XOR<StatistiqueInteruniversitaireUpdateWithoutUniversiteDestinationRelInput, StatistiqueInteruniversitaireUncheckedUpdateWithoutUniversiteDestinationRelInput>
-  }
-
-  export type StatistiqueInteruniversitaireUpdateManyWithWhereWithoutUniversiteDestinationRelInput = {
-    where: StatistiqueInteruniversitaireScalarWhereInput
-    data: XOR<StatistiqueInteruniversitaireUpdateManyMutationInput, StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelInput>
-  }
-
-  export type ReservationUpsertWithWhereUniqueWithoutUniversiteEmprunteurRelInput = {
-    where: ReservationWhereUniqueInput
-    update: XOR<ReservationUpdateWithoutUniversiteEmprunteurRelInput, ReservationUncheckedUpdateWithoutUniversiteEmprunteurRelInput>
-    create: XOR<ReservationCreateWithoutUniversiteEmprunteurRelInput, ReservationUncheckedCreateWithoutUniversiteEmprunteurRelInput>
-  }
-
-  export type ReservationUpdateWithWhereUniqueWithoutUniversiteEmprunteurRelInput = {
-    where: ReservationWhereUniqueInput
-    data: XOR<ReservationUpdateWithoutUniversiteEmprunteurRelInput, ReservationUncheckedUpdateWithoutUniversiteEmprunteurRelInput>
-  }
-
-  export type ReservationUpdateManyWithWhereWithoutUniversiteEmprunteurRelInput = {
-    where: ReservationScalarWhereInput
-    data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelInput>
-  }
-
-  export type ReservationScalarWhereInput = {
-    AND?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-    OR?: ReservationScalarWhereInput[]
-    NOT?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-    id?: StringFilter<"Reservation"> | string
-    userId?: StringNullableFilter<"Reservation"> | string | null
-    ressourceId?: StringFilter<"Reservation"> | string
-    dateReservation?: DateTimeFilter<"Reservation"> | Date | string
-    dateDebut?: DateTimeFilter<"Reservation"> | Date | string
-    dateFin?: DateTimeFilter<"Reservation"> | Date | string
-    statut?: EnumStatutReservationFilter<"Reservation"> | $Enums.StatutReservation
-    commentaire?: StringNullableFilter<"Reservation"> | string | null
-    universiteEmprunteur?: StringFilter<"Reservation"> | string
-    validePar?: StringNullableFilter<"Reservation"> | string | null
-  }
-
-  export type EmpruntUpsertWithWhereUniqueWithoutUniversiteEmprunteurRelInput = {
-    where: EmpruntWhereUniqueInput
-    update: XOR<EmpruntUpdateWithoutUniversiteEmprunteurRelInput, EmpruntUncheckedUpdateWithoutUniversiteEmprunteurRelInput>
-    create: XOR<EmpruntCreateWithoutUniversiteEmprunteurRelInput, EmpruntUncheckedCreateWithoutUniversiteEmprunteurRelInput>
-  }
-
-  export type EmpruntUpdateWithWhereUniqueWithoutUniversiteEmprunteurRelInput = {
-    where: EmpruntWhereUniqueInput
-    data: XOR<EmpruntUpdateWithoutUniversiteEmprunteurRelInput, EmpruntUncheckedUpdateWithoutUniversiteEmprunteurRelInput>
-  }
-
-  export type EmpruntUpdateManyWithWhereWithoutUniversiteEmprunteurRelInput = {
-    where: EmpruntScalarWhereInput
-    data: XOR<EmpruntUpdateManyMutationInput, EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelInput>
-  }
-
-  export type RecommandationUpsertWithWhereUniqueWithoutUniversiteSourceRelInput = {
-    where: RecommandationWhereUniqueInput
-    update: XOR<RecommandationUpdateWithoutUniversiteSourceRelInput, RecommandationUncheckedUpdateWithoutUniversiteSourceRelInput>
-    create: XOR<RecommandationCreateWithoutUniversiteSourceRelInput, RecommandationUncheckedCreateWithoutUniversiteSourceRelInput>
-  }
-
-  export type RecommandationUpdateWithWhereUniqueWithoutUniversiteSourceRelInput = {
-    where: RecommandationWhereUniqueInput
-    data: XOR<RecommandationUpdateWithoutUniversiteSourceRelInput, RecommandationUncheckedUpdateWithoutUniversiteSourceRelInput>
-  }
-
-  export type RecommandationUpdateManyWithWhereWithoutUniversiteSourceRelInput = {
-    where: RecommandationScalarWhereInput
-    data: XOR<RecommandationUpdateManyMutationInput, RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelInput>
-  }
-
-  export type RecommandationScalarWhereInput = {
-    AND?: RecommandationScalarWhereInput | RecommandationScalarWhereInput[]
-    OR?: RecommandationScalarWhereInput[]
-    NOT?: RecommandationScalarWhereInput | RecommandationScalarWhereInput[]
-    id?: StringFilter<"Recommandation"> | string
-    userId?: StringFilter<"Recommandation"> | string
-    ressourceId?: StringFilter<"Recommandation"> | string
-    dateRecommandation?: DateTimeFilter<"Recommandation"> | Date | string
-    score?: FloatFilter<"Recommandation"> | number
-    motif?: EnumMotifRecommandationFilter<"Recommandation"> | $Enums.MotifRecommandation
-    estVue?: BoolFilter<"Recommandation"> | boolean
-    estInteruniversitaire?: BoolFilter<"Recommandation"> | boolean
-    universiteSource?: StringNullableFilter<"Recommandation"> | string | null
+  export type UfrCreateManyUniversiteInputEnvelope = {
+    data: UfrCreateManyUniversiteInput | UfrCreateManyUniversiteInput[]
+    skipDuplicates?: boolean
   }
 
   export type StatistiqueBibliothequeUpsertWithWhereUniqueWithoutUniversiteInput = {
@@ -46357,82 +45546,6 @@ export namespace Prisma {
     universitesPlusFrequentes?: StringNullableFilter<"StatistiqueBibliotheque"> | string | null
   }
 
-  export type TransactionBlockchainUpsertWithWhereUniqueWithoutUniversiteOrigineRelInput = {
-    where: TransactionBlockchainWhereUniqueInput
-    update: XOR<TransactionBlockchainUpdateWithoutUniversiteOrigineRelInput, TransactionBlockchainUncheckedUpdateWithoutUniversiteOrigineRelInput>
-    create: XOR<TransactionBlockchainCreateWithoutUniversiteOrigineRelInput, TransactionBlockchainUncheckedCreateWithoutUniversiteOrigineRelInput>
-  }
-
-  export type TransactionBlockchainUpdateWithWhereUniqueWithoutUniversiteOrigineRelInput = {
-    where: TransactionBlockchainWhereUniqueInput
-    data: XOR<TransactionBlockchainUpdateWithoutUniversiteOrigineRelInput, TransactionBlockchainUncheckedUpdateWithoutUniversiteOrigineRelInput>
-  }
-
-  export type TransactionBlockchainUpdateManyWithWhereWithoutUniversiteOrigineRelInput = {
-    where: TransactionBlockchainScalarWhereInput
-    data: XOR<TransactionBlockchainUpdateManyMutationInput, TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelInput>
-  }
-
-  export type TransactionBlockchainScalarWhereInput = {
-    AND?: TransactionBlockchainScalarWhereInput | TransactionBlockchainScalarWhereInput[]
-    OR?: TransactionBlockchainScalarWhereInput[]
-    NOT?: TransactionBlockchainScalarWhereInput | TransactionBlockchainScalarWhereInput[]
-    id?: StringFilter<"TransactionBlockchain"> | string
-    referenceBlockchain?: StringFilter<"TransactionBlockchain"> | string
-    typeTransaction?: EnumTypeTransactionFilter<"TransactionBlockchain"> | $Enums.TypeTransaction
-    ressourceId?: StringNullableFilter<"TransactionBlockchain"> | string | null
-    universiteOrigine?: StringFilter<"TransactionBlockchain"> | string
-    universiteDestination?: StringNullableFilter<"TransactionBlockchain"> | string | null
-    dateTransaction?: DateTimeFilter<"TransactionBlockchain"> | Date | string
-    statut?: EnumStatutTransactionFilter<"TransactionBlockchain"> | $Enums.StatutTransaction
-    hashTransaction?: StringFilter<"TransactionBlockchain"> | string
-  }
-
-  export type TransactionBlockchainUpsertWithWhereUniqueWithoutUniversiteDestinationRelInput = {
-    where: TransactionBlockchainWhereUniqueInput
-    update: XOR<TransactionBlockchainUpdateWithoutUniversiteDestinationRelInput, TransactionBlockchainUncheckedUpdateWithoutUniversiteDestinationRelInput>
-    create: XOR<TransactionBlockchainCreateWithoutUniversiteDestinationRelInput, TransactionBlockchainUncheckedCreateWithoutUniversiteDestinationRelInput>
-  }
-
-  export type TransactionBlockchainUpdateWithWhereUniqueWithoutUniversiteDestinationRelInput = {
-    where: TransactionBlockchainWhereUniqueInput
-    data: XOR<TransactionBlockchainUpdateWithoutUniversiteDestinationRelInput, TransactionBlockchainUncheckedUpdateWithoutUniversiteDestinationRelInput>
-  }
-
-  export type TransactionBlockchainUpdateManyWithWhereWithoutUniversiteDestinationRelInput = {
-    where: TransactionBlockchainScalarWhereInput
-    data: XOR<TransactionBlockchainUpdateManyMutationInput, TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelInput>
-  }
-
-  export type HistoriqueAccesUpsertWithWhereUniqueWithoutUniversiteSrcRelInput = {
-    where: HistoriqueAccesWhereUniqueInput
-    update: XOR<HistoriqueAccesUpdateWithoutUniversiteSrcRelInput, HistoriqueAccesUncheckedUpdateWithoutUniversiteSrcRelInput>
-    create: XOR<HistoriqueAccesCreateWithoutUniversiteSrcRelInput, HistoriqueAccesUncheckedCreateWithoutUniversiteSrcRelInput>
-  }
-
-  export type HistoriqueAccesUpdateWithWhereUniqueWithoutUniversiteSrcRelInput = {
-    where: HistoriqueAccesWhereUniqueInput
-    data: XOR<HistoriqueAccesUpdateWithoutUniversiteSrcRelInput, HistoriqueAccesUncheckedUpdateWithoutUniversiteSrcRelInput>
-  }
-
-  export type HistoriqueAccesUpdateManyWithWhereWithoutUniversiteSrcRelInput = {
-    where: HistoriqueAccesScalarWhereInput
-    data: XOR<HistoriqueAccesUpdateManyMutationInput, HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelInput>
-  }
-
-  export type HistoriqueAccesScalarWhereInput = {
-    AND?: HistoriqueAccesScalarWhereInput | HistoriqueAccesScalarWhereInput[]
-    OR?: HistoriqueAccesScalarWhereInput[]
-    NOT?: HistoriqueAccesScalarWhereInput | HistoriqueAccesScalarWhereInput[]
-    id?: StringFilter<"HistoriqueAcces"> | string
-    userId?: StringFilter<"HistoriqueAcces"> | string
-    ressourceId?: StringFilter<"HistoriqueAcces"> | string
-    dateAcces?: DateTimeFilter<"HistoriqueAcces"> | Date | string
-    typeAcces?: EnumTypeAccesFilter<"HistoriqueAcces"> | $Enums.TypeAcces
-    universiteSrc?: StringNullableFilter<"HistoriqueAcces"> | string | null
-    universiteUser?: StringNullableFilter<"HistoriqueAcces"> | string | null
-  }
-
   export type ReglePretUpsertWithWhereUniqueWithoutUniversiteInput = {
     where: ReglePretWhereUniqueInput
     update: XOR<ReglePretUpdateWithoutUniversiteInput, ReglePretUncheckedUpdateWithoutUniversiteInput>
@@ -46460,8 +45573,6 @@ export namespace Prisma {
     dureeEmpruntJours?: IntFilter<"ReglePret"> | number
     nbRenouvellements?: IntFilter<"ReglePret"> | number
     penaliteRetardJours?: BoolFilter<"ReglePret"> | boolean
-    exigeCarteValide?: BoolFilter<"ReglePret"> | boolean
-    dateMiseAJour?: DateTimeFilter<"ReglePret"> | Date | string
     estActif?: BoolFilter<"ReglePret"> | boolean
   }
 
@@ -46494,57 +45605,276 @@ export namespace Prisma {
     dateMiseAJour?: DateTimeFilter<"PolitiqueBibliotheque"> | Date | string
   }
 
-  export type UniversiteCreateWithoutUsersInput = {
+  export type UfrUpsertWithWhereUniqueWithoutUniversiteInput = {
+    where: UfrWhereUniqueInput
+    update: XOR<UfrUpdateWithoutUniversiteInput, UfrUncheckedUpdateWithoutUniversiteInput>
+    create: XOR<UfrCreateWithoutUniversiteInput, UfrUncheckedCreateWithoutUniversiteInput>
+  }
+
+  export type UfrUpdateWithWhereUniqueWithoutUniversiteInput = {
+    where: UfrWhereUniqueInput
+    data: XOR<UfrUpdateWithoutUniversiteInput, UfrUncheckedUpdateWithoutUniversiteInput>
+  }
+
+  export type UfrUpdateManyWithWhereWithoutUniversiteInput = {
+    where: UfrScalarWhereInput
+    data: XOR<UfrUpdateManyMutationInput, UfrUncheckedUpdateManyWithoutUniversiteInput>
+  }
+
+  export type UfrScalarWhereInput = {
+    AND?: UfrScalarWhereInput | UfrScalarWhereInput[]
+    OR?: UfrScalarWhereInput[]
+    NOT?: UfrScalarWhereInput | UfrScalarWhereInput[]
+    id?: StringFilter<"Ufr"> | string
+    nom?: StringFilter<"Ufr"> | string
+    description?: StringNullableFilter<"Ufr"> | string | null
+    universiteId?: StringFilter<"Ufr"> | string
+  }
+
+  export type UniversiteCreateWithoutUfrsInput = {
     id?: string
     nom: string
     adresse?: string | null
     ville: string
-    pays: string
     siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
     reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
   }
 
-  export type UniversiteUncheckedCreateWithoutUsersInput = {
+  export type UniversiteUncheckedCreateWithoutUfrsInput = {
     id?: string
     nom: string
     adresse?: string | null
     ville: string
-    pays: string
     siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
     reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
   }
 
-  export type UniversiteCreateOrConnectWithoutUsersInput = {
+  export type UniversiteCreateOrConnectWithoutUfrsInput = {
     where: UniversiteWhereUniqueInput
-    create: XOR<UniversiteCreateWithoutUsersInput, UniversiteUncheckedCreateWithoutUsersInput>
+    create: XOR<UniversiteCreateWithoutUfrsInput, UniversiteUncheckedCreateWithoutUfrsInput>
+  }
+
+  export type DepartementCreateWithoutUfrInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    filieres?: FiliereCreateNestedManyWithoutDepartementInput
+  }
+
+  export type DepartementUncheckedCreateWithoutUfrInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    filieres?: FiliereUncheckedCreateNestedManyWithoutDepartementInput
+  }
+
+  export type DepartementCreateOrConnectWithoutUfrInput = {
+    where: DepartementWhereUniqueInput
+    create: XOR<DepartementCreateWithoutUfrInput, DepartementUncheckedCreateWithoutUfrInput>
+  }
+
+  export type DepartementCreateManyUfrInputEnvelope = {
+    data: DepartementCreateManyUfrInput | DepartementCreateManyUfrInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UniversiteUpsertWithoutUfrsInput = {
+    update: XOR<UniversiteUpdateWithoutUfrsInput, UniversiteUncheckedUpdateWithoutUfrsInput>
+    create: XOR<UniversiteCreateWithoutUfrsInput, UniversiteUncheckedCreateWithoutUfrsInput>
+    where?: UniversiteWhereInput
+  }
+
+  export type UniversiteUpdateToOneWithWhereWithoutUfrsInput = {
+    where?: UniversiteWhereInput
+    data: XOR<UniversiteUpdateWithoutUfrsInput, UniversiteUncheckedUpdateWithoutUfrsInput>
+  }
+
+  export type UniversiteUpdateWithoutUfrsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: StringFieldUpdateOperationsInput | string
+    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
+    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
+    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
+  }
+
+  export type UniversiteUncheckedUpdateWithoutUfrsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: StringFieldUpdateOperationsInput | string
+    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
+    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
+    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
+  }
+
+  export type DepartementUpsertWithWhereUniqueWithoutUfrInput = {
+    where: DepartementWhereUniqueInput
+    update: XOR<DepartementUpdateWithoutUfrInput, DepartementUncheckedUpdateWithoutUfrInput>
+    create: XOR<DepartementCreateWithoutUfrInput, DepartementUncheckedCreateWithoutUfrInput>
+  }
+
+  export type DepartementUpdateWithWhereUniqueWithoutUfrInput = {
+    where: DepartementWhereUniqueInput
+    data: XOR<DepartementUpdateWithoutUfrInput, DepartementUncheckedUpdateWithoutUfrInput>
+  }
+
+  export type DepartementUpdateManyWithWhereWithoutUfrInput = {
+    where: DepartementScalarWhereInput
+    data: XOR<DepartementUpdateManyMutationInput, DepartementUncheckedUpdateManyWithoutUfrInput>
+  }
+
+  export type DepartementScalarWhereInput = {
+    AND?: DepartementScalarWhereInput | DepartementScalarWhereInput[]
+    OR?: DepartementScalarWhereInput[]
+    NOT?: DepartementScalarWhereInput | DepartementScalarWhereInput[]
+    id?: StringFilter<"Departement"> | string
+    nom?: StringFilter<"Departement"> | string
+    description?: StringNullableFilter<"Departement"> | string | null
+    ufrId?: StringFilter<"Departement"> | string
+  }
+
+  export type UfrCreateWithoutDepartementsInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    universite: UniversiteCreateNestedOneWithoutUfrsInput
+  }
+
+  export type UfrUncheckedCreateWithoutDepartementsInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    universiteId: string
+  }
+
+  export type UfrCreateOrConnectWithoutDepartementsInput = {
+    where: UfrWhereUniqueInput
+    create: XOR<UfrCreateWithoutDepartementsInput, UfrUncheckedCreateWithoutDepartementsInput>
+  }
+
+  export type FiliereCreateWithoutDepartementInput = {
+    id?: string
+    nom: string
+    description?: string | null
+  }
+
+  export type FiliereUncheckedCreateWithoutDepartementInput = {
+    id?: string
+    nom: string
+    description?: string | null
+  }
+
+  export type FiliereCreateOrConnectWithoutDepartementInput = {
+    where: FiliereWhereUniqueInput
+    create: XOR<FiliereCreateWithoutDepartementInput, FiliereUncheckedCreateWithoutDepartementInput>
+  }
+
+  export type FiliereCreateManyDepartementInputEnvelope = {
+    data: FiliereCreateManyDepartementInput | FiliereCreateManyDepartementInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UfrUpsertWithoutDepartementsInput = {
+    update: XOR<UfrUpdateWithoutDepartementsInput, UfrUncheckedUpdateWithoutDepartementsInput>
+    create: XOR<UfrCreateWithoutDepartementsInput, UfrUncheckedCreateWithoutDepartementsInput>
+    where?: UfrWhereInput
+  }
+
+  export type UfrUpdateToOneWithWhereWithoutDepartementsInput = {
+    where?: UfrWhereInput
+    data: XOR<UfrUpdateWithoutDepartementsInput, UfrUncheckedUpdateWithoutDepartementsInput>
+  }
+
+  export type UfrUpdateWithoutDepartementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    universite?: UniversiteUpdateOneRequiredWithoutUfrsNestedInput
+  }
+
+  export type UfrUncheckedUpdateWithoutDepartementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type FiliereUpsertWithWhereUniqueWithoutDepartementInput = {
+    where: FiliereWhereUniqueInput
+    update: XOR<FiliereUpdateWithoutDepartementInput, FiliereUncheckedUpdateWithoutDepartementInput>
+    create: XOR<FiliereCreateWithoutDepartementInput, FiliereUncheckedCreateWithoutDepartementInput>
+  }
+
+  export type FiliereUpdateWithWhereUniqueWithoutDepartementInput = {
+    where: FiliereWhereUniqueInput
+    data: XOR<FiliereUpdateWithoutDepartementInput, FiliereUncheckedUpdateWithoutDepartementInput>
+  }
+
+  export type FiliereUpdateManyWithWhereWithoutDepartementInput = {
+    where: FiliereScalarWhereInput
+    data: XOR<FiliereUpdateManyMutationInput, FiliereUncheckedUpdateManyWithoutDepartementInput>
+  }
+
+  export type FiliereScalarWhereInput = {
+    AND?: FiliereScalarWhereInput | FiliereScalarWhereInput[]
+    OR?: FiliereScalarWhereInput[]
+    NOT?: FiliereScalarWhereInput | FiliereScalarWhereInput[]
+    id?: StringFilter<"Filiere"> | string
+    nom?: StringFilter<"Filiere"> | string
+    description?: StringNullableFilter<"Filiere"> | string | null
+    departementId?: StringFilter<"Filiere"> | string
+  }
+
+  export type DepartementCreateWithoutFilieresInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    ufr: UfrCreateNestedOneWithoutDepartementsInput
+  }
+
+  export type DepartementUncheckedCreateWithoutFilieresInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    ufrId: string
+  }
+
+  export type DepartementCreateOrConnectWithoutFilieresInput = {
+    where: DepartementWhereUniqueInput
+    create: XOR<DepartementCreateWithoutFilieresInput, DepartementUncheckedCreateWithoutFilieresInput>
+  }
+
+  export type DepartementUpsertWithoutFilieresInput = {
+    update: XOR<DepartementUpdateWithoutFilieresInput, DepartementUncheckedUpdateWithoutFilieresInput>
+    create: XOR<DepartementCreateWithoutFilieresInput, DepartementUncheckedCreateWithoutFilieresInput>
+    where?: DepartementWhereInput
+  }
+
+  export type DepartementUpdateToOneWithWhereWithoutFilieresInput = {
+    where?: DepartementWhereInput
+    data: XOR<DepartementUpdateWithoutFilieresInput, DepartementUncheckedUpdateWithoutFilieresInput>
+  }
+
+  export type DepartementUpdateWithoutFilieresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ufr?: UfrUpdateOneRequiredWithoutDepartementsNestedInput
+  }
+
+  export type DepartementUncheckedUpdateWithoutFilieresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ufrId?: StringFieldUpdateOperationsInput | string
   }
 
   export type RessourceCreateWithoutAuteurInput = {
@@ -46556,9 +45886,9 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
+    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
@@ -46566,24 +45896,14 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -46593,8 +45913,8 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
     notifications?: NotificationCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
   export type RessourceUncheckedCreateWithoutAuteurInput = {
@@ -46606,7 +45926,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     universiteId: string
@@ -46617,23 +45936,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -46643,7 +45954,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
@@ -46745,9 +46055,9 @@ export namespace Prisma {
     id?: string
     dateAcces?: Date | string
     typeAcces: $Enums.TypeAcces
+    universiteSrc?: string | null
     universiteUser?: string | null
     ressource: RessourceCreateNestedOneWithoutHistoriquesInput
-    universiteSrcRel?: UniversiteCreateNestedOneWithoutHistoriqueAccesInput
   }
 
   export type HistoriqueAccesUncheckedCreateWithoutUserInput = {
@@ -46773,7 +46083,6 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
-    estPublique?: boolean
     dateCreation?: Date | string
     ressources?: CollectionRessourceCreateNestedManyWithoutCollectionInput
   }
@@ -46782,7 +46091,6 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
-    estPublique?: boolean
     dateCreation?: Date | string
     ressources?: CollectionRessourceUncheckedCreateNestedManyWithoutCollectionInput
   }
@@ -46804,8 +46112,8 @@ export namespace Prisma {
     dateFin: Date | string
     statut?: $Enums.StatutReservation
     commentaire?: string | null
+    universiteEmprunteur: string
     ressource: RessourceCreateNestedOneWithoutReservationsInput
-    universiteEmprunteurRel: UniversiteCreateNestedOneWithoutReservationsInput
     valideur?: BibliothecaireCreateNestedOneWithoutReservationsInput
   }
 
@@ -46838,11 +46146,10 @@ export namespace Prisma {
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
-    estEmpruntExterne?: boolean
+    universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
     exemplaire: ExemplairePhysiqueCreateNestedOneWithoutEmpruntsInput
-    universiteEmprunteurRel: UniversiteCreateNestedOneWithoutEmpruntsInput
     SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
   }
 
@@ -46855,7 +46162,6 @@ export namespace Prisma {
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
     universiteEmprunteur: string
-    estEmpruntExterne?: boolean
     motifEmprunt?: string | null
     validePar?: string | null
     SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
@@ -46878,8 +46184,8 @@ export namespace Prisma {
     motif: $Enums.MotifRecommandation
     estVue?: boolean
     estInteruniversitaire?: boolean
+    universiteSource?: string | null
     ressource: RessourceCreateNestedOneWithoutRecommandationsInput
-    universiteSourceRel?: UniversiteCreateNestedOneWithoutRecommandationsSourceInput
   }
 
   export type RecommandationUncheckedCreateWithoutUserInput = {
@@ -47133,65 +46439,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UniversiteUpsertWithoutUsersInput = {
-    update: XOR<UniversiteUpdateWithoutUsersInput, UniversiteUncheckedUpdateWithoutUsersInput>
-    create: XOR<UniversiteCreateWithoutUsersInput, UniversiteUncheckedCreateWithoutUsersInput>
-    where?: UniversiteWhereInput
-  }
-
-  export type UniversiteUpdateToOneWithWhereWithoutUsersInput = {
-    where?: UniversiteWhereInput
-    data: XOR<UniversiteUpdateWithoutUsersInput, UniversiteUncheckedUpdateWithoutUsersInput>
-  }
-
-  export type UniversiteUpdateWithoutUsersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUncheckedUpdateWithoutUsersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-  }
-
   export type RessourceUpsertWithWhereUniqueWithoutAuteurInput = {
     where: RessourceWhereUniqueInput
     update: XOR<RessourceUpdateWithoutAuteurInput, RessourceUncheckedUpdateWithoutAuteurInput>
@@ -47206,6 +46453,40 @@ export namespace Prisma {
   export type RessourceUpdateManyWithWhereWithoutAuteurInput = {
     where: RessourceScalarWhereInput
     data: XOR<RessourceUpdateManyMutationInput, RessourceUncheckedUpdateManyWithoutAuteurInput>
+  }
+
+  export type RessourceScalarWhereInput = {
+    AND?: RessourceScalarWhereInput | RessourceScalarWhereInput[]
+    OR?: RessourceScalarWhereInput[]
+    NOT?: RessourceScalarWhereInput | RessourceScalarWhereInput[]
+    id?: StringFilter<"Ressource"> | string
+    titre?: StringFilter<"Ressource"> | string
+    description?: StringFilter<"Ressource"> | string
+    type?: EnumTypeRessourceFilter<"Ressource"> | $Enums.TypeRessource
+    langue?: StringFilter<"Ressource"> | string
+    urlFichier?: StringFilter<"Ressource"> | string
+    urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
+    format?: StringFilter<"Ressource"> | string
+    dateModification?: DateTimeFilter<"Ressource"> | Date | string
+    motsCles?: StringFilter<"Ressource"> | string
+    auteurId?: StringNullableFilter<"Ressource"> | string | null
+    universiteId?: StringFilter<"Ressource"> | string
+    image?: StringNullableFilter<"Ressource"> | string | null
+    niveauAcces?: EnumNiveauAccesFilter<"Ressource"> | $Enums.NiveauAcces
+    datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
+    estValide?: BoolFilter<"Ressource"> | boolean
+    estArchive?: BoolFilter<"Ressource"> | boolean
+    nomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
+    prenomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
+    validation?: EnumTypeValidationFilter<"Ressource"> | $Enums.TypeValidation
+    isbn?: StringNullableFilter<"Ressource"> | string | null
+    doi?: StringNullableFilter<"Ressource"> | string | null
+    anneePublication?: IntNullableFilter<"Ressource"> | number | null
+    nbPages?: IntNullableFilter<"Ressource"> | number | null
+    nbExemplaires?: IntFilter<"Ressource"> | number
+    nbDisponibles?: IntFilter<"Ressource"> | number
+    coteClassification?: StringNullableFilter<"Ressource"> | string | null
+    categorieId?: StringFilter<"Ressource"> | string
   }
 
   export type FavoriUpsertWithWhereUniqueWithoutUserInput = {
@@ -47311,6 +46592,19 @@ export namespace Prisma {
     data: XOR<HistoriqueAccesUpdateManyMutationInput, HistoriqueAccesUncheckedUpdateManyWithoutUserInput>
   }
 
+  export type HistoriqueAccesScalarWhereInput = {
+    AND?: HistoriqueAccesScalarWhereInput | HistoriqueAccesScalarWhereInput[]
+    OR?: HistoriqueAccesScalarWhereInput[]
+    NOT?: HistoriqueAccesScalarWhereInput | HistoriqueAccesScalarWhereInput[]
+    id?: StringFilter<"HistoriqueAcces"> | string
+    userId?: StringFilter<"HistoriqueAcces"> | string
+    ressourceId?: StringFilter<"HistoriqueAcces"> | string
+    dateAcces?: DateTimeFilter<"HistoriqueAcces"> | Date | string
+    typeAcces?: EnumTypeAccesFilter<"HistoriqueAcces"> | $Enums.TypeAcces
+    universiteSrc?: StringNullableFilter<"HistoriqueAcces"> | string | null
+    universiteUser?: StringNullableFilter<"HistoriqueAcces"> | string | null
+  }
+
   export type CollectionUpsertWithWhereUniqueWithoutUserInput = {
     where: CollectionWhereUniqueInput
     update: XOR<CollectionUpdateWithoutUserInput, CollectionUncheckedUpdateWithoutUserInput>
@@ -47335,7 +46629,6 @@ export namespace Prisma {
     userId?: StringFilter<"Collection"> | string
     nom?: StringFilter<"Collection"> | string
     description?: StringNullableFilter<"Collection"> | string | null
-    estPublique?: BoolFilter<"Collection"> | boolean
     dateCreation?: DateTimeFilter<"Collection"> | Date | string
   }
 
@@ -47353,6 +46646,22 @@ export namespace Prisma {
   export type ReservationUpdateManyWithWhereWithoutUserInput = {
     where: ReservationScalarWhereInput
     data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ReservationScalarWhereInput = {
+    AND?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+    OR?: ReservationScalarWhereInput[]
+    NOT?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+    id?: StringFilter<"Reservation"> | string
+    userId?: StringNullableFilter<"Reservation"> | string | null
+    ressourceId?: StringFilter<"Reservation"> | string
+    dateReservation?: DateTimeFilter<"Reservation"> | Date | string
+    dateDebut?: DateTimeFilter<"Reservation"> | Date | string
+    dateFin?: DateTimeFilter<"Reservation"> | Date | string
+    statut?: EnumStatutReservationFilter<"Reservation"> | $Enums.StatutReservation
+    commentaire?: StringNullableFilter<"Reservation"> | string | null
+    universiteEmprunteur?: StringFilter<"Reservation"> | string
+    validePar?: StringNullableFilter<"Reservation"> | string | null
   }
 
   export type EmpruntUpsertWithWhereUniqueWithoutUserInput = {
@@ -47385,6 +46694,21 @@ export namespace Prisma {
   export type RecommandationUpdateManyWithWhereWithoutUserInput = {
     where: RecommandationScalarWhereInput
     data: XOR<RecommandationUpdateManyMutationInput, RecommandationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RecommandationScalarWhereInput = {
+    AND?: RecommandationScalarWhereInput | RecommandationScalarWhereInput[]
+    OR?: RecommandationScalarWhereInput[]
+    NOT?: RecommandationScalarWhereInput | RecommandationScalarWhereInput[]
+    id?: StringFilter<"Recommandation"> | string
+    userId?: StringFilter<"Recommandation"> | string
+    ressourceId?: StringFilter<"Recommandation"> | string
+    dateRecommandation?: DateTimeFilter<"Recommandation"> | Date | string
+    score?: FloatFilter<"Recommandation"> | number
+    motif?: EnumMotifRecommandationFilter<"Recommandation"> | $Enums.MotifRecommandation
+    estVue?: BoolFilter<"Recommandation"> | boolean
+    estInteruniversitaire?: BoolFilter<"Recommandation"> | boolean
+    universiteSource?: StringNullableFilter<"Recommandation"> | string | null
   }
 
   export type JournalAuditUpsertWithWhereUniqueWithoutUserInput = {
@@ -47618,9 +46942,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -47698,9 +47022,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -47762,9 +47086,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -47842,9 +47166,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -47906,9 +47230,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -47971,9 +47295,9 @@ export namespace Prisma {
     dateFin: Date | string
     statut?: $Enums.StatutReservation
     commentaire?: string | null
+    universiteEmprunteur: string
     user?: UserCreateNestedOneWithoutReservationsInput
     ressource: RessourceCreateNestedOneWithoutReservationsInput
-    universiteEmprunteurRel: UniversiteCreateNestedOneWithoutReservationsInput
   }
 
   export type ReservationUncheckedCreateWithoutValideurInput = {
@@ -48020,9 +47344,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -48100,9 +47424,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -48180,9 +47504,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -48244,9 +47568,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
     notations?: NotationCreateNestedManyWithoutUserInput
@@ -48311,9 +47635,9 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
+    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
@@ -48321,25 +47645,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
     auteur?: UserCreateNestedOneWithoutContributionsInput
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
@@ -48348,8 +47662,8 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
     notifications?: NotificationCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
   export type RessourceUncheckedCreateWithoutFavorisInput = {
@@ -48361,7 +47675,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     auteurId?: string | null
@@ -48373,23 +47686,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
@@ -48398,7 +47703,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
@@ -48429,9 +47733,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
     notations?: NotationUpdateManyWithoutUserNestedInput
@@ -48502,9 +47806,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -48512,25 +47816,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
     auteur?: UserUpdateOneWithoutContributionsNestedInput
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
@@ -48539,8 +47833,8 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
   export type RessourceUncheckedUpdateWithoutFavorisInput = {
@@ -48552,7 +47846,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48564,23 +47857,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
@@ -48589,7 +47874,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
@@ -48604,9 +47888,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     notations?: NotationCreateNestedManyWithoutUserInput
@@ -48671,9 +47955,9 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
+    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
@@ -48681,25 +47965,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
     auteur?: UserCreateNestedOneWithoutContributionsInput
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
@@ -48708,8 +47982,8 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
     notifications?: NotificationCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
   export type RessourceUncheckedCreateWithoutCommentairesInput = {
@@ -48721,7 +47995,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     auteurId?: string | null
@@ -48733,23 +48006,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
@@ -48758,7 +48023,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
@@ -48789,9 +48053,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     notations?: NotationUpdateManyWithoutUserNestedInput
@@ -48862,9 +48126,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -48872,25 +48136,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
     auteur?: UserUpdateOneWithoutContributionsNestedInput
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
@@ -48899,8 +48153,8 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
   export type RessourceUncheckedUpdateWithoutCommentairesInput = {
@@ -48912,7 +48166,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48924,23 +48177,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
@@ -48949,7 +48194,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
@@ -48964,9 +48208,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -49031,9 +48275,9 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
+    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
@@ -49041,25 +48285,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
     auteur?: UserCreateNestedOneWithoutContributionsInput
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
@@ -49068,8 +48302,8 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
     notifications?: NotificationCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
   export type RessourceUncheckedCreateWithoutNotationsInput = {
@@ -49081,7 +48315,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     auteurId?: string | null
@@ -49093,23 +48326,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
@@ -49118,7 +48343,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
@@ -49149,9 +48373,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -49222,9 +48446,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -49232,25 +48456,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
     auteur?: UserUpdateOneWithoutContributionsNestedInput
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
@@ -49259,8 +48473,8 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
   export type RessourceUncheckedUpdateWithoutNotationsInput = {
@@ -49272,7 +48486,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49284,23 +48497,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
@@ -49309,7 +48514,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
@@ -49324,9 +48528,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -49391,9 +48595,9 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
+    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
@@ -49401,25 +48605,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
     auteur?: UserCreateNestedOneWithoutContributionsInput
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -49428,8 +48622,8 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
     notifications?: NotificationCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
   export type RessourceUncheckedCreateWithoutHistoriquesInput = {
@@ -49441,7 +48635,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     auteurId?: string | null
@@ -49453,23 +48646,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -49478,66 +48663,12 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutHistoriquesInput = {
     where: RessourceWhereUniqueInput
     create: XOR<RessourceCreateWithoutHistoriquesInput, RessourceUncheckedCreateWithoutHistoriquesInput>
-  }
-
-  export type UniversiteCreateWithoutHistoriqueAccesInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteUncheckedCreateWithoutHistoriqueAccesInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteCreateOrConnectWithoutHistoriqueAccesInput = {
-    where: UniversiteWhereUniqueInput
-    create: XOR<UniversiteCreateWithoutHistoriqueAccesInput, UniversiteUncheckedCreateWithoutHistoriqueAccesInput>
   }
 
   export type UserUpsertWithoutHistoriquesInput = {
@@ -49562,9 +48693,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -49635,9 +48766,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -49645,25 +48776,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
     auteur?: UserUpdateOneWithoutContributionsNestedInput
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -49672,8 +48793,8 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
   export type RessourceUncheckedUpdateWithoutHistoriquesInput = {
@@ -49685,7 +48806,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49697,23 +48817,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -49722,67 +48834,7 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
-  }
-
-  export type UniversiteUpsertWithoutHistoriqueAccesInput = {
-    update: XOR<UniversiteUpdateWithoutHistoriqueAccesInput, UniversiteUncheckedUpdateWithoutHistoriqueAccesInput>
-    create: XOR<UniversiteCreateWithoutHistoriqueAccesInput, UniversiteUncheckedCreateWithoutHistoriqueAccesInput>
-    where?: UniversiteWhereInput
-  }
-
-  export type UniversiteUpdateToOneWithWhereWithoutHistoriqueAccesInput = {
-    where?: UniversiteWhereInput
-    data: XOR<UniversiteUpdateWithoutHistoriqueAccesInput, UniversiteUncheckedUpdateWithoutHistoriqueAccesInput>
-  }
-
-  export type UniversiteUpdateWithoutHistoriqueAccesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUncheckedUpdateWithoutHistoriqueAccesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
   }
 
   export type UserCreateWithoutDonneesRecommandationsInput = {
@@ -49796,9 +48848,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -49863,9 +48915,9 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
+    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
@@ -49873,25 +48925,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
     auteur?: UserCreateNestedOneWithoutContributionsInput
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -49900,8 +48942,8 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
     notifications?: NotificationCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
   export type RessourceUncheckedCreateWithoutDonneesRecommandationsInput = {
@@ -49913,7 +48955,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     auteurId?: string | null
@@ -49925,23 +48966,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -49950,7 +48983,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
@@ -49981,9 +49013,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -50054,9 +49086,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -50064,25 +49096,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
     auteur?: UserUpdateOneWithoutContributionsNestedInput
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -50091,8 +49113,8 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
   export type RessourceUncheckedUpdateWithoutDonneesRecommandationsInput = {
@@ -50104,7 +49126,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50116,23 +49137,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -50141,7 +49154,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
@@ -50156,9 +49168,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -50260,9 +49272,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -50344,7 +49356,6 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
-    estPublique?: boolean
     dateCreation?: Date | string
     user: UserCreateNestedOneWithoutCollectionsInput
   }
@@ -50354,7 +49365,6 @@ export namespace Prisma {
     userId: string
     nom: string
     description?: string | null
-    estPublique?: boolean
     dateCreation?: Date | string
   }
 
@@ -50372,9 +49382,9 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
+    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
@@ -50382,25 +49392,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
     auteur?: UserCreateNestedOneWithoutContributionsInput
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -50409,8 +49409,8 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
     notifications?: NotificationCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
   export type RessourceUncheckedCreateWithoutCollectionsInput = {
@@ -50422,7 +49422,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     auteurId?: string | null
@@ -50434,23 +49433,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -50459,7 +49450,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
@@ -50483,7 +49473,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCollectionsNestedInput
   }
@@ -50493,7 +49482,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -50517,9 +49505,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -50527,25 +49515,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
     auteur?: UserUpdateOneWithoutContributionsNestedInput
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -50554,8 +49532,8 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
   export type RessourceUncheckedUpdateWithoutCollectionsInput = {
@@ -50567,7 +49545,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50579,23 +49556,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -50604,448 +49573,7 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
-  }
-
-  export type RessourceCreateWithoutTransactionsInput = {
-    id?: string
-    titre: string
-    description: string
-    type: $Enums.TypeRessource
-    langue?: string
-    urlFichier: string
-    urlFichierLocal?: string | null
-    format: string
-    dateCreation?: Date | string
-    dateModification?: Date | string
-    motsCles: string
-    image?: string | null
-    niveauAcces?: $Enums.NiveauAcces
-    datePublication?: Date | string | null
-    estValide?: boolean
-    estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
-    validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    edition?: string | null
-    anneePublication?: number | null
-    editeur?: string | null
-    nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
-    auteur?: UserCreateNestedOneWithoutContributionsInput
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
-    favoris?: FavoriCreateNestedManyWithoutRessourceInput
-    commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
-    notations?: NotationCreateNestedManyWithoutRessourceInput
-    historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
-    collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
-    recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
-    donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
-  }
-
-  export type RessourceUncheckedCreateWithoutTransactionsInput = {
-    id?: string
-    titre: string
-    description: string
-    type: $Enums.TypeRessource
-    langue?: string
-    urlFichier: string
-    urlFichierLocal?: string | null
-    format: string
-    dateCreation?: Date | string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
-    image?: string | null
-    niveauAcces?: $Enums.NiveauAcces
-    datePublication?: Date | string | null
-    estValide?: boolean
-    estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
-    validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    edition?: string | null
-    anneePublication?: number | null
-    editeur?: string | null
-    nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
-    favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
-    commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
-    notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
-    historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
-    collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
-    recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
-  }
-
-  export type RessourceCreateOrConnectWithoutTransactionsInput = {
-    where: RessourceWhereUniqueInput
-    create: XOR<RessourceCreateWithoutTransactionsInput, RessourceUncheckedCreateWithoutTransactionsInput>
-  }
-
-  export type UniversiteCreateWithoutTransactionsOrigineInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteUncheckedCreateWithoutTransactionsOrigineInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteCreateOrConnectWithoutTransactionsOrigineInput = {
-    where: UniversiteWhereUniqueInput
-    create: XOR<UniversiteCreateWithoutTransactionsOrigineInput, UniversiteUncheckedCreateWithoutTransactionsOrigineInput>
-  }
-
-  export type UniversiteCreateWithoutTransactionsDestinationInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteUncheckedCreateWithoutTransactionsDestinationInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteCreateOrConnectWithoutTransactionsDestinationInput = {
-    where: UniversiteWhereUniqueInput
-    create: XOR<UniversiteCreateWithoutTransactionsDestinationInput, UniversiteUncheckedCreateWithoutTransactionsDestinationInput>
-  }
-
-  export type RessourceUpsertWithoutTransactionsInput = {
-    update: XOR<RessourceUpdateWithoutTransactionsInput, RessourceUncheckedUpdateWithoutTransactionsInput>
-    create: XOR<RessourceCreateWithoutTransactionsInput, RessourceUncheckedCreateWithoutTransactionsInput>
-    where?: RessourceWhereInput
-  }
-
-  export type RessourceUpdateToOneWithWhereWithoutTransactionsInput = {
-    where?: RessourceWhereInput
-    data: XOR<RessourceUpdateWithoutTransactionsInput, RessourceUncheckedUpdateWithoutTransactionsInput>
-  }
-
-  export type RessourceUpdateWithoutTransactionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
-    langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
-    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
-    format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
-    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
-    estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
-    favoris?: FavoriUpdateManyWithoutRessourceNestedInput
-    commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
-    notations?: NotationUpdateManyWithoutRessourceNestedInput
-    historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
-    collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
-    recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
-    donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
-  }
-
-  export type RessourceUncheckedUpdateWithoutTransactionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
-    langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
-    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
-    format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
-    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
-    estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
-    favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
-    commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
-    notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
-    historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
-    collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
-    recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
-  }
-
-  export type UniversiteUpsertWithoutTransactionsOrigineInput = {
-    update: XOR<UniversiteUpdateWithoutTransactionsOrigineInput, UniversiteUncheckedUpdateWithoutTransactionsOrigineInput>
-    create: XOR<UniversiteCreateWithoutTransactionsOrigineInput, UniversiteUncheckedCreateWithoutTransactionsOrigineInput>
-    where?: UniversiteWhereInput
-  }
-
-  export type UniversiteUpdateToOneWithWhereWithoutTransactionsOrigineInput = {
-    where?: UniversiteWhereInput
-    data: XOR<UniversiteUpdateWithoutTransactionsOrigineInput, UniversiteUncheckedUpdateWithoutTransactionsOrigineInput>
-  }
-
-  export type UniversiteUpdateWithoutTransactionsOrigineInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUncheckedUpdateWithoutTransactionsOrigineInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUpsertWithoutTransactionsDestinationInput = {
-    update: XOR<UniversiteUpdateWithoutTransactionsDestinationInput, UniversiteUncheckedUpdateWithoutTransactionsDestinationInput>
-    create: XOR<UniversiteCreateWithoutTransactionsDestinationInput, UniversiteUncheckedCreateWithoutTransactionsDestinationInput>
-    where?: UniversiteWhereInput
-  }
-
-  export type UniversiteUpdateToOneWithWhereWithoutTransactionsDestinationInput = {
-    where?: UniversiteWhereInput
-    data: XOR<UniversiteUpdateWithoutTransactionsDestinationInput, UniversiteUncheckedUpdateWithoutTransactionsDestinationInput>
-  }
-
-  export type UniversiteUpdateWithoutTransactionsDestinationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUncheckedUpdateWithoutTransactionsDestinationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
   }
 
   export type UserCreateWithoutContributionsInput = {
@@ -51059,9 +49587,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
     notations?: NotationCreateNestedManyWithoutUserInput
@@ -51115,59 +49643,6 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutContributionsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutContributionsInput, UserUncheckedCreateWithoutContributionsInput>
-  }
-
-  export type UniversiteCreateWithoutRessourcesInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteUncheckedCreateWithoutRessourcesInput = {
-    id?: string
-    nom: string
-    adresse?: string | null
-    ville: string
-    pays: string
-    siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
-    reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
-  }
-
-  export type UniversiteCreateOrConnectWithoutRessourcesInput = {
-    where: UniversiteWhereUniqueInput
-    create: XOR<UniversiteCreateWithoutRessourcesInput, UniversiteUncheckedCreateWithoutRessourcesInput>
   }
 
   export type FavoriCreateWithoutRessourceInput = {
@@ -51258,9 +49733,9 @@ export namespace Prisma {
     id?: string
     dateAcces?: Date | string
     typeAcces: $Enums.TypeAcces
+    universiteSrc?: string | null
     universiteUser?: string | null
     user: UserCreateNestedOneWithoutHistoriquesInput
-    universiteSrcRel?: UniversiteCreateNestedOneWithoutHistoriqueAccesInput
   }
 
   export type HistoriqueAccesUncheckedCreateWithoutRessourceInput = {
@@ -51313,9 +49788,9 @@ export namespace Prisma {
     disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
-    estReservableExterne?: boolean | null
-    estEmpruntableExterne?: boolean | null
     qrCode?: string | null
+    dureeMaxEmpruntExterne?: number
+    nbMaxExemplairesExterne?: number
     emprunts?: EmpruntCreateNestedManyWithoutExemplaireInput
   }
 
@@ -51326,9 +49801,9 @@ export namespace Prisma {
     disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
-    estReservableExterne?: boolean | null
-    estEmpruntableExterne?: boolean | null
     qrCode?: string | null
+    dureeMaxEmpruntExterne?: number
+    nbMaxExemplairesExterne?: number
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutExemplaireInput
   }
 
@@ -51349,8 +49824,8 @@ export namespace Prisma {
     dateFin: Date | string
     statut?: $Enums.StatutReservation
     commentaire?: string | null
+    universiteEmprunteur: string
     user?: UserCreateNestedOneWithoutReservationsInput
-    universiteEmprunteurRel: UniversiteCreateNestedOneWithoutReservationsInput
     valideur?: BibliothecaireCreateNestedOneWithoutReservationsInput
   }
 
@@ -51383,8 +49858,8 @@ export namespace Prisma {
     motif: $Enums.MotifRecommandation
     estVue?: boolean
     estInteruniversitaire?: boolean
+    universiteSource?: string | null
     user: UserCreateNestedOneWithoutRecommandationsInput
-    universiteSourceRel?: UniversiteCreateNestedOneWithoutRecommandationsSourceInput
   }
 
   export type RecommandationUncheckedCreateWithoutRessourceInput = {
@@ -51434,38 +49909,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type TransactionBlockchainCreateWithoutRessourceInput = {
-    id?: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    dateTransaction?: Date | string
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
-    universiteOrigineRel: UniversiteCreateNestedOneWithoutTransactionsOrigineInput
-    universiteDestinationRel?: UniversiteCreateNestedOneWithoutTransactionsDestinationInput
-  }
-
-  export type TransactionBlockchainUncheckedCreateWithoutRessourceInput = {
-    id?: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    universiteOrigine: string
-    universiteDestination?: string | null
-    dateTransaction?: Date | string
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
-  }
-
-  export type TransactionBlockchainCreateOrConnectWithoutRessourceInput = {
-    where: TransactionBlockchainWhereUniqueInput
-    create: XOR<TransactionBlockchainCreateWithoutRessourceInput, TransactionBlockchainUncheckedCreateWithoutRessourceInput>
-  }
-
-  export type TransactionBlockchainCreateManyRessourceInputEnvelope = {
-    data: TransactionBlockchainCreateManyRessourceInput | TransactionBlockchainCreateManyRessourceInput[]
-    skipDuplicates?: boolean
-  }
-
   export type NotificationCreateWithoutRessourceInput = {
     id?: string
     titre: string
@@ -51496,6 +49939,25 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CategorieCreateWithoutRessourcesInput = {
+    id?: string
+    libelle: string
+    description?: string | null
+    dateCreation?: Date | string
+  }
+
+  export type CategorieUncheckedCreateWithoutRessourcesInput = {
+    id?: string
+    libelle: string
+    description?: string | null
+    dateCreation?: Date | string
+  }
+
+  export type CategorieCreateOrConnectWithoutRessourcesInput = {
+    where: CategorieWhereUniqueInput
+    create: XOR<CategorieCreateWithoutRessourcesInput, CategorieUncheckedCreateWithoutRessourcesInput>
+  }
+
   export type UserUpsertWithoutContributionsInput = {
     update: XOR<UserUpdateWithoutContributionsInput, UserUncheckedUpdateWithoutContributionsInput>
     create: XOR<UserCreateWithoutContributionsInput, UserUncheckedCreateWithoutContributionsInput>
@@ -51518,9 +49980,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
     notations?: NotationUpdateManyWithoutUserNestedInput
@@ -51569,65 +50031,6 @@ export namespace Prisma {
     bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
     administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UniversiteUpsertWithoutRessourcesInput = {
-    update: XOR<UniversiteUpdateWithoutRessourcesInput, UniversiteUncheckedUpdateWithoutRessourcesInput>
-    create: XOR<UniversiteCreateWithoutRessourcesInput, UniversiteUncheckedCreateWithoutRessourcesInput>
-    where?: UniversiteWhereInput
-  }
-
-  export type UniversiteUpdateToOneWithWhereWithoutRessourcesInput = {
-    where?: UniversiteWhereInput
-    data: XOR<UniversiteUpdateWithoutRessourcesInput, UniversiteUncheckedUpdateWithoutRessourcesInput>
-  }
-
-  export type UniversiteUpdateWithoutRessourcesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
-  }
-
-  export type UniversiteUncheckedUpdateWithoutRessourcesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
-    siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
-    reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
-    politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
   }
 
   export type FavoriUpsertWithWhereUniqueWithoutRessourceInput = {
@@ -51737,9 +50140,9 @@ export namespace Prisma {
     disponible?: BoolFilter<"ExemplairePhysique"> | boolean
     localisation?: StringFilter<"ExemplairePhysique"> | string
     dateAcquisition?: DateTimeNullableFilter<"ExemplairePhysique"> | Date | string | null
-    estReservableExterne?: BoolNullableFilter<"ExemplairePhysique"> | boolean | null
-    estEmpruntableExterne?: BoolNullableFilter<"ExemplairePhysique"> | boolean | null
     qrCode?: StringNullableFilter<"ExemplairePhysique"> | string | null
+    dureeMaxEmpruntExterne?: IntFilter<"ExemplairePhysique"> | number
+    nbMaxExemplairesExterne?: IntFilter<"ExemplairePhysique"> | number
   }
 
   export type ReservationUpsertWithWhereUniqueWithoutRessourceInput = {
@@ -51790,22 +50193,6 @@ export namespace Prisma {
     data: XOR<DonneesRecommandationUpdateManyMutationInput, DonneesRecommandationUncheckedUpdateManyWithoutRessourceInput>
   }
 
-  export type TransactionBlockchainUpsertWithWhereUniqueWithoutRessourceInput = {
-    where: TransactionBlockchainWhereUniqueInput
-    update: XOR<TransactionBlockchainUpdateWithoutRessourceInput, TransactionBlockchainUncheckedUpdateWithoutRessourceInput>
-    create: XOR<TransactionBlockchainCreateWithoutRessourceInput, TransactionBlockchainUncheckedCreateWithoutRessourceInput>
-  }
-
-  export type TransactionBlockchainUpdateWithWhereUniqueWithoutRessourceInput = {
-    where: TransactionBlockchainWhereUniqueInput
-    data: XOR<TransactionBlockchainUpdateWithoutRessourceInput, TransactionBlockchainUncheckedUpdateWithoutRessourceInput>
-  }
-
-  export type TransactionBlockchainUpdateManyWithWhereWithoutRessourceInput = {
-    where: TransactionBlockchainScalarWhereInput
-    data: XOR<TransactionBlockchainUpdateManyMutationInput, TransactionBlockchainUncheckedUpdateManyWithoutRessourceInput>
-  }
-
   export type NotificationUpsertWithWhereUniqueWithoutRessourceInput = {
     where: NotificationWhereUniqueInput
     update: XOR<NotificationUpdateWithoutRessourceInput, NotificationUncheckedUpdateWithoutRessourceInput>
@@ -51822,28 +50209,146 @@ export namespace Prisma {
     data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutRessourceInput>
   }
 
+  export type CategorieUpsertWithoutRessourcesInput = {
+    update: XOR<CategorieUpdateWithoutRessourcesInput, CategorieUncheckedUpdateWithoutRessourcesInput>
+    create: XOR<CategorieCreateWithoutRessourcesInput, CategorieUncheckedCreateWithoutRessourcesInput>
+    where?: CategorieWhereInput
+  }
+
+  export type CategorieUpdateToOneWithWhereWithoutRessourcesInput = {
+    where?: CategorieWhereInput
+    data: XOR<CategorieUpdateWithoutRessourcesInput, CategorieUncheckedUpdateWithoutRessourcesInput>
+  }
+
+  export type CategorieUpdateWithoutRessourcesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    libelle?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CategorieUncheckedUpdateWithoutRessourcesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    libelle?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RessourceCreateWithoutCategorieInput = {
+    id?: string
+    titre: string
+    description: string
+    type: $Enums.TypeRessource
+    langue?: string
+    urlFichier: string
+    urlFichierLocal?: string | null
+    format: string
+    dateModification?: Date | string
+    motsCles: string
+    universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    validation?: $Enums.TypeValidation
+    isbn?: string | null
+    doi?: string | null
+    anneePublication?: number | null
+    nbPages?: number | null
+    nbExemplaires?: number
+    nbDisponibles?: number
+    coteClassification?: string | null
+    auteur?: UserCreateNestedOneWithoutContributionsInput
+    favoris?: FavoriCreateNestedManyWithoutRessourceInput
+    commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
+    notations?: NotationCreateNestedManyWithoutRessourceInput
+    historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
+    collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
+    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
+    reservations?: ReservationCreateNestedManyWithoutRessourceInput
+    recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
+    donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
+    notifications?: NotificationCreateNestedManyWithoutRessourceInput
+  }
+
+  export type RessourceUncheckedCreateWithoutCategorieInput = {
+    id?: string
+    titre: string
+    description: string
+    type: $Enums.TypeRessource
+    langue?: string
+    urlFichier: string
+    urlFichierLocal?: string | null
+    format: string
+    dateModification?: Date | string
+    motsCles: string
+    auteurId?: string | null
+    universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    validation?: $Enums.TypeValidation
+    isbn?: string | null
+    doi?: string | null
+    anneePublication?: number | null
+    nbPages?: number | null
+    nbExemplaires?: number
+    nbDisponibles?: number
+    coteClassification?: string | null
+    favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
+    commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
+    notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
+    historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
+    collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
+    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
+    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
+    recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
+    donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
+  }
+
+  export type RessourceCreateOrConnectWithoutCategorieInput = {
+    where: RessourceWhereUniqueInput
+    create: XOR<RessourceCreateWithoutCategorieInput, RessourceUncheckedCreateWithoutCategorieInput>
+  }
+
+  export type RessourceCreateManyCategorieInputEnvelope = {
+    data: RessourceCreateManyCategorieInput | RessourceCreateManyCategorieInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RessourceUpsertWithWhereUniqueWithoutCategorieInput = {
+    where: RessourceWhereUniqueInput
+    update: XOR<RessourceUpdateWithoutCategorieInput, RessourceUncheckedUpdateWithoutCategorieInput>
+    create: XOR<RessourceCreateWithoutCategorieInput, RessourceUncheckedCreateWithoutCategorieInput>
+  }
+
+  export type RessourceUpdateWithWhereUniqueWithoutCategorieInput = {
+    where: RessourceWhereUniqueInput
+    data: XOR<RessourceUpdateWithoutCategorieInput, RessourceUncheckedUpdateWithoutCategorieInput>
+  }
+
+  export type RessourceUpdateManyWithWhereWithoutCategorieInput = {
+    where: RessourceScalarWhereInput
+    data: XOR<RessourceUpdateManyMutationInput, RessourceUncheckedUpdateManyWithoutCategorieInput>
+  }
+
   export type UniversiteCreateWithoutStatistiquesBibliothequeInput = {
     id?: string
     nom: string
     adresse?: string | null
     ville: string
-    pays: string
     siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationCreateNestedManyWithoutUniversiteSourceRelInput
-    transactionsOrigine?: TransactionBlockchainCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesCreateNestedManyWithoutUniversiteSrcRelInput
     reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
+    ufrs?: UfrCreateNestedManyWithoutUniversiteInput
   }
 
   export type UniversiteUncheckedCreateWithoutStatistiquesBibliothequeInput = {
@@ -51851,23 +50356,10 @@ export namespace Prisma {
     nom: string
     adresse?: string | null
     ville: string
-    pays: string
     siteWeb?: string | null
-    dateCreation?: Date | string
-    adresseBlockchain?: string | null
-    estActive?: boolean
-    users?: UserUncheckedCreateNestedManyWithoutUniversiteInput
-    ressources?: RessourceUncheckedCreateNestedManyWithoutUniversiteInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUniversiteEmprunteurRelInput
-    recommandationsSource?: RecommandationUncheckedCreateNestedManyWithoutUniversiteSourceRelInput
-    transactionsOrigine?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteOrigineRelInput
-    transactionsDestination?: TransactionBlockchainUncheckedCreateNestedManyWithoutUniversiteDestinationRelInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedCreateNestedManyWithoutUniversiteSrcRelInput
     reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
+    ufrs?: UfrUncheckedCreateNestedManyWithoutUniversiteInput
   }
 
   export type UniversiteCreateOrConnectWithoutStatistiquesBibliothequeInput = {
@@ -51891,23 +50383,10 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUpdateManyWithoutUniversiteSourceRelNestedInput
-    transactionsOrigine?: TransactionBlockchainUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUpdateManyWithoutUniversiteSrcRelNestedInput
     reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
+    ufrs?: UfrUpdateManyWithoutUniversiteNestedInput
   }
 
   export type UniversiteUncheckedUpdateWithoutStatistiquesBibliothequeInput = {
@@ -51915,23 +50394,10 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
-    pays?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresseBlockchain?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    users?: UserUncheckedUpdateManyWithoutUniversiteNestedInput
-    ressources?: RessourceUncheckedUpdateManyWithoutUniversiteNestedInput
-    statistiquesSource?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    statistiquesDestination?: StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelNestedInput
-    recommandationsSource?: RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelNestedInput
-    transactionsOrigine?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelNestedInput
-    transactionsDestination?: TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelNestedInput
-    HistoriqueAcces?: HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelNestedInput
     reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
+    ufrs?: UfrUncheckedUpdateManyWithoutUniversiteNestedInput
   }
 
   export type UserCreateWithoutNotificationsInput = {
@@ -51945,9 +50411,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -52012,9 +50478,9 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
+    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
@@ -52022,25 +50488,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
     auteur?: UserCreateNestedOneWithoutContributionsInput
-    universite: UniversiteCreateNestedOneWithoutRessourcesInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -52050,7 +50506,7 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
   export type RessourceUncheckedCreateWithoutNotificationsInput = {
@@ -52062,7 +50518,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     auteurId?: string | null
@@ -52074,23 +50529,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -52100,7 +50547,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    transactions?: TransactionBlockchainUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutNotificationsInput = {
@@ -52130,9 +50576,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -52203,9 +50649,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52213,25 +50659,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
     auteur?: UserUpdateOneWithoutContributionsNestedInput
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -52241,7 +50677,7 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
   export type RessourceUncheckedUpdateWithoutNotificationsInput = {
@@ -52253,7 +50689,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52265,23 +50700,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -52291,7 +50718,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type UserCreateWithoutJournalAuditInput = {
@@ -52305,9 +50731,9 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
-    universite: UniversiteCreateNestedOneWithoutUsersInput
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
     favoris?: FavoriCreateNestedManyWithoutUserInput
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
@@ -52385,9 +50811,9 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    universite?: UniversiteUpdateOneRequiredWithoutUsersNestedInput
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
     favoris?: FavoriUpdateManyWithoutUserNestedInput
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
@@ -52447,7 +50873,6 @@ export namespace Prisma {
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
     universiteEmprunteur: string
-    estEmpruntExterne?: boolean
     motifEmprunt?: string | null
     validePar?: string | null
   }
@@ -52459,11 +50884,10 @@ export namespace Prisma {
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutEmpruntsNestedInput
-    universiteEmprunteurRel?: UniversiteUpdateOneRequiredWithoutEmpruntsNestedInput
+    user?: UserUpdateOneWithoutEmpruntsNestedInput
     SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
   }
 
@@ -52476,7 +50900,6 @@ export namespace Prisma {
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
     SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
@@ -52491,7 +50914,6 @@ export namespace Prisma {
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -52536,119 +50958,6 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type UserCreateManyUniversiteInput = {
-    id?: string
-    email: string
-    motDePasse: string
-    nom: string
-    telephone?: string | null
-    prenom: string
-    image?: string | null
-    role: $Enums.RoleUser
-    derniereConnexion?: Date | string | null
-    estActif?: boolean
-    preferencesRecommandation?: string | null
-    frequenceRecommandation?: $Enums.FrequenceRecommandation
-  }
-
-  export type RessourceCreateManyUniversiteInput = {
-    id?: string
-    titre: string
-    description: string
-    type: $Enums.TypeRessource
-    langue?: string
-    urlFichier: string
-    urlFichierLocal?: string | null
-    format: string
-    dateCreation?: Date | string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    image?: string | null
-    niveauAcces?: $Enums.NiveauAcces
-    datePublication?: Date | string | null
-    estValide?: boolean
-    estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
-    validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    edition?: string | null
-    anneePublication?: number | null
-    editeur?: string | null
-    nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
-  }
-
-  export type StatistiqueInteruniversitaireCreateManyUniversiteSourceRelInput = {
-    id?: string
-    universiteDestination: string
-    mois: number
-    annee: number
-    nbEmprunts?: number
-    nbReservations?: number
-    ressourcesPlusConsultees?: string | null
-    domainesPlusConsultes?: string | null
-  }
-
-  export type StatistiqueInteruniversitaireCreateManyUniversiteDestinationRelInput = {
-    id?: string
-    universiteSource: string
-    mois: number
-    annee: number
-    nbEmprunts?: number
-    nbReservations?: number
-    ressourcesPlusConsultees?: string | null
-    domainesPlusConsultes?: string | null
-  }
-
-  export type ReservationCreateManyUniversiteEmprunteurRelInput = {
-    id?: string
-    userId?: string | null
-    ressourceId: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    validePar?: string | null
-  }
-
-  export type EmpruntCreateManyUniversiteEmprunteurRelInput = {
-    id?: string
-    exemplaireId: string
-    userId: string
-    dateEmprunt?: Date | string
-    dateRetourPrevue: Date | string
-    dateRetourEffective?: Date | string | null
-    statut?: $Enums.StatutEmprunt
-    commentaire?: string | null
-    estEmpruntExterne?: boolean
-    motifEmprunt?: string | null
-    validePar?: string | null
-  }
-
-  export type RecommandationCreateManyUniversiteSourceRelInput = {
-    id?: string
-    userId: string
-    ressourceId: string
-    dateRecommandation?: Date | string
-    score: number
-    motif: $Enums.MotifRecommandation
-    estVue?: boolean
-    estInteruniversitaire?: boolean
-  }
-
   export type StatistiqueBibliothequeCreateManyUniversiteInput = {
     id?: string
     mois: number
@@ -52663,37 +50972,6 @@ export namespace Prisma {
     universitesPlusFrequentes?: string | null
   }
 
-  export type TransactionBlockchainCreateManyUniversiteOrigineRelInput = {
-    id?: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    ressourceId?: string | null
-    universiteDestination?: string | null
-    dateTransaction?: Date | string
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
-  }
-
-  export type TransactionBlockchainCreateManyUniversiteDestinationRelInput = {
-    id?: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    ressourceId?: string | null
-    universiteOrigine: string
-    dateTransaction?: Date | string
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
-  }
-
-  export type HistoriqueAccesCreateManyUniversiteSrcRelInput = {
-    id?: string
-    userId: string
-    ressourceId: string
-    dateAcces?: Date | string
-    typeAcces: $Enums.TypeAcces
-    universiteUser?: string | null
-  }
-
   export type ReglePretCreateManyUniversiteInput = {
     id?: string
     roleUtilisateur: $Enums.RoleUser
@@ -52701,8 +50979,6 @@ export namespace Prisma {
     dureeEmpruntJours?: number
     nbRenouvellements?: number
     penaliteRetardJours?: boolean
-    exigeCarteValide?: boolean
-    dateMiseAJour?: Date | string
     estActif?: boolean
   }
 
@@ -52715,401 +50991,10 @@ export namespace Prisma {
     dateMiseAJour?: Date | string
   }
 
-  export type UserUpdateWithoutUniversiteInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    motDePasse?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    prenom?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
-    derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActif?: BoolFieldUpdateOperationsInput | boolean
-    preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
-    frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    contributions?: RessourceUpdateManyWithoutAuteurNestedInput
-    favoris?: FavoriUpdateManyWithoutUserNestedInput
-    commentaires?: CommentaireUpdateManyWithoutUserNestedInput
-    notations?: NotationUpdateManyWithoutUserNestedInput
-    historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
-    collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUserNestedInput
-    recommandations?: RecommandationUpdateManyWithoutUserNestedInput
-    JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
-    donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutUniversiteInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    motDePasse?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    prenom?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
-    derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActif?: BoolFieldUpdateOperationsInput | boolean
-    preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
-    frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
-    favoris?: FavoriUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentaireUncheckedUpdateManyWithoutUserNestedInput
-    notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
-    historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
-    collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
-    recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
-    JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
-    donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateManyWithoutUniversiteInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    motDePasse?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    prenom?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
-    derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActif?: BoolFieldUpdateOperationsInput | boolean
-    preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
-    frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-  }
-
-  export type RessourceUpdateWithoutUniversiteInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
-    langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
-    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
-    format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
-    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
-    estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
-    favoris?: FavoriUpdateManyWithoutRessourceNestedInput
-    commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
-    notations?: NotationUpdateManyWithoutRessourceNestedInput
-    historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
-    collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
-    recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
-    donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
-  }
-
-  export type RessourceUncheckedUpdateWithoutUniversiteInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
-    langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
-    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
-    format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
-    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
-    estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
-    favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
-    commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
-    notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
-    historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
-    collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
-    recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
-  }
-
-  export type RessourceUncheckedUpdateManyWithoutUniversiteInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
-    langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
-    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
-    format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
-    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
-    estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type StatistiqueInteruniversitaireUpdateWithoutUniversiteSourceRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    mois?: IntFieldUpdateOperationsInput | number
-    annee?: IntFieldUpdateOperationsInput | number
-    nbEmprunts?: IntFieldUpdateOperationsInput | number
-    nbReservations?: IntFieldUpdateOperationsInput | number
-    ressourcesPlusConsultees?: NullableStringFieldUpdateOperationsInput | string | null
-    domainesPlusConsultes?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteDestinationRel?: UniversiteUpdateOneRequiredWithoutStatistiquesDestinationNestedInput
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedUpdateWithoutUniversiteSourceRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    universiteDestination?: StringFieldUpdateOperationsInput | string
-    mois?: IntFieldUpdateOperationsInput | number
-    annee?: IntFieldUpdateOperationsInput | number
-    nbEmprunts?: IntFieldUpdateOperationsInput | number
-    nbReservations?: IntFieldUpdateOperationsInput | number
-    ressourcesPlusConsultees?: NullableStringFieldUpdateOperationsInput | string | null
-    domainesPlusConsultes?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteSourceRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    universiteDestination?: StringFieldUpdateOperationsInput | string
-    mois?: IntFieldUpdateOperationsInput | number
-    annee?: IntFieldUpdateOperationsInput | number
-    nbEmprunts?: IntFieldUpdateOperationsInput | number
-    nbReservations?: IntFieldUpdateOperationsInput | number
-    ressourcesPlusConsultees?: NullableStringFieldUpdateOperationsInput | string | null
-    domainesPlusConsultes?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type StatistiqueInteruniversitaireUpdateWithoutUniversiteDestinationRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    mois?: IntFieldUpdateOperationsInput | number
-    annee?: IntFieldUpdateOperationsInput | number
-    nbEmprunts?: IntFieldUpdateOperationsInput | number
-    nbReservations?: IntFieldUpdateOperationsInput | number
-    ressourcesPlusConsultees?: NullableStringFieldUpdateOperationsInput | string | null
-    domainesPlusConsultes?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteSourceRel?: UniversiteUpdateOneRequiredWithoutStatistiquesSourceNestedInput
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedUpdateWithoutUniversiteDestinationRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    mois?: IntFieldUpdateOperationsInput | number
-    annee?: IntFieldUpdateOperationsInput | number
-    nbEmprunts?: IntFieldUpdateOperationsInput | number
-    nbReservations?: IntFieldUpdateOperationsInput | number
-    ressourcesPlusConsultees?: NullableStringFieldUpdateOperationsInput | string | null
-    domainesPlusConsultes?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type StatistiqueInteruniversitaireUncheckedUpdateManyWithoutUniversiteDestinationRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    universiteSource?: StringFieldUpdateOperationsInput | string
-    mois?: IntFieldUpdateOperationsInput | number
-    annee?: IntFieldUpdateOperationsInput | number
-    nbEmprunts?: IntFieldUpdateOperationsInput | number
-    nbReservations?: IntFieldUpdateOperationsInput | number
-    ressourcesPlusConsultees?: NullableStringFieldUpdateOperationsInput | string | null
-    domainesPlusConsultes?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ReservationUpdateWithoutUniversiteEmprunteurRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneWithoutReservationsNestedInput
-    ressource?: RessourceUpdateOneRequiredWithoutReservationsNestedInput
-    valideur?: BibliothecaireUpdateOneWithoutReservationsNestedInput
-  }
-
-  export type ReservationUncheckedUpdateWithoutUniversiteEmprunteurRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ReservationUncheckedUpdateManyWithoutUniversiteEmprunteurRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type EmpruntUpdateWithoutUniversiteEmprunteurRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
-    exemplaire?: ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntsNestedInput
-    user?: UserUpdateOneRequiredWithoutEmpruntsNestedInput
-    SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
-  }
-
-  export type EmpruntUncheckedUpdateWithoutUniversiteEmprunteurRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    exemplaireId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
-    SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
-  }
-
-  export type EmpruntUncheckedUpdateManyWithoutUniversiteEmprunteurRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    exemplaireId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type RecommandationUpdateWithoutUniversiteSourceRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dateRecommandation?: DateTimeFieldUpdateOperationsInput | Date | string
-    score?: FloatFieldUpdateOperationsInput | number
-    motif?: EnumMotifRecommandationFieldUpdateOperationsInput | $Enums.MotifRecommandation
-    estVue?: BoolFieldUpdateOperationsInput | boolean
-    estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
-    user?: UserUpdateOneRequiredWithoutRecommandationsNestedInput
-    ressource?: RessourceUpdateOneRequiredWithoutRecommandationsNestedInput
-  }
-
-  export type RecommandationUncheckedUpdateWithoutUniversiteSourceRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateRecommandation?: DateTimeFieldUpdateOperationsInput | Date | string
-    score?: FloatFieldUpdateOperationsInput | number
-    motif?: EnumMotifRecommandationFieldUpdateOperationsInput | $Enums.MotifRecommandation
-    estVue?: BoolFieldUpdateOperationsInput | boolean
-    estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type RecommandationUncheckedUpdateManyWithoutUniversiteSourceRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateRecommandation?: DateTimeFieldUpdateOperationsInput | Date | string
-    score?: FloatFieldUpdateOperationsInput | number
-    motif?: EnumMotifRecommandationFieldUpdateOperationsInput | $Enums.MotifRecommandation
-    estVue?: BoolFieldUpdateOperationsInput | boolean
-    estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
+  export type UfrCreateManyUniversiteInput = {
+    id?: string
+    nom: string
+    description?: string | null
   }
 
   export type StatistiqueBibliothequeUpdateWithoutUniversiteInput = {
@@ -53154,99 +51039,6 @@ export namespace Prisma {
     universitesPlusFrequentes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type TransactionBlockchainUpdateWithoutUniversiteOrigineRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-    ressource?: RessourceUpdateOneWithoutTransactionsNestedInput
-    universiteDestinationRel?: UniversiteUpdateOneWithoutTransactionsDestinationNestedInput
-  }
-
-  export type TransactionBlockchainUncheckedUpdateWithoutUniversiteOrigineRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteDestination?: NullableStringFieldUpdateOperationsInput | string | null
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TransactionBlockchainUncheckedUpdateManyWithoutUniversiteOrigineRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteDestination?: NullableStringFieldUpdateOperationsInput | string | null
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TransactionBlockchainUpdateWithoutUniversiteDestinationRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-    ressource?: RessourceUpdateOneWithoutTransactionsNestedInput
-    universiteOrigineRel?: UniversiteUpdateOneRequiredWithoutTransactionsOrigineNestedInput
-  }
-
-  export type TransactionBlockchainUncheckedUpdateWithoutUniversiteDestinationRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteOrigine?: StringFieldUpdateOperationsInput | string
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TransactionBlockchainUncheckedUpdateManyWithoutUniversiteDestinationRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteOrigine?: StringFieldUpdateOperationsInput | string
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type HistoriqueAccesUpdateWithoutUniversiteSrcRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
-    typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutHistoriquesNestedInput
-    ressource?: RessourceUpdateOneRequiredWithoutHistoriquesNestedInput
-  }
-
-  export type HistoriqueAccesUncheckedUpdateWithoutUniversiteSrcRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
-    typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type HistoriqueAccesUncheckedUpdateManyWithoutUniversiteSrcRelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
-    typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type ReglePretUpdateWithoutUniversiteInput = {
     id?: StringFieldUpdateOperationsInput | string
     roleUtilisateur?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
@@ -53254,8 +51046,6 @@ export namespace Prisma {
     dureeEmpruntJours?: IntFieldUpdateOperationsInput | number
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
-    exigeCarteValide?: BoolFieldUpdateOperationsInput | boolean
-    dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
     estActif?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -53266,8 +51056,6 @@ export namespace Prisma {
     dureeEmpruntJours?: IntFieldUpdateOperationsInput | number
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
-    exigeCarteValide?: BoolFieldUpdateOperationsInput | boolean
-    dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
     estActif?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -53278,8 +51066,6 @@ export namespace Prisma {
     dureeEmpruntJours?: IntFieldUpdateOperationsInput | number
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
-    exigeCarteValide?: BoolFieldUpdateOperationsInput | boolean
-    dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
     estActif?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -53310,6 +51096,76 @@ export namespace Prisma {
     dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UfrUpdateWithoutUniversiteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    departements?: DepartementUpdateManyWithoutUfrNestedInput
+  }
+
+  export type UfrUncheckedUpdateWithoutUniversiteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    departements?: DepartementUncheckedUpdateManyWithoutUfrNestedInput
+  }
+
+  export type UfrUncheckedUpdateManyWithoutUniversiteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DepartementCreateManyUfrInput = {
+    id?: string
+    nom: string
+    description?: string | null
+  }
+
+  export type DepartementUpdateWithoutUfrInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    filieres?: FiliereUpdateManyWithoutDepartementNestedInput
+  }
+
+  export type DepartementUncheckedUpdateWithoutUfrInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    filieres?: FiliereUncheckedUpdateManyWithoutDepartementNestedInput
+  }
+
+  export type DepartementUncheckedUpdateManyWithoutUfrInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FiliereCreateManyDepartementInput = {
+    id?: string
+    nom: string
+    description?: string | null
+  }
+
+  export type FiliereUpdateWithoutDepartementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FiliereUncheckedUpdateWithoutDepartementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FiliereUncheckedUpdateManyWithoutDepartementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type RessourceCreateManyAuteurInput = {
     id?: string
     titre: string
@@ -53319,7 +51175,6 @@ export namespace Prisma {
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateCreation?: Date | string
     dateModification?: Date | string
     motsCles: string
     universiteId: string
@@ -53330,23 +51185,15 @@ export namespace Prisma {
     estArchive?: boolean
     nomAuteurExterne?: string | null
     prenomAuteurExterne?: string | null
-    affiliationAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
     isbn?: string | null
     doi?: string | null
-    edition?: string | null
     anneePublication?: number | null
-    editeur?: string | null
     nbPages?: number | null
-    categorieBiblio?: $Enums.CategorieBiblio | null
-    estEmpruntable?: boolean
     nbExemplaires?: number
     nbDisponibles?: number
     coteClassification?: string | null
-    estEmpruntableExterne?: boolean
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    necessiteAutorisation?: boolean
+    categorieId: string
   }
 
   export type FavoriCreateManyUserInput = {
@@ -53389,7 +51236,6 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
-    estPublique?: boolean
     dateCreation?: Date | string
   }
 
@@ -53414,7 +51260,6 @@ export namespace Prisma {
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
     universiteEmprunteur: string
-    estEmpruntExterne?: boolean
     motifEmprunt?: string | null
     validePar?: string | null
   }
@@ -53513,9 +51358,9 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53523,24 +51368,14 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
-    universite?: UniversiteUpdateOneRequiredWithoutRessourcesNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -53550,8 +51385,8 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
   export type RessourceUncheckedUpdateWithoutAuteurInput = {
@@ -53563,7 +51398,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -53574,23 +51408,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -53600,7 +51426,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    transactions?: TransactionBlockchainUncheckedUpdateManyWithoutRessourceNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
@@ -53613,7 +51438,6 @@ export namespace Prisma {
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
     motsCles?: StringFieldUpdateOperationsInput | string
     universiteId?: StringFieldUpdateOperationsInput | string
@@ -53624,23 +51448,15 @@ export namespace Prisma {
     estArchive?: BoolFieldUpdateOperationsInput | boolean
     nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    affiliationAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     isbn?: NullableStringFieldUpdateOperationsInput | string | null
     doi?: NullableStringFieldUpdateOperationsInput | string | null
-    edition?: NullableStringFieldUpdateOperationsInput | string | null
     anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    editeur?: NullableStringFieldUpdateOperationsInput | string | null
     nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    categorieBiblio?: NullableEnumCategorieBiblioFieldUpdateOperationsInput | $Enums.CategorieBiblio | null
-    estEmpruntable?: BoolFieldUpdateOperationsInput | boolean
     nbExemplaires?: IntFieldUpdateOperationsInput | number
     nbDisponibles?: IntFieldUpdateOperationsInput | number
     coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntableExterne?: BoolFieldUpdateOperationsInput | boolean
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    necessiteAutorisation?: BoolFieldUpdateOperationsInput | boolean
+    categorieId?: StringFieldUpdateOperationsInput | string
   }
 
   export type FavoriUpdateWithoutUserInput = {
@@ -53728,9 +51544,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
+    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     ressource?: RessourceUpdateOneRequiredWithoutHistoriquesNestedInput
-    universiteSrcRel?: UniversiteUpdateOneWithoutHistoriqueAccesNestedInput
   }
 
   export type HistoriqueAccesUncheckedUpdateWithoutUserInput = {
@@ -53755,7 +51571,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     ressources?: CollectionRessourceUpdateManyWithoutCollectionNestedInput
   }
@@ -53764,7 +51579,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     ressources?: CollectionRessourceUncheckedUpdateManyWithoutCollectionNestedInput
   }
@@ -53773,7 +51587,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    estPublique?: BoolFieldUpdateOperationsInput | boolean
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -53784,8 +51597,8 @@ export namespace Prisma {
     dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
     statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     ressource?: RessourceUpdateOneRequiredWithoutReservationsNestedInput
-    universiteEmprunteurRel?: UniversiteUpdateOneRequiredWithoutReservationsNestedInput
     valideur?: BibliothecaireUpdateOneWithoutReservationsNestedInput
   }
 
@@ -53820,11 +51633,10 @@ export namespace Prisma {
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
     exemplaire?: ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntsNestedInput
-    universiteEmprunteurRel?: UniversiteUpdateOneRequiredWithoutEmpruntsNestedInput
     SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
   }
 
@@ -53837,7 +51649,6 @@ export namespace Prisma {
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
     SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
@@ -53852,7 +51663,6 @@ export namespace Prisma {
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    estEmpruntExterne?: BoolFieldUpdateOperationsInput | boolean
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -53864,8 +51674,8 @@ export namespace Prisma {
     motif?: EnumMotifRecommandationFieldUpdateOperationsInput | $Enums.MotifRecommandation
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
+    universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
     ressource?: RessourceUpdateOneRequiredWithoutRecommandationsNestedInput
-    universiteSourceRel?: UniversiteUpdateOneWithoutRecommandationsSourceNestedInput
   }
 
   export type RecommandationUncheckedUpdateWithoutUserInput = {
@@ -54133,9 +51943,9 @@ export namespace Prisma {
     dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
     statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneWithoutReservationsNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutReservationsNestedInput
-    universiteEmprunteurRel?: UniversiteUpdateOneRequiredWithoutReservationsNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutValideurInput = {
@@ -54240,9 +52050,9 @@ export namespace Prisma {
     disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
-    estReservableExterne?: boolean | null
-    estEmpruntableExterne?: boolean | null
     qrCode?: string | null
+    dureeMaxEmpruntExterne?: number
+    nbMaxExemplairesExterne?: number
   }
 
   export type ReservationCreateManyRessourceInput = {
@@ -54274,17 +52084,6 @@ export namespace Prisma {
     score: number
     typeInteraction: $Enums.TypeInteraction
     dateDonnee?: Date | string
-  }
-
-  export type TransactionBlockchainCreateManyRessourceInput = {
-    id?: string
-    referenceBlockchain: string
-    typeTransaction: $Enums.TypeTransaction
-    universiteOrigine: string
-    universiteDestination?: string | null
-    dateTransaction?: Date | string
-    statut: $Enums.StatutTransaction
-    hashTransaction: string
   }
 
   export type NotificationCreateManyRessourceInput = {
@@ -54382,9 +52181,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
+    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutHistoriquesNestedInput
-    universiteSrcRel?: UniversiteUpdateOneWithoutHistoriqueAccesNestedInput
   }
 
   export type HistoriqueAccesUncheckedUpdateWithoutRessourceInput = {
@@ -54433,9 +52232,9 @@ export namespace Prisma {
     disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estReservableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    estEmpruntableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
+    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
     emprunts?: EmpruntUpdateManyWithoutExemplaireNestedInput
   }
 
@@ -54446,9 +52245,9 @@ export namespace Prisma {
     disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estReservableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    estEmpruntableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
+    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
     emprunts?: EmpruntUncheckedUpdateManyWithoutExemplaireNestedInput
   }
 
@@ -54459,9 +52258,9 @@ export namespace Prisma {
     disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estReservableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    estEmpruntableExterne?: NullableBoolFieldUpdateOperationsInput | boolean | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
+    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
   }
 
   export type ReservationUpdateWithoutRessourceInput = {
@@ -54471,8 +52270,8 @@ export namespace Prisma {
     dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
     statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneWithoutReservationsNestedInput
-    universiteEmprunteurRel?: UniversiteUpdateOneRequiredWithoutReservationsNestedInput
     valideur?: BibliothecaireUpdateOneWithoutReservationsNestedInput
   }
 
@@ -54507,8 +52306,8 @@ export namespace Prisma {
     motif?: EnumMotifRecommandationFieldUpdateOperationsInput | $Enums.MotifRecommandation
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
+    universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutRecommandationsNestedInput
-    universiteSourceRel?: UniversiteUpdateOneWithoutRecommandationsSourceNestedInput
   }
 
   export type RecommandationUncheckedUpdateWithoutRessourceInput = {
@@ -54557,39 +52356,6 @@ export namespace Prisma {
     dateDonnee?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TransactionBlockchainUpdateWithoutRessourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-    universiteOrigineRel?: UniversiteUpdateOneRequiredWithoutTransactionsOrigineNestedInput
-    universiteDestinationRel?: UniversiteUpdateOneWithoutTransactionsDestinationNestedInput
-  }
-
-  export type TransactionBlockchainUncheckedUpdateWithoutRessourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    universiteOrigine?: StringFieldUpdateOperationsInput | string
-    universiteDestination?: NullableStringFieldUpdateOperationsInput | string | null
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TransactionBlockchainUncheckedUpdateManyWithoutRessourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referenceBlockchain?: StringFieldUpdateOperationsInput | string
-    typeTransaction?: EnumTypeTransactionFieldUpdateOperationsInput | $Enums.TypeTransaction
-    universiteOrigine?: StringFieldUpdateOperationsInput | string
-    universiteDestination?: NullableStringFieldUpdateOperationsInput | string | null
-    dateTransaction?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutTransactionFieldUpdateOperationsInput | $Enums.StatutTransaction
-    hashTransaction?: StringFieldUpdateOperationsInput | string
-  }
-
   export type NotificationUpdateWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
@@ -54618,6 +52384,146 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
+  }
+
+  export type RessourceCreateManyCategorieInput = {
+    id?: string
+    titre: string
+    description: string
+    type: $Enums.TypeRessource
+    langue?: string
+    urlFichier: string
+    urlFichierLocal?: string | null
+    format: string
+    dateModification?: Date | string
+    motsCles: string
+    auteurId?: string | null
+    universiteId: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    estValide?: boolean
+    estArchive?: boolean
+    nomAuteurExterne?: string | null
+    prenomAuteurExterne?: string | null
+    validation?: $Enums.TypeValidation
+    isbn?: string | null
+    doi?: string | null
+    anneePublication?: number | null
+    nbPages?: number | null
+    nbExemplaires?: number
+    nbDisponibles?: number
+    coteClassification?: string | null
+  }
+
+  export type RessourceUpdateWithoutCategorieInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
+    langue?: StringFieldUpdateOperationsInput | string
+    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
+    format?: StringFieldUpdateOperationsInput | string
+    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
+    isbn?: NullableStringFieldUpdateOperationsInput | string | null
+    doi?: NullableStringFieldUpdateOperationsInput | string | null
+    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
+    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
+    nbExemplaires?: IntFieldUpdateOperationsInput | number
+    nbDisponibles?: IntFieldUpdateOperationsInput | number
+    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    favoris?: FavoriUpdateManyWithoutRessourceNestedInput
+    commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
+    notations?: NotationUpdateManyWithoutRessourceNestedInput
+    historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
+    collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
+    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
+    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
+    recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
+    donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
+    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
+  }
+
+  export type RessourceUncheckedUpdateWithoutCategorieInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
+    langue?: StringFieldUpdateOperationsInput | string
+    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
+    format?: StringFieldUpdateOperationsInput | string
+    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
+    isbn?: NullableStringFieldUpdateOperationsInput | string | null
+    doi?: NullableStringFieldUpdateOperationsInput | string | null
+    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
+    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
+    nbExemplaires?: IntFieldUpdateOperationsInput | number
+    nbDisponibles?: IntFieldUpdateOperationsInput | number
+    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
+    favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
+    commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
+    notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
+    historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
+    collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
+    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
+    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
+    recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
+    donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
+  }
+
+  export type RessourceUncheckedUpdateManyWithoutCategorieInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
+    langue?: StringFieldUpdateOperationsInput | string
+    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
+    format?: StringFieldUpdateOperationsInput | string
+    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteId?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estValide?: BoolFieldUpdateOperationsInput | boolean
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
+    isbn?: NullableStringFieldUpdateOperationsInput | string | null
+    doi?: NullableStringFieldUpdateOperationsInput | string | null
+    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
+    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
+    nbExemplaires?: IntFieldUpdateOperationsInput | number
+    nbDisponibles?: IntFieldUpdateOperationsInput | number
+    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

@@ -9,30 +9,24 @@ export declare class EtudiantController {
         message: string;
         data: {
             user: {
-                universite: {
-                    nom: string;
-                    id: string;
-                    ville: string;
-                    pays: string;
-                };
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
+            numeroEtudiant: string;
             dateNaissance: Date;
+            dateInscription: Date;
             departement: string | null;
             faculte: string | null;
             specialite: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-            numeroEtudiant: string;
-            dateInscription: Date;
         };
     } | {
         success: boolean;
@@ -52,31 +46,25 @@ export declare class EtudiantController {
         success: boolean;
         data: ({
             user: {
-                universite: {
-                    nom: string;
-                    id: string;
-                    ville: string;
-                    pays: string;
-                };
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
+            numeroEtudiant: string;
             dateNaissance: Date;
+            dateInscription: Date;
             departement: string | null;
             faculte: string | null;
             specialite: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-            numeroEtudiant: string;
-            dateInscription: Date;
         })[];
         pagination: {
             page: number;
@@ -94,31 +82,25 @@ export declare class EtudiantController {
         success: boolean;
         data: {
             user: {
-                universite: {
-                    nom: string;
-                    id: string;
-                    ville: string;
-                    pays: string;
-                };
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
+            numeroEtudiant: string;
             dateNaissance: Date;
+            dateInscription: Date;
             departement: string | null;
             faculte: string | null;
             specialite: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-            numeroEtudiant: string;
-            dateInscription: Date;
         };
     } | {
         success: boolean;
@@ -130,31 +112,25 @@ export declare class EtudiantController {
         success: boolean;
         data: {
             user: {
-                universite: {
-                    nom: string;
-                    id: string;
-                    ville: string;
-                    pays: string;
-                };
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
+            numeroEtudiant: string;
             dateNaissance: Date;
+            dateInscription: Date;
             departement: string | null;
             faculte: string | null;
             specialite: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-            numeroEtudiant: string;
-            dateInscription: Date;
         };
     } | {
         success: boolean;
@@ -166,31 +142,25 @@ export declare class EtudiantController {
         success: boolean;
         data: {
             user: {
-                universite: {
-                    nom: string;
-                    id: string;
-                    ville: string;
-                    pays: string;
-                };
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
+            numeroEtudiant: string;
             dateNaissance: Date;
+            dateInscription: Date;
             departement: string | null;
             faculte: string | null;
             specialite: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-            numeroEtudiant: string;
-            dateInscription: Date;
         };
     } | {
         success: boolean;
@@ -206,30 +176,24 @@ export declare class EtudiantController {
         message: string;
         data: {
             user: {
-                universite: {
-                    nom: string;
-                    id: string;
-                    ville: string;
-                    pays: string;
-                };
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
+            numeroEtudiant: string;
             dateNaissance: Date;
+            dateInscription: Date;
             departement: string | null;
             faculte: string | null;
             specialite: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-            numeroEtudiant: string;
-            dateInscription: Date;
         };
     } | {
         success: boolean;

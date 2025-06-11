@@ -9,12 +9,6 @@ export declare class RessourcesService {
     findAll(options?: SearchRessourceDto): Promise<{
         data: {
             noteMoyenne: number;
-            universite: {
-                nom: string;
-                id: string;
-                ville: string;
-                pays: string;
-            };
             _count: {
                 favoris: number;
                 commentaires: number;
@@ -22,22 +16,21 @@ export declare class RessourcesService {
                 historiques: number;
             };
             auteur: {
+                id: string;
                 nom: string;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
             } | null;
+            id: string;
             image: string | null;
             universiteId: string;
+            titre: string;
             description: string;
             type: import("generated/prisma").$Enums.TypeRessource;
-            format: string;
-            id: string;
-            dateCreation: Date;
-            titre: string;
             langue: string;
             urlFichier: string;
             urlFichierLocal: string | null;
+            format: string;
             dateModification: Date;
             motsCles: string;
             auteurId: string | null;
@@ -47,23 +40,15 @@ export declare class RessourcesService {
             estArchive: boolean;
             nomAuteurExterne: string | null;
             prenomAuteurExterne: string | null;
-            affiliationAuteurExterne: string | null;
             validation: import("generated/prisma").$Enums.TypeValidation;
             isbn: string | null;
             doi: string | null;
-            edition: string | null;
             anneePublication: number | null;
-            editeur: string | null;
             nbPages: number | null;
-            categorieBiblio: import("generated/prisma").$Enums.CategorieBiblio | null;
-            estEmpruntable: boolean;
             nbExemplaires: number;
             nbDisponibles: number;
             coteClassification: string | null;
-            estEmpruntableExterne: boolean;
-            dureeMaxEmpruntExterne: number;
-            nbMaxExemplairesExterne: number;
-            necessiteAutorisation: boolean;
+            categorieId: string;
         }[];
         meta: {
             total: number;
@@ -73,24 +58,17 @@ export declare class RessourcesService {
         };
     }>;
     findOne(id: string): Promise<{
-        noteMoyenne: number;
-        universite: {
-            nom: string;
-            id: string;
-            ville: string;
-            pays: string;
-        };
         commentaires: ({
             user: {
+                id: string;
                 nom: string;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
             };
         } & {
             id: string;
-            dateCreation: Date;
             userId: string;
+            dateCreation: Date;
             ressourceId: string;
             universiteSrc: string | null;
             universiteUser: string | null;
@@ -108,22 +86,21 @@ export declare class RessourcesService {
             historiques: number;
         };
         auteur: {
+            id: string;
             nom: string;
             prenom: string;
             role: import("generated/prisma").$Enums.RoleUser;
-            id: string;
         } | null;
+        id: string;
         image: string | null;
         universiteId: string;
+        titre: string;
         description: string;
         type: import("generated/prisma").$Enums.TypeRessource;
-        format: string;
-        id: string;
-        dateCreation: Date;
-        titre: string;
         langue: string;
         urlFichier: string;
         urlFichierLocal: string | null;
+        format: string;
         dateModification: Date;
         motsCles: string;
         auteurId: string | null;
@@ -133,63 +110,43 @@ export declare class RessourcesService {
         estArchive: boolean;
         nomAuteurExterne: string | null;
         prenomAuteurExterne: string | null;
-        affiliationAuteurExterne: string | null;
         validation: import("generated/prisma").$Enums.TypeValidation;
         isbn: string | null;
         doi: string | null;
-        edition: string | null;
         anneePublication: number | null;
-        editeur: string | null;
         nbPages: number | null;
-        categorieBiblio: import("generated/prisma").$Enums.CategorieBiblio | null;
-        estEmpruntable: boolean;
         nbExemplaires: number;
         nbDisponibles: number;
         coteClassification: string | null;
-        estEmpruntableExterne: boolean;
-        dureeMaxEmpruntExterne: number;
-        nbMaxExemplairesExterne: number;
-        necessiteAutorisation: boolean;
+        categorieId: string;
     }>;
     update(id: string, updateRessourceDto: UpdateRessourceDto): Promise<{
-        universite: {
-            nom: string;
-            id: string;
-            adresse: string | null;
-            ville: string;
-            pays: string;
-            siteWeb: string | null;
-            dateCreation: Date;
-            adresseBlockchain: string | null;
-            estActive: boolean;
-        };
         auteur: {
+            id: string;
             email: string;
             motDePasse: string;
             nom: string;
+            telephone: string | null;
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            universiteId: string;
-            id: string;
-            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
+            universiteId: string;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         } | null;
     } & {
+        id: string;
         image: string | null;
         universiteId: string;
+        titre: string;
         description: string;
         type: import("generated/prisma").$Enums.TypeRessource;
-        format: string;
-        id: string;
-        dateCreation: Date;
-        titre: string;
         langue: string;
         urlFichier: string;
         urlFichierLocal: string | null;
+        format: string;
         dateModification: Date;
         motsCles: string;
         auteurId: string | null;
@@ -199,23 +156,15 @@ export declare class RessourcesService {
         estArchive: boolean;
         nomAuteurExterne: string | null;
         prenomAuteurExterne: string | null;
-        affiliationAuteurExterne: string | null;
         validation: import("generated/prisma").$Enums.TypeValidation;
         isbn: string | null;
         doi: string | null;
-        edition: string | null;
         anneePublication: number | null;
-        editeur: string | null;
         nbPages: number | null;
-        categorieBiblio: import("generated/prisma").$Enums.CategorieBiblio | null;
-        estEmpruntable: boolean;
         nbExemplaires: number;
         nbDisponibles: number;
         coteClassification: string | null;
-        estEmpruntableExterne: boolean;
-        dureeMaxEmpruntExterne: number;
-        nbMaxExemplairesExterne: number;
-        necessiteAutorisation: boolean;
+        categorieId: string;
     }>;
     remove(id: string): Promise<{
         id: string;
@@ -224,12 +173,6 @@ export declare class RessourcesService {
     findByAuteur(auteurId: string, options?: SearchRessourceDto): Promise<{
         data: {
             noteMoyenne: number;
-            universite: {
-                nom: string;
-                id: string;
-                ville: string;
-                pays: string;
-            };
             _count: {
                 favoris: number;
                 commentaires: number;
@@ -237,22 +180,21 @@ export declare class RessourcesService {
                 historiques: number;
             };
             auteur: {
+                id: string;
                 nom: string;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
             } | null;
+            id: string;
             image: string | null;
             universiteId: string;
+            titre: string;
             description: string;
             type: import("generated/prisma").$Enums.TypeRessource;
-            format: string;
-            id: string;
-            dateCreation: Date;
-            titre: string;
             langue: string;
             urlFichier: string;
             urlFichierLocal: string | null;
+            format: string;
             dateModification: Date;
             motsCles: string;
             auteurId: string | null;
@@ -262,23 +204,15 @@ export declare class RessourcesService {
             estArchive: boolean;
             nomAuteurExterne: string | null;
             prenomAuteurExterne: string | null;
-            affiliationAuteurExterne: string | null;
             validation: import("generated/prisma").$Enums.TypeValidation;
             isbn: string | null;
             doi: string | null;
-            edition: string | null;
             anneePublication: number | null;
-            editeur: string | null;
             nbPages: number | null;
-            categorieBiblio: import("generated/prisma").$Enums.CategorieBiblio | null;
-            estEmpruntable: boolean;
             nbExemplaires: number;
             nbDisponibles: number;
             coteClassification: string | null;
-            estEmpruntableExterne: boolean;
-            dureeMaxEmpruntExterne: number;
-            nbMaxExemplairesExterne: number;
-            necessiteAutorisation: boolean;
+            categorieId: string;
         }[];
         meta: {
             total: number;
@@ -290,12 +224,6 @@ export declare class RessourcesService {
     findByUniversite(universiteId: string, options?: SearchRessourceDto): Promise<{
         data: {
             noteMoyenne: number;
-            universite: {
-                nom: string;
-                id: string;
-                ville: string;
-                pays: string;
-            };
             _count: {
                 favoris: number;
                 commentaires: number;
@@ -303,22 +231,21 @@ export declare class RessourcesService {
                 historiques: number;
             };
             auteur: {
+                id: string;
                 nom: string;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
             } | null;
+            id: string;
             image: string | null;
             universiteId: string;
+            titre: string;
             description: string;
             type: import("generated/prisma").$Enums.TypeRessource;
-            format: string;
-            id: string;
-            dateCreation: Date;
-            titre: string;
             langue: string;
             urlFichier: string;
             urlFichierLocal: string | null;
+            format: string;
             dateModification: Date;
             motsCles: string;
             auteurId: string | null;
@@ -328,23 +255,15 @@ export declare class RessourcesService {
             estArchive: boolean;
             nomAuteurExterne: string | null;
             prenomAuteurExterne: string | null;
-            affiliationAuteurExterne: string | null;
             validation: import("generated/prisma").$Enums.TypeValidation;
             isbn: string | null;
             doi: string | null;
-            edition: string | null;
             anneePublication: number | null;
-            editeur: string | null;
             nbPages: number | null;
-            categorieBiblio: import("generated/prisma").$Enums.CategorieBiblio | null;
-            estEmpruntable: boolean;
             nbExemplaires: number;
             nbDisponibles: number;
             coteClassification: string | null;
-            estEmpruntableExterne: boolean;
-            dureeMaxEmpruntExterne: number;
-            nbMaxExemplairesExterne: number;
-            necessiteAutorisation: boolean;
+            categorieId: string;
         }[];
         meta: {
             total: number;
@@ -354,17 +273,16 @@ export declare class RessourcesService {
         };
     }>;
     toggleValidation(id: string): Promise<{
+        id: string;
         image: string | null;
         universiteId: string;
+        titre: string;
         description: string;
         type: import("generated/prisma").$Enums.TypeRessource;
-        format: string;
-        id: string;
-        dateCreation: Date;
-        titre: string;
         langue: string;
         urlFichier: string;
         urlFichierLocal: string | null;
+        format: string;
         dateModification: Date;
         motsCles: string;
         auteurId: string | null;
@@ -374,36 +292,27 @@ export declare class RessourcesService {
         estArchive: boolean;
         nomAuteurExterne: string | null;
         prenomAuteurExterne: string | null;
-        affiliationAuteurExterne: string | null;
         validation: import("generated/prisma").$Enums.TypeValidation;
         isbn: string | null;
         doi: string | null;
-        edition: string | null;
         anneePublication: number | null;
-        editeur: string | null;
         nbPages: number | null;
-        categorieBiblio: import("generated/prisma").$Enums.CategorieBiblio | null;
-        estEmpruntable: boolean;
         nbExemplaires: number;
         nbDisponibles: number;
         coteClassification: string | null;
-        estEmpruntableExterne: boolean;
-        dureeMaxEmpruntExterne: number;
-        nbMaxExemplairesExterne: number;
-        necessiteAutorisation: boolean;
+        categorieId: string;
     }>;
     toggleArchivage(id: string): Promise<{
+        id: string;
         image: string | null;
         universiteId: string;
+        titre: string;
         description: string;
         type: import("generated/prisma").$Enums.TypeRessource;
-        format: string;
-        id: string;
-        dateCreation: Date;
-        titre: string;
         langue: string;
         urlFichier: string;
         urlFichierLocal: string | null;
+        format: string;
         dateModification: Date;
         motsCles: string;
         auteurId: string | null;
@@ -413,23 +322,15 @@ export declare class RessourcesService {
         estArchive: boolean;
         nomAuteurExterne: string | null;
         prenomAuteurExterne: string | null;
-        affiliationAuteurExterne: string | null;
         validation: import("generated/prisma").$Enums.TypeValidation;
         isbn: string | null;
         doi: string | null;
-        edition: string | null;
         anneePublication: number | null;
-        editeur: string | null;
         nbPages: number | null;
-        categorieBiblio: import("generated/prisma").$Enums.CategorieBiblio | null;
-        estEmpruntable: boolean;
         nbExemplaires: number;
         nbDisponibles: number;
         coteClassification: string | null;
-        estEmpruntableExterne: boolean;
-        dureeMaxEmpruntExterne: number;
-        nbMaxExemplairesExterne: number;
-        necessiteAutorisation: boolean;
+        categorieId: string;
     }>;
     enregistrerAcces(data: {
         userId: string;

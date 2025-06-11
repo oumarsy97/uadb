@@ -18,6 +18,10 @@ const collections_module_1 = require("./collections/collections.module");
 const universite_module_1 = require("./universite/universite.module");
 const convention_module_1 = require("./convention/convention.module");
 const etudiant_module_1 = require("./etudiant/etudiant.module");
+const categorie_module_1 = require("./categorie/categorie.module");
+const ufr_module_1 = require("./ufr/ufr.module");
+const departement_module_1 = require("./departement/departement.module");
+const filiere_module_1 = require("./filiere/filiere.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -32,6 +36,10 @@ exports.AppModule = AppModule = __decorate([
             universite_module_1.UniversiteModule,
             convention_module_1.ConventionModule,
             etudiant_module_1.EtudiantModule,
+            categorie_module_1.CategorieModule,
+            ufr_module_1.UfrModule,
+            departement_module_1.DepartementModule,
+            filiere_module_1.FiliereModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService,],

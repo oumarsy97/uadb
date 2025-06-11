@@ -123,7 +123,6 @@ export class UtilisateursService {
         where,
         skip,
         take: +limit,
-        include: { universite: true },
       }),
       this.prisma.user.count({ where }),
     ]);
@@ -144,7 +143,6 @@ export class UtilisateursService {
   async findOne(id: string) {
     const user = await this.prisma.user.findUnique({
       where: { id },
-      include: { universite: true },
     });
 
     if (!user) {
@@ -158,7 +156,6 @@ export class UtilisateursService {
   async findByEmail(email: string) {
     const user = await this.prisma.user.findUnique({
       where: { email },
-      include: { universite: true },
     });
 
     if (!user) {
@@ -195,7 +192,6 @@ export class UtilisateursService {
     const updatedUser = await this.prisma.user.update({
       where: { id },
       data: dataToUpdate,
-      include: { universite: true },
     });
 
     const { motDePasse, ...userWithoutPassword } = updatedUser;

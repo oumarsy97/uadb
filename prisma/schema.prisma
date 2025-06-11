@@ -10,6 +10,7 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+// Modèle pour les transactions inter-universitaires
 
 // Modèle pour les conventions entre universités
 model ConventionInteruniversitaire {
@@ -120,7 +121,6 @@ model Reservation {
   validePar         String?             @map("valide_par") // ID de l'administrateur qui a validé la réservation externe
   user              User?                @relation(fields: [userId], references: [id])
   ressource         Ressource           @relation(fields: [ressourceId], references: [id])
-  universiteEmprunteurRel Universite    @relation("UniversiteReservation", fields: [universiteEmprunteur], references: [id])
   valideur Bibliothecaire? @relation(fields: [validePar], references: [id]) // ID de l'administrateur qui a validé la réservation
   
   @@index([dateDebut, dateFin]) // Index pour optimiser les recherches par date
@@ -208,7 +208,6 @@ model Recommandation {
 
   user              User                 @relation(fields: [userId], references: [id])
   ressource         Ressource            @relation(fields: [ressourceId], references: [id])
-  universiteSourceRel Universite?        @relation("UniversiteRecommandation", fields: [universiteSource], references: [id])
   
   @@index([userId, estVue])
   @@index([ressourceId])
@@ -227,26 +226,52 @@ model Universite {
   nom               String   @unique
   adresse           String?
   ville             String
-  pays              String
   siteWeb           String?  @map("site_web")
-  dateCreation      DateTime @default(now()) @map("date_creation")
-  adresseBlockchain String?  @map("adresse_blockchain")
-  estActive         Boolean  @default(true) @map("est_active")
-
-  // Relations existantes
-  users             User[]
-  ressources        Ressource[]
-  
   // Relations manquantes
-  reservations      Reservation[] @relation("UniversiteReservation")
-  recommandationsSource Recommandation[] @relation("UniversiteRecommandation")
-  // Relations avec les statistiques biblio
   statistiquesBibliotheque StatistiqueBibliotheque[]
-  HistoriqueAcces HistoriqueAcces[] @relation("UniversiteHistoriqueAcces")
-
   reglePrets ReglePret[]
 
   politiqueBibliotheques PolitiqueBibliotheque[]
+
+  ufrs Ufr[]
+}
+
+model Ufr {
+  id                String   @id @default(uuid())
+  nom               String
+  description       String?  @db.Text
+  universiteId      String   @map("universite_id")
+  
+  // Relations
+  universite        Universite @relation(fields: [universiteId], references: [id])
+  
+  @@index([universiteId])
+  departements     Departement[]
+}
+
+model Departement {
+  id                String   @id @default(uuid())
+  nom               String
+  description       String?  @db.Text
+  ufrId             String   @map("ufr_id")
+  
+  // Relations
+  ufr               Ufr      @relation(fields: [ufrId], references: [id])
+  
+  @@index([ufrId])
+  filieres         Filiere[]
+}
+
+model Filiere {
+  id                String   @id @default(uuid())
+  nom               String
+  description       String?  @db.Text
+  departementId     String   @map("departement_id")
+
+  // Relations
+  departement       Departement @relation(fields: [departementId], references: [id])
+
+  @@index([departementId])
 }
 
 enum RoleUser {
@@ -271,7 +296,6 @@ model User {
   universiteId      String         @map("universite_id")
   
   // Relations existantesregle
-  universite        Universite     @relation(fields: [universiteId], references: [id])
   contributions     Ressource[]
   favoris           Favori[]
   commentaires      Commentaire[]
@@ -426,7 +450,6 @@ model HistoriqueAcces {
 
   user          User      @relation(fields: [userId], references: [id])
   ressource     Ressource @relation(fields: [ressourceId], references: [id])
-  universiteSrcRel Universite? @relation("UniversiteHistoriqueAcces", fields: [universiteSrc], references: [id])
   
   @@index([dateAcces])
   @@index([ressourceId, typeAcces])
@@ -461,7 +484,8 @@ enum TypeInteraction {
   TELECHARGEMENT
   FAVORI
   NOTATION
-  TEMPS_LECTURE
+  EMPRUNT
+  RESERVATION
   RECHERCHE_SIMILAIRE
 }
 
@@ -553,14 +577,12 @@ model Ressource {
   doi               String?
   anneePublication  Int?           @map("annee_publication")
   nbPages           Int?           @map("nb_pages")
-  categorieBiblio   CategorieBiblio? @map("categorie_biblio") @default(LIVRE)
   nbExemplaires     Int            @default(0) @map("nb_exemplaires")
   nbDisponibles     Int            @default(0) @map("nb_disponibles")
   coteClassification String?       @map("cote_classification") // Classification Dewey ou autre
   
   // Relations
   auteur            User?          @relation(fields: [auteurId], references: [id])
-  universite        Universite     @relation(fields: [universiteId], references: [id])
   
   favoris           Favori[]
   commentaires      Commentaire[]
@@ -575,7 +597,6 @@ model Ressource {
   notifications     Notification[]
   
   @@index([datePublication])
-  @@index([type, categorieBiblio])
   @@index([universiteId])
   @@index([estValide, estArchive])
   categorieId String
@@ -591,14 +612,7 @@ model Categorie {
   @@index([libelle])
 }
 
-enum CategorieBiblio {
-  LIVRE
-  MANUEL_SCOLAIRE
-  THESE_DOCTORAT
-  MEMOIRE_MASTER
-  MEMOIRE_LICENCE
-  RAPPORT_RECHERCHE
-}
+
 
 // Statistiques des prêts et réservations
 model StatistiqueBibliotheque {

@@ -32,28 +32,29 @@ export class RessourcesService {
     //     throw new BadRequestException('Vous devez spécifier soit un auteur interne (auteurId) ou un auteur externe (nom et prénom)');
     //   }
 
-      return this.prisma.ressource.create({
-        data: {
-          titre: createRessourceDto.titre,
-          description: createRessourceDto.description,
-          type: createRessourceDto.type,
-          langue: createRessourceDto.langue || 'fr',
-          urlFichier: createRessourceDto.urlFichier,
-          format: createRessourceDto.format,
-          motsCles: createRessourceDto.motsCles,
-          auteurId: createRessourceDto.auteurId,
-          universiteId: createRessourceDto.universiteId,
-          image: createRessourceDto.image,
-          niveauAcces: createRessourceDto.niveauAcces || 'PUBLIC',
-          nomAuteurExterne: createRessourceDto.nomAuteurExterne,
-          prenomAuteurExterne: createRessourceDto.prenomAuteurExterne,
-          affiliationAuteurExterne: createRessourceDto.affiliationAuteurExterne,
+      // Préparer l'objet data sans inclure auteurId si undefined
+      const data: any = {
+        titre: createRessourceDto.titre,
+        description: createRessourceDto.description,
+        type: createRessourceDto.type,
+        langue: createRessourceDto.langue || 'fr',
+        urlFichier: createRessourceDto.urlFichier,
+        format: createRessourceDto.format,
+        motsCles: createRessourceDto.motsCles,
+        universiteId: createRessourceDto.universiteId,
+        image: createRessourceDto.image,
+        niveauAcces: createRessourceDto.niveauAcces || 'PUBLIC',
         urlFichierLocal: createRessourceDto.urlFichierLocal,
-          datePublication: new Date(),
-        },
+        datePublication: new Date(),
+      };
+      if (createRessourceDto.auteurId) {
+        data.auteurId = createRessourceDto.auteurId;
+      }
+
+      return this.prisma.ressource.create({
+        data,
         include: {
           auteur: true,
-          universite: true,
         },
       });
     } catch (error) {
@@ -70,7 +71,6 @@ export class RessourcesService {
       type,
       langue,
       universiteId,
-      estPublique,
       niveauAcces,
       estValide,
       estArchive,
@@ -123,14 +123,7 @@ export class RessourcesService {
               role: true,
             },
           },
-          universite: {
-            select: {
-              id: true,
-              nom: true,
-              ville: true,
-              pays: true,
-            },
-          },
+          
           _count: {
             select: {
               favoris: true,
@@ -190,14 +183,7 @@ export class RessourcesService {
               role: true,
             },
           },
-          universite: {
-            select: {
-              id: true, 
-              nom: true,
-              ville: true,
-              pays: true,
-            },
-          },
+          
           commentaires: {
             include: {
               user: {
@@ -235,15 +221,10 @@ export class RessourcesService {
         throw new NotFoundException(`Ressource avec l'ID ${id} non trouvée`);
       }
 
-      // Calculer la note moyenne
-      const noteMoyenne =
-        ressource.notations.length > 0
-          ? ressource.notations.reduce((sum, notation) => sum + notation.note, 0) / ressource.notations.length
-          : 0;
+     
 
       return {
         ...ressource,
-        noteMoyenne: parseFloat(noteMoyenne.toFixed(1)),
       };
     } catch (error) {
       this.logger.error(`Erreur lors de la récupération de la ressource ${id}: ${error.message}`);
@@ -267,7 +248,6 @@ export class RessourcesService {
         data: updateRessourceDto,
         include: {
           auteur: true,
-          universite: true,
         },
       });
     } catch (error) {

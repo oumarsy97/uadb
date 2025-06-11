@@ -42,9 +42,6 @@ let UniversiteController = class UniversiteController {
     async getStatistics(id) {
         return this.universiteService.getStatistics(id);
     }
-    async toggleStatus(id) {
-        return this.universiteService.toggleStatus(id);
-    }
     async getTopUniversites(limit) {
         return this.universiteService.getTopUniversities(limit);
     }
@@ -92,13 +89,6 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UniversiteController.prototype, "getStatistics", null);
-__decorate([
-    (0, microservices_1.MessagePattern)('toggleUniversiteStatus'),
-    __param(0, (0, microservices_1.Payload)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], UniversiteController.prototype, "toggleStatus", null);
 __decorate([
     (0, microservices_1.MessagePattern)('getTopUniversitesByResources'),
     __param(0, (0, microservices_1.Payload)()),

@@ -94,7 +94,6 @@ let UtilisateursService = class UtilisateursService {
                 where,
                 skip,
                 take: +limit,
-                include: { universite: true },
             }),
             this.prisma.user.count({ where }),
         ]);
@@ -112,7 +111,6 @@ let UtilisateursService = class UtilisateursService {
     async findOne(id) {
         const user = await this.prisma.user.findUnique({
             where: { id },
-            include: { universite: true },
         });
         if (!user) {
             throw new common_1.HttpException('Utilisateur non trouvé.', common_1.HttpStatus.NOT_FOUND);
@@ -123,7 +121,6 @@ let UtilisateursService = class UtilisateursService {
     async findByEmail(email) {
         const user = await this.prisma.user.findUnique({
             where: { email },
-            include: { universite: true },
         });
         if (!user) {
             throw new common_1.HttpException('Utilisateur non trouvé.', common_1.HttpStatus.NOT_FOUND);
@@ -154,7 +151,6 @@ let UtilisateursService = class UtilisateursService {
         const updatedUser = await this.prisma.user.update({
             where: { id },
             data: dataToUpdate,
-            include: { universite: true },
         });
         const { motDePasse, ...userWithoutPassword } = updatedUser;
         return userWithoutPassword;

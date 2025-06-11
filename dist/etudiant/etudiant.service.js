@@ -76,14 +76,6 @@ let EtudiantService = class EtudiantService {
                             telephone: true,
                             role: true,
                             estActif: true,
-                            universite: {
-                                select: {
-                                    id: true,
-                                    nom: true,
-                                    ville: true,
-                                    pays: true
-                                }
-                            }
                         }
                     }
                 }
@@ -144,14 +136,6 @@ let EtudiantService = class EtudiantService {
                             role: true,
                             estActif: true,
                             derniereConnexion: true,
-                            universite: {
-                                select: {
-                                    id: true,
-                                    nom: true,
-                                    ville: true,
-                                    pays: true
-                                }
-                            }
                         }
                     }
                 },
@@ -186,14 +170,6 @@ let EtudiantService = class EtudiantService {
                         role: true,
                         estActif: true,
                         derniereConnexion: true,
-                        universite: {
-                            select: {
-                                id: true,
-                                nom: true,
-                                ville: true,
-                                pays: true
-                            }
-                        }
                     }
                 }
             }
@@ -220,14 +196,6 @@ let EtudiantService = class EtudiantService {
                         role: true,
                         estActif: true,
                         derniereConnexion: true,
-                        universite: {
-                            select: {
-                                id: true,
-                                nom: true,
-                                ville: true,
-                                pays: true
-                            }
-                        }
                     }
                 }
             }
@@ -254,14 +222,6 @@ let EtudiantService = class EtudiantService {
                         role: true,
                         estActif: true,
                         derniereConnexion: true,
-                        universite: {
-                            select: {
-                                id: true,
-                                nom: true,
-                                ville: true,
-                                pays: true
-                            }
-                        }
                     }
                 }
             }
@@ -312,14 +272,6 @@ let EtudiantService = class EtudiantService {
                             telephone: true,
                             role: true,
                             estActif: true,
-                            universite: {
-                                select: {
-                                    id: true,
-                                    nom: true,
-                                    ville: true,
-                                    pays: true
-                                }
-                            }
                         }
                     }
                 }
