@@ -10,9 +10,7 @@ export class CreateUniversiteDto {
   @IsNotEmpty()
   ville: string;
 
-  @IsString()
-  @IsNotEmpty()
-  pays: string;
+  
 
   @IsString()
   @IsOptional()
@@ -22,13 +20,6 @@ export class CreateUniversiteDto {
   @IsOptional()
   siteWeb?: string;
 
-  @IsString()
-  @IsOptional()
-  adresseBlockchain?: string;
-
-  @IsBoolean()
-  @IsOptional()
-  estActive?: boolean = true;
 }
 
 export class UpdateUniversiteDto {

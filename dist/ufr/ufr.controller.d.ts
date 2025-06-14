@@ -7,9 +7,9 @@ export declare class UfrController {
     create(createUfrDto: CreateUfrDto): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             universiteId: string;
         };
         message: string;
@@ -26,9 +26,9 @@ export declare class UfrController {
     }): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             universiteId: string;
         }[];
         meta: {
@@ -50,9 +50,9 @@ export declare class UfrController {
     }): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             universiteId: string;
         };
         message: string;
@@ -68,9 +68,9 @@ export declare class UfrController {
     }): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             universiteId: string;
         }[];
         message: string;
@@ -87,9 +87,9 @@ export declare class UfrController {
     }): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             universiteId: string;
         };
         message: string;
@@ -118,9 +118,9 @@ export declare class UfrController {
     }): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             universiteId: string;
         }[];
         message: string;

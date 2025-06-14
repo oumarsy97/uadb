@@ -21,11 +21,8 @@ class CreateEtudiantDto {
     image;
     role;
     dateNaissance;
-    departement;
-    faculte;
-    specialite;
     niveauEtudes;
-    universiteId;
+    filiereId;
 }
 exports.CreateEtudiantDto = CreateEtudiantDto;
 __decorate([
@@ -64,29 +61,14 @@ __decorate([
     __metadata("design:type", String)
 ], CreateEtudiantDto.prototype, "dateNaissance", void 0);
 __decorate([
-    (0, class_validator_1.IsString)({ message: 'Le département doit être une chaîne de caractères' }),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
-], CreateEtudiantDto.prototype, "departement", void 0);
-__decorate([
-    (0, class_validator_1.IsString)({ message: 'La faculté doit être une chaîne de caractères' }),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
-], CreateEtudiantDto.prototype, "faculte", void 0);
-__decorate([
-    (0, class_validator_1.IsString)({ message: 'La spécialité doit être une chaîne de caractères' }),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
-], CreateEtudiantDto.prototype, "specialite", void 0);
-__decorate([
     (0, class_validator_1.IsEnum)(prisma_1.NiveauEtudes, { message: 'Le niveau d\'études doit être valide (LICENCE, MASTER, DOCTORAT, POSTDOCTORAT)' }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], CreateEtudiantDto.prototype, "niveauEtudes", void 0);
 __decorate([
-    (0, class_validator_1.IsString)({ message: 'L\'ID de l\'université doit être une chaîne de caractères' }),
+    (0, class_validator_1.IsString)({ message: 'L\'ID de la filière doit être une chaîne de caractères' }),
     __metadata("design:type", String)
-], CreateEtudiantDto.prototype, "universiteId", void 0);
+], CreateEtudiantDto.prototype, "filiereId", void 0);
 class UpdateEtudiantDto {
     dateNaissance;
     departement;

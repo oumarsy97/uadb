@@ -12,24 +12,22 @@ export declare class EtudiantService {
         message: string;
         data: {
             user: {
-                id: string;
                 email: string;
                 nom: string;
-                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+                telephone: string | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
-            numeroEtudiant: string;
             dateNaissance: Date;
-            dateInscription: Date;
-            departement: string | null;
-            faculte: string | null;
-            specialite: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
+            filiereId: string;
+            numeroEtudiant: string;
+            dateInscription: Date;
         };
     }>;
     findAll(options: {
@@ -44,25 +42,23 @@ export declare class EtudiantService {
         success: boolean;
         data: ({
             user: {
-                id: string;
                 email: string;
                 nom: string;
-                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
-            numeroEtudiant: string;
             dateNaissance: Date;
-            dateInscription: Date;
-            departement: string | null;
-            faculte: string | null;
-            specialite: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
+            filiereId: string;
+            numeroEtudiant: string;
+            dateInscription: Date;
         })[];
         pagination: {
             page: number;
@@ -75,75 +71,69 @@ export declare class EtudiantService {
         success: boolean;
         data: {
             user: {
-                id: string;
                 email: string;
                 nom: string;
-                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
-            numeroEtudiant: string;
             dateNaissance: Date;
-            dateInscription: Date;
-            departement: string | null;
-            faculte: string | null;
-            specialite: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
+            filiereId: string;
+            numeroEtudiant: string;
+            dateInscription: Date;
         };
     }>;
     findByNumeroEtudiant(numeroEtudiant: string): Promise<{
         success: boolean;
         data: {
             user: {
-                id: string;
                 email: string;
                 nom: string;
-                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
-            numeroEtudiant: string;
             dateNaissance: Date;
-            dateInscription: Date;
-            departement: string | null;
-            faculte: string | null;
-            specialite: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
+            filiereId: string;
+            numeroEtudiant: string;
+            dateInscription: Date;
         };
     }>;
     findByUserId(etudiantId: string): Promise<{
         success: boolean;
         data: {
             user: {
-                id: string;
                 email: string;
                 nom: string;
-                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
-            numeroEtudiant: string;
             dateNaissance: Date;
-            dateInscription: Date;
-            departement: string | null;
-            faculte: string | null;
-            specialite: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
+            filiereId: string;
+            numeroEtudiant: string;
+            dateInscription: Date;
         };
     }>;
     update(id: string, updateEtudiantDto: UpdateEtudiantDto): Promise<{
@@ -151,24 +141,22 @@ export declare class EtudiantService {
         message: string;
         data: {
             user: {
-                id: string;
                 email: string;
                 nom: string;
-                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+                telephone: string | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
-            numeroEtudiant: string;
             dateNaissance: Date;
-            dateInscription: Date;
-            departement: string | null;
-            faculte: string | null;
-            specialite: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
+            filiereId: string;
+            numeroEtudiant: string;
+            dateInscription: Date;
         };
     }>;
     remove(id: string): Promise<{

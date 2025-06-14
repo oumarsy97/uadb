@@ -20,7 +20,6 @@ class CreateUtilisateurDto {
     prenom;
     image;
     role;
-    universiteId;
 }
 exports.CreateUtilisateurDto = CreateUtilisateurDto;
 __decorate([
@@ -48,10 +47,6 @@ __decorate([
     (0, class_validator_1.IsEnum)(prisma_1.RoleUser),
     __metadata("design:type", String)
 ], CreateUtilisateurDto.prototype, "role", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateUtilisateurDto.prototype, "universiteId", void 0);
 class LoginDataDto {
     email;
     motDePasse;

@@ -5,6 +5,9 @@ import { UtilisateursService } from './utilisateurs.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MailService } from '@sendgrid/mail';
+import { EmailModule } from 'src/meservices/mail/email.module';
+import { EmailService } from 'src/meservices/mail/email.service';
 
 @Module({
   controllers: [UtilisateursController],
@@ -24,7 +27,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       inject: [ConfigService],
     }),
   ],
-  providers: [UtilisateursService, PrismaService], // Retirez JwtService ici
+  providers: [UtilisateursService, PrismaService, EmailService], // Retirez JwtService ici
   exports: [UtilisateursService],
 })
 export class UtilisateursModule {}

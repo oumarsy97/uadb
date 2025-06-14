@@ -50,6 +50,7 @@ class UpdateDepartementDto {
     nom;
     description;
     ufrId;
+    responsable;
 }
 exports.UpdateDepartementDto = UpdateDepartementDto;
 __decorate([
@@ -80,4 +81,13 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UpdateDepartementDto.prototype, "ufrId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Responsable du département',
+        example: 'Jean Dupont'
+    }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], UpdateDepartementDto.prototype, "responsable", void 0);
 //# sourceMappingURL=create-departement.dto.js.map

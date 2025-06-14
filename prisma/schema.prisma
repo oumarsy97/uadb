@@ -254,7 +254,8 @@ model Departement {
   nom               String
   description       String?  @db.Text
   ufrId             String   @map("ufr_id")
-  
+  responsable       String?  @map("responsable") // Nom du responsable du département
+
   // Relations
   ufr               Ufr      @relation(fields: [ufrId], references: [id])
   
@@ -266,12 +267,23 @@ model Filiere {
   id                String   @id @default(uuid())
   nom               String
   description       String?  @db.Text
+  niveauEtudes      NiveauEtudes @map("niveau_etudes") @default(LICENCE_1)
   departementId     String   @map("departement_id")
-
   // Relations
   departement       Departement @relation(fields: [departementId], references: [id])
 
   @@index([departementId])
+  etudiants        Etudiant[]
+}
+
+enum NiveauEtudes {
+  LICENCE_1
+  LICENCE_2
+  LICENCE_3
+  MASTER_1
+  MASTER_2
+  DOCTORAT
+  
 }
 
 enum RoleUser {
@@ -293,7 +305,6 @@ model User {
   role              RoleUser       @map("role")
   derniereConnexion DateTime?      @map("derniere_connexion")
   estActif          Boolean        @default(true) @map("est_actif")
-  universiteId      String         @map("universite_id")
   
   // Relations existantesregle
   contributions     Ressource[]
@@ -317,7 +328,6 @@ model User {
   administrateurs Administrateur[]
   @@index([preferencesRecommandation])
   @@index([frequenceRecommandation])
-  @@index([universiteId])
   @@index([role])
   @@index([email])
   sanctions SanctionUtilisateur[]
@@ -329,22 +339,15 @@ model Etudiant {
   numeroEtudiant    String         @unique @map("numero_etudiant")
   dateNaissance     DateTime       @map("date_naissance")
   dateInscription   DateTime       @default(now()) @map("date_inscription")
-  departement       String?
-  faculte           String?
-  specialite        String?
-  niveauEtudes      NiveauEtudes @map("niveau_etudes")@default(LICENCE)
+  niveauEtudes      NiveauEtudes @map("niveau_etudes")@default(LICENCE_1)
   user              User           @relation(fields: [userId], references: [id])
+  filiereId         String        @map("filiere_id")
+  filiere           Filiere      @relation(fields: [filiereId], references: [id])
   
   @@index([userId])
-  @@index([departement])
 }
 
-enum NiveauEtudes {
-  LICENCE
-  MASTER
-  DOCTORAT
-  POSTDOCTORAT
-}
+
 model Enseignant {
   id                String         @id @default(uuid())
   userId            String         @map("user_id")
@@ -553,36 +556,25 @@ model Ressource {
   // Champs existants
   id                String         @id @default(uuid())
   titre             String
+  isbnglobale       String @map("isbn_globale") @unique
   description       String         @db.Text
-  type              TypeRessource
   langue            String         @default("fr")
   urlFichier        String         @map("url_fichier")
   urlFichierLocal   String?        @map("url_fichier_local") @default("file:///tmp/ressource.pdf")
   format            String         // pdf, docx, etc.
-  dateModification  DateTime       @updatedAt @map("date_modification")
-  motsCles          String         @map("mots_cles")
-  auteurId          String?        @map("auteur_id")
-  universiteId      String         @map("universite_id")
   image             String?
   niveauAcces       NiveauAcces    @default(PUBLIC) @map("niveau_acces")
   datePublication   DateTime?      @map("date_publication") @default(now())
   estValide         Boolean        @default(true) @map("est_valide")
+  motsCles          String         @map("mots_cles")
+  auteurId          String        @map("auteur_id")
+  universiteId      String         @map("universite_id")
   estArchive        Boolean        @default(false) @map("est_archive")
-  nomAuteurExterne  String?        @map("nom_auteur_externe")
-  prenomAuteurExterne String?      @map("prenom_auteur_externe")
   validation      TypeValidation @default(EN_ATTENTE) @map("validation")
   
-  // Champs pour bibliothèque
-  isbn              String?
-  doi               String?
-  anneePublication  Int?           @map("annee_publication")
-  nbPages           Int?           @map("nb_pages")
-  nbExemplaires     Int            @default(0) @map("nb_exemplaires")
-  nbDisponibles     Int            @default(0) @map("nb_disponibles")
-  coteClassification String?       @map("cote_classification") // Classification Dewey ou autre
-  
+
   // Relations
-  auteur            User?          @relation(fields: [auteurId], references: [id])
+  auteur            User          @relation(fields: [auteurId], references: [id])
   
   favoris           Favori[]
   commentaires      Commentaire[]
@@ -594,7 +586,6 @@ model Ressource {
   reservations      Reservation[]
   recommandations   Recommandation[]
   donneesRecommandations DonneesRecommandation[]
-  notifications     Notification[]
   
   @@index([datePublication])
   @@index([universiteId])
@@ -645,10 +636,8 @@ model Notification {
   dateCreation      DateTime          @default(now()) @map("date_creation")
   estLue            Boolean           @default(false)  @map("est_lue")
   typeNotification  TypeNotification
-  ressourceId       String?           @map("ressource_id")
   
   user              User              @relation(fields: [userId], references: [id])
-  ressource         Ressource?        @relation(fields: [ressourceId], references: [id])
   
   @@index([userId, estLue])
   @@index([dateCreation])

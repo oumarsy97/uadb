@@ -51,9 +51,10 @@ export class EtudiantService {
         derniereConnexion: new Date(),
         estValide: true,
         estActif: true,
-        universiteId: createEtudiantDto.universiteId,
         motDePasse: 'MotDePasse123', // Assurez-vous que le mot de passe est hashé avant de l'envoyer
         role: RoleUser.ETUDIANT,
+        telephone: createEtudiantDto.telephone || null,
+        image: createEtudiantDto.image || 'https://example.com/default-avatar.png', // URL par défaut pour l'image
 
       };
 
@@ -72,10 +73,8 @@ export class EtudiantService {
           userId: user.id,
           numeroEtudiant,
           dateNaissance: new Date(createEtudiantDto.dateNaissance),
-          departement: createEtudiantDto.departement,
-          faculte: createEtudiantDto.faculte,
-          specialite: createEtudiantDto.specialite,
-          niveauEtudes: createEtudiantDto.niveauEtudes || NiveauEtudes.LICENCE,
+          niveauEtudes: createEtudiantDto.niveauEtudes || NiveauEtudes.LICENCE_1,
+          filiereId: createEtudiantDto.filiereId,
         },
         include: {
           user: {

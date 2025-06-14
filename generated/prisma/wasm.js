@@ -231,13 +231,15 @@ exports.Prisma.DepartementScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
   description: 'description',
-  ufrId: 'ufrId'
+  ufrId: 'ufrId',
+  responsable: 'responsable'
 };
 
 exports.Prisma.FiliereScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
   description: 'description',
+  niveauEtudes: 'niveauEtudes',
   departementId: 'departementId'
 };
 
@@ -252,7 +254,6 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role',
   derniereConnexion: 'derniereConnexion',
   estActif: 'estActif',
-  universiteId: 'universiteId',
   preferencesRecommandation: 'preferencesRecommandation',
   frequenceRecommandation: 'frequenceRecommandation'
 };
@@ -263,10 +264,8 @@ exports.Prisma.EtudiantScalarFieldEnum = {
   numeroEtudiant: 'numeroEtudiant',
   dateNaissance: 'dateNaissance',
   dateInscription: 'dateInscription',
-  departement: 'departement',
-  faculte: 'faculte',
-  specialite: 'specialite',
-  niveauEtudes: 'niveauEtudes'
+  niveauEtudes: 'niveauEtudes',
+  filiereId: 'filiereId'
 };
 
 exports.Prisma.EnseignantScalarFieldEnum = {
@@ -422,8 +421,7 @@ exports.Prisma.NotificationScalarFieldEnum = {
   message: 'message',
   dateCreation: 'dateCreation',
   estLue: 'estLue',
-  typeNotification: 'typeNotification',
-  ressourceId: 'ressourceId'
+  typeNotification: 'typeNotification'
 };
 
 exports.Prisma.JournalAuditScalarFieldEnum = {
@@ -531,7 +529,8 @@ exports.Prisma.DepartementOrderByRelevanceFieldEnum = {
   id: 'id',
   nom: 'nom',
   description: 'description',
-  ufrId: 'ufrId'
+  ufrId: 'ufrId',
+  responsable: 'responsable'
 };
 
 exports.Prisma.FiliereOrderByRelevanceFieldEnum = {
@@ -549,7 +548,6 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   telephone: 'telephone',
   prenom: 'prenom',
   image: 'image',
-  universiteId: 'universiteId',
   preferencesRecommandation: 'preferencesRecommandation'
 };
 
@@ -557,9 +555,7 @@ exports.Prisma.EtudiantOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
   numeroEtudiant: 'numeroEtudiant',
-  departement: 'departement',
-  faculte: 'faculte',
-  specialite: 'specialite'
+  filiereId: 'filiereId'
 };
 
 exports.Prisma.EnseignantOrderByRelevanceFieldEnum = {
@@ -678,8 +674,7 @@ exports.Prisma.NotificationOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
   titre: 'titre',
-  message: 'message',
-  ressourceId: 'ressourceId'
+  message: 'message'
 };
 
 exports.Prisma.JsonNullValueFilter = {
@@ -753,18 +748,20 @@ exports.MotifRecommandation = exports.$Enums.MotifRecommandation = {
   SUGGESTION_ENSEIGNANT: 'SUGGESTION_ENSEIGNANT'
 };
 
+exports.NiveauEtudes = exports.$Enums.NiveauEtudes = {
+  LICENCE_1: 'LICENCE_1',
+  LICENCE_2: 'LICENCE_2',
+  LICENCE_3: 'LICENCE_3',
+  MASTER_1: 'MASTER_1',
+  MASTER_2: 'MASTER_2',
+  DOCTORAT: 'DOCTORAT'
+};
+
 exports.FrequenceRecommandation = exports.$Enums.FrequenceRecommandation = {
   QUOTIDIENNE: 'QUOTIDIENNE',
   HEBDOMADAIRE: 'HEBDOMADAIRE',
   MENSUELLE: 'MENSUELLE',
   JAMAIS: 'JAMAIS'
-};
-
-exports.NiveauEtudes = exports.$Enums.NiveauEtudes = {
-  LICENCE: 'LICENCE',
-  MASTER: 'MASTER',
-  DOCTORAT: 'DOCTORAT',
-  POSTDOCTORAT: 'POSTDOCTORAT'
 };
 
 exports.TypeAcces = exports.$Enums.TypeAcces = {

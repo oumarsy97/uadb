@@ -13,6 +13,7 @@ const utilisateurs_service_1 = require("./utilisateurs.service");
 const prisma_service_1 = require("../prisma/prisma.service");
 const jwt_1 = require("@nestjs/jwt");
 const config_1 = require("@nestjs/config");
+const email_service_1 = require("../meservices/mail/email.service");
 let UtilisateursModule = class UtilisateursModule {
 };
 exports.UtilisateursModule = UtilisateursModule;
@@ -35,7 +36,7 @@ exports.UtilisateursModule = UtilisateursModule = __decorate([
                 inject: [config_1.ConfigService],
             }),
         ],
-        providers: [utilisateurs_service_1.UtilisateursService, prisma_service_1.PrismaService],
+        providers: [utilisateurs_service_1.UtilisateursService, prisma_service_1.PrismaService, email_service_1.EmailService],
         exports: [utilisateurs_service_1.UtilisateursService],
     })
 ], UtilisateursModule);

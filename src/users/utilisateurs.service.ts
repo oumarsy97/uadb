@@ -2,6 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
+import { EmailService } from '../meservices/mail/email.service'; // Import du service email
 import {
   CreateUtilisateurDto,
   LoginDataDto,
@@ -12,6 +13,7 @@ export class UtilisateursService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
+    private readonly emailService: EmailService, // Injection du service email
   ) {}
 
   async create(createUtilisateurDto: CreateUtilisateurDto) {
@@ -27,7 +29,7 @@ export class UtilisateursService {
     const hashedPassword = await bcrypt.hash(createUtilisateurDto.motDePasse, 10);
 
     // Création de l'utilisateur
-    return this.prisma.user.create({
+    const newUser = await this.prisma.user.create({
       data: {
         nom: createUtilisateurDto.nom,
         prenom: createUtilisateurDto.prenom,
@@ -35,9 +37,23 @@ export class UtilisateursService {
         motDePasse: hashedPassword,
         role: createUtilisateurDto.role,
         image: createUtilisateurDto.image,
-        universiteId: createUtilisateurDto.universiteId , // Gérer le cas où c'est optionnel
       },
     });
+
+    // Envoi de l'email de bienvenue
+    try {
+      await this.emailService.sendWelcomeEmail(
+        newUser.email,
+        `${newUser.prenom} ${newUser.nom}`
+      );
+    } catch (error) {
+      // Log l'erreur mais ne fait pas échouer la création de l'utilisateur
+      console.error('Erreur lors de l\'envoi de l\'email de bienvenue:', error);
+    }
+
+    // Retourner l'utilisateur sans le mot de passe
+    const { motDePasse, ...userWithoutPassword } = newUser;
+    return userWithoutPassword;
   }
 
   async login(loginData: LoginDataDto) {
@@ -46,7 +62,6 @@ export class UtilisateursService {
     const user = await this.prisma.user.findUnique({
       where: { email: loginData.email },
     });
-    
 
     // Vérifier si l'utilisateur existe
     if (!user) {
@@ -104,6 +119,76 @@ export class UtilisateursService {
     return { message: 'Déconnexion réussie.' };
   }
 
+  // Nouvelle méthode pour initier la réinitialisation de mot de passe
+ 
+  // Nouvelle méthode pour envoyer une notification à un utilisateur
+  async sendNotificationToUser(userId: string, title: string, message: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      throw new HttpException('Utilisateur non trouvé.', HttpStatus.NOT_FOUND);
+    }
+
+    try {
+      await this.emailService.sendNotificationEmail(user.email, title, message);
+      return { message: 'Notification envoyée avec succès.' };
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi de la notification:', error);
+      throw new HttpException(
+        'Erreur lors de l\'envoi de la notification.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  // Nouvelle méthode pour envoyer des notifications en masse
+  async sendBulkNotification(userIds: string[], title: string, message: string) {
+    const users = await this.prisma.user.findMany({
+      where: { id: { in: userIds } },
+      select: { email: true, nom: true, prenom: true },
+    });
+
+    if (users.length === 0) {
+      throw new HttpException('Aucun utilisateur trouvé.', HttpStatus.NOT_FOUND);
+    }
+
+    const emails = users.map(user => ({
+      to: user.email,
+      subject: title,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #333;">${title}</h1>
+          <div style="margin: 20px 0; padding: 20px; background-color: #f8f9fa; border-left: 4px solid #007bff;">
+            <p>${message}</p>
+          </div>
+          <p>Cordialement,<br>L'équipe</p>
+        </div>
+      `,
+      text: `${title}\n\n${message}`,
+    }));
+
+    try {
+      const results = await this.emailService.sendBulkEmails(emails);
+      return {
+        message: 'Notifications envoyées.',
+        results: {
+          total: users.length,
+          success: results.success,
+          failed: results.failed,
+          errors: results.errors,
+        },
+      };
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi des notifications en masse:', error);
+      throw new HttpException(
+        'Erreur lors de l\'envoi des notifications.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   async findAll(options: { page?: number; limit?: number; search?: string } = {}) {
     const { page = 1, limit = 10, search = '' } = options;
     const skip = (page - 1) * limit;
@@ -111,9 +196,9 @@ export class UtilisateursService {
     const where = search
       ? {
           OR: [
-            { nom: { contains: search, lte: 'insensitive' } },
-            { prenom: { contains: search, lte: 'insensitive' } },
-            { email: { contains: search, lte: 'insensitive' } },
+            { nom: { contains: search, mode: 'insensitive' } },
+            { prenom: { contains: search, mode: 'insensitive' } },
+            { email: { contains: search, mode: 'insensitive' } },
           ],
         }
       : {};
@@ -127,7 +212,7 @@ export class UtilisateursService {
       this.prisma.user.count({ where }),
     ]);
 
-    const sanitizedUsers = users.map(({ motDePasse, ...user }) => user); // Retirer les mots de passes
+    const sanitizedUsers = users.map(({ motDePasse,  ...user }) => user);
 
     return {
       data: sanitizedUsers,
@@ -149,7 +234,7 @@ export class UtilisateursService {
       throw new HttpException('Utilisateur non trouvé.', HttpStatus.NOT_FOUND);
     }
 
-    const { motDePasse, ...userWithoutPassword } = user;
+    const { motDePasse,  ...userWithoutPassword } = user;
     return userWithoutPassword;
   }
 
@@ -162,7 +247,7 @@ export class UtilisateursService {
       throw new HttpException('Utilisateur non trouvé.', HttpStatus.NOT_FOUND);
     }
 
-    const { motDePasse, ...userWithoutPassword } = user;
+    const { motDePasse,  ...userWithoutPassword } = user;
     return userWithoutPassword;
   }
 
@@ -184,9 +269,6 @@ export class UtilisateursService {
       ...(hashedPassword && { motDePasse: hashedPassword }),
       ...(updateData.role && { role: updateData.role }),
       ...(updateData.image && { image: updateData.image }),
-      ...(updateData.universiteId !== undefined && {
-        universiteId: updateData.universiteId,
-      }),
     };
 
     const updatedUser = await this.prisma.user.update({
@@ -194,7 +276,20 @@ export class UtilisateursService {
       data: dataToUpdate,
     });
 
-    const { motDePasse, ...userWithoutPassword } = updatedUser;
+    // Envoyer une notification si l'email a été modifié
+    if (updateData.email && updateData.email !== user.email) {
+      try {
+        await this.emailService.sendNotificationEmail(
+          updateData.email,
+          'Email modifié',
+          'Votre adresse email a été modifiée avec succès.'
+        );
+      } catch (error) {
+        console.error('Erreur lors de l\'envoi de la notification de modification d\'email:', error);
+      }
+    }
+
+    const { motDePasse,  ...userWithoutPassword } = updatedUser;
     return userWithoutPassword;
   }
 
@@ -205,6 +300,18 @@ export class UtilisateursService {
     }
 
     await this.prisma.user.delete({ where: { id } });
+
+    // Envoyer un email de confirmation de suppression
+    try {
+      await this.emailService.sendNotificationEmail(
+        user.email,
+        'Compte supprimé',
+        'Votre compte a été supprimé avec succès. Nous sommes désolés de vous voir partir.'
+      );
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi de l\'email de suppression:', error);
+    }
+
     return { message: 'Utilisateur supprimé avec succès.' };
   }
 

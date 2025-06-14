@@ -52,4 +52,12 @@ export class UpdateDepartementDto {
   @IsUUID()
   @IsOptional()
   ufrId?: string;
+
+  @ApiPropertyOptional({
+    description: 'Responsable du département',
+    example: 'Jean Dupont'
+  })
+  @IsString()
+  @IsOptional()
+  responsable?: string;
 }

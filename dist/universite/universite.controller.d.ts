@@ -4,10 +4,10 @@ export declare class UniversiteController {
     private readonly universiteService;
     constructor(universiteService: UniversiteService);
     create(createUniversiteDto: CreateUniversiteDto): Promise<{
-        id: string;
         nom: string;
-        adresse: string | null;
+        id: string;
         ville: string;
+        adresse: string | null;
         siteWeb: string | null;
     }>;
     findAll(query: {
@@ -15,48 +15,48 @@ export declare class UniversiteController {
         limit?: number;
         search?: string;
     }): Promise<{
-        id: string;
         nom: string;
-        adresse: string | null;
+        id: string;
         ville: string;
+        adresse: string | null;
         siteWeb: string | null;
     }[]>;
     findOne(id: string): Promise<{
-        id: string;
         nom: string;
-        adresse: string | null;
+        id: string;
         ville: string;
+        adresse: string | null;
         siteWeb: string | null;
     } | null>;
     update(data: {
         id: string;
         updateData: Partial<UpdateUniversiteDto>;
     }): Promise<{
-        id: string;
         nom: string;
-        adresse: string | null;
+        id: string;
         ville: string;
+        adresse: string | null;
         siteWeb: string | null;
     }>;
     remove(id: string): Promise<{
-        id: string;
         nom: string;
-        adresse: string | null;
+        id: string;
         ville: string;
+        adresse: string | null;
         siteWeb: string | null;
     }>;
     getStatistics(id: string): Promise<{
-        id: string;
         nom: string;
-        adresse: string | null;
+        id: string;
         ville: string;
+        adresse: string | null;
         siteWeb: string | null;
     } | null>;
     getTopUniversites(limit?: number): Promise<{
-        id: string;
         nom: string;
-        adresse: string | null;
+        id: string;
         ville: string;
+        adresse: string | null;
         siteWeb: string | null;
     }[]>;
 }

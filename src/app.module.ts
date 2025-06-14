@@ -15,6 +15,8 @@ import { CategorieModule } from './categorie/categorie.module';
 import { UfrModule } from './ufr/ufr.module';
 import { DepartementModule } from './departement/departement.module';
 import { FiliereModule } from './filiere/filiere.module';
+import { EmailModule } from './meservices/mail/email.module';
+import { NotificationModule } from './notification/notification.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { FiliereModule } from './filiere/filiere.module';
     UfrModule,
     DepartementModule,
     FiliereModule,
+    EmailModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [AppService,],

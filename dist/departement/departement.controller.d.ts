@@ -8,10 +8,11 @@ export declare class DepartementController {
     create(createDepartementDto: CreateDepartementDto): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             ufrId: string;
+            responsable: string | null;
         };
         message: string;
         error?: undefined;
@@ -28,10 +29,11 @@ export declare class DepartementController {
     }): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             ufrId: string;
+            responsable: string | null;
         }[];
         meta: {
             total: number;
@@ -53,10 +55,11 @@ export declare class DepartementController {
     }): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             ufrId: string;
+            responsable: string | null;
         };
         message: string;
         error?: undefined;
@@ -71,10 +74,11 @@ export declare class DepartementController {
     }): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             ufrId: string;
+            responsable: string | null;
         }[];
         message: string;
         error?: undefined;
@@ -89,10 +93,11 @@ export declare class DepartementController {
     }): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             ufrId: string;
+            responsable: string | null;
         };
         message: string;
         error?: undefined;
@@ -108,10 +113,11 @@ export declare class DepartementController {
     }): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             ufrId: string;
+            responsable: string | null;
         };
         message: string;
         error?: undefined;
@@ -141,10 +147,11 @@ export declare class DepartementController {
     }): Promise<{
         success: boolean;
         data: {
-            id: string;
             nom: string;
             description: string | null;
+            id: string;
             ufrId: string;
+            responsable: string | null;
         }[];
         message: string;
         error?: undefined;

@@ -244,6 +244,18 @@ export const MotifRecommandation: {
 export type MotifRecommandation = (typeof MotifRecommandation)[keyof typeof MotifRecommandation]
 
 
+export const NiveauEtudes: {
+  LICENCE_1: 'LICENCE_1',
+  LICENCE_2: 'LICENCE_2',
+  LICENCE_3: 'LICENCE_3',
+  MASTER_1: 'MASTER_1',
+  MASTER_2: 'MASTER_2',
+  DOCTORAT: 'DOCTORAT'
+};
+
+export type NiveauEtudes = (typeof NiveauEtudes)[keyof typeof NiveauEtudes]
+
+
 export const RoleUser: {
   ETUDIANT: 'ETUDIANT',
   ENSEIGNANT: 'ENSEIGNANT',
@@ -252,16 +264,6 @@ export const RoleUser: {
 };
 
 export type RoleUser = (typeof RoleUser)[keyof typeof RoleUser]
-
-
-export const NiveauEtudes: {
-  LICENCE: 'LICENCE',
-  MASTER: 'MASTER',
-  DOCTORAT: 'DOCTORAT',
-  POSTDOCTORAT: 'POSTDOCTORAT'
-};
-
-export type NiveauEtudes = (typeof NiveauEtudes)[keyof typeof NiveauEtudes]
 
 
 export const FrequenceRecommandation: {
@@ -389,13 +391,13 @@ export type MotifRecommandation = $Enums.MotifRecommandation
 
 export const MotifRecommandation: typeof $Enums.MotifRecommandation
 
-export type RoleUser = $Enums.RoleUser
-
-export const RoleUser: typeof $Enums.RoleUser
-
 export type NiveauEtudes = $Enums.NiveauEtudes
 
 export const NiveauEtudes: typeof $Enums.NiveauEtudes
+
+export type RoleUser = $Enums.RoleUser
+
+export const RoleUser: typeof $Enums.RoleUser
 
 export type FrequenceRecommandation = $Enums.FrequenceRecommandation
 
@@ -3633,6 +3635,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type FiliereCountOutputType
+   */
+
+  export type FiliereCountOutputType = {
+    etudiants: number
+  }
+
+  export type FiliereCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    etudiants?: boolean | FiliereCountOutputTypeCountEtudiantsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * FiliereCountOutputType without action
+   */
+  export type FiliereCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FiliereCountOutputType
+     */
+    select?: FiliereCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * FiliereCountOutputType without action
+   */
+  export type FiliereCountOutputTypeCountEtudiantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EtudiantWhereInput
+  }
+
+
+  /**
    * Count Type UserCountOutputType
    */
 
@@ -3883,7 +3916,6 @@ export namespace Prisma {
     reservations: number
     recommandations: number
     donneesRecommandations: number
-    notifications: number
   }
 
   export type RessourceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3896,7 +3928,6 @@ export namespace Prisma {
     reservations?: boolean | RessourceCountOutputTypeCountReservationsArgs
     recommandations?: boolean | RessourceCountOutputTypeCountRecommandationsArgs
     donneesRecommandations?: boolean | RessourceCountOutputTypeCountDonneesRecommandationsArgs
-    notifications?: boolean | RessourceCountOutputTypeCountNotificationsArgs
   }
 
   // Custom InputTypes
@@ -3971,13 +4002,6 @@ export namespace Prisma {
    */
   export type RessourceCountOutputTypeCountDonneesRecommandationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DonneesRecommandationWhereInput
-  }
-
-  /**
-   * RessourceCountOutputType without action
-   */
-  export type RessourceCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NotificationWhereInput
   }
 
 
@@ -14014,6 +14038,7 @@ export namespace Prisma {
     nom: string | null
     description: string | null
     ufrId: string | null
+    responsable: string | null
   }
 
   export type DepartementMaxAggregateOutputType = {
@@ -14021,6 +14046,7 @@ export namespace Prisma {
     nom: string | null
     description: string | null
     ufrId: string | null
+    responsable: string | null
   }
 
   export type DepartementCountAggregateOutputType = {
@@ -14028,6 +14054,7 @@ export namespace Prisma {
     nom: number
     description: number
     ufrId: number
+    responsable: number
     _all: number
   }
 
@@ -14037,6 +14064,7 @@ export namespace Prisma {
     nom?: true
     description?: true
     ufrId?: true
+    responsable?: true
   }
 
   export type DepartementMaxAggregateInputType = {
@@ -14044,6 +14072,7 @@ export namespace Prisma {
     nom?: true
     description?: true
     ufrId?: true
+    responsable?: true
   }
 
   export type DepartementCountAggregateInputType = {
@@ -14051,6 +14080,7 @@ export namespace Prisma {
     nom?: true
     description?: true
     ufrId?: true
+    responsable?: true
     _all?: true
   }
 
@@ -14131,6 +14161,7 @@ export namespace Prisma {
     nom: string
     description: string | null
     ufrId: string
+    responsable: string | null
     _count: DepartementCountAggregateOutputType | null
     _min: DepartementMinAggregateOutputType | null
     _max: DepartementMaxAggregateOutputType | null
@@ -14155,6 +14186,7 @@ export namespace Prisma {
     nom?: boolean
     description?: boolean
     ufrId?: boolean
+    responsable?: boolean
     ufr?: boolean | UfrDefaultArgs<ExtArgs>
     filieres?: boolean | Departement$filieresArgs<ExtArgs>
     _count?: boolean | DepartementCountOutputTypeDefaultArgs<ExtArgs>
@@ -14167,9 +14199,10 @@ export namespace Prisma {
     nom?: boolean
     description?: boolean
     ufrId?: boolean
+    responsable?: boolean
   }
 
-  export type DepartementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "ufrId", ExtArgs["result"]["departement"]>
+  export type DepartementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "ufrId" | "responsable", ExtArgs["result"]["departement"]>
   export type DepartementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ufr?: boolean | UfrDefaultArgs<ExtArgs>
     filieres?: boolean | Departement$filieresArgs<ExtArgs>
@@ -14187,6 +14220,7 @@ export namespace Prisma {
       nom: string
       description: string | null
       ufrId: string
+      responsable: string | null
     }, ExtArgs["result"]["departement"]>
     composites: {}
   }
@@ -14562,6 +14596,7 @@ export namespace Prisma {
     readonly nom: FieldRef<"Departement", 'String'>
     readonly description: FieldRef<"Departement", 'String'>
     readonly ufrId: FieldRef<"Departement", 'String'>
+    readonly responsable: FieldRef<"Departement", 'String'>
   }
     
 
@@ -14961,6 +14996,7 @@ export namespace Prisma {
     id: string | null
     nom: string | null
     description: string | null
+    niveauEtudes: $Enums.NiveauEtudes | null
     departementId: string | null
   }
 
@@ -14968,6 +15004,7 @@ export namespace Prisma {
     id: string | null
     nom: string | null
     description: string | null
+    niveauEtudes: $Enums.NiveauEtudes | null
     departementId: string | null
   }
 
@@ -14975,6 +15012,7 @@ export namespace Prisma {
     id: number
     nom: number
     description: number
+    niveauEtudes: number
     departementId: number
     _all: number
   }
@@ -14984,6 +15022,7 @@ export namespace Prisma {
     id?: true
     nom?: true
     description?: true
+    niveauEtudes?: true
     departementId?: true
   }
 
@@ -14991,6 +15030,7 @@ export namespace Prisma {
     id?: true
     nom?: true
     description?: true
+    niveauEtudes?: true
     departementId?: true
   }
 
@@ -14998,6 +15038,7 @@ export namespace Prisma {
     id?: true
     nom?: true
     description?: true
+    niveauEtudes?: true
     departementId?: true
     _all?: true
   }
@@ -15078,6 +15119,7 @@ export namespace Prisma {
     id: string
     nom: string
     description: string | null
+    niveauEtudes: $Enums.NiveauEtudes
     departementId: string
     _count: FiliereCountAggregateOutputType | null
     _min: FiliereMinAggregateOutputType | null
@@ -15102,8 +15144,11 @@ export namespace Prisma {
     id?: boolean
     nom?: boolean
     description?: boolean
+    niveauEtudes?: boolean
     departementId?: boolean
     departement?: boolean | DepartementDefaultArgs<ExtArgs>
+    etudiants?: boolean | Filiere$etudiantsArgs<ExtArgs>
+    _count?: boolean | FiliereCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["filiere"]>
 
 
@@ -15112,23 +15157,28 @@ export namespace Prisma {
     id?: boolean
     nom?: boolean
     description?: boolean
+    niveauEtudes?: boolean
     departementId?: boolean
   }
 
-  export type FiliereOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "departementId", ExtArgs["result"]["filiere"]>
+  export type FiliereOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "niveauEtudes" | "departementId", ExtArgs["result"]["filiere"]>
   export type FiliereInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     departement?: boolean | DepartementDefaultArgs<ExtArgs>
+    etudiants?: boolean | Filiere$etudiantsArgs<ExtArgs>
+    _count?: boolean | FiliereCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $FilierePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Filiere"
     objects: {
       departement: Prisma.$DepartementPayload<ExtArgs>
+      etudiants: Prisma.$EtudiantPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       nom: string
       description: string | null
+      niveauEtudes: $Enums.NiveauEtudes
       departementId: string
     }, ExtArgs["result"]["filiere"]>
     composites: {}
@@ -15471,6 +15521,7 @@ export namespace Prisma {
   export interface Prisma__FiliereClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     departement<T extends DepartementDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartementDefaultArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    etudiants<T extends Filiere$etudiantsArgs<ExtArgs> = {}>(args?: Subset<T, Filiere$etudiantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EtudiantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15503,6 +15554,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Filiere", 'String'>
     readonly nom: FieldRef<"Filiere", 'String'>
     readonly description: FieldRef<"Filiere", 'String'>
+    readonly niveauEtudes: FieldRef<"Filiere", 'NiveauEtudes'>
     readonly departementId: FieldRef<"Filiere", 'String'>
   }
     
@@ -15847,6 +15899,30 @@ export namespace Prisma {
   }
 
   /**
+   * Filiere.etudiants
+   */
+  export type Filiere$etudiantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Etudiant
+     */
+    select?: EtudiantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Etudiant
+     */
+    omit?: EtudiantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EtudiantInclude<ExtArgs> | null
+    where?: EtudiantWhereInput
+    orderBy?: EtudiantOrderByWithRelationInput | EtudiantOrderByWithRelationInput[]
+    cursor?: EtudiantWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EtudiantScalarFieldEnum | EtudiantScalarFieldEnum[]
+  }
+
+  /**
    * Filiere without action
    */
   export type FiliereDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15886,7 +15962,6 @@ export namespace Prisma {
     role: $Enums.RoleUser | null
     derniereConnexion: Date | null
     estActif: boolean | null
-    universiteId: string | null
     preferencesRecommandation: string | null
     frequenceRecommandation: $Enums.FrequenceRecommandation | null
   }
@@ -15902,7 +15977,6 @@ export namespace Prisma {
     role: $Enums.RoleUser | null
     derniereConnexion: Date | null
     estActif: boolean | null
-    universiteId: string | null
     preferencesRecommandation: string | null
     frequenceRecommandation: $Enums.FrequenceRecommandation | null
   }
@@ -15918,7 +15992,6 @@ export namespace Prisma {
     role: number
     derniereConnexion: number
     estActif: number
-    universiteId: number
     preferencesRecommandation: number
     frequenceRecommandation: number
     _all: number
@@ -15936,7 +16009,6 @@ export namespace Prisma {
     role?: true
     derniereConnexion?: true
     estActif?: true
-    universiteId?: true
     preferencesRecommandation?: true
     frequenceRecommandation?: true
   }
@@ -15952,7 +16024,6 @@ export namespace Prisma {
     role?: true
     derniereConnexion?: true
     estActif?: true
-    universiteId?: true
     preferencesRecommandation?: true
     frequenceRecommandation?: true
   }
@@ -15968,7 +16039,6 @@ export namespace Prisma {
     role?: true
     derniereConnexion?: true
     estActif?: true
-    universiteId?: true
     preferencesRecommandation?: true
     frequenceRecommandation?: true
     _all?: true
@@ -16057,7 +16127,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion: Date | null
     estActif: boolean
-    universiteId: string
     preferencesRecommandation: string | null
     frequenceRecommandation: $Enums.FrequenceRecommandation
     _count: UserCountAggregateOutputType | null
@@ -16090,7 +16159,6 @@ export namespace Prisma {
     role?: boolean
     derniereConnexion?: boolean
     estActif?: boolean
-    universiteId?: boolean
     preferencesRecommandation?: boolean
     frequenceRecommandation?: boolean
     contributions?: boolean | User$contributionsArgs<ExtArgs>
@@ -16126,12 +16194,11 @@ export namespace Prisma {
     role?: boolean
     derniereConnexion?: boolean
     estActif?: boolean
-    universiteId?: boolean
     preferencesRecommandation?: boolean
     frequenceRecommandation?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "motDePasse" | "nom" | "telephone" | "prenom" | "image" | "role" | "derniereConnexion" | "estActif" | "universiteId" | "preferencesRecommandation" | "frequenceRecommandation", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "motDePasse" | "nom" | "telephone" | "prenom" | "image" | "role" | "derniereConnexion" | "estActif" | "preferencesRecommandation" | "frequenceRecommandation", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contributions?: boolean | User$contributionsArgs<ExtArgs>
     favoris?: boolean | User$favorisArgs<ExtArgs>
@@ -16185,7 +16252,6 @@ export namespace Prisma {
       role: $Enums.RoleUser
       derniereConnexion: Date | null
       estActif: boolean
-      universiteId: string
       preferencesRecommandation: string | null
       frequenceRecommandation: $Enums.FrequenceRecommandation
     }, ExtArgs["result"]["user"]>
@@ -16584,7 +16650,6 @@ export namespace Prisma {
     readonly role: FieldRef<"User", 'RoleUser'>
     readonly derniereConnexion: FieldRef<"User", 'DateTime'>
     readonly estActif: FieldRef<"User", 'Boolean'>
-    readonly universiteId: FieldRef<"User", 'String'>
     readonly preferencesRecommandation: FieldRef<"User", 'String'>
     readonly frequenceRecommandation: FieldRef<"User", 'FrequenceRecommandation'>
   }
@@ -17372,10 +17437,8 @@ export namespace Prisma {
     numeroEtudiant: string | null
     dateNaissance: Date | null
     dateInscription: Date | null
-    departement: string | null
-    faculte: string | null
-    specialite: string | null
     niveauEtudes: $Enums.NiveauEtudes | null
+    filiereId: string | null
   }
 
   export type EtudiantMaxAggregateOutputType = {
@@ -17384,10 +17447,8 @@ export namespace Prisma {
     numeroEtudiant: string | null
     dateNaissance: Date | null
     dateInscription: Date | null
-    departement: string | null
-    faculte: string | null
-    specialite: string | null
     niveauEtudes: $Enums.NiveauEtudes | null
+    filiereId: string | null
   }
 
   export type EtudiantCountAggregateOutputType = {
@@ -17396,10 +17457,8 @@ export namespace Prisma {
     numeroEtudiant: number
     dateNaissance: number
     dateInscription: number
-    departement: number
-    faculte: number
-    specialite: number
     niveauEtudes: number
+    filiereId: number
     _all: number
   }
 
@@ -17410,10 +17469,8 @@ export namespace Prisma {
     numeroEtudiant?: true
     dateNaissance?: true
     dateInscription?: true
-    departement?: true
-    faculte?: true
-    specialite?: true
     niveauEtudes?: true
+    filiereId?: true
   }
 
   export type EtudiantMaxAggregateInputType = {
@@ -17422,10 +17479,8 @@ export namespace Prisma {
     numeroEtudiant?: true
     dateNaissance?: true
     dateInscription?: true
-    departement?: true
-    faculte?: true
-    specialite?: true
     niveauEtudes?: true
+    filiereId?: true
   }
 
   export type EtudiantCountAggregateInputType = {
@@ -17434,10 +17489,8 @@ export namespace Prisma {
     numeroEtudiant?: true
     dateNaissance?: true
     dateInscription?: true
-    departement?: true
-    faculte?: true
-    specialite?: true
     niveauEtudes?: true
+    filiereId?: true
     _all?: true
   }
 
@@ -17519,10 +17572,8 @@ export namespace Prisma {
     numeroEtudiant: string
     dateNaissance: Date
     dateInscription: Date
-    departement: string | null
-    faculte: string | null
-    specialite: string | null
     niveauEtudes: $Enums.NiveauEtudes
+    filiereId: string
     _count: EtudiantCountAggregateOutputType | null
     _min: EtudiantMinAggregateOutputType | null
     _max: EtudiantMaxAggregateOutputType | null
@@ -17548,11 +17599,10 @@ export namespace Prisma {
     numeroEtudiant?: boolean
     dateNaissance?: boolean
     dateInscription?: boolean
-    departement?: boolean
-    faculte?: boolean
-    specialite?: boolean
     niveauEtudes?: boolean
+    filiereId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    filiere?: boolean | FiliereDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["etudiant"]>
 
 
@@ -17563,21 +17613,21 @@ export namespace Prisma {
     numeroEtudiant?: boolean
     dateNaissance?: boolean
     dateInscription?: boolean
-    departement?: boolean
-    faculte?: boolean
-    specialite?: boolean
     niveauEtudes?: boolean
+    filiereId?: boolean
   }
 
-  export type EtudiantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "numeroEtudiant" | "dateNaissance" | "dateInscription" | "departement" | "faculte" | "specialite" | "niveauEtudes", ExtArgs["result"]["etudiant"]>
+  export type EtudiantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "numeroEtudiant" | "dateNaissance" | "dateInscription" | "niveauEtudes" | "filiereId", ExtArgs["result"]["etudiant"]>
   export type EtudiantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    filiere?: boolean | FiliereDefaultArgs<ExtArgs>
   }
 
   export type $EtudiantPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Etudiant"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      filiere: Prisma.$FilierePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -17585,10 +17635,8 @@ export namespace Prisma {
       numeroEtudiant: string
       dateNaissance: Date
       dateInscription: Date
-      departement: string | null
-      faculte: string | null
-      specialite: string | null
       niveauEtudes: $Enums.NiveauEtudes
+      filiereId: string
     }, ExtArgs["result"]["etudiant"]>
     composites: {}
   }
@@ -17930,6 +17978,7 @@ export namespace Prisma {
   export interface Prisma__EtudiantClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    filiere<T extends FiliereDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FiliereDefaultArgs<ExtArgs>>): Prisma__FiliereClient<$Result.GetResult<Prisma.$FilierePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17964,10 +18013,8 @@ export namespace Prisma {
     readonly numeroEtudiant: FieldRef<"Etudiant", 'String'>
     readonly dateNaissance: FieldRef<"Etudiant", 'DateTime'>
     readonly dateInscription: FieldRef<"Etudiant", 'DateTime'>
-    readonly departement: FieldRef<"Etudiant", 'String'>
-    readonly faculte: FieldRef<"Etudiant", 'String'>
-    readonly specialite: FieldRef<"Etudiant", 'String'>
     readonly niveauEtudes: FieldRef<"Etudiant", 'NiveauEtudes'>
+    readonly filiereId: FieldRef<"Etudiant", 'String'>
   }
     
 
@@ -28318,7 +28365,6 @@ export namespace Prisma {
     reservations?: boolean | Ressource$reservationsArgs<ExtArgs>
     recommandations?: boolean | Ressource$recommandationsArgs<ExtArgs>
     donneesRecommandations?: boolean | Ressource$donneesRecommandationsArgs<ExtArgs>
-    notifications?: boolean | Ressource$notificationsArgs<ExtArgs>
     categorie?: boolean | Ressource$categorieArgs<ExtArgs>
     _count?: boolean | RessourceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ressource"]>
@@ -28368,7 +28414,6 @@ export namespace Prisma {
     reservations?: boolean | Ressource$reservationsArgs<ExtArgs>
     recommandations?: boolean | Ressource$recommandationsArgs<ExtArgs>
     donneesRecommandations?: boolean | Ressource$donneesRecommandationsArgs<ExtArgs>
-    notifications?: boolean | Ressource$notificationsArgs<ExtArgs>
     categorie?: boolean | Ressource$categorieArgs<ExtArgs>
     _count?: boolean | RessourceCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -28386,7 +28431,6 @@ export namespace Prisma {
       reservations: Prisma.$ReservationPayload<ExtArgs>[]
       recommandations: Prisma.$RecommandationPayload<ExtArgs>[]
       donneesRecommandations: Prisma.$DonneesRecommandationPayload<ExtArgs>[]
-      notifications: Prisma.$NotificationPayload<ExtArgs>[]
       categorie: Prisma.$CategoriePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -28768,7 +28812,6 @@ export namespace Prisma {
     reservations<T extends Ressource$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     recommandations<T extends Ressource$recommandationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$recommandationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecommandationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     donneesRecommandations<T extends Ressource$donneesRecommandationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$donneesRecommandationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonneesRecommandationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    notifications<T extends Ressource$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categorie<T extends Ressource$categorieArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$categorieArgs<ExtArgs>>): Prisma__CategorieClient<$Result.GetResult<Prisma.$CategoriePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -29402,30 +29445,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DonneesRecommandationScalarFieldEnum | DonneesRecommandationScalarFieldEnum[]
-  }
-
-  /**
-   * Ressource.notifications
-   */
-  export type Ressource$notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Notification
-     */
-    select?: NotificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Notification
-     */
-    omit?: NotificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NotificationInclude<ExtArgs> | null
-    where?: NotificationWhereInput
-    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
-    cursor?: NotificationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
   }
 
   /**
@@ -31496,7 +31515,6 @@ export namespace Prisma {
     dateCreation: Date | null
     estLue: boolean | null
     typeNotification: $Enums.TypeNotification | null
-    ressourceId: string | null
   }
 
   export type NotificationMaxAggregateOutputType = {
@@ -31507,7 +31525,6 @@ export namespace Prisma {
     dateCreation: Date | null
     estLue: boolean | null
     typeNotification: $Enums.TypeNotification | null
-    ressourceId: string | null
   }
 
   export type NotificationCountAggregateOutputType = {
@@ -31518,7 +31535,6 @@ export namespace Prisma {
     dateCreation: number
     estLue: number
     typeNotification: number
-    ressourceId: number
     _all: number
   }
 
@@ -31531,7 +31547,6 @@ export namespace Prisma {
     dateCreation?: true
     estLue?: true
     typeNotification?: true
-    ressourceId?: true
   }
 
   export type NotificationMaxAggregateInputType = {
@@ -31542,7 +31557,6 @@ export namespace Prisma {
     dateCreation?: true
     estLue?: true
     typeNotification?: true
-    ressourceId?: true
   }
 
   export type NotificationCountAggregateInputType = {
@@ -31553,7 +31567,6 @@ export namespace Prisma {
     dateCreation?: true
     estLue?: true
     typeNotification?: true
-    ressourceId?: true
     _all?: true
   }
 
@@ -31637,7 +31650,6 @@ export namespace Prisma {
     dateCreation: Date
     estLue: boolean
     typeNotification: $Enums.TypeNotification
-    ressourceId: string | null
     _count: NotificationCountAggregateOutputType | null
     _min: NotificationMinAggregateOutputType | null
     _max: NotificationMaxAggregateOutputType | null
@@ -31665,9 +31677,7 @@ export namespace Prisma {
     dateCreation?: boolean
     estLue?: boolean
     typeNotification?: boolean
-    ressourceId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    ressource?: boolean | Notification$ressourceArgs<ExtArgs>
   }, ExtArgs["result"]["notification"]>
 
 
@@ -31680,20 +31690,17 @@ export namespace Prisma {
     dateCreation?: boolean
     estLue?: boolean
     typeNotification?: boolean
-    ressourceId?: boolean
   }
 
-  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "titre" | "message" | "dateCreation" | "estLue" | "typeNotification" | "ressourceId", ExtArgs["result"]["notification"]>
+  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "titre" | "message" | "dateCreation" | "estLue" | "typeNotification", ExtArgs["result"]["notification"]>
   export type NotificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    ressource?: boolean | Notification$ressourceArgs<ExtArgs>
   }
 
   export type $NotificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Notification"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
-      ressource: Prisma.$RessourcePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -31703,7 +31710,6 @@ export namespace Prisma {
       dateCreation: Date
       estLue: boolean
       typeNotification: $Enums.TypeNotification
-      ressourceId: string | null
     }, ExtArgs["result"]["notification"]>
     composites: {}
   }
@@ -32045,7 +32051,6 @@ export namespace Prisma {
   export interface Prisma__NotificationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    ressource<T extends Notification$ressourceArgs<ExtArgs> = {}>(args?: Subset<T, Notification$ressourceArgs<ExtArgs>>): Prisma__RessourceClient<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -32082,7 +32087,6 @@ export namespace Prisma {
     readonly dateCreation: FieldRef<"Notification", 'DateTime'>
     readonly estLue: FieldRef<"Notification", 'Boolean'>
     readonly typeNotification: FieldRef<"Notification", 'TypeNotification'>
-    readonly ressourceId: FieldRef<"Notification", 'String'>
   }
     
 
@@ -32423,25 +32427,6 @@ export namespace Prisma {
      * Limit how many Notifications to delete.
      */
     limit?: number
-  }
-
-  /**
-   * Notification.ressource
-   */
-  export type Notification$ressourceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ressource
-     */
-    select?: RessourceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ressource
-     */
-    omit?: RessourceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RessourceInclude<ExtArgs> | null
-    where?: RessourceWhereInput
   }
 
   /**
@@ -33598,7 +33583,8 @@ export namespace Prisma {
     id: 'id',
     nom: 'nom',
     description: 'description',
-    ufrId: 'ufrId'
+    ufrId: 'ufrId',
+    responsable: 'responsable'
   };
 
   export type DepartementScalarFieldEnum = (typeof DepartementScalarFieldEnum)[keyof typeof DepartementScalarFieldEnum]
@@ -33608,6 +33594,7 @@ export namespace Prisma {
     id: 'id',
     nom: 'nom',
     description: 'description',
+    niveauEtudes: 'niveauEtudes',
     departementId: 'departementId'
   };
 
@@ -33625,7 +33612,6 @@ export namespace Prisma {
     role: 'role',
     derniereConnexion: 'derniereConnexion',
     estActif: 'estActif',
-    universiteId: 'universiteId',
     preferencesRecommandation: 'preferencesRecommandation',
     frequenceRecommandation: 'frequenceRecommandation'
   };
@@ -33639,10 +33625,8 @@ export namespace Prisma {
     numeroEtudiant: 'numeroEtudiant',
     dateNaissance: 'dateNaissance',
     dateInscription: 'dateInscription',
-    departement: 'departement',
-    faculte: 'faculte',
-    specialite: 'specialite',
-    niveauEtudes: 'niveauEtudes'
+    niveauEtudes: 'niveauEtudes',
+    filiereId: 'filiereId'
   };
 
   export type EtudiantScalarFieldEnum = (typeof EtudiantScalarFieldEnum)[keyof typeof EtudiantScalarFieldEnum]
@@ -33840,8 +33824,7 @@ export namespace Prisma {
     message: 'message',
     dateCreation: 'dateCreation',
     estLue: 'estLue',
-    typeNotification: 'typeNotification',
-    ressourceId: 'ressourceId'
+    typeNotification: 'typeNotification'
   };
 
   export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
@@ -33994,7 +33977,8 @@ export namespace Prisma {
     id: 'id',
     nom: 'nom',
     description: 'description',
-    ufrId: 'ufrId'
+    ufrId: 'ufrId',
+    responsable: 'responsable'
   };
 
   export type DepartementOrderByRelevanceFieldEnum = (typeof DepartementOrderByRelevanceFieldEnum)[keyof typeof DepartementOrderByRelevanceFieldEnum]
@@ -34018,7 +34002,6 @@ export namespace Prisma {
     telephone: 'telephone',
     prenom: 'prenom',
     image: 'image',
-    universiteId: 'universiteId',
     preferencesRecommandation: 'preferencesRecommandation'
   };
 
@@ -34029,9 +34012,7 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     numeroEtudiant: 'numeroEtudiant',
-    departement: 'departement',
-    faculte: 'faculte',
-    specialite: 'specialite'
+    filiereId: 'filiereId'
   };
 
   export type EtudiantOrderByRelevanceFieldEnum = (typeof EtudiantOrderByRelevanceFieldEnum)[keyof typeof EtudiantOrderByRelevanceFieldEnum]
@@ -34192,8 +34173,7 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     titre: 'titre',
-    message: 'message',
-    ressourceId: 'ressourceId'
+    message: 'message'
   };
 
   export type NotificationOrderByRelevanceFieldEnum = (typeof NotificationOrderByRelevanceFieldEnum)[keyof typeof NotificationOrderByRelevanceFieldEnum]
@@ -34318,16 +34298,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'FrequenceRecommandation'
+   * Reference to a field of type 'NiveauEtudes'
    */
-  export type EnumFrequenceRecommandationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FrequenceRecommandation'>
+  export type EnumNiveauEtudesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NiveauEtudes'>
     
 
 
   /**
-   * Reference to a field of type 'NiveauEtudes'
+   * Reference to a field of type 'FrequenceRecommandation'
    */
-  export type EnumNiveauEtudesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NiveauEtudes'>
+  export type EnumFrequenceRecommandationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FrequenceRecommandation'>
     
 
 
@@ -35146,6 +35126,7 @@ export namespace Prisma {
     nom?: StringFilter<"Departement"> | string
     description?: StringNullableFilter<"Departement"> | string | null
     ufrId?: StringFilter<"Departement"> | string
+    responsable?: StringNullableFilter<"Departement"> | string | null
     ufr?: XOR<UfrScalarRelationFilter, UfrWhereInput>
     filieres?: FiliereListRelationFilter
   }
@@ -35155,6 +35136,7 @@ export namespace Prisma {
     nom?: SortOrder
     description?: SortOrderInput | SortOrder
     ufrId?: SortOrder
+    responsable?: SortOrderInput | SortOrder
     ufr?: UfrOrderByWithRelationInput
     filieres?: FiliereOrderByRelationAggregateInput
     _relevance?: DepartementOrderByRelevanceInput
@@ -35168,6 +35150,7 @@ export namespace Prisma {
     nom?: StringFilter<"Departement"> | string
     description?: StringNullableFilter<"Departement"> | string | null
     ufrId?: StringFilter<"Departement"> | string
+    responsable?: StringNullableFilter<"Departement"> | string | null
     ufr?: XOR<UfrScalarRelationFilter, UfrWhereInput>
     filieres?: FiliereListRelationFilter
   }, "id">
@@ -35177,6 +35160,7 @@ export namespace Prisma {
     nom?: SortOrder
     description?: SortOrderInput | SortOrder
     ufrId?: SortOrder
+    responsable?: SortOrderInput | SortOrder
     _count?: DepartementCountOrderByAggregateInput
     _max?: DepartementMaxOrderByAggregateInput
     _min?: DepartementMinOrderByAggregateInput
@@ -35190,6 +35174,7 @@ export namespace Prisma {
     nom?: StringWithAggregatesFilter<"Departement"> | string
     description?: StringNullableWithAggregatesFilter<"Departement"> | string | null
     ufrId?: StringWithAggregatesFilter<"Departement"> | string
+    responsable?: StringNullableWithAggregatesFilter<"Departement"> | string | null
   }
 
   export type FiliereWhereInput = {
@@ -35199,16 +35184,20 @@ export namespace Prisma {
     id?: StringFilter<"Filiere"> | string
     nom?: StringFilter<"Filiere"> | string
     description?: StringNullableFilter<"Filiere"> | string | null
+    niveauEtudes?: EnumNiveauEtudesFilter<"Filiere"> | $Enums.NiveauEtudes
     departementId?: StringFilter<"Filiere"> | string
     departement?: XOR<DepartementScalarRelationFilter, DepartementWhereInput>
+    etudiants?: EtudiantListRelationFilter
   }
 
   export type FiliereOrderByWithRelationInput = {
     id?: SortOrder
     nom?: SortOrder
     description?: SortOrderInput | SortOrder
+    niveauEtudes?: SortOrder
     departementId?: SortOrder
     departement?: DepartementOrderByWithRelationInput
+    etudiants?: EtudiantOrderByRelationAggregateInput
     _relevance?: FiliereOrderByRelevanceInput
   }
 
@@ -35219,14 +35208,17 @@ export namespace Prisma {
     NOT?: FiliereWhereInput | FiliereWhereInput[]
     nom?: StringFilter<"Filiere"> | string
     description?: StringNullableFilter<"Filiere"> | string | null
+    niveauEtudes?: EnumNiveauEtudesFilter<"Filiere"> | $Enums.NiveauEtudes
     departementId?: StringFilter<"Filiere"> | string
     departement?: XOR<DepartementScalarRelationFilter, DepartementWhereInput>
+    etudiants?: EtudiantListRelationFilter
   }, "id">
 
   export type FiliereOrderByWithAggregationInput = {
     id?: SortOrder
     nom?: SortOrder
     description?: SortOrderInput | SortOrder
+    niveauEtudes?: SortOrder
     departementId?: SortOrder
     _count?: FiliereCountOrderByAggregateInput
     _max?: FiliereMaxOrderByAggregateInput
@@ -35240,6 +35232,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Filiere"> | string
     nom?: StringWithAggregatesFilter<"Filiere"> | string
     description?: StringNullableWithAggregatesFilter<"Filiere"> | string | null
+    niveauEtudes?: EnumNiveauEtudesWithAggregatesFilter<"Filiere"> | $Enums.NiveauEtudes
     departementId?: StringWithAggregatesFilter<"Filiere"> | string
   }
 
@@ -35257,7 +35250,6 @@ export namespace Prisma {
     role?: EnumRoleUserFilter<"User"> | $Enums.RoleUser
     derniereConnexion?: DateTimeNullableFilter<"User"> | Date | string | null
     estActif?: BoolFilter<"User"> | boolean
-    universiteId?: StringFilter<"User"> | string
     preferencesRecommandation?: StringNullableFilter<"User"> | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFilter<"User"> | $Enums.FrequenceRecommandation
     contributions?: RessourceListRelationFilter
@@ -35290,7 +35282,6 @@ export namespace Prisma {
     role?: SortOrder
     derniereConnexion?: SortOrderInput | SortOrder
     estActif?: SortOrder
-    universiteId?: SortOrder
     preferencesRecommandation?: SortOrderInput | SortOrder
     frequenceRecommandation?: SortOrder
     contributions?: RessourceOrderByRelationAggregateInput
@@ -35327,7 +35318,6 @@ export namespace Prisma {
     role?: EnumRoleUserFilter<"User"> | $Enums.RoleUser
     derniereConnexion?: DateTimeNullableFilter<"User"> | Date | string | null
     estActif?: BoolFilter<"User"> | boolean
-    universiteId?: StringFilter<"User"> | string
     preferencesRecommandation?: StringNullableFilter<"User"> | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFilter<"User"> | $Enums.FrequenceRecommandation
     contributions?: RessourceListRelationFilter
@@ -35360,7 +35350,6 @@ export namespace Prisma {
     role?: SortOrder
     derniereConnexion?: SortOrderInput | SortOrder
     estActif?: SortOrder
-    universiteId?: SortOrder
     preferencesRecommandation?: SortOrderInput | SortOrder
     frequenceRecommandation?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -35382,7 +35371,6 @@ export namespace Prisma {
     role?: EnumRoleUserWithAggregatesFilter<"User"> | $Enums.RoleUser
     derniereConnexion?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     estActif?: BoolWithAggregatesFilter<"User"> | boolean
-    universiteId?: StringWithAggregatesFilter<"User"> | string
     preferencesRecommandation?: StringNullableWithAggregatesFilter<"User"> | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationWithAggregatesFilter<"User"> | $Enums.FrequenceRecommandation
   }
@@ -35396,11 +35384,10 @@ export namespace Prisma {
     numeroEtudiant?: StringFilter<"Etudiant"> | string
     dateNaissance?: DateTimeFilter<"Etudiant"> | Date | string
     dateInscription?: DateTimeFilter<"Etudiant"> | Date | string
-    departement?: StringNullableFilter<"Etudiant"> | string | null
-    faculte?: StringNullableFilter<"Etudiant"> | string | null
-    specialite?: StringNullableFilter<"Etudiant"> | string | null
     niveauEtudes?: EnumNiveauEtudesFilter<"Etudiant"> | $Enums.NiveauEtudes
+    filiereId?: StringFilter<"Etudiant"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    filiere?: XOR<FiliereScalarRelationFilter, FiliereWhereInput>
   }
 
   export type EtudiantOrderByWithRelationInput = {
@@ -35409,11 +35396,10 @@ export namespace Prisma {
     numeroEtudiant?: SortOrder
     dateNaissance?: SortOrder
     dateInscription?: SortOrder
-    departement?: SortOrderInput | SortOrder
-    faculte?: SortOrderInput | SortOrder
-    specialite?: SortOrderInput | SortOrder
     niveauEtudes?: SortOrder
+    filiereId?: SortOrder
     user?: UserOrderByWithRelationInput
+    filiere?: FiliereOrderByWithRelationInput
     _relevance?: EtudiantOrderByRelevanceInput
   }
 
@@ -35426,11 +35412,10 @@ export namespace Prisma {
     userId?: StringFilter<"Etudiant"> | string
     dateNaissance?: DateTimeFilter<"Etudiant"> | Date | string
     dateInscription?: DateTimeFilter<"Etudiant"> | Date | string
-    departement?: StringNullableFilter<"Etudiant"> | string | null
-    faculte?: StringNullableFilter<"Etudiant"> | string | null
-    specialite?: StringNullableFilter<"Etudiant"> | string | null
     niveauEtudes?: EnumNiveauEtudesFilter<"Etudiant"> | $Enums.NiveauEtudes
+    filiereId?: StringFilter<"Etudiant"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    filiere?: XOR<FiliereScalarRelationFilter, FiliereWhereInput>
   }, "id" | "numeroEtudiant">
 
   export type EtudiantOrderByWithAggregationInput = {
@@ -35439,10 +35424,8 @@ export namespace Prisma {
     numeroEtudiant?: SortOrder
     dateNaissance?: SortOrder
     dateInscription?: SortOrder
-    departement?: SortOrderInput | SortOrder
-    faculte?: SortOrderInput | SortOrder
-    specialite?: SortOrderInput | SortOrder
     niveauEtudes?: SortOrder
+    filiereId?: SortOrder
     _count?: EtudiantCountOrderByAggregateInput
     _max?: EtudiantMaxOrderByAggregateInput
     _min?: EtudiantMinOrderByAggregateInput
@@ -35457,10 +35440,8 @@ export namespace Prisma {
     numeroEtudiant?: StringWithAggregatesFilter<"Etudiant"> | string
     dateNaissance?: DateTimeWithAggregatesFilter<"Etudiant"> | Date | string
     dateInscription?: DateTimeWithAggregatesFilter<"Etudiant"> | Date | string
-    departement?: StringNullableWithAggregatesFilter<"Etudiant"> | string | null
-    faculte?: StringNullableWithAggregatesFilter<"Etudiant"> | string | null
-    specialite?: StringNullableWithAggregatesFilter<"Etudiant"> | string | null
     niveauEtudes?: EnumNiveauEtudesWithAggregatesFilter<"Etudiant"> | $Enums.NiveauEtudes
+    filiereId?: StringWithAggregatesFilter<"Etudiant"> | string
   }
 
   export type EnseignantWhereInput = {
@@ -36161,7 +36142,6 @@ export namespace Prisma {
     reservations?: ReservationListRelationFilter
     recommandations?: RecommandationListRelationFilter
     donneesRecommandations?: DonneesRecommandationListRelationFilter
-    notifications?: NotificationListRelationFilter
     categorie?: XOR<CategorieNullableScalarRelationFilter, CategorieWhereInput> | null
   }
 
@@ -36204,7 +36184,6 @@ export namespace Prisma {
     reservations?: ReservationOrderByRelationAggregateInput
     recommandations?: RecommandationOrderByRelationAggregateInput
     donneesRecommandations?: DonneesRecommandationOrderByRelationAggregateInput
-    notifications?: NotificationOrderByRelationAggregateInput
     categorie?: CategorieOrderByWithRelationInput
     _relevance?: RessourceOrderByRelevanceInput
   }
@@ -36251,7 +36230,6 @@ export namespace Prisma {
     reservations?: ReservationListRelationFilter
     recommandations?: RecommandationListRelationFilter
     donneesRecommandations?: DonneesRecommandationListRelationFilter
-    notifications?: NotificationListRelationFilter
     categorie?: XOR<CategorieNullableScalarRelationFilter, CategorieWhereInput> | null
   }, "id">
 
@@ -36481,9 +36459,7 @@ export namespace Prisma {
     dateCreation?: DateTimeFilter<"Notification"> | Date | string
     estLue?: BoolFilter<"Notification"> | boolean
     typeNotification?: EnumTypeNotificationFilter<"Notification"> | $Enums.TypeNotification
-    ressourceId?: StringNullableFilter<"Notification"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    ressource?: XOR<RessourceNullableScalarRelationFilter, RessourceWhereInput> | null
   }
 
   export type NotificationOrderByWithRelationInput = {
@@ -36494,9 +36470,7 @@ export namespace Prisma {
     dateCreation?: SortOrder
     estLue?: SortOrder
     typeNotification?: SortOrder
-    ressourceId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
-    ressource?: RessourceOrderByWithRelationInput
     _relevance?: NotificationOrderByRelevanceInput
   }
 
@@ -36511,9 +36485,7 @@ export namespace Prisma {
     dateCreation?: DateTimeFilter<"Notification"> | Date | string
     estLue?: BoolFilter<"Notification"> | boolean
     typeNotification?: EnumTypeNotificationFilter<"Notification"> | $Enums.TypeNotification
-    ressourceId?: StringNullableFilter<"Notification"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    ressource?: XOR<RessourceNullableScalarRelationFilter, RessourceWhereInput> | null
   }, "id">
 
   export type NotificationOrderByWithAggregationInput = {
@@ -36524,7 +36496,6 @@ export namespace Prisma {
     dateCreation?: SortOrder
     estLue?: SortOrder
     typeNotification?: SortOrder
-    ressourceId?: SortOrderInput | SortOrder
     _count?: NotificationCountOrderByAggregateInput
     _max?: NotificationMaxOrderByAggregateInput
     _min?: NotificationMinOrderByAggregateInput
@@ -36541,7 +36512,6 @@ export namespace Prisma {
     dateCreation?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
     estLue?: BoolWithAggregatesFilter<"Notification"> | boolean
     typeNotification?: EnumTypeNotificationWithAggregatesFilter<"Notification"> | $Enums.TypeNotification
-    ressourceId?: StringNullableWithAggregatesFilter<"Notification"> | string | null
   }
 
   export type JournalAuditWhereInput = {
@@ -37404,6 +37374,7 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
+    responsable?: string | null
     ufr: UfrCreateNestedOneWithoutDepartementsInput
     filieres?: FiliereCreateNestedManyWithoutDepartementInput
   }
@@ -37413,6 +37384,7 @@ export namespace Prisma {
     nom: string
     description?: string | null
     ufrId: string
+    responsable?: string | null
     filieres?: FiliereUncheckedCreateNestedManyWithoutDepartementInput
   }
 
@@ -37420,6 +37392,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    responsable?: NullableStringFieldUpdateOperationsInput | string | null
     ufr?: UfrUpdateOneRequiredWithoutDepartementsNestedInput
     filieres?: FiliereUpdateManyWithoutDepartementNestedInput
   }
@@ -37429,6 +37402,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ufrId?: StringFieldUpdateOperationsInput | string
+    responsable?: NullableStringFieldUpdateOperationsInput | string | null
     filieres?: FiliereUncheckedUpdateManyWithoutDepartementNestedInput
   }
 
@@ -37437,12 +37411,14 @@ export namespace Prisma {
     nom: string
     description?: string | null
     ufrId: string
+    responsable?: string | null
   }
 
   export type DepartementUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    responsable?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DepartementUncheckedUpdateManyInput = {
@@ -37450,40 +37426,50 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ufrId?: StringFieldUpdateOperationsInput | string
+    responsable?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FiliereCreateInput = {
     id?: string
     nom: string
     description?: string | null
+    niveauEtudes?: $Enums.NiveauEtudes
     departement: DepartementCreateNestedOneWithoutFilieresInput
+    etudiants?: EtudiantCreateNestedManyWithoutFiliereInput
   }
 
   export type FiliereUncheckedCreateInput = {
     id?: string
     nom: string
     description?: string | null
+    niveauEtudes?: $Enums.NiveauEtudes
     departementId: string
+    etudiants?: EtudiantUncheckedCreateNestedManyWithoutFiliereInput
   }
 
   export type FiliereUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
     departement?: DepartementUpdateOneRequiredWithoutFilieresNestedInput
+    etudiants?: EtudiantUpdateManyWithoutFiliereNestedInput
   }
 
   export type FiliereUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
     departementId?: StringFieldUpdateOperationsInput | string
+    etudiants?: EtudiantUncheckedUpdateManyWithoutFiliereNestedInput
   }
 
   export type FiliereCreateManyInput = {
     id?: string
     nom: string
     description?: string | null
+    niveauEtudes?: $Enums.NiveauEtudes
     departementId: string
   }
 
@@ -37491,12 +37477,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
   }
 
   export type FiliereUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
     departementId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -37511,7 +37499,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -37544,7 +37531,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -37577,7 +37563,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -37610,7 +37595,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -37643,7 +37627,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
   }
@@ -37659,7 +37642,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
   }
@@ -37675,7 +37657,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
   }
@@ -37685,11 +37666,9 @@ export namespace Prisma {
     numeroEtudiant: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    departement?: string | null
-    faculte?: string | null
-    specialite?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
     user: UserCreateNestedOneWithoutEtudiantsInput
+    filiere: FiliereCreateNestedOneWithoutEtudiantsInput
   }
 
   export type EtudiantUncheckedCreateInput = {
@@ -37698,10 +37677,8 @@ export namespace Prisma {
     numeroEtudiant: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    departement?: string | null
-    faculte?: string | null
-    specialite?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
+    filiereId: string
   }
 
   export type EtudiantUpdateInput = {
@@ -37709,11 +37686,9 @@ export namespace Prisma {
     numeroEtudiant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    departement?: NullableStringFieldUpdateOperationsInput | string | null
-    faculte?: NullableStringFieldUpdateOperationsInput | string | null
-    specialite?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
     user?: UserUpdateOneRequiredWithoutEtudiantsNestedInput
+    filiere?: FiliereUpdateOneRequiredWithoutEtudiantsNestedInput
   }
 
   export type EtudiantUncheckedUpdateInput = {
@@ -37722,10 +37697,8 @@ export namespace Prisma {
     numeroEtudiant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    departement?: NullableStringFieldUpdateOperationsInput | string | null
-    faculte?: NullableStringFieldUpdateOperationsInput | string | null
-    specialite?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    filiereId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EtudiantCreateManyInput = {
@@ -37734,10 +37707,8 @@ export namespace Prisma {
     numeroEtudiant: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    departement?: string | null
-    faculte?: string | null
-    specialite?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
+    filiereId: string
   }
 
   export type EtudiantUpdateManyMutationInput = {
@@ -37745,9 +37716,6 @@ export namespace Prisma {
     numeroEtudiant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    departement?: NullableStringFieldUpdateOperationsInput | string | null
-    faculte?: NullableStringFieldUpdateOperationsInput | string | null
-    specialite?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
   }
 
@@ -37757,10 +37725,8 @@ export namespace Prisma {
     numeroEtudiant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    departement?: NullableStringFieldUpdateOperationsInput | string | null
-    faculte?: NullableStringFieldUpdateOperationsInput | string | null
-    specialite?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    filiereId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EnseignantCreateInput = {
@@ -38443,7 +38409,6 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
@@ -38485,7 +38450,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceUpdateInput = {
@@ -38525,7 +38489,6 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
@@ -38567,7 +38530,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type RessourceCreateManyInput = {
@@ -38826,7 +38788,6 @@ export namespace Prisma {
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
     user: UserCreateNestedOneWithoutNotificationsInput
-    ressource?: RessourceCreateNestedOneWithoutNotificationsInput
   }
 
   export type NotificationUncheckedCreateInput = {
@@ -38837,7 +38798,6 @@ export namespace Prisma {
     dateCreation?: Date | string
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
-    ressourceId?: string | null
   }
 
   export type NotificationUpdateInput = {
@@ -38848,7 +38808,6 @@ export namespace Prisma {
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
     user?: UserUpdateOneRequiredWithoutNotificationsNestedInput
-    ressource?: RessourceUpdateOneWithoutNotificationsNestedInput
   }
 
   export type NotificationUncheckedUpdateInput = {
@@ -38859,7 +38818,6 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
-    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NotificationCreateManyInput = {
@@ -38870,7 +38828,6 @@ export namespace Prisma {
     dateCreation?: Date | string
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
-    ressourceId?: string | null
   }
 
   export type NotificationUpdateManyMutationInput = {
@@ -38890,7 +38847,6 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
-    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type JournalAuditCreateInput = {
@@ -39837,6 +39793,7 @@ export namespace Prisma {
     nom?: SortOrder
     description?: SortOrder
     ufrId?: SortOrder
+    responsable?: SortOrder
   }
 
   export type DepartementMaxOrderByAggregateInput = {
@@ -39844,6 +39801,7 @@ export namespace Prisma {
     nom?: SortOrder
     description?: SortOrder
     ufrId?: SortOrder
+    responsable?: SortOrder
   }
 
   export type DepartementMinOrderByAggregateInput = {
@@ -39851,11 +39809,29 @@ export namespace Prisma {
     nom?: SortOrder
     description?: SortOrder
     ufrId?: SortOrder
+    responsable?: SortOrder
+  }
+
+  export type EnumNiveauEtudesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NiveauEtudes | EnumNiveauEtudesFieldRefInput<$PrismaModel>
+    in?: $Enums.NiveauEtudes[]
+    notIn?: $Enums.NiveauEtudes[]
+    not?: NestedEnumNiveauEtudesFilter<$PrismaModel> | $Enums.NiveauEtudes
   }
 
   export type DepartementScalarRelationFilter = {
     is?: DepartementWhereInput
     isNot?: DepartementWhereInput
+  }
+
+  export type EtudiantListRelationFilter = {
+    every?: EtudiantWhereInput
+    some?: EtudiantWhereInput
+    none?: EtudiantWhereInput
+  }
+
+  export type EtudiantOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type FiliereOrderByRelevanceInput = {
@@ -39868,6 +39844,7 @@ export namespace Prisma {
     id?: SortOrder
     nom?: SortOrder
     description?: SortOrder
+    niveauEtudes?: SortOrder
     departementId?: SortOrder
   }
 
@@ -39875,6 +39852,7 @@ export namespace Prisma {
     id?: SortOrder
     nom?: SortOrder
     description?: SortOrder
+    niveauEtudes?: SortOrder
     departementId?: SortOrder
   }
 
@@ -39882,7 +39860,18 @@ export namespace Prisma {
     id?: SortOrder
     nom?: SortOrder
     description?: SortOrder
+    niveauEtudes?: SortOrder
     departementId?: SortOrder
+  }
+
+  export type EnumNiveauEtudesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NiveauEtudes | EnumNiveauEtudesFieldRefInput<$PrismaModel>
+    in?: $Enums.NiveauEtudes[]
+    notIn?: $Enums.NiveauEtudes[]
+    not?: NestedEnumNiveauEtudesWithAggregatesFilter<$PrismaModel> | $Enums.NiveauEtudes
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNiveauEtudesFilter<$PrismaModel>
+    _max?: NestedEnumNiveauEtudesFilter<$PrismaModel>
   }
 
   export type EnumFrequenceRecommandationFilter<$PrismaModel = never> = {
@@ -39958,12 +39947,6 @@ export namespace Prisma {
     none?: NotificationWhereInput
   }
 
-  export type EtudiantListRelationFilter = {
-    every?: EtudiantWhereInput
-    some?: EtudiantWhereInput
-    none?: EtudiantWhereInput
-  }
-
   export type EnseignantListRelationFilter = {
     every?: EnseignantWhereInput
     some?: EnseignantWhereInput
@@ -40026,10 +40009,6 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type EtudiantOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type EnseignantOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -40059,7 +40038,6 @@ export namespace Prisma {
     role?: SortOrder
     derniereConnexion?: SortOrder
     estActif?: SortOrder
-    universiteId?: SortOrder
     preferencesRecommandation?: SortOrder
     frequenceRecommandation?: SortOrder
   }
@@ -40075,7 +40053,6 @@ export namespace Prisma {
     role?: SortOrder
     derniereConnexion?: SortOrder
     estActif?: SortOrder
-    universiteId?: SortOrder
     preferencesRecommandation?: SortOrder
     frequenceRecommandation?: SortOrder
   }
@@ -40091,7 +40068,6 @@ export namespace Prisma {
     role?: SortOrder
     derniereConnexion?: SortOrder
     estActif?: SortOrder
-    universiteId?: SortOrder
     preferencesRecommandation?: SortOrder
     frequenceRecommandation?: SortOrder
   }
@@ -40106,11 +40082,9 @@ export namespace Prisma {
     _max?: NestedEnumFrequenceRecommandationFilter<$PrismaModel>
   }
 
-  export type EnumNiveauEtudesFilter<$PrismaModel = never> = {
-    equals?: $Enums.NiveauEtudes | EnumNiveauEtudesFieldRefInput<$PrismaModel>
-    in?: $Enums.NiveauEtudes[]
-    notIn?: $Enums.NiveauEtudes[]
-    not?: NestedEnumNiveauEtudesFilter<$PrismaModel> | $Enums.NiveauEtudes
+  export type FiliereScalarRelationFilter = {
+    is?: FiliereWhereInput
+    isNot?: FiliereWhereInput
   }
 
   export type EtudiantOrderByRelevanceInput = {
@@ -40125,10 +40099,8 @@ export namespace Prisma {
     numeroEtudiant?: SortOrder
     dateNaissance?: SortOrder
     dateInscription?: SortOrder
-    departement?: SortOrder
-    faculte?: SortOrder
-    specialite?: SortOrder
     niveauEtudes?: SortOrder
+    filiereId?: SortOrder
   }
 
   export type EtudiantMaxOrderByAggregateInput = {
@@ -40137,10 +40109,8 @@ export namespace Prisma {
     numeroEtudiant?: SortOrder
     dateNaissance?: SortOrder
     dateInscription?: SortOrder
-    departement?: SortOrder
-    faculte?: SortOrder
-    specialite?: SortOrder
     niveauEtudes?: SortOrder
+    filiereId?: SortOrder
   }
 
   export type EtudiantMinOrderByAggregateInput = {
@@ -40149,20 +40119,8 @@ export namespace Prisma {
     numeroEtudiant?: SortOrder
     dateNaissance?: SortOrder
     dateInscription?: SortOrder
-    departement?: SortOrder
-    faculte?: SortOrder
-    specialite?: SortOrder
     niveauEtudes?: SortOrder
-  }
-
-  export type EnumNiveauEtudesWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.NiveauEtudes | EnumNiveauEtudesFieldRefInput<$PrismaModel>
-    in?: $Enums.NiveauEtudes[]
-    notIn?: $Enums.NiveauEtudes[]
-    not?: NestedEnumNiveauEtudesWithAggregatesFilter<$PrismaModel> | $Enums.NiveauEtudes
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumNiveauEtudesFilter<$PrismaModel>
-    _max?: NestedEnumNiveauEtudesFilter<$PrismaModel>
+    filiereId?: SortOrder
   }
 
   export type EnseignantOrderByRelevanceInput = {
@@ -40930,11 +40888,6 @@ export namespace Prisma {
     not?: NestedEnumTypeNotificationFilter<$PrismaModel> | $Enums.TypeNotification
   }
 
-  export type RessourceNullableScalarRelationFilter = {
-    is?: RessourceWhereInput | null
-    isNot?: RessourceWhereInput | null
-  }
-
   export type NotificationOrderByRelevanceInput = {
     fields: NotificationOrderByRelevanceFieldEnum | NotificationOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -40949,7 +40902,6 @@ export namespace Prisma {
     dateCreation?: SortOrder
     estLue?: SortOrder
     typeNotification?: SortOrder
-    ressourceId?: SortOrder
   }
 
   export type NotificationMaxOrderByAggregateInput = {
@@ -40960,7 +40912,6 @@ export namespace Prisma {
     dateCreation?: SortOrder
     estLue?: SortOrder
     typeNotification?: SortOrder
-    ressourceId?: SortOrder
   }
 
   export type NotificationMinOrderByAggregateInput = {
@@ -40971,7 +40922,6 @@ export namespace Prisma {
     dateCreation?: SortOrder
     estLue?: SortOrder
     typeNotification?: SortOrder
-    ressourceId?: SortOrder
   }
 
   export type EnumTypeNotificationWithAggregatesFilter<$PrismaModel = never> = {
@@ -41680,12 +41630,58 @@ export namespace Prisma {
     connect?: DepartementWhereUniqueInput
   }
 
+  export type EtudiantCreateNestedManyWithoutFiliereInput = {
+    create?: XOR<EtudiantCreateWithoutFiliereInput, EtudiantUncheckedCreateWithoutFiliereInput> | EtudiantCreateWithoutFiliereInput[] | EtudiantUncheckedCreateWithoutFiliereInput[]
+    connectOrCreate?: EtudiantCreateOrConnectWithoutFiliereInput | EtudiantCreateOrConnectWithoutFiliereInput[]
+    createMany?: EtudiantCreateManyFiliereInputEnvelope
+    connect?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
+  }
+
+  export type EtudiantUncheckedCreateNestedManyWithoutFiliereInput = {
+    create?: XOR<EtudiantCreateWithoutFiliereInput, EtudiantUncheckedCreateWithoutFiliereInput> | EtudiantCreateWithoutFiliereInput[] | EtudiantUncheckedCreateWithoutFiliereInput[]
+    connectOrCreate?: EtudiantCreateOrConnectWithoutFiliereInput | EtudiantCreateOrConnectWithoutFiliereInput[]
+    createMany?: EtudiantCreateManyFiliereInputEnvelope
+    connect?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
+  }
+
+  export type EnumNiveauEtudesFieldUpdateOperationsInput = {
+    set?: $Enums.NiveauEtudes
+  }
+
   export type DepartementUpdateOneRequiredWithoutFilieresNestedInput = {
     create?: XOR<DepartementCreateWithoutFilieresInput, DepartementUncheckedCreateWithoutFilieresInput>
     connectOrCreate?: DepartementCreateOrConnectWithoutFilieresInput
     upsert?: DepartementUpsertWithoutFilieresInput
     connect?: DepartementWhereUniqueInput
     update?: XOR<XOR<DepartementUpdateToOneWithWhereWithoutFilieresInput, DepartementUpdateWithoutFilieresInput>, DepartementUncheckedUpdateWithoutFilieresInput>
+  }
+
+  export type EtudiantUpdateManyWithoutFiliereNestedInput = {
+    create?: XOR<EtudiantCreateWithoutFiliereInput, EtudiantUncheckedCreateWithoutFiliereInput> | EtudiantCreateWithoutFiliereInput[] | EtudiantUncheckedCreateWithoutFiliereInput[]
+    connectOrCreate?: EtudiantCreateOrConnectWithoutFiliereInput | EtudiantCreateOrConnectWithoutFiliereInput[]
+    upsert?: EtudiantUpsertWithWhereUniqueWithoutFiliereInput | EtudiantUpsertWithWhereUniqueWithoutFiliereInput[]
+    createMany?: EtudiantCreateManyFiliereInputEnvelope
+    set?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
+    disconnect?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
+    delete?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
+    connect?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
+    update?: EtudiantUpdateWithWhereUniqueWithoutFiliereInput | EtudiantUpdateWithWhereUniqueWithoutFiliereInput[]
+    updateMany?: EtudiantUpdateManyWithWhereWithoutFiliereInput | EtudiantUpdateManyWithWhereWithoutFiliereInput[]
+    deleteMany?: EtudiantScalarWhereInput | EtudiantScalarWhereInput[]
+  }
+
+  export type EtudiantUncheckedUpdateManyWithoutFiliereNestedInput = {
+    create?: XOR<EtudiantCreateWithoutFiliereInput, EtudiantUncheckedCreateWithoutFiliereInput> | EtudiantCreateWithoutFiliereInput[] | EtudiantUncheckedCreateWithoutFiliereInput[]
+    connectOrCreate?: EtudiantCreateOrConnectWithoutFiliereInput | EtudiantCreateOrConnectWithoutFiliereInput[]
+    upsert?: EtudiantUpsertWithWhereUniqueWithoutFiliereInput | EtudiantUpsertWithWhereUniqueWithoutFiliereInput[]
+    createMany?: EtudiantCreateManyFiliereInputEnvelope
+    set?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
+    disconnect?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
+    delete?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
+    connect?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
+    update?: EtudiantUpdateWithWhereUniqueWithoutFiliereInput | EtudiantUpdateWithWhereUniqueWithoutFiliereInput[]
+    updateMany?: EtudiantUpdateManyWithWhereWithoutFiliereInput | EtudiantUpdateManyWithWhereWithoutFiliereInput[]
+    deleteMany?: EtudiantScalarWhereInput | EtudiantScalarWhereInput[]
   }
 
   export type RessourceCreateNestedManyWithoutAuteurInput = {
@@ -42412,8 +42408,10 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type EnumNiveauEtudesFieldUpdateOperationsInput = {
-    set?: $Enums.NiveauEtudes
+  export type FiliereCreateNestedOneWithoutEtudiantsInput = {
+    create?: XOR<FiliereCreateWithoutEtudiantsInput, FiliereUncheckedCreateWithoutEtudiantsInput>
+    connectOrCreate?: FiliereCreateOrConnectWithoutEtudiantsInput
+    connect?: FiliereWhereUniqueInput
   }
 
   export type UserUpdateOneRequiredWithoutEtudiantsNestedInput = {
@@ -42422,6 +42420,14 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutEtudiantsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEtudiantsInput, UserUpdateWithoutEtudiantsInput>, UserUncheckedUpdateWithoutEtudiantsInput>
+  }
+
+  export type FiliereUpdateOneRequiredWithoutEtudiantsNestedInput = {
+    create?: XOR<FiliereCreateWithoutEtudiantsInput, FiliereUncheckedCreateWithoutEtudiantsInput>
+    connectOrCreate?: FiliereCreateOrConnectWithoutEtudiantsInput
+    upsert?: FiliereUpsertWithoutEtudiantsInput
+    connect?: FiliereWhereUniqueInput
+    update?: XOR<XOR<FiliereUpdateToOneWithWhereWithoutEtudiantsInput, FiliereUpdateWithoutEtudiantsInput>, FiliereUncheckedUpdateWithoutEtudiantsInput>
   }
 
   export type UserCreateNestedOneWithoutEnseignantsInput = {
@@ -42809,13 +42815,6 @@ export namespace Prisma {
     connect?: DonneesRecommandationWhereUniqueInput | DonneesRecommandationWhereUniqueInput[]
   }
 
-  export type NotificationCreateNestedManyWithoutRessourceInput = {
-    create?: XOR<NotificationCreateWithoutRessourceInput, NotificationUncheckedCreateWithoutRessourceInput> | NotificationCreateWithoutRessourceInput[] | NotificationUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutRessourceInput | NotificationCreateOrConnectWithoutRessourceInput[]
-    createMany?: NotificationCreateManyRessourceInputEnvelope
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-  }
-
   export type CategorieCreateNestedOneWithoutRessourcesInput = {
     create?: XOR<CategorieCreateWithoutRessourcesInput, CategorieUncheckedCreateWithoutRessourcesInput>
     connectOrCreate?: CategorieCreateOrConnectWithoutRessourcesInput
@@ -42883,13 +42882,6 @@ export namespace Prisma {
     connectOrCreate?: DonneesRecommandationCreateOrConnectWithoutRessourceInput | DonneesRecommandationCreateOrConnectWithoutRessourceInput[]
     createMany?: DonneesRecommandationCreateManyRessourceInputEnvelope
     connect?: DonneesRecommandationWhereUniqueInput | DonneesRecommandationWhereUniqueInput[]
-  }
-
-  export type NotificationUncheckedCreateNestedManyWithoutRessourceInput = {
-    create?: XOR<NotificationCreateWithoutRessourceInput, NotificationUncheckedCreateWithoutRessourceInput> | NotificationCreateWithoutRessourceInput[] | NotificationUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutRessourceInput | NotificationCreateOrConnectWithoutRessourceInput[]
-    createMany?: NotificationCreateManyRessourceInputEnvelope
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
   export type EnumTypeRessourceFieldUpdateOperationsInput = {
@@ -43048,20 +43040,6 @@ export namespace Prisma {
     deleteMany?: DonneesRecommandationScalarWhereInput | DonneesRecommandationScalarWhereInput[]
   }
 
-  export type NotificationUpdateManyWithoutRessourceNestedInput = {
-    create?: XOR<NotificationCreateWithoutRessourceInput, NotificationUncheckedCreateWithoutRessourceInput> | NotificationCreateWithoutRessourceInput[] | NotificationUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutRessourceInput | NotificationCreateOrConnectWithoutRessourceInput[]
-    upsert?: NotificationUpsertWithWhereUniqueWithoutRessourceInput | NotificationUpsertWithWhereUniqueWithoutRessourceInput[]
-    createMany?: NotificationCreateManyRessourceInputEnvelope
-    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    update?: NotificationUpdateWithWhereUniqueWithoutRessourceInput | NotificationUpdateWithWhereUniqueWithoutRessourceInput[]
-    updateMany?: NotificationUpdateManyWithWhereWithoutRessourceInput | NotificationUpdateManyWithWhereWithoutRessourceInput[]
-    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-  }
-
   export type CategorieUpdateOneWithoutRessourcesNestedInput = {
     create?: XOR<CategorieCreateWithoutRessourcesInput, CategorieUncheckedCreateWithoutRessourcesInput>
     connectOrCreate?: CategorieCreateOrConnectWithoutRessourcesInput
@@ -43198,20 +43176,6 @@ export namespace Prisma {
     deleteMany?: DonneesRecommandationScalarWhereInput | DonneesRecommandationScalarWhereInput[]
   }
 
-  export type NotificationUncheckedUpdateManyWithoutRessourceNestedInput = {
-    create?: XOR<NotificationCreateWithoutRessourceInput, NotificationUncheckedCreateWithoutRessourceInput> | NotificationCreateWithoutRessourceInput[] | NotificationUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutRessourceInput | NotificationCreateOrConnectWithoutRessourceInput[]
-    upsert?: NotificationUpsertWithWhereUniqueWithoutRessourceInput | NotificationUpsertWithWhereUniqueWithoutRessourceInput[]
-    createMany?: NotificationCreateManyRessourceInputEnvelope
-    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    update?: NotificationUpdateWithWhereUniqueWithoutRessourceInput | NotificationUpdateWithWhereUniqueWithoutRessourceInput[]
-    updateMany?: NotificationUpdateManyWithWhereWithoutRessourceInput | NotificationUpdateManyWithWhereWithoutRessourceInput[]
-    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-  }
-
   export type RessourceCreateNestedManyWithoutCategorieInput = {
     create?: XOR<RessourceCreateWithoutCategorieInput, RessourceUncheckedCreateWithoutCategorieInput> | RessourceCreateWithoutCategorieInput[] | RessourceUncheckedCreateWithoutCategorieInput[]
     connectOrCreate?: RessourceCreateOrConnectWithoutCategorieInput | RessourceCreateOrConnectWithoutCategorieInput[]
@@ -43282,12 +43246,6 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type RessourceCreateNestedOneWithoutNotificationsInput = {
-    create?: XOR<RessourceCreateWithoutNotificationsInput, RessourceUncheckedCreateWithoutNotificationsInput>
-    connectOrCreate?: RessourceCreateOrConnectWithoutNotificationsInput
-    connect?: RessourceWhereUniqueInput
-  }
-
   export type EnumTypeNotificationFieldUpdateOperationsInput = {
     set?: $Enums.TypeNotification
   }
@@ -43298,16 +43256,6 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutNotificationsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotificationsInput, UserUpdateWithoutNotificationsInput>, UserUncheckedUpdateWithoutNotificationsInput>
-  }
-
-  export type RessourceUpdateOneWithoutNotificationsNestedInput = {
-    create?: XOR<RessourceCreateWithoutNotificationsInput, RessourceUncheckedCreateWithoutNotificationsInput>
-    connectOrCreate?: RessourceCreateOrConnectWithoutNotificationsInput
-    upsert?: RessourceUpsertWithoutNotificationsInput
-    disconnect?: RessourceWhereInput | boolean
-    delete?: RessourceWhereInput | boolean
-    connect?: RessourceWhereUniqueInput
-    update?: XOR<XOR<RessourceUpdateToOneWithWhereWithoutNotificationsInput, RessourceUpdateWithoutNotificationsInput>, RessourceUncheckedUpdateWithoutNotificationsInput>
   }
 
   export type UserCreateNestedOneWithoutJournalAuditInput = {
@@ -43639,23 +43587,6 @@ export namespace Prisma {
     _max?: NestedEnumMotifRecommandationFilter<$PrismaModel>
   }
 
-  export type NestedEnumFrequenceRecommandationFilter<$PrismaModel = never> = {
-    equals?: $Enums.FrequenceRecommandation | EnumFrequenceRecommandationFieldRefInput<$PrismaModel>
-    in?: $Enums.FrequenceRecommandation[]
-    notIn?: $Enums.FrequenceRecommandation[]
-    not?: NestedEnumFrequenceRecommandationFilter<$PrismaModel> | $Enums.FrequenceRecommandation
-  }
-
-  export type NestedEnumFrequenceRecommandationWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.FrequenceRecommandation | EnumFrequenceRecommandationFieldRefInput<$PrismaModel>
-    in?: $Enums.FrequenceRecommandation[]
-    notIn?: $Enums.FrequenceRecommandation[]
-    not?: NestedEnumFrequenceRecommandationWithAggregatesFilter<$PrismaModel> | $Enums.FrequenceRecommandation
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumFrequenceRecommandationFilter<$PrismaModel>
-    _max?: NestedEnumFrequenceRecommandationFilter<$PrismaModel>
-  }
-
   export type NestedEnumNiveauEtudesFilter<$PrismaModel = never> = {
     equals?: $Enums.NiveauEtudes | EnumNiveauEtudesFieldRefInput<$PrismaModel>
     in?: $Enums.NiveauEtudes[]
@@ -43671,6 +43602,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumNiveauEtudesFilter<$PrismaModel>
     _max?: NestedEnumNiveauEtudesFilter<$PrismaModel>
+  }
+
+  export type NestedEnumFrequenceRecommandationFilter<$PrismaModel = never> = {
+    equals?: $Enums.FrequenceRecommandation | EnumFrequenceRecommandationFieldRefInput<$PrismaModel>
+    in?: $Enums.FrequenceRecommandation[]
+    notIn?: $Enums.FrequenceRecommandation[]
+    not?: NestedEnumFrequenceRecommandationFilter<$PrismaModel> | $Enums.FrequenceRecommandation
+  }
+
+  export type NestedEnumFrequenceRecommandationWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FrequenceRecommandation | EnumFrequenceRecommandationFieldRefInput<$PrismaModel>
+    in?: $Enums.FrequenceRecommandation[]
+    notIn?: $Enums.FrequenceRecommandation[]
+    not?: NestedEnumFrequenceRecommandationWithAggregatesFilter<$PrismaModel> | $Enums.FrequenceRecommandation
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFrequenceRecommandationFilter<$PrismaModel>
+    _max?: NestedEnumFrequenceRecommandationFilter<$PrismaModel>
   }
 
   export type NestedEnumTypeAccesFilter<$PrismaModel = never> = {
@@ -43972,7 +43920,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -44004,7 +43951,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -44085,7 +44031,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -44117,7 +44062,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -44188,7 +44132,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -44220,7 +44163,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -44282,7 +44224,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
@@ -44323,7 +44264,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutReservationsInput = {
@@ -44378,7 +44318,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -44410,7 +44349,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -44478,7 +44416,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
@@ -44519,7 +44456,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type BibliothecaireUpsertWithoutReservationsInput = {
@@ -44589,7 +44525,6 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
@@ -44630,7 +44565,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutExemplairesInput = {
@@ -44723,7 +44657,6 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
@@ -44764,7 +44697,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type EmpruntUpsertWithWhereUniqueWithoutExemplaireInput = {
@@ -44842,7 +44774,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -44874,7 +44805,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -44989,7 +44919,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -45021,7 +44950,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -45083,7 +45011,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -45115,7 +45042,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -45177,7 +45103,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
@@ -45218,7 +45143,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutRecommandationsInput = {
@@ -45248,7 +45172,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -45280,7 +45203,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -45348,7 +45270,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
@@ -45389,7 +45310,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type StatistiqueBibliothequeCreateWithoutUniversiteInput = {
@@ -45662,6 +45582,7 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
+    responsable?: string | null
     filieres?: FiliereCreateNestedManyWithoutDepartementInput
   }
 
@@ -45669,6 +45590,7 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
+    responsable?: string | null
     filieres?: FiliereUncheckedCreateNestedManyWithoutDepartementInput
   }
 
@@ -45739,6 +45661,7 @@ export namespace Prisma {
     nom?: StringFilter<"Departement"> | string
     description?: StringNullableFilter<"Departement"> | string | null
     ufrId?: StringFilter<"Departement"> | string
+    responsable?: StringNullableFilter<"Departement"> | string | null
   }
 
   export type UfrCreateWithoutDepartementsInput = {
@@ -45764,12 +45687,16 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
+    niveauEtudes?: $Enums.NiveauEtudes
+    etudiants?: EtudiantCreateNestedManyWithoutFiliereInput
   }
 
   export type FiliereUncheckedCreateWithoutDepartementInput = {
     id?: string
     nom: string
     description?: string | null
+    niveauEtudes?: $Enums.NiveauEtudes
+    etudiants?: EtudiantUncheckedCreateNestedManyWithoutFiliereInput
   }
 
   export type FiliereCreateOrConnectWithoutDepartementInput = {
@@ -45830,6 +45757,7 @@ export namespace Prisma {
     id?: StringFilter<"Filiere"> | string
     nom?: StringFilter<"Filiere"> | string
     description?: StringNullableFilter<"Filiere"> | string | null
+    niveauEtudes?: EnumNiveauEtudesFilter<"Filiere"> | $Enums.NiveauEtudes
     departementId?: StringFilter<"Filiere"> | string
   }
 
@@ -45837,6 +45765,7 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
+    responsable?: string | null
     ufr: UfrCreateNestedOneWithoutDepartementsInput
   }
 
@@ -45845,11 +45774,40 @@ export namespace Prisma {
     nom: string
     description?: string | null
     ufrId: string
+    responsable?: string | null
   }
 
   export type DepartementCreateOrConnectWithoutFilieresInput = {
     where: DepartementWhereUniqueInput
     create: XOR<DepartementCreateWithoutFilieresInput, DepartementUncheckedCreateWithoutFilieresInput>
+  }
+
+  export type EtudiantCreateWithoutFiliereInput = {
+    id?: string
+    numeroEtudiant: string
+    dateNaissance: Date | string
+    dateInscription?: Date | string
+    niveauEtudes?: $Enums.NiveauEtudes
+    user: UserCreateNestedOneWithoutEtudiantsInput
+  }
+
+  export type EtudiantUncheckedCreateWithoutFiliereInput = {
+    id?: string
+    userId: string
+    numeroEtudiant: string
+    dateNaissance: Date | string
+    dateInscription?: Date | string
+    niveauEtudes?: $Enums.NiveauEtudes
+  }
+
+  export type EtudiantCreateOrConnectWithoutFiliereInput = {
+    where: EtudiantWhereUniqueInput
+    create: XOR<EtudiantCreateWithoutFiliereInput, EtudiantUncheckedCreateWithoutFiliereInput>
+  }
+
+  export type EtudiantCreateManyFiliereInputEnvelope = {
+    data: EtudiantCreateManyFiliereInput | EtudiantCreateManyFiliereInput[]
+    skipDuplicates?: boolean
   }
 
   export type DepartementUpsertWithoutFilieresInput = {
@@ -45867,6 +45825,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    responsable?: NullableStringFieldUpdateOperationsInput | string | null
     ufr?: UfrUpdateOneRequiredWithoutDepartementsNestedInput
   }
 
@@ -45875,6 +45834,36 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ufrId?: StringFieldUpdateOperationsInput | string
+    responsable?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type EtudiantUpsertWithWhereUniqueWithoutFiliereInput = {
+    where: EtudiantWhereUniqueInput
+    update: XOR<EtudiantUpdateWithoutFiliereInput, EtudiantUncheckedUpdateWithoutFiliereInput>
+    create: XOR<EtudiantCreateWithoutFiliereInput, EtudiantUncheckedCreateWithoutFiliereInput>
+  }
+
+  export type EtudiantUpdateWithWhereUniqueWithoutFiliereInput = {
+    where: EtudiantWhereUniqueInput
+    data: XOR<EtudiantUpdateWithoutFiliereInput, EtudiantUncheckedUpdateWithoutFiliereInput>
+  }
+
+  export type EtudiantUpdateManyWithWhereWithoutFiliereInput = {
+    where: EtudiantScalarWhereInput
+    data: XOR<EtudiantUpdateManyMutationInput, EtudiantUncheckedUpdateManyWithoutFiliereInput>
+  }
+
+  export type EtudiantScalarWhereInput = {
+    AND?: EtudiantScalarWhereInput | EtudiantScalarWhereInput[]
+    OR?: EtudiantScalarWhereInput[]
+    NOT?: EtudiantScalarWhereInput | EtudiantScalarWhereInput[]
+    id?: StringFilter<"Etudiant"> | string
+    userId?: StringFilter<"Etudiant"> | string
+    numeroEtudiant?: StringFilter<"Etudiant"> | string
+    dateNaissance?: DateTimeFilter<"Etudiant"> | Date | string
+    dateInscription?: DateTimeFilter<"Etudiant"> | Date | string
+    niveauEtudes?: EnumNiveauEtudesFilter<"Etudiant"> | $Enums.NiveauEtudes
+    filiereId?: StringFilter<"Etudiant"> | string
   }
 
   export type RessourceCreateWithoutAuteurInput = {
@@ -45913,7 +45902,6 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
@@ -45954,7 +45942,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutAuteurInput = {
@@ -46272,7 +46259,6 @@ export namespace Prisma {
     dateCreation?: Date | string
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
-    ressource?: RessourceCreateNestedOneWithoutNotificationsInput
   }
 
   export type NotificationUncheckedCreateWithoutUserInput = {
@@ -46282,7 +46268,6 @@ export namespace Prisma {
     dateCreation?: Date | string
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
-    ressourceId?: string | null
   }
 
   export type NotificationCreateOrConnectWithoutUserInput = {
@@ -46300,10 +46285,8 @@ export namespace Prisma {
     numeroEtudiant: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    departement?: string | null
-    faculte?: string | null
-    specialite?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
+    filiere: FiliereCreateNestedOneWithoutEtudiantsInput
   }
 
   export type EtudiantUncheckedCreateWithoutUserInput = {
@@ -46311,10 +46294,8 @@ export namespace Prisma {
     numeroEtudiant: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    departement?: string | null
-    faculte?: string | null
-    specialite?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
+    filiereId: string
   }
 
   export type EtudiantCreateOrConnectWithoutUserInput = {
@@ -46796,7 +46777,6 @@ export namespace Prisma {
     dateCreation?: DateTimeFilter<"Notification"> | Date | string
     estLue?: BoolFilter<"Notification"> | boolean
     typeNotification?: EnumTypeNotificationFilter<"Notification"> | $Enums.TypeNotification
-    ressourceId?: StringNullableFilter<"Notification"> | string | null
   }
 
   export type EtudiantUpsertWithWhereUniqueWithoutUserInput = {
@@ -46813,21 +46793,6 @@ export namespace Prisma {
   export type EtudiantUpdateManyWithWhereWithoutUserInput = {
     where: EtudiantScalarWhereInput
     data: XOR<EtudiantUpdateManyMutationInput, EtudiantUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type EtudiantScalarWhereInput = {
-    AND?: EtudiantScalarWhereInput | EtudiantScalarWhereInput[]
-    OR?: EtudiantScalarWhereInput[]
-    NOT?: EtudiantScalarWhereInput | EtudiantScalarWhereInput[]
-    id?: StringFilter<"Etudiant"> | string
-    userId?: StringFilter<"Etudiant"> | string
-    numeroEtudiant?: StringFilter<"Etudiant"> | string
-    dateNaissance?: DateTimeFilter<"Etudiant"> | Date | string
-    dateInscription?: DateTimeFilter<"Etudiant"> | Date | string
-    departement?: StringNullableFilter<"Etudiant"> | string | null
-    faculte?: StringNullableFilter<"Etudiant"> | string | null
-    specialite?: StringNullableFilter<"Etudiant"> | string | null
-    niveauEtudes?: EnumNiveauEtudesFilter<"Etudiant"> | $Enums.NiveauEtudes
   }
 
   export type EnseignantUpsertWithWhereUniqueWithoutUserInput = {
@@ -46942,7 +46907,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -46974,7 +46938,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -47000,6 +46963,27 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutEtudiantsInput, UserUncheckedCreateWithoutEtudiantsInput>
   }
 
+  export type FiliereCreateWithoutEtudiantsInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    niveauEtudes?: $Enums.NiveauEtudes
+    departement: DepartementCreateNestedOneWithoutFilieresInput
+  }
+
+  export type FiliereUncheckedCreateWithoutEtudiantsInput = {
+    id?: string
+    nom: string
+    description?: string | null
+    niveauEtudes?: $Enums.NiveauEtudes
+    departementId: string
+  }
+
+  export type FiliereCreateOrConnectWithoutEtudiantsInput = {
+    where: FiliereWhereUniqueInput
+    create: XOR<FiliereCreateWithoutEtudiantsInput, FiliereUncheckedCreateWithoutEtudiantsInput>
+  }
+
   export type UserUpsertWithoutEtudiantsInput = {
     update: XOR<UserUpdateWithoutEtudiantsInput, UserUncheckedUpdateWithoutEtudiantsInput>
     create: XOR<UserCreateWithoutEtudiantsInput, UserUncheckedCreateWithoutEtudiantsInput>
@@ -47022,7 +47006,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -47054,7 +47037,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -47075,6 +47057,33 @@ export namespace Prisma {
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type FiliereUpsertWithoutEtudiantsInput = {
+    update: XOR<FiliereUpdateWithoutEtudiantsInput, FiliereUncheckedUpdateWithoutEtudiantsInput>
+    create: XOR<FiliereCreateWithoutEtudiantsInput, FiliereUncheckedCreateWithoutEtudiantsInput>
+    where?: FiliereWhereInput
+  }
+
+  export type FiliereUpdateToOneWithWhereWithoutEtudiantsInput = {
+    where?: FiliereWhereInput
+    data: XOR<FiliereUpdateWithoutEtudiantsInput, FiliereUncheckedUpdateWithoutEtudiantsInput>
+  }
+
+  export type FiliereUpdateWithoutEtudiantsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    departement?: DepartementUpdateOneRequiredWithoutFilieresNestedInput
+  }
+
+  export type FiliereUncheckedUpdateWithoutEtudiantsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    departementId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type UserCreateWithoutEnseignantsInput = {
     id?: string
     email: string
@@ -47086,7 +47095,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -47118,7 +47126,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -47166,7 +47173,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -47198,7 +47204,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -47230,7 +47235,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -47262,7 +47266,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -47344,7 +47347,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -47376,7 +47378,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -47424,7 +47425,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -47456,7 +47456,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -47504,7 +47503,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -47536,7 +47534,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -47568,7 +47565,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -47600,7 +47596,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -47662,7 +47657,6 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
@@ -47703,7 +47697,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutFavorisInput = {
@@ -47733,7 +47726,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -47765,7 +47757,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -47833,7 +47824,6 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
@@ -47874,7 +47864,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type UserCreateWithoutCommentairesInput = {
@@ -47888,7 +47877,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -47920,7 +47908,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -47982,7 +47969,6 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
@@ -48023,7 +48009,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutCommentairesInput = {
@@ -48053,7 +48038,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -48085,7 +48069,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -48153,7 +48136,6 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
@@ -48194,7 +48176,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type UserCreateWithoutNotationsInput = {
@@ -48208,7 +48189,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -48240,7 +48220,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -48302,7 +48281,6 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
@@ -48343,7 +48321,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutNotationsInput = {
@@ -48373,7 +48350,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -48405,7 +48381,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -48473,7 +48448,6 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
@@ -48514,7 +48488,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type UserCreateWithoutHistoriquesInput = {
@@ -48528,7 +48501,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -48560,7 +48532,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -48622,7 +48593,6 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
@@ -48663,7 +48633,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutHistoriquesInput = {
@@ -48693,7 +48662,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -48725,7 +48693,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -48793,7 +48760,6 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
@@ -48834,7 +48800,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type UserCreateWithoutDonneesRecommandationsInput = {
@@ -48848,7 +48813,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -48880,7 +48844,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -48942,7 +48905,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
@@ -48983,7 +48945,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutDonneesRecommandationsInput = {
@@ -49013,7 +48974,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -49045,7 +49005,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -49113,7 +49072,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
@@ -49154,7 +49112,6 @@ export namespace Prisma {
     exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type UserCreateWithoutCollectionsInput = {
@@ -49168,7 +49125,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -49200,7 +49156,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -49272,7 +49227,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -49304,7 +49258,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -49409,7 +49362,6 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
@@ -49450,7 +49402,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutCollectionsInput = {
@@ -49532,7 +49483,6 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
@@ -49573,7 +49523,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type UserCreateWithoutContributionsInput = {
@@ -49587,7 +49536,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     favoris?: FavoriCreateNestedManyWithoutUserInput
@@ -49619,7 +49567,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     favoris?: FavoriUncheckedCreateNestedManyWithoutUserInput
@@ -49909,36 +49856,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type NotificationCreateWithoutRessourceInput = {
-    id?: string
-    titre: string
-    message: string
-    dateCreation?: Date | string
-    estLue?: boolean
-    typeNotification: $Enums.TypeNotification
-    user: UserCreateNestedOneWithoutNotificationsInput
-  }
-
-  export type NotificationUncheckedCreateWithoutRessourceInput = {
-    id?: string
-    userId: string
-    titre: string
-    message: string
-    dateCreation?: Date | string
-    estLue?: boolean
-    typeNotification: $Enums.TypeNotification
-  }
-
-  export type NotificationCreateOrConnectWithoutRessourceInput = {
-    where: NotificationWhereUniqueInput
-    create: XOR<NotificationCreateWithoutRessourceInput, NotificationUncheckedCreateWithoutRessourceInput>
-  }
-
-  export type NotificationCreateManyRessourceInputEnvelope = {
-    data: NotificationCreateManyRessourceInput | NotificationCreateManyRessourceInput[]
-    skipDuplicates?: boolean
-  }
-
   export type CategorieCreateWithoutRessourcesInput = {
     id?: string
     libelle: string
@@ -49980,7 +49897,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     favoris?: FavoriUpdateManyWithoutUserNestedInput
@@ -50012,7 +49928,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     favoris?: FavoriUncheckedUpdateManyWithoutUserNestedInput
@@ -50193,22 +50108,6 @@ export namespace Prisma {
     data: XOR<DonneesRecommandationUpdateManyMutationInput, DonneesRecommandationUncheckedUpdateManyWithoutRessourceInput>
   }
 
-  export type NotificationUpsertWithWhereUniqueWithoutRessourceInput = {
-    where: NotificationWhereUniqueInput
-    update: XOR<NotificationUpdateWithoutRessourceInput, NotificationUncheckedUpdateWithoutRessourceInput>
-    create: XOR<NotificationCreateWithoutRessourceInput, NotificationUncheckedCreateWithoutRessourceInput>
-  }
-
-  export type NotificationUpdateWithWhereUniqueWithoutRessourceInput = {
-    where: NotificationWhereUniqueInput
-    data: XOR<NotificationUpdateWithoutRessourceInput, NotificationUncheckedUpdateWithoutRessourceInput>
-  }
-
-  export type NotificationUpdateManyWithWhereWithoutRessourceInput = {
-    where: NotificationScalarWhereInput
-    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutRessourceInput>
-  }
-
   export type CategorieUpsertWithoutRessourcesInput = {
     update: XOR<CategorieUpdateWithoutRessourcesInput, CategorieUncheckedUpdateWithoutRessourcesInput>
     create: XOR<CategorieCreateWithoutRessourcesInput, CategorieUncheckedCreateWithoutRessourcesInput>
@@ -50271,7 +50170,6 @@ export namespace Prisma {
     reservations?: ReservationCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceUncheckedCreateWithoutCategorieInput = {
@@ -50311,7 +50209,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
   export type RessourceCreateOrConnectWithoutCategorieInput = {
@@ -50411,7 +50308,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -50443,7 +50339,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -50469,91 +50364,6 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutNotificationsInput, UserUncheckedCreateWithoutNotificationsInput>
   }
 
-  export type RessourceCreateWithoutNotificationsInput = {
-    id?: string
-    titre: string
-    description: string
-    type: $Enums.TypeRessource
-    langue?: string
-    urlFichier: string
-    urlFichierLocal?: string | null
-    format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
-    image?: string | null
-    niveauAcces?: $Enums.NiveauAcces
-    datePublication?: Date | string | null
-    estValide?: boolean
-    estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
-    validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    auteur?: UserCreateNestedOneWithoutContributionsInput
-    favoris?: FavoriCreateNestedManyWithoutRessourceInput
-    commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
-    notations?: NotationCreateNestedManyWithoutRessourceInput
-    historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
-    collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
-    recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
-    donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
-  }
-
-  export type RessourceUncheckedCreateWithoutNotificationsInput = {
-    id?: string
-    titre: string
-    description: string
-    type: $Enums.TypeRessource
-    langue?: string
-    urlFichier: string
-    urlFichierLocal?: string | null
-    format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
-    image?: string | null
-    niveauAcces?: $Enums.NiveauAcces
-    datePublication?: Date | string | null
-    estValide?: boolean
-    estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
-    validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    categorieId: string
-    favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
-    commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
-    notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
-    historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
-    collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
-    recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-  }
-
-  export type RessourceCreateOrConnectWithoutNotificationsInput = {
-    where: RessourceWhereUniqueInput
-    create: XOR<RessourceCreateWithoutNotificationsInput, RessourceUncheckedCreateWithoutNotificationsInput>
-  }
-
   export type UserUpsertWithoutNotificationsInput = {
     update: XOR<UserUpdateWithoutNotificationsInput, UserUncheckedUpdateWithoutNotificationsInput>
     create: XOR<UserCreateWithoutNotificationsInput, UserUncheckedCreateWithoutNotificationsInput>
@@ -50576,7 +50386,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -50608,7 +50417,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -50629,97 +50437,6 @@ export namespace Prisma {
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type RessourceUpsertWithoutNotificationsInput = {
-    update: XOR<RessourceUpdateWithoutNotificationsInput, RessourceUncheckedUpdateWithoutNotificationsInput>
-    create: XOR<RessourceCreateWithoutNotificationsInput, RessourceUncheckedCreateWithoutNotificationsInput>
-    where?: RessourceWhereInput
-  }
-
-  export type RessourceUpdateToOneWithWhereWithoutNotificationsInput = {
-    where?: RessourceWhereInput
-    data: XOR<RessourceUpdateWithoutNotificationsInput, RessourceUncheckedUpdateWithoutNotificationsInput>
-  }
-
-  export type RessourceUpdateWithoutNotificationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
-    langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
-    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
-    format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
-    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
-    estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
-    favoris?: FavoriUpdateManyWithoutRessourceNestedInput
-    commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
-    notations?: NotationUpdateManyWithoutRessourceNestedInput
-    historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
-    collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
-    recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
-    donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
-  }
-
-  export type RessourceUncheckedUpdateWithoutNotificationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
-    langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
-    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
-    format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
-    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
-    estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    categorieId?: StringFieldUpdateOperationsInput | string
-    favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
-    commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
-    notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
-    historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
-    collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
-    recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-  }
-
   export type UserCreateWithoutJournalAuditInput = {
     id?: string
     email: string
@@ -50731,7 +50448,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -50763,7 +50479,6 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
-    universiteId: string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -50811,7 +50526,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -50843,7 +50557,6 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
-    universiteId?: StringFieldUpdateOperationsInput | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -51120,12 +50833,14 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
+    responsable?: string | null
   }
 
   export type DepartementUpdateWithoutUfrInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    responsable?: NullableStringFieldUpdateOperationsInput | string | null
     filieres?: FiliereUpdateManyWithoutDepartementNestedInput
   }
 
@@ -51133,6 +50848,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    responsable?: NullableStringFieldUpdateOperationsInput | string | null
     filieres?: FiliereUncheckedUpdateManyWithoutDepartementNestedInput
   }
 
@@ -51140,30 +50856,73 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    responsable?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FiliereCreateManyDepartementInput = {
     id?: string
     nom: string
     description?: string | null
+    niveauEtudes?: $Enums.NiveauEtudes
   }
 
   export type FiliereUpdateWithoutDepartementInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    etudiants?: EtudiantUpdateManyWithoutFiliereNestedInput
   }
 
   export type FiliereUncheckedUpdateWithoutDepartementInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    etudiants?: EtudiantUncheckedUpdateManyWithoutFiliereNestedInput
   }
 
   export type FiliereUncheckedUpdateManyWithoutDepartementInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+  }
+
+  export type EtudiantCreateManyFiliereInput = {
+    id?: string
+    userId: string
+    numeroEtudiant: string
+    dateNaissance: Date | string
+    dateInscription?: Date | string
+    niveauEtudes?: $Enums.NiveauEtudes
+  }
+
+  export type EtudiantUpdateWithoutFiliereInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
+    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    user?: UserUpdateOneRequiredWithoutEtudiantsNestedInput
+  }
+
+  export type EtudiantUncheckedUpdateWithoutFiliereInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
+    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+  }
+
+  export type EtudiantUncheckedUpdateManyWithoutFiliereInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
+    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
   }
 
   export type RessourceCreateManyAuteurInput = {
@@ -51300,7 +51059,6 @@ export namespace Prisma {
     dateCreation?: Date | string
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
-    ressourceId?: string | null
   }
 
   export type EtudiantCreateManyUserInput = {
@@ -51308,10 +51066,8 @@ export namespace Prisma {
     numeroEtudiant: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    departement?: string | null
-    faculte?: string | null
-    specialite?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
+    filiereId: string
   }
 
   export type EnseignantCreateManyUserInput = {
@@ -51385,7 +51141,6 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
@@ -51426,7 +51181,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type RessourceUncheckedUpdateManyWithoutAuteurInput = {
@@ -51761,7 +51515,6 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
-    ressource?: RessourceUpdateOneWithoutNotificationsNestedInput
   }
 
   export type NotificationUncheckedUpdateWithoutUserInput = {
@@ -51771,7 +51524,6 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
-    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NotificationUncheckedUpdateManyWithoutUserInput = {
@@ -51781,7 +51533,6 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
-    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EtudiantUpdateWithoutUserInput = {
@@ -51789,10 +51540,8 @@ export namespace Prisma {
     numeroEtudiant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    departement?: NullableStringFieldUpdateOperationsInput | string | null
-    faculte?: NullableStringFieldUpdateOperationsInput | string | null
-    specialite?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    filiere?: FiliereUpdateOneRequiredWithoutEtudiantsNestedInput
   }
 
   export type EtudiantUncheckedUpdateWithoutUserInput = {
@@ -51800,10 +51549,8 @@ export namespace Prisma {
     numeroEtudiant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    departement?: NullableStringFieldUpdateOperationsInput | string | null
-    faculte?: NullableStringFieldUpdateOperationsInput | string | null
-    specialite?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    filiereId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EtudiantUncheckedUpdateManyWithoutUserInput = {
@@ -51811,10 +51558,8 @@ export namespace Prisma {
     numeroEtudiant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    departement?: NullableStringFieldUpdateOperationsInput | string | null
-    faculte?: NullableStringFieldUpdateOperationsInput | string | null
-    specialite?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    filiereId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EnseignantUpdateWithoutUserInput = {
@@ -52086,16 +51831,6 @@ export namespace Prisma {
     dateDonnee?: Date | string
   }
 
-  export type NotificationCreateManyRessourceInput = {
-    id?: string
-    userId: string
-    titre: string
-    message: string
-    dateCreation?: Date | string
-    estLue?: boolean
-    typeNotification: $Enums.TypeNotification
-  }
-
   export type FavoriUpdateWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
     dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -52356,36 +52091,6 @@ export namespace Prisma {
     dateDonnee?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type NotificationUpdateWithoutRessourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    estLue?: BoolFieldUpdateOperationsInput | boolean
-    typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
-    user?: UserUpdateOneRequiredWithoutNotificationsNestedInput
-  }
-
-  export type NotificationUncheckedUpdateWithoutRessourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    estLue?: BoolFieldUpdateOperationsInput | boolean
-    typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
-  }
-
-  export type NotificationUncheckedUpdateManyWithoutRessourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
-    estLue?: BoolFieldUpdateOperationsInput | boolean
-    typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
-  }
-
   export type RessourceCreateManyCategorieInput = {
     id?: string
     titre: string
@@ -52453,7 +52158,6 @@ export namespace Prisma {
     reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUpdateManyWithoutRessourceNestedInput
   }
 
   export type RessourceUncheckedUpdateWithoutCategorieInput = {
@@ -52493,7 +52197,6 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type RessourceUncheckedUpdateManyWithoutCategorieInput = {

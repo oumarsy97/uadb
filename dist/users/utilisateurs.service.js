@@ -14,12 +14,15 @@ const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const bcrypt = require("bcrypt");
 const prisma_service_1 = require("../prisma/prisma.service");
+const email_service_1 = require("../meservices/mail/email.service");
 let UtilisateursService = class UtilisateursService {
     prisma;
     jwtService;
-    constructor(prisma, jwtService) {
+    emailService;
+    constructor(prisma, jwtService, emailService) {
         this.prisma = prisma;
         this.jwtService = jwtService;
+        this.emailService = emailService;
     }
     async create(createUtilisateurDto) {
         const { email } = createUtilisateurDto;
@@ -28,7 +31,7 @@ let UtilisateursService = class UtilisateursService {
             throw new common_1.HttpException('Cet email est déjà utilisé.', common_1.HttpStatus.CONFLICT);
         }
         const hashedPassword = await bcrypt.hash(createUtilisateurDto.motDePasse, 10);
-        return this.prisma.user.create({
+        const newUser = await this.prisma.user.create({
             data: {
                 nom: createUtilisateurDto.nom,
                 prenom: createUtilisateurDto.prenom,
@@ -36,9 +39,16 @@ let UtilisateursService = class UtilisateursService {
                 motDePasse: hashedPassword,
                 role: createUtilisateurDto.role,
                 image: createUtilisateurDto.image,
-                universiteId: createUtilisateurDto.universiteId,
             },
         });
+        try {
+            await this.emailService.sendWelcomeEmail(newUser.email, `${newUser.prenom} ${newUser.nom}`);
+        }
+        catch (error) {
+            console.error('Erreur lors de l\'envoi de l\'email de bienvenue:', error);
+        }
+        const { motDePasse, ...userWithoutPassword } = newUser;
+        return userWithoutPassword;
     }
     async login(loginData) {
         console.log('Login attempt with data:', loginData);
@@ -77,15 +87,70 @@ let UtilisateursService = class UtilisateursService {
     async logout(logoutData) {
         return { message: 'Déconnexion réussie.' };
     }
+    async sendNotificationToUser(userId, title, message) {
+        const user = await this.prisma.user.findUnique({
+            where: { id: userId },
+        });
+        if (!user) {
+            throw new common_1.HttpException('Utilisateur non trouvé.', common_1.HttpStatus.NOT_FOUND);
+        }
+        try {
+            await this.emailService.sendNotificationEmail(user.email, title, message);
+            return { message: 'Notification envoyée avec succès.' };
+        }
+        catch (error) {
+            console.error('Erreur lors de l\'envoi de la notification:', error);
+            throw new common_1.HttpException('Erreur lors de l\'envoi de la notification.', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    async sendBulkNotification(userIds, title, message) {
+        const users = await this.prisma.user.findMany({
+            where: { id: { in: userIds } },
+            select: { email: true, nom: true, prenom: true },
+        });
+        if (users.length === 0) {
+            throw new common_1.HttpException('Aucun utilisateur trouvé.', common_1.HttpStatus.NOT_FOUND);
+        }
+        const emails = users.map(user => ({
+            to: user.email,
+            subject: title,
+            html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #333;">${title}</h1>
+          <div style="margin: 20px 0; padding: 20px; background-color: #f8f9fa; border-left: 4px solid #007bff;">
+            <p>${message}</p>
+          </div>
+          <p>Cordialement,<br>L'équipe</p>
+        </div>
+      `,
+            text: `${title}\n\n${message}`,
+        }));
+        try {
+            const results = await this.emailService.sendBulkEmails(emails);
+            return {
+                message: 'Notifications envoyées.',
+                results: {
+                    total: users.length,
+                    success: results.success,
+                    failed: results.failed,
+                    errors: results.errors,
+                },
+            };
+        }
+        catch (error) {
+            console.error('Erreur lors de l\'envoi des notifications en masse:', error);
+            throw new common_1.HttpException('Erreur lors de l\'envoi des notifications.', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     async findAll(options = {}) {
         const { page = 1, limit = 10, search = '' } = options;
         const skip = (page - 1) * limit;
         const where = search
             ? {
                 OR: [
-                    { nom: { contains: search, lte: 'insensitive' } },
-                    { prenom: { contains: search, lte: 'insensitive' } },
-                    { email: { contains: search, lte: 'insensitive' } },
+                    { nom: { contains: search, mode: 'insensitive' } },
+                    { prenom: { contains: search, mode: 'insensitive' } },
+                    { email: { contains: search, mode: 'insensitive' } },
                 ],
             }
             : {};
@@ -144,14 +209,19 @@ let UtilisateursService = class UtilisateursService {
             ...(hashedPassword && { motDePasse: hashedPassword }),
             ...(updateData.role && { role: updateData.role }),
             ...(updateData.image && { image: updateData.image }),
-            ...(updateData.universiteId !== undefined && {
-                universiteId: updateData.universiteId,
-            }),
         };
         const updatedUser = await this.prisma.user.update({
             where: { id },
             data: dataToUpdate,
         });
+        if (updateData.email && updateData.email !== user.email) {
+            try {
+                await this.emailService.sendNotificationEmail(updateData.email, 'Email modifié', 'Votre adresse email a été modifiée avec succès.');
+            }
+            catch (error) {
+                console.error('Erreur lors de l\'envoi de la notification de modification d\'email:', error);
+            }
+        }
         const { motDePasse, ...userWithoutPassword } = updatedUser;
         return userWithoutPassword;
     }
@@ -161,6 +231,12 @@ let UtilisateursService = class UtilisateursService {
             throw new common_1.HttpException('Utilisateur non trouvé.', common_1.HttpStatus.NOT_FOUND);
         }
         await this.prisma.user.delete({ where: { id } });
+        try {
+            await this.emailService.sendNotificationEmail(user.email, 'Compte supprimé', 'Votre compte a été supprimé avec succès. Nous sommes désolés de vous voir partir.');
+        }
+        catch (error) {
+            console.error('Erreur lors de l\'envoi de l\'email de suppression:', error);
+        }
         return { message: 'Utilisateur supprimé avec succès.' };
     }
     async updateDerniereConnexion(id) {
@@ -174,6 +250,7 @@ exports.UtilisateursService = UtilisateursService;
 exports.UtilisateursService = UtilisateursService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService,
-        jwt_1.JwtService])
+        jwt_1.JwtService,
+        email_service_1.EmailService])
 ], UtilisateursService);
 //# sourceMappingURL=utilisateurs.service.js.map

@@ -14,11 +14,8 @@ const class_validator_1 = require("class-validator");
 class CreateUniversiteDto {
     nom;
     ville;
-    pays;
     adresse;
     siteWeb;
-    adresseBlockchain;
-    estActive = true;
 }
 exports.CreateUniversiteDto = CreateUniversiteDto;
 __decorate([
@@ -33,11 +30,6 @@ __decorate([
 ], CreateUniversiteDto.prototype, "ville", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateUniversiteDto.prototype, "pays", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], CreateUniversiteDto.prototype, "adresse", void 0);
@@ -46,16 +38,6 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], CreateUniversiteDto.prototype, "siteWeb", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
-], CreateUniversiteDto.prototype, "adresseBlockchain", void 0);
-__decorate([
-    (0, class_validator_1.IsBoolean)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Boolean)
-], CreateUniversiteDto.prototype, "estActive", void 0);
 class UpdateUniversiteDto {
     nom;
     ville;

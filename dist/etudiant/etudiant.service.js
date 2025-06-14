@@ -47,9 +47,10 @@ let EtudiantService = class EtudiantService {
                 derniereConnexion: new Date(),
                 estValide: true,
                 estActif: true,
-                universiteId: createEtudiantDto.universiteId,
                 motDePasse: 'MotDePasse123',
                 role: prisma_1.RoleUser.ETUDIANT,
+                telephone: createEtudiantDto.telephone || null,
+                image: createEtudiantDto.image || 'https://example.com/default-avatar.png',
             };
             const user = await this.utilisateursService.create(userData);
             if (!user || !user.id) {
@@ -61,10 +62,8 @@ let EtudiantService = class EtudiantService {
                     userId: user.id,
                     numeroEtudiant,
                     dateNaissance: new Date(createEtudiantDto.dateNaissance),
-                    departement: createEtudiantDto.departement,
-                    faculte: createEtudiantDto.faculte,
-                    specialite: createEtudiantDto.specialite,
-                    niveauEtudes: createEtudiantDto.niveauEtudes || prisma_1.NiveauEtudes.LICENCE,
+                    niveauEtudes: createEtudiantDto.niveauEtudes || prisma_1.NiveauEtudes.LICENCE_1,
+                    filiereId: createEtudiantDto.filiereId,
                 },
                 include: {
                     user: {

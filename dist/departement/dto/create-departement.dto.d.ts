@@ -7,4 +7,5 @@ export declare class UpdateDepartementDto {
     nom?: string;
     description?: string;
     ufrId?: string;
+    responsable?: string;
 }

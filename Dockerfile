@@ -1,37 +1,24 @@
-FROM node:18-alpine AS builder
-
-# Définition des arguments
-ARG PORT=4000
-
-WORKDIR /app
-
-# Copie des fichiers de dépendances
-COPY package*.json ./
-
-# Installation des dépendances
-RUN npm ci
-
-# Copie du reste du code
-COPY . .
-
-# Build de l'application
-RUN npm run build
-
-# Image de production
+# Dockerfile pour développement avec hot reload
 FROM node:18-alpine
 
-ARG PORT=4000
-ENV PORT=$PORT
 
+
+# 2) Définir le répertoire de travail
 WORKDIR /app
 
-# Copie des fichiers nécessaires depuis l'étape de build
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
+# 3) Copier et installer les dépendances (inclut les devDependencies)
+COPY package*.json ./
+RUN npm ci
 
-# Exposition du port configuré
-EXPOSE $PORT
+# 4) Copier le schéma Prisma et générer le client
+COPY prisma ./prisma/
+RUN npx prisma generate
 
-# Démarrage de l'application
-CMD ["node", "dist/main", "--port", "$PORT"]
+# 5) Copier le reste de votre code **après** l'installation pour profiter du cache
+COPY . .
+
+# 6) Exposer le port sur lequel NestJS écoute
+EXPOSE 4000
+
+# 7) Commande par défaut pour le hot‑reload
+CMD ["npm", "run", "start:dev"]

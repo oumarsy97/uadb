@@ -253,6 +253,7 @@ model Departement {
   nom         String
   description String? @db.Text
   ufrId       String  @map("ufr_id")
+  responsable String? @map("responsable") // Nom du responsable du département
 
   // Relations
   ufr      Ufr       @relation(fields: [ufrId], references: [id])
@@ -262,15 +263,25 @@ model Departement {
 }
 
 model Filiere {
-  id            String  @id @default(uuid())
+  id            String       @id @default(uuid())
   nom           String
-  description   String? @db.Text
-  departementId String  @map("departement_id")
-
+  description   String?      @db.Text
+  niveauEtudes  NiveauEtudes @default(LICENCE_1) @map("niveau_etudes")
+  departementId String       @map("departement_id")
   // Relations
-  departement Departement @relation(fields: [departementId], references: [id])
+  departement   Departement  @relation(fields: [departementId], references: [id])
+  etudiants     Etudiant[]
 
   @@index([departementId])
+}
+
+enum NiveauEtudes {
+  LICENCE_1
+  LICENCE_2
+  LICENCE_3
+  MASTER_1
+  MASTER_2
+  DOCTORAT
 }
 
 enum RoleUser {
@@ -292,7 +303,6 @@ model User {
   role              RoleUser  @map("role")
   derniereConnexion DateTime? @map("derniere_connexion")
   estActif          Boolean   @default(true) @map("est_actif")
-  universiteId      String    @map("universite_id")
 
   // Relations existantesregle
   contributions             Ressource[]
@@ -318,7 +328,6 @@ model User {
 
   @@index([preferencesRecommandation])
   @@index([frequenceRecommandation])
-  @@index([universiteId])
   @@index([role])
   @@index([email])
 }
@@ -329,21 +338,12 @@ model Etudiant {
   numeroEtudiant  String       @unique @map("numero_etudiant")
   dateNaissance   DateTime     @map("date_naissance")
   dateInscription DateTime     @default(now()) @map("date_inscription")
-  departement     String?
-  faculte         String?
-  specialite      String?
-  niveauEtudes    NiveauEtudes @default(LICENCE) @map("niveau_etudes")
+  niveauEtudes    NiveauEtudes @default(LICENCE_1) @map("niveau_etudes")
   user            User         @relation(fields: [userId], references: [id])
+  filiereId       String       @map("filiere_id")
+  filiere         Filiere      @relation(fields: [filiereId], references: [id])
 
   @@index([userId])
-  @@index([departement])
-}
-
-enum NiveauEtudes {
-  LICENCE
-  MASTER
-  DOCTORAT
-  POSTDOCTORAT
 }
 
 model Enseignant {
@@ -596,7 +596,6 @@ model Ressource {
   reservations           Reservation[]
   recommandations        Recommandation[]
   donneesRecommandations DonneesRecommandation[]
-  notifications          Notification[]
   categorieId            String
   categorie              Categorie?              @relation(fields: [categorieId], references: [id])
 
@@ -646,10 +645,8 @@ model Notification {
   dateCreation     DateTime         @default(now()) @map("date_creation")
   estLue           Boolean          @default(false) @map("est_lue")
   typeNotification TypeNotification
-  ressourceId      String?          @map("ressource_id")
 
-  user      User       @relation(fields: [userId], references: [id])
-  ressource Ressource? @relation(fields: [ressourceId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@index([userId, estLue])
   @@index([dateCreation])

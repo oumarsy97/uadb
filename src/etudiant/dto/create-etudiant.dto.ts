@@ -31,23 +31,15 @@ export class CreateEtudiantDto {
   @IsNotEmpty({ message: 'La date de naissance est requise' })
   dateNaissance: string;
 
-  @IsString({ message: 'Le département doit être une chaîne de caractères' })
-  @IsOptional()
-  departement?: string;
+ 
 
-  @IsString({ message: 'La faculté doit être une chaîne de caractères' })
-  @IsOptional()
-  faculte?: string;
-
-  @IsString({ message: 'La spécialité doit être une chaîne de caractères' })
-  @IsOptional()
-  specialite?: string;
+ 
 
   @IsEnum(NiveauEtudes, { message: 'Le niveau d\'études doit être valide (LICENCE, MASTER, DOCTORAT, POSTDOCTORAT)' })
   @IsOptional()
   niveauEtudes?: NiveauEtudes;
-  @IsString({ message: 'L\'ID de l\'université doit être une chaîne de caractères' })
-  universiteId: string;
+  @IsString({ message: 'L\'ID de la filière doit être une chaîne de caractères' })
+  filiereId: string;
 }
 
 export class UpdateEtudiantDto {
