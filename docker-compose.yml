@@ -39,14 +39,6 @@ services:
       DATABASE_URL: "mysql://root@mysql-db:3306/dbuadb"
       JWT_SECRET: "3889c5248ae7b3254b78c22c31de58eab58cb9b9222e6fdbe7af07b878699d77"
       JWT_EXPIRES_IN: "24h"
-      EMAIL_PROVIDER: "smtp"
-      SMTP_HOST: "smtp.gmail.com"
-      SMTP_PORT: 587
-      SMTP_SECURE: "false"
-      SMTP_USER: "syoumar505@gmail.com"
-      SMTP_PASS: "qbwhfhxuxlqmrvzo"
-      SMTP_TLS_REJECT_UNAUTHORIZED: "false"
-      DEFAULT_FROM_EMAIL: "syoumar505@gmail.com"
       FRONTEND_URL: "http://localhost:3000"
     depends_on:
       mysql:
