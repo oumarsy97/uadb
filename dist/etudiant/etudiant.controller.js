@@ -62,9 +62,9 @@ let EtudiantController = class EtudiantController {
             };
         }
     }
-    async findByNumeroEtudiant(numeroEtudiant) {
+    async findByCodePermanent(codePermanent) {
         try {
-            return await this.etudiantService.findByNumeroEtudiant(numeroEtudiant);
+            return await this.etudiantService.findByCodePermanent(codePermanent);
         }
         catch (error) {
             return {
@@ -160,7 +160,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], EtudiantController.prototype, "findByNumeroEtudiant", null);
+], EtudiantController.prototype, "findByCodePermanent", null);
 __decorate([
     (0, microservices_1.MessagePattern)('findEtudiantByUserId'),
     __param(0, (0, microservices_1.Payload)()),

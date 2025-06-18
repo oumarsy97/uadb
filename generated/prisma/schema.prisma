@@ -2,8 +2,9 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../generated/prisma"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -23,6 +24,8 @@ model ConventionInteruniversitaire {
   estActive         Boolean        @default(true) @map("est_active")
   typeConvention    TypeConvention @default(EMPRUNT_RECIPROQUE)
   detailsConvention String?        @map("details_convention") @db.Text
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
 
   @@unique([universiteId1, universiteId2])
 }
@@ -42,6 +45,8 @@ model ReglePret {
   nbRenouvellements   Int      @default(1) @map("nb_renouvellements")
   penaliteRetardJours Boolean  @default(true) @map("penalite_retard_jours")
   estActif            Boolean  @default(true) @map("est_actif")
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 
   // Relation avec l'université
   universite Universite @relation(fields: [universiteId], references: [id])
@@ -60,6 +65,8 @@ model PolitiqueBibliotheque {
   penaliteRetard  String   @map("penalite_retard") @db.Text // Description de la pénalité
   estActive       Boolean  @default(true) @map("est_active")
   dateMiseAJour   DateTime @updatedAt @map("date_mise_a_jour")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   // Relation avec l'université
   universite Universite @relation(fields: [universiteId], references: [id])
@@ -76,6 +83,8 @@ model SanctionUtilisateur {
   motif           String       @db.Text
   empruntId       String?      @map("emprunt_id") // Lien vers l'emprunt en retard ou perdu
   estActive       Boolean      @default(true) @map("est_active")
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
 
   // Relations
   user    User     @relation(fields: [userId], references: [id])
@@ -121,6 +130,8 @@ model Reservation {
   user                 User?             @relation(fields: [userId], references: [id])
   ressource            Ressource         @relation(fields: [ressourceId], references: [id])
   valideur             Bibliothecaire?   @relation(fields: [validePar], references: [id]) // ID de l'administrateur qui a validé la réservation
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
 
   @@index([dateDebut, dateFin]) // Index pour optimiser les recherches par date
 }
@@ -150,6 +161,8 @@ model ExemplairePhysique {
 
   ressource Ressource @relation(fields: [ressourceId], references: [id])
   emprunts  Emprunt[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
   @@index([ressourceId])
   @@index([disponible])
@@ -180,6 +193,8 @@ model Emprunt {
   validePar            String?               @map("valide_par") // ID de l'administrateur qui a validé l'emprunt externe
   exemplaire           ExemplairePhysique    @relation(fields: [exemplaireId], references: [id])
   user                 User?                 @relation(fields: [userId], references: [id])
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
   SanctionUtilisateur  SanctionUtilisateur[]
 
   @@index([dateEmprunt, dateRetourPrevue])
@@ -207,6 +222,8 @@ model Recommandation {
 
   user      User      @relation(fields: [userId], references: [id])
   ressource Ressource @relation(fields: [ressourceId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
   @@index([userId, estVue])
   @@index([ressourceId])
@@ -226,6 +243,8 @@ model Universite {
   adresse                  String?
   ville                    String
   siteWeb                  String?                   @map("site_web")
+  createdAt                DateTime                  @default(now())
+  updatedAt                DateTime                  @updatedAt
   // Relations manquantes
   statistiquesBibliotheque StatistiqueBibliotheque[]
   reglePrets               ReglePret[]
@@ -236,11 +255,12 @@ model Universite {
 }
 
 model Ufr {
-  id           String  @id @default(uuid())
+  id           String        @id @default(uuid())
   nom          String
-  description  String? @db.Text
-  universiteId String  @map("universite_id")
-
+  description  String?       @db.Text
+  universiteId String        @map("universite_id")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
   // Relations
   universite   Universite    @relation(fields: [universiteId], references: [id])
   departements Departement[]
@@ -249,15 +269,16 @@ model Ufr {
 }
 
 model Departement {
-  id          String  @id @default(uuid())
+  id          String    @id @default(uuid())
   nom         String
-  description String? @db.Text
-  ufrId       String  @map("ufr_id")
-  responsable String? @map("responsable") // Nom du responsable du département
-
+  description String?   @db.Text
+  ufrId       String    @map("ufr_id")
+  responsable String?   @map("responsable") // Nom du responsable du département
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   // Relations
-  ufr      Ufr       @relation(fields: [ufrId], references: [id])
-  filieres Filiere[]
+  ufr         Ufr       @relation(fields: [ufrId], references: [id])
+  filieres    Filiere[]
 
   @@index([ufrId])
 }
@@ -268,9 +289,12 @@ model Filiere {
   description   String?      @db.Text
   niveauEtudes  NiveauEtudes @default(LICENCE_1) @map("niveau_etudes")
   departementId String       @map("departement_id")
+
   // Relations
-  departement   Departement  @relation(fields: [departementId], references: [id])
-  etudiants     Etudiant[]
+  departement Departement @relation(fields: [departementId], references: [id])
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  etudiants   Etudiant[]
 
   @@index([departementId])
 }
@@ -293,17 +317,18 @@ enum RoleUser {
 
 // Modèle User avec préférences de recommandation
 model User {
-  id                String    @id @default(uuid())
-  email             String    @unique
-  motDePasse        String    @map("mot_de_passe")
-  nom               String
-  telephone         String?
-  prenom            String
-  image             String?
-  role              RoleUser  @map("role")
-  derniereConnexion DateTime? @map("derniere_connexion")
-  estActif          Boolean   @default(true) @map("est_actif")
-
+  id                        String                  @id @default(uuid())
+  email                     String                  @unique
+  motDePasse                String                  @map("mot_de_passe")
+  nom                       String
+  telephone                 String?
+  prenom                    String
+  image                     String?
+  role                      RoleUser                @map("role")
+  derniereConnexion         DateTime?               @map("derniere_connexion")
+  estActif                  Boolean                 @default(true) @map("est_actif")
+  createdAt                 DateTime                @default(now())
+  updatedAt                 DateTime                @updatedAt
   // Relations existantesregle
   contributions             Ressource[]
   favoris                   Favori[]
@@ -333,15 +358,16 @@ model User {
 }
 
 model Etudiant {
-  id              String       @id @default(uuid())
-  userId          String       @map("user_id")
-  numeroEtudiant  String       @unique @map("numero_etudiant")
-  dateNaissance   DateTime     @map("date_naissance")
-  dateInscription DateTime     @default(now()) @map("date_inscription")
-  niveauEtudes    NiveauEtudes @default(LICENCE_1) @map("niveau_etudes")
-  user            User         @relation(fields: [userId], references: [id])
-  filiereId       String       @map("filiere_id")
-  filiere         Filiere      @relation(fields: [filiereId], references: [id])
+  id              String   @id @default(uuid())
+  userId          String   @map("user_id")
+  codePermanent   String   @unique @map("numero_etudiant")
+  dateNaissance   DateTime @map("date_naissance")
+  dateInscription DateTime @default(now()) @map("date_inscription")
+  user            User     @relation(fields: [userId], references: [id])
+  filiereId       String   @map("filiere_id")
+  filiere         Filiere  @relation(fields: [filiereId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@index([userId])
 }
@@ -353,6 +379,8 @@ model Enseignant {
   dateNaissance    DateTime @map("date_naissance")
   specialite       String?
   user             User     @relation(fields: [userId], references: [id])
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
   @@index([userId])
 }
@@ -366,6 +394,8 @@ model Bibliothecaire {
   ville                String?
   pays                 String?
   user                 User          @relation(fields: [userId], references: [id])
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
   reservations         Reservation[]
 
   @@index([userId])
@@ -402,6 +432,8 @@ model Favori {
   ressource      Ressource @relation(fields: [ressourceId], references: [id])
   universiteSrc  String?   @map("universite_source") // Si favori externe
   universiteUser String?   @map("universite_utilisateur") // Université de l'utilisateur
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   @@unique([userId, ressourceId])
   @@index([dateAjout])
@@ -419,6 +451,8 @@ model Commentaire {
   ressource      Ressource @relation(fields: [ressourceId], references: [id])
   universiteSrc  String?   @map("universite_source") // Si commentaire externe
   universiteUser String?   @map("universite_utilisateur")
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   @@index([ressourceId, dateCreation])
   @@index([universiteSrc])
@@ -435,6 +469,8 @@ model Notation {
   ressource      Ressource @relation(fields: [ressourceId], references: [id])
   universiteSrc  String?   @map("universite_source") // Si notation externe
   universiteUser String?   @map("universite_utilisateur") // Université de l'utilisateur
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   @@unique([userId, ressourceId])
   @@index([ressourceId])
@@ -453,6 +489,8 @@ model HistoriqueAcces {
 
   user      User      @relation(fields: [userId], references: [id])
   ressource Ressource @relation(fields: [ressourceId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
   @@index([dateAcces])
   @@index([ressourceId, typeAcces])
@@ -472,6 +510,8 @@ model DonneesRecommandation {
   score           Float // Score de pertinence calculé
   typeInteraction TypeInteraction @map("type_interaction")
   dateDonnee      DateTime        @default(now()) @map("date_donnee")
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
 
   // Relations manquantes
   user      User      @relation(fields: [userId], references: [id])
@@ -512,6 +552,8 @@ model CollectionRessource {
   notes        String?    @db.Text
   collection   Collection @relation(fields: [collectionId], references: [id])
   ressource    Ressource  @relation(fields: [ressourceId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
   @@unique([collectionId, ressourceId])
   @@index([dateAjout])
@@ -553,38 +595,25 @@ enum NiveauAcces {
 // Modèle Ressource pour bibliothèque
 model Ressource {
   // Champs existants
-  id                  String         @id @default(uuid())
-  titre               String
-  description         String         @db.Text
-  type                TypeRessource
-  langue              String         @default("fr")
-  urlFichier          String         @map("url_fichier")
-  urlFichierLocal     String?        @default("file:///tmp/ressource.pdf") @map("url_fichier_local")
-  format              String // pdf, docx, etc.
-  dateModification    DateTime       @updatedAt @map("date_modification")
-  motsCles            String         @map("mots_cles")
-  auteurId            String?        @map("auteur_id")
-  universiteId        String         @map("universite_id")
-  image               String?
-  niveauAcces         NiveauAcces    @default(PUBLIC) @map("niveau_acces")
-  datePublication     DateTime?      @default(now()) @map("date_publication")
-  estValide           Boolean        @default(true) @map("est_valide")
-  estArchive          Boolean        @default(false) @map("est_archive")
-  nomAuteurExterne    String?        @map("nom_auteur_externe")
-  prenomAuteurExterne String?        @map("prenom_auteur_externe")
-  validation          TypeValidation @default(EN_ATTENTE) @map("validation")
-
-  // Champs pour bibliothèque
-  isbn               String?
-  doi                String?
-  anneePublication   Int?    @map("annee_publication")
-  nbPages            Int?    @map("nb_pages")
-  nbExemplaires      Int     @default(0) @map("nb_exemplaires")
-  nbDisponibles      Int     @default(0) @map("nb_disponibles")
-  coteClassification String? @map("cote_classification") // Classification Dewey ou autre
+  id              String         @id @default(uuid())
+  titre           String
+  isbnglobale     String         @unique @map("isbn_globale")
+  description     String         @db.Text
+  langue          String         @default("fr")
+  urlFichier      String         @map("url_fichier")
+  urlFichierLocal String?        @default("file:///tmp/ressource.pdf") @map("url_fichier_local")
+  format          String // pdf, docx, etc.
+  image           String?
+  niveauAcces     NiveauAcces    @default(PUBLIC) @map("niveau_acces")
+  datePublication DateTime?      @default(now()) @map("date_publication")
+  motsCles        String         @map("mots_cles")
+  auteurId        String         @map("auteur_id")
+  universiteId    String         @map("universite_id")
+  estArchive      Boolean        @default(false) @map("est_archive")
+  validation      TypeValidation @default(EN_ATTENTE) @map("validation")
 
   // Relations
-  auteur User? @relation(fields: [auteurId], references: [id])
+  auteur User @relation(fields: [auteurId], references: [id])
 
   favoris                Favori[]
   commentaires           Commentaire[]
@@ -601,7 +630,7 @@ model Ressource {
 
   @@index([datePublication])
   @@index([universiteId])
-  @@index([estValide, estArchive])
+  @@index([auteurId, estArchive])
 }
 
 model Categorie {
@@ -610,27 +639,30 @@ model Categorie {
   description  String?     @db.Text
   dateCreation DateTime    @default(now()) @map("date_creation")
   ressources   Ressource[]
+  createdAt    DateTime    @default(now())
+  updayedAt    DateTime    @updatedAt
 
   @@index([libelle])
 }
 
 // Statistiques des prêts et réservations
 model StatistiqueBibliotheque {
-  id                        String  @id @default(uuid())
-  universiteId              String  @map("universite_id")
+  id                        String     @id @default(uuid())
+  universiteId              String     @map("universite_id")
   mois                      Int
   annee                     Int
-  nbEmprunts                Int     @default(0) @map("nb_emprunts")
-  nbEmpruntsExternes        Int     @default(0) @map("nb_emprunts_externes") // Emprunts provenant d'autres universités
-  nbReservations            Int     @default(0) @map("nb_reservations")
-  nbReservationsExternes    Int     @default(0) @map("nb_reservations_externes") // Réservations provenant d'autres universités
-  nbRetardsRendu            Int     @default(0) @map("nb_retards_rendu")
-  tauxRotation              Float?  @map("taux_rotation") // Ratio prêts/nombre d'exemplaires
-  categoriesPlusEmpruntees  String? @map("categories_plus_empruntees") // JSON array
-  universitesPlusFrequentes String? @map("universites_plus_frequentes") // Universités partenaires les plus actives
-
+  nbEmprunts                Int        @default(0) @map("nb_emprunts")
+  nbEmpruntsExternes        Int        @default(0) @map("nb_emprunts_externes") // Emprunts provenant d'autres universités
+  nbReservations            Int        @default(0) @map("nb_reservations")
+  nbReservationsExternes    Int        @default(0) @map("nb_reservations_externes") // Réservations provenant d'autres universités
+  nbRetardsRendu            Int        @default(0) @map("nb_retards_rendu")
+  tauxRotation              Float?     @map("taux_rotation") // Ratio prêts/nombre d'exemplaires
+  categoriesPlusEmpruntees  String?    @map("categories_plus_empruntees") // JSON array
+  universitesPlusFrequentes String?    @map("universites_plus_frequentes") // Universités partenaires les plus actives
+  createdAt                 DateTime   @default(now())
+  updatedAt                 DateTime   @updatedAt
   // Relation manquante
-  universite Universite @relation(fields: [universiteId], references: [id])
+  universite                Universite @relation(fields: [universiteId], references: [id])
 
   @@unique([universiteId, mois, annee])
   @@index([annee, mois])
@@ -645,8 +677,9 @@ model Notification {
   dateCreation     DateTime         @default(now()) @map("date_creation")
   estLue           Boolean          @default(false) @map("est_lue")
   typeNotification TypeNotification
-
-  user User @relation(fields: [userId], references: [id])
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  user             User             @relation(fields: [userId], references: [id])
 
   @@index([userId, estLue])
   @@index([dateCreation])
@@ -673,8 +706,9 @@ model JournalAudit {
   dateAction    DateTime @default(now()) @map("date_action")
   detailsAction Json     @map("details_action")
   ipAdresse     String   @map("ip_adresse")
-
-  user User? @relation(fields: [userId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User?    @relation(fields: [userId], references: [id])
 
   @@index([dateAction])
   @@index([userId])

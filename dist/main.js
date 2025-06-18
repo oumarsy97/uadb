@@ -8,12 +8,16 @@ const dotenv = require("dotenv");
 async function bootstrap() {
     dotenv.config();
     console.log("JWT_SECRET:", process.env.JWT_SECRET);
+    console.log("Environment:", process.env.NODE_ENV);
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    const host = process.env.NODE_ENV === 'development' ? '0.0.0.0' : 'localhost';
+    const port = process.env.MICROSERVICE_PORT ? +process.env.MICROSERVICE_PORT : 4000;
+    console.log(`Configuration microservice: ${host}:${port}`);
     app.connectMicroservice({
         transport: microservices_1.Transport.TCP,
         options: {
-            host: 'localhost',
-            port: 4000,
+            host: host,
+            port: port,
         },
     });
     app.useGlobalPipes(new common_1.ValidationPipe({
@@ -21,7 +25,13 @@ async function bootstrap() {
         transform: true,
     }));
     await app.startAllMicroservices();
-    console.log(`Microservice démarré sur le port 4000`);
+    console.log(`Microservice démarré sur ${host}:${port}`);
+    const httpPort = process.env.HTTP_PORT || 4000;
+    await app.listen(httpPort, '0.0.0.0');
+    console.log(`HTTP Server démarré sur 0.0.0.0:${httpPort}`);
 }
-bootstrap();
+bootstrap().catch(err => {
+    console.error('Erreur au démarrage:', err);
+    process.exit(1);
+});
 //# sourceMappingURL=main.js.map

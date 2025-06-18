@@ -60,9 +60,9 @@ export class EtudiantController {
   }
 
   @MessagePattern('findEtudiantByNumero')
-  async findByNumeroEtudiant(@Payload() numeroEtudiant: string) {
+  async findByCodePermanent(@Payload() codePermanent: string) {
     try {
-      return await this.etudiantService.findByNumeroEtudiant(numeroEtudiant);
+      return await this.etudiantService.findByCodePermanent(codePermanent);
     } catch (error) {
       return {
         success: false,

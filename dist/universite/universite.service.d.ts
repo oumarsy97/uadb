@@ -6,6 +6,8 @@ export declare class UniversiteService {
     create(createUniversiteDto: CreateUniversiteDto): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
@@ -13,6 +15,8 @@ export declare class UniversiteService {
     findAll(page?: number, limit?: number, search?: string): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
@@ -20,6 +24,8 @@ export declare class UniversiteService {
     findOne(id: string): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
@@ -27,6 +33,8 @@ export declare class UniversiteService {
     update(id: string, updateUniversiteDto: Partial<UpdateUniversiteDto>): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
@@ -34,6 +42,8 @@ export declare class UniversiteService {
     remove(id: string): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
@@ -41,6 +51,8 @@ export declare class UniversiteService {
     getStatistics(id: string): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
@@ -48,6 +60,8 @@ export declare class UniversiteService {
     getTopUniversities(limit?: number): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;

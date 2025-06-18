@@ -1,6 +1,26 @@
 version: '3.8'
 
 services:
+  # Base de données MySQL (à démarrer en premier)
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "dbuadb"  # Nom cohérent avec votre DATABASE_URL
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: ""
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root"]
+      timeout: 20s
+      retries: 10
+      interval: 10s
+      start_period: 40s
+
   # Service principal NestJS
   nestjs-app:
     build:
@@ -11,60 +31,29 @@ services:
     ports:
       - "4000:4000"
     volumes:
-      # Monte votre code local dans /app pour le hot‑reload
       - .:/app
-      # Isole node_modules du conteneur pour éviter des conflits
       - /app/node_modules
     env_file:
       - .env
     environment:
-      - NODE_ENV=development
-      # Variables de connexion à MySQL (exemple pour TypeORM ou @nestjs/typeorm)
-      - DB_TYPE=mysql
-      - DB_HOST=mysql-db
-      - DB_PORT=3306
-      - DB_DATABASE=${DATABASE_NAME:-nestjs_db}
-      - DB_USERNAME=${DATABASE_USER:-root}
-      - DB_PASSWORD=${DATABASE_PASSWORD:-password}
+      DATABASE_URL: "mysql://root@mysql-db:3306/dbuadb"
+      JWT_SECRET: "3889c5248ae7b3254b78c22c31de58eab58cb9b9222e6fdbe7af07b878699d77"
+      JWT_EXPIRES_IN: "24h"
+      EMAIL_PROVIDER: "smtp"
+      SMTP_HOST: "smtp.gmail.com"
+      SMTP_PORT: 587
+      SMTP_SECURE: "false"
+      SMTP_USER: "syoumar505@gmail.com"
+      SMTP_PASS: "qbwhfhxuxlqmrvzo"
+      SMTP_TLS_REJECT_UNAUTHORIZED: "false"
+      DEFAULT_FROM_EMAIL: "syoumar505@gmail.com"
+      FRONTEND_URL: "http://localhost:3000"
     depends_on:
-      - mysql
-    networks:
-      - nestjs-network
+      mysql:
+        condition: service_healthy  # Attend que MySQL soit prêt
     restart: unless-stopped
-    # Lance NestJS en mode watch pour recharger à chaud à chaque modif
-    command: npm run start:dev
-
-  # Base de données MySQL
-  mysql:
-    image: mysql:8.0
-    container_name: mysql-db
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: ${DATABASE_NAME:-nestjs_db}
-      MYSQL_USER: ${DATABASE_USER:-root}
-      MYSQL_PASSWORD: ${DATABASE_PASSWORD:-password}
-      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD:-rootpassword}
-    volumes:
-      - mysql_data:/var/lib/mysql
-    networks:
-      - nestjs-network
-    restart: unless-stopped
-
-  # Cache Redis (optionnel)
-  redis:
-    image: redis:7-alpine
-    container_name: redis-cache
-    ports:
-      - "6379:6379"
-    networks:
-      - nestjs-network
-    restart: unless-stopped
+    command: sh -c "sleep 10 && npx prisma generate && npx prisma db push && npm run start:uadb"
 
 volumes:
   mysql_data:
     driver: local
-
-networks:
-  nestjs-network:
-    driver: bridge

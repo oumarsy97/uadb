@@ -11,23 +11,57 @@ export declare class EtudiantService {
         success: boolean;
         message: string;
         data: {
+            ufrId: any;
             user: {
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 estActif: boolean;
             };
-        } & {
+            filiere: {
+                departement: {
+                    ufr: {
+                        universite: {
+                            id: string;
+                            nom: string;
+                        };
+                    } & {
+                        id: string;
+                        createdAt: Date;
+                        updatedAt: Date;
+                        nom: string;
+                        description: string | null;
+                        universiteId: string;
+                    };
+                } & {
+                    id: string;
+                    createdAt: Date;
+                    updatedAt: Date;
+                    nom: string;
+                    description: string | null;
+                    ufrId: string;
+                    responsable: string | null;
+                };
+            } & {
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                nom: string;
+                description: string | null;
+                niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
+                departementId: string;
+            };
             id: string;
             userId: string;
+            codePermanent: string;
             dateNaissance: Date;
-            niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-            filiereId: string;
-            numeroEtudiant: string;
             dateInscription: Date;
+            filiereId: string;
+            createdAt: Date;
+            updatedAt: Date;
         };
     }>;
     findAll(options: {
@@ -42,23 +76,24 @@ export declare class EtudiantService {
         success: boolean;
         data: ({
             user: {
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
+            codePermanent: string;
             dateNaissance: Date;
-            niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-            filiereId: string;
-            numeroEtudiant: string;
             dateInscription: Date;
+            filiereId: string;
+            createdAt: Date;
+            updatedAt: Date;
         })[];
         pagination: {
             page: number;
@@ -71,69 +106,72 @@ export declare class EtudiantService {
         success: boolean;
         data: {
             user: {
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
+            codePermanent: string;
             dateNaissance: Date;
-            niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-            filiereId: string;
-            numeroEtudiant: string;
             dateInscription: Date;
+            filiereId: string;
+            createdAt: Date;
+            updatedAt: Date;
         };
     }>;
-    findByNumeroEtudiant(numeroEtudiant: string): Promise<{
+    findByCodePermanent(codePermanent: string): Promise<{
         success: boolean;
         data: {
             user: {
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
+            codePermanent: string;
             dateNaissance: Date;
-            niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-            filiereId: string;
-            numeroEtudiant: string;
             dateInscription: Date;
+            filiereId: string;
+            createdAt: Date;
+            updatedAt: Date;
         };
     }>;
     findByUserId(etudiantId: string): Promise<{
         success: boolean;
         data: {
             user: {
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
+            codePermanent: string;
             dateNaissance: Date;
-            niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-            filiereId: string;
-            numeroEtudiant: string;
             dateInscription: Date;
+            filiereId: string;
+            createdAt: Date;
+            updatedAt: Date;
         };
     }>;
     update(id: string, updateEtudiantDto: UpdateEtudiantDto): Promise<{
@@ -141,22 +179,23 @@ export declare class EtudiantService {
         message: string;
         data: {
             user: {
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 estActif: boolean;
             };
         } & {
             id: string;
             userId: string;
+            codePermanent: string;
             dateNaissance: Date;
-            niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-            filiereId: string;
-            numeroEtudiant: string;
             dateInscription: Date;
+            filiereId: string;
+            createdAt: Date;
+            updatedAt: Date;
         };
     }>;
     remove(id: string): Promise<{
@@ -167,7 +206,7 @@ export declare class EtudiantService {
         totalEtudiants: number;
         etudiantsActifs: number;
         etudiantsInactifs: number;
-        etudiantsParNiveau: (import("generated/prisma").Prisma.PickEnumerable<import("generated/prisma").Prisma.EtudiantGroupByOutputType, "niveauEtudes"[]> & {
+        etudiantsParNiveau: (import("generated/prisma").Prisma.PickEnumerable<import("generated/prisma").Prisma.EtudiantGroupByOutputType, "id"> & {
             _count: {
                 id: number;
             };

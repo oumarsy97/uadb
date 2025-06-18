@@ -6,6 +6,8 @@ export declare class ConventionController {
     constructor(conventionService: ConventionService);
     create(createConventionDto: CreateConventionDto): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -20,6 +22,8 @@ export declare class ConventionController {
         search?: string;
     }): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -30,6 +34,8 @@ export declare class ConventionController {
     }[]>;
     findOne(id: string): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -43,6 +49,8 @@ export declare class ConventionController {
         updateData: UpdateConventionDto;
     }): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -53,6 +61,8 @@ export declare class ConventionController {
     }>;
     remove(id: string): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -63,6 +73,8 @@ export declare class ConventionController {
     }>;
     findActiveConventions(): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -73,6 +85,8 @@ export declare class ConventionController {
     }[]>;
     findInactiveConventions(): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -83,6 +97,8 @@ export declare class ConventionController {
     }[]>;
     activateConvention(id: string): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -93,6 +109,8 @@ export declare class ConventionController {
     }>;
     deactivateConvention(id: string): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -103,6 +121,8 @@ export declare class ConventionController {
     }>;
     findConventionsByUniversite(universiteId: string): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -113,6 +133,8 @@ export declare class ConventionController {
     }[]>;
     toggleStatus(id: string): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;

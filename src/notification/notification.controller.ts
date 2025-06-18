@@ -9,7 +9,7 @@ import { CreateNotificationDto, UpdateNotificationDto, NotificationResponseDto }
 @Controller('notifications')
 export class NotificationController {
   constructor(private readonly notificationService: NotificationService) {}
-
+ 
   // Patterns pour les communications entre microservices
   @MessagePattern('notification.create')
   async createNotification(@Payload() createNotificationDto: CreateNotificationDto) {

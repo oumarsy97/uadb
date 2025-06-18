@@ -11,6 +11,8 @@ export declare class DepartementController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             ufrId: string;
             responsable: string | null;
         };
@@ -32,6 +34,8 @@ export declare class DepartementController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             ufrId: string;
             responsable: string | null;
         }[];
@@ -58,6 +62,8 @@ export declare class DepartementController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             ufrId: string;
             responsable: string | null;
         };
@@ -77,6 +83,8 @@ export declare class DepartementController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             ufrId: string;
             responsable: string | null;
         }[];
@@ -96,6 +104,8 @@ export declare class DepartementController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             ufrId: string;
             responsable: string | null;
         };
@@ -116,6 +126,8 @@ export declare class DepartementController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             ufrId: string;
             responsable: string | null;
         };
@@ -150,6 +162,8 @@ export declare class DepartementController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             ufrId: string;
             responsable: string | null;
         }[];

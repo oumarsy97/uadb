@@ -87,7 +87,7 @@ export class NotificationService {
     } catch (error) {
       throw new NotFoundException(`Notification avec l'ID ${id} non trouvée`);
     }
-  }
+  } 
 
   async getUnreadCount(userId: string): Promise<{ count: number }> {
     const count = await this.prisma.notification.count({

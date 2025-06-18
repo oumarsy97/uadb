@@ -107,18 +107,6 @@ let RessourcesController = class RessourcesController {
             };
         }
     }
-    async toggleValidation(id) {
-        try {
-            return await this.ressourcesService.toggleValidation(id);
-        }
-        catch (error) {
-            return {
-                error: true,
-                message: error.message,
-                statusCode: error.status || 500
-            };
-        }
-    }
     async toggleArchivage(id) {
         try {
             return await this.ressourcesService.toggleArchivage(id);
@@ -194,13 +182,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], RessourcesController.prototype, "findByUniversite", null);
-__decorate([
-    (0, microservices_1.MessagePattern)('toggleValidationRessource'),
-    __param(0, (0, microservices_1.Payload)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], RessourcesController.prototype, "toggleValidation", null);
 __decorate([
     (0, microservices_1.MessagePattern)('toggleArchivageRessource'),
     __param(0, (0, microservices_1.Payload)()),

@@ -6,6 +6,8 @@ export declare class ConventionService {
     constructor(prisma: PrismaService);
     create(createConventionDto: CreateConventionDto): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -16,6 +18,8 @@ export declare class ConventionService {
     }>;
     findAll(page?: number, limit?: number, search?: string): import("generated/prisma").Prisma.PrismaPromise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -26,6 +30,8 @@ export declare class ConventionService {
     }[]>;
     findOne(id: string): import("generated/prisma").Prisma.Prisma__ConventionInteruniversitaireClient<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -36,6 +42,8 @@ export declare class ConventionService {
     } | null, null, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     update(id: string, updateConventionDto: UpdateConventionDto): import("generated/prisma").Prisma.Prisma__ConventionInteruniversitaireClient<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -46,6 +54,8 @@ export declare class ConventionService {
     }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     remove(id: string): import("generated/prisma").Prisma.Prisma__ConventionInteruniversitaireClient<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -56,6 +66,8 @@ export declare class ConventionService {
     }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     findActiveConventions(): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -66,6 +78,8 @@ export declare class ConventionService {
     }[]>;
     findInactiveConventions(): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -76,6 +90,8 @@ export declare class ConventionService {
     }[]>;
     activateConvention(id: string): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -86,6 +102,8 @@ export declare class ConventionService {
     }>;
     deactivateConvention(id: string): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;
@@ -96,6 +114,8 @@ export declare class ConventionService {
     }>;
     findConventionsByUniversite(universiteId: string): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         estActive: boolean;
         universiteId1: string;
         universiteId2: string;

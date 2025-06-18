@@ -1,3 +1,4 @@
+import { Filiere } from './../filiere/entities/filiere.entity';
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateEtudiantDto, UpdateEtudiantDto } from './dto/create-etudiant.dto';
@@ -22,11 +23,11 @@ export class EtudiantService {
 
     while (!isUnique) {
       const randomNumber = Math.floor(100000 + Math.random() * 900000);
-      numeroEtudiant = `ETU-${currentYear}-${randomNumber}`;
+      numeroEtudiant = `UAD-${currentYear}-${randomNumber}`;
       
       // Vérifier l'unicité dans la base de données
       const existingEtudiant = await this.prisma.etudiant.findUnique({
-        where: { numeroEtudiant: numeroEtudiant }
+        where: { codePermanent: numeroEtudiant }
       });
       
       if (!existingEtudiant) {
@@ -40,73 +41,103 @@ export class EtudiantService {
   /**
    * Crée un nouvel étudiant avec son utilisateur associé
    */
-  async create(createEtudiantDto: CreateEtudiantDto) {
-    try {
-      // 1. Créer d'abord l'utilisateur avec le rôle ETUDIANT
-      const userData = {
-        nom: createEtudiantDto.nom,
-        prenom: createEtudiantDto.prenom,
-        email: createEtudiantDto.email,
-        dateInscription: new Date(),
-        derniereConnexion: new Date(),
-        estValide: true,
-        estActif: true,
-        motDePasse: 'MotDePasse123', // Assurez-vous que le mot de passe est hashé avant de l'envoyer
-        role: RoleUser.ETUDIANT,
-        telephone: createEtudiantDto.telephone || null,
-        image: createEtudiantDto.image || 'https://example.com/default-avatar.png', // URL par défaut pour l'image
+ /**
+ * Crée un nouvel étudiant avec son utilisateur associé
+ */
+/**
+ * Crée un nouvel étudiant avec son utilisateur associé
+ */
+/**
+ * Crée un nouvel étudiant avec son utilisateur associé
+ */
+async create(createEtudiantDto: CreateEtudiantDto) {
+  try {
+    // 1. Créer d'abord l'utilisateur avec le rôle ETUDIANT
+    const userData = {
+      nom: createEtudiantDto.nom,
+      prenom: createEtudiantDto.prenom,
+      email: createEtudiantDto.email,
+      dateInscription: new Date(),
+      derniereConnexion: new Date(),
+      estValide: true,
+      estActif: true,
+      motDePasse: 'MotDePasse123', // Assurez-vous que le mot de passe est hashé avant de l'envoyer
+      role: RoleUser.ETUDIANT,
+      telephone: createEtudiantDto.telephone || null,
+      image: createEtudiantDto.image || 'https://example.com/default-avatar.png', // URL par défaut pour l'image
+    };
 
-      };
+    const user = await this.utilisateursService.create(userData);
+    
+    if (!user || !user.id) {
+      throw new BadRequestException('Erreur lors de la création de l\'utilisateur');
+    }
 
-      const user = await this.utilisateursService.create(userData);
-      
-      if (!user || !user.id) {
-        throw new BadRequestException('Erreur lors de la création de l\'utilisateur');
-      }
+    // 2. Générer le code permanent unique
+    const numeroEtudiant = await this.generatenumeroEtudiant();
 
-      // 2. Générer le code permanent unique
-      const numeroEtudiant = await this.generatenumeroEtudiant();
-
-      // 3. Créer l'étudiant avec les données spécifiques
-      const etudiant = await this.prisma.etudiant.create({
-        data: {
-          userId: user.id,
-          numeroEtudiant,
-          dateNaissance: new Date(createEtudiantDto.dateNaissance),
-          niveauEtudes: createEtudiantDto.niveauEtudes || NiveauEtudes.LICENCE_1,
-          filiereId: createEtudiantDto.filiereId,
+    // 3. Créer l'étudiant avec les données spécifiques
+    const etudiant = await this.prisma.etudiant.create({
+      data: {
+        userId: user.id,
+        codePermanent: numeroEtudiant,
+        dateNaissance: new Date(createEtudiantDto.dateNaissance),
+        filiereId: createEtudiantDto.filiereId,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            email: true,
+            nom: true,
+            prenom: true,
+            telephone: true,
+            role: true,
+            estActif: true,
+          }
         },
-        include: {
-          user: {
-            select: {
-              id: true,
-              email: true,
-              nom: true,
-              prenom: true,
-              telephone: true,
-              role: true,
-              estActif: true,
-              
+        filiere: {
+          include: {
+            departement: {
+              include: {
+                ufr: {
+                  include: {
+                    universite: {
+                      select: {
+                        id: true,
+                        nom: true,
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
-      });
-
-      return {
-        success: true,
-        message: 'Étudiant créé avec succès',
-        data: etudiant
-      };
-
-    } catch (error) {
-      // Si erreur, nettoyer l'utilisateur créé si possible
-      if (error.code === 'P2002') {
-        throw new BadRequestException('Un étudiant avec ces informations existe déjà');
       }
-      
-      throw new BadRequestException(`Erreur lors de la création de l'étudiant: ${error.message}`);
+    });
+
+    // Récupérer l'ufrId via la chaîne de relations
+    const ufrId = (etudiant as any).filiere?.departement?.ufr?.id;
+
+    return {
+      success: true,
+      message: 'Étudiant créé avec succès',
+      data: {
+        ...etudiant,
+        ufrId // Retourner l'ID de l'UFR
+      }
+    };
+
+  } catch (error) {
+    // Si erreur, nettoyer l'utilisateur créé si possible
+    if (error.code === 'P2002') {
+      throw new BadRequestException('Un étudiant avec ces informations existe déjà');
     }
+    
+    throw new BadRequestException(`Erreur lors de la création de l'étudiant: ${error.message}`);
   }
+}
 
   /**
    * Récupère tous les étudiants avec pagination et recherche
@@ -228,9 +259,9 @@ export class EtudiantService {
   /**
    * Récupère un étudiant par son numéro étudiant (code permanent)
    */
-  async findByNumeroEtudiant(numeroEtudiant: string) {
+  async findByCodePermanent(codePermanent: string) {
     const etudiant = await this.prisma.etudiant.findUnique({
-      where: { numeroEtudiant },
+      where: { codePermanent },
       include: {
         user: {
           select: {
@@ -437,16 +468,17 @@ export class EtudiantService {
     });
     //etudiants par niveau d'études
     const etudiantsParNiveau = await this.prisma.etudiant.groupBy({
-      by: ['niveauEtudes'],
       _count: {
         id: true,
       },
       where: {
         user: {
           role: RoleUser.ETUDIANT,
-          estActif: true,    
+          estActif: true,
         }
-      }
+      },
+      orderBy: undefined,
+      by: 'id'
     });
     return {
       totalEtudiants,

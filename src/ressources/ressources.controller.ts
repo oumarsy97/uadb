@@ -100,18 +100,7 @@ export class RessourcesController {
     }
   }
 
-  @MessagePattern('toggleValidationRessource')
-  async toggleValidation(@Payload() id: string) {
-    try {
-      return await this.ressourcesService.toggleValidation(id);
-    } catch (error) {
-      return {
-        error: true,
-        message: error.message,
-        statusCode: error.status || 500
-      };
-    }
-  }
+ 
 
   @MessagePattern('toggleArchivageRessource')
   async toggleArchivage(@Payload() id: string) {

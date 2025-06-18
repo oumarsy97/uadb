@@ -10,6 +10,8 @@ export declare class UfrController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             universiteId: string;
         };
         message: string;
@@ -29,6 +31,8 @@ export declare class UfrController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             universiteId: string;
         }[];
         meta: {
@@ -53,6 +57,8 @@ export declare class UfrController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             universiteId: string;
         };
         message: string;
@@ -71,6 +77,8 @@ export declare class UfrController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             universiteId: string;
         }[];
         message: string;
@@ -90,6 +98,8 @@ export declare class UfrController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             universiteId: string;
         };
         message: string;
@@ -121,6 +131,8 @@ export declare class UfrController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             universiteId: string;
         }[];
         message: string;

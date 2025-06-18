@@ -13,6 +13,8 @@ export declare class UtilisateursController {
         telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
+        createdAt: Date;
+        updatedAt: Date;
         preferencesRecommandation: string | null;
         frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
     }>;
@@ -50,6 +52,8 @@ export declare class UtilisateursController {
             telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
+            createdAt: Date;
+            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         }[];
@@ -70,6 +74,8 @@ export declare class UtilisateursController {
         telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
+        createdAt: Date;
+        updatedAt: Date;
         preferencesRecommandation: string | null;
         frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
     }>;
@@ -83,6 +89,8 @@ export declare class UtilisateursController {
         telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
+        createdAt: Date;
+        updatedAt: Date;
         preferencesRecommandation: string | null;
         frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
     }>;
@@ -99,6 +107,8 @@ export declare class UtilisateursController {
         telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
+        createdAt: Date;
+        updatedAt: Date;
         preferencesRecommandation: string | null;
         frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
     }>;
@@ -118,6 +128,8 @@ export declare class UtilisateursController {
         telephone: string | null;
         derniereConnexion: Date | null;
         estActif: boolean;
+        createdAt: Date;
+        updatedAt: Date;
         preferencesRecommandation: string | null;
         frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
     }>;

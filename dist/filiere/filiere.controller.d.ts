@@ -11,6 +11,8 @@ export declare class FiliereController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         };
@@ -32,6 +34,8 @@ export declare class FiliereController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         }[];
@@ -58,6 +62,8 @@ export declare class FiliereController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         };
@@ -77,6 +83,8 @@ export declare class FiliereController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         }[];
@@ -96,6 +104,8 @@ export declare class FiliereController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         };
@@ -116,6 +126,8 @@ export declare class FiliereController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         };
@@ -150,6 +162,8 @@ export declare class FiliereController {
             nom: string;
             description: string | null;
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         }[];

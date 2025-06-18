@@ -27,9 +27,9 @@ let EtudiantService = class EtudiantService {
         let isUnique = false;
         while (!isUnique) {
             const randomNumber = Math.floor(100000 + Math.random() * 900000);
-            numeroEtudiant = `ETU-${currentYear}-${randomNumber}`;
+            numeroEtudiant = `UAD-${currentYear}-${randomNumber}`;
             const existingEtudiant = await this.prisma.etudiant.findUnique({
-                where: { numeroEtudiant: numeroEtudiant }
+                where: { codePermanent: numeroEtudiant }
             });
             if (!existingEtudiant) {
                 isUnique = true;
@@ -60,9 +60,8 @@ let EtudiantService = class EtudiantService {
             const etudiant = await this.prisma.etudiant.create({
                 data: {
                     userId: user.id,
-                    numeroEtudiant,
+                    codePermanent: numeroEtudiant,
                     dateNaissance: new Date(createEtudiantDto.dateNaissance),
-                    niveauEtudes: createEtudiantDto.niveauEtudes || prisma_1.NiveauEtudes.LICENCE_1,
                     filiereId: createEtudiantDto.filiereId,
                 },
                 include: {
@@ -76,13 +75,35 @@ let EtudiantService = class EtudiantService {
                             role: true,
                             estActif: true,
                         }
+                    },
+                    filiere: {
+                        include: {
+                            departement: {
+                                include: {
+                                    ufr: {
+                                        include: {
+                                            universite: {
+                                                select: {
+                                                    id: true,
+                                                    nom: true,
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             });
+            const ufrId = etudiant.filiere?.departement?.ufr?.id;
             return {
                 success: true,
                 message: 'Étudiant créé avec succès',
-                data: etudiant
+                data: {
+                    ...etudiant,
+                    ufrId
+                }
             };
         }
         catch (error) {
@@ -181,9 +202,9 @@ let EtudiantService = class EtudiantService {
             data: etudiant
         };
     }
-    async findByNumeroEtudiant(numeroEtudiant) {
+    async findByCodePermanent(codePermanent) {
         const etudiant = await this.prisma.etudiant.findUnique({
-            where: { numeroEtudiant },
+            where: { codePermanent },
             include: {
                 user: {
                     select: {
@@ -341,7 +362,6 @@ let EtudiantService = class EtudiantService {
             }
         });
         const etudiantsParNiveau = await this.prisma.etudiant.groupBy({
-            by: ['niveauEtudes'],
             _count: {
                 id: true,
             },
@@ -350,7 +370,9 @@ let EtudiantService = class EtudiantService {
                     role: prisma_1.RoleUser.ETUDIANT,
                     estActif: true,
                 }
-            }
+            },
+            orderBy: undefined,
+            by: 'id'
         });
         return {
             totalEtudiants,

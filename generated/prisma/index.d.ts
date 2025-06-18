@@ -4059,6 +4059,8 @@ export namespace Prisma {
     estActive: boolean | null
     typeConvention: $Enums.TypeConvention | null
     detailsConvention: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ConventionInteruniversitaireMaxAggregateOutputType = {
@@ -4070,6 +4072,8 @@ export namespace Prisma {
     estActive: boolean | null
     typeConvention: $Enums.TypeConvention | null
     detailsConvention: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ConventionInteruniversitaireCountAggregateOutputType = {
@@ -4081,6 +4085,8 @@ export namespace Prisma {
     estActive: number
     typeConvention: number
     detailsConvention: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -4094,6 +4100,8 @@ export namespace Prisma {
     estActive?: true
     typeConvention?: true
     detailsConvention?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ConventionInteruniversitaireMaxAggregateInputType = {
@@ -4105,6 +4113,8 @@ export namespace Prisma {
     estActive?: true
     typeConvention?: true
     detailsConvention?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ConventionInteruniversitaireCountAggregateInputType = {
@@ -4116,6 +4126,8 @@ export namespace Prisma {
     estActive?: true
     typeConvention?: true
     detailsConvention?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -4200,6 +4212,8 @@ export namespace Prisma {
     estActive: boolean
     typeConvention: $Enums.TypeConvention
     detailsConvention: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: ConventionInteruniversitaireCountAggregateOutputType | null
     _min: ConventionInteruniversitaireMinAggregateOutputType | null
     _max: ConventionInteruniversitaireMaxAggregateOutputType | null
@@ -4228,6 +4242,8 @@ export namespace Prisma {
     estActive?: boolean
     typeConvention?: boolean
     detailsConvention?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["conventionInteruniversitaire"]>
 
 
@@ -4241,9 +4257,11 @@ export namespace Prisma {
     estActive?: boolean
     typeConvention?: boolean
     detailsConvention?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ConventionInteruniversitaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteId1" | "universiteId2" | "dateDebut" | "dateFin" | "estActive" | "typeConvention" | "detailsConvention", ExtArgs["result"]["conventionInteruniversitaire"]>
+  export type ConventionInteruniversitaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteId1" | "universiteId2" | "dateDebut" | "dateFin" | "estActive" | "typeConvention" | "detailsConvention" | "createdAt" | "updatedAt", ExtArgs["result"]["conventionInteruniversitaire"]>
 
   export type $ConventionInteruniversitairePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ConventionInteruniversitaire"
@@ -4257,6 +4275,8 @@ export namespace Prisma {
       estActive: boolean
       typeConvention: $Enums.TypeConvention
       detailsConvention: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["conventionInteruniversitaire"]>
     composites: {}
   }
@@ -4634,6 +4654,8 @@ export namespace Prisma {
     readonly estActive: FieldRef<"ConventionInteruniversitaire", 'Boolean'>
     readonly typeConvention: FieldRef<"ConventionInteruniversitaire", 'TypeConvention'>
     readonly detailsConvention: FieldRef<"ConventionInteruniversitaire", 'String'>
+    readonly createdAt: FieldRef<"ConventionInteruniversitaire", 'DateTime'>
+    readonly updatedAt: FieldRef<"ConventionInteruniversitaire", 'DateTime'>
   }
     
 
@@ -4988,6 +5010,8 @@ export namespace Prisma {
     nbRenouvellements: number | null
     penaliteRetardJours: boolean | null
     estActif: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ReglePretMaxAggregateOutputType = {
@@ -4999,6 +5023,8 @@ export namespace Prisma {
     nbRenouvellements: number | null
     penaliteRetardJours: boolean | null
     estActif: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ReglePretCountAggregateOutputType = {
@@ -5010,6 +5036,8 @@ export namespace Prisma {
     nbRenouvellements: number
     penaliteRetardJours: number
     estActif: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -5035,6 +5063,8 @@ export namespace Prisma {
     nbRenouvellements?: true
     penaliteRetardJours?: true
     estActif?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ReglePretMaxAggregateInputType = {
@@ -5046,6 +5076,8 @@ export namespace Prisma {
     nbRenouvellements?: true
     penaliteRetardJours?: true
     estActif?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ReglePretCountAggregateInputType = {
@@ -5057,6 +5089,8 @@ export namespace Prisma {
     nbRenouvellements?: true
     penaliteRetardJours?: true
     estActif?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -5155,6 +5189,8 @@ export namespace Prisma {
     nbRenouvellements: number
     penaliteRetardJours: boolean
     estActif: boolean
+    createdAt: Date
+    updatedAt: Date
     _count: ReglePretCountAggregateOutputType | null
     _avg: ReglePretAvgAggregateOutputType | null
     _sum: ReglePretSumAggregateOutputType | null
@@ -5185,6 +5221,8 @@ export namespace Prisma {
     nbRenouvellements?: boolean
     penaliteRetardJours?: boolean
     estActif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reglePret"]>
 
@@ -5199,9 +5237,11 @@ export namespace Prisma {
     nbRenouvellements?: boolean
     penaliteRetardJours?: boolean
     estActif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ReglePretOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteId" | "roleUtilisateur" | "nombreMaxOuvrages" | "dureeEmpruntJours" | "nbRenouvellements" | "penaliteRetardJours" | "estActif", ExtArgs["result"]["reglePret"]>
+  export type ReglePretOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteId" | "roleUtilisateur" | "nombreMaxOuvrages" | "dureeEmpruntJours" | "nbRenouvellements" | "penaliteRetardJours" | "estActif" | "createdAt" | "updatedAt", ExtArgs["result"]["reglePret"]>
   export type ReglePretInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
   }
@@ -5220,6 +5260,8 @@ export namespace Prisma {
       nbRenouvellements: number
       penaliteRetardJours: boolean
       estActif: boolean
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["reglePret"]>
     composites: {}
   }
@@ -5598,6 +5640,8 @@ export namespace Prisma {
     readonly nbRenouvellements: FieldRef<"ReglePret", 'Int'>
     readonly penaliteRetardJours: FieldRef<"ReglePret", 'Boolean'>
     readonly estActif: FieldRef<"ReglePret", 'Boolean'>
+    readonly createdAt: FieldRef<"ReglePret", 'DateTime'>
+    readonly updatedAt: FieldRef<"ReglePret", 'DateTime'>
   }
     
 
@@ -5977,6 +6021,8 @@ export namespace Prisma {
     penaliteRetard: string | null
     estActive: boolean | null
     dateMiseAJour: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PolitiqueBibliothequeMaxAggregateOutputType = {
@@ -5987,6 +6033,8 @@ export namespace Prisma {
     penaliteRetard: string | null
     estActive: boolean | null
     dateMiseAJour: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PolitiqueBibliothequeCountAggregateOutputType = {
@@ -5997,6 +6045,8 @@ export namespace Prisma {
     penaliteRetard: number
     estActive: number
     dateMiseAJour: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -6009,6 +6059,8 @@ export namespace Prisma {
     penaliteRetard?: true
     estActive?: true
     dateMiseAJour?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type PolitiqueBibliothequeMaxAggregateInputType = {
@@ -6019,6 +6071,8 @@ export namespace Prisma {
     penaliteRetard?: true
     estActive?: true
     dateMiseAJour?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type PolitiqueBibliothequeCountAggregateInputType = {
@@ -6029,6 +6083,8 @@ export namespace Prisma {
     penaliteRetard?: true
     estActive?: true
     dateMiseAJour?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -6112,6 +6168,8 @@ export namespace Prisma {
     penaliteRetard: string
     estActive: boolean
     dateMiseAJour: Date
+    createdAt: Date
+    updatedAt: Date
     _count: PolitiqueBibliothequeCountAggregateOutputType | null
     _min: PolitiqueBibliothequeMinAggregateOutputType | null
     _max: PolitiqueBibliothequeMaxAggregateOutputType | null
@@ -6139,6 +6197,8 @@ export namespace Prisma {
     penaliteRetard?: boolean
     estActive?: boolean
     dateMiseAJour?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["politiqueBibliotheque"]>
 
@@ -6152,9 +6212,11 @@ export namespace Prisma {
     penaliteRetard?: boolean
     estActive?: boolean
     dateMiseAJour?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type PolitiqueBibliothequeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteId" | "politiqueRetour" | "politiquePerte" | "penaliteRetard" | "estActive" | "dateMiseAJour", ExtArgs["result"]["politiqueBibliotheque"]>
+  export type PolitiqueBibliothequeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteId" | "politiqueRetour" | "politiquePerte" | "penaliteRetard" | "estActive" | "dateMiseAJour" | "createdAt" | "updatedAt", ExtArgs["result"]["politiqueBibliotheque"]>
   export type PolitiqueBibliothequeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
   }
@@ -6172,6 +6234,8 @@ export namespace Prisma {
       penaliteRetard: string
       estActive: boolean
       dateMiseAJour: Date
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["politiqueBibliotheque"]>
     composites: {}
   }
@@ -6549,6 +6613,8 @@ export namespace Prisma {
     readonly penaliteRetard: FieldRef<"PolitiqueBibliotheque", 'String'>
     readonly estActive: FieldRef<"PolitiqueBibliotheque", 'Boolean'>
     readonly dateMiseAJour: FieldRef<"PolitiqueBibliotheque", 'DateTime'>
+    readonly createdAt: FieldRef<"PolitiqueBibliotheque", 'DateTime'>
+    readonly updatedAt: FieldRef<"PolitiqueBibliotheque", 'DateTime'>
   }
     
 
@@ -6929,6 +6995,8 @@ export namespace Prisma {
     motif: string | null
     empruntId: string | null
     estActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type SanctionUtilisateurMaxAggregateOutputType = {
@@ -6940,6 +7008,8 @@ export namespace Prisma {
     motif: string | null
     empruntId: string | null
     estActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type SanctionUtilisateurCountAggregateOutputType = {
@@ -6951,6 +7021,8 @@ export namespace Prisma {
     motif: number
     empruntId: number
     estActive: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -6964,6 +7036,8 @@ export namespace Prisma {
     motif?: true
     empruntId?: true
     estActive?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type SanctionUtilisateurMaxAggregateInputType = {
@@ -6975,6 +7049,8 @@ export namespace Prisma {
     motif?: true
     empruntId?: true
     estActive?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type SanctionUtilisateurCountAggregateInputType = {
@@ -6986,6 +7062,8 @@ export namespace Prisma {
     motif?: true
     empruntId?: true
     estActive?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -7070,6 +7148,8 @@ export namespace Prisma {
     motif: string
     empruntId: string | null
     estActive: boolean
+    createdAt: Date
+    updatedAt: Date
     _count: SanctionUtilisateurCountAggregateOutputType | null
     _min: SanctionUtilisateurMinAggregateOutputType | null
     _max: SanctionUtilisateurMaxAggregateOutputType | null
@@ -7098,6 +7178,8 @@ export namespace Prisma {
     motif?: boolean
     empruntId?: boolean
     estActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     emprunt?: boolean | SanctionUtilisateur$empruntArgs<ExtArgs>
   }, ExtArgs["result"]["sanctionUtilisateur"]>
@@ -7113,9 +7195,11 @@ export namespace Prisma {
     motif?: boolean
     empruntId?: boolean
     estActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type SanctionUtilisateurOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "typeRestriction" | "dateDebut" | "dateFin" | "motif" | "empruntId" | "estActive", ExtArgs["result"]["sanctionUtilisateur"]>
+  export type SanctionUtilisateurOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "typeRestriction" | "dateDebut" | "dateFin" | "motif" | "empruntId" | "estActive" | "createdAt" | "updatedAt", ExtArgs["result"]["sanctionUtilisateur"]>
   export type SanctionUtilisateurInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     emprunt?: boolean | SanctionUtilisateur$empruntArgs<ExtArgs>
@@ -7136,6 +7220,8 @@ export namespace Prisma {
       motif: string
       empruntId: string | null
       estActive: boolean
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["sanctionUtilisateur"]>
     composites: {}
   }
@@ -7515,6 +7601,8 @@ export namespace Prisma {
     readonly motif: FieldRef<"SanctionUtilisateur", 'String'>
     readonly empruntId: FieldRef<"SanctionUtilisateur", 'String'>
     readonly estActive: FieldRef<"SanctionUtilisateur", 'Boolean'>
+    readonly createdAt: FieldRef<"SanctionUtilisateur", 'DateTime'>
+    readonly updatedAt: FieldRef<"SanctionUtilisateur", 'DateTime'>
   }
     
 
@@ -7916,6 +8004,8 @@ export namespace Prisma {
     commentaire: string | null
     universiteEmprunteur: string | null
     validePar: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ReservationMaxAggregateOutputType = {
@@ -7929,6 +8019,8 @@ export namespace Prisma {
     commentaire: string | null
     universiteEmprunteur: string | null
     validePar: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ReservationCountAggregateOutputType = {
@@ -7942,6 +8034,8 @@ export namespace Prisma {
     commentaire: number
     universiteEmprunteur: number
     validePar: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -7957,6 +8051,8 @@ export namespace Prisma {
     commentaire?: true
     universiteEmprunteur?: true
     validePar?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ReservationMaxAggregateInputType = {
@@ -7970,6 +8066,8 @@ export namespace Prisma {
     commentaire?: true
     universiteEmprunteur?: true
     validePar?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ReservationCountAggregateInputType = {
@@ -7983,6 +8081,8 @@ export namespace Prisma {
     commentaire?: true
     universiteEmprunteur?: true
     validePar?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -8069,6 +8169,8 @@ export namespace Prisma {
     commentaire: string | null
     universiteEmprunteur: string
     validePar: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: ReservationCountAggregateOutputType | null
     _min: ReservationMinAggregateOutputType | null
     _max: ReservationMaxAggregateOutputType | null
@@ -8099,6 +8201,8 @@ export namespace Prisma {
     commentaire?: boolean
     universiteEmprunteur?: boolean
     validePar?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | Reservation$userArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
     valideur?: boolean | Reservation$valideurArgs<ExtArgs>
@@ -8117,9 +8221,11 @@ export namespace Prisma {
     commentaire?: boolean
     universiteEmprunteur?: boolean
     validePar?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ReservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "dateReservation" | "dateDebut" | "dateFin" | "statut" | "commentaire" | "universiteEmprunteur" | "validePar", ExtArgs["result"]["reservation"]>
+  export type ReservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "dateReservation" | "dateDebut" | "dateFin" | "statut" | "commentaire" | "universiteEmprunteur" | "validePar" | "createdAt" | "updatedAt", ExtArgs["result"]["reservation"]>
   export type ReservationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Reservation$userArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
@@ -8144,6 +8250,8 @@ export namespace Prisma {
       commentaire: string | null
       universiteEmprunteur: string
       validePar: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["reservation"]>
     composites: {}
   }
@@ -8526,6 +8634,8 @@ export namespace Prisma {
     readonly commentaire: FieldRef<"Reservation", 'String'>
     readonly universiteEmprunteur: FieldRef<"Reservation", 'String'>
     readonly validePar: FieldRef<"Reservation", 'String'>
+    readonly createdAt: FieldRef<"Reservation", 'DateTime'>
+    readonly updatedAt: FieldRef<"Reservation", 'DateTime'>
   }
     
 
@@ -8958,6 +9068,8 @@ export namespace Prisma {
     qrCode: string | null
     dureeMaxEmpruntExterne: number | null
     nbMaxExemplairesExterne: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ExemplairePhysiqueMaxAggregateOutputType = {
@@ -8971,6 +9083,8 @@ export namespace Prisma {
     qrCode: string | null
     dureeMaxEmpruntExterne: number | null
     nbMaxExemplairesExterne: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ExemplairePhysiqueCountAggregateOutputType = {
@@ -8984,6 +9098,8 @@ export namespace Prisma {
     qrCode: number
     dureeMaxEmpruntExterne: number
     nbMaxExemplairesExterne: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -9009,6 +9125,8 @@ export namespace Prisma {
     qrCode?: true
     dureeMaxEmpruntExterne?: true
     nbMaxExemplairesExterne?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ExemplairePhysiqueMaxAggregateInputType = {
@@ -9022,6 +9140,8 @@ export namespace Prisma {
     qrCode?: true
     dureeMaxEmpruntExterne?: true
     nbMaxExemplairesExterne?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ExemplairePhysiqueCountAggregateInputType = {
@@ -9035,6 +9155,8 @@ export namespace Prisma {
     qrCode?: true
     dureeMaxEmpruntExterne?: true
     nbMaxExemplairesExterne?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -9135,6 +9257,8 @@ export namespace Prisma {
     qrCode: string | null
     dureeMaxEmpruntExterne: number
     nbMaxExemplairesExterne: number
+    createdAt: Date
+    updatedAt: Date
     _count: ExemplairePhysiqueCountAggregateOutputType | null
     _avg: ExemplairePhysiqueAvgAggregateOutputType | null
     _sum: ExemplairePhysiqueSumAggregateOutputType | null
@@ -9167,6 +9291,8 @@ export namespace Prisma {
     qrCode?: boolean
     dureeMaxEmpruntExterne?: boolean
     nbMaxExemplairesExterne?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
     emprunts?: boolean | ExemplairePhysique$empruntsArgs<ExtArgs>
     _count?: boolean | ExemplairePhysiqueCountOutputTypeDefaultArgs<ExtArgs>
@@ -9185,9 +9311,11 @@ export namespace Prisma {
     qrCode?: boolean
     dureeMaxEmpruntExterne?: boolean
     nbMaxExemplairesExterne?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ExemplairePhysiqueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ressourceId" | "cote" | "etat" | "disponible" | "localisation" | "dateAcquisition" | "qrCode" | "dureeMaxEmpruntExterne" | "nbMaxExemplairesExterne", ExtArgs["result"]["exemplairePhysique"]>
+  export type ExemplairePhysiqueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ressourceId" | "cote" | "etat" | "disponible" | "localisation" | "dateAcquisition" | "qrCode" | "dureeMaxEmpruntExterne" | "nbMaxExemplairesExterne" | "createdAt" | "updatedAt", ExtArgs["result"]["exemplairePhysique"]>
   export type ExemplairePhysiqueInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
     emprunts?: boolean | ExemplairePhysique$empruntsArgs<ExtArgs>
@@ -9211,6 +9339,8 @@ export namespace Prisma {
       qrCode: string | null
       dureeMaxEmpruntExterne: number
       nbMaxExemplairesExterne: number
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["exemplairePhysique"]>
     composites: {}
   }
@@ -9592,6 +9722,8 @@ export namespace Prisma {
     readonly qrCode: FieldRef<"ExemplairePhysique", 'String'>
     readonly dureeMaxEmpruntExterne: FieldRef<"ExemplairePhysique", 'Int'>
     readonly nbMaxExemplairesExterne: FieldRef<"ExemplairePhysique", 'Int'>
+    readonly createdAt: FieldRef<"ExemplairePhysique", 'DateTime'>
+    readonly updatedAt: FieldRef<"ExemplairePhysique", 'DateTime'>
   }
     
 
@@ -9999,6 +10131,8 @@ export namespace Prisma {
     universiteEmprunteur: string | null
     motifEmprunt: string | null
     validePar: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type EmpruntMaxAggregateOutputType = {
@@ -10013,6 +10147,8 @@ export namespace Prisma {
     universiteEmprunteur: string | null
     motifEmprunt: string | null
     validePar: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type EmpruntCountAggregateOutputType = {
@@ -10027,6 +10163,8 @@ export namespace Prisma {
     universiteEmprunteur: number
     motifEmprunt: number
     validePar: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -10043,6 +10181,8 @@ export namespace Prisma {
     universiteEmprunteur?: true
     motifEmprunt?: true
     validePar?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type EmpruntMaxAggregateInputType = {
@@ -10057,6 +10197,8 @@ export namespace Prisma {
     universiteEmprunteur?: true
     motifEmprunt?: true
     validePar?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type EmpruntCountAggregateInputType = {
@@ -10071,6 +10213,8 @@ export namespace Prisma {
     universiteEmprunteur?: true
     motifEmprunt?: true
     validePar?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -10158,6 +10302,8 @@ export namespace Prisma {
     universiteEmprunteur: string
     motifEmprunt: string | null
     validePar: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: EmpruntCountAggregateOutputType | null
     _min: EmpruntMinAggregateOutputType | null
     _max: EmpruntMaxAggregateOutputType | null
@@ -10189,6 +10335,8 @@ export namespace Prisma {
     universiteEmprunteur?: boolean
     motifEmprunt?: boolean
     validePar?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     exemplaire?: boolean | ExemplairePhysiqueDefaultArgs<ExtArgs>
     user?: boolean | Emprunt$userArgs<ExtArgs>
     SanctionUtilisateur?: boolean | Emprunt$SanctionUtilisateurArgs<ExtArgs>
@@ -10209,9 +10357,11 @@ export namespace Prisma {
     universiteEmprunteur?: boolean
     motifEmprunt?: boolean
     validePar?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type EmpruntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "exemplaireId" | "userId" | "dateEmprunt" | "dateRetourPrevue" | "dateRetourEffective" | "statut" | "commentaire" | "universiteEmprunteur" | "motifEmprunt" | "validePar", ExtArgs["result"]["emprunt"]>
+  export type EmpruntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "exemplaireId" | "userId" | "dateEmprunt" | "dateRetourPrevue" | "dateRetourEffective" | "statut" | "commentaire" | "universiteEmprunteur" | "motifEmprunt" | "validePar" | "createdAt" | "updatedAt", ExtArgs["result"]["emprunt"]>
   export type EmpruntInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     exemplaire?: boolean | ExemplairePhysiqueDefaultArgs<ExtArgs>
     user?: boolean | Emprunt$userArgs<ExtArgs>
@@ -10238,6 +10388,8 @@ export namespace Prisma {
       universiteEmprunteur: string
       motifEmprunt: string | null
       validePar: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["emprunt"]>
     composites: {}
   }
@@ -10621,6 +10773,8 @@ export namespace Prisma {
     readonly universiteEmprunteur: FieldRef<"Emprunt", 'String'>
     readonly motifEmprunt: FieldRef<"Emprunt", 'String'>
     readonly validePar: FieldRef<"Emprunt", 'String'>
+    readonly createdAt: FieldRef<"Emprunt", 'DateTime'>
+    readonly updatedAt: FieldRef<"Emprunt", 'DateTime'>
   }
     
 
@@ -11055,6 +11209,8 @@ export namespace Prisma {
     estVue: boolean | null
     estInteruniversitaire: boolean | null
     universiteSource: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type RecommandationMaxAggregateOutputType = {
@@ -11067,6 +11223,8 @@ export namespace Prisma {
     estVue: boolean | null
     estInteruniversitaire: boolean | null
     universiteSource: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type RecommandationCountAggregateOutputType = {
@@ -11079,6 +11237,8 @@ export namespace Prisma {
     estVue: number
     estInteruniversitaire: number
     universiteSource: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -11101,6 +11261,8 @@ export namespace Prisma {
     estVue?: true
     estInteruniversitaire?: true
     universiteSource?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type RecommandationMaxAggregateInputType = {
@@ -11113,6 +11275,8 @@ export namespace Prisma {
     estVue?: true
     estInteruniversitaire?: true
     universiteSource?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type RecommandationCountAggregateInputType = {
@@ -11125,6 +11289,8 @@ export namespace Prisma {
     estVue?: true
     estInteruniversitaire?: true
     universiteSource?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -11224,6 +11390,8 @@ export namespace Prisma {
     estVue: boolean
     estInteruniversitaire: boolean
     universiteSource: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: RecommandationCountAggregateOutputType | null
     _avg: RecommandationAvgAggregateOutputType | null
     _sum: RecommandationSumAggregateOutputType | null
@@ -11255,6 +11423,8 @@ export namespace Prisma {
     estVue?: boolean
     estInteruniversitaire?: boolean
     universiteSource?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["recommandation"]>
@@ -11271,9 +11441,11 @@ export namespace Prisma {
     estVue?: boolean
     estInteruniversitaire?: boolean
     universiteSource?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type RecommandationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "dateRecommandation" | "score" | "motif" | "estVue" | "estInteruniversitaire" | "universiteSource", ExtArgs["result"]["recommandation"]>
+  export type RecommandationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "dateRecommandation" | "score" | "motif" | "estVue" | "estInteruniversitaire" | "universiteSource" | "createdAt" | "updatedAt", ExtArgs["result"]["recommandation"]>
   export type RecommandationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
@@ -11295,6 +11467,8 @@ export namespace Prisma {
       estVue: boolean
       estInteruniversitaire: boolean
       universiteSource: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["recommandation"]>
     composites: {}
   }
@@ -11675,6 +11849,8 @@ export namespace Prisma {
     readonly estVue: FieldRef<"Recommandation", 'Boolean'>
     readonly estInteruniversitaire: FieldRef<"Recommandation", 'Boolean'>
     readonly universiteSource: FieldRef<"Recommandation", 'String'>
+    readonly createdAt: FieldRef<"Recommandation", 'DateTime'>
+    readonly updatedAt: FieldRef<"Recommandation", 'DateTime'>
   }
     
 
@@ -12052,6 +12228,8 @@ export namespace Prisma {
     adresse: string | null
     ville: string | null
     siteWeb: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UniversiteMaxAggregateOutputType = {
@@ -12060,6 +12238,8 @@ export namespace Prisma {
     adresse: string | null
     ville: string | null
     siteWeb: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UniversiteCountAggregateOutputType = {
@@ -12068,6 +12248,8 @@ export namespace Prisma {
     adresse: number
     ville: number
     siteWeb: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -12078,6 +12260,8 @@ export namespace Prisma {
     adresse?: true
     ville?: true
     siteWeb?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UniversiteMaxAggregateInputType = {
@@ -12086,6 +12270,8 @@ export namespace Prisma {
     adresse?: true
     ville?: true
     siteWeb?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UniversiteCountAggregateInputType = {
@@ -12094,6 +12280,8 @@ export namespace Prisma {
     adresse?: true
     ville?: true
     siteWeb?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -12175,6 +12363,8 @@ export namespace Prisma {
     adresse: string | null
     ville: string
     siteWeb: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: UniversiteCountAggregateOutputType | null
     _min: UniversiteMinAggregateOutputType | null
     _max: UniversiteMaxAggregateOutputType | null
@@ -12200,6 +12390,8 @@ export namespace Prisma {
     adresse?: boolean
     ville?: boolean
     siteWeb?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     statistiquesBibliotheque?: boolean | Universite$statistiquesBibliothequeArgs<ExtArgs>
     reglePrets?: boolean | Universite$reglePretsArgs<ExtArgs>
     politiqueBibliotheques?: boolean | Universite$politiqueBibliothequesArgs<ExtArgs>
@@ -12215,9 +12407,11 @@ export namespace Prisma {
     adresse?: boolean
     ville?: boolean
     siteWeb?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type UniversiteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "adresse" | "ville" | "siteWeb", ExtArgs["result"]["universite"]>
+  export type UniversiteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "adresse" | "ville" | "siteWeb" | "createdAt" | "updatedAt", ExtArgs["result"]["universite"]>
   export type UniversiteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     statistiquesBibliotheque?: boolean | Universite$statistiquesBibliothequeArgs<ExtArgs>
     reglePrets?: boolean | Universite$reglePretsArgs<ExtArgs>
@@ -12240,6 +12434,8 @@ export namespace Prisma {
       adresse: string | null
       ville: string
       siteWeb: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["universite"]>
     composites: {}
   }
@@ -12618,6 +12814,8 @@ export namespace Prisma {
     readonly adresse: FieldRef<"Universite", 'String'>
     readonly ville: FieldRef<"Universite", 'String'>
     readonly siteWeb: FieldRef<"Universite", 'String'>
+    readonly createdAt: FieldRef<"Universite", 'DateTime'>
+    readonly updatedAt: FieldRef<"Universite", 'DateTime'>
   }
     
 
@@ -13090,6 +13288,8 @@ export namespace Prisma {
     nom: string | null
     description: string | null
     universiteId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UfrMaxAggregateOutputType = {
@@ -13097,6 +13297,8 @@ export namespace Prisma {
     nom: string | null
     description: string | null
     universiteId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UfrCountAggregateOutputType = {
@@ -13104,6 +13306,8 @@ export namespace Prisma {
     nom: number
     description: number
     universiteId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -13113,6 +13317,8 @@ export namespace Prisma {
     nom?: true
     description?: true
     universiteId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UfrMaxAggregateInputType = {
@@ -13120,6 +13326,8 @@ export namespace Prisma {
     nom?: true
     description?: true
     universiteId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UfrCountAggregateInputType = {
@@ -13127,6 +13335,8 @@ export namespace Prisma {
     nom?: true
     description?: true
     universiteId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -13207,6 +13417,8 @@ export namespace Prisma {
     nom: string
     description: string | null
     universiteId: string
+    createdAt: Date
+    updatedAt: Date
     _count: UfrCountAggregateOutputType | null
     _min: UfrMinAggregateOutputType | null
     _max: UfrMaxAggregateOutputType | null
@@ -13231,6 +13443,8 @@ export namespace Prisma {
     nom?: boolean
     description?: boolean
     universiteId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
     departements?: boolean | Ufr$departementsArgs<ExtArgs>
     _count?: boolean | UfrCountOutputTypeDefaultArgs<ExtArgs>
@@ -13243,9 +13457,11 @@ export namespace Prisma {
     nom?: boolean
     description?: boolean
     universiteId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type UfrOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "universiteId", ExtArgs["result"]["ufr"]>
+  export type UfrOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "universiteId" | "createdAt" | "updatedAt", ExtArgs["result"]["ufr"]>
   export type UfrInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
     departements?: boolean | Ufr$departementsArgs<ExtArgs>
@@ -13263,6 +13479,8 @@ export namespace Prisma {
       nom: string
       description: string | null
       universiteId: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["ufr"]>
     composites: {}
   }
@@ -13638,6 +13856,8 @@ export namespace Prisma {
     readonly nom: FieldRef<"Ufr", 'String'>
     readonly description: FieldRef<"Ufr", 'String'>
     readonly universiteId: FieldRef<"Ufr", 'String'>
+    readonly createdAt: FieldRef<"Ufr", 'DateTime'>
+    readonly updatedAt: FieldRef<"Ufr", 'DateTime'>
   }
     
 
@@ -14039,6 +14259,8 @@ export namespace Prisma {
     description: string | null
     ufrId: string | null
     responsable: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type DepartementMaxAggregateOutputType = {
@@ -14047,6 +14269,8 @@ export namespace Prisma {
     description: string | null
     ufrId: string | null
     responsable: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type DepartementCountAggregateOutputType = {
@@ -14055,6 +14279,8 @@ export namespace Prisma {
     description: number
     ufrId: number
     responsable: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -14065,6 +14291,8 @@ export namespace Prisma {
     description?: true
     ufrId?: true
     responsable?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type DepartementMaxAggregateInputType = {
@@ -14073,6 +14301,8 @@ export namespace Prisma {
     description?: true
     ufrId?: true
     responsable?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type DepartementCountAggregateInputType = {
@@ -14081,6 +14311,8 @@ export namespace Prisma {
     description?: true
     ufrId?: true
     responsable?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -14162,6 +14394,8 @@ export namespace Prisma {
     description: string | null
     ufrId: string
     responsable: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: DepartementCountAggregateOutputType | null
     _min: DepartementMinAggregateOutputType | null
     _max: DepartementMaxAggregateOutputType | null
@@ -14187,6 +14421,8 @@ export namespace Prisma {
     description?: boolean
     ufrId?: boolean
     responsable?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     ufr?: boolean | UfrDefaultArgs<ExtArgs>
     filieres?: boolean | Departement$filieresArgs<ExtArgs>
     _count?: boolean | DepartementCountOutputTypeDefaultArgs<ExtArgs>
@@ -14200,9 +14436,11 @@ export namespace Prisma {
     description?: boolean
     ufrId?: boolean
     responsable?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type DepartementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "ufrId" | "responsable", ExtArgs["result"]["departement"]>
+  export type DepartementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "ufrId" | "responsable" | "createdAt" | "updatedAt", ExtArgs["result"]["departement"]>
   export type DepartementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ufr?: boolean | UfrDefaultArgs<ExtArgs>
     filieres?: boolean | Departement$filieresArgs<ExtArgs>
@@ -14221,6 +14459,8 @@ export namespace Prisma {
       description: string | null
       ufrId: string
       responsable: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["departement"]>
     composites: {}
   }
@@ -14597,6 +14837,8 @@ export namespace Prisma {
     readonly description: FieldRef<"Departement", 'String'>
     readonly ufrId: FieldRef<"Departement", 'String'>
     readonly responsable: FieldRef<"Departement", 'String'>
+    readonly createdAt: FieldRef<"Departement", 'DateTime'>
+    readonly updatedAt: FieldRef<"Departement", 'DateTime'>
   }
     
 
@@ -14998,6 +15240,8 @@ export namespace Prisma {
     description: string | null
     niveauEtudes: $Enums.NiveauEtudes | null
     departementId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type FiliereMaxAggregateOutputType = {
@@ -15006,6 +15250,8 @@ export namespace Prisma {
     description: string | null
     niveauEtudes: $Enums.NiveauEtudes | null
     departementId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type FiliereCountAggregateOutputType = {
@@ -15014,6 +15260,8 @@ export namespace Prisma {
     description: number
     niveauEtudes: number
     departementId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -15024,6 +15272,8 @@ export namespace Prisma {
     description?: true
     niveauEtudes?: true
     departementId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type FiliereMaxAggregateInputType = {
@@ -15032,6 +15282,8 @@ export namespace Prisma {
     description?: true
     niveauEtudes?: true
     departementId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type FiliereCountAggregateInputType = {
@@ -15040,6 +15292,8 @@ export namespace Prisma {
     description?: true
     niveauEtudes?: true
     departementId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -15121,6 +15375,8 @@ export namespace Prisma {
     description: string | null
     niveauEtudes: $Enums.NiveauEtudes
     departementId: string
+    createdAt: Date
+    updatedAt: Date
     _count: FiliereCountAggregateOutputType | null
     _min: FiliereMinAggregateOutputType | null
     _max: FiliereMaxAggregateOutputType | null
@@ -15146,6 +15402,8 @@ export namespace Prisma {
     description?: boolean
     niveauEtudes?: boolean
     departementId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     departement?: boolean | DepartementDefaultArgs<ExtArgs>
     etudiants?: boolean | Filiere$etudiantsArgs<ExtArgs>
     _count?: boolean | FiliereCountOutputTypeDefaultArgs<ExtArgs>
@@ -15159,9 +15417,11 @@ export namespace Prisma {
     description?: boolean
     niveauEtudes?: boolean
     departementId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type FiliereOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "niveauEtudes" | "departementId", ExtArgs["result"]["filiere"]>
+  export type FiliereOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "niveauEtudes" | "departementId" | "createdAt" | "updatedAt", ExtArgs["result"]["filiere"]>
   export type FiliereInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     departement?: boolean | DepartementDefaultArgs<ExtArgs>
     etudiants?: boolean | Filiere$etudiantsArgs<ExtArgs>
@@ -15180,6 +15440,8 @@ export namespace Prisma {
       description: string | null
       niveauEtudes: $Enums.NiveauEtudes
       departementId: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["filiere"]>
     composites: {}
   }
@@ -15556,6 +15818,8 @@ export namespace Prisma {
     readonly description: FieldRef<"Filiere", 'String'>
     readonly niveauEtudes: FieldRef<"Filiere", 'NiveauEtudes'>
     readonly departementId: FieldRef<"Filiere", 'String'>
+    readonly createdAt: FieldRef<"Filiere", 'DateTime'>
+    readonly updatedAt: FieldRef<"Filiere", 'DateTime'>
   }
     
 
@@ -15962,6 +16226,8 @@ export namespace Prisma {
     role: $Enums.RoleUser | null
     derniereConnexion: Date | null
     estActif: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
     preferencesRecommandation: string | null
     frequenceRecommandation: $Enums.FrequenceRecommandation | null
   }
@@ -15977,6 +16243,8 @@ export namespace Prisma {
     role: $Enums.RoleUser | null
     derniereConnexion: Date | null
     estActif: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
     preferencesRecommandation: string | null
     frequenceRecommandation: $Enums.FrequenceRecommandation | null
   }
@@ -15992,6 +16260,8 @@ export namespace Prisma {
     role: number
     derniereConnexion: number
     estActif: number
+    createdAt: number
+    updatedAt: number
     preferencesRecommandation: number
     frequenceRecommandation: number
     _all: number
@@ -16009,6 +16279,8 @@ export namespace Prisma {
     role?: true
     derniereConnexion?: true
     estActif?: true
+    createdAt?: true
+    updatedAt?: true
     preferencesRecommandation?: true
     frequenceRecommandation?: true
   }
@@ -16024,6 +16296,8 @@ export namespace Prisma {
     role?: true
     derniereConnexion?: true
     estActif?: true
+    createdAt?: true
+    updatedAt?: true
     preferencesRecommandation?: true
     frequenceRecommandation?: true
   }
@@ -16039,6 +16313,8 @@ export namespace Prisma {
     role?: true
     derniereConnexion?: true
     estActif?: true
+    createdAt?: true
+    updatedAt?: true
     preferencesRecommandation?: true
     frequenceRecommandation?: true
     _all?: true
@@ -16127,6 +16403,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion: Date | null
     estActif: boolean
+    createdAt: Date
+    updatedAt: Date
     preferencesRecommandation: string | null
     frequenceRecommandation: $Enums.FrequenceRecommandation
     _count: UserCountAggregateOutputType | null
@@ -16159,6 +16437,8 @@ export namespace Prisma {
     role?: boolean
     derniereConnexion?: boolean
     estActif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     preferencesRecommandation?: boolean
     frequenceRecommandation?: boolean
     contributions?: boolean | User$contributionsArgs<ExtArgs>
@@ -16194,11 +16474,13 @@ export namespace Prisma {
     role?: boolean
     derniereConnexion?: boolean
     estActif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     preferencesRecommandation?: boolean
     frequenceRecommandation?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "motDePasse" | "nom" | "telephone" | "prenom" | "image" | "role" | "derniereConnexion" | "estActif" | "preferencesRecommandation" | "frequenceRecommandation", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "motDePasse" | "nom" | "telephone" | "prenom" | "image" | "role" | "derniereConnexion" | "estActif" | "createdAt" | "updatedAt" | "preferencesRecommandation" | "frequenceRecommandation", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contributions?: boolean | User$contributionsArgs<ExtArgs>
     favoris?: boolean | User$favorisArgs<ExtArgs>
@@ -16252,6 +16534,8 @@ export namespace Prisma {
       role: $Enums.RoleUser
       derniereConnexion: Date | null
       estActif: boolean
+      createdAt: Date
+      updatedAt: Date
       preferencesRecommandation: string | null
       frequenceRecommandation: $Enums.FrequenceRecommandation
     }, ExtArgs["result"]["user"]>
@@ -16650,6 +16934,8 @@ export namespace Prisma {
     readonly role: FieldRef<"User", 'RoleUser'>
     readonly derniereConnexion: FieldRef<"User", 'DateTime'>
     readonly estActif: FieldRef<"User", 'Boolean'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly preferencesRecommandation: FieldRef<"User", 'String'>
     readonly frequenceRecommandation: FieldRef<"User", 'FrequenceRecommandation'>
   }
@@ -17434,31 +17720,34 @@ export namespace Prisma {
   export type EtudiantMinAggregateOutputType = {
     id: string | null
     userId: string | null
-    numeroEtudiant: string | null
+    codePermanent: string | null
     dateNaissance: Date | null
     dateInscription: Date | null
-    niveauEtudes: $Enums.NiveauEtudes | null
     filiereId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type EtudiantMaxAggregateOutputType = {
     id: string | null
     userId: string | null
-    numeroEtudiant: string | null
+    codePermanent: string | null
     dateNaissance: Date | null
     dateInscription: Date | null
-    niveauEtudes: $Enums.NiveauEtudes | null
     filiereId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type EtudiantCountAggregateOutputType = {
     id: number
     userId: number
-    numeroEtudiant: number
+    codePermanent: number
     dateNaissance: number
     dateInscription: number
-    niveauEtudes: number
     filiereId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -17466,31 +17755,34 @@ export namespace Prisma {
   export type EtudiantMinAggregateInputType = {
     id?: true
     userId?: true
-    numeroEtudiant?: true
+    codePermanent?: true
     dateNaissance?: true
     dateInscription?: true
-    niveauEtudes?: true
     filiereId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type EtudiantMaxAggregateInputType = {
     id?: true
     userId?: true
-    numeroEtudiant?: true
+    codePermanent?: true
     dateNaissance?: true
     dateInscription?: true
-    niveauEtudes?: true
     filiereId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type EtudiantCountAggregateInputType = {
     id?: true
     userId?: true
-    numeroEtudiant?: true
+    codePermanent?: true
     dateNaissance?: true
     dateInscription?: true
-    niveauEtudes?: true
     filiereId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -17569,11 +17861,12 @@ export namespace Prisma {
   export type EtudiantGroupByOutputType = {
     id: string
     userId: string
-    numeroEtudiant: string
+    codePermanent: string
     dateNaissance: Date
     dateInscription: Date
-    niveauEtudes: $Enums.NiveauEtudes
     filiereId: string
+    createdAt: Date
+    updatedAt: Date
     _count: EtudiantCountAggregateOutputType | null
     _min: EtudiantMinAggregateOutputType | null
     _max: EtudiantMaxAggregateOutputType | null
@@ -17596,11 +17889,12 @@ export namespace Prisma {
   export type EtudiantSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    numeroEtudiant?: boolean
+    codePermanent?: boolean
     dateNaissance?: boolean
     dateInscription?: boolean
-    niveauEtudes?: boolean
     filiereId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     filiere?: boolean | FiliereDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["etudiant"]>
@@ -17610,14 +17904,15 @@ export namespace Prisma {
   export type EtudiantSelectScalar = {
     id?: boolean
     userId?: boolean
-    numeroEtudiant?: boolean
+    codePermanent?: boolean
     dateNaissance?: boolean
     dateInscription?: boolean
-    niveauEtudes?: boolean
     filiereId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type EtudiantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "numeroEtudiant" | "dateNaissance" | "dateInscription" | "niveauEtudes" | "filiereId", ExtArgs["result"]["etudiant"]>
+  export type EtudiantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "codePermanent" | "dateNaissance" | "dateInscription" | "filiereId" | "createdAt" | "updatedAt", ExtArgs["result"]["etudiant"]>
   export type EtudiantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     filiere?: boolean | FiliereDefaultArgs<ExtArgs>
@@ -17632,11 +17927,12 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      numeroEtudiant: string
+      codePermanent: string
       dateNaissance: Date
       dateInscription: Date
-      niveauEtudes: $Enums.NiveauEtudes
       filiereId: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["etudiant"]>
     composites: {}
   }
@@ -18010,11 +18306,12 @@ export namespace Prisma {
   interface EtudiantFieldRefs {
     readonly id: FieldRef<"Etudiant", 'String'>
     readonly userId: FieldRef<"Etudiant", 'String'>
-    readonly numeroEtudiant: FieldRef<"Etudiant", 'String'>
+    readonly codePermanent: FieldRef<"Etudiant", 'String'>
     readonly dateNaissance: FieldRef<"Etudiant", 'DateTime'>
     readonly dateInscription: FieldRef<"Etudiant", 'DateTime'>
-    readonly niveauEtudes: FieldRef<"Etudiant", 'NiveauEtudes'>
     readonly filiereId: FieldRef<"Etudiant", 'String'>
+    readonly createdAt: FieldRef<"Etudiant", 'DateTime'>
+    readonly updatedAt: FieldRef<"Etudiant", 'DateTime'>
   }
     
 
@@ -18392,6 +18689,8 @@ export namespace Prisma {
     numeroEnseignant: string | null
     dateNaissance: Date | null
     specialite: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type EnseignantMaxAggregateOutputType = {
@@ -18400,6 +18699,8 @@ export namespace Prisma {
     numeroEnseignant: string | null
     dateNaissance: Date | null
     specialite: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type EnseignantCountAggregateOutputType = {
@@ -18408,6 +18709,8 @@ export namespace Prisma {
     numeroEnseignant: number
     dateNaissance: number
     specialite: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -18418,6 +18721,8 @@ export namespace Prisma {
     numeroEnseignant?: true
     dateNaissance?: true
     specialite?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type EnseignantMaxAggregateInputType = {
@@ -18426,6 +18731,8 @@ export namespace Prisma {
     numeroEnseignant?: true
     dateNaissance?: true
     specialite?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type EnseignantCountAggregateInputType = {
@@ -18434,6 +18741,8 @@ export namespace Prisma {
     numeroEnseignant?: true
     dateNaissance?: true
     specialite?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -18515,6 +18824,8 @@ export namespace Prisma {
     numeroEnseignant: string
     dateNaissance: Date
     specialite: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: EnseignantCountAggregateOutputType | null
     _min: EnseignantMinAggregateOutputType | null
     _max: EnseignantMaxAggregateOutputType | null
@@ -18540,6 +18851,8 @@ export namespace Prisma {
     numeroEnseignant?: boolean
     dateNaissance?: boolean
     specialite?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["enseignant"]>
 
@@ -18551,9 +18864,11 @@ export namespace Prisma {
     numeroEnseignant?: boolean
     dateNaissance?: boolean
     specialite?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type EnseignantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "numeroEnseignant" | "dateNaissance" | "specialite", ExtArgs["result"]["enseignant"]>
+  export type EnseignantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "numeroEnseignant" | "dateNaissance" | "specialite" | "createdAt" | "updatedAt", ExtArgs["result"]["enseignant"]>
   export type EnseignantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -18569,6 +18884,8 @@ export namespace Prisma {
       numeroEnseignant: string
       dateNaissance: Date
       specialite: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["enseignant"]>
     composites: {}
   }
@@ -18944,6 +19261,8 @@ export namespace Prisma {
     readonly numeroEnseignant: FieldRef<"Enseignant", 'String'>
     readonly dateNaissance: FieldRef<"Enseignant", 'DateTime'>
     readonly specialite: FieldRef<"Enseignant", 'String'>
+    readonly createdAt: FieldRef<"Enseignant", 'DateTime'>
+    readonly updatedAt: FieldRef<"Enseignant", 'DateTime'>
   }
     
 
@@ -19323,6 +19642,8 @@ export namespace Prisma {
     adresse: string | null
     ville: string | null
     pays: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type BibliothecaireMaxAggregateOutputType = {
@@ -19333,6 +19654,8 @@ export namespace Prisma {
     adresse: string | null
     ville: string | null
     pays: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type BibliothecaireCountAggregateOutputType = {
@@ -19343,6 +19666,8 @@ export namespace Prisma {
     adresse: number
     ville: number
     pays: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -19355,6 +19680,8 @@ export namespace Prisma {
     adresse?: true
     ville?: true
     pays?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type BibliothecaireMaxAggregateInputType = {
@@ -19365,6 +19692,8 @@ export namespace Prisma {
     adresse?: true
     ville?: true
     pays?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type BibliothecaireCountAggregateInputType = {
@@ -19375,6 +19704,8 @@ export namespace Prisma {
     adresse?: true
     ville?: true
     pays?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -19458,6 +19789,8 @@ export namespace Prisma {
     adresse: string | null
     ville: string | null
     pays: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: BibliothecaireCountAggregateOutputType | null
     _min: BibliothecaireMinAggregateOutputType | null
     _max: BibliothecaireMaxAggregateOutputType | null
@@ -19485,6 +19818,8 @@ export namespace Prisma {
     adresse?: boolean
     ville?: boolean
     pays?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     reservations?: boolean | Bibliothecaire$reservationsArgs<ExtArgs>
     _count?: boolean | BibliothecaireCountOutputTypeDefaultArgs<ExtArgs>
@@ -19500,9 +19835,11 @@ export namespace Prisma {
     adresse?: boolean
     ville?: boolean
     pays?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type BibliothecaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "numeroBibliothecaire" | "dateNaissance" | "adresse" | "ville" | "pays", ExtArgs["result"]["bibliothecaire"]>
+  export type BibliothecaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "numeroBibliothecaire" | "dateNaissance" | "adresse" | "ville" | "pays" | "createdAt" | "updatedAt", ExtArgs["result"]["bibliothecaire"]>
   export type BibliothecaireInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     reservations?: boolean | Bibliothecaire$reservationsArgs<ExtArgs>
@@ -19523,6 +19860,8 @@ export namespace Prisma {
       adresse: string | null
       ville: string | null
       pays: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["bibliothecaire"]>
     composites: {}
   }
@@ -19901,6 +20240,8 @@ export namespace Prisma {
     readonly adresse: FieldRef<"Bibliothecaire", 'String'>
     readonly ville: FieldRef<"Bibliothecaire", 'String'>
     readonly pays: FieldRef<"Bibliothecaire", 'String'>
+    readonly createdAt: FieldRef<"Bibliothecaire", 'DateTime'>
+    readonly updatedAt: FieldRef<"Bibliothecaire", 'DateTime'>
   }
     
 
@@ -21255,6 +21596,8 @@ export namespace Prisma {
     note: string | null
     universiteSrc: string | null
     universiteUser: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type FavoriMaxAggregateOutputType = {
@@ -21265,6 +21608,8 @@ export namespace Prisma {
     note: string | null
     universiteSrc: string | null
     universiteUser: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type FavoriCountAggregateOutputType = {
@@ -21275,6 +21620,8 @@ export namespace Prisma {
     note: number
     universiteSrc: number
     universiteUser: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -21287,6 +21634,8 @@ export namespace Prisma {
     note?: true
     universiteSrc?: true
     universiteUser?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type FavoriMaxAggregateInputType = {
@@ -21297,6 +21646,8 @@ export namespace Prisma {
     note?: true
     universiteSrc?: true
     universiteUser?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type FavoriCountAggregateInputType = {
@@ -21307,6 +21658,8 @@ export namespace Prisma {
     note?: true
     universiteSrc?: true
     universiteUser?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -21390,6 +21743,8 @@ export namespace Prisma {
     note: string | null
     universiteSrc: string | null
     universiteUser: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: FavoriCountAggregateOutputType | null
     _min: FavoriMinAggregateOutputType | null
     _max: FavoriMaxAggregateOutputType | null
@@ -21417,6 +21772,8 @@ export namespace Prisma {
     note?: boolean
     universiteSrc?: boolean
     universiteUser?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["favori"]>
@@ -21431,9 +21788,11 @@ export namespace Prisma {
     note?: boolean
     universiteSrc?: boolean
     universiteUser?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type FavoriOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "dateAjout" | "note" | "universiteSrc" | "universiteUser", ExtArgs["result"]["favori"]>
+  export type FavoriOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "dateAjout" | "note" | "universiteSrc" | "universiteUser" | "createdAt" | "updatedAt", ExtArgs["result"]["favori"]>
   export type FavoriInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
@@ -21453,6 +21812,8 @@ export namespace Prisma {
       note: string | null
       universiteSrc: string | null
       universiteUser: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["favori"]>
     composites: {}
   }
@@ -21831,6 +22192,8 @@ export namespace Prisma {
     readonly note: FieldRef<"Favori", 'String'>
     readonly universiteSrc: FieldRef<"Favori", 'String'>
     readonly universiteUser: FieldRef<"Favori", 'String'>
+    readonly createdAt: FieldRef<"Favori", 'DateTime'>
+    readonly updatedAt: FieldRef<"Favori", 'DateTime'>
   }
     
 
@@ -22210,6 +22573,8 @@ export namespace Prisma {
     dateCreation: Date | null
     universiteSrc: string | null
     universiteUser: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type CommentaireMaxAggregateOutputType = {
@@ -22220,6 +22585,8 @@ export namespace Prisma {
     dateCreation: Date | null
     universiteSrc: string | null
     universiteUser: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type CommentaireCountAggregateOutputType = {
@@ -22230,6 +22597,8 @@ export namespace Prisma {
     dateCreation: number
     universiteSrc: number
     universiteUser: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -22242,6 +22611,8 @@ export namespace Prisma {
     dateCreation?: true
     universiteSrc?: true
     universiteUser?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type CommentaireMaxAggregateInputType = {
@@ -22252,6 +22623,8 @@ export namespace Prisma {
     dateCreation?: true
     universiteSrc?: true
     universiteUser?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type CommentaireCountAggregateInputType = {
@@ -22262,6 +22635,8 @@ export namespace Prisma {
     dateCreation?: true
     universiteSrc?: true
     universiteUser?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -22345,6 +22720,8 @@ export namespace Prisma {
     dateCreation: Date
     universiteSrc: string | null
     universiteUser: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: CommentaireCountAggregateOutputType | null
     _min: CommentaireMinAggregateOutputType | null
     _max: CommentaireMaxAggregateOutputType | null
@@ -22372,6 +22749,8 @@ export namespace Prisma {
     dateCreation?: boolean
     universiteSrc?: boolean
     universiteUser?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["commentaire"]>
@@ -22386,9 +22765,11 @@ export namespace Prisma {
     dateCreation?: boolean
     universiteSrc?: boolean
     universiteUser?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type CommentaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "contenu" | "dateCreation" | "universiteSrc" | "universiteUser", ExtArgs["result"]["commentaire"]>
+  export type CommentaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "contenu" | "dateCreation" | "universiteSrc" | "universiteUser" | "createdAt" | "updatedAt", ExtArgs["result"]["commentaire"]>
   export type CommentaireInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
@@ -22408,6 +22789,8 @@ export namespace Prisma {
       dateCreation: Date
       universiteSrc: string | null
       universiteUser: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["commentaire"]>
     composites: {}
   }
@@ -22786,6 +23169,8 @@ export namespace Prisma {
     readonly dateCreation: FieldRef<"Commentaire", 'DateTime'>
     readonly universiteSrc: FieldRef<"Commentaire", 'String'>
     readonly universiteUser: FieldRef<"Commentaire", 'String'>
+    readonly createdAt: FieldRef<"Commentaire", 'DateTime'>
+    readonly updatedAt: FieldRef<"Commentaire", 'DateTime'>
   }
     
 
@@ -23175,6 +23560,8 @@ export namespace Prisma {
     dateNotation: Date | null
     universiteSrc: string | null
     universiteUser: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type NotationMaxAggregateOutputType = {
@@ -23185,6 +23572,8 @@ export namespace Prisma {
     dateNotation: Date | null
     universiteSrc: string | null
     universiteUser: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type NotationCountAggregateOutputType = {
@@ -23195,6 +23584,8 @@ export namespace Prisma {
     dateNotation: number
     universiteSrc: number
     universiteUser: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -23215,6 +23606,8 @@ export namespace Prisma {
     dateNotation?: true
     universiteSrc?: true
     universiteUser?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type NotationMaxAggregateInputType = {
@@ -23225,6 +23618,8 @@ export namespace Prisma {
     dateNotation?: true
     universiteSrc?: true
     universiteUser?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type NotationCountAggregateInputType = {
@@ -23235,6 +23630,8 @@ export namespace Prisma {
     dateNotation?: true
     universiteSrc?: true
     universiteUser?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -23332,6 +23729,8 @@ export namespace Prisma {
     dateNotation: Date
     universiteSrc: string | null
     universiteUser: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: NotationCountAggregateOutputType | null
     _avg: NotationAvgAggregateOutputType | null
     _sum: NotationSumAggregateOutputType | null
@@ -23361,6 +23760,8 @@ export namespace Prisma {
     dateNotation?: boolean
     universiteSrc?: boolean
     universiteUser?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["notation"]>
@@ -23375,9 +23776,11 @@ export namespace Prisma {
     dateNotation?: boolean
     universiteSrc?: boolean
     universiteUser?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type NotationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "note" | "dateNotation" | "universiteSrc" | "universiteUser", ExtArgs["result"]["notation"]>
+  export type NotationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "note" | "dateNotation" | "universiteSrc" | "universiteUser" | "createdAt" | "updatedAt", ExtArgs["result"]["notation"]>
   export type NotationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
@@ -23397,6 +23800,8 @@ export namespace Prisma {
       dateNotation: Date
       universiteSrc: string | null
       universiteUser: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["notation"]>
     composites: {}
   }
@@ -23775,6 +24180,8 @@ export namespace Prisma {
     readonly dateNotation: FieldRef<"Notation", 'DateTime'>
     readonly universiteSrc: FieldRef<"Notation", 'String'>
     readonly universiteUser: FieldRef<"Notation", 'String'>
+    readonly createdAt: FieldRef<"Notation", 'DateTime'>
+    readonly updatedAt: FieldRef<"Notation", 'DateTime'>
   }
     
 
@@ -24154,6 +24561,8 @@ export namespace Prisma {
     typeAcces: $Enums.TypeAcces | null
     universiteSrc: string | null
     universiteUser: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type HistoriqueAccesMaxAggregateOutputType = {
@@ -24164,6 +24573,8 @@ export namespace Prisma {
     typeAcces: $Enums.TypeAcces | null
     universiteSrc: string | null
     universiteUser: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type HistoriqueAccesCountAggregateOutputType = {
@@ -24174,6 +24585,8 @@ export namespace Prisma {
     typeAcces: number
     universiteSrc: number
     universiteUser: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -24186,6 +24599,8 @@ export namespace Prisma {
     typeAcces?: true
     universiteSrc?: true
     universiteUser?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type HistoriqueAccesMaxAggregateInputType = {
@@ -24196,6 +24611,8 @@ export namespace Prisma {
     typeAcces?: true
     universiteSrc?: true
     universiteUser?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type HistoriqueAccesCountAggregateInputType = {
@@ -24206,6 +24623,8 @@ export namespace Prisma {
     typeAcces?: true
     universiteSrc?: true
     universiteUser?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -24289,6 +24708,8 @@ export namespace Prisma {
     typeAcces: $Enums.TypeAcces
     universiteSrc: string | null
     universiteUser: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: HistoriqueAccesCountAggregateOutputType | null
     _min: HistoriqueAccesMinAggregateOutputType | null
     _max: HistoriqueAccesMaxAggregateOutputType | null
@@ -24316,6 +24737,8 @@ export namespace Prisma {
     typeAcces?: boolean
     universiteSrc?: boolean
     universiteUser?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["historiqueAcces"]>
@@ -24330,9 +24753,11 @@ export namespace Prisma {
     typeAcces?: boolean
     universiteSrc?: boolean
     universiteUser?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type HistoriqueAccesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "dateAcces" | "typeAcces" | "universiteSrc" | "universiteUser", ExtArgs["result"]["historiqueAcces"]>
+  export type HistoriqueAccesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "dateAcces" | "typeAcces" | "universiteSrc" | "universiteUser" | "createdAt" | "updatedAt", ExtArgs["result"]["historiqueAcces"]>
   export type HistoriqueAccesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
@@ -24352,6 +24777,8 @@ export namespace Prisma {
       typeAcces: $Enums.TypeAcces
       universiteSrc: string | null
       universiteUser: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["historiqueAcces"]>
     composites: {}
   }
@@ -24730,6 +25157,8 @@ export namespace Prisma {
     readonly typeAcces: FieldRef<"HistoriqueAcces", 'TypeAcces'>
     readonly universiteSrc: FieldRef<"HistoriqueAcces", 'String'>
     readonly universiteUser: FieldRef<"HistoriqueAcces", 'String'>
+    readonly createdAt: FieldRef<"HistoriqueAcces", 'DateTime'>
+    readonly updatedAt: FieldRef<"HistoriqueAcces", 'DateTime'>
   }
     
 
@@ -25118,6 +25547,8 @@ export namespace Prisma {
     score: number | null
     typeInteraction: $Enums.TypeInteraction | null
     dateDonnee: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type DonneesRecommandationMaxAggregateOutputType = {
@@ -25127,6 +25558,8 @@ export namespace Prisma {
     score: number | null
     typeInteraction: $Enums.TypeInteraction | null
     dateDonnee: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type DonneesRecommandationCountAggregateOutputType = {
@@ -25136,6 +25569,8 @@ export namespace Prisma {
     score: number
     typeInteraction: number
     dateDonnee: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -25155,6 +25590,8 @@ export namespace Prisma {
     score?: true
     typeInteraction?: true
     dateDonnee?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type DonneesRecommandationMaxAggregateInputType = {
@@ -25164,6 +25601,8 @@ export namespace Prisma {
     score?: true
     typeInteraction?: true
     dateDonnee?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type DonneesRecommandationCountAggregateInputType = {
@@ -25173,6 +25612,8 @@ export namespace Prisma {
     score?: true
     typeInteraction?: true
     dateDonnee?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -25269,6 +25710,8 @@ export namespace Prisma {
     score: number
     typeInteraction: $Enums.TypeInteraction
     dateDonnee: Date
+    createdAt: Date
+    updatedAt: Date
     _count: DonneesRecommandationCountAggregateOutputType | null
     _avg: DonneesRecommandationAvgAggregateOutputType | null
     _sum: DonneesRecommandationSumAggregateOutputType | null
@@ -25297,6 +25740,8 @@ export namespace Prisma {
     score?: boolean
     typeInteraction?: boolean
     dateDonnee?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["donneesRecommandation"]>
@@ -25310,9 +25755,11 @@ export namespace Prisma {
     score?: boolean
     typeInteraction?: boolean
     dateDonnee?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type DonneesRecommandationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "score" | "typeInteraction" | "dateDonnee", ExtArgs["result"]["donneesRecommandation"]>
+  export type DonneesRecommandationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "score" | "typeInteraction" | "dateDonnee" | "createdAt" | "updatedAt", ExtArgs["result"]["donneesRecommandation"]>
   export type DonneesRecommandationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
@@ -25331,6 +25778,8 @@ export namespace Prisma {
       score: number
       typeInteraction: $Enums.TypeInteraction
       dateDonnee: Date
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["donneesRecommandation"]>
     composites: {}
   }
@@ -25708,6 +26157,8 @@ export namespace Prisma {
     readonly score: FieldRef<"DonneesRecommandation", 'Float'>
     readonly typeInteraction: FieldRef<"DonneesRecommandation", 'TypeInteraction'>
     readonly dateDonnee: FieldRef<"DonneesRecommandation", 'DateTime'>
+    readonly createdAt: FieldRef<"DonneesRecommandation", 'DateTime'>
+    readonly updatedAt: FieldRef<"DonneesRecommandation", 'DateTime'>
   }
     
 
@@ -27044,6 +27495,8 @@ export namespace Prisma {
     ressourceId: string | null
     dateAjout: Date | null
     notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type CollectionRessourceMaxAggregateOutputType = {
@@ -27052,6 +27505,8 @@ export namespace Prisma {
     ressourceId: string | null
     dateAjout: Date | null
     notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type CollectionRessourceCountAggregateOutputType = {
@@ -27060,6 +27515,8 @@ export namespace Prisma {
     ressourceId: number
     dateAjout: number
     notes: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -27070,6 +27527,8 @@ export namespace Prisma {
     ressourceId?: true
     dateAjout?: true
     notes?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type CollectionRessourceMaxAggregateInputType = {
@@ -27078,6 +27537,8 @@ export namespace Prisma {
     ressourceId?: true
     dateAjout?: true
     notes?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type CollectionRessourceCountAggregateInputType = {
@@ -27086,6 +27547,8 @@ export namespace Prisma {
     ressourceId?: true
     dateAjout?: true
     notes?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -27167,6 +27630,8 @@ export namespace Prisma {
     ressourceId: string
     dateAjout: Date
     notes: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: CollectionRessourceCountAggregateOutputType | null
     _min: CollectionRessourceMinAggregateOutputType | null
     _max: CollectionRessourceMaxAggregateOutputType | null
@@ -27192,6 +27657,8 @@ export namespace Prisma {
     ressourceId?: boolean
     dateAjout?: boolean
     notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     collection?: boolean | CollectionDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["collectionRessource"]>
@@ -27204,9 +27671,11 @@ export namespace Prisma {
     ressourceId?: boolean
     dateAjout?: boolean
     notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type CollectionRessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "collectionId" | "ressourceId" | "dateAjout" | "notes", ExtArgs["result"]["collectionRessource"]>
+  export type CollectionRessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "collectionId" | "ressourceId" | "dateAjout" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["collectionRessource"]>
   export type CollectionRessourceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     collection?: boolean | CollectionDefaultArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
@@ -27224,6 +27693,8 @@ export namespace Prisma {
       ressourceId: string
       dateAjout: Date
       notes: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["collectionRessource"]>
     composites: {}
   }
@@ -27600,6 +28071,8 @@ export namespace Prisma {
     readonly ressourceId: FieldRef<"CollectionRessource", 'String'>
     readonly dateAjout: FieldRef<"CollectionRessource", 'DateTime'>
     readonly notes: FieldRef<"CollectionRessource", 'String'>
+    readonly createdAt: FieldRef<"CollectionRessource", 'DateTime'>
+    readonly updatedAt: FieldRef<"CollectionRessource", 'DateTime'>
   }
     
 
@@ -27967,225 +28440,129 @@ export namespace Prisma {
 
   export type AggregateRessource = {
     _count: RessourceCountAggregateOutputType | null
-    _avg: RessourceAvgAggregateOutputType | null
-    _sum: RessourceSumAggregateOutputType | null
     _min: RessourceMinAggregateOutputType | null
     _max: RessourceMaxAggregateOutputType | null
-  }
-
-  export type RessourceAvgAggregateOutputType = {
-    anneePublication: number | null
-    nbPages: number | null
-    nbExemplaires: number | null
-    nbDisponibles: number | null
-  }
-
-  export type RessourceSumAggregateOutputType = {
-    anneePublication: number | null
-    nbPages: number | null
-    nbExemplaires: number | null
-    nbDisponibles: number | null
   }
 
   export type RessourceMinAggregateOutputType = {
     id: string | null
     titre: string | null
+    isbnglobale: string | null
     description: string | null
-    type: $Enums.TypeRessource | null
     langue: string | null
     urlFichier: string | null
     urlFichierLocal: string | null
     format: string | null
-    dateModification: Date | null
-    motsCles: string | null
-    auteurId: string | null
-    universiteId: string | null
     image: string | null
     niveauAcces: $Enums.NiveauAcces | null
     datePublication: Date | null
-    estValide: boolean | null
+    motsCles: string | null
+    auteurId: string | null
+    universiteId: string | null
     estArchive: boolean | null
-    nomAuteurExterne: string | null
-    prenomAuteurExterne: string | null
     validation: $Enums.TypeValidation | null
-    isbn: string | null
-    doi: string | null
-    anneePublication: number | null
-    nbPages: number | null
-    nbExemplaires: number | null
-    nbDisponibles: number | null
-    coteClassification: string | null
     categorieId: string | null
   }
 
   export type RessourceMaxAggregateOutputType = {
     id: string | null
     titre: string | null
+    isbnglobale: string | null
     description: string | null
-    type: $Enums.TypeRessource | null
     langue: string | null
     urlFichier: string | null
     urlFichierLocal: string | null
     format: string | null
-    dateModification: Date | null
-    motsCles: string | null
-    auteurId: string | null
-    universiteId: string | null
     image: string | null
     niveauAcces: $Enums.NiveauAcces | null
     datePublication: Date | null
-    estValide: boolean | null
+    motsCles: string | null
+    auteurId: string | null
+    universiteId: string | null
     estArchive: boolean | null
-    nomAuteurExterne: string | null
-    prenomAuteurExterne: string | null
     validation: $Enums.TypeValidation | null
-    isbn: string | null
-    doi: string | null
-    anneePublication: number | null
-    nbPages: number | null
-    nbExemplaires: number | null
-    nbDisponibles: number | null
-    coteClassification: string | null
     categorieId: string | null
   }
 
   export type RessourceCountAggregateOutputType = {
     id: number
     titre: number
+    isbnglobale: number
     description: number
-    type: number
     langue: number
     urlFichier: number
     urlFichierLocal: number
     format: number
-    dateModification: number
-    motsCles: number
-    auteurId: number
-    universiteId: number
     image: number
     niveauAcces: number
     datePublication: number
-    estValide: number
+    motsCles: number
+    auteurId: number
+    universiteId: number
     estArchive: number
-    nomAuteurExterne: number
-    prenomAuteurExterne: number
     validation: number
-    isbn: number
-    doi: number
-    anneePublication: number
-    nbPages: number
-    nbExemplaires: number
-    nbDisponibles: number
-    coteClassification: number
     categorieId: number
     _all: number
   }
 
 
-  export type RessourceAvgAggregateInputType = {
-    anneePublication?: true
-    nbPages?: true
-    nbExemplaires?: true
-    nbDisponibles?: true
-  }
-
-  export type RessourceSumAggregateInputType = {
-    anneePublication?: true
-    nbPages?: true
-    nbExemplaires?: true
-    nbDisponibles?: true
-  }
-
   export type RessourceMinAggregateInputType = {
     id?: true
     titre?: true
+    isbnglobale?: true
     description?: true
-    type?: true
     langue?: true
     urlFichier?: true
     urlFichierLocal?: true
     format?: true
-    dateModification?: true
-    motsCles?: true
-    auteurId?: true
-    universiteId?: true
     image?: true
     niveauAcces?: true
     datePublication?: true
-    estValide?: true
+    motsCles?: true
+    auteurId?: true
+    universiteId?: true
     estArchive?: true
-    nomAuteurExterne?: true
-    prenomAuteurExterne?: true
     validation?: true
-    isbn?: true
-    doi?: true
-    anneePublication?: true
-    nbPages?: true
-    nbExemplaires?: true
-    nbDisponibles?: true
-    coteClassification?: true
     categorieId?: true
   }
 
   export type RessourceMaxAggregateInputType = {
     id?: true
     titre?: true
+    isbnglobale?: true
     description?: true
-    type?: true
     langue?: true
     urlFichier?: true
     urlFichierLocal?: true
     format?: true
-    dateModification?: true
-    motsCles?: true
-    auteurId?: true
-    universiteId?: true
     image?: true
     niveauAcces?: true
     datePublication?: true
-    estValide?: true
+    motsCles?: true
+    auteurId?: true
+    universiteId?: true
     estArchive?: true
-    nomAuteurExterne?: true
-    prenomAuteurExterne?: true
     validation?: true
-    isbn?: true
-    doi?: true
-    anneePublication?: true
-    nbPages?: true
-    nbExemplaires?: true
-    nbDisponibles?: true
-    coteClassification?: true
     categorieId?: true
   }
 
   export type RessourceCountAggregateInputType = {
     id?: true
     titre?: true
+    isbnglobale?: true
     description?: true
-    type?: true
     langue?: true
     urlFichier?: true
     urlFichierLocal?: true
     format?: true
-    dateModification?: true
-    motsCles?: true
-    auteurId?: true
-    universiteId?: true
     image?: true
     niveauAcces?: true
     datePublication?: true
-    estValide?: true
+    motsCles?: true
+    auteurId?: true
+    universiteId?: true
     estArchive?: true
-    nomAuteurExterne?: true
-    prenomAuteurExterne?: true
     validation?: true
-    isbn?: true
-    doi?: true
-    anneePublication?: true
-    nbPages?: true
-    nbExemplaires?: true
-    nbDisponibles?: true
-    coteClassification?: true
     categorieId?: true
     _all?: true
   }
@@ -28228,18 +28605,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: RessourceAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: RessourceSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: RessourceMinAggregateInputType
@@ -28270,8 +28635,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: RessourceCountAggregateInputType | true
-    _avg?: RessourceAvgAggregateInputType
-    _sum?: RessourceSumAggregateInputType
     _min?: RessourceMinAggregateInputType
     _max?: RessourceMaxAggregateInputType
   }
@@ -28279,35 +28642,22 @@ export namespace Prisma {
   export type RessourceGroupByOutputType = {
     id: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue: string
     urlFichier: string
     urlFichierLocal: string | null
     format: string
-    dateModification: Date
-    motsCles: string
-    auteurId: string | null
-    universiteId: string
     image: string | null
     niveauAcces: $Enums.NiveauAcces
     datePublication: Date | null
-    estValide: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive: boolean
-    nomAuteurExterne: string | null
-    prenomAuteurExterne: string | null
     validation: $Enums.TypeValidation
-    isbn: string | null
-    doi: string | null
-    anneePublication: number | null
-    nbPages: number | null
-    nbExemplaires: number
-    nbDisponibles: number
-    coteClassification: string | null
     categorieId: string
     _count: RessourceCountAggregateOutputType | null
-    _avg: RessourceAvgAggregateOutputType | null
-    _sum: RessourceSumAggregateOutputType | null
     _min: RessourceMinAggregateOutputType | null
     _max: RessourceMaxAggregateOutputType | null
   }
@@ -28329,33 +28679,22 @@ export namespace Prisma {
   export type RessourceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     titre?: boolean
+    isbnglobale?: boolean
     description?: boolean
-    type?: boolean
     langue?: boolean
     urlFichier?: boolean
     urlFichierLocal?: boolean
     format?: boolean
-    dateModification?: boolean
-    motsCles?: boolean
-    auteurId?: boolean
-    universiteId?: boolean
     image?: boolean
     niveauAcces?: boolean
     datePublication?: boolean
-    estValide?: boolean
+    motsCles?: boolean
+    auteurId?: boolean
+    universiteId?: boolean
     estArchive?: boolean
-    nomAuteurExterne?: boolean
-    prenomAuteurExterne?: boolean
     validation?: boolean
-    isbn?: boolean
-    doi?: boolean
-    anneePublication?: boolean
-    nbPages?: boolean
-    nbExemplaires?: boolean
-    nbDisponibles?: boolean
-    coteClassification?: boolean
     categorieId?: boolean
-    auteur?: boolean | Ressource$auteurArgs<ExtArgs>
+    auteur?: boolean | UserDefaultArgs<ExtArgs>
     favoris?: boolean | Ressource$favorisArgs<ExtArgs>
     commentaires?: boolean | Ressource$commentairesArgs<ExtArgs>
     notations?: boolean | Ressource$notationsArgs<ExtArgs>
@@ -28374,37 +28713,26 @@ export namespace Prisma {
   export type RessourceSelectScalar = {
     id?: boolean
     titre?: boolean
+    isbnglobale?: boolean
     description?: boolean
-    type?: boolean
     langue?: boolean
     urlFichier?: boolean
     urlFichierLocal?: boolean
     format?: boolean
-    dateModification?: boolean
-    motsCles?: boolean
-    auteurId?: boolean
-    universiteId?: boolean
     image?: boolean
     niveauAcces?: boolean
     datePublication?: boolean
-    estValide?: boolean
+    motsCles?: boolean
+    auteurId?: boolean
+    universiteId?: boolean
     estArchive?: boolean
-    nomAuteurExterne?: boolean
-    prenomAuteurExterne?: boolean
     validation?: boolean
-    isbn?: boolean
-    doi?: boolean
-    anneePublication?: boolean
-    nbPages?: boolean
-    nbExemplaires?: boolean
-    nbDisponibles?: boolean
-    coteClassification?: boolean
     categorieId?: boolean
   }
 
-  export type RessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "description" | "type" | "langue" | "urlFichier" | "urlFichierLocal" | "format" | "dateModification" | "motsCles" | "auteurId" | "universiteId" | "image" | "niveauAcces" | "datePublication" | "estValide" | "estArchive" | "nomAuteurExterne" | "prenomAuteurExterne" | "validation" | "isbn" | "doi" | "anneePublication" | "nbPages" | "nbExemplaires" | "nbDisponibles" | "coteClassification" | "categorieId", ExtArgs["result"]["ressource"]>
+  export type RessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "isbnglobale" | "description" | "langue" | "urlFichier" | "urlFichierLocal" | "format" | "image" | "niveauAcces" | "datePublication" | "motsCles" | "auteurId" | "universiteId" | "estArchive" | "validation" | "categorieId", ExtArgs["result"]["ressource"]>
   export type RessourceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    auteur?: boolean | Ressource$auteurArgs<ExtArgs>
+    auteur?: boolean | UserDefaultArgs<ExtArgs>
     favoris?: boolean | Ressource$favorisArgs<ExtArgs>
     commentaires?: boolean | Ressource$commentairesArgs<ExtArgs>
     notations?: boolean | Ressource$notationsArgs<ExtArgs>
@@ -28421,7 +28749,7 @@ export namespace Prisma {
   export type $RessourcePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Ressource"
     objects: {
-      auteur: Prisma.$UserPayload<ExtArgs> | null
+      auteur: Prisma.$UserPayload<ExtArgs>
       favoris: Prisma.$FavoriPayload<ExtArgs>[]
       commentaires: Prisma.$CommentairePayload<ExtArgs>[]
       notations: Prisma.$NotationPayload<ExtArgs>[]
@@ -28436,31 +28764,20 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       titre: string
+      isbnglobale: string
       description: string
-      type: $Enums.TypeRessource
       langue: string
       urlFichier: string
       urlFichierLocal: string | null
       format: string
-      dateModification: Date
-      motsCles: string
-      auteurId: string | null
-      universiteId: string
       image: string | null
       niveauAcces: $Enums.NiveauAcces
       datePublication: Date | null
-      estValide: boolean
+      motsCles: string
+      auteurId: string
+      universiteId: string
       estArchive: boolean
-      nomAuteurExterne: string | null
-      prenomAuteurExterne: string | null
       validation: $Enums.TypeValidation
-      isbn: string | null
-      doi: string | null
-      anneePublication: number | null
-      nbPages: number | null
-      nbExemplaires: number
-      nbDisponibles: number
-      coteClassification: string | null
       categorieId: string
     }, ExtArgs["result"]["ressource"]>
     composites: {}
@@ -28802,7 +29119,7 @@ export namespace Prisma {
    */
   export interface Prisma__RessourceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    auteur<T extends Ressource$auteurArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$auteurArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    auteur<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     favoris<T extends Ressource$favorisArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$favorisArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoriPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     commentaires<T extends Ressource$commentairesArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$commentairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notations<T extends Ressource$notationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$notationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -28844,31 +29161,20 @@ export namespace Prisma {
   interface RessourceFieldRefs {
     readonly id: FieldRef<"Ressource", 'String'>
     readonly titre: FieldRef<"Ressource", 'String'>
+    readonly isbnglobale: FieldRef<"Ressource", 'String'>
     readonly description: FieldRef<"Ressource", 'String'>
-    readonly type: FieldRef<"Ressource", 'TypeRessource'>
     readonly langue: FieldRef<"Ressource", 'String'>
     readonly urlFichier: FieldRef<"Ressource", 'String'>
     readonly urlFichierLocal: FieldRef<"Ressource", 'String'>
     readonly format: FieldRef<"Ressource", 'String'>
-    readonly dateModification: FieldRef<"Ressource", 'DateTime'>
-    readonly motsCles: FieldRef<"Ressource", 'String'>
-    readonly auteurId: FieldRef<"Ressource", 'String'>
-    readonly universiteId: FieldRef<"Ressource", 'String'>
     readonly image: FieldRef<"Ressource", 'String'>
     readonly niveauAcces: FieldRef<"Ressource", 'NiveauAcces'>
     readonly datePublication: FieldRef<"Ressource", 'DateTime'>
-    readonly estValide: FieldRef<"Ressource", 'Boolean'>
+    readonly motsCles: FieldRef<"Ressource", 'String'>
+    readonly auteurId: FieldRef<"Ressource", 'String'>
+    readonly universiteId: FieldRef<"Ressource", 'String'>
     readonly estArchive: FieldRef<"Ressource", 'Boolean'>
-    readonly nomAuteurExterne: FieldRef<"Ressource", 'String'>
-    readonly prenomAuteurExterne: FieldRef<"Ressource", 'String'>
     readonly validation: FieldRef<"Ressource", 'TypeValidation'>
-    readonly isbn: FieldRef<"Ressource", 'String'>
-    readonly doi: FieldRef<"Ressource", 'String'>
-    readonly anneePublication: FieldRef<"Ressource", 'Int'>
-    readonly nbPages: FieldRef<"Ressource", 'Int'>
-    readonly nbExemplaires: FieldRef<"Ressource", 'Int'>
-    readonly nbDisponibles: FieldRef<"Ressource", 'Int'>
-    readonly coteClassification: FieldRef<"Ressource", 'String'>
     readonly categorieId: FieldRef<"Ressource", 'String'>
   }
     
@@ -29213,25 +29519,6 @@ export namespace Prisma {
   }
 
   /**
-   * Ressource.auteur
-   */
-  export type Ressource$auteurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
    * Ressource.favoris
    */
   export type Ressource$favorisArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -29500,6 +29787,8 @@ export namespace Prisma {
     libelle: string | null
     description: string | null
     dateCreation: Date | null
+    createdAt: Date | null
+    updayedAt: Date | null
   }
 
   export type CategorieMaxAggregateOutputType = {
@@ -29507,6 +29796,8 @@ export namespace Prisma {
     libelle: string | null
     description: string | null
     dateCreation: Date | null
+    createdAt: Date | null
+    updayedAt: Date | null
   }
 
   export type CategorieCountAggregateOutputType = {
@@ -29514,6 +29805,8 @@ export namespace Prisma {
     libelle: number
     description: number
     dateCreation: number
+    createdAt: number
+    updayedAt: number
     _all: number
   }
 
@@ -29523,6 +29816,8 @@ export namespace Prisma {
     libelle?: true
     description?: true
     dateCreation?: true
+    createdAt?: true
+    updayedAt?: true
   }
 
   export type CategorieMaxAggregateInputType = {
@@ -29530,6 +29825,8 @@ export namespace Prisma {
     libelle?: true
     description?: true
     dateCreation?: true
+    createdAt?: true
+    updayedAt?: true
   }
 
   export type CategorieCountAggregateInputType = {
@@ -29537,6 +29834,8 @@ export namespace Prisma {
     libelle?: true
     description?: true
     dateCreation?: true
+    createdAt?: true
+    updayedAt?: true
     _all?: true
   }
 
@@ -29617,6 +29916,8 @@ export namespace Prisma {
     libelle: string
     description: string | null
     dateCreation: Date
+    createdAt: Date
+    updayedAt: Date
     _count: CategorieCountAggregateOutputType | null
     _min: CategorieMinAggregateOutputType | null
     _max: CategorieMaxAggregateOutputType | null
@@ -29641,6 +29942,8 @@ export namespace Prisma {
     libelle?: boolean
     description?: boolean
     dateCreation?: boolean
+    createdAt?: boolean
+    updayedAt?: boolean
     ressources?: boolean | Categorie$ressourcesArgs<ExtArgs>
     _count?: boolean | CategorieCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["categorie"]>
@@ -29652,9 +29955,11 @@ export namespace Prisma {
     libelle?: boolean
     description?: boolean
     dateCreation?: boolean
+    createdAt?: boolean
+    updayedAt?: boolean
   }
 
-  export type CategorieOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "libelle" | "description" | "dateCreation", ExtArgs["result"]["categorie"]>
+  export type CategorieOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "libelle" | "description" | "dateCreation" | "createdAt" | "updayedAt", ExtArgs["result"]["categorie"]>
   export type CategorieInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ressources?: boolean | Categorie$ressourcesArgs<ExtArgs>
     _count?: boolean | CategorieCountOutputTypeDefaultArgs<ExtArgs>
@@ -29670,6 +29975,8 @@ export namespace Prisma {
       libelle: string
       description: string | null
       dateCreation: Date
+      createdAt: Date
+      updayedAt: Date
     }, ExtArgs["result"]["categorie"]>
     composites: {}
   }
@@ -30044,6 +30351,8 @@ export namespace Prisma {
     readonly libelle: FieldRef<"Categorie", 'String'>
     readonly description: FieldRef<"Categorie", 'String'>
     readonly dateCreation: FieldRef<"Categorie", 'DateTime'>
+    readonly createdAt: FieldRef<"Categorie", 'DateTime'>
+    readonly updayedAt: FieldRef<"Categorie", 'DateTime'>
   }
     
 
@@ -30476,6 +30785,8 @@ export namespace Prisma {
     tauxRotation: number | null
     categoriesPlusEmpruntees: string | null
     universitesPlusFrequentes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type StatistiqueBibliothequeMaxAggregateOutputType = {
@@ -30491,6 +30802,8 @@ export namespace Prisma {
     tauxRotation: number | null
     categoriesPlusEmpruntees: string | null
     universitesPlusFrequentes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type StatistiqueBibliothequeCountAggregateOutputType = {
@@ -30506,6 +30819,8 @@ export namespace Prisma {
     tauxRotation: number
     categoriesPlusEmpruntees: number
     universitesPlusFrequentes: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -30545,6 +30860,8 @@ export namespace Prisma {
     tauxRotation?: true
     categoriesPlusEmpruntees?: true
     universitesPlusFrequentes?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type StatistiqueBibliothequeMaxAggregateInputType = {
@@ -30560,6 +30877,8 @@ export namespace Prisma {
     tauxRotation?: true
     categoriesPlusEmpruntees?: true
     universitesPlusFrequentes?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type StatistiqueBibliothequeCountAggregateInputType = {
@@ -30575,6 +30894,8 @@ export namespace Prisma {
     tauxRotation?: true
     categoriesPlusEmpruntees?: true
     universitesPlusFrequentes?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -30677,6 +30998,8 @@ export namespace Prisma {
     tauxRotation: number | null
     categoriesPlusEmpruntees: string | null
     universitesPlusFrequentes: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: StatistiqueBibliothequeCountAggregateOutputType | null
     _avg: StatistiqueBibliothequeAvgAggregateOutputType | null
     _sum: StatistiqueBibliothequeSumAggregateOutputType | null
@@ -30711,6 +31034,8 @@ export namespace Prisma {
     tauxRotation?: boolean
     categoriesPlusEmpruntees?: boolean
     universitesPlusFrequentes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["statistiqueBibliotheque"]>
 
@@ -30729,9 +31054,11 @@ export namespace Prisma {
     tauxRotation?: boolean
     categoriesPlusEmpruntees?: boolean
     universitesPlusFrequentes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type StatistiqueBibliothequeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteId" | "mois" | "annee" | "nbEmprunts" | "nbEmpruntsExternes" | "nbReservations" | "nbReservationsExternes" | "nbRetardsRendu" | "tauxRotation" | "categoriesPlusEmpruntees" | "universitesPlusFrequentes", ExtArgs["result"]["statistiqueBibliotheque"]>
+  export type StatistiqueBibliothequeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universiteId" | "mois" | "annee" | "nbEmprunts" | "nbEmpruntsExternes" | "nbReservations" | "nbReservationsExternes" | "nbRetardsRendu" | "tauxRotation" | "categoriesPlusEmpruntees" | "universitesPlusFrequentes" | "createdAt" | "updatedAt", ExtArgs["result"]["statistiqueBibliotheque"]>
   export type StatistiqueBibliothequeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     universite?: boolean | UniversiteDefaultArgs<ExtArgs>
   }
@@ -30754,6 +31081,8 @@ export namespace Prisma {
       tauxRotation: number | null
       categoriesPlusEmpruntees: string | null
       universitesPlusFrequentes: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["statistiqueBibliotheque"]>
     composites: {}
   }
@@ -31136,6 +31465,8 @@ export namespace Prisma {
     readonly tauxRotation: FieldRef<"StatistiqueBibliotheque", 'Float'>
     readonly categoriesPlusEmpruntees: FieldRef<"StatistiqueBibliotheque", 'String'>
     readonly universitesPlusFrequentes: FieldRef<"StatistiqueBibliotheque", 'String'>
+    readonly createdAt: FieldRef<"StatistiqueBibliotheque", 'DateTime'>
+    readonly updatedAt: FieldRef<"StatistiqueBibliotheque", 'DateTime'>
   }
     
 
@@ -31515,6 +31846,8 @@ export namespace Prisma {
     dateCreation: Date | null
     estLue: boolean | null
     typeNotification: $Enums.TypeNotification | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type NotificationMaxAggregateOutputType = {
@@ -31525,6 +31858,8 @@ export namespace Prisma {
     dateCreation: Date | null
     estLue: boolean | null
     typeNotification: $Enums.TypeNotification | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type NotificationCountAggregateOutputType = {
@@ -31535,6 +31870,8 @@ export namespace Prisma {
     dateCreation: number
     estLue: number
     typeNotification: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -31547,6 +31884,8 @@ export namespace Prisma {
     dateCreation?: true
     estLue?: true
     typeNotification?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type NotificationMaxAggregateInputType = {
@@ -31557,6 +31896,8 @@ export namespace Prisma {
     dateCreation?: true
     estLue?: true
     typeNotification?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type NotificationCountAggregateInputType = {
@@ -31567,6 +31908,8 @@ export namespace Prisma {
     dateCreation?: true
     estLue?: true
     typeNotification?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -31650,6 +31993,8 @@ export namespace Prisma {
     dateCreation: Date
     estLue: boolean
     typeNotification: $Enums.TypeNotification
+    createdAt: Date
+    updatedAt: Date
     _count: NotificationCountAggregateOutputType | null
     _min: NotificationMinAggregateOutputType | null
     _max: NotificationMaxAggregateOutputType | null
@@ -31677,6 +32022,8 @@ export namespace Prisma {
     dateCreation?: boolean
     estLue?: boolean
     typeNotification?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["notification"]>
 
@@ -31690,9 +32037,11 @@ export namespace Prisma {
     dateCreation?: boolean
     estLue?: boolean
     typeNotification?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "titre" | "message" | "dateCreation" | "estLue" | "typeNotification", ExtArgs["result"]["notification"]>
+  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "titre" | "message" | "dateCreation" | "estLue" | "typeNotification" | "createdAt" | "updatedAt", ExtArgs["result"]["notification"]>
   export type NotificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -31710,6 +32059,8 @@ export namespace Prisma {
       dateCreation: Date
       estLue: boolean
       typeNotification: $Enums.TypeNotification
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["notification"]>
     composites: {}
   }
@@ -32087,6 +32438,8 @@ export namespace Prisma {
     readonly dateCreation: FieldRef<"Notification", 'DateTime'>
     readonly estLue: FieldRef<"Notification", 'Boolean'>
     readonly typeNotification: FieldRef<"Notification", 'TypeNotification'>
+    readonly createdAt: FieldRef<"Notification", 'DateTime'>
+    readonly updatedAt: FieldRef<"Notification", 'DateTime'>
   }
     
 
@@ -32466,6 +32819,8 @@ export namespace Prisma {
     entiteId: string | null
     dateAction: Date | null
     ipAdresse: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type JournalAuditMaxAggregateOutputType = {
@@ -32476,6 +32831,8 @@ export namespace Prisma {
     entiteId: string | null
     dateAction: Date | null
     ipAdresse: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type JournalAuditCountAggregateOutputType = {
@@ -32487,6 +32844,8 @@ export namespace Prisma {
     dateAction: number
     detailsAction: number
     ipAdresse: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -32499,6 +32858,8 @@ export namespace Prisma {
     entiteId?: true
     dateAction?: true
     ipAdresse?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type JournalAuditMaxAggregateInputType = {
@@ -32509,6 +32870,8 @@ export namespace Prisma {
     entiteId?: true
     dateAction?: true
     ipAdresse?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type JournalAuditCountAggregateInputType = {
@@ -32520,6 +32883,8 @@ export namespace Prisma {
     dateAction?: true
     detailsAction?: true
     ipAdresse?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -32604,6 +32969,8 @@ export namespace Prisma {
     dateAction: Date
     detailsAction: JsonValue
     ipAdresse: string
+    createdAt: Date
+    updatedAt: Date
     _count: JournalAuditCountAggregateOutputType | null
     _min: JournalAuditMinAggregateOutputType | null
     _max: JournalAuditMaxAggregateOutputType | null
@@ -32632,6 +32999,8 @@ export namespace Prisma {
     dateAction?: boolean
     detailsAction?: boolean
     ipAdresse?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | JournalAudit$userArgs<ExtArgs>
   }, ExtArgs["result"]["journalAudit"]>
 
@@ -32646,9 +33015,11 @@ export namespace Prisma {
     dateAction?: boolean
     detailsAction?: boolean
     ipAdresse?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type JournalAuditOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "action" | "entite" | "entiteId" | "dateAction" | "detailsAction" | "ipAdresse", ExtArgs["result"]["journalAudit"]>
+  export type JournalAuditOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "action" | "entite" | "entiteId" | "dateAction" | "detailsAction" | "ipAdresse" | "createdAt" | "updatedAt", ExtArgs["result"]["journalAudit"]>
   export type JournalAuditInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | JournalAudit$userArgs<ExtArgs>
   }
@@ -32667,6 +33038,8 @@ export namespace Prisma {
       dateAction: Date
       detailsAction: Prisma.JsonValue
       ipAdresse: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["journalAudit"]>
     composites: {}
   }
@@ -33045,6 +33418,8 @@ export namespace Prisma {
     readonly dateAction: FieldRef<"JournalAudit", 'DateTime'>
     readonly detailsAction: FieldRef<"JournalAudit", 'Json'>
     readonly ipAdresse: FieldRef<"JournalAudit", 'String'>
+    readonly createdAt: FieldRef<"JournalAudit", 'DateTime'>
+    readonly updatedAt: FieldRef<"JournalAudit", 'DateTime'>
   }
     
 
@@ -33447,7 +33822,9 @@ export namespace Prisma {
     dateFin: 'dateFin',
     estActive: 'estActive',
     typeConvention: 'typeConvention',
-    detailsConvention: 'detailsConvention'
+    detailsConvention: 'detailsConvention',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ConventionInteruniversitaireScalarFieldEnum = (typeof ConventionInteruniversitaireScalarFieldEnum)[keyof typeof ConventionInteruniversitaireScalarFieldEnum]
@@ -33461,7 +33838,9 @@ export namespace Prisma {
     dureeEmpruntJours: 'dureeEmpruntJours',
     nbRenouvellements: 'nbRenouvellements',
     penaliteRetardJours: 'penaliteRetardJours',
-    estActif: 'estActif'
+    estActif: 'estActif',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ReglePretScalarFieldEnum = (typeof ReglePretScalarFieldEnum)[keyof typeof ReglePretScalarFieldEnum]
@@ -33474,7 +33853,9 @@ export namespace Prisma {
     politiquePerte: 'politiquePerte',
     penaliteRetard: 'penaliteRetard',
     estActive: 'estActive',
-    dateMiseAJour: 'dateMiseAJour'
+    dateMiseAJour: 'dateMiseAJour',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type PolitiqueBibliothequeScalarFieldEnum = (typeof PolitiqueBibliothequeScalarFieldEnum)[keyof typeof PolitiqueBibliothequeScalarFieldEnum]
@@ -33488,7 +33869,9 @@ export namespace Prisma {
     dateFin: 'dateFin',
     motif: 'motif',
     empruntId: 'empruntId',
-    estActive: 'estActive'
+    estActive: 'estActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type SanctionUtilisateurScalarFieldEnum = (typeof SanctionUtilisateurScalarFieldEnum)[keyof typeof SanctionUtilisateurScalarFieldEnum]
@@ -33504,7 +33887,9 @@ export namespace Prisma {
     statut: 'statut',
     commentaire: 'commentaire',
     universiteEmprunteur: 'universiteEmprunteur',
-    validePar: 'validePar'
+    validePar: 'validePar',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ReservationScalarFieldEnum = (typeof ReservationScalarFieldEnum)[keyof typeof ReservationScalarFieldEnum]
@@ -33520,7 +33905,9 @@ export namespace Prisma {
     dateAcquisition: 'dateAcquisition',
     qrCode: 'qrCode',
     dureeMaxEmpruntExterne: 'dureeMaxEmpruntExterne',
-    nbMaxExemplairesExterne: 'nbMaxExemplairesExterne'
+    nbMaxExemplairesExterne: 'nbMaxExemplairesExterne',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ExemplairePhysiqueScalarFieldEnum = (typeof ExemplairePhysiqueScalarFieldEnum)[keyof typeof ExemplairePhysiqueScalarFieldEnum]
@@ -33537,7 +33924,9 @@ export namespace Prisma {
     commentaire: 'commentaire',
     universiteEmprunteur: 'universiteEmprunteur',
     motifEmprunt: 'motifEmprunt',
-    validePar: 'validePar'
+    validePar: 'validePar',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type EmpruntScalarFieldEnum = (typeof EmpruntScalarFieldEnum)[keyof typeof EmpruntScalarFieldEnum]
@@ -33552,7 +33941,9 @@ export namespace Prisma {
     motif: 'motif',
     estVue: 'estVue',
     estInteruniversitaire: 'estInteruniversitaire',
-    universiteSource: 'universiteSource'
+    universiteSource: 'universiteSource',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type RecommandationScalarFieldEnum = (typeof RecommandationScalarFieldEnum)[keyof typeof RecommandationScalarFieldEnum]
@@ -33563,7 +33954,9 @@ export namespace Prisma {
     nom: 'nom',
     adresse: 'adresse',
     ville: 'ville',
-    siteWeb: 'siteWeb'
+    siteWeb: 'siteWeb',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type UniversiteScalarFieldEnum = (typeof UniversiteScalarFieldEnum)[keyof typeof UniversiteScalarFieldEnum]
@@ -33573,7 +33966,9 @@ export namespace Prisma {
     id: 'id',
     nom: 'nom',
     description: 'description',
-    universiteId: 'universiteId'
+    universiteId: 'universiteId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type UfrScalarFieldEnum = (typeof UfrScalarFieldEnum)[keyof typeof UfrScalarFieldEnum]
@@ -33584,7 +33979,9 @@ export namespace Prisma {
     nom: 'nom',
     description: 'description',
     ufrId: 'ufrId',
-    responsable: 'responsable'
+    responsable: 'responsable',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type DepartementScalarFieldEnum = (typeof DepartementScalarFieldEnum)[keyof typeof DepartementScalarFieldEnum]
@@ -33595,7 +33992,9 @@ export namespace Prisma {
     nom: 'nom',
     description: 'description',
     niveauEtudes: 'niveauEtudes',
-    departementId: 'departementId'
+    departementId: 'departementId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type FiliereScalarFieldEnum = (typeof FiliereScalarFieldEnum)[keyof typeof FiliereScalarFieldEnum]
@@ -33612,6 +34011,8 @@ export namespace Prisma {
     role: 'role',
     derniereConnexion: 'derniereConnexion',
     estActif: 'estActif',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     preferencesRecommandation: 'preferencesRecommandation',
     frequenceRecommandation: 'frequenceRecommandation'
   };
@@ -33622,11 +34023,12 @@ export namespace Prisma {
   export const EtudiantScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
-    numeroEtudiant: 'numeroEtudiant',
+    codePermanent: 'codePermanent',
     dateNaissance: 'dateNaissance',
     dateInscription: 'dateInscription',
-    niveauEtudes: 'niveauEtudes',
-    filiereId: 'filiereId'
+    filiereId: 'filiereId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type EtudiantScalarFieldEnum = (typeof EtudiantScalarFieldEnum)[keyof typeof EtudiantScalarFieldEnum]
@@ -33637,7 +34039,9 @@ export namespace Prisma {
     userId: 'userId',
     numeroEnseignant: 'numeroEnseignant',
     dateNaissance: 'dateNaissance',
-    specialite: 'specialite'
+    specialite: 'specialite',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type EnseignantScalarFieldEnum = (typeof EnseignantScalarFieldEnum)[keyof typeof EnseignantScalarFieldEnum]
@@ -33650,7 +34054,9 @@ export namespace Prisma {
     dateNaissance: 'dateNaissance',
     adresse: 'adresse',
     ville: 'ville',
-    pays: 'pays'
+    pays: 'pays',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type BibliothecaireScalarFieldEnum = (typeof BibliothecaireScalarFieldEnum)[keyof typeof BibliothecaireScalarFieldEnum]
@@ -33676,7 +34082,9 @@ export namespace Prisma {
     dateAjout: 'dateAjout',
     note: 'note',
     universiteSrc: 'universiteSrc',
-    universiteUser: 'universiteUser'
+    universiteUser: 'universiteUser',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type FavoriScalarFieldEnum = (typeof FavoriScalarFieldEnum)[keyof typeof FavoriScalarFieldEnum]
@@ -33689,7 +34097,9 @@ export namespace Prisma {
     contenu: 'contenu',
     dateCreation: 'dateCreation',
     universiteSrc: 'universiteSrc',
-    universiteUser: 'universiteUser'
+    universiteUser: 'universiteUser',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type CommentaireScalarFieldEnum = (typeof CommentaireScalarFieldEnum)[keyof typeof CommentaireScalarFieldEnum]
@@ -33702,7 +34112,9 @@ export namespace Prisma {
     note: 'note',
     dateNotation: 'dateNotation',
     universiteSrc: 'universiteSrc',
-    universiteUser: 'universiteUser'
+    universiteUser: 'universiteUser',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type NotationScalarFieldEnum = (typeof NotationScalarFieldEnum)[keyof typeof NotationScalarFieldEnum]
@@ -33715,7 +34127,9 @@ export namespace Prisma {
     dateAcces: 'dateAcces',
     typeAcces: 'typeAcces',
     universiteSrc: 'universiteSrc',
-    universiteUser: 'universiteUser'
+    universiteUser: 'universiteUser',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type HistoriqueAccesScalarFieldEnum = (typeof HistoriqueAccesScalarFieldEnum)[keyof typeof HistoriqueAccesScalarFieldEnum]
@@ -33727,7 +34141,9 @@ export namespace Prisma {
     ressourceId: 'ressourceId',
     score: 'score',
     typeInteraction: 'typeInteraction',
-    dateDonnee: 'dateDonnee'
+    dateDonnee: 'dateDonnee',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type DonneesRecommandationScalarFieldEnum = (typeof DonneesRecommandationScalarFieldEnum)[keyof typeof DonneesRecommandationScalarFieldEnum]
@@ -33749,7 +34165,9 @@ export namespace Prisma {
     collectionId: 'collectionId',
     ressourceId: 'ressourceId',
     dateAjout: 'dateAjout',
-    notes: 'notes'
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type CollectionRessourceScalarFieldEnum = (typeof CollectionRessourceScalarFieldEnum)[keyof typeof CollectionRessourceScalarFieldEnum]
@@ -33758,31 +34176,20 @@ export namespace Prisma {
   export const RessourceScalarFieldEnum: {
     id: 'id',
     titre: 'titre',
+    isbnglobale: 'isbnglobale',
     description: 'description',
-    type: 'type',
     langue: 'langue',
     urlFichier: 'urlFichier',
     urlFichierLocal: 'urlFichierLocal',
     format: 'format',
-    dateModification: 'dateModification',
-    motsCles: 'motsCles',
-    auteurId: 'auteurId',
-    universiteId: 'universiteId',
     image: 'image',
     niveauAcces: 'niveauAcces',
     datePublication: 'datePublication',
-    estValide: 'estValide',
+    motsCles: 'motsCles',
+    auteurId: 'auteurId',
+    universiteId: 'universiteId',
     estArchive: 'estArchive',
-    nomAuteurExterne: 'nomAuteurExterne',
-    prenomAuteurExterne: 'prenomAuteurExterne',
     validation: 'validation',
-    isbn: 'isbn',
-    doi: 'doi',
-    anneePublication: 'anneePublication',
-    nbPages: 'nbPages',
-    nbExemplaires: 'nbExemplaires',
-    nbDisponibles: 'nbDisponibles',
-    coteClassification: 'coteClassification',
     categorieId: 'categorieId'
   };
 
@@ -33793,7 +34200,9 @@ export namespace Prisma {
     id: 'id',
     libelle: 'libelle',
     description: 'description',
-    dateCreation: 'dateCreation'
+    dateCreation: 'dateCreation',
+    createdAt: 'createdAt',
+    updayedAt: 'updayedAt'
   };
 
   export type CategorieScalarFieldEnum = (typeof CategorieScalarFieldEnum)[keyof typeof CategorieScalarFieldEnum]
@@ -33811,7 +34220,9 @@ export namespace Prisma {
     nbRetardsRendu: 'nbRetardsRendu',
     tauxRotation: 'tauxRotation',
     categoriesPlusEmpruntees: 'categoriesPlusEmpruntees',
-    universitesPlusFrequentes: 'universitesPlusFrequentes'
+    universitesPlusFrequentes: 'universitesPlusFrequentes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type StatistiqueBibliothequeScalarFieldEnum = (typeof StatistiqueBibliothequeScalarFieldEnum)[keyof typeof StatistiqueBibliothequeScalarFieldEnum]
@@ -33824,7 +34235,9 @@ export namespace Prisma {
     message: 'message',
     dateCreation: 'dateCreation',
     estLue: 'estLue',
-    typeNotification: 'typeNotification'
+    typeNotification: 'typeNotification',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
@@ -33838,7 +34251,9 @@ export namespace Prisma {
     entiteId: 'entiteId',
     dateAction: 'dateAction',
     detailsAction: 'detailsAction',
-    ipAdresse: 'ipAdresse'
+    ipAdresse: 'ipAdresse',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type JournalAuditScalarFieldEnum = (typeof JournalAuditScalarFieldEnum)[keyof typeof JournalAuditScalarFieldEnum]
@@ -34011,7 +34426,7 @@ export namespace Prisma {
   export const EtudiantOrderByRelevanceFieldEnum: {
     id: 'id',
     userId: 'userId',
-    numeroEtudiant: 'numeroEtudiant',
+    codePermanent: 'codePermanent',
     filiereId: 'filiereId'
   };
 
@@ -34130,20 +34545,16 @@ export namespace Prisma {
   export const RessourceOrderByRelevanceFieldEnum: {
     id: 'id',
     titre: 'titre',
+    isbnglobale: 'isbnglobale',
     description: 'description',
     langue: 'langue',
     urlFichier: 'urlFichier',
     urlFichierLocal: 'urlFichierLocal',
     format: 'format',
+    image: 'image',
     motsCles: 'motsCles',
     auteurId: 'auteurId',
     universiteId: 'universiteId',
-    image: 'image',
-    nomAuteurExterne: 'nomAuteurExterne',
-    prenomAuteurExterne: 'prenomAuteurExterne',
-    isbn: 'isbn',
-    doi: 'doi',
-    coteClassification: 'coteClassification',
     categorieId: 'categorieId'
   };
 
@@ -34326,13 +34737,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'TypeRessource'
-   */
-  export type EnumTypeRessourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeRessource'>
-    
-
-
-  /**
    * Reference to a field of type 'NiveauAcces'
    */
   export type EnumNiveauAccesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NiveauAcces'>
@@ -34382,6 +34786,8 @@ export namespace Prisma {
     estActive?: BoolFilter<"ConventionInteruniversitaire"> | boolean
     typeConvention?: EnumTypeConventionFilter<"ConventionInteruniversitaire"> | $Enums.TypeConvention
     detailsConvention?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
+    createdAt?: DateTimeFilter<"ConventionInteruniversitaire"> | Date | string
+    updatedAt?: DateTimeFilter<"ConventionInteruniversitaire"> | Date | string
   }
 
   export type ConventionInteruniversitaireOrderByWithRelationInput = {
@@ -34393,6 +34799,8 @@ export namespace Prisma {
     estActive?: SortOrder
     typeConvention?: SortOrder
     detailsConvention?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _relevance?: ConventionInteruniversitaireOrderByRelevanceInput
   }
 
@@ -34409,6 +34817,8 @@ export namespace Prisma {
     estActive?: BoolFilter<"ConventionInteruniversitaire"> | boolean
     typeConvention?: EnumTypeConventionFilter<"ConventionInteruniversitaire"> | $Enums.TypeConvention
     detailsConvention?: StringNullableFilter<"ConventionInteruniversitaire"> | string | null
+    createdAt?: DateTimeFilter<"ConventionInteruniversitaire"> | Date | string
+    updatedAt?: DateTimeFilter<"ConventionInteruniversitaire"> | Date | string
   }, "id" | "universiteId1_universiteId2">
 
   export type ConventionInteruniversitaireOrderByWithAggregationInput = {
@@ -34420,6 +34830,8 @@ export namespace Prisma {
     estActive?: SortOrder
     typeConvention?: SortOrder
     detailsConvention?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ConventionInteruniversitaireCountOrderByAggregateInput
     _max?: ConventionInteruniversitaireMaxOrderByAggregateInput
     _min?: ConventionInteruniversitaireMinOrderByAggregateInput
@@ -34437,6 +34849,8 @@ export namespace Prisma {
     estActive?: BoolWithAggregatesFilter<"ConventionInteruniversitaire"> | boolean
     typeConvention?: EnumTypeConventionWithAggregatesFilter<"ConventionInteruniversitaire"> | $Enums.TypeConvention
     detailsConvention?: StringNullableWithAggregatesFilter<"ConventionInteruniversitaire"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ConventionInteruniversitaire"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ConventionInteruniversitaire"> | Date | string
   }
 
   export type ReglePretWhereInput = {
@@ -34451,6 +34865,8 @@ export namespace Prisma {
     nbRenouvellements?: IntFilter<"ReglePret"> | number
     penaliteRetardJours?: BoolFilter<"ReglePret"> | boolean
     estActif?: BoolFilter<"ReglePret"> | boolean
+    createdAt?: DateTimeFilter<"ReglePret"> | Date | string
+    updatedAt?: DateTimeFilter<"ReglePret"> | Date | string
     universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
   }
 
@@ -34463,6 +34879,8 @@ export namespace Prisma {
     nbRenouvellements?: SortOrder
     penaliteRetardJours?: SortOrder
     estActif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     universite?: UniversiteOrderByWithRelationInput
     _relevance?: ReglePretOrderByRelevanceInput
   }
@@ -34480,6 +34898,8 @@ export namespace Prisma {
     nbRenouvellements?: IntFilter<"ReglePret"> | number
     penaliteRetardJours?: BoolFilter<"ReglePret"> | boolean
     estActif?: BoolFilter<"ReglePret"> | boolean
+    createdAt?: DateTimeFilter<"ReglePret"> | Date | string
+    updatedAt?: DateTimeFilter<"ReglePret"> | Date | string
     universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
   }, "id" | "universiteId_roleUtilisateur">
 
@@ -34492,6 +34912,8 @@ export namespace Prisma {
     nbRenouvellements?: SortOrder
     penaliteRetardJours?: SortOrder
     estActif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ReglePretCountOrderByAggregateInput
     _avg?: ReglePretAvgOrderByAggregateInput
     _max?: ReglePretMaxOrderByAggregateInput
@@ -34511,6 +34933,8 @@ export namespace Prisma {
     nbRenouvellements?: IntWithAggregatesFilter<"ReglePret"> | number
     penaliteRetardJours?: BoolWithAggregatesFilter<"ReglePret"> | boolean
     estActif?: BoolWithAggregatesFilter<"ReglePret"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ReglePret"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ReglePret"> | Date | string
   }
 
   export type PolitiqueBibliothequeWhereInput = {
@@ -34524,6 +34948,8 @@ export namespace Prisma {
     penaliteRetard?: StringFilter<"PolitiqueBibliotheque"> | string
     estActive?: BoolFilter<"PolitiqueBibliotheque"> | boolean
     dateMiseAJour?: DateTimeFilter<"PolitiqueBibliotheque"> | Date | string
+    createdAt?: DateTimeFilter<"PolitiqueBibliotheque"> | Date | string
+    updatedAt?: DateTimeFilter<"PolitiqueBibliotheque"> | Date | string
     universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
   }
 
@@ -34535,6 +34961,8 @@ export namespace Prisma {
     penaliteRetard?: SortOrder
     estActive?: SortOrder
     dateMiseAJour?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     universite?: UniversiteOrderByWithRelationInput
     _relevance?: PolitiqueBibliothequeOrderByRelevanceInput
   }
@@ -34550,6 +34978,8 @@ export namespace Prisma {
     penaliteRetard?: StringFilter<"PolitiqueBibliotheque"> | string
     estActive?: BoolFilter<"PolitiqueBibliotheque"> | boolean
     dateMiseAJour?: DateTimeFilter<"PolitiqueBibliotheque"> | Date | string
+    createdAt?: DateTimeFilter<"PolitiqueBibliotheque"> | Date | string
+    updatedAt?: DateTimeFilter<"PolitiqueBibliotheque"> | Date | string
     universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
   }, "id">
 
@@ -34561,6 +34991,8 @@ export namespace Prisma {
     penaliteRetard?: SortOrder
     estActive?: SortOrder
     dateMiseAJour?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: PolitiqueBibliothequeCountOrderByAggregateInput
     _max?: PolitiqueBibliothequeMaxOrderByAggregateInput
     _min?: PolitiqueBibliothequeMinOrderByAggregateInput
@@ -34577,6 +35009,8 @@ export namespace Prisma {
     penaliteRetard?: StringWithAggregatesFilter<"PolitiqueBibliotheque"> | string
     estActive?: BoolWithAggregatesFilter<"PolitiqueBibliotheque"> | boolean
     dateMiseAJour?: DateTimeWithAggregatesFilter<"PolitiqueBibliotheque"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"PolitiqueBibliotheque"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PolitiqueBibliotheque"> | Date | string
   }
 
   export type SanctionUtilisateurWhereInput = {
@@ -34591,6 +35025,8 @@ export namespace Prisma {
     motif?: StringFilter<"SanctionUtilisateur"> | string
     empruntId?: StringNullableFilter<"SanctionUtilisateur"> | string | null
     estActive?: BoolFilter<"SanctionUtilisateur"> | boolean
+    createdAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
+    updatedAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     emprunt?: XOR<EmpruntNullableScalarRelationFilter, EmpruntWhereInput> | null
   }
@@ -34604,6 +35040,8 @@ export namespace Prisma {
     motif?: SortOrder
     empruntId?: SortOrderInput | SortOrder
     estActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     emprunt?: EmpruntOrderByWithRelationInput
     _relevance?: SanctionUtilisateurOrderByRelevanceInput
@@ -34621,6 +35059,8 @@ export namespace Prisma {
     motif?: StringFilter<"SanctionUtilisateur"> | string
     empruntId?: StringNullableFilter<"SanctionUtilisateur"> | string | null
     estActive?: BoolFilter<"SanctionUtilisateur"> | boolean
+    createdAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
+    updatedAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     emprunt?: XOR<EmpruntNullableScalarRelationFilter, EmpruntWhereInput> | null
   }, "id">
@@ -34634,6 +35074,8 @@ export namespace Prisma {
     motif?: SortOrder
     empruntId?: SortOrderInput | SortOrder
     estActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: SanctionUtilisateurCountOrderByAggregateInput
     _max?: SanctionUtilisateurMaxOrderByAggregateInput
     _min?: SanctionUtilisateurMinOrderByAggregateInput
@@ -34651,6 +35093,8 @@ export namespace Prisma {
     motif?: StringWithAggregatesFilter<"SanctionUtilisateur"> | string
     empruntId?: StringNullableWithAggregatesFilter<"SanctionUtilisateur"> | string | null
     estActive?: BoolWithAggregatesFilter<"SanctionUtilisateur"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"SanctionUtilisateur"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SanctionUtilisateur"> | Date | string
   }
 
   export type ReservationWhereInput = {
@@ -34667,6 +35111,8 @@ export namespace Prisma {
     commentaire?: StringNullableFilter<"Reservation"> | string | null
     universiteEmprunteur?: StringFilter<"Reservation"> | string
     validePar?: StringNullableFilter<"Reservation"> | string | null
+    createdAt?: DateTimeFilter<"Reservation"> | Date | string
+    updatedAt?: DateTimeFilter<"Reservation"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
     valideur?: XOR<BibliothecaireNullableScalarRelationFilter, BibliothecaireWhereInput> | null
@@ -34683,6 +35129,8 @@ export namespace Prisma {
     commentaire?: SortOrderInput | SortOrder
     universiteEmprunteur?: SortOrder
     validePar?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     ressource?: RessourceOrderByWithRelationInput
     valideur?: BibliothecaireOrderByWithRelationInput
@@ -34703,6 +35151,8 @@ export namespace Prisma {
     commentaire?: StringNullableFilter<"Reservation"> | string | null
     universiteEmprunteur?: StringFilter<"Reservation"> | string
     validePar?: StringNullableFilter<"Reservation"> | string | null
+    createdAt?: DateTimeFilter<"Reservation"> | Date | string
+    updatedAt?: DateTimeFilter<"Reservation"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
     valideur?: XOR<BibliothecaireNullableScalarRelationFilter, BibliothecaireWhereInput> | null
@@ -34719,6 +35169,8 @@ export namespace Prisma {
     commentaire?: SortOrderInput | SortOrder
     universiteEmprunteur?: SortOrder
     validePar?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ReservationCountOrderByAggregateInput
     _max?: ReservationMaxOrderByAggregateInput
     _min?: ReservationMinOrderByAggregateInput
@@ -34738,6 +35190,8 @@ export namespace Prisma {
     commentaire?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
     universiteEmprunteur?: StringWithAggregatesFilter<"Reservation"> | string
     validePar?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
   }
 
   export type ExemplairePhysiqueWhereInput = {
@@ -34754,6 +35208,8 @@ export namespace Prisma {
     qrCode?: StringNullableFilter<"ExemplairePhysique"> | string | null
     dureeMaxEmpruntExterne?: IntFilter<"ExemplairePhysique"> | number
     nbMaxExemplairesExterne?: IntFilter<"ExemplairePhysique"> | number
+    createdAt?: DateTimeFilter<"ExemplairePhysique"> | Date | string
+    updatedAt?: DateTimeFilter<"ExemplairePhysique"> | Date | string
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
     emprunts?: EmpruntListRelationFilter
   }
@@ -34769,6 +35225,8 @@ export namespace Prisma {
     qrCode?: SortOrderInput | SortOrder
     dureeMaxEmpruntExterne?: SortOrder
     nbMaxExemplairesExterne?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     ressource?: RessourceOrderByWithRelationInput
     emprunts?: EmpruntOrderByRelationAggregateInput
     _relevance?: ExemplairePhysiqueOrderByRelevanceInput
@@ -34788,6 +35246,8 @@ export namespace Prisma {
     qrCode?: StringNullableFilter<"ExemplairePhysique"> | string | null
     dureeMaxEmpruntExterne?: IntFilter<"ExemplairePhysique"> | number
     nbMaxExemplairesExterne?: IntFilter<"ExemplairePhysique"> | number
+    createdAt?: DateTimeFilter<"ExemplairePhysique"> | Date | string
+    updatedAt?: DateTimeFilter<"ExemplairePhysique"> | Date | string
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
     emprunts?: EmpruntListRelationFilter
   }, "id">
@@ -34803,6 +35263,8 @@ export namespace Prisma {
     qrCode?: SortOrderInput | SortOrder
     dureeMaxEmpruntExterne?: SortOrder
     nbMaxExemplairesExterne?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ExemplairePhysiqueCountOrderByAggregateInput
     _avg?: ExemplairePhysiqueAvgOrderByAggregateInput
     _max?: ExemplairePhysiqueMaxOrderByAggregateInput
@@ -34824,6 +35286,8 @@ export namespace Prisma {
     qrCode?: StringNullableWithAggregatesFilter<"ExemplairePhysique"> | string | null
     dureeMaxEmpruntExterne?: IntWithAggregatesFilter<"ExemplairePhysique"> | number
     nbMaxExemplairesExterne?: IntWithAggregatesFilter<"ExemplairePhysique"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"ExemplairePhysique"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ExemplairePhysique"> | Date | string
   }
 
   export type EmpruntWhereInput = {
@@ -34841,6 +35305,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
     motifEmprunt?: StringNullableFilter<"Emprunt"> | string | null
     validePar?: StringNullableFilter<"Emprunt"> | string | null
+    createdAt?: DateTimeFilter<"Emprunt"> | Date | string
+    updatedAt?: DateTimeFilter<"Emprunt"> | Date | string
     exemplaire?: XOR<ExemplairePhysiqueScalarRelationFilter, ExemplairePhysiqueWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     SanctionUtilisateur?: SanctionUtilisateurListRelationFilter
@@ -34858,6 +35324,8 @@ export namespace Prisma {
     universiteEmprunteur?: SortOrder
     motifEmprunt?: SortOrderInput | SortOrder
     validePar?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     exemplaire?: ExemplairePhysiqueOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     SanctionUtilisateur?: SanctionUtilisateurOrderByRelationAggregateInput
@@ -34879,6 +35347,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
     motifEmprunt?: StringNullableFilter<"Emprunt"> | string | null
     validePar?: StringNullableFilter<"Emprunt"> | string | null
+    createdAt?: DateTimeFilter<"Emprunt"> | Date | string
+    updatedAt?: DateTimeFilter<"Emprunt"> | Date | string
     exemplaire?: XOR<ExemplairePhysiqueScalarRelationFilter, ExemplairePhysiqueWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     SanctionUtilisateur?: SanctionUtilisateurListRelationFilter
@@ -34896,6 +35366,8 @@ export namespace Prisma {
     universiteEmprunteur?: SortOrder
     motifEmprunt?: SortOrderInput | SortOrder
     validePar?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: EmpruntCountOrderByAggregateInput
     _max?: EmpruntMaxOrderByAggregateInput
     _min?: EmpruntMinOrderByAggregateInput
@@ -34916,6 +35388,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringWithAggregatesFilter<"Emprunt"> | string
     motifEmprunt?: StringNullableWithAggregatesFilter<"Emprunt"> | string | null
     validePar?: StringNullableWithAggregatesFilter<"Emprunt"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Emprunt"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Emprunt"> | Date | string
   }
 
   export type RecommandationWhereInput = {
@@ -34931,6 +35405,8 @@ export namespace Prisma {
     estVue?: BoolFilter<"Recommandation"> | boolean
     estInteruniversitaire?: BoolFilter<"Recommandation"> | boolean
     universiteSource?: StringNullableFilter<"Recommandation"> | string | null
+    createdAt?: DateTimeFilter<"Recommandation"> | Date | string
+    updatedAt?: DateTimeFilter<"Recommandation"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }
@@ -34945,6 +35421,8 @@ export namespace Prisma {
     estVue?: SortOrder
     estInteruniversitaire?: SortOrder
     universiteSource?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     ressource?: RessourceOrderByWithRelationInput
     _relevance?: RecommandationOrderByRelevanceInput
@@ -34963,6 +35441,8 @@ export namespace Prisma {
     estVue?: BoolFilter<"Recommandation"> | boolean
     estInteruniversitaire?: BoolFilter<"Recommandation"> | boolean
     universiteSource?: StringNullableFilter<"Recommandation"> | string | null
+    createdAt?: DateTimeFilter<"Recommandation"> | Date | string
+    updatedAt?: DateTimeFilter<"Recommandation"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }, "id">
@@ -34977,6 +35457,8 @@ export namespace Prisma {
     estVue?: SortOrder
     estInteruniversitaire?: SortOrder
     universiteSource?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: RecommandationCountOrderByAggregateInput
     _avg?: RecommandationAvgOrderByAggregateInput
     _max?: RecommandationMaxOrderByAggregateInput
@@ -34997,6 +35479,8 @@ export namespace Prisma {
     estVue?: BoolWithAggregatesFilter<"Recommandation"> | boolean
     estInteruniversitaire?: BoolWithAggregatesFilter<"Recommandation"> | boolean
     universiteSource?: StringNullableWithAggregatesFilter<"Recommandation"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Recommandation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Recommandation"> | Date | string
   }
 
   export type UniversiteWhereInput = {
@@ -35008,6 +35492,8 @@ export namespace Prisma {
     adresse?: StringNullableFilter<"Universite"> | string | null
     ville?: StringFilter<"Universite"> | string
     siteWeb?: StringNullableFilter<"Universite"> | string | null
+    createdAt?: DateTimeFilter<"Universite"> | Date | string
+    updatedAt?: DateTimeFilter<"Universite"> | Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeListRelationFilter
     reglePrets?: ReglePretListRelationFilter
     politiqueBibliotheques?: PolitiqueBibliothequeListRelationFilter
@@ -35020,6 +35506,8 @@ export namespace Prisma {
     adresse?: SortOrderInput | SortOrder
     ville?: SortOrder
     siteWeb?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     statistiquesBibliotheque?: StatistiqueBibliothequeOrderByRelationAggregateInput
     reglePrets?: ReglePretOrderByRelationAggregateInput
     politiqueBibliotheques?: PolitiqueBibliothequeOrderByRelationAggregateInput
@@ -35036,6 +35524,8 @@ export namespace Prisma {
     adresse?: StringNullableFilter<"Universite"> | string | null
     ville?: StringFilter<"Universite"> | string
     siteWeb?: StringNullableFilter<"Universite"> | string | null
+    createdAt?: DateTimeFilter<"Universite"> | Date | string
+    updatedAt?: DateTimeFilter<"Universite"> | Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeListRelationFilter
     reglePrets?: ReglePretListRelationFilter
     politiqueBibliotheques?: PolitiqueBibliothequeListRelationFilter
@@ -35048,6 +35538,8 @@ export namespace Prisma {
     adresse?: SortOrderInput | SortOrder
     ville?: SortOrder
     siteWeb?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: UniversiteCountOrderByAggregateInput
     _max?: UniversiteMaxOrderByAggregateInput
     _min?: UniversiteMinOrderByAggregateInput
@@ -35062,6 +35554,8 @@ export namespace Prisma {
     adresse?: StringNullableWithAggregatesFilter<"Universite"> | string | null
     ville?: StringWithAggregatesFilter<"Universite"> | string
     siteWeb?: StringNullableWithAggregatesFilter<"Universite"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Universite"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Universite"> | Date | string
   }
 
   export type UfrWhereInput = {
@@ -35072,6 +35566,8 @@ export namespace Prisma {
     nom?: StringFilter<"Ufr"> | string
     description?: StringNullableFilter<"Ufr"> | string | null
     universiteId?: StringFilter<"Ufr"> | string
+    createdAt?: DateTimeFilter<"Ufr"> | Date | string
+    updatedAt?: DateTimeFilter<"Ufr"> | Date | string
     universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
     departements?: DepartementListRelationFilter
   }
@@ -35081,6 +35577,8 @@ export namespace Prisma {
     nom?: SortOrder
     description?: SortOrderInput | SortOrder
     universiteId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     universite?: UniversiteOrderByWithRelationInput
     departements?: DepartementOrderByRelationAggregateInput
     _relevance?: UfrOrderByRelevanceInput
@@ -35094,6 +35592,8 @@ export namespace Prisma {
     nom?: StringFilter<"Ufr"> | string
     description?: StringNullableFilter<"Ufr"> | string | null
     universiteId?: StringFilter<"Ufr"> | string
+    createdAt?: DateTimeFilter<"Ufr"> | Date | string
+    updatedAt?: DateTimeFilter<"Ufr"> | Date | string
     universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
     departements?: DepartementListRelationFilter
   }, "id">
@@ -35103,6 +35603,8 @@ export namespace Prisma {
     nom?: SortOrder
     description?: SortOrderInput | SortOrder
     universiteId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: UfrCountOrderByAggregateInput
     _max?: UfrMaxOrderByAggregateInput
     _min?: UfrMinOrderByAggregateInput
@@ -35116,6 +35618,8 @@ export namespace Prisma {
     nom?: StringWithAggregatesFilter<"Ufr"> | string
     description?: StringNullableWithAggregatesFilter<"Ufr"> | string | null
     universiteId?: StringWithAggregatesFilter<"Ufr"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Ufr"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Ufr"> | Date | string
   }
 
   export type DepartementWhereInput = {
@@ -35127,6 +35631,8 @@ export namespace Prisma {
     description?: StringNullableFilter<"Departement"> | string | null
     ufrId?: StringFilter<"Departement"> | string
     responsable?: StringNullableFilter<"Departement"> | string | null
+    createdAt?: DateTimeFilter<"Departement"> | Date | string
+    updatedAt?: DateTimeFilter<"Departement"> | Date | string
     ufr?: XOR<UfrScalarRelationFilter, UfrWhereInput>
     filieres?: FiliereListRelationFilter
   }
@@ -35137,6 +35643,8 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     ufrId?: SortOrder
     responsable?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     ufr?: UfrOrderByWithRelationInput
     filieres?: FiliereOrderByRelationAggregateInput
     _relevance?: DepartementOrderByRelevanceInput
@@ -35151,6 +35659,8 @@ export namespace Prisma {
     description?: StringNullableFilter<"Departement"> | string | null
     ufrId?: StringFilter<"Departement"> | string
     responsable?: StringNullableFilter<"Departement"> | string | null
+    createdAt?: DateTimeFilter<"Departement"> | Date | string
+    updatedAt?: DateTimeFilter<"Departement"> | Date | string
     ufr?: XOR<UfrScalarRelationFilter, UfrWhereInput>
     filieres?: FiliereListRelationFilter
   }, "id">
@@ -35161,6 +35671,8 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     ufrId?: SortOrder
     responsable?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: DepartementCountOrderByAggregateInput
     _max?: DepartementMaxOrderByAggregateInput
     _min?: DepartementMinOrderByAggregateInput
@@ -35175,6 +35687,8 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Departement"> | string | null
     ufrId?: StringWithAggregatesFilter<"Departement"> | string
     responsable?: StringNullableWithAggregatesFilter<"Departement"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Departement"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Departement"> | Date | string
   }
 
   export type FiliereWhereInput = {
@@ -35186,6 +35700,8 @@ export namespace Prisma {
     description?: StringNullableFilter<"Filiere"> | string | null
     niveauEtudes?: EnumNiveauEtudesFilter<"Filiere"> | $Enums.NiveauEtudes
     departementId?: StringFilter<"Filiere"> | string
+    createdAt?: DateTimeFilter<"Filiere"> | Date | string
+    updatedAt?: DateTimeFilter<"Filiere"> | Date | string
     departement?: XOR<DepartementScalarRelationFilter, DepartementWhereInput>
     etudiants?: EtudiantListRelationFilter
   }
@@ -35196,6 +35712,8 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     niveauEtudes?: SortOrder
     departementId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     departement?: DepartementOrderByWithRelationInput
     etudiants?: EtudiantOrderByRelationAggregateInput
     _relevance?: FiliereOrderByRelevanceInput
@@ -35210,6 +35728,8 @@ export namespace Prisma {
     description?: StringNullableFilter<"Filiere"> | string | null
     niveauEtudes?: EnumNiveauEtudesFilter<"Filiere"> | $Enums.NiveauEtudes
     departementId?: StringFilter<"Filiere"> | string
+    createdAt?: DateTimeFilter<"Filiere"> | Date | string
+    updatedAt?: DateTimeFilter<"Filiere"> | Date | string
     departement?: XOR<DepartementScalarRelationFilter, DepartementWhereInput>
     etudiants?: EtudiantListRelationFilter
   }, "id">
@@ -35220,6 +35740,8 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     niveauEtudes?: SortOrder
     departementId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: FiliereCountOrderByAggregateInput
     _max?: FiliereMaxOrderByAggregateInput
     _min?: FiliereMinOrderByAggregateInput
@@ -35234,6 +35756,8 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Filiere"> | string | null
     niveauEtudes?: EnumNiveauEtudesWithAggregatesFilter<"Filiere"> | $Enums.NiveauEtudes
     departementId?: StringWithAggregatesFilter<"Filiere"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Filiere"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Filiere"> | Date | string
   }
 
   export type UserWhereInput = {
@@ -35250,6 +35774,8 @@ export namespace Prisma {
     role?: EnumRoleUserFilter<"User"> | $Enums.RoleUser
     derniereConnexion?: DateTimeNullableFilter<"User"> | Date | string | null
     estActif?: BoolFilter<"User"> | boolean
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     preferencesRecommandation?: StringNullableFilter<"User"> | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFilter<"User"> | $Enums.FrequenceRecommandation
     contributions?: RessourceListRelationFilter
@@ -35282,6 +35808,8 @@ export namespace Prisma {
     role?: SortOrder
     derniereConnexion?: SortOrderInput | SortOrder
     estActif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     preferencesRecommandation?: SortOrderInput | SortOrder
     frequenceRecommandation?: SortOrder
     contributions?: RessourceOrderByRelationAggregateInput
@@ -35318,6 +35846,8 @@ export namespace Prisma {
     role?: EnumRoleUserFilter<"User"> | $Enums.RoleUser
     derniereConnexion?: DateTimeNullableFilter<"User"> | Date | string | null
     estActif?: BoolFilter<"User"> | boolean
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     preferencesRecommandation?: StringNullableFilter<"User"> | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFilter<"User"> | $Enums.FrequenceRecommandation
     contributions?: RessourceListRelationFilter
@@ -35350,6 +35880,8 @@ export namespace Prisma {
     role?: SortOrder
     derniereConnexion?: SortOrderInput | SortOrder
     estActif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     preferencesRecommandation?: SortOrderInput | SortOrder
     frequenceRecommandation?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -35371,6 +35903,8 @@ export namespace Prisma {
     role?: EnumRoleUserWithAggregatesFilter<"User"> | $Enums.RoleUser
     derniereConnexion?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     estActif?: BoolWithAggregatesFilter<"User"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     preferencesRecommandation?: StringNullableWithAggregatesFilter<"User"> | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationWithAggregatesFilter<"User"> | $Enums.FrequenceRecommandation
   }
@@ -35381,11 +35915,12 @@ export namespace Prisma {
     NOT?: EtudiantWhereInput | EtudiantWhereInput[]
     id?: StringFilter<"Etudiant"> | string
     userId?: StringFilter<"Etudiant"> | string
-    numeroEtudiant?: StringFilter<"Etudiant"> | string
+    codePermanent?: StringFilter<"Etudiant"> | string
     dateNaissance?: DateTimeFilter<"Etudiant"> | Date | string
     dateInscription?: DateTimeFilter<"Etudiant"> | Date | string
-    niveauEtudes?: EnumNiveauEtudesFilter<"Etudiant"> | $Enums.NiveauEtudes
     filiereId?: StringFilter<"Etudiant"> | string
+    createdAt?: DateTimeFilter<"Etudiant"> | Date | string
+    updatedAt?: DateTimeFilter<"Etudiant"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     filiere?: XOR<FiliereScalarRelationFilter, FiliereWhereInput>
   }
@@ -35393,11 +35928,12 @@ export namespace Prisma {
   export type EtudiantOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    numeroEtudiant?: SortOrder
+    codePermanent?: SortOrder
     dateNaissance?: SortOrder
     dateInscription?: SortOrder
-    niveauEtudes?: SortOrder
     filiereId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     filiere?: FiliereOrderByWithRelationInput
     _relevance?: EtudiantOrderByRelevanceInput
@@ -35405,27 +35941,29 @@ export namespace Prisma {
 
   export type EtudiantWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    numeroEtudiant?: string
+    codePermanent?: string
     AND?: EtudiantWhereInput | EtudiantWhereInput[]
     OR?: EtudiantWhereInput[]
     NOT?: EtudiantWhereInput | EtudiantWhereInput[]
     userId?: StringFilter<"Etudiant"> | string
     dateNaissance?: DateTimeFilter<"Etudiant"> | Date | string
     dateInscription?: DateTimeFilter<"Etudiant"> | Date | string
-    niveauEtudes?: EnumNiveauEtudesFilter<"Etudiant"> | $Enums.NiveauEtudes
     filiereId?: StringFilter<"Etudiant"> | string
+    createdAt?: DateTimeFilter<"Etudiant"> | Date | string
+    updatedAt?: DateTimeFilter<"Etudiant"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     filiere?: XOR<FiliereScalarRelationFilter, FiliereWhereInput>
-  }, "id" | "numeroEtudiant">
+  }, "id" | "codePermanent">
 
   export type EtudiantOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    numeroEtudiant?: SortOrder
+    codePermanent?: SortOrder
     dateNaissance?: SortOrder
     dateInscription?: SortOrder
-    niveauEtudes?: SortOrder
     filiereId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: EtudiantCountOrderByAggregateInput
     _max?: EtudiantMaxOrderByAggregateInput
     _min?: EtudiantMinOrderByAggregateInput
@@ -35437,11 +35975,12 @@ export namespace Prisma {
     NOT?: EtudiantScalarWhereWithAggregatesInput | EtudiantScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Etudiant"> | string
     userId?: StringWithAggregatesFilter<"Etudiant"> | string
-    numeroEtudiant?: StringWithAggregatesFilter<"Etudiant"> | string
+    codePermanent?: StringWithAggregatesFilter<"Etudiant"> | string
     dateNaissance?: DateTimeWithAggregatesFilter<"Etudiant"> | Date | string
     dateInscription?: DateTimeWithAggregatesFilter<"Etudiant"> | Date | string
-    niveauEtudes?: EnumNiveauEtudesWithAggregatesFilter<"Etudiant"> | $Enums.NiveauEtudes
     filiereId?: StringWithAggregatesFilter<"Etudiant"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Etudiant"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Etudiant"> | Date | string
   }
 
   export type EnseignantWhereInput = {
@@ -35453,6 +35992,8 @@ export namespace Prisma {
     numeroEnseignant?: StringFilter<"Enseignant"> | string
     dateNaissance?: DateTimeFilter<"Enseignant"> | Date | string
     specialite?: StringNullableFilter<"Enseignant"> | string | null
+    createdAt?: DateTimeFilter<"Enseignant"> | Date | string
+    updatedAt?: DateTimeFilter<"Enseignant"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -35462,6 +36003,8 @@ export namespace Prisma {
     numeroEnseignant?: SortOrder
     dateNaissance?: SortOrder
     specialite?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     _relevance?: EnseignantOrderByRelevanceInput
   }
@@ -35475,6 +36018,8 @@ export namespace Prisma {
     userId?: StringFilter<"Enseignant"> | string
     dateNaissance?: DateTimeFilter<"Enseignant"> | Date | string
     specialite?: StringNullableFilter<"Enseignant"> | string | null
+    createdAt?: DateTimeFilter<"Enseignant"> | Date | string
+    updatedAt?: DateTimeFilter<"Enseignant"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "numeroEnseignant">
 
@@ -35484,6 +36029,8 @@ export namespace Prisma {
     numeroEnseignant?: SortOrder
     dateNaissance?: SortOrder
     specialite?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: EnseignantCountOrderByAggregateInput
     _max?: EnseignantMaxOrderByAggregateInput
     _min?: EnseignantMinOrderByAggregateInput
@@ -35498,6 +36045,8 @@ export namespace Prisma {
     numeroEnseignant?: StringWithAggregatesFilter<"Enseignant"> | string
     dateNaissance?: DateTimeWithAggregatesFilter<"Enseignant"> | Date | string
     specialite?: StringNullableWithAggregatesFilter<"Enseignant"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Enseignant"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Enseignant"> | Date | string
   }
 
   export type BibliothecaireWhereInput = {
@@ -35511,6 +36060,8 @@ export namespace Prisma {
     adresse?: StringNullableFilter<"Bibliothecaire"> | string | null
     ville?: StringNullableFilter<"Bibliothecaire"> | string | null
     pays?: StringNullableFilter<"Bibliothecaire"> | string | null
+    createdAt?: DateTimeFilter<"Bibliothecaire"> | Date | string
+    updatedAt?: DateTimeFilter<"Bibliothecaire"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     reservations?: ReservationListRelationFilter
   }
@@ -35523,6 +36074,8 @@ export namespace Prisma {
     adresse?: SortOrderInput | SortOrder
     ville?: SortOrderInput | SortOrder
     pays?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     reservations?: ReservationOrderByRelationAggregateInput
     _relevance?: BibliothecaireOrderByRelevanceInput
@@ -35539,6 +36092,8 @@ export namespace Prisma {
     adresse?: StringNullableFilter<"Bibliothecaire"> | string | null
     ville?: StringNullableFilter<"Bibliothecaire"> | string | null
     pays?: StringNullableFilter<"Bibliothecaire"> | string | null
+    createdAt?: DateTimeFilter<"Bibliothecaire"> | Date | string
+    updatedAt?: DateTimeFilter<"Bibliothecaire"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     reservations?: ReservationListRelationFilter
   }, "id" | "numeroBibliothecaire">
@@ -35551,6 +36106,8 @@ export namespace Prisma {
     adresse?: SortOrderInput | SortOrder
     ville?: SortOrderInput | SortOrder
     pays?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: BibliothecaireCountOrderByAggregateInput
     _max?: BibliothecaireMaxOrderByAggregateInput
     _min?: BibliothecaireMinOrderByAggregateInput
@@ -35567,6 +36124,8 @@ export namespace Prisma {
     adresse?: StringNullableWithAggregatesFilter<"Bibliothecaire"> | string | null
     ville?: StringNullableWithAggregatesFilter<"Bibliothecaire"> | string | null
     pays?: StringNullableWithAggregatesFilter<"Bibliothecaire"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Bibliothecaire"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Bibliothecaire"> | Date | string
   }
 
   export type AdministrateurWhereInput = {
@@ -35646,6 +36205,8 @@ export namespace Prisma {
     note?: StringNullableFilter<"Favori"> | string | null
     universiteSrc?: StringNullableFilter<"Favori"> | string | null
     universiteUser?: StringNullableFilter<"Favori"> | string | null
+    createdAt?: DateTimeFilter<"Favori"> | Date | string
+    updatedAt?: DateTimeFilter<"Favori"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }
@@ -35658,6 +36219,8 @@ export namespace Prisma {
     note?: SortOrderInput | SortOrder
     universiteSrc?: SortOrderInput | SortOrder
     universiteUser?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     ressource?: RessourceOrderByWithRelationInput
     _relevance?: FavoriOrderByRelevanceInput
@@ -35675,6 +36238,8 @@ export namespace Prisma {
     note?: StringNullableFilter<"Favori"> | string | null
     universiteSrc?: StringNullableFilter<"Favori"> | string | null
     universiteUser?: StringNullableFilter<"Favori"> | string | null
+    createdAt?: DateTimeFilter<"Favori"> | Date | string
+    updatedAt?: DateTimeFilter<"Favori"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }, "id" | "userId_ressourceId">
@@ -35687,6 +36252,8 @@ export namespace Prisma {
     note?: SortOrderInput | SortOrder
     universiteSrc?: SortOrderInput | SortOrder
     universiteUser?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: FavoriCountOrderByAggregateInput
     _max?: FavoriMaxOrderByAggregateInput
     _min?: FavoriMinOrderByAggregateInput
@@ -35703,6 +36270,8 @@ export namespace Prisma {
     note?: StringNullableWithAggregatesFilter<"Favori"> | string | null
     universiteSrc?: StringNullableWithAggregatesFilter<"Favori"> | string | null
     universiteUser?: StringNullableWithAggregatesFilter<"Favori"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Favori"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Favori"> | Date | string
   }
 
   export type CommentaireWhereInput = {
@@ -35716,6 +36285,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFilter<"Commentaire"> | Date | string
     universiteSrc?: StringNullableFilter<"Commentaire"> | string | null
     universiteUser?: StringNullableFilter<"Commentaire"> | string | null
+    createdAt?: DateTimeFilter<"Commentaire"> | Date | string
+    updatedAt?: DateTimeFilter<"Commentaire"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }
@@ -35728,6 +36299,8 @@ export namespace Prisma {
     dateCreation?: SortOrder
     universiteSrc?: SortOrderInput | SortOrder
     universiteUser?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     ressource?: RessourceOrderByWithRelationInput
     _relevance?: CommentaireOrderByRelevanceInput
@@ -35744,6 +36317,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFilter<"Commentaire"> | Date | string
     universiteSrc?: StringNullableFilter<"Commentaire"> | string | null
     universiteUser?: StringNullableFilter<"Commentaire"> | string | null
+    createdAt?: DateTimeFilter<"Commentaire"> | Date | string
+    updatedAt?: DateTimeFilter<"Commentaire"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }, "id">
@@ -35756,6 +36331,8 @@ export namespace Prisma {
     dateCreation?: SortOrder
     universiteSrc?: SortOrderInput | SortOrder
     universiteUser?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: CommentaireCountOrderByAggregateInput
     _max?: CommentaireMaxOrderByAggregateInput
     _min?: CommentaireMinOrderByAggregateInput
@@ -35772,6 +36349,8 @@ export namespace Prisma {
     dateCreation?: DateTimeWithAggregatesFilter<"Commentaire"> | Date | string
     universiteSrc?: StringNullableWithAggregatesFilter<"Commentaire"> | string | null
     universiteUser?: StringNullableWithAggregatesFilter<"Commentaire"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Commentaire"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Commentaire"> | Date | string
   }
 
   export type NotationWhereInput = {
@@ -35785,6 +36364,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFilter<"Notation"> | Date | string
     universiteSrc?: StringNullableFilter<"Notation"> | string | null
     universiteUser?: StringNullableFilter<"Notation"> | string | null
+    createdAt?: DateTimeFilter<"Notation"> | Date | string
+    updatedAt?: DateTimeFilter<"Notation"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }
@@ -35797,6 +36378,8 @@ export namespace Prisma {
     dateNotation?: SortOrder
     universiteSrc?: SortOrderInput | SortOrder
     universiteUser?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     ressource?: RessourceOrderByWithRelationInput
     _relevance?: NotationOrderByRelevanceInput
@@ -35814,6 +36397,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFilter<"Notation"> | Date | string
     universiteSrc?: StringNullableFilter<"Notation"> | string | null
     universiteUser?: StringNullableFilter<"Notation"> | string | null
+    createdAt?: DateTimeFilter<"Notation"> | Date | string
+    updatedAt?: DateTimeFilter<"Notation"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }, "id" | "userId_ressourceId">
@@ -35826,6 +36411,8 @@ export namespace Prisma {
     dateNotation?: SortOrder
     universiteSrc?: SortOrderInput | SortOrder
     universiteUser?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: NotationCountOrderByAggregateInput
     _avg?: NotationAvgOrderByAggregateInput
     _max?: NotationMaxOrderByAggregateInput
@@ -35844,6 +36431,8 @@ export namespace Prisma {
     dateNotation?: DateTimeWithAggregatesFilter<"Notation"> | Date | string
     universiteSrc?: StringNullableWithAggregatesFilter<"Notation"> | string | null
     universiteUser?: StringNullableWithAggregatesFilter<"Notation"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Notation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Notation"> | Date | string
   }
 
   export type HistoriqueAccesWhereInput = {
@@ -35857,6 +36446,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFilter<"HistoriqueAcces"> | $Enums.TypeAcces
     universiteSrc?: StringNullableFilter<"HistoriqueAcces"> | string | null
     universiteUser?: StringNullableFilter<"HistoriqueAcces"> | string | null
+    createdAt?: DateTimeFilter<"HistoriqueAcces"> | Date | string
+    updatedAt?: DateTimeFilter<"HistoriqueAcces"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }
@@ -35869,6 +36460,8 @@ export namespace Prisma {
     typeAcces?: SortOrder
     universiteSrc?: SortOrderInput | SortOrder
     universiteUser?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     ressource?: RessourceOrderByWithRelationInput
     _relevance?: HistoriqueAccesOrderByRelevanceInput
@@ -35885,6 +36478,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFilter<"HistoriqueAcces"> | $Enums.TypeAcces
     universiteSrc?: StringNullableFilter<"HistoriqueAcces"> | string | null
     universiteUser?: StringNullableFilter<"HistoriqueAcces"> | string | null
+    createdAt?: DateTimeFilter<"HistoriqueAcces"> | Date | string
+    updatedAt?: DateTimeFilter<"HistoriqueAcces"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }, "id">
@@ -35897,6 +36492,8 @@ export namespace Prisma {
     typeAcces?: SortOrder
     universiteSrc?: SortOrderInput | SortOrder
     universiteUser?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: HistoriqueAccesCountOrderByAggregateInput
     _max?: HistoriqueAccesMaxOrderByAggregateInput
     _min?: HistoriqueAccesMinOrderByAggregateInput
@@ -35913,6 +36510,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesWithAggregatesFilter<"HistoriqueAcces"> | $Enums.TypeAcces
     universiteSrc?: StringNullableWithAggregatesFilter<"HistoriqueAcces"> | string | null
     universiteUser?: StringNullableWithAggregatesFilter<"HistoriqueAcces"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"HistoriqueAcces"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"HistoriqueAcces"> | Date | string
   }
 
   export type DonneesRecommandationWhereInput = {
@@ -35925,6 +36524,8 @@ export namespace Prisma {
     score?: FloatFilter<"DonneesRecommandation"> | number
     typeInteraction?: EnumTypeInteractionFilter<"DonneesRecommandation"> | $Enums.TypeInteraction
     dateDonnee?: DateTimeFilter<"DonneesRecommandation"> | Date | string
+    createdAt?: DateTimeFilter<"DonneesRecommandation"> | Date | string
+    updatedAt?: DateTimeFilter<"DonneesRecommandation"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }
@@ -35936,6 +36537,8 @@ export namespace Prisma {
     score?: SortOrder
     typeInteraction?: SortOrder
     dateDonnee?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     ressource?: RessourceOrderByWithRelationInput
     _relevance?: DonneesRecommandationOrderByRelevanceInput
@@ -35951,6 +36554,8 @@ export namespace Prisma {
     score?: FloatFilter<"DonneesRecommandation"> | number
     typeInteraction?: EnumTypeInteractionFilter<"DonneesRecommandation"> | $Enums.TypeInteraction
     dateDonnee?: DateTimeFilter<"DonneesRecommandation"> | Date | string
+    createdAt?: DateTimeFilter<"DonneesRecommandation"> | Date | string
+    updatedAt?: DateTimeFilter<"DonneesRecommandation"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }, "id">
@@ -35962,6 +36567,8 @@ export namespace Prisma {
     score?: SortOrder
     typeInteraction?: SortOrder
     dateDonnee?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: DonneesRecommandationCountOrderByAggregateInput
     _avg?: DonneesRecommandationAvgOrderByAggregateInput
     _max?: DonneesRecommandationMaxOrderByAggregateInput
@@ -35979,6 +36586,8 @@ export namespace Prisma {
     score?: FloatWithAggregatesFilter<"DonneesRecommandation"> | number
     typeInteraction?: EnumTypeInteractionWithAggregatesFilter<"DonneesRecommandation"> | $Enums.TypeInteraction
     dateDonnee?: DateTimeWithAggregatesFilter<"DonneesRecommandation"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"DonneesRecommandation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"DonneesRecommandation"> | Date | string
   }
 
   export type CollectionWhereInput = {
@@ -36049,6 +36658,8 @@ export namespace Prisma {
     ressourceId?: StringFilter<"CollectionRessource"> | string
     dateAjout?: DateTimeFilter<"CollectionRessource"> | Date | string
     notes?: StringNullableFilter<"CollectionRessource"> | string | null
+    createdAt?: DateTimeFilter<"CollectionRessource"> | Date | string
+    updatedAt?: DateTimeFilter<"CollectionRessource"> | Date | string
     collection?: XOR<CollectionScalarRelationFilter, CollectionWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }
@@ -36059,6 +36670,8 @@ export namespace Prisma {
     ressourceId?: SortOrder
     dateAjout?: SortOrder
     notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     collection?: CollectionOrderByWithRelationInput
     ressource?: RessourceOrderByWithRelationInput
     _relevance?: CollectionRessourceOrderByRelevanceInput
@@ -36074,6 +36687,8 @@ export namespace Prisma {
     ressourceId?: StringFilter<"CollectionRessource"> | string
     dateAjout?: DateTimeFilter<"CollectionRessource"> | Date | string
     notes?: StringNullableFilter<"CollectionRessource"> | string | null
+    createdAt?: DateTimeFilter<"CollectionRessource"> | Date | string
+    updatedAt?: DateTimeFilter<"CollectionRessource"> | Date | string
     collection?: XOR<CollectionScalarRelationFilter, CollectionWhereInput>
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }, "id" | "collectionId_ressourceId">
@@ -36084,6 +36699,8 @@ export namespace Prisma {
     ressourceId?: SortOrder
     dateAjout?: SortOrder
     notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: CollectionRessourceCountOrderByAggregateInput
     _max?: CollectionRessourceMaxOrderByAggregateInput
     _min?: CollectionRessourceMinOrderByAggregateInput
@@ -36098,6 +36715,8 @@ export namespace Prisma {
     ressourceId?: StringWithAggregatesFilter<"CollectionRessource"> | string
     dateAjout?: DateTimeWithAggregatesFilter<"CollectionRessource"> | Date | string
     notes?: StringNullableWithAggregatesFilter<"CollectionRessource"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"CollectionRessource"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"CollectionRessource"> | Date | string
   }
 
   export type RessourceWhereInput = {
@@ -36106,33 +36725,22 @@ export namespace Prisma {
     NOT?: RessourceWhereInput | RessourceWhereInput[]
     id?: StringFilter<"Ressource"> | string
     titre?: StringFilter<"Ressource"> | string
+    isbnglobale?: StringFilter<"Ressource"> | string
     description?: StringFilter<"Ressource"> | string
-    type?: EnumTypeRessourceFilter<"Ressource"> | $Enums.TypeRessource
     langue?: StringFilter<"Ressource"> | string
     urlFichier?: StringFilter<"Ressource"> | string
     urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
     format?: StringFilter<"Ressource"> | string
-    dateModification?: DateTimeFilter<"Ressource"> | Date | string
-    motsCles?: StringFilter<"Ressource"> | string
-    auteurId?: StringNullableFilter<"Ressource"> | string | null
-    universiteId?: StringFilter<"Ressource"> | string
     image?: StringNullableFilter<"Ressource"> | string | null
     niveauAcces?: EnumNiveauAccesFilter<"Ressource"> | $Enums.NiveauAcces
     datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
-    estValide?: BoolFilter<"Ressource"> | boolean
+    motsCles?: StringFilter<"Ressource"> | string
+    auteurId?: StringFilter<"Ressource"> | string
+    universiteId?: StringFilter<"Ressource"> | string
     estArchive?: BoolFilter<"Ressource"> | boolean
-    nomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
-    prenomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
     validation?: EnumTypeValidationFilter<"Ressource"> | $Enums.TypeValidation
-    isbn?: StringNullableFilter<"Ressource"> | string | null
-    doi?: StringNullableFilter<"Ressource"> | string | null
-    anneePublication?: IntNullableFilter<"Ressource"> | number | null
-    nbPages?: IntNullableFilter<"Ressource"> | number | null
-    nbExemplaires?: IntFilter<"Ressource"> | number
-    nbDisponibles?: IntFilter<"Ressource"> | number
-    coteClassification?: StringNullableFilter<"Ressource"> | string | null
     categorieId?: StringFilter<"Ressource"> | string
-    auteur?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
     favoris?: FavoriListRelationFilter
     commentaires?: CommentaireListRelationFilter
     notations?: NotationListRelationFilter
@@ -36148,31 +36756,20 @@ export namespace Prisma {
   export type RessourceOrderByWithRelationInput = {
     id?: SortOrder
     titre?: SortOrder
+    isbnglobale?: SortOrder
     description?: SortOrder
-    type?: SortOrder
     langue?: SortOrder
     urlFichier?: SortOrder
     urlFichierLocal?: SortOrderInput | SortOrder
     format?: SortOrder
-    dateModification?: SortOrder
-    motsCles?: SortOrder
-    auteurId?: SortOrderInput | SortOrder
-    universiteId?: SortOrder
     image?: SortOrderInput | SortOrder
     niveauAcces?: SortOrder
     datePublication?: SortOrderInput | SortOrder
-    estValide?: SortOrder
+    motsCles?: SortOrder
+    auteurId?: SortOrder
+    universiteId?: SortOrder
     estArchive?: SortOrder
-    nomAuteurExterne?: SortOrderInput | SortOrder
-    prenomAuteurExterne?: SortOrderInput | SortOrder
     validation?: SortOrder
-    isbn?: SortOrderInput | SortOrder
-    doi?: SortOrderInput | SortOrder
-    anneePublication?: SortOrderInput | SortOrder
-    nbPages?: SortOrderInput | SortOrder
-    nbExemplaires?: SortOrder
-    nbDisponibles?: SortOrder
-    coteClassification?: SortOrderInput | SortOrder
     categorieId?: SortOrder
     auteur?: UserOrderByWithRelationInput
     favoris?: FavoriOrderByRelationAggregateInput
@@ -36190,37 +36787,26 @@ export namespace Prisma {
 
   export type RessourceWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    isbnglobale?: string
     AND?: RessourceWhereInput | RessourceWhereInput[]
     OR?: RessourceWhereInput[]
     NOT?: RessourceWhereInput | RessourceWhereInput[]
     titre?: StringFilter<"Ressource"> | string
     description?: StringFilter<"Ressource"> | string
-    type?: EnumTypeRessourceFilter<"Ressource"> | $Enums.TypeRessource
     langue?: StringFilter<"Ressource"> | string
     urlFichier?: StringFilter<"Ressource"> | string
     urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
     format?: StringFilter<"Ressource"> | string
-    dateModification?: DateTimeFilter<"Ressource"> | Date | string
-    motsCles?: StringFilter<"Ressource"> | string
-    auteurId?: StringNullableFilter<"Ressource"> | string | null
-    universiteId?: StringFilter<"Ressource"> | string
     image?: StringNullableFilter<"Ressource"> | string | null
     niveauAcces?: EnumNiveauAccesFilter<"Ressource"> | $Enums.NiveauAcces
     datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
-    estValide?: BoolFilter<"Ressource"> | boolean
+    motsCles?: StringFilter<"Ressource"> | string
+    auteurId?: StringFilter<"Ressource"> | string
+    universiteId?: StringFilter<"Ressource"> | string
     estArchive?: BoolFilter<"Ressource"> | boolean
-    nomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
-    prenomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
     validation?: EnumTypeValidationFilter<"Ressource"> | $Enums.TypeValidation
-    isbn?: StringNullableFilter<"Ressource"> | string | null
-    doi?: StringNullableFilter<"Ressource"> | string | null
-    anneePublication?: IntNullableFilter<"Ressource"> | number | null
-    nbPages?: IntNullableFilter<"Ressource"> | number | null
-    nbExemplaires?: IntFilter<"Ressource"> | number
-    nbDisponibles?: IntFilter<"Ressource"> | number
-    coteClassification?: StringNullableFilter<"Ressource"> | string | null
     categorieId?: StringFilter<"Ressource"> | string
-    auteur?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
     favoris?: FavoriListRelationFilter
     commentaires?: CommentaireListRelationFilter
     notations?: NotationListRelationFilter
@@ -36231,42 +36817,29 @@ export namespace Prisma {
     recommandations?: RecommandationListRelationFilter
     donneesRecommandations?: DonneesRecommandationListRelationFilter
     categorie?: XOR<CategorieNullableScalarRelationFilter, CategorieWhereInput> | null
-  }, "id">
+  }, "id" | "isbnglobale">
 
   export type RessourceOrderByWithAggregationInput = {
     id?: SortOrder
     titre?: SortOrder
+    isbnglobale?: SortOrder
     description?: SortOrder
-    type?: SortOrder
     langue?: SortOrder
     urlFichier?: SortOrder
     urlFichierLocal?: SortOrderInput | SortOrder
     format?: SortOrder
-    dateModification?: SortOrder
-    motsCles?: SortOrder
-    auteurId?: SortOrderInput | SortOrder
-    universiteId?: SortOrder
     image?: SortOrderInput | SortOrder
     niveauAcces?: SortOrder
     datePublication?: SortOrderInput | SortOrder
-    estValide?: SortOrder
+    motsCles?: SortOrder
+    auteurId?: SortOrder
+    universiteId?: SortOrder
     estArchive?: SortOrder
-    nomAuteurExterne?: SortOrderInput | SortOrder
-    prenomAuteurExterne?: SortOrderInput | SortOrder
     validation?: SortOrder
-    isbn?: SortOrderInput | SortOrder
-    doi?: SortOrderInput | SortOrder
-    anneePublication?: SortOrderInput | SortOrder
-    nbPages?: SortOrderInput | SortOrder
-    nbExemplaires?: SortOrder
-    nbDisponibles?: SortOrder
-    coteClassification?: SortOrderInput | SortOrder
     categorieId?: SortOrder
     _count?: RessourceCountOrderByAggregateInput
-    _avg?: RessourceAvgOrderByAggregateInput
     _max?: RessourceMaxOrderByAggregateInput
     _min?: RessourceMinOrderByAggregateInput
-    _sum?: RessourceSumOrderByAggregateInput
   }
 
   export type RessourceScalarWhereWithAggregatesInput = {
@@ -36275,31 +36848,20 @@ export namespace Prisma {
     NOT?: RessourceScalarWhereWithAggregatesInput | RessourceScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Ressource"> | string
     titre?: StringWithAggregatesFilter<"Ressource"> | string
+    isbnglobale?: StringWithAggregatesFilter<"Ressource"> | string
     description?: StringWithAggregatesFilter<"Ressource"> | string
-    type?: EnumTypeRessourceWithAggregatesFilter<"Ressource"> | $Enums.TypeRessource
     langue?: StringWithAggregatesFilter<"Ressource"> | string
     urlFichier?: StringWithAggregatesFilter<"Ressource"> | string
     urlFichierLocal?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     format?: StringWithAggregatesFilter<"Ressource"> | string
-    dateModification?: DateTimeWithAggregatesFilter<"Ressource"> | Date | string
-    motsCles?: StringWithAggregatesFilter<"Ressource"> | string
-    auteurId?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
-    universiteId?: StringWithAggregatesFilter<"Ressource"> | string
     image?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     niveauAcces?: EnumNiveauAccesWithAggregatesFilter<"Ressource"> | $Enums.NiveauAcces
     datePublication?: DateTimeNullableWithAggregatesFilter<"Ressource"> | Date | string | null
-    estValide?: BoolWithAggregatesFilter<"Ressource"> | boolean
+    motsCles?: StringWithAggregatesFilter<"Ressource"> | string
+    auteurId?: StringWithAggregatesFilter<"Ressource"> | string
+    universiteId?: StringWithAggregatesFilter<"Ressource"> | string
     estArchive?: BoolWithAggregatesFilter<"Ressource"> | boolean
-    nomAuteurExterne?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
-    prenomAuteurExterne?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     validation?: EnumTypeValidationWithAggregatesFilter<"Ressource"> | $Enums.TypeValidation
-    isbn?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
-    doi?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
-    anneePublication?: IntNullableWithAggregatesFilter<"Ressource"> | number | null
-    nbPages?: IntNullableWithAggregatesFilter<"Ressource"> | number | null
-    nbExemplaires?: IntWithAggregatesFilter<"Ressource"> | number
-    nbDisponibles?: IntWithAggregatesFilter<"Ressource"> | number
-    coteClassification?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     categorieId?: StringWithAggregatesFilter<"Ressource"> | string
   }
 
@@ -36311,6 +36873,8 @@ export namespace Prisma {
     libelle?: StringFilter<"Categorie"> | string
     description?: StringNullableFilter<"Categorie"> | string | null
     dateCreation?: DateTimeFilter<"Categorie"> | Date | string
+    createdAt?: DateTimeFilter<"Categorie"> | Date | string
+    updayedAt?: DateTimeFilter<"Categorie"> | Date | string
     ressources?: RessourceListRelationFilter
   }
 
@@ -36319,6 +36883,8 @@ export namespace Prisma {
     libelle?: SortOrder
     description?: SortOrderInput | SortOrder
     dateCreation?: SortOrder
+    createdAt?: SortOrder
+    updayedAt?: SortOrder
     ressources?: RessourceOrderByRelationAggregateInput
     _relevance?: CategorieOrderByRelevanceInput
   }
@@ -36331,6 +36897,8 @@ export namespace Prisma {
     NOT?: CategorieWhereInput | CategorieWhereInput[]
     description?: StringNullableFilter<"Categorie"> | string | null
     dateCreation?: DateTimeFilter<"Categorie"> | Date | string
+    createdAt?: DateTimeFilter<"Categorie"> | Date | string
+    updayedAt?: DateTimeFilter<"Categorie"> | Date | string
     ressources?: RessourceListRelationFilter
   }, "id" | "libelle">
 
@@ -36339,6 +36907,8 @@ export namespace Prisma {
     libelle?: SortOrder
     description?: SortOrderInput | SortOrder
     dateCreation?: SortOrder
+    createdAt?: SortOrder
+    updayedAt?: SortOrder
     _count?: CategorieCountOrderByAggregateInput
     _max?: CategorieMaxOrderByAggregateInput
     _min?: CategorieMinOrderByAggregateInput
@@ -36352,6 +36922,8 @@ export namespace Prisma {
     libelle?: StringWithAggregatesFilter<"Categorie"> | string
     description?: StringNullableWithAggregatesFilter<"Categorie"> | string | null
     dateCreation?: DateTimeWithAggregatesFilter<"Categorie"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Categorie"> | Date | string
+    updayedAt?: DateTimeWithAggregatesFilter<"Categorie"> | Date | string
   }
 
   export type StatistiqueBibliothequeWhereInput = {
@@ -36370,6 +36942,8 @@ export namespace Prisma {
     tauxRotation?: FloatNullableFilter<"StatistiqueBibliotheque"> | number | null
     categoriesPlusEmpruntees?: StringNullableFilter<"StatistiqueBibliotheque"> | string | null
     universitesPlusFrequentes?: StringNullableFilter<"StatistiqueBibliotheque"> | string | null
+    createdAt?: DateTimeFilter<"StatistiqueBibliotheque"> | Date | string
+    updatedAt?: DateTimeFilter<"StatistiqueBibliotheque"> | Date | string
     universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
   }
 
@@ -36386,6 +36960,8 @@ export namespace Prisma {
     tauxRotation?: SortOrderInput | SortOrder
     categoriesPlusEmpruntees?: SortOrderInput | SortOrder
     universitesPlusFrequentes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     universite?: UniversiteOrderByWithRelationInput
     _relevance?: StatistiqueBibliothequeOrderByRelevanceInput
   }
@@ -36407,6 +36983,8 @@ export namespace Prisma {
     tauxRotation?: FloatNullableFilter<"StatistiqueBibliotheque"> | number | null
     categoriesPlusEmpruntees?: StringNullableFilter<"StatistiqueBibliotheque"> | string | null
     universitesPlusFrequentes?: StringNullableFilter<"StatistiqueBibliotheque"> | string | null
+    createdAt?: DateTimeFilter<"StatistiqueBibliotheque"> | Date | string
+    updatedAt?: DateTimeFilter<"StatistiqueBibliotheque"> | Date | string
     universite?: XOR<UniversiteScalarRelationFilter, UniversiteWhereInput>
   }, "id" | "universiteId_mois_annee">
 
@@ -36423,6 +37001,8 @@ export namespace Prisma {
     tauxRotation?: SortOrderInput | SortOrder
     categoriesPlusEmpruntees?: SortOrderInput | SortOrder
     universitesPlusFrequentes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: StatistiqueBibliothequeCountOrderByAggregateInput
     _avg?: StatistiqueBibliothequeAvgOrderByAggregateInput
     _max?: StatistiqueBibliothequeMaxOrderByAggregateInput
@@ -36446,6 +37026,8 @@ export namespace Prisma {
     tauxRotation?: FloatNullableWithAggregatesFilter<"StatistiqueBibliotheque"> | number | null
     categoriesPlusEmpruntees?: StringNullableWithAggregatesFilter<"StatistiqueBibliotheque"> | string | null
     universitesPlusFrequentes?: StringNullableWithAggregatesFilter<"StatistiqueBibliotheque"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"StatistiqueBibliotheque"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StatistiqueBibliotheque"> | Date | string
   }
 
   export type NotificationWhereInput = {
@@ -36459,6 +37041,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFilter<"Notification"> | Date | string
     estLue?: BoolFilter<"Notification"> | boolean
     typeNotification?: EnumTypeNotificationFilter<"Notification"> | $Enums.TypeNotification
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeFilter<"Notification"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -36470,6 +37054,8 @@ export namespace Prisma {
     dateCreation?: SortOrder
     estLue?: SortOrder
     typeNotification?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     _relevance?: NotificationOrderByRelevanceInput
   }
@@ -36485,6 +37071,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFilter<"Notification"> | Date | string
     estLue?: BoolFilter<"Notification"> | boolean
     typeNotification?: EnumTypeNotificationFilter<"Notification"> | $Enums.TypeNotification
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeFilter<"Notification"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -36496,6 +37084,8 @@ export namespace Prisma {
     dateCreation?: SortOrder
     estLue?: SortOrder
     typeNotification?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: NotificationCountOrderByAggregateInput
     _max?: NotificationMaxOrderByAggregateInput
     _min?: NotificationMinOrderByAggregateInput
@@ -36512,6 +37102,8 @@ export namespace Prisma {
     dateCreation?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
     estLue?: BoolWithAggregatesFilter<"Notification"> | boolean
     typeNotification?: EnumTypeNotificationWithAggregatesFilter<"Notification"> | $Enums.TypeNotification
+    createdAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
   }
 
   export type JournalAuditWhereInput = {
@@ -36526,6 +37118,8 @@ export namespace Prisma {
     dateAction?: DateTimeFilter<"JournalAudit"> | Date | string
     detailsAction?: JsonFilter<"JournalAudit">
     ipAdresse?: StringFilter<"JournalAudit"> | string
+    createdAt?: DateTimeFilter<"JournalAudit"> | Date | string
+    updatedAt?: DateTimeFilter<"JournalAudit"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
@@ -36538,6 +37132,8 @@ export namespace Prisma {
     dateAction?: SortOrder
     detailsAction?: SortOrder
     ipAdresse?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     _relevance?: JournalAuditOrderByRelevanceInput
   }
@@ -36554,6 +37150,8 @@ export namespace Prisma {
     dateAction?: DateTimeFilter<"JournalAudit"> | Date | string
     detailsAction?: JsonFilter<"JournalAudit">
     ipAdresse?: StringFilter<"JournalAudit"> | string
+    createdAt?: DateTimeFilter<"JournalAudit"> | Date | string
+    updatedAt?: DateTimeFilter<"JournalAudit"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -36566,6 +37164,8 @@ export namespace Prisma {
     dateAction?: SortOrder
     detailsAction?: SortOrder
     ipAdresse?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: JournalAuditCountOrderByAggregateInput
     _max?: JournalAuditMaxOrderByAggregateInput
     _min?: JournalAuditMinOrderByAggregateInput
@@ -36583,6 +37183,8 @@ export namespace Prisma {
     dateAction?: DateTimeWithAggregatesFilter<"JournalAudit"> | Date | string
     detailsAction?: JsonWithAggregatesFilter<"JournalAudit">
     ipAdresse?: StringWithAggregatesFilter<"JournalAudit"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"JournalAudit"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"JournalAudit"> | Date | string
   }
 
   export type ConventionInteruniversitaireCreateInput = {
@@ -36594,6 +37196,8 @@ export namespace Prisma {
     estActive?: boolean
     typeConvention?: $Enums.TypeConvention
     detailsConvention?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ConventionInteruniversitaireUncheckedCreateInput = {
@@ -36605,6 +37209,8 @@ export namespace Prisma {
     estActive?: boolean
     typeConvention?: $Enums.TypeConvention
     detailsConvention?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ConventionInteruniversitaireUpdateInput = {
@@ -36616,6 +37222,8 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
     detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConventionInteruniversitaireUncheckedUpdateInput = {
@@ -36627,6 +37235,8 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
     detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConventionInteruniversitaireCreateManyInput = {
@@ -36638,6 +37248,8 @@ export namespace Prisma {
     estActive?: boolean
     typeConvention?: $Enums.TypeConvention
     detailsConvention?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ConventionInteruniversitaireUpdateManyMutationInput = {
@@ -36649,6 +37261,8 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
     detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConventionInteruniversitaireUncheckedUpdateManyInput = {
@@ -36660,6 +37274,8 @@ export namespace Prisma {
     estActive?: BoolFieldUpdateOperationsInput | boolean
     typeConvention?: EnumTypeConventionFieldUpdateOperationsInput | $Enums.TypeConvention
     detailsConvention?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReglePretCreateInput = {
@@ -36670,6 +37286,8 @@ export namespace Prisma {
     nbRenouvellements?: number
     penaliteRetardJours?: boolean
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     universite: UniversiteCreateNestedOneWithoutReglePretsInput
   }
 
@@ -36682,6 +37300,8 @@ export namespace Prisma {
     nbRenouvellements?: number
     penaliteRetardJours?: boolean
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReglePretUpdateInput = {
@@ -36692,6 +37312,8 @@ export namespace Prisma {
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     universite?: UniversiteUpdateOneRequiredWithoutReglePretsNestedInput
   }
 
@@ -36704,6 +37326,8 @@ export namespace Prisma {
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReglePretCreateManyInput = {
@@ -36715,6 +37339,8 @@ export namespace Prisma {
     nbRenouvellements?: number
     penaliteRetardJours?: boolean
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReglePretUpdateManyMutationInput = {
@@ -36725,6 +37351,8 @@ export namespace Prisma {
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReglePretUncheckedUpdateManyInput = {
@@ -36736,6 +37364,8 @@ export namespace Prisma {
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PolitiqueBibliothequeCreateInput = {
@@ -36745,6 +37375,8 @@ export namespace Prisma {
     penaliteRetard: string
     estActive?: boolean
     dateMiseAJour?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     universite: UniversiteCreateNestedOneWithoutPolitiqueBibliothequesInput
   }
 
@@ -36756,6 +37388,8 @@ export namespace Prisma {
     penaliteRetard: string
     estActive?: boolean
     dateMiseAJour?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PolitiqueBibliothequeUpdateInput = {
@@ -36765,6 +37399,8 @@ export namespace Prisma {
     penaliteRetard?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
     dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     universite?: UniversiteUpdateOneRequiredWithoutPolitiqueBibliothequesNestedInput
   }
 
@@ -36776,6 +37412,8 @@ export namespace Prisma {
     penaliteRetard?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
     dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PolitiqueBibliothequeCreateManyInput = {
@@ -36786,6 +37424,8 @@ export namespace Prisma {
     penaliteRetard: string
     estActive?: boolean
     dateMiseAJour?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PolitiqueBibliothequeUpdateManyMutationInput = {
@@ -36795,6 +37435,8 @@ export namespace Prisma {
     penaliteRetard?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
     dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PolitiqueBibliothequeUncheckedUpdateManyInput = {
@@ -36805,6 +37447,8 @@ export namespace Prisma {
     penaliteRetard?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
     dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SanctionUtilisateurCreateInput = {
@@ -36814,6 +37458,8 @@ export namespace Prisma {
     dateFin: Date | string
     motif: string
     estActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutSanctionsInput
     emprunt?: EmpruntCreateNestedOneWithoutSanctionUtilisateurInput
   }
@@ -36827,6 +37473,8 @@ export namespace Prisma {
     motif: string
     empruntId?: string | null
     estActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SanctionUtilisateurUpdateInput = {
@@ -36836,6 +37484,8 @@ export namespace Prisma {
     dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
     motif?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutSanctionsNestedInput
     emprunt?: EmpruntUpdateOneWithoutSanctionUtilisateurNestedInput
   }
@@ -36849,6 +37499,8 @@ export namespace Prisma {
     motif?: StringFieldUpdateOperationsInput | string
     empruntId?: NullableStringFieldUpdateOperationsInput | string | null
     estActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SanctionUtilisateurCreateManyInput = {
@@ -36860,6 +37512,8 @@ export namespace Prisma {
     motif: string
     empruntId?: string | null
     estActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SanctionUtilisateurUpdateManyMutationInput = {
@@ -36869,6 +37523,8 @@ export namespace Prisma {
     dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
     motif?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SanctionUtilisateurUncheckedUpdateManyInput = {
@@ -36880,6 +37536,8 @@ export namespace Prisma {
     motif?: StringFieldUpdateOperationsInput | string
     empruntId?: NullableStringFieldUpdateOperationsInput | string | null
     estActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationCreateInput = {
@@ -36890,6 +37548,8 @@ export namespace Prisma {
     statut?: $Enums.StatutReservation
     commentaire?: string | null
     universiteEmprunteur: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutReservationsInput
     ressource: RessourceCreateNestedOneWithoutReservationsInput
     valideur?: BibliothecaireCreateNestedOneWithoutReservationsInput
@@ -36906,6 +37566,8 @@ export namespace Prisma {
     commentaire?: string | null
     universiteEmprunteur: string
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReservationUpdateInput = {
@@ -36916,6 +37578,8 @@ export namespace Prisma {
     statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutReservationsNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutReservationsNestedInput
     valideur?: BibliothecaireUpdateOneWithoutReservationsNestedInput
@@ -36932,6 +37596,8 @@ export namespace Prisma {
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationCreateManyInput = {
@@ -36945,6 +37611,8 @@ export namespace Prisma {
     commentaire?: string | null
     universiteEmprunteur: string
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReservationUpdateManyMutationInput = {
@@ -36955,6 +37623,8 @@ export namespace Prisma {
     statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationUncheckedUpdateManyInput = {
@@ -36968,6 +37638,8 @@ export namespace Prisma {
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExemplairePhysiqueCreateInput = {
@@ -36980,6 +37652,8 @@ export namespace Prisma {
     qrCode?: string | null
     dureeMaxEmpruntExterne?: number
     nbMaxExemplairesExterne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ressource: RessourceCreateNestedOneWithoutExemplairesInput
     emprunts?: EmpruntCreateNestedManyWithoutExemplaireInput
   }
@@ -36995,6 +37669,8 @@ export namespace Prisma {
     qrCode?: string | null
     dureeMaxEmpruntExterne?: number
     nbMaxExemplairesExterne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutExemplaireInput
   }
 
@@ -37008,6 +37684,8 @@ export namespace Prisma {
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
     dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
     nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressource?: RessourceUpdateOneRequiredWithoutExemplairesNestedInput
     emprunts?: EmpruntUpdateManyWithoutExemplaireNestedInput
   }
@@ -37023,6 +37701,8 @@ export namespace Prisma {
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
     dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
     nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emprunts?: EmpruntUncheckedUpdateManyWithoutExemplaireNestedInput
   }
 
@@ -37037,6 +37717,8 @@ export namespace Prisma {
     qrCode?: string | null
     dureeMaxEmpruntExterne?: number
     nbMaxExemplairesExterne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ExemplairePhysiqueUpdateManyMutationInput = {
@@ -37049,6 +37731,8 @@ export namespace Prisma {
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
     dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
     nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExemplairePhysiqueUncheckedUpdateManyInput = {
@@ -37062,6 +37746,8 @@ export namespace Prisma {
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
     dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
     nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmpruntCreateInput = {
@@ -37074,6 +37760,8 @@ export namespace Prisma {
     universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     exemplaire: ExemplairePhysiqueCreateNestedOneWithoutEmpruntsInput
     user?: UserCreateNestedOneWithoutEmpruntsInput
     SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
@@ -37091,6 +37779,8 @@ export namespace Prisma {
     universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
   }
 
@@ -37104,6 +37794,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     exemplaire?: ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntsNestedInput
     user?: UserUpdateOneWithoutEmpruntsNestedInput
     SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
@@ -37121,6 +37813,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
   }
 
@@ -37136,6 +37830,8 @@ export namespace Prisma {
     universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EmpruntUpdateManyMutationInput = {
@@ -37148,6 +37844,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmpruntUncheckedUpdateManyInput = {
@@ -37162,6 +37860,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RecommandationCreateInput = {
@@ -37172,6 +37872,8 @@ export namespace Prisma {
     estVue?: boolean
     estInteruniversitaire?: boolean
     universiteSource?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutRecommandationsInput
     ressource: RessourceCreateNestedOneWithoutRecommandationsInput
   }
@@ -37186,6 +37888,8 @@ export namespace Prisma {
     estVue?: boolean
     estInteruniversitaire?: boolean
     universiteSource?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type RecommandationUpdateInput = {
@@ -37196,6 +37900,8 @@ export namespace Prisma {
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
     universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutRecommandationsNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutRecommandationsNestedInput
   }
@@ -37210,6 +37916,8 @@ export namespace Prisma {
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
     universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RecommandationCreateManyInput = {
@@ -37222,6 +37930,8 @@ export namespace Prisma {
     estVue?: boolean
     estInteruniversitaire?: boolean
     universiteSource?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type RecommandationUpdateManyMutationInput = {
@@ -37232,6 +37942,8 @@ export namespace Prisma {
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
     universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RecommandationUncheckedUpdateManyInput = {
@@ -37244,6 +37956,8 @@ export namespace Prisma {
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
     universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UniversiteCreateInput = {
@@ -37252,6 +37966,8 @@ export namespace Prisma {
     adresse?: string | null
     ville: string
     siteWeb?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
     reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
@@ -37264,6 +37980,8 @@ export namespace Prisma {
     adresse?: string | null
     ville: string
     siteWeb?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
     reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
@@ -37276,6 +37994,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
     reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
@@ -37288,6 +38008,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
     reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
@@ -37300,6 +38022,8 @@ export namespace Prisma {
     adresse?: string | null
     ville: string
     siteWeb?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UniversiteUpdateManyMutationInput = {
@@ -37308,6 +38032,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UniversiteUncheckedUpdateManyInput = {
@@ -37316,12 +38042,16 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UfrCreateInput = {
     id?: string
     nom: string
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     universite: UniversiteCreateNestedOneWithoutUfrsInput
     departements?: DepartementCreateNestedManyWithoutUfrInput
   }
@@ -37331,6 +38061,8 @@ export namespace Prisma {
     nom: string
     description?: string | null
     universiteId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     departements?: DepartementUncheckedCreateNestedManyWithoutUfrInput
   }
 
@@ -37338,6 +38070,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     universite?: UniversiteUpdateOneRequiredWithoutUfrsNestedInput
     departements?: DepartementUpdateManyWithoutUfrNestedInput
   }
@@ -37347,6 +38081,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     departements?: DepartementUncheckedUpdateManyWithoutUfrNestedInput
   }
 
@@ -37355,12 +38091,16 @@ export namespace Prisma {
     nom: string
     description?: string | null
     universiteId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UfrUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UfrUncheckedUpdateManyInput = {
@@ -37368,6 +38108,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DepartementCreateInput = {
@@ -37375,6 +38117,8 @@ export namespace Prisma {
     nom: string
     description?: string | null
     responsable?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ufr: UfrCreateNestedOneWithoutDepartementsInput
     filieres?: FiliereCreateNestedManyWithoutDepartementInput
   }
@@ -37385,6 +38129,8 @@ export namespace Prisma {
     description?: string | null
     ufrId: string
     responsable?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     filieres?: FiliereUncheckedCreateNestedManyWithoutDepartementInput
   }
 
@@ -37393,6 +38139,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     responsable?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ufr?: UfrUpdateOneRequiredWithoutDepartementsNestedInput
     filieres?: FiliereUpdateManyWithoutDepartementNestedInput
   }
@@ -37403,6 +38151,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ufrId?: StringFieldUpdateOperationsInput | string
     responsable?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     filieres?: FiliereUncheckedUpdateManyWithoutDepartementNestedInput
   }
 
@@ -37412,6 +38162,8 @@ export namespace Prisma {
     description?: string | null
     ufrId: string
     responsable?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DepartementUpdateManyMutationInput = {
@@ -37419,6 +38171,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     responsable?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DepartementUncheckedUpdateManyInput = {
@@ -37427,6 +38181,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ufrId?: StringFieldUpdateOperationsInput | string
     responsable?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FiliereCreateInput = {
@@ -37434,6 +38190,8 @@ export namespace Prisma {
     nom: string
     description?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
+    createdAt?: Date | string
+    updatedAt?: Date | string
     departement: DepartementCreateNestedOneWithoutFilieresInput
     etudiants?: EtudiantCreateNestedManyWithoutFiliereInput
   }
@@ -37444,6 +38202,8 @@ export namespace Prisma {
     description?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
     departementId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     etudiants?: EtudiantUncheckedCreateNestedManyWithoutFiliereInput
   }
 
@@ -37452,6 +38212,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     departement?: DepartementUpdateOneRequiredWithoutFilieresNestedInput
     etudiants?: EtudiantUpdateManyWithoutFiliereNestedInput
   }
@@ -37462,6 +38224,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
     departementId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     etudiants?: EtudiantUncheckedUpdateManyWithoutFiliereNestedInput
   }
 
@@ -37471,6 +38235,8 @@ export namespace Prisma {
     description?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
     departementId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FiliereUpdateManyMutationInput = {
@@ -37478,6 +38244,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FiliereUncheckedUpdateManyInput = {
@@ -37486,6 +38254,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
     departementId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateInput = {
@@ -37499,6 +38269,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -37531,6 +38303,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -37563,6 +38337,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -37595,6 +38371,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -37627,6 +38405,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
   }
@@ -37642,6 +38422,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
   }
@@ -37657,16 +38439,19 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
   }
 
   export type EtudiantCreateInput = {
     id?: string
-    numeroEtudiant: string
+    codePermanent: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    niveauEtudes?: $Enums.NiveauEtudes
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutEtudiantsInput
     filiere: FiliereCreateNestedOneWithoutEtudiantsInput
   }
@@ -37674,19 +38459,21 @@ export namespace Prisma {
   export type EtudiantUncheckedCreateInput = {
     id?: string
     userId: string
-    numeroEtudiant: string
+    codePermanent: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    niveauEtudes?: $Enums.NiveauEtudes
     filiereId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EtudiantUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutEtudiantsNestedInput
     filiere?: FiliereUpdateOneRequiredWithoutEtudiantsNestedInput
   }
@@ -37694,39 +38481,43 @@ export namespace Prisma {
   export type EtudiantUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
     filiereId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EtudiantCreateManyInput = {
     id?: string
     userId: string
-    numeroEtudiant: string
+    codePermanent: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    niveauEtudes?: $Enums.NiveauEtudes
     filiereId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EtudiantUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EtudiantUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
     filiereId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnseignantCreateInput = {
@@ -37734,6 +38525,8 @@ export namespace Prisma {
     numeroEnseignant: string
     dateNaissance: Date | string
     specialite?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutEnseignantsInput
   }
 
@@ -37743,6 +38536,8 @@ export namespace Prisma {
     numeroEnseignant: string
     dateNaissance: Date | string
     specialite?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EnseignantUpdateInput = {
@@ -37750,6 +38545,8 @@ export namespace Prisma {
     numeroEnseignant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     specialite?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutEnseignantsNestedInput
   }
 
@@ -37759,6 +38556,8 @@ export namespace Prisma {
     numeroEnseignant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     specialite?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnseignantCreateManyInput = {
@@ -37767,6 +38566,8 @@ export namespace Prisma {
     numeroEnseignant: string
     dateNaissance: Date | string
     specialite?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EnseignantUpdateManyMutationInput = {
@@ -37774,6 +38575,8 @@ export namespace Prisma {
     numeroEnseignant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     specialite?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnseignantUncheckedUpdateManyInput = {
@@ -37782,6 +38585,8 @@ export namespace Prisma {
     numeroEnseignant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     specialite?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BibliothecaireCreateInput = {
@@ -37791,6 +38596,8 @@ export namespace Prisma {
     adresse?: string | null
     ville?: string | null
     pays?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutBibliothecairesInput
     reservations?: ReservationCreateNestedManyWithoutValideurInput
   }
@@ -37803,6 +38610,8 @@ export namespace Prisma {
     adresse?: string | null
     ville?: string | null
     pays?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     reservations?: ReservationUncheckedCreateNestedManyWithoutValideurInput
   }
 
@@ -37813,6 +38622,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: NullableStringFieldUpdateOperationsInput | string | null
     pays?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutBibliothecairesNestedInput
     reservations?: ReservationUpdateManyWithoutValideurNestedInput
   }
@@ -37825,6 +38636,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: NullableStringFieldUpdateOperationsInput | string | null
     pays?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUncheckedUpdateManyWithoutValideurNestedInput
   }
 
@@ -37836,6 +38649,8 @@ export namespace Prisma {
     adresse?: string | null
     ville?: string | null
     pays?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BibliothecaireUpdateManyMutationInput = {
@@ -37845,6 +38660,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: NullableStringFieldUpdateOperationsInput | string | null
     pays?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BibliothecaireUncheckedUpdateManyInput = {
@@ -37855,6 +38672,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: NullableStringFieldUpdateOperationsInput | string | null
     pays?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AdministrateurCreateInput = {
@@ -37932,6 +38751,8 @@ export namespace Prisma {
     note?: string | null
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutFavorisInput
     ressource: RessourceCreateNestedOneWithoutFavorisInput
   }
@@ -37944,6 +38765,8 @@ export namespace Prisma {
     note?: string | null
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FavoriUpdateInput = {
@@ -37952,6 +38775,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutFavorisNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutFavorisNestedInput
   }
@@ -37964,6 +38789,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FavoriCreateManyInput = {
@@ -37974,6 +38801,8 @@ export namespace Prisma {
     note?: string | null
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FavoriUpdateManyMutationInput = {
@@ -37982,6 +38811,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FavoriUncheckedUpdateManyInput = {
@@ -37992,6 +38823,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommentaireCreateInput = {
@@ -38000,6 +38833,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutCommentairesInput
     ressource: RessourceCreateNestedOneWithoutCommentairesInput
   }
@@ -38012,6 +38847,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CommentaireUpdateInput = {
@@ -38020,6 +38857,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCommentairesNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutCommentairesNestedInput
   }
@@ -38032,6 +38871,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommentaireCreateManyInput = {
@@ -38042,6 +38883,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CommentaireUpdateManyMutationInput = {
@@ -38050,6 +38893,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommentaireUncheckedUpdateManyInput = {
@@ -38060,6 +38905,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotationCreateInput = {
@@ -38068,6 +38915,8 @@ export namespace Prisma {
     dateNotation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutNotationsInput
     ressource: RessourceCreateNestedOneWithoutNotationsInput
   }
@@ -38080,6 +38929,8 @@ export namespace Prisma {
     dateNotation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotationUpdateInput = {
@@ -38088,6 +38939,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutNotationsNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutNotationsNestedInput
   }
@@ -38100,6 +38953,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotationCreateManyInput = {
@@ -38110,6 +38965,8 @@ export namespace Prisma {
     dateNotation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotationUpdateManyMutationInput = {
@@ -38118,6 +38975,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotationUncheckedUpdateManyInput = {
@@ -38128,6 +38987,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoriqueAccesCreateInput = {
@@ -38136,6 +38997,8 @@ export namespace Prisma {
     typeAcces: $Enums.TypeAcces
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutHistoriquesInput
     ressource: RessourceCreateNestedOneWithoutHistoriquesInput
   }
@@ -38148,6 +39011,8 @@ export namespace Prisma {
     typeAcces: $Enums.TypeAcces
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type HistoriqueAccesUpdateInput = {
@@ -38156,6 +39021,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutHistoriquesNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutHistoriquesNestedInput
   }
@@ -38168,6 +39035,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoriqueAccesCreateManyInput = {
@@ -38178,6 +39047,8 @@ export namespace Prisma {
     typeAcces: $Enums.TypeAcces
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type HistoriqueAccesUpdateManyMutationInput = {
@@ -38186,6 +39057,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoriqueAccesUncheckedUpdateManyInput = {
@@ -38196,6 +39069,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DonneesRecommandationCreateInput = {
@@ -38203,6 +39078,8 @@ export namespace Prisma {
     score: number
     typeInteraction: $Enums.TypeInteraction
     dateDonnee?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutDonneesRecommandationsInput
     ressource: RessourceCreateNestedOneWithoutDonneesRecommandationsInput
   }
@@ -38214,6 +39091,8 @@ export namespace Prisma {
     score: number
     typeInteraction: $Enums.TypeInteraction
     dateDonnee?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DonneesRecommandationUpdateInput = {
@@ -38221,6 +39100,8 @@ export namespace Prisma {
     score?: FloatFieldUpdateOperationsInput | number
     typeInteraction?: EnumTypeInteractionFieldUpdateOperationsInput | $Enums.TypeInteraction
     dateDonnee?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutDonneesRecommandationsNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutDonneesRecommandationsNestedInput
   }
@@ -38232,6 +39113,8 @@ export namespace Prisma {
     score?: FloatFieldUpdateOperationsInput | number
     typeInteraction?: EnumTypeInteractionFieldUpdateOperationsInput | $Enums.TypeInteraction
     dateDonnee?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DonneesRecommandationCreateManyInput = {
@@ -38241,6 +39124,8 @@ export namespace Prisma {
     score: number
     typeInteraction: $Enums.TypeInteraction
     dateDonnee?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DonneesRecommandationUpdateManyMutationInput = {
@@ -38248,6 +39133,8 @@ export namespace Prisma {
     score?: FloatFieldUpdateOperationsInput | number
     typeInteraction?: EnumTypeInteractionFieldUpdateOperationsInput | $Enums.TypeInteraction
     dateDonnee?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DonneesRecommandationUncheckedUpdateManyInput = {
@@ -38257,6 +39144,8 @@ export namespace Prisma {
     score?: FloatFieldUpdateOperationsInput | number
     typeInteraction?: EnumTypeInteractionFieldUpdateOperationsInput | $Enums.TypeInteraction
     dateDonnee?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CollectionCreateInput = {
@@ -38322,6 +39211,8 @@ export namespace Prisma {
     id?: string
     dateAjout?: Date | string
     notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     collection: CollectionCreateNestedOneWithoutRessourcesInput
     ressource: RessourceCreateNestedOneWithoutCollectionsInput
   }
@@ -38332,12 +39223,16 @@ export namespace Prisma {
     ressourceId: string
     dateAjout?: Date | string
     notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CollectionRessourceUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     collection?: CollectionUpdateOneRequiredWithoutRessourcesNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutCollectionsNestedInput
   }
@@ -38348,6 +39243,8 @@ export namespace Prisma {
     ressourceId?: StringFieldUpdateOperationsInput | string
     dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CollectionRessourceCreateManyInput = {
@@ -38356,12 +39253,16 @@ export namespace Prisma {
     ressourceId: string
     dateAjout?: Date | string
     notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CollectionRessourceUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CollectionRessourceUncheckedUpdateManyInput = {
@@ -38370,36 +39271,27 @@ export namespace Prisma {
     ressourceId?: StringFieldUpdateOperationsInput | string
     dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RessourceCreateInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    auteur?: UserCreateNestedOneWithoutContributionsInput
+    auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -38415,31 +39307,20 @@ export namespace Prisma {
   export type RessourceUncheckedCreateInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -38455,31 +39336,20 @@ export namespace Prisma {
   export type RessourceUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -38495,31 +39365,20 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -38535,91 +39394,58 @@ export namespace Prisma {
   export type RessourceCreateManyInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
   }
 
   export type RessourceUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RessourceUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -38628,6 +39454,8 @@ export namespace Prisma {
     libelle: string
     description?: string | null
     dateCreation?: Date | string
+    createdAt?: Date | string
+    updayedAt?: Date | string
     ressources?: RessourceCreateNestedManyWithoutCategorieInput
   }
 
@@ -38636,6 +39464,8 @@ export namespace Prisma {
     libelle: string
     description?: string | null
     dateCreation?: Date | string
+    createdAt?: Date | string
+    updayedAt?: Date | string
     ressources?: RessourceUncheckedCreateNestedManyWithoutCategorieInput
   }
 
@@ -38644,6 +39474,8 @@ export namespace Prisma {
     libelle?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updayedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressources?: RessourceUpdateManyWithoutCategorieNestedInput
   }
 
@@ -38652,6 +39484,8 @@ export namespace Prisma {
     libelle?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updayedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressources?: RessourceUncheckedUpdateManyWithoutCategorieNestedInput
   }
 
@@ -38660,6 +39494,8 @@ export namespace Prisma {
     libelle: string
     description?: string | null
     dateCreation?: Date | string
+    createdAt?: Date | string
+    updayedAt?: Date | string
   }
 
   export type CategorieUpdateManyMutationInput = {
@@ -38667,6 +39503,8 @@ export namespace Prisma {
     libelle?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updayedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategorieUncheckedUpdateManyInput = {
@@ -38674,6 +39512,8 @@ export namespace Prisma {
     libelle?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updayedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StatistiqueBibliothequeCreateInput = {
@@ -38688,6 +39528,8 @@ export namespace Prisma {
     tauxRotation?: number | null
     categoriesPlusEmpruntees?: string | null
     universitesPlusFrequentes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     universite: UniversiteCreateNestedOneWithoutStatistiquesBibliothequeInput
   }
 
@@ -38704,6 +39546,8 @@ export namespace Prisma {
     tauxRotation?: number | null
     categoriesPlusEmpruntees?: string | null
     universitesPlusFrequentes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type StatistiqueBibliothequeUpdateInput = {
@@ -38718,6 +39562,8 @@ export namespace Prisma {
     tauxRotation?: NullableFloatFieldUpdateOperationsInput | number | null
     categoriesPlusEmpruntees?: NullableStringFieldUpdateOperationsInput | string | null
     universitesPlusFrequentes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     universite?: UniversiteUpdateOneRequiredWithoutStatistiquesBibliothequeNestedInput
   }
 
@@ -38734,6 +39580,8 @@ export namespace Prisma {
     tauxRotation?: NullableFloatFieldUpdateOperationsInput | number | null
     categoriesPlusEmpruntees?: NullableStringFieldUpdateOperationsInput | string | null
     universitesPlusFrequentes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StatistiqueBibliothequeCreateManyInput = {
@@ -38749,6 +39597,8 @@ export namespace Prisma {
     tauxRotation?: number | null
     categoriesPlusEmpruntees?: string | null
     universitesPlusFrequentes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type StatistiqueBibliothequeUpdateManyMutationInput = {
@@ -38763,6 +39613,8 @@ export namespace Prisma {
     tauxRotation?: NullableFloatFieldUpdateOperationsInput | number | null
     categoriesPlusEmpruntees?: NullableStringFieldUpdateOperationsInput | string | null
     universitesPlusFrequentes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StatistiqueBibliothequeUncheckedUpdateManyInput = {
@@ -38778,6 +39630,8 @@ export namespace Prisma {
     tauxRotation?: NullableFloatFieldUpdateOperationsInput | number | null
     categoriesPlusEmpruntees?: NullableStringFieldUpdateOperationsInput | string | null
     universitesPlusFrequentes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationCreateInput = {
@@ -38787,6 +39641,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutNotificationsInput
   }
 
@@ -38798,6 +39654,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotificationUpdateInput = {
@@ -38807,6 +39665,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutNotificationsNestedInput
   }
 
@@ -38818,6 +39678,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationCreateManyInput = {
@@ -38828,6 +39690,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotificationUpdateManyMutationInput = {
@@ -38837,6 +39701,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationUncheckedUpdateManyInput = {
@@ -38847,6 +39713,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type JournalAuditCreateInput = {
@@ -38857,6 +39725,8 @@ export namespace Prisma {
     dateAction?: Date | string
     detailsAction: JsonNullValueInput | InputJsonValue
     ipAdresse: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutJournalAuditInput
   }
 
@@ -38869,6 +39739,8 @@ export namespace Prisma {
     dateAction?: Date | string
     detailsAction: JsonNullValueInput | InputJsonValue
     ipAdresse: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type JournalAuditUpdateInput = {
@@ -38879,6 +39751,8 @@ export namespace Prisma {
     dateAction?: DateTimeFieldUpdateOperationsInput | Date | string
     detailsAction?: JsonNullValueInput | InputJsonValue
     ipAdresse?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutJournalAuditNestedInput
   }
 
@@ -38891,6 +39765,8 @@ export namespace Prisma {
     dateAction?: DateTimeFieldUpdateOperationsInput | Date | string
     detailsAction?: JsonNullValueInput | InputJsonValue
     ipAdresse?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type JournalAuditCreateManyInput = {
@@ -38902,6 +39778,8 @@ export namespace Prisma {
     dateAction?: Date | string
     detailsAction: JsonNullValueInput | InputJsonValue
     ipAdresse: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type JournalAuditUpdateManyMutationInput = {
@@ -38912,6 +39790,8 @@ export namespace Prisma {
     dateAction?: DateTimeFieldUpdateOperationsInput | Date | string
     detailsAction?: JsonNullValueInput | InputJsonValue
     ipAdresse?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type JournalAuditUncheckedUpdateManyInput = {
@@ -38923,6 +39803,8 @@ export namespace Prisma {
     dateAction?: DateTimeFieldUpdateOperationsInput | Date | string
     detailsAction?: JsonNullValueInput | InputJsonValue
     ipAdresse?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -39014,6 +39896,8 @@ export namespace Prisma {
     estActive?: SortOrder
     typeConvention?: SortOrder
     detailsConvention?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ConventionInteruniversitaireMaxOrderByAggregateInput = {
@@ -39025,6 +39909,8 @@ export namespace Prisma {
     estActive?: SortOrder
     typeConvention?: SortOrder
     detailsConvention?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ConventionInteruniversitaireMinOrderByAggregateInput = {
@@ -39036,6 +39922,8 @@ export namespace Prisma {
     estActive?: SortOrder
     typeConvention?: SortOrder
     detailsConvention?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -39163,6 +40051,8 @@ export namespace Prisma {
     nbRenouvellements?: SortOrder
     penaliteRetardJours?: SortOrder
     estActif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ReglePretAvgOrderByAggregateInput = {
@@ -39180,6 +40070,8 @@ export namespace Prisma {
     nbRenouvellements?: SortOrder
     penaliteRetardJours?: SortOrder
     estActif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ReglePretMinOrderByAggregateInput = {
@@ -39191,6 +40083,8 @@ export namespace Prisma {
     nbRenouvellements?: SortOrder
     penaliteRetardJours?: SortOrder
     estActif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ReglePretSumOrderByAggregateInput = {
@@ -39239,6 +40133,8 @@ export namespace Prisma {
     penaliteRetard?: SortOrder
     estActive?: SortOrder
     dateMiseAJour?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PolitiqueBibliothequeMaxOrderByAggregateInput = {
@@ -39249,6 +40145,8 @@ export namespace Prisma {
     penaliteRetard?: SortOrder
     estActive?: SortOrder
     dateMiseAJour?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PolitiqueBibliothequeMinOrderByAggregateInput = {
@@ -39259,6 +40157,8 @@ export namespace Prisma {
     penaliteRetard?: SortOrder
     estActive?: SortOrder
     dateMiseAJour?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumTypeSanctionFilter<$PrismaModel = never> = {
@@ -39293,6 +40193,8 @@ export namespace Prisma {
     motif?: SortOrder
     empruntId?: SortOrder
     estActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type SanctionUtilisateurMaxOrderByAggregateInput = {
@@ -39304,6 +40206,8 @@ export namespace Prisma {
     motif?: SortOrder
     empruntId?: SortOrder
     estActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type SanctionUtilisateurMinOrderByAggregateInput = {
@@ -39315,6 +40219,8 @@ export namespace Prisma {
     motif?: SortOrder
     empruntId?: SortOrder
     estActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumTypeSanctionWithAggregatesFilter<$PrismaModel = never> = {
@@ -39366,6 +40272,8 @@ export namespace Prisma {
     commentaire?: SortOrder
     universiteEmprunteur?: SortOrder
     validePar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ReservationMaxOrderByAggregateInput = {
@@ -39379,6 +40287,8 @@ export namespace Prisma {
     commentaire?: SortOrder
     universiteEmprunteur?: SortOrder
     validePar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ReservationMinOrderByAggregateInput = {
@@ -39392,6 +40302,8 @@ export namespace Prisma {
     commentaire?: SortOrder
     universiteEmprunteur?: SortOrder
     validePar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumStatutReservationWithAggregatesFilter<$PrismaModel = never> = {
@@ -39438,6 +40350,8 @@ export namespace Prisma {
     qrCode?: SortOrder
     dureeMaxEmpruntExterne?: SortOrder
     nbMaxExemplairesExterne?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ExemplairePhysiqueAvgOrderByAggregateInput = {
@@ -39456,6 +40370,8 @@ export namespace Prisma {
     qrCode?: SortOrder
     dureeMaxEmpruntExterne?: SortOrder
     nbMaxExemplairesExterne?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ExemplairePhysiqueMinOrderByAggregateInput = {
@@ -39469,6 +40385,8 @@ export namespace Prisma {
     qrCode?: SortOrder
     dureeMaxEmpruntExterne?: SortOrder
     nbMaxExemplairesExterne?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ExemplairePhysiqueSumOrderByAggregateInput = {
@@ -39526,6 +40444,8 @@ export namespace Prisma {
     universiteEmprunteur?: SortOrder
     motifEmprunt?: SortOrder
     validePar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EmpruntMaxOrderByAggregateInput = {
@@ -39540,6 +40460,8 @@ export namespace Prisma {
     universiteEmprunteur?: SortOrder
     motifEmprunt?: SortOrder
     validePar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EmpruntMinOrderByAggregateInput = {
@@ -39554,6 +40476,8 @@ export namespace Prisma {
     universiteEmprunteur?: SortOrder
     motifEmprunt?: SortOrder
     validePar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumStatutEmpruntWithAggregatesFilter<$PrismaModel = never> = {
@@ -39600,6 +40524,8 @@ export namespace Prisma {
     estVue?: SortOrder
     estInteruniversitaire?: SortOrder
     universiteSource?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type RecommandationAvgOrderByAggregateInput = {
@@ -39616,6 +40542,8 @@ export namespace Prisma {
     estVue?: SortOrder
     estInteruniversitaire?: SortOrder
     universiteSource?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type RecommandationMinOrderByAggregateInput = {
@@ -39628,6 +40556,8 @@ export namespace Prisma {
     estVue?: SortOrder
     estInteruniversitaire?: SortOrder
     universiteSource?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type RecommandationSumOrderByAggregateInput = {
@@ -39712,6 +40642,8 @@ export namespace Prisma {
     adresse?: SortOrder
     ville?: SortOrder
     siteWeb?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UniversiteMaxOrderByAggregateInput = {
@@ -39720,6 +40652,8 @@ export namespace Prisma {
     adresse?: SortOrder
     ville?: SortOrder
     siteWeb?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UniversiteMinOrderByAggregateInput = {
@@ -39728,6 +40662,8 @@ export namespace Prisma {
     adresse?: SortOrder
     ville?: SortOrder
     siteWeb?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type DepartementListRelationFilter = {
@@ -39751,6 +40687,8 @@ export namespace Prisma {
     nom?: SortOrder
     description?: SortOrder
     universiteId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UfrMaxOrderByAggregateInput = {
@@ -39758,6 +40696,8 @@ export namespace Prisma {
     nom?: SortOrder
     description?: SortOrder
     universiteId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UfrMinOrderByAggregateInput = {
@@ -39765,6 +40705,8 @@ export namespace Prisma {
     nom?: SortOrder
     description?: SortOrder
     universiteId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UfrScalarRelationFilter = {
@@ -39794,6 +40736,8 @@ export namespace Prisma {
     description?: SortOrder
     ufrId?: SortOrder
     responsable?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type DepartementMaxOrderByAggregateInput = {
@@ -39802,6 +40746,8 @@ export namespace Prisma {
     description?: SortOrder
     ufrId?: SortOrder
     responsable?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type DepartementMinOrderByAggregateInput = {
@@ -39810,6 +40756,8 @@ export namespace Prisma {
     description?: SortOrder
     ufrId?: SortOrder
     responsable?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumNiveauEtudesFilter<$PrismaModel = never> = {
@@ -39846,6 +40794,8 @@ export namespace Prisma {
     description?: SortOrder
     niveauEtudes?: SortOrder
     departementId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FiliereMaxOrderByAggregateInput = {
@@ -39854,6 +40804,8 @@ export namespace Prisma {
     description?: SortOrder
     niveauEtudes?: SortOrder
     departementId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FiliereMinOrderByAggregateInput = {
@@ -39862,6 +40814,8 @@ export namespace Prisma {
     description?: SortOrder
     niveauEtudes?: SortOrder
     departementId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumNiveauEtudesWithAggregatesFilter<$PrismaModel = never> = {
@@ -40038,6 +40992,8 @@ export namespace Prisma {
     role?: SortOrder
     derniereConnexion?: SortOrder
     estActif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     preferencesRecommandation?: SortOrder
     frequenceRecommandation?: SortOrder
   }
@@ -40053,6 +41009,8 @@ export namespace Prisma {
     role?: SortOrder
     derniereConnexion?: SortOrder
     estActif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     preferencesRecommandation?: SortOrder
     frequenceRecommandation?: SortOrder
   }
@@ -40068,6 +41026,8 @@ export namespace Prisma {
     role?: SortOrder
     derniereConnexion?: SortOrder
     estActif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     preferencesRecommandation?: SortOrder
     frequenceRecommandation?: SortOrder
   }
@@ -40096,31 +41056,34 @@ export namespace Prisma {
   export type EtudiantCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    numeroEtudiant?: SortOrder
+    codePermanent?: SortOrder
     dateNaissance?: SortOrder
     dateInscription?: SortOrder
-    niveauEtudes?: SortOrder
     filiereId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EtudiantMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    numeroEtudiant?: SortOrder
+    codePermanent?: SortOrder
     dateNaissance?: SortOrder
     dateInscription?: SortOrder
-    niveauEtudes?: SortOrder
     filiereId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EtudiantMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    numeroEtudiant?: SortOrder
+    codePermanent?: SortOrder
     dateNaissance?: SortOrder
     dateInscription?: SortOrder
-    niveauEtudes?: SortOrder
     filiereId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnseignantOrderByRelevanceInput = {
@@ -40135,6 +41098,8 @@ export namespace Prisma {
     numeroEnseignant?: SortOrder
     dateNaissance?: SortOrder
     specialite?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnseignantMaxOrderByAggregateInput = {
@@ -40143,6 +41108,8 @@ export namespace Prisma {
     numeroEnseignant?: SortOrder
     dateNaissance?: SortOrder
     specialite?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnseignantMinOrderByAggregateInput = {
@@ -40151,6 +41118,8 @@ export namespace Prisma {
     numeroEnseignant?: SortOrder
     dateNaissance?: SortOrder
     specialite?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BibliothecaireOrderByRelevanceInput = {
@@ -40167,6 +41136,8 @@ export namespace Prisma {
     adresse?: SortOrder
     ville?: SortOrder
     pays?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BibliothecaireMaxOrderByAggregateInput = {
@@ -40177,6 +41148,8 @@ export namespace Prisma {
     adresse?: SortOrder
     ville?: SortOrder
     pays?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BibliothecaireMinOrderByAggregateInput = {
@@ -40187,6 +41160,8 @@ export namespace Prisma {
     adresse?: SortOrder
     ville?: SortOrder
     pays?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type AdministrateurOrderByRelevanceInput = {
@@ -40244,6 +41219,8 @@ export namespace Prisma {
     note?: SortOrder
     universiteSrc?: SortOrder
     universiteUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FavoriMaxOrderByAggregateInput = {
@@ -40254,6 +41231,8 @@ export namespace Prisma {
     note?: SortOrder
     universiteSrc?: SortOrder
     universiteUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FavoriMinOrderByAggregateInput = {
@@ -40264,6 +41243,8 @@ export namespace Prisma {
     note?: SortOrder
     universiteSrc?: SortOrder
     universiteUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CommentaireOrderByRelevanceInput = {
@@ -40280,6 +41261,8 @@ export namespace Prisma {
     dateCreation?: SortOrder
     universiteSrc?: SortOrder
     universiteUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CommentaireMaxOrderByAggregateInput = {
@@ -40290,6 +41273,8 @@ export namespace Prisma {
     dateCreation?: SortOrder
     universiteSrc?: SortOrder
     universiteUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CommentaireMinOrderByAggregateInput = {
@@ -40300,6 +41285,8 @@ export namespace Prisma {
     dateCreation?: SortOrder
     universiteSrc?: SortOrder
     universiteUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type NotationOrderByRelevanceInput = {
@@ -40321,6 +41308,8 @@ export namespace Prisma {
     dateNotation?: SortOrder
     universiteSrc?: SortOrder
     universiteUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type NotationAvgOrderByAggregateInput = {
@@ -40335,6 +41324,8 @@ export namespace Prisma {
     dateNotation?: SortOrder
     universiteSrc?: SortOrder
     universiteUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type NotationMinOrderByAggregateInput = {
@@ -40345,6 +41336,8 @@ export namespace Prisma {
     dateNotation?: SortOrder
     universiteSrc?: SortOrder
     universiteUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type NotationSumOrderByAggregateInput = {
@@ -40372,6 +41365,8 @@ export namespace Prisma {
     typeAcces?: SortOrder
     universiteSrc?: SortOrder
     universiteUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type HistoriqueAccesMaxOrderByAggregateInput = {
@@ -40382,6 +41377,8 @@ export namespace Prisma {
     typeAcces?: SortOrder
     universiteSrc?: SortOrder
     universiteUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type HistoriqueAccesMinOrderByAggregateInput = {
@@ -40392,6 +41389,8 @@ export namespace Prisma {
     typeAcces?: SortOrder
     universiteSrc?: SortOrder
     universiteUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumTypeAccesWithAggregatesFilter<$PrismaModel = never> = {
@@ -40424,6 +41423,8 @@ export namespace Prisma {
     score?: SortOrder
     typeInteraction?: SortOrder
     dateDonnee?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type DonneesRecommandationAvgOrderByAggregateInput = {
@@ -40437,6 +41438,8 @@ export namespace Prisma {
     score?: SortOrder
     typeInteraction?: SortOrder
     dateDonnee?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type DonneesRecommandationMinOrderByAggregateInput = {
@@ -40446,6 +41449,8 @@ export namespace Prisma {
     score?: SortOrder
     typeInteraction?: SortOrder
     dateDonnee?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type DonneesRecommandationSumOrderByAggregateInput = {
@@ -40524,6 +41529,8 @@ export namespace Prisma {
     ressourceId?: SortOrder
     dateAjout?: SortOrder
     notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CollectionRessourceMaxOrderByAggregateInput = {
@@ -40532,6 +41539,8 @@ export namespace Prisma {
     ressourceId?: SortOrder
     dateAjout?: SortOrder
     notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CollectionRessourceMinOrderByAggregateInput = {
@@ -40540,13 +41549,8 @@ export namespace Prisma {
     ressourceId?: SortOrder
     dateAjout?: SortOrder
     notes?: SortOrder
-  }
-
-  export type EnumTypeRessourceFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeRessource | EnumTypeRessourceFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeRessource[]
-    notIn?: $Enums.TypeRessource[]
-    not?: NestedEnumTypeRessourceFilter<$PrismaModel> | $Enums.TypeRessource
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumNiveauAccesFilter<$PrismaModel = never> = {
@@ -40561,17 +41565,6 @@ export namespace Prisma {
     in?: $Enums.TypeValidation[]
     notIn?: $Enums.TypeValidation[]
     not?: NestedEnumTypeValidationFilter<$PrismaModel> | $Enums.TypeValidation
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type ExemplairePhysiqueListRelationFilter = {
@@ -40598,118 +41591,61 @@ export namespace Prisma {
   export type RessourceCountOrderByAggregateInput = {
     id?: SortOrder
     titre?: SortOrder
+    isbnglobale?: SortOrder
     description?: SortOrder
-    type?: SortOrder
     langue?: SortOrder
     urlFichier?: SortOrder
     urlFichierLocal?: SortOrder
     format?: SortOrder
-    dateModification?: SortOrder
-    motsCles?: SortOrder
-    auteurId?: SortOrder
-    universiteId?: SortOrder
     image?: SortOrder
     niveauAcces?: SortOrder
     datePublication?: SortOrder
-    estValide?: SortOrder
+    motsCles?: SortOrder
+    auteurId?: SortOrder
+    universiteId?: SortOrder
     estArchive?: SortOrder
-    nomAuteurExterne?: SortOrder
-    prenomAuteurExterne?: SortOrder
     validation?: SortOrder
-    isbn?: SortOrder
-    doi?: SortOrder
-    anneePublication?: SortOrder
-    nbPages?: SortOrder
-    nbExemplaires?: SortOrder
-    nbDisponibles?: SortOrder
-    coteClassification?: SortOrder
     categorieId?: SortOrder
-  }
-
-  export type RessourceAvgOrderByAggregateInput = {
-    anneePublication?: SortOrder
-    nbPages?: SortOrder
-    nbExemplaires?: SortOrder
-    nbDisponibles?: SortOrder
   }
 
   export type RessourceMaxOrderByAggregateInput = {
     id?: SortOrder
     titre?: SortOrder
+    isbnglobale?: SortOrder
     description?: SortOrder
-    type?: SortOrder
     langue?: SortOrder
     urlFichier?: SortOrder
     urlFichierLocal?: SortOrder
     format?: SortOrder
-    dateModification?: SortOrder
-    motsCles?: SortOrder
-    auteurId?: SortOrder
-    universiteId?: SortOrder
     image?: SortOrder
     niveauAcces?: SortOrder
     datePublication?: SortOrder
-    estValide?: SortOrder
+    motsCles?: SortOrder
+    auteurId?: SortOrder
+    universiteId?: SortOrder
     estArchive?: SortOrder
-    nomAuteurExterne?: SortOrder
-    prenomAuteurExterne?: SortOrder
     validation?: SortOrder
-    isbn?: SortOrder
-    doi?: SortOrder
-    anneePublication?: SortOrder
-    nbPages?: SortOrder
-    nbExemplaires?: SortOrder
-    nbDisponibles?: SortOrder
-    coteClassification?: SortOrder
     categorieId?: SortOrder
   }
 
   export type RessourceMinOrderByAggregateInput = {
     id?: SortOrder
     titre?: SortOrder
+    isbnglobale?: SortOrder
     description?: SortOrder
-    type?: SortOrder
     langue?: SortOrder
     urlFichier?: SortOrder
     urlFichierLocal?: SortOrder
     format?: SortOrder
-    dateModification?: SortOrder
-    motsCles?: SortOrder
-    auteurId?: SortOrder
-    universiteId?: SortOrder
     image?: SortOrder
     niveauAcces?: SortOrder
     datePublication?: SortOrder
-    estValide?: SortOrder
+    motsCles?: SortOrder
+    auteurId?: SortOrder
+    universiteId?: SortOrder
     estArchive?: SortOrder
-    nomAuteurExterne?: SortOrder
-    prenomAuteurExterne?: SortOrder
     validation?: SortOrder
-    isbn?: SortOrder
-    doi?: SortOrder
-    anneePublication?: SortOrder
-    nbPages?: SortOrder
-    nbExemplaires?: SortOrder
-    nbDisponibles?: SortOrder
-    coteClassification?: SortOrder
     categorieId?: SortOrder
-  }
-
-  export type RessourceSumOrderByAggregateInput = {
-    anneePublication?: SortOrder
-    nbPages?: SortOrder
-    nbExemplaires?: SortOrder
-    nbDisponibles?: SortOrder
-  }
-
-  export type EnumTypeRessourceWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeRessource | EnumTypeRessourceFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeRessource[]
-    notIn?: $Enums.TypeRessource[]
-    not?: NestedEnumTypeRessourceWithAggregatesFilter<$PrismaModel> | $Enums.TypeRessource
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeRessourceFilter<$PrismaModel>
-    _max?: NestedEnumTypeRessourceFilter<$PrismaModel>
   }
 
   export type EnumNiveauAccesWithAggregatesFilter<$PrismaModel = never> = {
@@ -40732,22 +41668,6 @@ export namespace Prisma {
     _max?: NestedEnumTypeValidationFilter<$PrismaModel>
   }
 
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
   export type CategorieOrderByRelevanceInput = {
     fields: CategorieOrderByRelevanceFieldEnum | CategorieOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -40759,6 +41679,8 @@ export namespace Prisma {
     libelle?: SortOrder
     description?: SortOrder
     dateCreation?: SortOrder
+    createdAt?: SortOrder
+    updayedAt?: SortOrder
   }
 
   export type CategorieMaxOrderByAggregateInput = {
@@ -40766,6 +41688,8 @@ export namespace Prisma {
     libelle?: SortOrder
     description?: SortOrder
     dateCreation?: SortOrder
+    createdAt?: SortOrder
+    updayedAt?: SortOrder
   }
 
   export type CategorieMinOrderByAggregateInput = {
@@ -40773,6 +41697,8 @@ export namespace Prisma {
     libelle?: SortOrder
     description?: SortOrder
     dateCreation?: SortOrder
+    createdAt?: SortOrder
+    updayedAt?: SortOrder
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -40811,6 +41737,8 @@ export namespace Prisma {
     tauxRotation?: SortOrder
     categoriesPlusEmpruntees?: SortOrder
     universitesPlusFrequentes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StatistiqueBibliothequeAvgOrderByAggregateInput = {
@@ -40837,6 +41765,8 @@ export namespace Prisma {
     tauxRotation?: SortOrder
     categoriesPlusEmpruntees?: SortOrder
     universitesPlusFrequentes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StatistiqueBibliothequeMinOrderByAggregateInput = {
@@ -40852,6 +41782,8 @@ export namespace Prisma {
     tauxRotation?: SortOrder
     categoriesPlusEmpruntees?: SortOrder
     universitesPlusFrequentes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StatistiqueBibliothequeSumOrderByAggregateInput = {
@@ -40902,6 +41834,8 @@ export namespace Prisma {
     dateCreation?: SortOrder
     estLue?: SortOrder
     typeNotification?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type NotificationMaxOrderByAggregateInput = {
@@ -40912,6 +41846,8 @@ export namespace Prisma {
     dateCreation?: SortOrder
     estLue?: SortOrder
     typeNotification?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type NotificationMinOrderByAggregateInput = {
@@ -40922,6 +41858,8 @@ export namespace Prisma {
     dateCreation?: SortOrder
     estLue?: SortOrder
     typeNotification?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumTypeNotificationWithAggregatesFilter<$PrismaModel = never> = {
@@ -40972,6 +41910,8 @@ export namespace Prisma {
     dateAction?: SortOrder
     detailsAction?: SortOrder
     ipAdresse?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type JournalAuditMaxOrderByAggregateInput = {
@@ -40982,6 +41922,8 @@ export namespace Prisma {
     entiteId?: SortOrder
     dateAction?: SortOrder
     ipAdresse?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type JournalAuditMinOrderByAggregateInput = {
@@ -40992,6 +41934,8 @@ export namespace Prisma {
     entiteId?: SortOrder
     dateAction?: SortOrder
     ipAdresse?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -42884,10 +43828,6 @@ export namespace Prisma {
     connect?: DonneesRecommandationWhereUniqueInput | DonneesRecommandationWhereUniqueInput[]
   }
 
-  export type EnumTypeRessourceFieldUpdateOperationsInput = {
-    set?: $Enums.TypeRessource
-  }
-
   export type EnumNiveauAccesFieldUpdateOperationsInput = {
     set?: $Enums.NiveauAcces
   }
@@ -42896,20 +43836,10 @@ export namespace Prisma {
     set?: $Enums.TypeValidation
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type UserUpdateOneWithoutContributionsNestedInput = {
+  export type UserUpdateOneRequiredWithoutContributionsNestedInput = {
     create?: XOR<UserCreateWithoutContributionsInput, UserUncheckedCreateWithoutContributionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutContributionsInput
     upsert?: UserUpsertWithoutContributionsInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContributionsInput, UserUpdateWithoutContributionsInput>, UserUncheckedUpdateWithoutContributionsInput>
   }
@@ -43655,13 +44585,6 @@ export namespace Prisma {
     _max?: NestedEnumTypeInteractionFilter<$PrismaModel>
   }
 
-  export type NestedEnumTypeRessourceFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeRessource | EnumTypeRessourceFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeRessource[]
-    notIn?: $Enums.TypeRessource[]
-    not?: NestedEnumTypeRessourceFilter<$PrismaModel> | $Enums.TypeRessource
-  }
-
   export type NestedEnumNiveauAccesFilter<$PrismaModel = never> = {
     equals?: $Enums.NiveauAcces | EnumNiveauAccesFieldRefInput<$PrismaModel>
     in?: $Enums.NiveauAcces[]
@@ -43674,16 +44597,6 @@ export namespace Prisma {
     in?: $Enums.TypeValidation[]
     notIn?: $Enums.TypeValidation[]
     not?: NestedEnumTypeValidationFilter<$PrismaModel> | $Enums.TypeValidation
-  }
-
-  export type NestedEnumTypeRessourceWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeRessource | EnumTypeRessourceFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeRessource[]
-    notIn?: $Enums.TypeRessource[]
-    not?: NestedEnumTypeRessourceWithAggregatesFilter<$PrismaModel> | $Enums.TypeRessource
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeRessourceFilter<$PrismaModel>
-    _max?: NestedEnumTypeRessourceFilter<$PrismaModel>
   }
 
   export type NestedEnumNiveauAccesWithAggregatesFilter<$PrismaModel = never> = {
@@ -43704,22 +44617,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTypeValidationFilter<$PrismaModel>
     _max?: NestedEnumTypeValidationFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type NestedFloatNullableFilter<$PrismaModel = never> = {
@@ -43795,6 +44692,8 @@ export namespace Prisma {
     adresse?: string | null
     ville: string
     siteWeb?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
     ufrs?: UfrCreateNestedManyWithoutUniversiteInput
@@ -43806,6 +44705,8 @@ export namespace Prisma {
     adresse?: string | null
     ville: string
     siteWeb?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
     ufrs?: UfrUncheckedCreateNestedManyWithoutUniversiteInput
@@ -43833,6 +44734,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
     ufrs?: UfrUpdateManyWithoutUniversiteNestedInput
@@ -43844,6 +44747,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
     ufrs?: UfrUncheckedUpdateManyWithoutUniversiteNestedInput
@@ -43855,6 +44760,8 @@ export namespace Prisma {
     adresse?: string | null
     ville: string
     siteWeb?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
     reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
     ufrs?: UfrCreateNestedManyWithoutUniversiteInput
@@ -43866,6 +44773,8 @@ export namespace Prisma {
     adresse?: string | null
     ville: string
     siteWeb?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
     reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
     ufrs?: UfrUncheckedCreateNestedManyWithoutUniversiteInput
@@ -43893,6 +44802,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
     reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
     ufrs?: UfrUpdateManyWithoutUniversiteNestedInput
@@ -43904,6 +44815,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
     reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
     ufrs?: UfrUncheckedUpdateManyWithoutUniversiteNestedInput
@@ -43920,6 +44833,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -43951,6 +44866,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -43986,6 +44903,8 @@ export namespace Prisma {
     universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     exemplaire: ExemplairePhysiqueCreateNestedOneWithoutEmpruntsInput
     user?: UserCreateNestedOneWithoutEmpruntsInput
   }
@@ -44002,6 +44921,8 @@ export namespace Prisma {
     universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EmpruntCreateOrConnectWithoutSanctionUtilisateurInput = {
@@ -44031,6 +44952,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -44062,6 +44985,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -44103,6 +45028,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     exemplaire?: ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntsNestedInput
     user?: UserUpdateOneWithoutEmpruntsNestedInput
   }
@@ -44119,6 +45046,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateWithoutReservationsInput = {
@@ -44132,6 +45061,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -44163,6 +45094,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -44191,31 +45124,20 @@ export namespace Prisma {
   export type RessourceCreateWithoutReservationsInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    auteur?: UserCreateNestedOneWithoutContributionsInput
+    auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -44230,31 +45152,20 @@ export namespace Prisma {
   export type RessourceUncheckedCreateWithoutReservationsInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -44278,6 +45189,8 @@ export namespace Prisma {
     adresse?: string | null
     ville?: string | null
     pays?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutBibliothecairesInput
   }
 
@@ -44289,6 +45202,8 @@ export namespace Prisma {
     adresse?: string | null
     ville?: string | null
     pays?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BibliothecaireCreateOrConnectWithoutReservationsInput = {
@@ -44318,6 +45233,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -44349,6 +45266,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -44383,31 +45302,20 @@ export namespace Prisma {
   export type RessourceUpdateWithoutReservationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -44422,31 +45330,20 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateWithoutReservationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -44476,6 +45373,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: NullableStringFieldUpdateOperationsInput | string | null
     pays?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutBibliothecairesNestedInput
   }
 
@@ -44487,36 +45386,27 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: NullableStringFieldUpdateOperationsInput | string | null
     pays?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RessourceCreateWithoutExemplairesInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    auteur?: UserCreateNestedOneWithoutContributionsInput
+    auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -44531,31 +45421,20 @@ export namespace Prisma {
   export type RessourceUncheckedCreateWithoutExemplairesInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -44582,6 +45461,8 @@ export namespace Prisma {
     universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutEmpruntsInput
     SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
   }
@@ -44597,6 +45478,8 @@ export namespace Prisma {
     universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
   }
 
@@ -44624,31 +45507,20 @@ export namespace Prisma {
   export type RessourceUpdateWithoutExemplairesInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -44663,31 +45535,20 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateWithoutExemplairesInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -44730,6 +45591,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
     motifEmprunt?: StringNullableFilter<"Emprunt"> | string | null
     validePar?: StringNullableFilter<"Emprunt"> | string | null
+    createdAt?: DateTimeFilter<"Emprunt"> | Date | string
+    updatedAt?: DateTimeFilter<"Emprunt"> | Date | string
   }
 
   export type ExemplairePhysiqueCreateWithoutEmpruntsInput = {
@@ -44742,6 +45605,8 @@ export namespace Prisma {
     qrCode?: string | null
     dureeMaxEmpruntExterne?: number
     nbMaxExemplairesExterne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ressource: RessourceCreateNestedOneWithoutExemplairesInput
   }
 
@@ -44756,6 +45621,8 @@ export namespace Prisma {
     qrCode?: string | null
     dureeMaxEmpruntExterne?: number
     nbMaxExemplairesExterne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ExemplairePhysiqueCreateOrConnectWithoutEmpruntsInput = {
@@ -44774,6 +45641,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -44805,6 +45674,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -44837,6 +45708,8 @@ export namespace Prisma {
     dateFin: Date | string
     motif: string
     estActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutSanctionsInput
   }
 
@@ -44848,6 +45721,8 @@ export namespace Prisma {
     dateFin: Date | string
     motif: string
     estActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SanctionUtilisateurCreateOrConnectWithoutEmpruntInput = {
@@ -44881,6 +45756,8 @@ export namespace Prisma {
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
     dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
     nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressource?: RessourceUpdateOneRequiredWithoutExemplairesNestedInput
   }
 
@@ -44895,6 +45772,8 @@ export namespace Prisma {
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
     dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
     nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUpsertWithoutEmpruntsInput = {
@@ -44919,6 +45798,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -44950,6 +45831,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -44998,6 +45881,8 @@ export namespace Prisma {
     motif?: StringFilter<"SanctionUtilisateur"> | string
     empruntId?: StringNullableFilter<"SanctionUtilisateur"> | string | null
     estActive?: BoolFilter<"SanctionUtilisateur"> | boolean
+    createdAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
+    updatedAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
   }
 
   export type UserCreateWithoutRecommandationsInput = {
@@ -45011,6 +45896,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -45042,6 +45929,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -45070,31 +45959,20 @@ export namespace Prisma {
   export type RessourceCreateWithoutRecommandationsInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    auteur?: UserCreateNestedOneWithoutContributionsInput
+    auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -45109,31 +45987,20 @@ export namespace Prisma {
   export type RessourceUncheckedCreateWithoutRecommandationsInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -45172,6 +46039,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -45203,6 +46072,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -45237,31 +46108,20 @@ export namespace Prisma {
   export type RessourceUpdateWithoutRecommandationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -45276,31 +46136,20 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateWithoutRecommandationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -45324,6 +46173,8 @@ export namespace Prisma {
     tauxRotation?: number | null
     categoriesPlusEmpruntees?: string | null
     universitesPlusFrequentes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type StatistiqueBibliothequeUncheckedCreateWithoutUniversiteInput = {
@@ -45338,6 +46189,8 @@ export namespace Prisma {
     tauxRotation?: number | null
     categoriesPlusEmpruntees?: string | null
     universitesPlusFrequentes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type StatistiqueBibliothequeCreateOrConnectWithoutUniversiteInput = {
@@ -45358,6 +46211,8 @@ export namespace Prisma {
     nbRenouvellements?: number
     penaliteRetardJours?: boolean
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReglePretUncheckedCreateWithoutUniversiteInput = {
@@ -45368,6 +46223,8 @@ export namespace Prisma {
     nbRenouvellements?: number
     penaliteRetardJours?: boolean
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReglePretCreateOrConnectWithoutUniversiteInput = {
@@ -45387,6 +46244,8 @@ export namespace Prisma {
     penaliteRetard: string
     estActive?: boolean
     dateMiseAJour?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PolitiqueBibliothequeUncheckedCreateWithoutUniversiteInput = {
@@ -45396,6 +46255,8 @@ export namespace Prisma {
     penaliteRetard: string
     estActive?: boolean
     dateMiseAJour?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PolitiqueBibliothequeCreateOrConnectWithoutUniversiteInput = {
@@ -45412,6 +46273,8 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     departements?: DepartementCreateNestedManyWithoutUfrInput
   }
 
@@ -45419,6 +46282,8 @@ export namespace Prisma {
     id?: string
     nom: string
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     departements?: DepartementUncheckedCreateNestedManyWithoutUfrInput
   }
 
@@ -45464,6 +46329,8 @@ export namespace Prisma {
     tauxRotation?: FloatNullableFilter<"StatistiqueBibliotheque"> | number | null
     categoriesPlusEmpruntees?: StringNullableFilter<"StatistiqueBibliotheque"> | string | null
     universitesPlusFrequentes?: StringNullableFilter<"StatistiqueBibliotheque"> | string | null
+    createdAt?: DateTimeFilter<"StatistiqueBibliotheque"> | Date | string
+    updatedAt?: DateTimeFilter<"StatistiqueBibliotheque"> | Date | string
   }
 
   export type ReglePretUpsertWithWhereUniqueWithoutUniversiteInput = {
@@ -45494,6 +46361,8 @@ export namespace Prisma {
     nbRenouvellements?: IntFilter<"ReglePret"> | number
     penaliteRetardJours?: BoolFilter<"ReglePret"> | boolean
     estActif?: BoolFilter<"ReglePret"> | boolean
+    createdAt?: DateTimeFilter<"ReglePret"> | Date | string
+    updatedAt?: DateTimeFilter<"ReglePret"> | Date | string
   }
 
   export type PolitiqueBibliothequeUpsertWithWhereUniqueWithoutUniversiteInput = {
@@ -45523,6 +46392,8 @@ export namespace Prisma {
     penaliteRetard?: StringFilter<"PolitiqueBibliotheque"> | string
     estActive?: BoolFilter<"PolitiqueBibliotheque"> | boolean
     dateMiseAJour?: DateTimeFilter<"PolitiqueBibliotheque"> | Date | string
+    createdAt?: DateTimeFilter<"PolitiqueBibliotheque"> | Date | string
+    updatedAt?: DateTimeFilter<"PolitiqueBibliotheque"> | Date | string
   }
 
   export type UfrUpsertWithWhereUniqueWithoutUniversiteInput = {
@@ -45549,6 +46420,8 @@ export namespace Prisma {
     nom?: StringFilter<"Ufr"> | string
     description?: StringNullableFilter<"Ufr"> | string | null
     universiteId?: StringFilter<"Ufr"> | string
+    createdAt?: DateTimeFilter<"Ufr"> | Date | string
+    updatedAt?: DateTimeFilter<"Ufr"> | Date | string
   }
 
   export type UniversiteCreateWithoutUfrsInput = {
@@ -45557,6 +46430,8 @@ export namespace Prisma {
     adresse?: string | null
     ville: string
     siteWeb?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeCreateNestedManyWithoutUniversiteInput
     reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
@@ -45568,6 +46443,8 @@ export namespace Prisma {
     adresse?: string | null
     ville: string
     siteWeb?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
     reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
@@ -45583,6 +46460,8 @@ export namespace Prisma {
     nom: string
     description?: string | null
     responsable?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     filieres?: FiliereCreateNestedManyWithoutDepartementInput
   }
 
@@ -45591,6 +46470,8 @@ export namespace Prisma {
     nom: string
     description?: string | null
     responsable?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     filieres?: FiliereUncheckedCreateNestedManyWithoutDepartementInput
   }
 
@@ -45621,6 +46502,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
     reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
@@ -45632,6 +46515,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     statistiquesBibliotheque?: StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
     reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
@@ -45662,12 +46547,16 @@ export namespace Prisma {
     description?: StringNullableFilter<"Departement"> | string | null
     ufrId?: StringFilter<"Departement"> | string
     responsable?: StringNullableFilter<"Departement"> | string | null
+    createdAt?: DateTimeFilter<"Departement"> | Date | string
+    updatedAt?: DateTimeFilter<"Departement"> | Date | string
   }
 
   export type UfrCreateWithoutDepartementsInput = {
     id?: string
     nom: string
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     universite: UniversiteCreateNestedOneWithoutUfrsInput
   }
 
@@ -45676,6 +46565,8 @@ export namespace Prisma {
     nom: string
     description?: string | null
     universiteId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UfrCreateOrConnectWithoutDepartementsInput = {
@@ -45688,6 +46579,8 @@ export namespace Prisma {
     nom: string
     description?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
+    createdAt?: Date | string
+    updatedAt?: Date | string
     etudiants?: EtudiantCreateNestedManyWithoutFiliereInput
   }
 
@@ -45696,6 +46589,8 @@ export namespace Prisma {
     nom: string
     description?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
+    createdAt?: Date | string
+    updatedAt?: Date | string
     etudiants?: EtudiantUncheckedCreateNestedManyWithoutFiliereInput
   }
 
@@ -45724,6 +46619,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     universite?: UniversiteUpdateOneRequiredWithoutUfrsNestedInput
   }
 
@@ -45732,6 +46629,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     universiteId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FiliereUpsertWithWhereUniqueWithoutDepartementInput = {
@@ -45759,6 +46658,8 @@ export namespace Prisma {
     description?: StringNullableFilter<"Filiere"> | string | null
     niveauEtudes?: EnumNiveauEtudesFilter<"Filiere"> | $Enums.NiveauEtudes
     departementId?: StringFilter<"Filiere"> | string
+    createdAt?: DateTimeFilter<"Filiere"> | Date | string
+    updatedAt?: DateTimeFilter<"Filiere"> | Date | string
   }
 
   export type DepartementCreateWithoutFilieresInput = {
@@ -45766,6 +46667,8 @@ export namespace Prisma {
     nom: string
     description?: string | null
     responsable?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ufr: UfrCreateNestedOneWithoutDepartementsInput
   }
 
@@ -45775,6 +46678,8 @@ export namespace Prisma {
     description?: string | null
     ufrId: string
     responsable?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DepartementCreateOrConnectWithoutFilieresInput = {
@@ -45784,20 +46689,22 @@ export namespace Prisma {
 
   export type EtudiantCreateWithoutFiliereInput = {
     id?: string
-    numeroEtudiant: string
+    codePermanent: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    niveauEtudes?: $Enums.NiveauEtudes
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutEtudiantsInput
   }
 
   export type EtudiantUncheckedCreateWithoutFiliereInput = {
     id?: string
     userId: string
-    numeroEtudiant: string
+    codePermanent: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    niveauEtudes?: $Enums.NiveauEtudes
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EtudiantCreateOrConnectWithoutFiliereInput = {
@@ -45826,6 +46733,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     responsable?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ufr?: UfrUpdateOneRequiredWithoutDepartementsNestedInput
   }
 
@@ -45835,6 +46744,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     ufrId?: StringFieldUpdateOperationsInput | string
     responsable?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EtudiantUpsertWithWhereUniqueWithoutFiliereInput = {
@@ -45859,40 +46770,30 @@ export namespace Prisma {
     NOT?: EtudiantScalarWhereInput | EtudiantScalarWhereInput[]
     id?: StringFilter<"Etudiant"> | string
     userId?: StringFilter<"Etudiant"> | string
-    numeroEtudiant?: StringFilter<"Etudiant"> | string
+    codePermanent?: StringFilter<"Etudiant"> | string
     dateNaissance?: DateTimeFilter<"Etudiant"> | Date | string
     dateInscription?: DateTimeFilter<"Etudiant"> | Date | string
-    niveauEtudes?: EnumNiveauEtudesFilter<"Etudiant"> | $Enums.NiveauEtudes
     filiereId?: StringFilter<"Etudiant"> | string
+    createdAt?: DateTimeFilter<"Etudiant"> | Date | string
+    updatedAt?: DateTimeFilter<"Etudiant"> | Date | string
   }
 
   export type RessourceCreateWithoutAuteurInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -45908,30 +46809,19 @@ export namespace Prisma {
   export type RessourceUncheckedCreateWithoutAuteurInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -45960,6 +46850,8 @@ export namespace Prisma {
     note?: string | null
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ressource: RessourceCreateNestedOneWithoutFavorisInput
   }
 
@@ -45970,6 +46862,8 @@ export namespace Prisma {
     note?: string | null
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FavoriCreateOrConnectWithoutUserInput = {
@@ -45988,6 +46882,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ressource: RessourceCreateNestedOneWithoutCommentairesInput
   }
 
@@ -45998,6 +46894,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CommentaireCreateOrConnectWithoutUserInput = {
@@ -46016,6 +46914,8 @@ export namespace Prisma {
     dateNotation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ressource: RessourceCreateNestedOneWithoutNotationsInput
   }
 
@@ -46026,6 +46926,8 @@ export namespace Prisma {
     dateNotation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotationCreateOrConnectWithoutUserInput = {
@@ -46044,6 +46946,8 @@ export namespace Prisma {
     typeAcces: $Enums.TypeAcces
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ressource: RessourceCreateNestedOneWithoutHistoriquesInput
   }
 
@@ -46054,6 +46958,8 @@ export namespace Prisma {
     typeAcces: $Enums.TypeAcces
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type HistoriqueAccesCreateOrConnectWithoutUserInput = {
@@ -46100,6 +47006,8 @@ export namespace Prisma {
     statut?: $Enums.StatutReservation
     commentaire?: string | null
     universiteEmprunteur: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ressource: RessourceCreateNestedOneWithoutReservationsInput
     valideur?: BibliothecaireCreateNestedOneWithoutReservationsInput
   }
@@ -46114,6 +47022,8 @@ export namespace Prisma {
     commentaire?: string | null
     universiteEmprunteur: string
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReservationCreateOrConnectWithoutUserInput = {
@@ -46136,6 +47046,8 @@ export namespace Prisma {
     universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     exemplaire: ExemplairePhysiqueCreateNestedOneWithoutEmpruntsInput
     SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
   }
@@ -46151,6 +47063,8 @@ export namespace Prisma {
     universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
   }
 
@@ -46172,6 +47086,8 @@ export namespace Prisma {
     estVue?: boolean
     estInteruniversitaire?: boolean
     universiteSource?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ressource: RessourceCreateNestedOneWithoutRecommandationsInput
   }
 
@@ -46184,6 +47100,8 @@ export namespace Prisma {
     estVue?: boolean
     estInteruniversitaire?: boolean
     universiteSource?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type RecommandationCreateOrConnectWithoutUserInput = {
@@ -46204,6 +47122,8 @@ export namespace Prisma {
     dateAction?: Date | string
     detailsAction: JsonNullValueInput | InputJsonValue
     ipAdresse: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type JournalAuditUncheckedCreateWithoutUserInput = {
@@ -46214,6 +47134,8 @@ export namespace Prisma {
     dateAction?: Date | string
     detailsAction: JsonNullValueInput | InputJsonValue
     ipAdresse: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type JournalAuditCreateOrConnectWithoutUserInput = {
@@ -46231,6 +47153,8 @@ export namespace Prisma {
     score: number
     typeInteraction: $Enums.TypeInteraction
     dateDonnee?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ressource: RessourceCreateNestedOneWithoutDonneesRecommandationsInput
   }
 
@@ -46240,6 +47164,8 @@ export namespace Prisma {
     score: number
     typeInteraction: $Enums.TypeInteraction
     dateDonnee?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DonneesRecommandationCreateOrConnectWithoutUserInput = {
@@ -46259,6 +47185,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotificationUncheckedCreateWithoutUserInput = {
@@ -46268,6 +47196,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotificationCreateOrConnectWithoutUserInput = {
@@ -46282,20 +47212,22 @@ export namespace Prisma {
 
   export type EtudiantCreateWithoutUserInput = {
     id?: string
-    numeroEtudiant: string
+    codePermanent: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    niveauEtudes?: $Enums.NiveauEtudes
+    createdAt?: Date | string
+    updatedAt?: Date | string
     filiere: FiliereCreateNestedOneWithoutEtudiantsInput
   }
 
   export type EtudiantUncheckedCreateWithoutUserInput = {
     id?: string
-    numeroEtudiant: string
+    codePermanent: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    niveauEtudes?: $Enums.NiveauEtudes
     filiereId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EtudiantCreateOrConnectWithoutUserInput = {
@@ -46313,6 +47245,8 @@ export namespace Prisma {
     numeroEnseignant: string
     dateNaissance: Date | string
     specialite?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EnseignantUncheckedCreateWithoutUserInput = {
@@ -46320,6 +47254,8 @@ export namespace Prisma {
     numeroEnseignant: string
     dateNaissance: Date | string
     specialite?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EnseignantCreateOrConnectWithoutUserInput = {
@@ -46339,6 +47275,8 @@ export namespace Prisma {
     adresse?: string | null
     ville?: string | null
     pays?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     reservations?: ReservationCreateNestedManyWithoutValideurInput
   }
 
@@ -46349,6 +47287,8 @@ export namespace Prisma {
     adresse?: string | null
     ville?: string | null
     pays?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     reservations?: ReservationUncheckedCreateNestedManyWithoutValideurInput
   }
 
@@ -46397,6 +47337,8 @@ export namespace Prisma {
     dateFin: Date | string
     motif: string
     estActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     emprunt?: EmpruntCreateNestedOneWithoutSanctionUtilisateurInput
   }
 
@@ -46408,6 +47350,8 @@ export namespace Prisma {
     motif: string
     empruntId?: string | null
     estActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SanctionUtilisateurCreateOrConnectWithoutUserInput = {
@@ -46442,31 +47386,20 @@ export namespace Prisma {
     NOT?: RessourceScalarWhereInput | RessourceScalarWhereInput[]
     id?: StringFilter<"Ressource"> | string
     titre?: StringFilter<"Ressource"> | string
+    isbnglobale?: StringFilter<"Ressource"> | string
     description?: StringFilter<"Ressource"> | string
-    type?: EnumTypeRessourceFilter<"Ressource"> | $Enums.TypeRessource
     langue?: StringFilter<"Ressource"> | string
     urlFichier?: StringFilter<"Ressource"> | string
     urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
     format?: StringFilter<"Ressource"> | string
-    dateModification?: DateTimeFilter<"Ressource"> | Date | string
-    motsCles?: StringFilter<"Ressource"> | string
-    auteurId?: StringNullableFilter<"Ressource"> | string | null
-    universiteId?: StringFilter<"Ressource"> | string
     image?: StringNullableFilter<"Ressource"> | string | null
     niveauAcces?: EnumNiveauAccesFilter<"Ressource"> | $Enums.NiveauAcces
     datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
-    estValide?: BoolFilter<"Ressource"> | boolean
+    motsCles?: StringFilter<"Ressource"> | string
+    auteurId?: StringFilter<"Ressource"> | string
+    universiteId?: StringFilter<"Ressource"> | string
     estArchive?: BoolFilter<"Ressource"> | boolean
-    nomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
-    prenomAuteurExterne?: StringNullableFilter<"Ressource"> | string | null
     validation?: EnumTypeValidationFilter<"Ressource"> | $Enums.TypeValidation
-    isbn?: StringNullableFilter<"Ressource"> | string | null
-    doi?: StringNullableFilter<"Ressource"> | string | null
-    anneePublication?: IntNullableFilter<"Ressource"> | number | null
-    nbPages?: IntNullableFilter<"Ressource"> | number | null
-    nbExemplaires?: IntFilter<"Ressource"> | number
-    nbDisponibles?: IntFilter<"Ressource"> | number
-    coteClassification?: StringNullableFilter<"Ressource"> | string | null
     categorieId?: StringFilter<"Ressource"> | string
   }
 
@@ -46497,6 +47430,8 @@ export namespace Prisma {
     note?: StringNullableFilter<"Favori"> | string | null
     universiteSrc?: StringNullableFilter<"Favori"> | string | null
     universiteUser?: StringNullableFilter<"Favori"> | string | null
+    createdAt?: DateTimeFilter<"Favori"> | Date | string
+    updatedAt?: DateTimeFilter<"Favori"> | Date | string
   }
 
   export type CommentaireUpsertWithWhereUniqueWithoutUserInput = {
@@ -46526,6 +47461,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFilter<"Commentaire"> | Date | string
     universiteSrc?: StringNullableFilter<"Commentaire"> | string | null
     universiteUser?: StringNullableFilter<"Commentaire"> | string | null
+    createdAt?: DateTimeFilter<"Commentaire"> | Date | string
+    updatedAt?: DateTimeFilter<"Commentaire"> | Date | string
   }
 
   export type NotationUpsertWithWhereUniqueWithoutUserInput = {
@@ -46555,6 +47492,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFilter<"Notation"> | Date | string
     universiteSrc?: StringNullableFilter<"Notation"> | string | null
     universiteUser?: StringNullableFilter<"Notation"> | string | null
+    createdAt?: DateTimeFilter<"Notation"> | Date | string
+    updatedAt?: DateTimeFilter<"Notation"> | Date | string
   }
 
   export type HistoriqueAccesUpsertWithWhereUniqueWithoutUserInput = {
@@ -46584,6 +47523,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFilter<"HistoriqueAcces"> | $Enums.TypeAcces
     universiteSrc?: StringNullableFilter<"HistoriqueAcces"> | string | null
     universiteUser?: StringNullableFilter<"HistoriqueAcces"> | string | null
+    createdAt?: DateTimeFilter<"HistoriqueAcces"> | Date | string
+    updatedAt?: DateTimeFilter<"HistoriqueAcces"> | Date | string
   }
 
   export type CollectionUpsertWithWhereUniqueWithoutUserInput = {
@@ -46643,6 +47584,8 @@ export namespace Prisma {
     commentaire?: StringNullableFilter<"Reservation"> | string | null
     universiteEmprunteur?: StringFilter<"Reservation"> | string
     validePar?: StringNullableFilter<"Reservation"> | string | null
+    createdAt?: DateTimeFilter<"Reservation"> | Date | string
+    updatedAt?: DateTimeFilter<"Reservation"> | Date | string
   }
 
   export type EmpruntUpsertWithWhereUniqueWithoutUserInput = {
@@ -46690,6 +47633,8 @@ export namespace Prisma {
     estVue?: BoolFilter<"Recommandation"> | boolean
     estInteruniversitaire?: BoolFilter<"Recommandation"> | boolean
     universiteSource?: StringNullableFilter<"Recommandation"> | string | null
+    createdAt?: DateTimeFilter<"Recommandation"> | Date | string
+    updatedAt?: DateTimeFilter<"Recommandation"> | Date | string
   }
 
   export type JournalAuditUpsertWithWhereUniqueWithoutUserInput = {
@@ -46720,6 +47665,8 @@ export namespace Prisma {
     dateAction?: DateTimeFilter<"JournalAudit"> | Date | string
     detailsAction?: JsonFilter<"JournalAudit">
     ipAdresse?: StringFilter<"JournalAudit"> | string
+    createdAt?: DateTimeFilter<"JournalAudit"> | Date | string
+    updatedAt?: DateTimeFilter<"JournalAudit"> | Date | string
   }
 
   export type DonneesRecommandationUpsertWithWhereUniqueWithoutUserInput = {
@@ -46748,6 +47695,8 @@ export namespace Prisma {
     score?: FloatFilter<"DonneesRecommandation"> | number
     typeInteraction?: EnumTypeInteractionFilter<"DonneesRecommandation"> | $Enums.TypeInteraction
     dateDonnee?: DateTimeFilter<"DonneesRecommandation"> | Date | string
+    createdAt?: DateTimeFilter<"DonneesRecommandation"> | Date | string
+    updatedAt?: DateTimeFilter<"DonneesRecommandation"> | Date | string
   }
 
   export type NotificationUpsertWithWhereUniqueWithoutUserInput = {
@@ -46777,6 +47726,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFilter<"Notification"> | Date | string
     estLue?: BoolFilter<"Notification"> | boolean
     typeNotification?: EnumTypeNotificationFilter<"Notification"> | $Enums.TypeNotification
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeFilter<"Notification"> | Date | string
   }
 
   export type EtudiantUpsertWithWhereUniqueWithoutUserInput = {
@@ -46820,6 +47771,8 @@ export namespace Prisma {
     numeroEnseignant?: StringFilter<"Enseignant"> | string
     dateNaissance?: DateTimeFilter<"Enseignant"> | Date | string
     specialite?: StringNullableFilter<"Enseignant"> | string | null
+    createdAt?: DateTimeFilter<"Enseignant"> | Date | string
+    updatedAt?: DateTimeFilter<"Enseignant"> | Date | string
   }
 
   export type BibliothecaireUpsertWithWhereUniqueWithoutUserInput = {
@@ -46849,6 +47802,8 @@ export namespace Prisma {
     adresse?: StringNullableFilter<"Bibliothecaire"> | string | null
     ville?: StringNullableFilter<"Bibliothecaire"> | string | null
     pays?: StringNullableFilter<"Bibliothecaire"> | string | null
+    createdAt?: DateTimeFilter<"Bibliothecaire"> | Date | string
+    updatedAt?: DateTimeFilter<"Bibliothecaire"> | Date | string
   }
 
   export type AdministrateurUpsertWithWhereUniqueWithoutUserInput = {
@@ -46907,6 +47862,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -46938,6 +47895,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -46968,6 +47927,8 @@ export namespace Prisma {
     nom: string
     description?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
+    createdAt?: Date | string
+    updatedAt?: Date | string
     departement: DepartementCreateNestedOneWithoutFilieresInput
   }
 
@@ -46977,6 +47938,8 @@ export namespace Prisma {
     description?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
     departementId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FiliereCreateOrConnectWithoutEtudiantsInput = {
@@ -47006,6 +47969,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -47037,6 +48002,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -47073,6 +48040,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     departement?: DepartementUpdateOneRequiredWithoutFilieresNestedInput
   }
 
@@ -47082,6 +48051,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
     departementId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateWithoutEnseignantsInput = {
@@ -47095,6 +48066,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -47126,6 +48099,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -47173,6 +48148,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -47204,6 +48181,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -47235,6 +48214,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -47266,6 +48247,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -47299,6 +48282,8 @@ export namespace Prisma {
     statut?: $Enums.StatutReservation
     commentaire?: string | null
     universiteEmprunteur: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutReservationsInput
     ressource: RessourceCreateNestedOneWithoutReservationsInput
   }
@@ -47313,6 +48298,8 @@ export namespace Prisma {
     statut?: $Enums.StatutReservation
     commentaire?: string | null
     universiteEmprunteur: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReservationCreateOrConnectWithoutValideurInput = {
@@ -47347,6 +48334,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -47378,6 +48367,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -47425,6 +48416,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -47456,6 +48449,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -47503,6 +48498,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -47534,6 +48531,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -47565,6 +48564,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -47596,6 +48597,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -47624,31 +48627,20 @@ export namespace Prisma {
   export type RessourceCreateWithoutFavorisInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    auteur?: UserCreateNestedOneWithoutContributionsInput
+    auteur: UserCreateNestedOneWithoutContributionsInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
@@ -47663,31 +48655,20 @@ export namespace Prisma {
   export type RessourceUncheckedCreateWithoutFavorisInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -47726,6 +48707,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -47757,6 +48740,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -47791,31 +48776,20 @@ export namespace Prisma {
   export type RessourceUpdateWithoutFavorisInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
@@ -47830,31 +48804,20 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateWithoutFavorisInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -47877,6 +48840,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -47908,6 +48873,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -47936,31 +48903,20 @@ export namespace Prisma {
   export type RessourceCreateWithoutCommentairesInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    auteur?: UserCreateNestedOneWithoutContributionsInput
+    auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
@@ -47975,31 +48931,20 @@ export namespace Prisma {
   export type RessourceUncheckedCreateWithoutCommentairesInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -48038,6 +48983,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -48069,6 +49016,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -48103,31 +49052,20 @@ export namespace Prisma {
   export type RessourceUpdateWithoutCommentairesInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
@@ -48142,31 +49080,20 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateWithoutCommentairesInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -48189,6 +49116,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -48220,6 +49149,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -48248,31 +49179,20 @@ export namespace Prisma {
   export type RessourceCreateWithoutNotationsInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    auteur?: UserCreateNestedOneWithoutContributionsInput
+    auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
@@ -48287,31 +49207,20 @@ export namespace Prisma {
   export type RessourceUncheckedCreateWithoutNotationsInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -48350,6 +49259,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -48381,6 +49292,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -48415,31 +49328,20 @@ export namespace Prisma {
   export type RessourceUpdateWithoutNotationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
@@ -48454,31 +49356,20 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateWithoutNotationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -48501,6 +49392,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -48532,6 +49425,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -48560,31 +49455,20 @@ export namespace Prisma {
   export type RessourceCreateWithoutHistoriquesInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    auteur?: UserCreateNestedOneWithoutContributionsInput
+    auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -48599,31 +49483,20 @@ export namespace Prisma {
   export type RessourceUncheckedCreateWithoutHistoriquesInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -48662,6 +49535,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -48693,6 +49568,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -48727,31 +49604,20 @@ export namespace Prisma {
   export type RessourceUpdateWithoutHistoriquesInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -48766,31 +49632,20 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateWithoutHistoriquesInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -48813,6 +49668,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -48844,6 +49701,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -48872,31 +49731,20 @@ export namespace Prisma {
   export type RessourceCreateWithoutDonneesRecommandationsInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    auteur?: UserCreateNestedOneWithoutContributionsInput
+    auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -48911,31 +49759,20 @@ export namespace Prisma {
   export type RessourceUncheckedCreateWithoutDonneesRecommandationsInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -48974,6 +49811,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -49005,6 +49844,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -49039,31 +49880,20 @@ export namespace Prisma {
   export type RessourceUpdateWithoutDonneesRecommandationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -49078,31 +49908,20 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateWithoutDonneesRecommandationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -49125,6 +49944,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -49156,6 +49977,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -49185,6 +50008,8 @@ export namespace Prisma {
     id?: string
     dateAjout?: Date | string
     notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     ressource: RessourceCreateNestedOneWithoutCollectionsInput
   }
 
@@ -49193,6 +50018,8 @@ export namespace Prisma {
     ressourceId: string
     dateAjout?: Date | string
     notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CollectionRessourceCreateOrConnectWithoutCollectionInput = {
@@ -49227,6 +50054,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -49258,6 +50087,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -49303,6 +50134,8 @@ export namespace Prisma {
     ressourceId?: StringFilter<"CollectionRessource"> | string
     dateAjout?: DateTimeFilter<"CollectionRessource"> | Date | string
     notes?: StringNullableFilter<"CollectionRessource"> | string | null
+    createdAt?: DateTimeFilter<"CollectionRessource"> | Date | string
+    updatedAt?: DateTimeFilter<"CollectionRessource"> | Date | string
   }
 
   export type CollectionCreateWithoutRessourcesInput = {
@@ -49329,31 +50162,20 @@ export namespace Prisma {
   export type RessourceCreateWithoutCollectionsInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    auteur?: UserCreateNestedOneWithoutContributionsInput
+    auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -49368,31 +50190,20 @@ export namespace Prisma {
   export type RessourceUncheckedCreateWithoutCollectionsInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -49450,31 +50261,20 @@ export namespace Prisma {
   export type RessourceUpdateWithoutCollectionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -49489,31 +50289,20 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateWithoutCollectionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -49536,6 +50325,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     favoris?: FavoriCreateNestedManyWithoutUserInput
@@ -49567,6 +50358,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     favoris?: FavoriUncheckedCreateNestedManyWithoutUserInput
@@ -49598,6 +50391,8 @@ export namespace Prisma {
     note?: string | null
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutFavorisInput
   }
 
@@ -49608,6 +50403,8 @@ export namespace Prisma {
     note?: string | null
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FavoriCreateOrConnectWithoutRessourceInput = {
@@ -49626,6 +50423,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutCommentairesInput
   }
 
@@ -49636,6 +50435,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CommentaireCreateOrConnectWithoutRessourceInput = {
@@ -49654,6 +50455,8 @@ export namespace Prisma {
     dateNotation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutNotationsInput
   }
 
@@ -49664,6 +50467,8 @@ export namespace Prisma {
     dateNotation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotationCreateOrConnectWithoutRessourceInput = {
@@ -49682,6 +50487,8 @@ export namespace Prisma {
     typeAcces: $Enums.TypeAcces
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutHistoriquesInput
   }
 
@@ -49692,6 +50499,8 @@ export namespace Prisma {
     typeAcces: $Enums.TypeAcces
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type HistoriqueAccesCreateOrConnectWithoutRessourceInput = {
@@ -49708,6 +50517,8 @@ export namespace Prisma {
     id?: string
     dateAjout?: Date | string
     notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     collection: CollectionCreateNestedOneWithoutRessourcesInput
   }
 
@@ -49716,6 +50527,8 @@ export namespace Prisma {
     collectionId: string
     dateAjout?: Date | string
     notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CollectionRessourceCreateOrConnectWithoutRessourceInput = {
@@ -49738,6 +50551,8 @@ export namespace Prisma {
     qrCode?: string | null
     dureeMaxEmpruntExterne?: number
     nbMaxExemplairesExterne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     emprunts?: EmpruntCreateNestedManyWithoutExemplaireInput
   }
 
@@ -49751,6 +50566,8 @@ export namespace Prisma {
     qrCode?: string | null
     dureeMaxEmpruntExterne?: number
     nbMaxExemplairesExterne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutExemplaireInput
   }
 
@@ -49772,6 +50589,8 @@ export namespace Prisma {
     statut?: $Enums.StatutReservation
     commentaire?: string | null
     universiteEmprunteur: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutReservationsInput
     valideur?: BibliothecaireCreateNestedOneWithoutReservationsInput
   }
@@ -49786,6 +50605,8 @@ export namespace Prisma {
     commentaire?: string | null
     universiteEmprunteur: string
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReservationCreateOrConnectWithoutRessourceInput = {
@@ -49806,6 +50627,8 @@ export namespace Prisma {
     estVue?: boolean
     estInteruniversitaire?: boolean
     universiteSource?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutRecommandationsInput
   }
 
@@ -49818,6 +50641,8 @@ export namespace Prisma {
     estVue?: boolean
     estInteruniversitaire?: boolean
     universiteSource?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type RecommandationCreateOrConnectWithoutRessourceInput = {
@@ -49835,6 +50660,8 @@ export namespace Prisma {
     score: number
     typeInteraction: $Enums.TypeInteraction
     dateDonnee?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutDonneesRecommandationsInput
   }
 
@@ -49844,6 +50671,8 @@ export namespace Prisma {
     score: number
     typeInteraction: $Enums.TypeInteraction
     dateDonnee?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DonneesRecommandationCreateOrConnectWithoutRessourceInput = {
@@ -49861,6 +50690,8 @@ export namespace Prisma {
     libelle: string
     description?: string | null
     dateCreation?: Date | string
+    createdAt?: Date | string
+    updayedAt?: Date | string
   }
 
   export type CategorieUncheckedCreateWithoutRessourcesInput = {
@@ -49868,6 +50699,8 @@ export namespace Prisma {
     libelle: string
     description?: string | null
     dateCreation?: Date | string
+    createdAt?: Date | string
+    updayedAt?: Date | string
   }
 
   export type CategorieCreateOrConnectWithoutRessourcesInput = {
@@ -49897,6 +50730,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     favoris?: FavoriUpdateManyWithoutUserNestedInput
@@ -49928,6 +50763,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     favoris?: FavoriUncheckedUpdateManyWithoutUserNestedInput
@@ -50058,6 +50895,8 @@ export namespace Prisma {
     qrCode?: StringNullableFilter<"ExemplairePhysique"> | string | null
     dureeMaxEmpruntExterne?: IntFilter<"ExemplairePhysique"> | number
     nbMaxExemplairesExterne?: IntFilter<"ExemplairePhysique"> | number
+    createdAt?: DateTimeFilter<"ExemplairePhysique"> | Date | string
+    updatedAt?: DateTimeFilter<"ExemplairePhysique"> | Date | string
   }
 
   export type ReservationUpsertWithWhereUniqueWithoutRessourceInput = {
@@ -50124,6 +50963,8 @@ export namespace Prisma {
     libelle?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updayedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategorieUncheckedUpdateWithoutRessourcesInput = {
@@ -50131,36 +50972,27 @@ export namespace Prisma {
     libelle?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updayedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RessourceCreateWithoutCategorieInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
-    auteur?: UserCreateNestedOneWithoutContributionsInput
+    auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -50175,31 +51007,20 @@ export namespace Prisma {
   export type RessourceUncheckedCreateWithoutCategorieInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -50243,6 +51064,8 @@ export namespace Prisma {
     adresse?: string | null
     ville: string
     siteWeb?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     reglePrets?: ReglePretCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeCreateNestedManyWithoutUniversiteInput
     ufrs?: UfrCreateNestedManyWithoutUniversiteInput
@@ -50254,6 +51077,8 @@ export namespace Prisma {
     adresse?: string | null
     ville: string
     siteWeb?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     reglePrets?: ReglePretUncheckedCreateNestedManyWithoutUniversiteInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedCreateNestedManyWithoutUniversiteInput
     ufrs?: UfrUncheckedCreateNestedManyWithoutUniversiteInput
@@ -50281,6 +51106,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reglePrets?: ReglePretUpdateManyWithoutUniversiteNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUpdateManyWithoutUniversiteNestedInput
     ufrs?: UfrUpdateManyWithoutUniversiteNestedInput
@@ -50292,6 +51119,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: StringFieldUpdateOperationsInput | string
     siteWeb?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reglePrets?: ReglePretUncheckedUpdateManyWithoutUniversiteNestedInput
     politiqueBibliotheques?: PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteNestedInput
     ufrs?: UfrUncheckedUpdateManyWithoutUniversiteNestedInput
@@ -50308,6 +51137,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -50339,6 +51170,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -50386,6 +51219,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -50417,6 +51252,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -50448,6 +51285,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceCreateNestedManyWithoutAuteurInput
@@ -50479,6 +51318,8 @@ export namespace Prisma {
     role: $Enums.RoleUser
     derniereConnexion?: Date | string | null
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     preferencesRecommandation?: string | null
     frequenceRecommandation?: $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
@@ -50526,6 +51367,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUpdateManyWithoutAuteurNestedInput
@@ -50557,6 +51400,8 @@ export namespace Prisma {
     role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
     derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
     frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
     contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
@@ -50588,6 +51433,8 @@ export namespace Prisma {
     universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EmpruntUpdateWithoutExemplaireInput = {
@@ -50600,6 +51447,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutEmpruntsNestedInput
     SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
   }
@@ -50615,6 +51464,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
   }
 
@@ -50629,6 +51480,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SanctionUtilisateurCreateManyEmpruntInput = {
@@ -50639,6 +51492,8 @@ export namespace Prisma {
     dateFin: Date | string
     motif: string
     estActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SanctionUtilisateurUpdateWithoutEmpruntInput = {
@@ -50648,6 +51503,8 @@ export namespace Prisma {
     dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
     motif?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutSanctionsNestedInput
   }
 
@@ -50659,6 +51516,8 @@ export namespace Prisma {
     dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
     motif?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntInput = {
@@ -50669,6 +51528,8 @@ export namespace Prisma {
     dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
     motif?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StatistiqueBibliothequeCreateManyUniversiteInput = {
@@ -50683,6 +51544,8 @@ export namespace Prisma {
     tauxRotation?: number | null
     categoriesPlusEmpruntees?: string | null
     universitesPlusFrequentes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReglePretCreateManyUniversiteInput = {
@@ -50693,6 +51556,8 @@ export namespace Prisma {
     nbRenouvellements?: number
     penaliteRetardJours?: boolean
     estActif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PolitiqueBibliothequeCreateManyUniversiteInput = {
@@ -50702,12 +51567,16 @@ export namespace Prisma {
     penaliteRetard: string
     estActive?: boolean
     dateMiseAJour?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UfrCreateManyUniversiteInput = {
     id?: string
     nom: string
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type StatistiqueBibliothequeUpdateWithoutUniversiteInput = {
@@ -50722,6 +51591,8 @@ export namespace Prisma {
     tauxRotation?: NullableFloatFieldUpdateOperationsInput | number | null
     categoriesPlusEmpruntees?: NullableStringFieldUpdateOperationsInput | string | null
     universitesPlusFrequentes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StatistiqueBibliothequeUncheckedUpdateWithoutUniversiteInput = {
@@ -50736,6 +51607,8 @@ export namespace Prisma {
     tauxRotation?: NullableFloatFieldUpdateOperationsInput | number | null
     categoriesPlusEmpruntees?: NullableStringFieldUpdateOperationsInput | string | null
     universitesPlusFrequentes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StatistiqueBibliothequeUncheckedUpdateManyWithoutUniversiteInput = {
@@ -50750,6 +51623,8 @@ export namespace Prisma {
     tauxRotation?: NullableFloatFieldUpdateOperationsInput | number | null
     categoriesPlusEmpruntees?: NullableStringFieldUpdateOperationsInput | string | null
     universitesPlusFrequentes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReglePretUpdateWithoutUniversiteInput = {
@@ -50760,6 +51635,8 @@ export namespace Prisma {
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReglePretUncheckedUpdateWithoutUniversiteInput = {
@@ -50770,6 +51647,8 @@ export namespace Prisma {
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReglePretUncheckedUpdateManyWithoutUniversiteInput = {
@@ -50780,6 +51659,8 @@ export namespace Prisma {
     nbRenouvellements?: IntFieldUpdateOperationsInput | number
     penaliteRetardJours?: BoolFieldUpdateOperationsInput | boolean
     estActif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PolitiqueBibliothequeUpdateWithoutUniversiteInput = {
@@ -50789,6 +51670,8 @@ export namespace Prisma {
     penaliteRetard?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
     dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PolitiqueBibliothequeUncheckedUpdateWithoutUniversiteInput = {
@@ -50798,6 +51681,8 @@ export namespace Prisma {
     penaliteRetard?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
     dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PolitiqueBibliothequeUncheckedUpdateManyWithoutUniversiteInput = {
@@ -50807,12 +51692,16 @@ export namespace Prisma {
     penaliteRetard?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
     dateMiseAJour?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UfrUpdateWithoutUniversiteInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     departements?: DepartementUpdateManyWithoutUfrNestedInput
   }
 
@@ -50820,6 +51709,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     departements?: DepartementUncheckedUpdateManyWithoutUfrNestedInput
   }
 
@@ -50827,6 +51718,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DepartementCreateManyUfrInput = {
@@ -50834,6 +51727,8 @@ export namespace Prisma {
     nom: string
     description?: string | null
     responsable?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DepartementUpdateWithoutUfrInput = {
@@ -50841,6 +51736,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     responsable?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     filieres?: FiliereUpdateManyWithoutDepartementNestedInput
   }
 
@@ -50849,6 +51746,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     responsable?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     filieres?: FiliereUncheckedUpdateManyWithoutDepartementNestedInput
   }
 
@@ -50857,6 +51756,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     responsable?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FiliereCreateManyDepartementInput = {
@@ -50864,6 +51765,8 @@ export namespace Prisma {
     nom: string
     description?: string | null
     niveauEtudes?: $Enums.NiveauEtudes
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FiliereUpdateWithoutDepartementInput = {
@@ -50871,6 +51774,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     etudiants?: EtudiantUpdateManyWithoutFiliereNestedInput
   }
 
@@ -50879,6 +51784,8 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     etudiants?: EtudiantUncheckedUpdateManyWithoutFiliereNestedInput
   }
 
@@ -50887,71 +51794,66 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EtudiantCreateManyFiliereInput = {
     id?: string
     userId: string
-    numeroEtudiant: string
+    codePermanent: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    niveauEtudes?: $Enums.NiveauEtudes
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EtudiantUpdateWithoutFiliereInput = {
     id?: StringFieldUpdateOperationsInput | string
-    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutEtudiantsNestedInput
   }
 
   export type EtudiantUncheckedUpdateWithoutFiliereInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EtudiantUncheckedUpdateManyWithoutFiliereInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RessourceCreateManyAuteurInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
     categorieId: string
   }
 
@@ -50962,6 +51864,8 @@ export namespace Prisma {
     note?: string | null
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CommentaireCreateManyUserInput = {
@@ -50971,6 +51875,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotationCreateManyUserInput = {
@@ -50980,6 +51886,8 @@ export namespace Prisma {
     dateNotation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type HistoriqueAccesCreateManyUserInput = {
@@ -50989,6 +51897,8 @@ export namespace Prisma {
     typeAcces: $Enums.TypeAcces
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CollectionCreateManyUserInput = {
@@ -51008,6 +51918,8 @@ export namespace Prisma {
     commentaire?: string | null
     universiteEmprunteur: string
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EmpruntCreateManyUserInput = {
@@ -51021,6 +51933,8 @@ export namespace Prisma {
     universiteEmprunteur: string
     motifEmprunt?: string | null
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type RecommandationCreateManyUserInput = {
@@ -51032,6 +51946,8 @@ export namespace Prisma {
     estVue?: boolean
     estInteruniversitaire?: boolean
     universiteSource?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type JournalAuditCreateManyUserInput = {
@@ -51042,6 +51958,8 @@ export namespace Prisma {
     dateAction?: Date | string
     detailsAction: JsonNullValueInput | InputJsonValue
     ipAdresse: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DonneesRecommandationCreateManyUserInput = {
@@ -51050,6 +51968,8 @@ export namespace Prisma {
     score: number
     typeInteraction: $Enums.TypeInteraction
     dateDonnee?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotificationCreateManyUserInput = {
@@ -51059,15 +51979,18 @@ export namespace Prisma {
     dateCreation?: Date | string
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EtudiantCreateManyUserInput = {
     id?: string
-    numeroEtudiant: string
+    codePermanent: string
     dateNaissance: Date | string
     dateInscription?: Date | string
-    niveauEtudes?: $Enums.NiveauEtudes
     filiereId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EnseignantCreateManyUserInput = {
@@ -51075,6 +51998,8 @@ export namespace Prisma {
     numeroEnseignant: string
     dateNaissance: Date | string
     specialite?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BibliothecaireCreateManyUserInput = {
@@ -51084,6 +52009,8 @@ export namespace Prisma {
     adresse?: string | null
     ville?: string | null
     pays?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AdministrateurCreateManyUserInput = {
@@ -51103,35 +52030,26 @@ export namespace Prisma {
     motif: string
     empruntId?: string | null
     estActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type RessourceUpdateWithoutAuteurInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -51147,30 +52065,19 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateWithoutAuteurInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -51186,30 +52093,19 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateManyWithoutAuteurInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     categorieId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -51219,6 +52115,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressource?: RessourceUpdateOneRequiredWithoutFavorisNestedInput
   }
 
@@ -51229,6 +52127,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FavoriUncheckedUpdateManyWithoutUserInput = {
@@ -51238,6 +52138,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommentaireUpdateWithoutUserInput = {
@@ -51246,6 +52148,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressource?: RessourceUpdateOneRequiredWithoutCommentairesNestedInput
   }
 
@@ -51256,6 +52160,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommentaireUncheckedUpdateManyWithoutUserInput = {
@@ -51265,6 +52171,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotationUpdateWithoutUserInput = {
@@ -51273,6 +52181,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressource?: RessourceUpdateOneRequiredWithoutNotationsNestedInput
   }
 
@@ -51283,6 +52193,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotationUncheckedUpdateManyWithoutUserInput = {
@@ -51292,6 +52204,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoriqueAccesUpdateWithoutUserInput = {
@@ -51300,6 +52214,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressource?: RessourceUpdateOneRequiredWithoutHistoriquesNestedInput
   }
 
@@ -51310,6 +52226,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoriqueAccesUncheckedUpdateManyWithoutUserInput = {
@@ -51319,6 +52237,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CollectionUpdateWithoutUserInput = {
@@ -51352,6 +52272,8 @@ export namespace Prisma {
     statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressource?: RessourceUpdateOneRequiredWithoutReservationsNestedInput
     valideur?: BibliothecaireUpdateOneWithoutReservationsNestedInput
   }
@@ -51366,6 +52288,8 @@ export namespace Prisma {
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationUncheckedUpdateManyWithoutUserInput = {
@@ -51378,6 +52302,8 @@ export namespace Prisma {
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmpruntUpdateWithoutUserInput = {
@@ -51390,6 +52316,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     exemplaire?: ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntsNestedInput
     SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
   }
@@ -51405,6 +52333,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
   }
 
@@ -51419,6 +52349,8 @@ export namespace Prisma {
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RecommandationUpdateWithoutUserInput = {
@@ -51429,6 +52361,8 @@ export namespace Prisma {
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
     universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressource?: RessourceUpdateOneRequiredWithoutRecommandationsNestedInput
   }
 
@@ -51441,6 +52375,8 @@ export namespace Prisma {
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
     universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RecommandationUncheckedUpdateManyWithoutUserInput = {
@@ -51452,6 +52388,8 @@ export namespace Prisma {
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
     universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type JournalAuditUpdateWithoutUserInput = {
@@ -51462,6 +52400,8 @@ export namespace Prisma {
     dateAction?: DateTimeFieldUpdateOperationsInput | Date | string
     detailsAction?: JsonNullValueInput | InputJsonValue
     ipAdresse?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type JournalAuditUncheckedUpdateWithoutUserInput = {
@@ -51472,6 +52412,8 @@ export namespace Prisma {
     dateAction?: DateTimeFieldUpdateOperationsInput | Date | string
     detailsAction?: JsonNullValueInput | InputJsonValue
     ipAdresse?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type JournalAuditUncheckedUpdateManyWithoutUserInput = {
@@ -51482,6 +52424,8 @@ export namespace Prisma {
     dateAction?: DateTimeFieldUpdateOperationsInput | Date | string
     detailsAction?: JsonNullValueInput | InputJsonValue
     ipAdresse?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DonneesRecommandationUpdateWithoutUserInput = {
@@ -51489,6 +52433,8 @@ export namespace Prisma {
     score?: FloatFieldUpdateOperationsInput | number
     typeInteraction?: EnumTypeInteractionFieldUpdateOperationsInput | $Enums.TypeInteraction
     dateDonnee?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressource?: RessourceUpdateOneRequiredWithoutDonneesRecommandationsNestedInput
   }
 
@@ -51498,6 +52444,8 @@ export namespace Prisma {
     score?: FloatFieldUpdateOperationsInput | number
     typeInteraction?: EnumTypeInteractionFieldUpdateOperationsInput | $Enums.TypeInteraction
     dateDonnee?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DonneesRecommandationUncheckedUpdateManyWithoutUserInput = {
@@ -51506,6 +52454,8 @@ export namespace Prisma {
     score?: FloatFieldUpdateOperationsInput | number
     typeInteraction?: EnumTypeInteractionFieldUpdateOperationsInput | $Enums.TypeInteraction
     dateDonnee?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationUpdateWithoutUserInput = {
@@ -51515,6 +52465,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationUncheckedUpdateWithoutUserInput = {
@@ -51524,6 +52476,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationUncheckedUpdateManyWithoutUserInput = {
@@ -51533,33 +52487,38 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     estLue?: BoolFieldUpdateOperationsInput | boolean
     typeNotification?: EnumTypeNotificationFieldUpdateOperationsInput | $Enums.TypeNotification
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EtudiantUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     filiere?: FiliereUpdateOneRequiredWithoutEtudiantsNestedInput
   }
 
   export type EtudiantUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
     filiereId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EtudiantUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    numeroEtudiant?: StringFieldUpdateOperationsInput | string
+    codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    niveauEtudes?: EnumNiveauEtudesFieldUpdateOperationsInput | $Enums.NiveauEtudes
     filiereId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnseignantUpdateWithoutUserInput = {
@@ -51567,6 +52526,8 @@ export namespace Prisma {
     numeroEnseignant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     specialite?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnseignantUncheckedUpdateWithoutUserInput = {
@@ -51574,6 +52535,8 @@ export namespace Prisma {
     numeroEnseignant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     specialite?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnseignantUncheckedUpdateManyWithoutUserInput = {
@@ -51581,6 +52544,8 @@ export namespace Prisma {
     numeroEnseignant?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
     specialite?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BibliothecaireUpdateWithoutUserInput = {
@@ -51590,6 +52555,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: NullableStringFieldUpdateOperationsInput | string | null
     pays?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUpdateManyWithoutValideurNestedInput
   }
 
@@ -51600,6 +52567,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: NullableStringFieldUpdateOperationsInput | string | null
     pays?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUncheckedUpdateManyWithoutValideurNestedInput
   }
 
@@ -51610,6 +52579,8 @@ export namespace Prisma {
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     ville?: NullableStringFieldUpdateOperationsInput | string | null
     pays?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AdministrateurUpdateWithoutUserInput = {
@@ -51646,6 +52617,8 @@ export namespace Prisma {
     dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
     motif?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emprunt?: EmpruntUpdateOneWithoutSanctionUtilisateurNestedInput
   }
 
@@ -51657,6 +52630,8 @@ export namespace Prisma {
     motif?: StringFieldUpdateOperationsInput | string
     empruntId?: NullableStringFieldUpdateOperationsInput | string | null
     estActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SanctionUtilisateurUncheckedUpdateManyWithoutUserInput = {
@@ -51667,6 +52642,8 @@ export namespace Prisma {
     motif?: StringFieldUpdateOperationsInput | string
     empruntId?: NullableStringFieldUpdateOperationsInput | string | null
     estActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationCreateManyValideurInput = {
@@ -51679,6 +52656,8 @@ export namespace Prisma {
     statut?: $Enums.StatutReservation
     commentaire?: string | null
     universiteEmprunteur: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReservationUpdateWithoutValideurInput = {
@@ -51689,6 +52668,8 @@ export namespace Prisma {
     statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutReservationsNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutReservationsNestedInput
   }
@@ -51703,6 +52684,8 @@ export namespace Prisma {
     statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationUncheckedUpdateManyWithoutValideurInput = {
@@ -51715,6 +52698,8 @@ export namespace Prisma {
     statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CollectionRessourceCreateManyCollectionInput = {
@@ -51722,12 +52707,16 @@ export namespace Prisma {
     ressourceId: string
     dateAjout?: Date | string
     notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CollectionRessourceUpdateWithoutCollectionInput = {
     id?: StringFieldUpdateOperationsInput | string
     dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressource?: RessourceUpdateOneRequiredWithoutCollectionsNestedInput
   }
 
@@ -51736,6 +52725,8 @@ export namespace Prisma {
     ressourceId?: StringFieldUpdateOperationsInput | string
     dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CollectionRessourceUncheckedUpdateManyWithoutCollectionInput = {
@@ -51743,6 +52734,8 @@ export namespace Prisma {
     ressourceId?: StringFieldUpdateOperationsInput | string
     dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FavoriCreateManyRessourceInput = {
@@ -51752,6 +52745,8 @@ export namespace Prisma {
     note?: string | null
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CommentaireCreateManyRessourceInput = {
@@ -51761,6 +52756,8 @@ export namespace Prisma {
     dateCreation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotationCreateManyRessourceInput = {
@@ -51770,6 +52767,8 @@ export namespace Prisma {
     dateNotation?: Date | string
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type HistoriqueAccesCreateManyRessourceInput = {
@@ -51779,6 +52778,8 @@ export namespace Prisma {
     typeAcces: $Enums.TypeAcces
     universiteSrc?: string | null
     universiteUser?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CollectionRessourceCreateManyRessourceInput = {
@@ -51786,6 +52787,8 @@ export namespace Prisma {
     collectionId: string
     dateAjout?: Date | string
     notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ExemplairePhysiqueCreateManyRessourceInput = {
@@ -51798,6 +52801,8 @@ export namespace Prisma {
     qrCode?: string | null
     dureeMaxEmpruntExterne?: number
     nbMaxExemplairesExterne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReservationCreateManyRessourceInput = {
@@ -51810,6 +52815,8 @@ export namespace Prisma {
     commentaire?: string | null
     universiteEmprunteur: string
     validePar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type RecommandationCreateManyRessourceInput = {
@@ -51821,6 +52828,8 @@ export namespace Prisma {
     estVue?: boolean
     estInteruniversitaire?: boolean
     universiteSource?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DonneesRecommandationCreateManyRessourceInput = {
@@ -51829,6 +52838,8 @@ export namespace Prisma {
     score: number
     typeInteraction: $Enums.TypeInteraction
     dateDonnee?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FavoriUpdateWithoutRessourceInput = {
@@ -51837,6 +52848,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutFavorisNestedInput
   }
 
@@ -51847,6 +52860,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FavoriUncheckedUpdateManyWithoutRessourceInput = {
@@ -51856,6 +52871,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommentaireUpdateWithoutRessourceInput = {
@@ -51864,6 +52881,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCommentairesNestedInput
   }
 
@@ -51874,6 +52893,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommentaireUncheckedUpdateManyWithoutRessourceInput = {
@@ -51883,6 +52904,8 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotationUpdateWithoutRessourceInput = {
@@ -51891,6 +52914,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutNotationsNestedInput
   }
 
@@ -51901,6 +52926,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotationUncheckedUpdateManyWithoutRessourceInput = {
@@ -51910,6 +52937,8 @@ export namespace Prisma {
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoriqueAccesUpdateWithoutRessourceInput = {
@@ -51918,6 +52947,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutHistoriquesNestedInput
   }
 
@@ -51928,6 +52959,8 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoriqueAccesUncheckedUpdateManyWithoutRessourceInput = {
@@ -51937,12 +52970,16 @@ export namespace Prisma {
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CollectionRessourceUpdateWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
     dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     collection?: CollectionUpdateOneRequiredWithoutRessourcesNestedInput
   }
 
@@ -51951,6 +52988,8 @@ export namespace Prisma {
     collectionId?: StringFieldUpdateOperationsInput | string
     dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CollectionRessourceUncheckedUpdateManyWithoutRessourceInput = {
@@ -51958,6 +52997,8 @@ export namespace Prisma {
     collectionId?: StringFieldUpdateOperationsInput | string
     dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExemplairePhysiqueUpdateWithoutRessourceInput = {
@@ -51970,6 +53011,8 @@ export namespace Prisma {
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
     dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
     nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emprunts?: EmpruntUpdateManyWithoutExemplaireNestedInput
   }
 
@@ -51983,6 +53026,8 @@ export namespace Prisma {
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
     dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
     nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emprunts?: EmpruntUncheckedUpdateManyWithoutExemplaireNestedInput
   }
 
@@ -51996,6 +53041,8 @@ export namespace Prisma {
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
     dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
     nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationUpdateWithoutRessourceInput = {
@@ -52006,6 +53053,8 @@ export namespace Prisma {
     statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutReservationsNestedInput
     valideur?: BibliothecaireUpdateOneWithoutReservationsNestedInput
   }
@@ -52020,6 +53069,8 @@ export namespace Prisma {
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationUncheckedUpdateManyWithoutRessourceInput = {
@@ -52032,6 +53083,8 @@ export namespace Prisma {
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RecommandationUpdateWithoutRessourceInput = {
@@ -52042,6 +53095,8 @@ export namespace Prisma {
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
     universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutRecommandationsNestedInput
   }
 
@@ -52054,6 +53109,8 @@ export namespace Prisma {
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
     universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RecommandationUncheckedUpdateManyWithoutRessourceInput = {
@@ -52065,6 +53122,8 @@ export namespace Prisma {
     estVue?: BoolFieldUpdateOperationsInput | boolean
     estInteruniversitaire?: BoolFieldUpdateOperationsInput | boolean
     universiteSource?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DonneesRecommandationUpdateWithoutRessourceInput = {
@@ -52072,6 +53131,8 @@ export namespace Prisma {
     score?: FloatFieldUpdateOperationsInput | number
     typeInteraction?: EnumTypeInteractionFieldUpdateOperationsInput | $Enums.TypeInteraction
     dateDonnee?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutDonneesRecommandationsNestedInput
   }
 
@@ -52081,6 +53142,8 @@ export namespace Prisma {
     score?: FloatFieldUpdateOperationsInput | number
     typeInteraction?: EnumTypeInteractionFieldUpdateOperationsInput | $Enums.TypeInteraction
     dateDonnee?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DonneesRecommandationUncheckedUpdateManyWithoutRessourceInput = {
@@ -52089,66 +53152,46 @@ export namespace Prisma {
     score?: FloatFieldUpdateOperationsInput | number
     typeInteraction?: EnumTypeInteractionFieldUpdateOperationsInput | $Enums.TypeInteraction
     dateDonnee?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RessourceCreateManyCategorieInput = {
     id?: string
     titre: string
+    isbnglobale: string
     description: string
-    type: $Enums.TypeRessource
     langue?: string
     urlFichier: string
     urlFichierLocal?: string | null
     format: string
-    dateModification?: Date | string
-    motsCles: string
-    auteurId?: string | null
-    universiteId: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
-    estValide?: boolean
+    motsCles: string
+    auteurId: string
+    universiteId: string
     estArchive?: boolean
-    nomAuteurExterne?: string | null
-    prenomAuteurExterne?: string | null
     validation?: $Enums.TypeValidation
-    isbn?: string | null
-    doi?: string | null
-    anneePublication?: number | null
-    nbPages?: number | null
-    nbExemplaires?: number
-    nbDisponibles?: number
-    coteClassification?: string | null
   }
 
   export type RessourceUpdateWithoutCategorieInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
-    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -52163,31 +53206,20 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateWithoutCategorieInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -52202,31 +53234,20 @@ export namespace Prisma {
   export type RessourceUncheckedUpdateManyWithoutCategorieInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    type?: EnumTypeRessourceFieldUpdateOperationsInput | $Enums.TypeRessource
     langue?: StringFieldUpdateOperationsInput | string
     urlFichier?: StringFieldUpdateOperationsInput | string
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
-    dateModification?: DateTimeFieldUpdateOperationsInput | Date | string
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteId?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estValide?: BoolFieldUpdateOperationsInput | boolean
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: StringFieldUpdateOperationsInput | string
+    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    nomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    prenomAuteurExterne?: NullableStringFieldUpdateOperationsInput | string | null
     validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
-    isbn?: NullableStringFieldUpdateOperationsInput | string | null
-    doi?: NullableStringFieldUpdateOperationsInput | string | null
-    anneePublication?: NullableIntFieldUpdateOperationsInput | number | null
-    nbPages?: NullableIntFieldUpdateOperationsInput | number | null
-    nbExemplaires?: IntFieldUpdateOperationsInput | number
-    nbDisponibles?: IntFieldUpdateOperationsInput | number
-    coteClassification?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

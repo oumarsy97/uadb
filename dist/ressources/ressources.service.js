@@ -70,20 +70,14 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                 { titre: { contains: search } },
                 { description: { contains: search } },
                 { motsCles: { contains: search } },
-                { nomAuteurExterne: { contains: search } },
-                { prenomAuteurExterne: { contains: search } },
             ];
         }
-        if (type)
-            where.type = type;
         if (langue)
             where.langue = langue;
         if (universiteId)
             where.universiteId = universiteId;
         if (niveauAcces)
             where.niveauAcces = niveauAcces;
-        if (estValide !== undefined)
-            where.estValide = estValide;
         if (estArchive !== undefined)
             where.estArchive = estArchive;
         if (auteurId)
@@ -254,24 +248,6 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             ...options,
             universiteId,
         });
-    }
-    async toggleValidation(id) {
-        try {
-            const ressource = await this.prisma.ressource.findUnique({
-                where: { id },
-            });
-            if (!ressource) {
-                throw new common_1.NotFoundException(`Ressource avec l'ID ${id} non trouvée`);
-            }
-            return this.prisma.ressource.update({
-                where: { id },
-                data: { estValide: !ressource.estValide },
-            });
-        }
-        catch (error) {
-            this.logger.error(`Erreur lors du changement de validation de la ressource ${id}: ${error.message}`);
-            throw error;
-        }
     }
     async toggleArchivage(id) {
         try {

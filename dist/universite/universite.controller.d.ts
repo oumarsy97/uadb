@@ -6,6 +6,8 @@ export declare class UniversiteController {
     create(createUniversiteDto: CreateUniversiteDto): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
@@ -17,6 +19,8 @@ export declare class UniversiteController {
     }): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
@@ -24,6 +28,8 @@ export declare class UniversiteController {
     findOne(id: string): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
@@ -34,6 +40,8 @@ export declare class UniversiteController {
     }): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
@@ -41,6 +49,8 @@ export declare class UniversiteController {
     remove(id: string): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
@@ -48,6 +58,8 @@ export declare class UniversiteController {
     getStatistics(id: string): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
@@ -55,6 +67,8 @@ export declare class UniversiteController {
     getTopUniversites(limit?: number): Promise<{
         nom: string;
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ville: string;
         adresse: string | null;
         siteWeb: string | null;
