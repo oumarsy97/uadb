@@ -320,20 +320,6 @@ export const StatutTransaction: {
 export type StatutTransaction = (typeof StatutTransaction)[keyof typeof StatutTransaction]
 
 
-export const TypeRessource: {
-  MEMOIRE: 'MEMOIRE',
-  THESE: 'THESE',
-  ARTICLE_SCIENTIFIQUE: 'ARTICLE_SCIENTIFIQUE',
-  COURS: 'COURS',
-  SUPPORT_PEDAGOGIQUE: 'SUPPORT_PEDAGOGIQUE',
-  RAPPORT_RECHERCHE: 'RAPPORT_RECHERCHE',
-  LIVRE: 'LIVRE',
-  CONFERENCE: 'CONFERENCE'
-};
-
-export type TypeRessource = (typeof TypeRessource)[keyof typeof TypeRessource]
-
-
 export const NiveauAcces: {
   PUBLIC: 'PUBLIC',
   AUTHENTIFIE: 'AUTHENTIFIE',
@@ -418,10 +404,6 @@ export const TypeTransaction: typeof $Enums.TypeTransaction
 export type StatutTransaction = $Enums.StatutTransaction
 
 export const StatutTransaction: typeof $Enums.StatutTransaction
-
-export type TypeRessource = $Enums.TypeRessource
-
-export const TypeRessource: typeof $Enums.TypeRessource
 
 export type NiveauAcces = $Enums.NiveauAcces
 
@@ -28458,9 +28440,7 @@ export namespace Prisma {
     datePublication: Date | null
     motsCles: string | null
     auteurId: string | null
-    universiteId: string | null
     estArchive: boolean | null
-    validation: $Enums.TypeValidation | null
     categorieId: string | null
   }
 
@@ -28478,9 +28458,7 @@ export namespace Prisma {
     datePublication: Date | null
     motsCles: string | null
     auteurId: string | null
-    universiteId: string | null
     estArchive: boolean | null
-    validation: $Enums.TypeValidation | null
     categorieId: string | null
   }
 
@@ -28498,9 +28476,7 @@ export namespace Prisma {
     datePublication: number
     motsCles: number
     auteurId: number
-    universiteId: number
     estArchive: number
-    validation: number
     categorieId: number
     _all: number
   }
@@ -28520,9 +28496,7 @@ export namespace Prisma {
     datePublication?: true
     motsCles?: true
     auteurId?: true
-    universiteId?: true
     estArchive?: true
-    validation?: true
     categorieId?: true
   }
 
@@ -28540,9 +28514,7 @@ export namespace Prisma {
     datePublication?: true
     motsCles?: true
     auteurId?: true
-    universiteId?: true
     estArchive?: true
-    validation?: true
     categorieId?: true
   }
 
@@ -28560,9 +28532,7 @@ export namespace Prisma {
     datePublication?: true
     motsCles?: true
     auteurId?: true
-    universiteId?: true
     estArchive?: true
-    validation?: true
     categorieId?: true
     _all?: true
   }
@@ -28645,7 +28615,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue: string
-    urlFichier: string
+    urlFichier: string | null
     urlFichierLocal: string | null
     format: string
     image: string | null
@@ -28653,9 +28623,7 @@ export namespace Prisma {
     datePublication: Date | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive: boolean
-    validation: $Enums.TypeValidation
     categorieId: string
     _count: RessourceCountAggregateOutputType | null
     _min: RessourceMinAggregateOutputType | null
@@ -28690,9 +28658,7 @@ export namespace Prisma {
     datePublication?: boolean
     motsCles?: boolean
     auteurId?: boolean
-    universiteId?: boolean
     estArchive?: boolean
-    validation?: boolean
     categorieId?: boolean
     auteur?: boolean | UserDefaultArgs<ExtArgs>
     favoris?: boolean | Ressource$favorisArgs<ExtArgs>
@@ -28724,13 +28690,11 @@ export namespace Prisma {
     datePublication?: boolean
     motsCles?: boolean
     auteurId?: boolean
-    universiteId?: boolean
     estArchive?: boolean
-    validation?: boolean
     categorieId?: boolean
   }
 
-  export type RessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "isbnglobale" | "description" | "langue" | "urlFichier" | "urlFichierLocal" | "format" | "image" | "niveauAcces" | "datePublication" | "motsCles" | "auteurId" | "universiteId" | "estArchive" | "validation" | "categorieId", ExtArgs["result"]["ressource"]>
+  export type RessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "isbnglobale" | "description" | "langue" | "urlFichier" | "urlFichierLocal" | "format" | "image" | "niveauAcces" | "datePublication" | "motsCles" | "auteurId" | "estArchive" | "categorieId", ExtArgs["result"]["ressource"]>
   export type RessourceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     auteur?: boolean | UserDefaultArgs<ExtArgs>
     favoris?: boolean | Ressource$favorisArgs<ExtArgs>
@@ -28767,7 +28731,7 @@ export namespace Prisma {
       isbnglobale: string
       description: string
       langue: string
-      urlFichier: string
+      urlFichier: string | null
       urlFichierLocal: string | null
       format: string
       image: string | null
@@ -28775,9 +28739,7 @@ export namespace Prisma {
       datePublication: Date | null
       motsCles: string
       auteurId: string
-      universiteId: string
       estArchive: boolean
-      validation: $Enums.TypeValidation
       categorieId: string
     }, ExtArgs["result"]["ressource"]>
     composites: {}
@@ -29172,9 +29134,7 @@ export namespace Prisma {
     readonly datePublication: FieldRef<"Ressource", 'DateTime'>
     readonly motsCles: FieldRef<"Ressource", 'String'>
     readonly auteurId: FieldRef<"Ressource", 'String'>
-    readonly universiteId: FieldRef<"Ressource", 'String'>
     readonly estArchive: FieldRef<"Ressource", 'Boolean'>
-    readonly validation: FieldRef<"Ressource", 'TypeValidation'>
     readonly categorieId: FieldRef<"Ressource", 'String'>
   }
     
@@ -34187,9 +34147,7 @@ export namespace Prisma {
     datePublication: 'datePublication',
     motsCles: 'motsCles',
     auteurId: 'auteurId',
-    universiteId: 'universiteId',
     estArchive: 'estArchive',
-    validation: 'validation',
     categorieId: 'categorieId'
   };
 
@@ -34554,7 +34512,6 @@ export namespace Prisma {
     image: 'image',
     motsCles: 'motsCles',
     auteurId: 'auteurId',
-    universiteId: 'universiteId',
     categorieId: 'categorieId'
   };
 
@@ -34740,13 +34697,6 @@ export namespace Prisma {
    * Reference to a field of type 'NiveauAcces'
    */
   export type EnumNiveauAccesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NiveauAcces'>
-    
-
-
-  /**
-   * Reference to a field of type 'TypeValidation'
-   */
-  export type EnumTypeValidationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeValidation'>
     
 
 
@@ -36728,7 +36678,7 @@ export namespace Prisma {
     isbnglobale?: StringFilter<"Ressource"> | string
     description?: StringFilter<"Ressource"> | string
     langue?: StringFilter<"Ressource"> | string
-    urlFichier?: StringFilter<"Ressource"> | string
+    urlFichier?: StringNullableFilter<"Ressource"> | string | null
     urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
     format?: StringFilter<"Ressource"> | string
     image?: StringNullableFilter<"Ressource"> | string | null
@@ -36736,9 +36686,7 @@ export namespace Prisma {
     datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
     motsCles?: StringFilter<"Ressource"> | string
     auteurId?: StringFilter<"Ressource"> | string
-    universiteId?: StringFilter<"Ressource"> | string
     estArchive?: BoolFilter<"Ressource"> | boolean
-    validation?: EnumTypeValidationFilter<"Ressource"> | $Enums.TypeValidation
     categorieId?: StringFilter<"Ressource"> | string
     auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
     favoris?: FavoriListRelationFilter
@@ -36759,7 +36707,7 @@ export namespace Prisma {
     isbnglobale?: SortOrder
     description?: SortOrder
     langue?: SortOrder
-    urlFichier?: SortOrder
+    urlFichier?: SortOrderInput | SortOrder
     urlFichierLocal?: SortOrderInput | SortOrder
     format?: SortOrder
     image?: SortOrderInput | SortOrder
@@ -36767,9 +36715,7 @@ export namespace Prisma {
     datePublication?: SortOrderInput | SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
-    universiteId?: SortOrder
     estArchive?: SortOrder
-    validation?: SortOrder
     categorieId?: SortOrder
     auteur?: UserOrderByWithRelationInput
     favoris?: FavoriOrderByRelationAggregateInput
@@ -36794,7 +36740,7 @@ export namespace Prisma {
     titre?: StringFilter<"Ressource"> | string
     description?: StringFilter<"Ressource"> | string
     langue?: StringFilter<"Ressource"> | string
-    urlFichier?: StringFilter<"Ressource"> | string
+    urlFichier?: StringNullableFilter<"Ressource"> | string | null
     urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
     format?: StringFilter<"Ressource"> | string
     image?: StringNullableFilter<"Ressource"> | string | null
@@ -36802,9 +36748,7 @@ export namespace Prisma {
     datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
     motsCles?: StringFilter<"Ressource"> | string
     auteurId?: StringFilter<"Ressource"> | string
-    universiteId?: StringFilter<"Ressource"> | string
     estArchive?: BoolFilter<"Ressource"> | boolean
-    validation?: EnumTypeValidationFilter<"Ressource"> | $Enums.TypeValidation
     categorieId?: StringFilter<"Ressource"> | string
     auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
     favoris?: FavoriListRelationFilter
@@ -36825,7 +36769,7 @@ export namespace Prisma {
     isbnglobale?: SortOrder
     description?: SortOrder
     langue?: SortOrder
-    urlFichier?: SortOrder
+    urlFichier?: SortOrderInput | SortOrder
     urlFichierLocal?: SortOrderInput | SortOrder
     format?: SortOrder
     image?: SortOrderInput | SortOrder
@@ -36833,9 +36777,7 @@ export namespace Prisma {
     datePublication?: SortOrderInput | SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
-    universiteId?: SortOrder
     estArchive?: SortOrder
-    validation?: SortOrder
     categorieId?: SortOrder
     _count?: RessourceCountOrderByAggregateInput
     _max?: RessourceMaxOrderByAggregateInput
@@ -36851,7 +36793,7 @@ export namespace Prisma {
     isbnglobale?: StringWithAggregatesFilter<"Ressource"> | string
     description?: StringWithAggregatesFilter<"Ressource"> | string
     langue?: StringWithAggregatesFilter<"Ressource"> | string
-    urlFichier?: StringWithAggregatesFilter<"Ressource"> | string
+    urlFichier?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     urlFichierLocal?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
     format?: StringWithAggregatesFilter<"Ressource"> | string
     image?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
@@ -36859,9 +36801,7 @@ export namespace Prisma {
     datePublication?: DateTimeNullableWithAggregatesFilter<"Ressource"> | Date | string | null
     motsCles?: StringWithAggregatesFilter<"Ressource"> | string
     auteurId?: StringWithAggregatesFilter<"Ressource"> | string
-    universiteId?: StringWithAggregatesFilter<"Ressource"> | string
     estArchive?: BoolWithAggregatesFilter<"Ressource"> | boolean
-    validation?: EnumTypeValidationWithAggregatesFilter<"Ressource"> | $Enums.TypeValidation
     categorieId?: StringWithAggregatesFilter<"Ressource"> | string
   }
 
@@ -39281,16 +39221,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -39310,7 +39248,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -39318,9 +39256,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -39339,16 +39275,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -39368,7 +39302,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39376,9 +39310,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -39397,7 +39329,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -39405,9 +39337,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
   }
 
@@ -39417,16 +39347,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
   }
 
   export type RessourceUncheckedUpdateManyInput = {
@@ -39435,7 +39363,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39443,9 +39371,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -41560,13 +41486,6 @@ export namespace Prisma {
     not?: NestedEnumNiveauAccesFilter<$PrismaModel> | $Enums.NiveauAcces
   }
 
-  export type EnumTypeValidationFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeValidation | EnumTypeValidationFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeValidation[]
-    notIn?: $Enums.TypeValidation[]
-    not?: NestedEnumTypeValidationFilter<$PrismaModel> | $Enums.TypeValidation
-  }
-
   export type ExemplairePhysiqueListRelationFilter = {
     every?: ExemplairePhysiqueWhereInput
     some?: ExemplairePhysiqueWhereInput
@@ -41602,9 +41521,7 @@ export namespace Prisma {
     datePublication?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
-    universiteId?: SortOrder
     estArchive?: SortOrder
-    validation?: SortOrder
     categorieId?: SortOrder
   }
 
@@ -41622,9 +41539,7 @@ export namespace Prisma {
     datePublication?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
-    universiteId?: SortOrder
     estArchive?: SortOrder
-    validation?: SortOrder
     categorieId?: SortOrder
   }
 
@@ -41642,9 +41557,7 @@ export namespace Prisma {
     datePublication?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
-    universiteId?: SortOrder
     estArchive?: SortOrder
-    validation?: SortOrder
     categorieId?: SortOrder
   }
 
@@ -41656,16 +41569,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumNiveauAccesFilter<$PrismaModel>
     _max?: NestedEnumNiveauAccesFilter<$PrismaModel>
-  }
-
-  export type EnumTypeValidationWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeValidation | EnumTypeValidationFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeValidation[]
-    notIn?: $Enums.TypeValidation[]
-    not?: NestedEnumTypeValidationWithAggregatesFilter<$PrismaModel> | $Enums.TypeValidation
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeValidationFilter<$PrismaModel>
-    _max?: NestedEnumTypeValidationFilter<$PrismaModel>
   }
 
   export type CategorieOrderByRelevanceInput = {
@@ -43832,10 +43735,6 @@ export namespace Prisma {
     set?: $Enums.NiveauAcces
   }
 
-  export type EnumTypeValidationFieldUpdateOperationsInput = {
-    set?: $Enums.TypeValidation
-  }
-
   export type UserUpdateOneRequiredWithoutContributionsNestedInput = {
     create?: XOR<UserCreateWithoutContributionsInput, UserUncheckedCreateWithoutContributionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutContributionsInput
@@ -44592,13 +44491,6 @@ export namespace Prisma {
     not?: NestedEnumNiveauAccesFilter<$PrismaModel> | $Enums.NiveauAcces
   }
 
-  export type NestedEnumTypeValidationFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeValidation | EnumTypeValidationFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeValidation[]
-    notIn?: $Enums.TypeValidation[]
-    not?: NestedEnumTypeValidationFilter<$PrismaModel> | $Enums.TypeValidation
-  }
-
   export type NestedEnumNiveauAccesWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.NiveauAcces | EnumNiveauAccesFieldRefInput<$PrismaModel>
     in?: $Enums.NiveauAcces[]
@@ -44607,16 +44499,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumNiveauAccesFilter<$PrismaModel>
     _max?: NestedEnumNiveauAccesFilter<$PrismaModel>
-  }
-
-  export type NestedEnumTypeValidationWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeValidation | EnumTypeValidationFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeValidation[]
-    notIn?: $Enums.TypeValidation[]
-    not?: NestedEnumTypeValidationWithAggregatesFilter<$PrismaModel> | $Enums.TypeValidation
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeValidationFilter<$PrismaModel>
-    _max?: NestedEnumTypeValidationFilter<$PrismaModel>
   }
 
   export type NestedFloatNullableFilter<$PrismaModel = never> = {
@@ -45127,16 +45009,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -45155,7 +45035,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -45163,9 +45043,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -45305,16 +45183,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -45333,7 +45209,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45341,9 +45217,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -45396,16 +45270,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -45424,7 +45296,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -45432,9 +45304,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -45510,16 +45380,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -45538,7 +45406,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45546,9 +45414,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -45962,16 +45828,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -45990,7 +45854,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -45998,9 +45862,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -46111,16 +45973,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -46139,7 +45999,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46147,9 +46007,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -46784,16 +46642,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -46812,16 +46668,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -47389,7 +47243,7 @@ export namespace Prisma {
     isbnglobale?: StringFilter<"Ressource"> | string
     description?: StringFilter<"Ressource"> | string
     langue?: StringFilter<"Ressource"> | string
-    urlFichier?: StringFilter<"Ressource"> | string
+    urlFichier?: StringNullableFilter<"Ressource"> | string | null
     urlFichierLocal?: StringNullableFilter<"Ressource"> | string | null
     format?: StringFilter<"Ressource"> | string
     image?: StringNullableFilter<"Ressource"> | string | null
@@ -47397,9 +47251,7 @@ export namespace Prisma {
     datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
     motsCles?: StringFilter<"Ressource"> | string
     auteurId?: StringFilter<"Ressource"> | string
-    universiteId?: StringFilter<"Ressource"> | string
     estArchive?: BoolFilter<"Ressource"> | boolean
-    validation?: EnumTypeValidationFilter<"Ressource"> | $Enums.TypeValidation
     categorieId?: StringFilter<"Ressource"> | string
   }
 
@@ -48630,16 +48482,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     auteur: UserCreateNestedOneWithoutContributionsInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -48658,7 +48508,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -48666,9 +48516,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -48779,16 +48627,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -48807,7 +48653,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48815,9 +48661,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -48906,16 +48750,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
@@ -48934,7 +48776,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -48942,9 +48784,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -49055,16 +48895,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -49083,7 +48921,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49091,9 +48929,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -49182,16 +49018,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -49210,7 +49044,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -49218,9 +49052,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -49331,16 +49163,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -49359,7 +49189,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49367,9 +49197,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -49458,16 +49286,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -49486,7 +49312,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -49494,9 +49320,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -49607,16 +49431,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -49635,7 +49457,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49643,9 +49465,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -49734,16 +49554,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -49762,7 +49580,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -49770,9 +49588,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -49883,16 +49699,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -49911,7 +49725,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49919,9 +49733,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -50165,16 +49977,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -50193,7 +50003,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -50201,9 +50011,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
@@ -50264,16 +50072,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -50292,7 +50098,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50300,9 +50106,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -50982,16 +50786,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     auteur: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
@@ -51010,7 +50812,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -51018,9 +50820,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
@@ -51844,16 +51644,14 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
     categorieId: string
   }
 
@@ -52040,16 +51838,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
@@ -52068,16 +51864,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
@@ -52096,16 +51890,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     categorieId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -53162,7 +52954,7 @@ export namespace Prisma {
     isbnglobale: string
     description: string
     langue?: string
-    urlFichier: string
+    urlFichier?: string | null
     urlFichierLocal?: string | null
     format: string
     image?: string | null
@@ -53170,9 +52962,7 @@ export namespace Prisma {
     datePublication?: Date | string | null
     motsCles: string
     auteurId: string
-    universiteId: string
     estArchive?: boolean
-    validation?: $Enums.TypeValidation
   }
 
   export type RessourceUpdateWithoutCategorieInput = {
@@ -53181,16 +52971,14 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
@@ -53209,7 +52997,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53217,9 +53005,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
@@ -53237,7 +53023,7 @@ export namespace Prisma {
     isbnglobale?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
     urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
     format?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53245,9 +53031,7 @@ export namespace Prisma {
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
     auteurId?: StringFieldUpdateOperationsInput | string
-    universiteId?: StringFieldUpdateOperationsInput | string
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    validation?: EnumTypeValidationFieldUpdateOperationsInput | $Enums.TypeValidation
   }
 
 

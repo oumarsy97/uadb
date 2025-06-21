@@ -1,18 +1,68 @@
-// ressources.controller.ts
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { RessourcesService } from './ressources.service';
 import { CreateRessourceDto, UpdateRessourceDto, SearchRessourceDto } from './dto/create-ressource.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller()
 export class RessourcesController {
-  constructor(private readonly ressourcesService: RessourcesService) {}
+  constructor(
+    private readonly ressourcesService: RessourcesService,
+    private readonly jwtService: JwtService
+  ) {}
+
+  /**
+   * Extrait l'ID utilisateur depuis le token JWT
+   * @param token - Le token JWT
+   * @returns L'ID de l'utilisateur
+   */
+  private extractUserIdFromToken(token: string): string {
+    try {
+      // Enlever le préfixe "Bearer " s'il existe
+      const cleanToken = token.replace(/^Bearer\s+/, '');
+      
+      // Décoder le token
+      const payload = this.jwtService.decode(cleanToken) as any;
+      
+      if (!payload || !payload.sub && !payload.id && !payload.userId) {
+        throw new Error('Token invalide: ID utilisateur non trouvé');
+      }
+      
+      // Retourner l'ID utilisateur (peut être dans sub, id, ou userId selon votre implémentation)
+      return payload.sub || payload.id || payload.userId;
+    } catch (error) {
+      throw new Error(`Erreur lors de l'extraction de l'ID utilisateur: ${error.message}`);
+    }
+  }
+
+  
+
+  /**
+   * Alternative pour générer un ISRN basé sur timestamp + random
+   * @returns Un ISRN au format UADB-XXXXXXX
+   */
+ 
 
   @MessagePattern('createRessource')
-  async create(@Payload() createRessourceDto: CreateRessourceDto) {
+  async create(@Payload() data: { createRessourceDto: CreateRessourceDto; token: string }) {
     try {
-        console.log('ressource',createRessourceDto)
-      return await this.ressourcesService.create(createRessourceDto);
+      const { createRessourceDto, token } = data;
+      
+      // Extraire l'ID utilisateur depuis le token
+      const userId = this.extractUserIdFromToken(token);
+      
+      // Générer un ISRN unique
+      
+      console.log('ID Utilisateur:', userId);
+      console.log('Données ressource:', createRessourceDto);
+      
+      // Ajouter l'ID utilisateur et l'ISRN aux données de création
+      const enrichedDto = {
+        ...createRessourceDto,
+        auteurId: userId, // ou le nom de champ approprié
+      };
+      
+      return await this.ressourcesService.create(enrichedDto);
     } catch (error) {
       return {
         error: true,
@@ -23,8 +73,16 @@ export class RessourcesController {
   }
 
   @MessagePattern('findAllRessources')
-  async findAll(@Payload() options: SearchRessourceDto = {}) {
+  async findAll(@Payload() data: { options?: SearchRessourceDto; token?: string }) {
     try {
+      const { options = {}, token } = data;
+      
+      // Si un token est fourni, extraire l'ID utilisateur pour filtrer ou loguer
+      if (token) {
+        const userId = this.extractUserIdFromToken(token);
+        console.log('Recherche effectuée par utilisateur:', userId);
+      }
+      
       return await this.ressourcesService.findAll(options);
     } catch (error) {
       return {
@@ -36,8 +94,16 @@ export class RessourcesController {
   }
 
   @MessagePattern('findRessourceById')
-  async findOne(@Payload() id: string) {
+  async findOne(@Payload() data: { id: string; token?: string }) {
     try {
+      const { id, token } = data;
+      
+      // Si un token est fourni, extraire l'ID utilisateur
+      if (token) {
+        const userId = this.extractUserIdFromToken(token);
+        console.log('Consultation par utilisateur:', userId);
+      }
+      
       return await this.ressourcesService.findOne(id);
     } catch (error) {
       return {
@@ -49,9 +115,16 @@ export class RessourcesController {
   }
 
   @MessagePattern('updateRessource')
-  async update(@Payload() data: { id: string; updateData: UpdateRessourceDto }) {
+  async update(@Payload() data: { id: string; updateData: UpdateRessourceDto; token: string }) {
     try {
-      return await this.ressourcesService.update(data.id, data.updateData);
+      const { id, updateData, token } = data;
+      
+      // Extraire l'ID utilisateur depuis le token
+      const userId = this.extractUserIdFromToken(token);
+      
+      console.log('Modification par utilisateur:', userId);
+      
+      return await this.ressourcesService.update(id, updateData);
     } catch (error) {
       return {
         error: true,
@@ -62,8 +135,15 @@ export class RessourcesController {
   }
 
   @MessagePattern('removeRessource')
-  async remove(@Payload() id: string) {
+  async remove(@Payload() data: { id: string; token: string }) {
     try {
+      const { id, token } = data;
+      
+      // Extraire l'ID utilisateur depuis le token
+      const userId = this.extractUserIdFromToken(token);
+      
+      console.log('Suppression par utilisateur:', userId);
+      
       return await this.ressourcesService.remove(id);
     } catch (error) {
       return {
@@ -75,9 +155,16 @@ export class RessourcesController {
   }
 
   @MessagePattern('findRessourcesByAuteur')
-  async findByAuteur(@Payload() data: { auteurId: string; options?: SearchRessourceDto }) {
+  async findByAuteur(@Payload() data: { auteurId: string; options?: SearchRessourceDto; token?: string }) {
     try {
-      return await this.ressourcesService.findByAuteur(data.auteurId, data.options);
+      const { auteurId, options, token } = data;
+      
+      if (token) {
+        const userId = this.extractUserIdFromToken(token);
+        console.log('Recherche par auteur effectuée par:', userId);
+      }
+      
+      return await this.ressourcesService.findByAuteur(auteurId, options);
     } catch (error) {
       return {
         error: true,
@@ -88,9 +175,16 @@ export class RessourcesController {
   }
 
   @MessagePattern('findRessourcesByUniversite')
-  async findByUniversite(@Payload() data: { universiteId: string; options?: SearchRessourceDto }) {
+  async findByUniversite(@Payload() data: { universiteId: string; options?: SearchRessourceDto; token?: string }) {
     try {
-      return await this.ressourcesService.findByUniversite(data.universiteId, data.options);
+      const { universiteId, options, token } = data;
+      
+      if (token) {
+        const userId = this.extractUserIdFromToken(token);
+        console.log('Recherche par université effectuée par:', userId);
+      }
+      
+      return await this.ressourcesService.findByUniversite(universiteId, options);
     } catch (error) {
       return {
         error: true,
@@ -100,11 +194,16 @@ export class RessourcesController {
     }
   }
 
- 
-
   @MessagePattern('toggleArchivageRessource')
-  async toggleArchivage(@Payload() id: string) {
+  async toggleArchivage(@Payload() data: { id: string; token: string }) {
     try {
+      const { id, token } = data;
+      
+      // Extraire l'ID utilisateur depuis le token
+      const userId = this.extractUserIdFromToken(token);
+      
+      console.log('Toggle archivage par utilisateur:', userId);
+      
       return await this.ressourcesService.toggleArchivage(id);
     } catch (error) {
       return {
@@ -117,14 +216,27 @@ export class RessourcesController {
 
   @MessagePattern('enregistrerAccesRessource')
   async enregistrerAcces(@Payload() data: { 
-    userId: string; 
     ressourceId: string; 
     typeAcces: 'CONSULTATION' | 'TELECHARGEMENT' | 'CITATION' | 'PARTAGE';
     ipAcces: string;
     universiteSrc?: string;
+    token: string;
   }) {
     try {
-      return await this.ressourcesService.enregistrerAcces(data);
+      const { ressourceId, typeAcces, ipAcces, universiteSrc, token } = data;
+      
+      // Extraire l'ID utilisateur depuis le token
+      const userId = this.extractUserIdFromToken(token);
+      
+      const accessData = {
+        userId,
+        ressourceId,
+        typeAcces,
+        ipAcces,
+        universiteSrc
+      };
+      
+      return await this.ressourcesService.enregistrerAcces(accessData);
     } catch (error) {
       return {
         error: true,
@@ -133,4 +245,6 @@ export class RessourcesController {
       };
     }
   }
+
+  
 }

@@ -16,16 +16,38 @@ exports.RessourcesController = void 0;
 const common_1 = require("@nestjs/common");
 const microservices_1 = require("@nestjs/microservices");
 const ressources_service_1 = require("./ressources.service");
-const create_ressource_dto_1 = require("./dto/create-ressource.dto");
+const jwt_1 = require("@nestjs/jwt");
 let RessourcesController = class RessourcesController {
     ressourcesService;
-    constructor(ressourcesService) {
+    jwtService;
+    constructor(ressourcesService, jwtService) {
         this.ressourcesService = ressourcesService;
+        this.jwtService = jwtService;
     }
-    async create(createRessourceDto) {
+    extractUserIdFromToken(token) {
         try {
-            console.log('ressource', createRessourceDto);
-            return await this.ressourcesService.create(createRessourceDto);
+            const cleanToken = token.replace(/^Bearer\s+/, '');
+            const payload = this.jwtService.decode(cleanToken);
+            if (!payload || !payload.sub && !payload.id && !payload.userId) {
+                throw new Error('Token invalide: ID utilisateur non trouvé');
+            }
+            return payload.sub || payload.id || payload.userId;
+        }
+        catch (error) {
+            throw new Error(`Erreur lors de l'extraction de l'ID utilisateur: ${error.message}`);
+        }
+    }
+    async create(data) {
+        try {
+            const { createRessourceDto, token } = data;
+            const userId = this.extractUserIdFromToken(token);
+            console.log('ID Utilisateur:', userId);
+            console.log('Données ressource:', createRessourceDto);
+            const enrichedDto = {
+                ...createRessourceDto,
+                auteurId: userId,
+            };
+            return await this.ressourcesService.create(enrichedDto);
         }
         catch (error) {
             return {
@@ -35,8 +57,13 @@ let RessourcesController = class RessourcesController {
             };
         }
     }
-    async findAll(options = {}) {
+    async findAll(data) {
         try {
+            const { options = {}, token } = data;
+            if (token) {
+                const userId = this.extractUserIdFromToken(token);
+                console.log('Recherche effectuée par utilisateur:', userId);
+            }
             return await this.ressourcesService.findAll(options);
         }
         catch (error) {
@@ -47,8 +74,13 @@ let RessourcesController = class RessourcesController {
             };
         }
     }
-    async findOne(id) {
+    async findOne(data) {
         try {
+            const { id, token } = data;
+            if (token) {
+                const userId = this.extractUserIdFromToken(token);
+                console.log('Consultation par utilisateur:', userId);
+            }
             return await this.ressourcesService.findOne(id);
         }
         catch (error) {
@@ -61,7 +93,10 @@ let RessourcesController = class RessourcesController {
     }
     async update(data) {
         try {
-            return await this.ressourcesService.update(data.id, data.updateData);
+            const { id, updateData, token } = data;
+            const userId = this.extractUserIdFromToken(token);
+            console.log('Modification par utilisateur:', userId);
+            return await this.ressourcesService.update(id, updateData);
         }
         catch (error) {
             return {
@@ -71,8 +106,11 @@ let RessourcesController = class RessourcesController {
             };
         }
     }
-    async remove(id) {
+    async remove(data) {
         try {
+            const { id, token } = data;
+            const userId = this.extractUserIdFromToken(token);
+            console.log('Suppression par utilisateur:', userId);
             return await this.ressourcesService.remove(id);
         }
         catch (error) {
@@ -85,7 +123,12 @@ let RessourcesController = class RessourcesController {
     }
     async findByAuteur(data) {
         try {
-            return await this.ressourcesService.findByAuteur(data.auteurId, data.options);
+            const { auteurId, options, token } = data;
+            if (token) {
+                const userId = this.extractUserIdFromToken(token);
+                console.log('Recherche par auteur effectuée par:', userId);
+            }
+            return await this.ressourcesService.findByAuteur(auteurId, options);
         }
         catch (error) {
             return {
@@ -97,7 +140,12 @@ let RessourcesController = class RessourcesController {
     }
     async findByUniversite(data) {
         try {
-            return await this.ressourcesService.findByUniversite(data.universiteId, data.options);
+            const { universiteId, options, token } = data;
+            if (token) {
+                const userId = this.extractUserIdFromToken(token);
+                console.log('Recherche par université effectuée par:', userId);
+            }
+            return await this.ressourcesService.findByUniversite(universiteId, options);
         }
         catch (error) {
             return {
@@ -107,8 +155,11 @@ let RessourcesController = class RessourcesController {
             };
         }
     }
-    async toggleArchivage(id) {
+    async toggleArchivage(data) {
         try {
+            const { id, token } = data;
+            const userId = this.extractUserIdFromToken(token);
+            console.log('Toggle archivage par utilisateur:', userId);
             return await this.ressourcesService.toggleArchivage(id);
         }
         catch (error) {
@@ -121,7 +172,16 @@ let RessourcesController = class RessourcesController {
     }
     async enregistrerAcces(data) {
         try {
-            return await this.ressourcesService.enregistrerAcces(data);
+            const { ressourceId, typeAcces, ipAcces, universiteSrc, token } = data;
+            const userId = this.extractUserIdFromToken(token);
+            const accessData = {
+                userId,
+                ressourceId,
+                typeAcces,
+                ipAcces,
+                universiteSrc
+            };
+            return await this.ressourcesService.enregistrerAcces(accessData);
         }
         catch (error) {
             return {
@@ -137,21 +197,21 @@ __decorate([
     (0, microservices_1.MessagePattern)('createRessource'),
     __param(0, (0, microservices_1.Payload)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_ressource_dto_1.CreateRessourceDto]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], RessourcesController.prototype, "create", null);
 __decorate([
     (0, microservices_1.MessagePattern)('findAllRessources'),
     __param(0, (0, microservices_1.Payload)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_ressource_dto_1.SearchRessourceDto]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], RessourcesController.prototype, "findAll", null);
 __decorate([
     (0, microservices_1.MessagePattern)('findRessourceById'),
     __param(0, (0, microservices_1.Payload)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], RessourcesController.prototype, "findOne", null);
 __decorate([
@@ -165,7 +225,7 @@ __decorate([
     (0, microservices_1.MessagePattern)('removeRessource'),
     __param(0, (0, microservices_1.Payload)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], RessourcesController.prototype, "remove", null);
 __decorate([
@@ -186,7 +246,7 @@ __decorate([
     (0, microservices_1.MessagePattern)('toggleArchivageRessource'),
     __param(0, (0, microservices_1.Payload)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], RessourcesController.prototype, "toggleArchivage", null);
 __decorate([
@@ -198,6 +258,7 @@ __decorate([
 ], RessourcesController.prototype, "enregistrerAcces", null);
 exports.RessourcesController = RessourcesController = __decorate([
     (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [ressources_service_1.RessourcesService])
+    __metadata("design:paramtypes", [ressources_service_1.RessourcesService,
+        jwt_1.JwtService])
 ], RessourcesController);
 //# sourceMappingURL=ressources.controller.js.map

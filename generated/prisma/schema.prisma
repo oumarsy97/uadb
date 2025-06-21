@@ -574,17 +574,6 @@ enum StatutTransaction {
   ANNULEE
 }
 
-enum TypeRessource {
-  MEMOIRE
-  THESE
-  ARTICLE_SCIENTIFIQUE
-  COURS
-  SUPPORT_PEDAGOGIQUE
-  RAPPORT_RECHERCHE
-  LIVRE
-  CONFERENCE
-}
-
 enum NiveauAcces {
   PUBLIC // Accessible à tous
   AUTHENTIFIE // Accessible aux utilisateurs authentifiés
@@ -595,22 +584,20 @@ enum NiveauAcces {
 // Modèle Ressource pour bibliothèque
 model Ressource {
   // Champs existants
-  id              String         @id @default(uuid())
+  id              String      @id @default(uuid())
   titre           String
-  isbnglobale     String         @unique @map("isbn_globale")
-  description     String         @db.Text
-  langue          String         @default("fr")
-  urlFichier      String         @map("url_fichier")
-  urlFichierLocal String?        @default("file:///tmp/ressource.pdf") @map("url_fichier_local")
+  isbnglobale     String      @unique @map("isbn_globale")
+  description     String      @db.Text
+  langue          String      @default("fr")
+  urlFichier      String?     @map("url_fichier")
+  urlFichierLocal String?     @default("file:///tmp/ressource.pdf") @map("url_fichier_local")
   format          String // pdf, docx, etc.
   image           String?
-  niveauAcces     NiveauAcces    @default(PUBLIC) @map("niveau_acces")
-  datePublication DateTime?      @default(now()) @map("date_publication")
-  motsCles        String         @map("mots_cles")
-  auteurId        String         @map("auteur_id")
-  universiteId    String         @map("universite_id")
-  estArchive      Boolean        @default(false) @map("est_archive")
-  validation      TypeValidation @default(EN_ATTENTE) @map("validation")
+  niveauAcces     NiveauAcces @default(PUBLIC) @map("niveau_acces")
+  datePublication DateTime?   @default(now()) @map("date_publication")
+  motsCles        String      @map("mots_cles")
+  auteurId        String      @map("auteur_id")
+  estArchive      Boolean     @default(false) @map("est_archive")
 
   // Relations
   auteur User @relation(fields: [auteurId], references: [id])
@@ -629,7 +616,6 @@ model Ressource {
   categorie              Categorie?              @relation(fields: [categorieId], references: [id])
 
   @@index([datePublication])
-  @@index([universiteId])
   @@index([auteurId, estArchive])
 }
 

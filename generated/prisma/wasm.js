@@ -418,9 +418,7 @@ exports.Prisma.RessourceScalarFieldEnum = {
   datePublication: 'datePublication',
   motsCles: 'motsCles',
   auteurId: 'auteurId',
-  universiteId: 'universiteId',
   estArchive: 'estArchive',
-  validation: 'validation',
   categorieId: 'categorieId'
 };
 
@@ -689,7 +687,6 @@ exports.Prisma.RessourceOrderByRelevanceFieldEnum = {
   image: 'image',
   motsCles: 'motsCles',
   auteurId: 'auteurId',
-  universiteId: 'universiteId',
   categorieId: 'categorieId'
 };
 
@@ -822,13 +819,6 @@ exports.NiveauAcces = exports.$Enums.NiveauAcces = {
   AUTHENTIFIE: 'AUTHENTIFIE',
   UNIVERSITE_ORIGINE: 'UNIVERSITE_ORIGINE',
   PRIVE: 'PRIVE'
-};
-
-exports.TypeValidation = exports.$Enums.TypeValidation = {
-  EN_ATTENTE: 'EN_ATTENTE',
-  VALIDE: 'VALIDE',
-  REJETEE: 'REJETEE',
-  ANNULEE: 'ANNULEE'
 };
 
 exports.TypeNotification = exports.$Enums.TypeNotification = {

@@ -21,48 +21,132 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
     }
     async create(createRessourceDto) {
         try {
-            if (createRessourceDto.auteurId) {
-                const existingRessource = await this.prisma.ressource.findFirst({
-                    where: {
-                        titre: createRessourceDto.titre,
-                        auteurId: createRessourceDto.auteurId,
-                    },
-                });
-                if (existingRessource) {
-                    throw new common_1.BadRequestException('Une ressource avec le même titre existe déjà pour cet auteur');
-                }
+            this.logger.log(`Création d'une ressource: ${JSON.stringify(createRessourceDto, null, 2)}`);
+            if (!createRessourceDto.auteurId) {
+                throw new common_1.BadRequestException('L\'ID de l\'auteur est obligatoire');
             }
-            const data = {
-                titre: createRessourceDto.titre,
-                description: createRessourceDto.description,
-                type: createRessourceDto.type,
-                langue: createRessourceDto.langue || 'fr',
-                urlFichier: createRessourceDto.urlFichier,
-                format: createRessourceDto.format,
-                motsCles: createRessourceDto.motsCles,
-                universiteId: createRessourceDto.universiteId,
-                image: createRessourceDto.image,
-                niveauAcces: createRessourceDto.niveauAcces || 'PUBLIC',
-                urlFichierLocal: createRessourceDto.urlFichierLocal,
-                datePublication: new Date(),
-            };
-            if (createRessourceDto.auteurId) {
-                data.auteurId = createRessourceDto.auteurId;
+            const auteurExists = await this.prisma.user.findUnique({
+                where: { id: createRessourceDto.auteurId }
+            });
+            if (!auteurExists) {
+                throw new common_1.BadRequestException('L\'auteur spécifié n\'existe pas');
             }
-            return this.prisma.ressource.create({
-                data,
-                include: {
-                    auteur: true,
+            const existingRessource = await this.prisma.ressource.findFirst({
+                where: {
+                    titre: createRessourceDto.titre,
+                    auteurId: createRessourceDto.auteurId,
                 },
             });
+            if (existingRessource) {
+                throw new common_1.BadRequestException('Une ressource avec le même titre existe déjà pour cet auteur');
+            }
+            let categorieId = createRessourceDto.categorieId;
+            if (categorieId) {
+                const categorieExists = await this.prisma.categorie.findUnique({
+                    where: { id: categorieId }
+                });
+                if (!categorieExists) {
+                    this.logger.warn(`Catégorie ${categorieId} non trouvée, utilisation de la catégorie par défaut`);
+                    categorieId = null;
+                }
+            }
+            if (!categorieId) {
+                let categorieParDefaut = await this.prisma.categorie.findFirst({
+                    where: {
+                        OR: [
+                            { libelle: { contains: 'Général' } },
+                            { libelle: { contains: 'Non classé' } },
+                            { libelle: { contains: 'Divers' } },
+                            { libelle: { contains: 'Autre' } }
+                        ]
+                    }
+                });
+                if (!categorieParDefaut) {
+                    categorieParDefaut = await this.prisma.categorie.create({
+                        data: {
+                            libelle: 'Non classé',
+                            description: 'Catégorie par défaut pour les ressources non classées',
+                        }
+                    });
+                    this.logger.log(`Nouvelle catégorie par défaut créée: ${categorieParDefaut.libelle} (ID: ${categorieParDefaut.id})`);
+                }
+                categorieId = categorieParDefaut.id;
+                this.logger.log(`Catégorie par défaut utilisée: ${categorieParDefaut.libelle} (ID: ${categorieId})`);
+            }
+            const isbnglobale = await this.generateIsbnCode();
+            const data = {
+                titre: createRessourceDto.titre,
+                isbnglobale,
+                description: createRessourceDto.description,
+                langue: createRessourceDto.langue || 'fr',
+                urlFichier: createRessourceDto.urlFichier,
+                urlFichierLocal: createRessourceDto.urlFichierLocal || "file:///tmp/ressource.pdf",
+                format: createRessourceDto.format || 'PDF',
+                estArchive: createRessourceDto.estArchive || false,
+                motsCles: createRessourceDto.motsCles,
+                image: createRessourceDto.image,
+                niveauAcces: createRessourceDto.niveauAcces || 'PUBLIC',
+                datePublication: new Date(),
+                auteur: {
+                    connect: { id: createRessourceDto.auteurId }
+                },
+                categorie: {
+                    connect: { id: categorieId }
+                },
+            };
+            this.logger.log(`Données finales pour création: ${JSON.stringify(data, null, 2)}`);
+            const ressource = await this.prisma.ressource.create({
+                data,
+                include: {
+                    auteur: {
+                        select: {
+                            id: true,
+                            nom: true,
+                            prenom: true,
+                            role: true,
+                        }
+                    },
+                    categorie: {
+                        select: {
+                            id: true,
+                            libelle: true,
+                            description: true,
+                        }
+                    },
+                },
+            });
+            this.logger.log(`Ressource créée avec succès: ${ressource.id}`);
+            return ressource;
         }
         catch (error) {
             this.logger.error(`Erreur lors de la création de la ressource: ${error.message}`);
+            this.logger.error(`Stack trace: ${error.stack}`);
             throw error;
         }
     }
+    async getOrCreateDefaultCategory() {
+        let categorieParDefaut = await this.prisma.categorie.findFirst({
+            where: {
+                OR: [
+                    { libelle: { contains: 'Général' } },
+                    { libelle: { contains: 'Non classé' } },
+                    { libelle: { contains: 'Divers' } }
+                ]
+            }
+        });
+        if (!categorieParDefaut) {
+            categorieParDefaut = await this.prisma.categorie.create({
+                data: {
+                    libelle: 'Non classé',
+                    description: 'Catégorie par défaut pour les ressources non classées'
+                }
+            });
+            this.logger.log(`Catégorie par défaut créée: ${categorieParDefaut.libelle}`);
+        }
+        return categorieParDefaut.id;
+    }
     async findAll(options = {}) {
-        const { page = 1, limit = 10, search = '', type, langue, universiteId, niveauAcces, estValide, estArchive, auteurId, orderBy = 'dateCreation', orderDirection = 'desc', } = options;
+        const { page = 1, limit = 10, search = '', langue, niveauAcces, estArchive, auteurId, categorieId, orderBy = 'datePublication', orderDirection = 'desc', } = options;
         const skip = (page - 1) * limit;
         const where = {};
         if (search) {
@@ -70,18 +154,19 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                 { titre: { contains: search } },
                 { description: { contains: search } },
                 { motsCles: { contains: search } },
+                { isbnglobale: { contains: search } },
             ];
         }
         if (langue)
             where.langue = langue;
-        if (universiteId)
-            where.universiteId = universiteId;
-        if (niveauAcces)
-            where.niveauAcces = niveauAcces;
         if (estArchive !== undefined)
             where.estArchive = estArchive;
+        if (niveauAcces)
+            where.niveauAcces = niveauAcces;
         if (auteurId)
             where.auteurId = auteurId;
+        if (categorieId)
+            where.categorieId = categorieId;
         try {
             const total = await this.prisma.ressource.count({ where });
             const ressources = await this.prisma.ressource.findMany({
@@ -98,12 +183,21 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                             role: true,
                         },
                     },
+                    categorie: {
+                        select: {
+                            id: true,
+                            libelle: true,
+                            description: true,
+                        }
+                    },
                     _count: {
                         select: {
                             favoris: true,
                             commentaires: true,
                             notations: true,
                             historiques: true,
+                            exemplaires: true,
+                            reservations: true,
                         },
                     },
                 },
@@ -149,6 +243,13 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                             role: true,
                         },
                     },
+                    categorie: {
+                        select: {
+                            id: true,
+                            libelle: true,
+                            description: true,
+                        }
+                    },
                     commentaires: {
                         include: {
                             user: {
@@ -171,12 +272,25 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                             userId: true,
                         }
                     },
+                    reservations: {
+                        include: {
+                            user: {
+                                select: {
+                                    id: true,
+                                    nom: true,
+                                    prenom: true,
+                                }
+                            }
+                        }
+                    },
                     _count: {
                         select: {
                             favoris: true,
                             commentaires: true,
                             notations: true,
                             historiques: true,
+                            exemplaires: true,
+                            reservations: true,
                         },
                     },
                 },
@@ -184,8 +298,12 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             if (!ressource) {
                 throw new common_1.NotFoundException(`Ressource avec l'ID ${id} non trouvée`);
             }
+            const noteMoyenne = ressource.notations.length > 0
+                ? ressource.notations.reduce((sum, notation) => sum + notation.note, 0) / ressource.notations.length
+                : 0;
             return {
                 ...ressource,
+                noteMoyenne: parseFloat(noteMoyenne.toFixed(1)),
             };
         }
         catch (error) {
@@ -201,11 +319,38 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             if (!ressourceExists) {
                 throw new common_1.NotFoundException(`Ressource avec l'ID ${id} non trouvée`);
             }
+            const updateData = { ...updateRessourceDto };
+            if (updateRessourceDto.auteurId) {
+                updateData.auteur = { connect: { id: updateRessourceDto.auteurId } };
+                delete updateData.auteurId;
+            }
+            if (updateRessourceDto.universiteId) {
+                updateData.universite = { connect: { id: updateRessourceDto.universiteId } };
+                delete updateData.universiteId;
+            }
+            if (updateRessourceDto.categorieId) {
+                updateData.categorie = { connect: { id: updateRessourceDto.categorieId } };
+                delete updateData.categorieId;
+            }
             return this.prisma.ressource.update({
                 where: { id },
-                data: updateRessourceDto,
+                data: updateData,
                 include: {
-                    auteur: true,
+                    auteur: {
+                        select: {
+                            id: true,
+                            nom: true,
+                            prenom: true,
+                            role: true,
+                        }
+                    },
+                    categorie: {
+                        select: {
+                            id: true,
+                            libelle: true,
+                            description: true,
+                        }
+                    },
                 },
             });
         }
@@ -228,6 +373,10 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                 this.prisma.notation.deleteMany({ where: { ressourceId: id } }),
                 this.prisma.historiqueAcces.deleteMany({ where: { ressourceId: id } }),
                 this.prisma.collectionRessource.deleteMany({ where: { ressourceId: id } }),
+                this.prisma.reservation.deleteMany({ where: { ressourceId: id } }),
+                this.prisma.exemplairePhysique.deleteMany({ where: { ressourceId: id } }),
+                this.prisma.recommandation.deleteMany({ where: { ressourceId: id } }),
+                this.prisma.donneesRecommandation.deleteMany({ where: { ressourceId: id } }),
                 this.prisma.ressource.delete({ where: { id } }),
             ]);
             return { id, message: 'Ressource supprimée avec succès' };
@@ -246,7 +395,12 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
     async findByUniversite(universiteId, options = {}) {
         return this.findAll({
             ...options,
-            universiteId,
+        });
+    }
+    async findByCategorie(categorieId, options = {}) {
+        return this.findAll({
+            ...options,
+            categorieId,
         });
     }
     async toggleArchivage(id) {
@@ -282,6 +436,38 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             this.logger.error(`Erreur lors de l'enregistrement de l'accès: ${error.message}`);
             throw error;
         }
+    }
+    async getStatistiques(ressourceId) {
+        try {
+            const stats = await this.prisma.historiqueAcces.groupBy({
+                by: ['typeAcces'],
+                where: { ressourceId },
+                _count: {
+                    typeAcces: true,
+                },
+            });
+            const totalAcces = await this.prisma.historiqueAcces.count({
+                where: { ressourceId },
+            });
+            return {
+                totalAcces,
+                parType: stats.reduce((acc, stat) => {
+                    acc[stat.typeAcces] = stat._count.typeAcces;
+                    return acc;
+                }, {}),
+            };
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de la récupération des statistiques: ${error.message}`);
+            throw error;
+        }
+    }
+    async generateIsbnCode() {
+        const dateNow = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
+        const randomSuffix = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+        const isbnCode = `UADB-${dateNow}-${randomSuffix}`;
+        this.logger.log(`Génération de l'ISBN: ${isbnCode}`);
+        return isbnCode;
     }
 };
 exports.RessourcesService = RessourcesService;

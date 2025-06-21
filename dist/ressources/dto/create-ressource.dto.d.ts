@@ -1,52 +1,50 @@
-import { NiveauAcces, TypeRessource } from "generated/prisma";
+import { NiveauAcces } from 'generated/prisma';
+export declare enum TypeValidation {
+    EN_ATTENTE = "EN_ATTENTE",
+    VALIDE = "VALIDE",
+    REJETE = "REJETE"
+}
 export declare class CreateRessourceDto {
     titre: string;
     description: string;
-    type: TypeRessource;
     langue?: string;
-    urlFichier: string;
-    format: string;
-    motsCles: string;
-    auteurId?: string;
-    universiteId: string;
+    urlFichier?: string;
+    urlFichierLocal?: string;
+    format?: string;
     image?: string;
     niveauAcces?: NiveauAcces;
-    nomAuteurExterne?: string;
-    prenomAuteurExterne?: string;
-    affiliationAuteurExterne?: string;
-    urlFichierLocal?: string;
+    datePublication?: Date;
+    motsCles: string;
+    auteurId: string;
+    categorieId: string;
+    estArchive?: boolean;
 }
 export declare class UpdateRessourceDto {
     titre?: string;
     description?: string;
-    type?: TypeRessource;
     langue?: string;
     urlFichier?: string;
+    urlFichierLocal?: string;
     format?: string;
-    estPublique?: boolean;
+    image?: string;
+    niveauAcces?: NiveauAcces;
+    datePublication?: Date;
     motsCles?: string;
     auteurId?: string;
     universiteId?: string;
-    image?: string;
-    niveauAcces?: NiveauAcces;
-    estValide?: boolean;
+    categorieId?: string;
     estArchive?: boolean;
-    nomAuteurExterne?: string;
-    prenomAuteurExterne?: string;
-    affiliationAuteurExterne?: string;
+    validation?: TypeValidation;
 }
 export declare class SearchRessourceDto {
     page?: number;
     limit?: number;
     search?: string;
-    type?: TypeRessource;
     langue?: string;
-    universiteId?: string;
-    estPublique?: boolean;
     niveauAcces?: NiveauAcces;
-    estValide?: boolean;
     estArchive?: boolean;
     auteurId?: string;
+    categorieId?: string;
     orderBy?: string;
     orderDirection?: 'asc' | 'desc';
 }

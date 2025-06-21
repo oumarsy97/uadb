@@ -580,7 +580,7 @@ model Ressource {
   isbnglobale       String @map("isbn_globale") @unique
   description       String         @db.Text
   langue            String         @default("fr")
-  urlFichier        String         @map("url_fichier")
+  urlFichier        String?         @map("url_fichier")
   urlFichierLocal   String?        @map("url_fichier_local") @default("file:///tmp/ressource.pdf")
   format            String         // pdf, docx, etc.
   image             String?
@@ -588,9 +588,7 @@ model Ressource {
   datePublication   DateTime?      @map("date_publication") @default(now())
   motsCles          String         @map("mots_cles")
   auteurId          String        @map("auteur_id")
-  universiteId      String         @map("universite_id")
   estArchive        Boolean        @default(false) @map("est_archive")
-  validation      TypeValidation @default(EN_ATTENTE) @map("validation")
   
 
   // Relations
@@ -608,7 +606,6 @@ model Ressource {
   donneesRecommandations DonneesRecommandation[]
   
   @@index([datePublication])
-  @@index([universiteId])
   @@index([auteurId, estArchive])
   categorieId String
   categorie   Categorie? @relation(fields: [categorieId], references: [id])

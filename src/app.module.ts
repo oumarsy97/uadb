@@ -17,6 +17,7 @@ import { DepartementModule } from './departement/departement.module';
 import { FiliereModule } from './filiere/filiere.module';
 import { EmailModule } from './meservices/mail/email.module';
 import { NotificationModule } from './notification/notification.module';
+import { ExemplairePhysiqueModule } from './exemplaire-physique/exemplaire-physique.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { NotificationModule } from './notification/notification.module';
     FiliereModule,
     EmailModule,
     NotificationModule,
+    ExemplairePhysiqueModule,
   ],
   controllers: [AppController],
   providers: [AppService,],

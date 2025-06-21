@@ -1,14 +1,13 @@
 version: '3.8'
 
 services:
-  # Base de données MySQL (à démarrer en premier)
   mysql:
     image: mysql:8.0
     container_name: mysql-db
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: "dbuadb"  # Nom cohérent avec votre DATABASE_URL
+      MYSQL_DATABASE: "dbuadb"
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_ROOT_PASSWORD: ""
     volumes:
@@ -21,7 +20,6 @@ services:
       interval: 10s
       start_period: 40s
 
-  # Service principal NestJS
   nestjs-app:
     build:
       context: .
@@ -37,23 +35,13 @@ services:
       - .env
     environment:
       DATABASE_URL: "mysql://root@mysql-db:3306/dbuadb"
-      JWT_SECRET: "3889c5248ae7b3254b78c22c31de58eab58cb9b9222e6fdbe7af07b878699d77"
-      JWT_EXPIRES_IN: "24h"
-      EMAIL_PROVIDER: "smtp"
-      SMTP_HOST: "smtp.gmail.com"
-      SMTP_PORT: 587
-      SMTP_SECURE: "false"
-      SMTP_USER: "syoumar505@gmail.com"
-      SMTP_PASS: "qbwhfhxuxlqmrvzo"
-      SMTP_TLS_REJECT_UNAUTHORIZED: "false"
-      DEFAULT_FROM_EMAIL: "syoumar505@gmail.com"
       FRONTEND_URL: "http://localhost:3000"
+
     depends_on:
       mysql:
-        condition: service_healthy  # Attend que MySQL soit prêt
+        condition: service_healthy
     restart: unless-stopped
     command: sh -c "sleep 10 && npx prisma generate && npx prisma db push && npm run start:uadb"
 
 volumes:
   mysql_data:
-    driver: local
