@@ -13,11 +13,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RessourcesService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const prisma_1 = require("../../generated/prisma/index.js");
+const historique_acces_service_1 = require("../interactions/historique-acces/historique-acces.service");
 let RessourcesService = RessourcesService_1 = class RessourcesService {
     prisma;
+    historiqueAccesService;
     logger = new common_1.Logger(RessourcesService_1.name);
-    constructor(prisma) {
+    constructor(prisma, historiqueAccesService) {
         this.prisma = prisma;
+        this.historiqueAccesService = historiqueAccesService;
     }
     async create(createRessourceDto) {
         try {
@@ -41,37 +45,19 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                 throw new common_1.BadRequestException('Une ressource avec le même titre existe déjà pour cet auteur');
             }
             let categorieId = createRessourceDto.categorieId;
-            if (categorieId) {
-                const categorieExists = await this.prisma.categorie.findUnique({
-                    where: { id: categorieId }
-                });
-                if (!categorieExists) {
-                    this.logger.warn(`Catégorie ${categorieId} non trouvée, utilisation de la catégorie par défaut`);
-                    categorieId = null;
-                }
-            }
             if (!categorieId) {
-                let categorieParDefaut = await this.prisma.categorie.findFirst({
-                    where: {
-                        OR: [
-                            { libelle: { contains: 'Général' } },
-                            { libelle: { contains: 'Non classé' } },
-                            { libelle: { contains: 'Divers' } },
-                            { libelle: { contains: 'Autre' } }
-                        ]
-                    }
-                });
-                if (!categorieParDefaut) {
-                    categorieParDefaut = await this.prisma.categorie.create({
-                        data: {
-                            libelle: 'Non classé',
-                            description: 'Catégorie par défaut pour les ressources non classées',
-                        }
-                    });
-                    this.logger.log(`Nouvelle catégorie par défaut créée: ${categorieParDefaut.libelle} (ID: ${categorieParDefaut.id})`);
-                }
-                categorieId = categorieParDefaut.id;
-                this.logger.log(`Catégorie par défaut utilisée: ${categorieParDefaut.libelle} (ID: ${categorieId})`);
+                this.logger.log('Aucune catégorie spécifiée, utilisation de la catégorie par défaut');
+                categorieId = await this.getOrCreateDefaultCategory();
+            }
+            let finalAuteurId;
+            let finalNomAuteur;
+            if (auteurExists.role === 'ENSEIGNANT') {
+                finalAuteurId = createRessourceDto.auteurId;
+                finalNomAuteur = `${auteurExists.prenom} ${auteurExists.nom}`;
+            }
+            else {
+                finalAuteurId = null;
+                finalNomAuteur = createRessourceDto.nomAuteur || `${auteurExists.prenom} ${auteurExists.nom}`;
             }
             const isbnglobale = await this.generateIsbnCode();
             const data = {
@@ -87,9 +73,10 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                 image: createRessourceDto.image,
                 niveauAcces: createRessourceDto.niveauAcces || 'PUBLIC',
                 datePublication: new Date(),
-                auteur: {
-                    connect: { id: createRessourceDto.auteurId }
-                },
+                ...(finalAuteurId
+                    ? { auteur: { connect: { id: finalAuteurId } } }
+                    : {}),
+                nomAuteur: finalNomAuteur,
                 categorie: {
                     connect: { id: categorieId }
                 },
@@ -98,14 +85,14 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             const ressource = await this.prisma.ressource.create({
                 data,
                 include: {
-                    auteur: {
+                    auteur: finalAuteurId ? {
                         select: {
                             id: true,
                             nom: true,
                             prenom: true,
                             role: true,
                         }
-                    },
+                    } : undefined,
                     categorie: {
                         select: {
                             id: true,
@@ -183,6 +170,7 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                             role: true,
                         },
                     },
+                    exemplaire: true,
                     categorie: {
                         select: {
                             id: true,
@@ -192,12 +180,9 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                     },
                     _count: {
                         select: {
-                            favoris: true,
                             commentaires: true,
                             notations: true,
                             historiques: true,
-                            exemplaires: true,
-                            reservations: true,
                         },
                     },
                 },
@@ -230,7 +215,7 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             throw error;
         }
     }
-    async findOne(id) {
+    async findOne(id, userId) {
         try {
             const ressource = await this.prisma.ressource.findUnique({
                 where: { id },
@@ -272,25 +257,11 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                             userId: true,
                         }
                     },
-                    reservations: {
-                        include: {
-                            user: {
-                                select: {
-                                    id: true,
-                                    nom: true,
-                                    prenom: true,
-                                }
-                            }
-                        }
-                    },
                     _count: {
                         select: {
-                            favoris: true,
                             commentaires: true,
                             notations: true,
                             historiques: true,
-                            exemplaires: true,
-                            reservations: true,
                         },
                     },
                 },
@@ -298,20 +269,47 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             if (!ressource) {
                 throw new common_1.NotFoundException(`Ressource avec l'ID ${id} non trouvée`);
             }
-            const noteMoyenne = ressource.notations.length > 0
-                ? ressource.notations.reduce((sum, notation) => sum + notation.note, 0) / ressource.notations.length
-                : 0;
-            return {
-                ...ressource,
-                noteMoyenne: parseFloat(noteMoyenne.toFixed(1)),
-            };
+            if (userId) {
+                try {
+                    await this.historiqueAccesService.enregistrerAcces(userId, id, prisma_1.TypeAcces.CONSULTATION, process.env.CURRENT_UNIVERSITY || 'uadb');
+                    this.logger.log(`Accès CONSULTATION enregistré pour la ressource ${id} par l'utilisateur ${userId}`);
+                }
+                catch (historiqueError) {
+                    this.logger.warn(`Erreur lors de l'enregistrement de l'historique: ${historiqueError.message}`);
+                }
+            }
+            return ressource;
         }
         catch (error) {
             this.logger.error(`Erreur lors de la récupération de la ressource ${id}: ${error.message}`);
             throw error;
         }
     }
-    async update(id, updateRessourceDto) {
+    async downloadRessource(id, userId) {
+        try {
+            const ressource = await this.findOne(id);
+            if (!ressource) {
+                throw new common_1.NotFoundException(`Ressource avec l'ID ${id} non trouvée`);
+            }
+            await this.historiqueAccesService.enregistrerAcces(userId, id, prisma_1.TypeAcces.TELECHARGEMENT, process.env.CURRENT_UNIVERSITY || 'uadb');
+            this.logger.log(`Accès TELECHARGEMENT enregistré pour la ressource ${id} par l'utilisateur ${userId}`);
+            return {
+                message: 'Téléchargement autorisé',
+                ressource: {
+                    id: ressource.id,
+                    titre: ressource.titre,
+                    urlFichier: ressource.urlFichier,
+                    urlFichierLocal: ressource.urlFichierLocal,
+                    format: ressource.format
+                }
+            };
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors du téléchargement de la ressource ${id}: ${error.message}`);
+            throw error;
+        }
+    }
+    async update(id, updateRessourceDto, userId) {
         try {
             const ressourceExists = await this.prisma.ressource.findUnique({
                 where: { id },
@@ -332,7 +330,7 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                 updateData.categorie = { connect: { id: updateRessourceDto.categorieId } };
                 delete updateData.categorieId;
             }
-            return this.prisma.ressource.update({
+            const updatedRessource = await this.prisma.ressource.update({
                 where: { id },
                 data: updateData,
                 include: {
@@ -353,13 +351,14 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                     },
                 },
             });
+            return updatedRessource;
         }
         catch (error) {
             this.logger.error(`Erreur lors de la mise à jour de la ressource ${id}: ${error.message}`);
             throw error;
         }
     }
-    async remove(id) {
+    async remove(id, userId) {
         try {
             const ressourceExists = await this.prisma.ressource.findUnique({
                 where: { id },
@@ -373,7 +372,6 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                 this.prisma.notation.deleteMany({ where: { ressourceId: id } }),
                 this.prisma.historiqueAcces.deleteMany({ where: { ressourceId: id } }),
                 this.prisma.collectionRessource.deleteMany({ where: { ressourceId: id } }),
-                this.prisma.reservation.deleteMany({ where: { ressourceId: id } }),
                 this.prisma.exemplairePhysique.deleteMany({ where: { ressourceId: id } }),
                 this.prisma.recommandation.deleteMany({ where: { ressourceId: id } }),
                 this.prisma.donneesRecommandation.deleteMany({ where: { ressourceId: id } }),
@@ -403,7 +401,7 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             categorieId,
         });
     }
-    async toggleArchivage(id) {
+    async toggleArchivage(id, userId) {
         try {
             const ressource = await this.prisma.ressource.findUnique({
                 where: { id },
@@ -411,29 +409,14 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             if (!ressource) {
                 throw new common_1.NotFoundException(`Ressource avec l'ID ${id} non trouvée`);
             }
-            return this.prisma.ressource.update({
+            const updatedRessource = await this.prisma.ressource.update({
                 where: { id },
                 data: { estArchive: !ressource.estArchive },
             });
+            return updatedRessource;
         }
         catch (error) {
             this.logger.error(`Erreur lors du changement d'archivage de la ressource ${id}: ${error.message}`);
-            throw error;
-        }
-    }
-    async enregistrerAcces(data) {
-        try {
-            return this.prisma.historiqueAcces.create({
-                data: {
-                    userId: data.userId,
-                    ressourceId: data.ressourceId,
-                    typeAcces: data.typeAcces,
-                    universiteSrc: data.universiteSrc,
-                },
-            });
-        }
-        catch (error) {
-            this.logger.error(`Erreur lors de l'enregistrement de l'accès: ${error.message}`);
             throw error;
         }
     }
@@ -469,10 +452,129 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
         this.logger.log(`Génération de l'ISBN: ${isbnCode}`);
         return isbnCode;
     }
+    async findTopRated(options = {}) {
+        const { limit = 5, orderBy = 'noteMoyenne', orderDirection = 'desc' } = options;
+        try {
+            const ressources = await this.prisma.ressource.findMany({
+                take: +limit,
+                orderBy: { [orderBy]: orderDirection },
+                include: {
+                    auteur: {
+                        select: {
+                            id: true,
+                            nom: true,
+                            prenom: true,
+                            role: true,
+                        },
+                    },
+                    _count: {
+                        select: {
+                            commentaires: true,
+                            notations: true,
+                            historiques: true,
+                        },
+                    },
+                },
+            });
+            const ressourcesAvecNotes = await Promise.all(ressources.map(async (ressource) => {
+                const notations = await this.prisma.notation.findMany({
+                    where: { ressourceId: ressource.id },
+                    select: { note: true },
+                });
+                const noteMoyenne = notations.length > 0
+                    ? notations.reduce((sum, notation) => sum + notation.note, 0) / notations.length
+                    : 0;
+                return {
+                    ...ressource,
+                    noteMoyenne: parseFloat(noteMoyenne.toFixed(1)),
+                };
+            }));
+            return ressourcesAvecNotes;
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de la récupération des ressources les mieux notées: ${error.message}`);
+            throw error;
+        }
+    }
+    async findRecentlyAccessed(limit = 5) {
+        try {
+            const ressources = await this.prisma.historiqueAcces.findMany({
+                take: +limit,
+                orderBy: { createdAt: 'desc' },
+                include: {
+                    ressource: {
+                        include: {
+                            auteur: {
+                                select: {
+                                    id: true,
+                                    nom: true,
+                                    prenom: true,
+                                    role: true,
+                                },
+                            },
+                            categorie: {
+                                select: {
+                                    id: true,
+                                    libelle: true,
+                                    description: true,
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+            return ressources.map((ha) => ha.ressource);
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de la récupération des ressources récemment accédées: ${error.message}`);
+            throw error;
+        }
+    }
+    async findTopAccessed(options = {}) {
+        const { limit = 5, orderBy = 'dateAcces', orderDirection = 'desc' } = options;
+        try {
+            const ressources = await this.prisma.historiqueAcces.groupBy({
+                by: ['ressourceId'],
+                _count: {
+                    ressourceId: true,
+                },
+                orderBy: {
+                    _count: {
+                        ressourceId: orderDirection,
+                    },
+                },
+                take: +limit,
+            });
+            return ressources;
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de la récupération des ressources les plus consultées: ${error.message}`);
+            throw error;
+        }
+    }
+    async getHistoriqueRessource(ressourceId, limit = 50) {
+        try {
+            return await this.historiqueAccesService.getHistoriqueRessource(ressourceId, false, limit);
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de la récupération de l'historique de la ressource ${ressourceId}: ${error.message}`);
+            throw error;
+        }
+    }
+    async compterAccesRessource(ressourceId, typeAcces) {
+        try {
+            return await this.historiqueAccesService.compterAcces(ressourceId, false, typeAcces);
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors du comptage des accès de la ressource ${ressourceId}: ${error.message}`);
+            throw error;
+        }
+    }
 };
 exports.RessourcesService = RessourcesService;
 exports.RessourcesService = RessourcesService = RessourcesService_1 = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        historique_acces_service_1.HistoriqueAccesService])
 ], RessourcesService);
 //# sourceMappingURL=ressources.service.js.map

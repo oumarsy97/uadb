@@ -10,13 +10,16 @@ exports.HistoriqueAccesModule = void 0;
 const common_1 = require("@nestjs/common");
 const historique_acces_controller_1 = require("./historique-acces.controller");
 const historique_acces_service_1 = require("./historique-acces.service");
+const prisma_service_1 = require("../../prisma/prisma.service");
+const jwt_1 = require("@nestjs/jwt");
 let HistoriqueAccesModule = class HistoriqueAccesModule {
 };
 exports.HistoriqueAccesModule = HistoriqueAccesModule;
 exports.HistoriqueAccesModule = HistoriqueAccesModule = __decorate([
     (0, common_1.Module)({
         controllers: [historique_acces_controller_1.HistoriqueAccesController],
-        providers: [historique_acces_service_1.HistoriqueAccesService]
+        providers: [historique_acces_service_1.HistoriqueAccesService, prisma_service_1.PrismaService, jwt_1.JwtService],
+        exports: [historique_acces_service_1.HistoriqueAccesService],
     })
 ], HistoriqueAccesModule);
 //# sourceMappingURL=historique-acces.module.js.map

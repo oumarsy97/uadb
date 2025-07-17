@@ -34,11 +34,6 @@ export type PolitiqueBibliotheque = $Result.DefaultSelection<Prisma.$PolitiqueBi
  */
 export type SanctionUtilisateur = $Result.DefaultSelection<Prisma.$SanctionUtilisateurPayload>
 /**
- * Model Reservation
- * 
- */
-export type Reservation = $Result.DefaultSelection<Prisma.$ReservationPayload>
-/**
  * Model ExemplairePhysique
  * 
  */
@@ -48,6 +43,11 @@ export type ExemplairePhysique = $Result.DefaultSelection<Prisma.$ExemplairePhys
  * 
  */
 export type Emprunt = $Result.DefaultSelection<Prisma.$EmpruntPayload>
+/**
+ * Model EmpruntExemplaire
+ * 
+ */
+export type EmpruntExemplaire = $Result.DefaultSelection<Prisma.$EmpruntExemplairePayload>
 /**
  * Model Recommandation
  * 
@@ -279,6 +279,7 @@ export type FrequenceRecommandation = (typeof FrequenceRecommandation)[keyof typ
 export const TypeAcces: {
   CONSULTATION: 'CONSULTATION',
   TELECHARGEMENT: 'TELECHARGEMENT',
+  FAVORIS: 'FAVORIS',
   CITATION: 'CITATION',
   PARTAGE: 'PARTAGE'
 };
@@ -322,9 +323,7 @@ export type StatutTransaction = (typeof StatutTransaction)[keyof typeof StatutTr
 
 export const NiveauAcces: {
   PUBLIC: 'PUBLIC',
-  AUTHENTIFIE: 'AUTHENTIFIE',
-  UNIVERSITE_ORIGINE: 'UNIVERSITE_ORIGINE',
-  PRIVE: 'PRIVE'
+  UNIVERSITE_ORIGINE: 'UNIVERSITE_ORIGINE'
 };
 
 export type NiveauAcces = (typeof NiveauAcces)[keyof typeof NiveauAcces]
@@ -579,16 +578,6 @@ export class PrismaClient<
   get sanctionUtilisateur(): Prisma.SanctionUtilisateurDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.reservation`: Exposes CRUD operations for the **Reservation** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Reservations
-    * const reservations = await prisma.reservation.findMany()
-    * ```
-    */
-  get reservation(): Prisma.ReservationDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.exemplairePhysique`: Exposes CRUD operations for the **ExemplairePhysique** model.
     * Example usage:
     * ```ts
@@ -607,6 +596,16 @@ export class PrismaClient<
     * ```
     */
   get emprunt(): Prisma.EmpruntDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.empruntExemplaire`: Exposes CRUD operations for the **EmpruntExemplaire** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmpruntExemplaires
+    * const empruntExemplaires = await prisma.empruntExemplaire.findMany()
+    * ```
+    */
+  get empruntExemplaire(): Prisma.EmpruntExemplaireDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.recommandation`: Exposes CRUD operations for the **Recommandation** model.
@@ -1271,9 +1270,9 @@ export namespace Prisma {
     ReglePret: 'ReglePret',
     PolitiqueBibliotheque: 'PolitiqueBibliotheque',
     SanctionUtilisateur: 'SanctionUtilisateur',
-    Reservation: 'Reservation',
     ExemplairePhysique: 'ExemplairePhysique',
     Emprunt: 'Emprunt',
+    EmpruntExemplaire: 'EmpruntExemplaire',
     Recommandation: 'Recommandation',
     Universite: 'Universite',
     Ufr: 'Ufr',
@@ -1314,7 +1313,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "conventionInteruniversitaire" | "reglePret" | "politiqueBibliotheque" | "sanctionUtilisateur" | "reservation" | "exemplairePhysique" | "emprunt" | "recommandation" | "universite" | "ufr" | "departement" | "filiere" | "user" | "etudiant" | "enseignant" | "bibliothecaire" | "administrateur" | "favori" | "commentaire" | "notation" | "historiqueAcces" | "donneesRecommandation" | "collection" | "collectionRessource" | "ressource" | "categorie" | "statistiqueBibliotheque" | "notification" | "journalAudit"
+      modelProps: "conventionInteruniversitaire" | "reglePret" | "politiqueBibliotheque" | "sanctionUtilisateur" | "exemplairePhysique" | "emprunt" | "empruntExemplaire" | "recommandation" | "universite" | "ufr" | "departement" | "filiere" | "user" | "etudiant" | "enseignant" | "bibliothecaire" | "administrateur" | "favori" | "commentaire" | "notation" | "historiqueAcces" | "donneesRecommandation" | "collection" | "collectionRessource" | "ressource" | "categorie" | "statistiqueBibliotheque" | "notification" | "journalAudit"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1582,72 +1581,6 @@ export namespace Prisma {
           }
         }
       }
-      Reservation: {
-        payload: Prisma.$ReservationPayload<ExtArgs>
-        fields: Prisma.ReservationFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ReservationFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReservationPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ReservationFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>
-          }
-          findFirst: {
-            args: Prisma.ReservationFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReservationPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ReservationFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>
-          }
-          findMany: {
-            args: Prisma.ReservationFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>[]
-          }
-          create: {
-            args: Prisma.ReservationCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>
-          }
-          createMany: {
-            args: Prisma.ReservationCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.ReservationDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>
-          }
-          update: {
-            args: Prisma.ReservationUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>
-          }
-          deleteMany: {
-            args: Prisma.ReservationDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ReservationUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.ReservationUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>
-          }
-          aggregate: {
-            args: Prisma.ReservationAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateReservation>
-          }
-          groupBy: {
-            args: Prisma.ReservationGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ReservationGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ReservationCountArgs<ExtArgs>
-            result: $Utils.Optional<ReservationCountAggregateOutputType> | number
-          }
-        }
-      }
       ExemplairePhysique: {
         payload: Prisma.$ExemplairePhysiquePayload<ExtArgs>
         fields: Prisma.ExemplairePhysiqueFieldRefs
@@ -1777,6 +1710,72 @@ export namespace Prisma {
           count: {
             args: Prisma.EmpruntCountArgs<ExtArgs>
             result: $Utils.Optional<EmpruntCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmpruntExemplaire: {
+        payload: Prisma.$EmpruntExemplairePayload<ExtArgs>
+        fields: Prisma.EmpruntExemplaireFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmpruntExemplaireFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmpruntExemplairePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmpruntExemplaireFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmpruntExemplairePayload>
+          }
+          findFirst: {
+            args: Prisma.EmpruntExemplaireFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmpruntExemplairePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmpruntExemplaireFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmpruntExemplairePayload>
+          }
+          findMany: {
+            args: Prisma.EmpruntExemplaireFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmpruntExemplairePayload>[]
+          }
+          create: {
+            args: Prisma.EmpruntExemplaireCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmpruntExemplairePayload>
+          }
+          createMany: {
+            args: Prisma.EmpruntExemplaireCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.EmpruntExemplaireDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmpruntExemplairePayload>
+          }
+          update: {
+            args: Prisma.EmpruntExemplaireUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmpruntExemplairePayload>
+          }
+          deleteMany: {
+            args: Prisma.EmpruntExemplaireDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmpruntExemplaireUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.EmpruntExemplaireUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmpruntExemplairePayload>
+          }
+          aggregate: {
+            args: Prisma.EmpruntExemplaireAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmpruntExemplaire>
+          }
+          groupBy: {
+            args: Prisma.EmpruntExemplaireGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmpruntExemplaireGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmpruntExemplaireCountArgs<ExtArgs>
+            result: $Utils.Optional<EmpruntExemplaireCountAggregateOutputType> | number
           }
         }
       }
@@ -3320,9 +3319,9 @@ export namespace Prisma {
     reglePret?: ReglePretOmit
     politiqueBibliotheque?: PolitiqueBibliothequeOmit
     sanctionUtilisateur?: SanctionUtilisateurOmit
-    reservation?: ReservationOmit
     exemplairePhysique?: ExemplairePhysiqueOmit
     emprunt?: EmpruntOmit
+    empruntExemplaire?: EmpruntExemplaireOmit
     recommandation?: RecommandationOmit
     universite?: UniversiteOmit
     ufr?: UfrOmit
@@ -3439,11 +3438,11 @@ export namespace Prisma {
    */
 
   export type ExemplairePhysiqueCountOutputType = {
-    emprunts: number
+    empruntExemplaires: number
   }
 
   export type ExemplairePhysiqueCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    emprunts?: boolean | ExemplairePhysiqueCountOutputTypeCountEmpruntsArgs
+    empruntExemplaires?: boolean | ExemplairePhysiqueCountOutputTypeCountEmpruntExemplairesArgs
   }
 
   // Custom InputTypes
@@ -3460,8 +3459,8 @@ export namespace Prisma {
   /**
    * ExemplairePhysiqueCountOutputType without action
    */
-  export type ExemplairePhysiqueCountOutputTypeCountEmpruntsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EmpruntWhereInput
+  export type ExemplairePhysiqueCountOutputTypeCountEmpruntExemplairesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmpruntExemplaireWhereInput
   }
 
 
@@ -3471,10 +3470,12 @@ export namespace Prisma {
 
   export type EmpruntCountOutputType = {
     SanctionUtilisateur: number
+    empruntExemplaires: number
   }
 
   export type EmpruntCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     SanctionUtilisateur?: boolean | EmpruntCountOutputTypeCountSanctionUtilisateurArgs
+    empruntExemplaires?: boolean | EmpruntCountOutputTypeCountEmpruntExemplairesArgs
   }
 
   // Custom InputTypes
@@ -3493,6 +3494,13 @@ export namespace Prisma {
    */
   export type EmpruntCountOutputTypeCountSanctionUtilisateurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SanctionUtilisateurWhereInput
+  }
+
+  /**
+   * EmpruntCountOutputType without action
+   */
+  export type EmpruntCountOutputTypeCountEmpruntExemplairesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmpruntExemplaireWhereInput
   }
 
 
@@ -3658,16 +3666,11 @@ export namespace Prisma {
     notations: number
     historiques: number
     collections: number
-    reservations: number
     emprunts: number
     recommandations: number
     JournalAudit: number
     donneesRecommandations: number
     notifications: number
-    etudiants: number
-    enseignants: number
-    bibliothecaires: number
-    administrateurs: number
     sanctions: number
   }
 
@@ -3678,16 +3681,11 @@ export namespace Prisma {
     notations?: boolean | UserCountOutputTypeCountNotationsArgs
     historiques?: boolean | UserCountOutputTypeCountHistoriquesArgs
     collections?: boolean | UserCountOutputTypeCountCollectionsArgs
-    reservations?: boolean | UserCountOutputTypeCountReservationsArgs
     emprunts?: boolean | UserCountOutputTypeCountEmpruntsArgs
     recommandations?: boolean | UserCountOutputTypeCountRecommandationsArgs
     JournalAudit?: boolean | UserCountOutputTypeCountJournalAuditArgs
     donneesRecommandations?: boolean | UserCountOutputTypeCountDonneesRecommandationsArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
-    etudiants?: boolean | UserCountOutputTypeCountEtudiantsArgs
-    enseignants?: boolean | UserCountOutputTypeCountEnseignantsArgs
-    bibliothecaires?: boolean | UserCountOutputTypeCountBibliothecairesArgs
-    administrateurs?: boolean | UserCountOutputTypeCountAdministrateursArgs
     sanctions?: boolean | UserCountOutputTypeCountSanctionsArgs
   }
 
@@ -3747,13 +3745,6 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountReservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReservationWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountEmpruntsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EmpruntWhereInput
   }
@@ -3789,67 +3780,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountEtudiantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EtudiantWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountEnseignantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EnseignantWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountBibliothecairesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BibliothecaireWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountAdministrateursArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AdministrateurWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountSanctionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SanctionUtilisateurWhereInput
-  }
-
-
-  /**
-   * Count Type BibliothecaireCountOutputType
-   */
-
-  export type BibliothecaireCountOutputType = {
-    reservations: number
-  }
-
-  export type BibliothecaireCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    reservations?: boolean | BibliothecaireCountOutputTypeCountReservationsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * BibliothecaireCountOutputType without action
-   */
-  export type BibliothecaireCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BibliothecaireCountOutputType
-     */
-    select?: BibliothecaireCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * BibliothecaireCountOutputType without action
-   */
-  export type BibliothecaireCountOutputTypeCountReservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReservationWhereInput
   }
 
 
@@ -3894,8 +3826,6 @@ export namespace Prisma {
     notations: number
     historiques: number
     collections: number
-    exemplaires: number
-    reservations: number
     recommandations: number
     donneesRecommandations: number
   }
@@ -3906,8 +3836,6 @@ export namespace Prisma {
     notations?: boolean | RessourceCountOutputTypeCountNotationsArgs
     historiques?: boolean | RessourceCountOutputTypeCountHistoriquesArgs
     collections?: boolean | RessourceCountOutputTypeCountCollectionsArgs
-    exemplaires?: boolean | RessourceCountOutputTypeCountExemplairesArgs
-    reservations?: boolean | RessourceCountOutputTypeCountReservationsArgs
     recommandations?: boolean | RessourceCountOutputTypeCountRecommandationsArgs
     donneesRecommandations?: boolean | RessourceCountOutputTypeCountDonneesRecommandationsArgs
   }
@@ -3956,20 +3884,6 @@ export namespace Prisma {
    */
   export type RessourceCountOutputTypeCountCollectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CollectionRessourceWhereInput
-  }
-
-  /**
-   * RessourceCountOutputType without action
-   */
-  export type RessourceCountOutputTypeCountExemplairesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ExemplairePhysiqueWhereInput
-  }
-
-  /**
-   * RessourceCountOutputType without action
-   */
-  export type RessourceCountOutputTypeCountReservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReservationWhereInput
   }
 
   /**
@@ -7966,1058 +7880,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Reservation
-   */
-
-  export type AggregateReservation = {
-    _count: ReservationCountAggregateOutputType | null
-    _min: ReservationMinAggregateOutputType | null
-    _max: ReservationMaxAggregateOutputType | null
-  }
-
-  export type ReservationMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    ressourceId: string | null
-    dateReservation: Date | null
-    dateDebut: Date | null
-    dateFin: Date | null
-    statut: $Enums.StatutReservation | null
-    commentaire: string | null
-    universiteEmprunteur: string | null
-    validePar: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type ReservationMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    ressourceId: string | null
-    dateReservation: Date | null
-    dateDebut: Date | null
-    dateFin: Date | null
-    statut: $Enums.StatutReservation | null
-    commentaire: string | null
-    universiteEmprunteur: string | null
-    validePar: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type ReservationCountAggregateOutputType = {
-    id: number
-    userId: number
-    ressourceId: number
-    dateReservation: number
-    dateDebut: number
-    dateFin: number
-    statut: number
-    commentaire: number
-    universiteEmprunteur: number
-    validePar: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type ReservationMinAggregateInputType = {
-    id?: true
-    userId?: true
-    ressourceId?: true
-    dateReservation?: true
-    dateDebut?: true
-    dateFin?: true
-    statut?: true
-    commentaire?: true
-    universiteEmprunteur?: true
-    validePar?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type ReservationMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    ressourceId?: true
-    dateReservation?: true
-    dateDebut?: true
-    dateFin?: true
-    statut?: true
-    commentaire?: true
-    universiteEmprunteur?: true
-    validePar?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type ReservationCountAggregateInputType = {
-    id?: true
-    userId?: true
-    ressourceId?: true
-    dateReservation?: true
-    dateDebut?: true
-    dateFin?: true
-    statut?: true
-    commentaire?: true
-    universiteEmprunteur?: true
-    validePar?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type ReservationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Reservation to aggregate.
-     */
-    where?: ReservationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Reservations to fetch.
-     */
-    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ReservationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Reservations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Reservations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Reservations
-    **/
-    _count?: true | ReservationCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ReservationMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ReservationMaxAggregateInputType
-  }
-
-  export type GetReservationAggregateType<T extends ReservationAggregateArgs> = {
-        [P in keyof T & keyof AggregateReservation]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateReservation[P]>
-      : GetScalarType<T[P], AggregateReservation[P]>
-  }
-
-
-
-
-  export type ReservationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReservationWhereInput
-    orderBy?: ReservationOrderByWithAggregationInput | ReservationOrderByWithAggregationInput[]
-    by: ReservationScalarFieldEnum[] | ReservationScalarFieldEnum
-    having?: ReservationScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ReservationCountAggregateInputType | true
-    _min?: ReservationMinAggregateInputType
-    _max?: ReservationMaxAggregateInputType
-  }
-
-  export type ReservationGroupByOutputType = {
-    id: string
-    userId: string | null
-    ressourceId: string
-    dateReservation: Date
-    dateDebut: Date
-    dateFin: Date
-    statut: $Enums.StatutReservation
-    commentaire: string | null
-    universiteEmprunteur: string
-    validePar: string | null
-    createdAt: Date
-    updatedAt: Date
-    _count: ReservationCountAggregateOutputType | null
-    _min: ReservationMinAggregateOutputType | null
-    _max: ReservationMaxAggregateOutputType | null
-  }
-
-  type GetReservationGroupByPayload<T extends ReservationGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ReservationGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ReservationGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ReservationGroupByOutputType[P]>
-            : GetScalarType<T[P], ReservationGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ReservationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    ressourceId?: boolean
-    dateReservation?: boolean
-    dateDebut?: boolean
-    dateFin?: boolean
-    statut?: boolean
-    commentaire?: boolean
-    universiteEmprunteur?: boolean
-    validePar?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | Reservation$userArgs<ExtArgs>
-    ressource?: boolean | RessourceDefaultArgs<ExtArgs>
-    valideur?: boolean | Reservation$valideurArgs<ExtArgs>
-  }, ExtArgs["result"]["reservation"]>
-
-
-
-  export type ReservationSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    ressourceId?: boolean
-    dateReservation?: boolean
-    dateDebut?: boolean
-    dateFin?: boolean
-    statut?: boolean
-    commentaire?: boolean
-    universiteEmprunteur?: boolean
-    validePar?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type ReservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "dateReservation" | "dateDebut" | "dateFin" | "statut" | "commentaire" | "universiteEmprunteur" | "validePar" | "createdAt" | "updatedAt", ExtArgs["result"]["reservation"]>
-  export type ReservationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Reservation$userArgs<ExtArgs>
-    ressource?: boolean | RessourceDefaultArgs<ExtArgs>
-    valideur?: boolean | Reservation$valideurArgs<ExtArgs>
-  }
-
-  export type $ReservationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Reservation"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-      ressource: Prisma.$RessourcePayload<ExtArgs>
-      valideur: Prisma.$BibliothecairePayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string | null
-      ressourceId: string
-      dateReservation: Date
-      dateDebut: Date
-      dateFin: Date
-      statut: $Enums.StatutReservation
-      commentaire: string | null
-      universiteEmprunteur: string
-      validePar: string | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["reservation"]>
-    composites: {}
-  }
-
-  type ReservationGetPayload<S extends boolean | null | undefined | ReservationDefaultArgs> = $Result.GetResult<Prisma.$ReservationPayload, S>
-
-  type ReservationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ReservationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ReservationCountAggregateInputType | true
-    }
-
-  export interface ReservationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Reservation'], meta: { name: 'Reservation' } }
-    /**
-     * Find zero or one Reservation that matches the filter.
-     * @param {ReservationFindUniqueArgs} args - Arguments to find a Reservation
-     * @example
-     * // Get one Reservation
-     * const reservation = await prisma.reservation.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ReservationFindUniqueArgs>(args: SelectSubset<T, ReservationFindUniqueArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Reservation that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ReservationFindUniqueOrThrowArgs} args - Arguments to find a Reservation
-     * @example
-     * // Get one Reservation
-     * const reservation = await prisma.reservation.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ReservationFindUniqueOrThrowArgs>(args: SelectSubset<T, ReservationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Reservation that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReservationFindFirstArgs} args - Arguments to find a Reservation
-     * @example
-     * // Get one Reservation
-     * const reservation = await prisma.reservation.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ReservationFindFirstArgs>(args?: SelectSubset<T, ReservationFindFirstArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Reservation that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReservationFindFirstOrThrowArgs} args - Arguments to find a Reservation
-     * @example
-     * // Get one Reservation
-     * const reservation = await prisma.reservation.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ReservationFindFirstOrThrowArgs>(args?: SelectSubset<T, ReservationFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Reservations that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReservationFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Reservations
-     * const reservations = await prisma.reservation.findMany()
-     * 
-     * // Get first 10 Reservations
-     * const reservations = await prisma.reservation.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const reservationWithIdOnly = await prisma.reservation.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ReservationFindManyArgs>(args?: SelectSubset<T, ReservationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Reservation.
-     * @param {ReservationCreateArgs} args - Arguments to create a Reservation.
-     * @example
-     * // Create one Reservation
-     * const Reservation = await prisma.reservation.create({
-     *   data: {
-     *     // ... data to create a Reservation
-     *   }
-     * })
-     * 
-     */
-    create<T extends ReservationCreateArgs>(args: SelectSubset<T, ReservationCreateArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Reservations.
-     * @param {ReservationCreateManyArgs} args - Arguments to create many Reservations.
-     * @example
-     * // Create many Reservations
-     * const reservation = await prisma.reservation.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ReservationCreateManyArgs>(args?: SelectSubset<T, ReservationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Reservation.
-     * @param {ReservationDeleteArgs} args - Arguments to delete one Reservation.
-     * @example
-     * // Delete one Reservation
-     * const Reservation = await prisma.reservation.delete({
-     *   where: {
-     *     // ... filter to delete one Reservation
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ReservationDeleteArgs>(args: SelectSubset<T, ReservationDeleteArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Reservation.
-     * @param {ReservationUpdateArgs} args - Arguments to update one Reservation.
-     * @example
-     * // Update one Reservation
-     * const reservation = await prisma.reservation.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ReservationUpdateArgs>(args: SelectSubset<T, ReservationUpdateArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Reservations.
-     * @param {ReservationDeleteManyArgs} args - Arguments to filter Reservations to delete.
-     * @example
-     * // Delete a few Reservations
-     * const { count } = await prisma.reservation.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ReservationDeleteManyArgs>(args?: SelectSubset<T, ReservationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Reservations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReservationUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Reservations
-     * const reservation = await prisma.reservation.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ReservationUpdateManyArgs>(args: SelectSubset<T, ReservationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Reservation.
-     * @param {ReservationUpsertArgs} args - Arguments to update or create a Reservation.
-     * @example
-     * // Update or create a Reservation
-     * const reservation = await prisma.reservation.upsert({
-     *   create: {
-     *     // ... data to create a Reservation
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Reservation we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ReservationUpsertArgs>(args: SelectSubset<T, ReservationUpsertArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Reservations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReservationCountArgs} args - Arguments to filter Reservations to count.
-     * @example
-     * // Count the number of Reservations
-     * const count = await prisma.reservation.count({
-     *   where: {
-     *     // ... the filter for the Reservations we want to count
-     *   }
-     * })
-    **/
-    count<T extends ReservationCountArgs>(
-      args?: Subset<T, ReservationCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ReservationCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Reservation.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReservationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ReservationAggregateArgs>(args: Subset<T, ReservationAggregateArgs>): Prisma.PrismaPromise<GetReservationAggregateType<T>>
-
-    /**
-     * Group by Reservation.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReservationGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ReservationGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ReservationGroupByArgs['orderBy'] }
-        : { orderBy?: ReservationGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ReservationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReservationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Reservation model
-   */
-  readonly fields: ReservationFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Reservation.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ReservationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends Reservation$userArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    ressource<T extends RessourceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RessourceDefaultArgs<ExtArgs>>): Prisma__RessourceClient<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    valideur<T extends Reservation$valideurArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$valideurArgs<ExtArgs>>): Prisma__BibliothecaireClient<$Result.GetResult<Prisma.$BibliothecairePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Reservation model
-   */
-  interface ReservationFieldRefs {
-    readonly id: FieldRef<"Reservation", 'String'>
-    readonly userId: FieldRef<"Reservation", 'String'>
-    readonly ressourceId: FieldRef<"Reservation", 'String'>
-    readonly dateReservation: FieldRef<"Reservation", 'DateTime'>
-    readonly dateDebut: FieldRef<"Reservation", 'DateTime'>
-    readonly dateFin: FieldRef<"Reservation", 'DateTime'>
-    readonly statut: FieldRef<"Reservation", 'StatutReservation'>
-    readonly commentaire: FieldRef<"Reservation", 'String'>
-    readonly universiteEmprunteur: FieldRef<"Reservation", 'String'>
-    readonly validePar: FieldRef<"Reservation", 'String'>
-    readonly createdAt: FieldRef<"Reservation", 'DateTime'>
-    readonly updatedAt: FieldRef<"Reservation", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Reservation findUnique
-   */
-  export type ReservationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    /**
-     * Filter, which Reservation to fetch.
-     */
-    where: ReservationWhereUniqueInput
-  }
-
-  /**
-   * Reservation findUniqueOrThrow
-   */
-  export type ReservationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    /**
-     * Filter, which Reservation to fetch.
-     */
-    where: ReservationWhereUniqueInput
-  }
-
-  /**
-   * Reservation findFirst
-   */
-  export type ReservationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    /**
-     * Filter, which Reservation to fetch.
-     */
-    where?: ReservationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Reservations to fetch.
-     */
-    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Reservations.
-     */
-    cursor?: ReservationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Reservations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Reservations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Reservations.
-     */
-    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
-  }
-
-  /**
-   * Reservation findFirstOrThrow
-   */
-  export type ReservationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    /**
-     * Filter, which Reservation to fetch.
-     */
-    where?: ReservationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Reservations to fetch.
-     */
-    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Reservations.
-     */
-    cursor?: ReservationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Reservations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Reservations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Reservations.
-     */
-    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
-  }
-
-  /**
-   * Reservation findMany
-   */
-  export type ReservationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    /**
-     * Filter, which Reservations to fetch.
-     */
-    where?: ReservationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Reservations to fetch.
-     */
-    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Reservations.
-     */
-    cursor?: ReservationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Reservations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Reservations.
-     */
-    skip?: number
-    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
-  }
-
-  /**
-   * Reservation create
-   */
-  export type ReservationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Reservation.
-     */
-    data: XOR<ReservationCreateInput, ReservationUncheckedCreateInput>
-  }
-
-  /**
-   * Reservation createMany
-   */
-  export type ReservationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Reservations.
-     */
-    data: ReservationCreateManyInput | ReservationCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Reservation update
-   */
-  export type ReservationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Reservation.
-     */
-    data: XOR<ReservationUpdateInput, ReservationUncheckedUpdateInput>
-    /**
-     * Choose, which Reservation to update.
-     */
-    where: ReservationWhereUniqueInput
-  }
-
-  /**
-   * Reservation updateMany
-   */
-  export type ReservationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Reservations.
-     */
-    data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyInput>
-    /**
-     * Filter which Reservations to update
-     */
-    where?: ReservationWhereInput
-    /**
-     * Limit how many Reservations to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Reservation upsert
-   */
-  export type ReservationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Reservation to update in case it exists.
-     */
-    where: ReservationWhereUniqueInput
-    /**
-     * In case the Reservation found by the `where` argument doesn't exist, create a new Reservation with this data.
-     */
-    create: XOR<ReservationCreateInput, ReservationUncheckedCreateInput>
-    /**
-     * In case the Reservation was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ReservationUpdateInput, ReservationUncheckedUpdateInput>
-  }
-
-  /**
-   * Reservation delete
-   */
-  export type ReservationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    /**
-     * Filter which Reservation to delete.
-     */
-    where: ReservationWhereUniqueInput
-  }
-
-  /**
-   * Reservation deleteMany
-   */
-  export type ReservationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Reservations to delete
-     */
-    where?: ReservationWhereInput
-    /**
-     * Limit how many Reservations to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Reservation.user
-   */
-  export type Reservation$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
-   * Reservation.valideur
-   */
-  export type Reservation$valideurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bibliothecaire
-     */
-    select?: BibliothecaireSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bibliothecaire
-     */
-    omit?: BibliothecaireOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BibliothecaireInclude<ExtArgs> | null
-    where?: BibliothecaireWhereInput
-  }
-
-  /**
-   * Reservation without action
-   */
-  export type ReservationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model ExemplairePhysique
    */
 
@@ -9030,26 +7892,24 @@ export namespace Prisma {
   }
 
   export type ExemplairePhysiqueAvgAggregateOutputType = {
-    dureeMaxEmpruntExterne: number | null
-    nbMaxExemplairesExterne: number | null
+    nombre: number | null
+    nombreDisponible: number | null
   }
 
   export type ExemplairePhysiqueSumAggregateOutputType = {
-    dureeMaxEmpruntExterne: number | null
-    nbMaxExemplairesExterne: number | null
+    nombre: number | null
+    nombreDisponible: number | null
   }
 
   export type ExemplairePhysiqueMinAggregateOutputType = {
     id: string | null
     ressourceId: string | null
-    cote: string | null
     etat: $Enums.EtatExemplaire | null
-    disponible: boolean | null
     localisation: string | null
     dateAcquisition: Date | null
     qrCode: string | null
-    dureeMaxEmpruntExterne: number | null
-    nbMaxExemplairesExterne: number | null
+    nombre: number | null
+    nombreDisponible: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9057,14 +7917,12 @@ export namespace Prisma {
   export type ExemplairePhysiqueMaxAggregateOutputType = {
     id: string | null
     ressourceId: string | null
-    cote: string | null
     etat: $Enums.EtatExemplaire | null
-    disponible: boolean | null
     localisation: string | null
     dateAcquisition: Date | null
     qrCode: string | null
-    dureeMaxEmpruntExterne: number | null
-    nbMaxExemplairesExterne: number | null
+    nombre: number | null
+    nombreDisponible: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9072,14 +7930,12 @@ export namespace Prisma {
   export type ExemplairePhysiqueCountAggregateOutputType = {
     id: number
     ressourceId: number
-    cote: number
     etat: number
-    disponible: number
     localisation: number
     dateAcquisition: number
     qrCode: number
-    dureeMaxEmpruntExterne: number
-    nbMaxExemplairesExterne: number
+    nombre: number
+    nombreDisponible: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -9087,26 +7943,24 @@ export namespace Prisma {
 
 
   export type ExemplairePhysiqueAvgAggregateInputType = {
-    dureeMaxEmpruntExterne?: true
-    nbMaxExemplairesExterne?: true
+    nombre?: true
+    nombreDisponible?: true
   }
 
   export type ExemplairePhysiqueSumAggregateInputType = {
-    dureeMaxEmpruntExterne?: true
-    nbMaxExemplairesExterne?: true
+    nombre?: true
+    nombreDisponible?: true
   }
 
   export type ExemplairePhysiqueMinAggregateInputType = {
     id?: true
     ressourceId?: true
-    cote?: true
     etat?: true
-    disponible?: true
     localisation?: true
     dateAcquisition?: true
     qrCode?: true
-    dureeMaxEmpruntExterne?: true
-    nbMaxExemplairesExterne?: true
+    nombre?: true
+    nombreDisponible?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -9114,14 +7968,12 @@ export namespace Prisma {
   export type ExemplairePhysiqueMaxAggregateInputType = {
     id?: true
     ressourceId?: true
-    cote?: true
     etat?: true
-    disponible?: true
     localisation?: true
     dateAcquisition?: true
     qrCode?: true
-    dureeMaxEmpruntExterne?: true
-    nbMaxExemplairesExterne?: true
+    nombre?: true
+    nombreDisponible?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -9129,14 +7981,12 @@ export namespace Prisma {
   export type ExemplairePhysiqueCountAggregateInputType = {
     id?: true
     ressourceId?: true
-    cote?: true
     etat?: true
-    disponible?: true
     localisation?: true
     dateAcquisition?: true
     qrCode?: true
-    dureeMaxEmpruntExterne?: true
-    nbMaxExemplairesExterne?: true
+    nombre?: true
+    nombreDisponible?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -9231,14 +8081,12 @@ export namespace Prisma {
   export type ExemplairePhysiqueGroupByOutputType = {
     id: string
     ressourceId: string
-    cote: string
     etat: $Enums.EtatExemplaire
-    disponible: boolean
     localisation: string
     dateAcquisition: Date | null
     qrCode: string | null
-    dureeMaxEmpruntExterne: number
-    nbMaxExemplairesExterne: number
+    nombre: number
+    nombreDisponible: number
     createdAt: Date
     updatedAt: Date
     _count: ExemplairePhysiqueCountAggregateOutputType | null
@@ -9265,18 +8113,16 @@ export namespace Prisma {
   export type ExemplairePhysiqueSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     ressourceId?: boolean
-    cote?: boolean
     etat?: boolean
-    disponible?: boolean
     localisation?: boolean
     dateAcquisition?: boolean
     qrCode?: boolean
-    dureeMaxEmpruntExterne?: boolean
-    nbMaxExemplairesExterne?: boolean
+    nombre?: boolean
+    nombreDisponible?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
-    emprunts?: boolean | ExemplairePhysique$empruntsArgs<ExtArgs>
+    empruntExemplaires?: boolean | ExemplairePhysique$empruntExemplairesArgs<ExtArgs>
     _count?: boolean | ExemplairePhysiqueCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["exemplairePhysique"]>
 
@@ -9285,22 +8131,20 @@ export namespace Prisma {
   export type ExemplairePhysiqueSelectScalar = {
     id?: boolean
     ressourceId?: boolean
-    cote?: boolean
     etat?: boolean
-    disponible?: boolean
     localisation?: boolean
     dateAcquisition?: boolean
     qrCode?: boolean
-    dureeMaxEmpruntExterne?: boolean
-    nbMaxExemplairesExterne?: boolean
+    nombre?: boolean
+    nombreDisponible?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ExemplairePhysiqueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ressourceId" | "cote" | "etat" | "disponible" | "localisation" | "dateAcquisition" | "qrCode" | "dureeMaxEmpruntExterne" | "nbMaxExemplairesExterne" | "createdAt" | "updatedAt", ExtArgs["result"]["exemplairePhysique"]>
+  export type ExemplairePhysiqueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ressourceId" | "etat" | "localisation" | "dateAcquisition" | "qrCode" | "nombre" | "nombreDisponible" | "createdAt" | "updatedAt", ExtArgs["result"]["exemplairePhysique"]>
   export type ExemplairePhysiqueInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
-    emprunts?: boolean | ExemplairePhysique$empruntsArgs<ExtArgs>
+    empruntExemplaires?: boolean | ExemplairePhysique$empruntExemplairesArgs<ExtArgs>
     _count?: boolean | ExemplairePhysiqueCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -9308,19 +8152,17 @@ export namespace Prisma {
     name: "ExemplairePhysique"
     objects: {
       ressource: Prisma.$RessourcePayload<ExtArgs>
-      emprunts: Prisma.$EmpruntPayload<ExtArgs>[]
+      empruntExemplaires: Prisma.$EmpruntExemplairePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       ressourceId: string
-      cote: string
       etat: $Enums.EtatExemplaire
-      disponible: boolean
       localisation: string
       dateAcquisition: Date | null
       qrCode: string | null
-      dureeMaxEmpruntExterne: number
-      nbMaxExemplairesExterne: number
+      nombre: number
+      nombreDisponible: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["exemplairePhysique"]>
@@ -9664,7 +8506,7 @@ export namespace Prisma {
   export interface Prisma__ExemplairePhysiqueClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     ressource<T extends RessourceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RessourceDefaultArgs<ExtArgs>>): Prisma__RessourceClient<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    emprunts<T extends ExemplairePhysique$empruntsArgs<ExtArgs> = {}>(args?: Subset<T, ExemplairePhysique$empruntsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmpruntPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    empruntExemplaires<T extends ExemplairePhysique$empruntExemplairesArgs<ExtArgs> = {}>(args?: Subset<T, ExemplairePhysique$empruntExemplairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmpruntExemplairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9696,14 +8538,12 @@ export namespace Prisma {
   interface ExemplairePhysiqueFieldRefs {
     readonly id: FieldRef<"ExemplairePhysique", 'String'>
     readonly ressourceId: FieldRef<"ExemplairePhysique", 'String'>
-    readonly cote: FieldRef<"ExemplairePhysique", 'String'>
     readonly etat: FieldRef<"ExemplairePhysique", 'EtatExemplaire'>
-    readonly disponible: FieldRef<"ExemplairePhysique", 'Boolean'>
     readonly localisation: FieldRef<"ExemplairePhysique", 'String'>
     readonly dateAcquisition: FieldRef<"ExemplairePhysique", 'DateTime'>
     readonly qrCode: FieldRef<"ExemplairePhysique", 'String'>
-    readonly dureeMaxEmpruntExterne: FieldRef<"ExemplairePhysique", 'Int'>
-    readonly nbMaxExemplairesExterne: FieldRef<"ExemplairePhysique", 'Int'>
+    readonly nombre: FieldRef<"ExemplairePhysique", 'Int'>
+    readonly nombreDisponible: FieldRef<"ExemplairePhysique", 'Int'>
     readonly createdAt: FieldRef<"ExemplairePhysique", 'DateTime'>
     readonly updatedAt: FieldRef<"ExemplairePhysique", 'DateTime'>
   }
@@ -10049,27 +8889,27 @@ export namespace Prisma {
   }
 
   /**
-   * ExemplairePhysique.emprunts
+   * ExemplairePhysique.empruntExemplaires
    */
-  export type ExemplairePhysique$empruntsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ExemplairePhysique$empruntExemplairesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Emprunt
+     * Select specific fields to fetch from the EmpruntExemplaire
      */
-    select?: EmpruntSelect<ExtArgs> | null
+    select?: EmpruntExemplaireSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Emprunt
+     * Omit specific fields from the EmpruntExemplaire
      */
-    omit?: EmpruntOmit<ExtArgs> | null
+    omit?: EmpruntExemplaireOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmpruntInclude<ExtArgs> | null
-    where?: EmpruntWhereInput
-    orderBy?: EmpruntOrderByWithRelationInput | EmpruntOrderByWithRelationInput[]
-    cursor?: EmpruntWhereUniqueInput
+    include?: EmpruntExemplaireInclude<ExtArgs> | null
+    where?: EmpruntExemplaireWhereInput
+    orderBy?: EmpruntExemplaireOrderByWithRelationInput | EmpruntExemplaireOrderByWithRelationInput[]
+    cursor?: EmpruntExemplaireWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: EmpruntScalarFieldEnum | EmpruntScalarFieldEnum[]
+    distinct?: EmpruntExemplaireScalarFieldEnum | EmpruntExemplaireScalarFieldEnum[]
   }
 
   /**
@@ -10109,10 +8949,7 @@ export namespace Prisma {
     dateRetourPrevue: Date | null
     dateRetourEffective: Date | null
     statut: $Enums.StatutEmprunt | null
-    commentaire: string | null
     universiteEmprunteur: string | null
-    motifEmprunt: string | null
-    validePar: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10125,10 +8962,7 @@ export namespace Prisma {
     dateRetourPrevue: Date | null
     dateRetourEffective: Date | null
     statut: $Enums.StatutEmprunt | null
-    commentaire: string | null
     universiteEmprunteur: string | null
-    motifEmprunt: string | null
-    validePar: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10141,10 +8975,7 @@ export namespace Prisma {
     dateRetourPrevue: number
     dateRetourEffective: number
     statut: number
-    commentaire: number
     universiteEmprunteur: number
-    motifEmprunt: number
-    validePar: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -10159,10 +8990,7 @@ export namespace Prisma {
     dateRetourPrevue?: true
     dateRetourEffective?: true
     statut?: true
-    commentaire?: true
     universiteEmprunteur?: true
-    motifEmprunt?: true
-    validePar?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10175,10 +9003,7 @@ export namespace Prisma {
     dateRetourPrevue?: true
     dateRetourEffective?: true
     statut?: true
-    commentaire?: true
     universiteEmprunteur?: true
-    motifEmprunt?: true
-    validePar?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10191,10 +9016,7 @@ export namespace Prisma {
     dateRetourPrevue?: true
     dateRetourEffective?: true
     statut?: true
-    commentaire?: true
     universiteEmprunteur?: true
-    motifEmprunt?: true
-    validePar?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -10275,15 +9097,12 @@ export namespace Prisma {
   export type EmpruntGroupByOutputType = {
     id: string
     exemplaireId: string
-    userId: string
+    userId: string | null
     dateEmprunt: Date
     dateRetourPrevue: Date
     dateRetourEffective: Date | null
     statut: $Enums.StatutEmprunt
-    commentaire: string | null
     universiteEmprunteur: string
-    motifEmprunt: string | null
-    validePar: string | null
     createdAt: Date
     updatedAt: Date
     _count: EmpruntCountAggregateOutputType | null
@@ -10313,15 +9132,12 @@ export namespace Prisma {
     dateRetourPrevue?: boolean
     dateRetourEffective?: boolean
     statut?: boolean
-    commentaire?: boolean
     universiteEmprunteur?: boolean
-    motifEmprunt?: boolean
-    validePar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    exemplaire?: boolean | ExemplairePhysiqueDefaultArgs<ExtArgs>
     user?: boolean | Emprunt$userArgs<ExtArgs>
     SanctionUtilisateur?: boolean | Emprunt$SanctionUtilisateurArgs<ExtArgs>
+    empruntExemplaires?: boolean | Emprunt$empruntExemplairesArgs<ExtArgs>
     _count?: boolean | EmpruntCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emprunt"]>
 
@@ -10335,41 +9151,35 @@ export namespace Prisma {
     dateRetourPrevue?: boolean
     dateRetourEffective?: boolean
     statut?: boolean
-    commentaire?: boolean
     universiteEmprunteur?: boolean
-    motifEmprunt?: boolean
-    validePar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EmpruntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "exemplaireId" | "userId" | "dateEmprunt" | "dateRetourPrevue" | "dateRetourEffective" | "statut" | "commentaire" | "universiteEmprunteur" | "motifEmprunt" | "validePar" | "createdAt" | "updatedAt", ExtArgs["result"]["emprunt"]>
+  export type EmpruntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "exemplaireId" | "userId" | "dateEmprunt" | "dateRetourPrevue" | "dateRetourEffective" | "statut" | "universiteEmprunteur" | "createdAt" | "updatedAt", ExtArgs["result"]["emprunt"]>
   export type EmpruntInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    exemplaire?: boolean | ExemplairePhysiqueDefaultArgs<ExtArgs>
     user?: boolean | Emprunt$userArgs<ExtArgs>
     SanctionUtilisateur?: boolean | Emprunt$SanctionUtilisateurArgs<ExtArgs>
+    empruntExemplaires?: boolean | Emprunt$empruntExemplairesArgs<ExtArgs>
     _count?: boolean | EmpruntCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $EmpruntPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Emprunt"
     objects: {
-      exemplaire: Prisma.$ExemplairePhysiquePayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs> | null
       SanctionUtilisateur: Prisma.$SanctionUtilisateurPayload<ExtArgs>[]
+      empruntExemplaires: Prisma.$EmpruntExemplairePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       exemplaireId: string
-      userId: string
+      userId: string | null
       dateEmprunt: Date
       dateRetourPrevue: Date
       dateRetourEffective: Date | null
       statut: $Enums.StatutEmprunt
-      commentaire: string | null
       universiteEmprunteur: string
-      motifEmprunt: string | null
-      validePar: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["emprunt"]>
@@ -10712,9 +9522,9 @@ export namespace Prisma {
    */
   export interface Prisma__EmpruntClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    exemplaire<T extends ExemplairePhysiqueDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExemplairePhysiqueDefaultArgs<ExtArgs>>): Prisma__ExemplairePhysiqueClient<$Result.GetResult<Prisma.$ExemplairePhysiquePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends Emprunt$userArgs<ExtArgs> = {}>(args?: Subset<T, Emprunt$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     SanctionUtilisateur<T extends Emprunt$SanctionUtilisateurArgs<ExtArgs> = {}>(args?: Subset<T, Emprunt$SanctionUtilisateurArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    empruntExemplaires<T extends Emprunt$empruntExemplairesArgs<ExtArgs> = {}>(args?: Subset<T, Emprunt$empruntExemplairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmpruntExemplairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10751,10 +9561,7 @@ export namespace Prisma {
     readonly dateRetourPrevue: FieldRef<"Emprunt", 'DateTime'>
     readonly dateRetourEffective: FieldRef<"Emprunt", 'DateTime'>
     readonly statut: FieldRef<"Emprunt", 'StatutEmprunt'>
-    readonly commentaire: FieldRef<"Emprunt", 'String'>
     readonly universiteEmprunteur: FieldRef<"Emprunt", 'String'>
-    readonly motifEmprunt: FieldRef<"Emprunt", 'String'>
-    readonly validePar: FieldRef<"Emprunt", 'String'>
     readonly createdAt: FieldRef<"Emprunt", 'DateTime'>
     readonly updatedAt: FieldRef<"Emprunt", 'DateTime'>
   }
@@ -11143,6 +9950,30 @@ export namespace Prisma {
   }
 
   /**
+   * Emprunt.empruntExemplaires
+   */
+  export type Emprunt$empruntExemplairesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmpruntExemplaire
+     */
+    select?: EmpruntExemplaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmpruntExemplaire
+     */
+    omit?: EmpruntExemplaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpruntExemplaireInclude<ExtArgs> | null
+    where?: EmpruntExemplaireWhereInput
+    orderBy?: EmpruntExemplaireOrderByWithRelationInput | EmpruntExemplaireOrderByWithRelationInput[]
+    cursor?: EmpruntExemplaireWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmpruntExemplaireScalarFieldEnum | EmpruntExemplaireScalarFieldEnum[]
+  }
+
+  /**
    * Emprunt without action
    */
   export type EmpruntDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11158,6 +9989,994 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EmpruntInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EmpruntExemplaire
+   */
+
+  export type AggregateEmpruntExemplaire = {
+    _count: EmpruntExemplaireCountAggregateOutputType | null
+    _min: EmpruntExemplaireMinAggregateOutputType | null
+    _max: EmpruntExemplaireMaxAggregateOutputType | null
+  }
+
+  export type EmpruntExemplaireMinAggregateOutputType = {
+    id: string | null
+    empruntId: string | null
+    exemplaireId: string | null
+    dateEmprunt: Date | null
+    dateRetourPrevue: Date | null
+    dateRetourEffective: Date | null
+    statut: $Enums.StatutEmprunt | null
+    commentaire: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmpruntExemplaireMaxAggregateOutputType = {
+    id: string | null
+    empruntId: string | null
+    exemplaireId: string | null
+    dateEmprunt: Date | null
+    dateRetourPrevue: Date | null
+    dateRetourEffective: Date | null
+    statut: $Enums.StatutEmprunt | null
+    commentaire: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmpruntExemplaireCountAggregateOutputType = {
+    id: number
+    empruntId: number
+    exemplaireId: number
+    dateEmprunt: number
+    dateRetourPrevue: number
+    dateRetourEffective: number
+    statut: number
+    commentaire: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EmpruntExemplaireMinAggregateInputType = {
+    id?: true
+    empruntId?: true
+    exemplaireId?: true
+    dateEmprunt?: true
+    dateRetourPrevue?: true
+    dateRetourEffective?: true
+    statut?: true
+    commentaire?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmpruntExemplaireMaxAggregateInputType = {
+    id?: true
+    empruntId?: true
+    exemplaireId?: true
+    dateEmprunt?: true
+    dateRetourPrevue?: true
+    dateRetourEffective?: true
+    statut?: true
+    commentaire?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmpruntExemplaireCountAggregateInputType = {
+    id?: true
+    empruntId?: true
+    exemplaireId?: true
+    dateEmprunt?: true
+    dateRetourPrevue?: true
+    dateRetourEffective?: true
+    statut?: true
+    commentaire?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EmpruntExemplaireAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmpruntExemplaire to aggregate.
+     */
+    where?: EmpruntExemplaireWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmpruntExemplaires to fetch.
+     */
+    orderBy?: EmpruntExemplaireOrderByWithRelationInput | EmpruntExemplaireOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmpruntExemplaireWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmpruntExemplaires from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmpruntExemplaires.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmpruntExemplaires
+    **/
+    _count?: true | EmpruntExemplaireCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmpruntExemplaireMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmpruntExemplaireMaxAggregateInputType
+  }
+
+  export type GetEmpruntExemplaireAggregateType<T extends EmpruntExemplaireAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmpruntExemplaire]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmpruntExemplaire[P]>
+      : GetScalarType<T[P], AggregateEmpruntExemplaire[P]>
+  }
+
+
+
+
+  export type EmpruntExemplaireGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmpruntExemplaireWhereInput
+    orderBy?: EmpruntExemplaireOrderByWithAggregationInput | EmpruntExemplaireOrderByWithAggregationInput[]
+    by: EmpruntExemplaireScalarFieldEnum[] | EmpruntExemplaireScalarFieldEnum
+    having?: EmpruntExemplaireScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmpruntExemplaireCountAggregateInputType | true
+    _min?: EmpruntExemplaireMinAggregateInputType
+    _max?: EmpruntExemplaireMaxAggregateInputType
+  }
+
+  export type EmpruntExemplaireGroupByOutputType = {
+    id: string
+    empruntId: string
+    exemplaireId: string
+    dateEmprunt: Date
+    dateRetourPrevue: Date
+    dateRetourEffective: Date | null
+    statut: $Enums.StatutEmprunt
+    commentaire: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: EmpruntExemplaireCountAggregateOutputType | null
+    _min: EmpruntExemplaireMinAggregateOutputType | null
+    _max: EmpruntExemplaireMaxAggregateOutputType | null
+  }
+
+  type GetEmpruntExemplaireGroupByPayload<T extends EmpruntExemplaireGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmpruntExemplaireGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmpruntExemplaireGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmpruntExemplaireGroupByOutputType[P]>
+            : GetScalarType<T[P], EmpruntExemplaireGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmpruntExemplaireSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    empruntId?: boolean
+    exemplaireId?: boolean
+    dateEmprunt?: boolean
+    dateRetourPrevue?: boolean
+    dateRetourEffective?: boolean
+    statut?: boolean
+    commentaire?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    emprunt?: boolean | EmpruntDefaultArgs<ExtArgs>
+    exemplaire?: boolean | ExemplairePhysiqueDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["empruntExemplaire"]>
+
+
+
+  export type EmpruntExemplaireSelectScalar = {
+    id?: boolean
+    empruntId?: boolean
+    exemplaireId?: boolean
+    dateEmprunt?: boolean
+    dateRetourPrevue?: boolean
+    dateRetourEffective?: boolean
+    statut?: boolean
+    commentaire?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EmpruntExemplaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "empruntId" | "exemplaireId" | "dateEmprunt" | "dateRetourPrevue" | "dateRetourEffective" | "statut" | "commentaire" | "createdAt" | "updatedAt", ExtArgs["result"]["empruntExemplaire"]>
+  export type EmpruntExemplaireInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emprunt?: boolean | EmpruntDefaultArgs<ExtArgs>
+    exemplaire?: boolean | ExemplairePhysiqueDefaultArgs<ExtArgs>
+  }
+
+  export type $EmpruntExemplairePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmpruntExemplaire"
+    objects: {
+      emprunt: Prisma.$EmpruntPayload<ExtArgs>
+      exemplaire: Prisma.$ExemplairePhysiquePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      empruntId: string
+      exemplaireId: string
+      dateEmprunt: Date
+      dateRetourPrevue: Date
+      dateRetourEffective: Date | null
+      statut: $Enums.StatutEmprunt
+      commentaire: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["empruntExemplaire"]>
+    composites: {}
+  }
+
+  type EmpruntExemplaireGetPayload<S extends boolean | null | undefined | EmpruntExemplaireDefaultArgs> = $Result.GetResult<Prisma.$EmpruntExemplairePayload, S>
+
+  type EmpruntExemplaireCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmpruntExemplaireFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmpruntExemplaireCountAggregateInputType | true
+    }
+
+  export interface EmpruntExemplaireDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmpruntExemplaire'], meta: { name: 'EmpruntExemplaire' } }
+    /**
+     * Find zero or one EmpruntExemplaire that matches the filter.
+     * @param {EmpruntExemplaireFindUniqueArgs} args - Arguments to find a EmpruntExemplaire
+     * @example
+     * // Get one EmpruntExemplaire
+     * const empruntExemplaire = await prisma.empruntExemplaire.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmpruntExemplaireFindUniqueArgs>(args: SelectSubset<T, EmpruntExemplaireFindUniqueArgs<ExtArgs>>): Prisma__EmpruntExemplaireClient<$Result.GetResult<Prisma.$EmpruntExemplairePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmpruntExemplaire that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmpruntExemplaireFindUniqueOrThrowArgs} args - Arguments to find a EmpruntExemplaire
+     * @example
+     * // Get one EmpruntExemplaire
+     * const empruntExemplaire = await prisma.empruntExemplaire.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmpruntExemplaireFindUniqueOrThrowArgs>(args: SelectSubset<T, EmpruntExemplaireFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmpruntExemplaireClient<$Result.GetResult<Prisma.$EmpruntExemplairePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmpruntExemplaire that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmpruntExemplaireFindFirstArgs} args - Arguments to find a EmpruntExemplaire
+     * @example
+     * // Get one EmpruntExemplaire
+     * const empruntExemplaire = await prisma.empruntExemplaire.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmpruntExemplaireFindFirstArgs>(args?: SelectSubset<T, EmpruntExemplaireFindFirstArgs<ExtArgs>>): Prisma__EmpruntExemplaireClient<$Result.GetResult<Prisma.$EmpruntExemplairePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmpruntExemplaire that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmpruntExemplaireFindFirstOrThrowArgs} args - Arguments to find a EmpruntExemplaire
+     * @example
+     * // Get one EmpruntExemplaire
+     * const empruntExemplaire = await prisma.empruntExemplaire.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmpruntExemplaireFindFirstOrThrowArgs>(args?: SelectSubset<T, EmpruntExemplaireFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmpruntExemplaireClient<$Result.GetResult<Prisma.$EmpruntExemplairePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmpruntExemplaires that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmpruntExemplaireFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmpruntExemplaires
+     * const empruntExemplaires = await prisma.empruntExemplaire.findMany()
+     * 
+     * // Get first 10 EmpruntExemplaires
+     * const empruntExemplaires = await prisma.empruntExemplaire.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const empruntExemplaireWithIdOnly = await prisma.empruntExemplaire.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmpruntExemplaireFindManyArgs>(args?: SelectSubset<T, EmpruntExemplaireFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmpruntExemplairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmpruntExemplaire.
+     * @param {EmpruntExemplaireCreateArgs} args - Arguments to create a EmpruntExemplaire.
+     * @example
+     * // Create one EmpruntExemplaire
+     * const EmpruntExemplaire = await prisma.empruntExemplaire.create({
+     *   data: {
+     *     // ... data to create a EmpruntExemplaire
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmpruntExemplaireCreateArgs>(args: SelectSubset<T, EmpruntExemplaireCreateArgs<ExtArgs>>): Prisma__EmpruntExemplaireClient<$Result.GetResult<Prisma.$EmpruntExemplairePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmpruntExemplaires.
+     * @param {EmpruntExemplaireCreateManyArgs} args - Arguments to create many EmpruntExemplaires.
+     * @example
+     * // Create many EmpruntExemplaires
+     * const empruntExemplaire = await prisma.empruntExemplaire.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmpruntExemplaireCreateManyArgs>(args?: SelectSubset<T, EmpruntExemplaireCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a EmpruntExemplaire.
+     * @param {EmpruntExemplaireDeleteArgs} args - Arguments to delete one EmpruntExemplaire.
+     * @example
+     * // Delete one EmpruntExemplaire
+     * const EmpruntExemplaire = await prisma.empruntExemplaire.delete({
+     *   where: {
+     *     // ... filter to delete one EmpruntExemplaire
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmpruntExemplaireDeleteArgs>(args: SelectSubset<T, EmpruntExemplaireDeleteArgs<ExtArgs>>): Prisma__EmpruntExemplaireClient<$Result.GetResult<Prisma.$EmpruntExemplairePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmpruntExemplaire.
+     * @param {EmpruntExemplaireUpdateArgs} args - Arguments to update one EmpruntExemplaire.
+     * @example
+     * // Update one EmpruntExemplaire
+     * const empruntExemplaire = await prisma.empruntExemplaire.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmpruntExemplaireUpdateArgs>(args: SelectSubset<T, EmpruntExemplaireUpdateArgs<ExtArgs>>): Prisma__EmpruntExemplaireClient<$Result.GetResult<Prisma.$EmpruntExemplairePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmpruntExemplaires.
+     * @param {EmpruntExemplaireDeleteManyArgs} args - Arguments to filter EmpruntExemplaires to delete.
+     * @example
+     * // Delete a few EmpruntExemplaires
+     * const { count } = await prisma.empruntExemplaire.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmpruntExemplaireDeleteManyArgs>(args?: SelectSubset<T, EmpruntExemplaireDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmpruntExemplaires.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmpruntExemplaireUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmpruntExemplaires
+     * const empruntExemplaire = await prisma.empruntExemplaire.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmpruntExemplaireUpdateManyArgs>(args: SelectSubset<T, EmpruntExemplaireUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one EmpruntExemplaire.
+     * @param {EmpruntExemplaireUpsertArgs} args - Arguments to update or create a EmpruntExemplaire.
+     * @example
+     * // Update or create a EmpruntExemplaire
+     * const empruntExemplaire = await prisma.empruntExemplaire.upsert({
+     *   create: {
+     *     // ... data to create a EmpruntExemplaire
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmpruntExemplaire we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmpruntExemplaireUpsertArgs>(args: SelectSubset<T, EmpruntExemplaireUpsertArgs<ExtArgs>>): Prisma__EmpruntExemplaireClient<$Result.GetResult<Prisma.$EmpruntExemplairePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmpruntExemplaires.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmpruntExemplaireCountArgs} args - Arguments to filter EmpruntExemplaires to count.
+     * @example
+     * // Count the number of EmpruntExemplaires
+     * const count = await prisma.empruntExemplaire.count({
+     *   where: {
+     *     // ... the filter for the EmpruntExemplaires we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmpruntExemplaireCountArgs>(
+      args?: Subset<T, EmpruntExemplaireCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmpruntExemplaireCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmpruntExemplaire.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmpruntExemplaireAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmpruntExemplaireAggregateArgs>(args: Subset<T, EmpruntExemplaireAggregateArgs>): Prisma.PrismaPromise<GetEmpruntExemplaireAggregateType<T>>
+
+    /**
+     * Group by EmpruntExemplaire.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmpruntExemplaireGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmpruntExemplaireGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmpruntExemplaireGroupByArgs['orderBy'] }
+        : { orderBy?: EmpruntExemplaireGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmpruntExemplaireGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmpruntExemplaireGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmpruntExemplaire model
+   */
+  readonly fields: EmpruntExemplaireFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmpruntExemplaire.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmpruntExemplaireClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    emprunt<T extends EmpruntDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmpruntDefaultArgs<ExtArgs>>): Prisma__EmpruntClient<$Result.GetResult<Prisma.$EmpruntPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    exemplaire<T extends ExemplairePhysiqueDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExemplairePhysiqueDefaultArgs<ExtArgs>>): Prisma__ExemplairePhysiqueClient<$Result.GetResult<Prisma.$ExemplairePhysiquePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmpruntExemplaire model
+   */
+  interface EmpruntExemplaireFieldRefs {
+    readonly id: FieldRef<"EmpruntExemplaire", 'String'>
+    readonly empruntId: FieldRef<"EmpruntExemplaire", 'String'>
+    readonly exemplaireId: FieldRef<"EmpruntExemplaire", 'String'>
+    readonly dateEmprunt: FieldRef<"EmpruntExemplaire", 'DateTime'>
+    readonly dateRetourPrevue: FieldRef<"EmpruntExemplaire", 'DateTime'>
+    readonly dateRetourEffective: FieldRef<"EmpruntExemplaire", 'DateTime'>
+    readonly statut: FieldRef<"EmpruntExemplaire", 'StatutEmprunt'>
+    readonly commentaire: FieldRef<"EmpruntExemplaire", 'String'>
+    readonly createdAt: FieldRef<"EmpruntExemplaire", 'DateTime'>
+    readonly updatedAt: FieldRef<"EmpruntExemplaire", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmpruntExemplaire findUnique
+   */
+  export type EmpruntExemplaireFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmpruntExemplaire
+     */
+    select?: EmpruntExemplaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmpruntExemplaire
+     */
+    omit?: EmpruntExemplaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpruntExemplaireInclude<ExtArgs> | null
+    /**
+     * Filter, which EmpruntExemplaire to fetch.
+     */
+    where: EmpruntExemplaireWhereUniqueInput
+  }
+
+  /**
+   * EmpruntExemplaire findUniqueOrThrow
+   */
+  export type EmpruntExemplaireFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmpruntExemplaire
+     */
+    select?: EmpruntExemplaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmpruntExemplaire
+     */
+    omit?: EmpruntExemplaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpruntExemplaireInclude<ExtArgs> | null
+    /**
+     * Filter, which EmpruntExemplaire to fetch.
+     */
+    where: EmpruntExemplaireWhereUniqueInput
+  }
+
+  /**
+   * EmpruntExemplaire findFirst
+   */
+  export type EmpruntExemplaireFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmpruntExemplaire
+     */
+    select?: EmpruntExemplaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmpruntExemplaire
+     */
+    omit?: EmpruntExemplaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpruntExemplaireInclude<ExtArgs> | null
+    /**
+     * Filter, which EmpruntExemplaire to fetch.
+     */
+    where?: EmpruntExemplaireWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmpruntExemplaires to fetch.
+     */
+    orderBy?: EmpruntExemplaireOrderByWithRelationInput | EmpruntExemplaireOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmpruntExemplaires.
+     */
+    cursor?: EmpruntExemplaireWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmpruntExemplaires from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmpruntExemplaires.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmpruntExemplaires.
+     */
+    distinct?: EmpruntExemplaireScalarFieldEnum | EmpruntExemplaireScalarFieldEnum[]
+  }
+
+  /**
+   * EmpruntExemplaire findFirstOrThrow
+   */
+  export type EmpruntExemplaireFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmpruntExemplaire
+     */
+    select?: EmpruntExemplaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmpruntExemplaire
+     */
+    omit?: EmpruntExemplaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpruntExemplaireInclude<ExtArgs> | null
+    /**
+     * Filter, which EmpruntExemplaire to fetch.
+     */
+    where?: EmpruntExemplaireWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmpruntExemplaires to fetch.
+     */
+    orderBy?: EmpruntExemplaireOrderByWithRelationInput | EmpruntExemplaireOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmpruntExemplaires.
+     */
+    cursor?: EmpruntExemplaireWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmpruntExemplaires from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmpruntExemplaires.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmpruntExemplaires.
+     */
+    distinct?: EmpruntExemplaireScalarFieldEnum | EmpruntExemplaireScalarFieldEnum[]
+  }
+
+  /**
+   * EmpruntExemplaire findMany
+   */
+  export type EmpruntExemplaireFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmpruntExemplaire
+     */
+    select?: EmpruntExemplaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmpruntExemplaire
+     */
+    omit?: EmpruntExemplaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpruntExemplaireInclude<ExtArgs> | null
+    /**
+     * Filter, which EmpruntExemplaires to fetch.
+     */
+    where?: EmpruntExemplaireWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmpruntExemplaires to fetch.
+     */
+    orderBy?: EmpruntExemplaireOrderByWithRelationInput | EmpruntExemplaireOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmpruntExemplaires.
+     */
+    cursor?: EmpruntExemplaireWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmpruntExemplaires from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmpruntExemplaires.
+     */
+    skip?: number
+    distinct?: EmpruntExemplaireScalarFieldEnum | EmpruntExemplaireScalarFieldEnum[]
+  }
+
+  /**
+   * EmpruntExemplaire create
+   */
+  export type EmpruntExemplaireCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmpruntExemplaire
+     */
+    select?: EmpruntExemplaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmpruntExemplaire
+     */
+    omit?: EmpruntExemplaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpruntExemplaireInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EmpruntExemplaire.
+     */
+    data: XOR<EmpruntExemplaireCreateInput, EmpruntExemplaireUncheckedCreateInput>
+  }
+
+  /**
+   * EmpruntExemplaire createMany
+   */
+  export type EmpruntExemplaireCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmpruntExemplaires.
+     */
+    data: EmpruntExemplaireCreateManyInput | EmpruntExemplaireCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmpruntExemplaire update
+   */
+  export type EmpruntExemplaireUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmpruntExemplaire
+     */
+    select?: EmpruntExemplaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmpruntExemplaire
+     */
+    omit?: EmpruntExemplaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpruntExemplaireInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EmpruntExemplaire.
+     */
+    data: XOR<EmpruntExemplaireUpdateInput, EmpruntExemplaireUncheckedUpdateInput>
+    /**
+     * Choose, which EmpruntExemplaire to update.
+     */
+    where: EmpruntExemplaireWhereUniqueInput
+  }
+
+  /**
+   * EmpruntExemplaire updateMany
+   */
+  export type EmpruntExemplaireUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmpruntExemplaires.
+     */
+    data: XOR<EmpruntExemplaireUpdateManyMutationInput, EmpruntExemplaireUncheckedUpdateManyInput>
+    /**
+     * Filter which EmpruntExemplaires to update
+     */
+    where?: EmpruntExemplaireWhereInput
+    /**
+     * Limit how many EmpruntExemplaires to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmpruntExemplaire upsert
+   */
+  export type EmpruntExemplaireUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmpruntExemplaire
+     */
+    select?: EmpruntExemplaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmpruntExemplaire
+     */
+    omit?: EmpruntExemplaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpruntExemplaireInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EmpruntExemplaire to update in case it exists.
+     */
+    where: EmpruntExemplaireWhereUniqueInput
+    /**
+     * In case the EmpruntExemplaire found by the `where` argument doesn't exist, create a new EmpruntExemplaire with this data.
+     */
+    create: XOR<EmpruntExemplaireCreateInput, EmpruntExemplaireUncheckedCreateInput>
+    /**
+     * In case the EmpruntExemplaire was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmpruntExemplaireUpdateInput, EmpruntExemplaireUncheckedUpdateInput>
+  }
+
+  /**
+   * EmpruntExemplaire delete
+   */
+  export type EmpruntExemplaireDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmpruntExemplaire
+     */
+    select?: EmpruntExemplaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmpruntExemplaire
+     */
+    omit?: EmpruntExemplaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpruntExemplaireInclude<ExtArgs> | null
+    /**
+     * Filter which EmpruntExemplaire to delete.
+     */
+    where: EmpruntExemplaireWhereUniqueInput
+  }
+
+  /**
+   * EmpruntExemplaire deleteMany
+   */
+  export type EmpruntExemplaireDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmpruntExemplaires to delete
+     */
+    where?: EmpruntExemplaireWhereInput
+    /**
+     * Limit how many EmpruntExemplaires to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmpruntExemplaire without action
+   */
+  export type EmpruntExemplaireDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmpruntExemplaire
+     */
+    select?: EmpruntExemplaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmpruntExemplaire
+     */
+    omit?: EmpruntExemplaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpruntExemplaireInclude<ExtArgs> | null
   }
 
 
@@ -16429,16 +16248,15 @@ export namespace Prisma {
     notations?: boolean | User$notationsArgs<ExtArgs>
     historiques?: boolean | User$historiquesArgs<ExtArgs>
     collections?: boolean | User$collectionsArgs<ExtArgs>
-    reservations?: boolean | User$reservationsArgs<ExtArgs>
     emprunts?: boolean | User$empruntsArgs<ExtArgs>
     recommandations?: boolean | User$recommandationsArgs<ExtArgs>
     JournalAudit?: boolean | User$JournalAuditArgs<ExtArgs>
     donneesRecommandations?: boolean | User$donneesRecommandationsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
-    etudiants?: boolean | User$etudiantsArgs<ExtArgs>
-    enseignants?: boolean | User$enseignantsArgs<ExtArgs>
-    bibliothecaires?: boolean | User$bibliothecairesArgs<ExtArgs>
-    administrateurs?: boolean | User$administrateursArgs<ExtArgs>
+    etudiant?: boolean | User$etudiantArgs<ExtArgs>
+    enseignant?: boolean | User$enseignantArgs<ExtArgs>
+    bibliothecaire?: boolean | User$bibliothecaireArgs<ExtArgs>
+    administrateur?: boolean | User$administrateurArgs<ExtArgs>
     sanctions?: boolean | User$sanctionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -16470,16 +16288,15 @@ export namespace Prisma {
     notations?: boolean | User$notationsArgs<ExtArgs>
     historiques?: boolean | User$historiquesArgs<ExtArgs>
     collections?: boolean | User$collectionsArgs<ExtArgs>
-    reservations?: boolean | User$reservationsArgs<ExtArgs>
     emprunts?: boolean | User$empruntsArgs<ExtArgs>
     recommandations?: boolean | User$recommandationsArgs<ExtArgs>
     JournalAudit?: boolean | User$JournalAuditArgs<ExtArgs>
     donneesRecommandations?: boolean | User$donneesRecommandationsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
-    etudiants?: boolean | User$etudiantsArgs<ExtArgs>
-    enseignants?: boolean | User$enseignantsArgs<ExtArgs>
-    bibliothecaires?: boolean | User$bibliothecairesArgs<ExtArgs>
-    administrateurs?: boolean | User$administrateursArgs<ExtArgs>
+    etudiant?: boolean | User$etudiantArgs<ExtArgs>
+    enseignant?: boolean | User$enseignantArgs<ExtArgs>
+    bibliothecaire?: boolean | User$bibliothecaireArgs<ExtArgs>
+    administrateur?: boolean | User$administrateurArgs<ExtArgs>
     sanctions?: boolean | User$sanctionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -16493,16 +16310,15 @@ export namespace Prisma {
       notations: Prisma.$NotationPayload<ExtArgs>[]
       historiques: Prisma.$HistoriqueAccesPayload<ExtArgs>[]
       collections: Prisma.$CollectionPayload<ExtArgs>[]
-      reservations: Prisma.$ReservationPayload<ExtArgs>[]
       emprunts: Prisma.$EmpruntPayload<ExtArgs>[]
       recommandations: Prisma.$RecommandationPayload<ExtArgs>[]
       JournalAudit: Prisma.$JournalAuditPayload<ExtArgs>[]
       donneesRecommandations: Prisma.$DonneesRecommandationPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
-      etudiants: Prisma.$EtudiantPayload<ExtArgs>[]
-      enseignants: Prisma.$EnseignantPayload<ExtArgs>[]
-      bibliothecaires: Prisma.$BibliothecairePayload<ExtArgs>[]
-      administrateurs: Prisma.$AdministrateurPayload<ExtArgs>[]
+      etudiant: Prisma.$EtudiantPayload<ExtArgs> | null
+      enseignant: Prisma.$EnseignantPayload<ExtArgs> | null
+      bibliothecaire: Prisma.$BibliothecairePayload<ExtArgs> | null
+      administrateur: Prisma.$AdministrateurPayload<ExtArgs> | null
       sanctions: Prisma.$SanctionUtilisateurPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -16866,16 +16682,15 @@ export namespace Prisma {
     notations<T extends User$notationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     historiques<T extends User$historiquesArgs<ExtArgs> = {}>(args?: Subset<T, User$historiquesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoriqueAccesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     collections<T extends User$collectionsArgs<ExtArgs> = {}>(args?: Subset<T, User$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    reservations<T extends User$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, User$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     emprunts<T extends User$empruntsArgs<ExtArgs> = {}>(args?: Subset<T, User$empruntsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmpruntPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     recommandations<T extends User$recommandationsArgs<ExtArgs> = {}>(args?: Subset<T, User$recommandationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecommandationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     JournalAudit<T extends User$JournalAuditArgs<ExtArgs> = {}>(args?: Subset<T, User$JournalAuditArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JournalAuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     donneesRecommandations<T extends User$donneesRecommandationsArgs<ExtArgs> = {}>(args?: Subset<T, User$donneesRecommandationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonneesRecommandationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    etudiants<T extends User$etudiantsArgs<ExtArgs> = {}>(args?: Subset<T, User$etudiantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EtudiantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    enseignants<T extends User$enseignantsArgs<ExtArgs> = {}>(args?: Subset<T, User$enseignantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnseignantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    bibliothecaires<T extends User$bibliothecairesArgs<ExtArgs> = {}>(args?: Subset<T, User$bibliothecairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BibliothecairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    administrateurs<T extends User$administrateursArgs<ExtArgs> = {}>(args?: Subset<T, User$administrateursArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdministrateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    etudiant<T extends User$etudiantArgs<ExtArgs> = {}>(args?: Subset<T, User$etudiantArgs<ExtArgs>>): Prisma__EtudiantClient<$Result.GetResult<Prisma.$EtudiantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    enseignant<T extends User$enseignantArgs<ExtArgs> = {}>(args?: Subset<T, User$enseignantArgs<ExtArgs>>): Prisma__EnseignantClient<$Result.GetResult<Prisma.$EnseignantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    bibliothecaire<T extends User$bibliothecaireArgs<ExtArgs> = {}>(args?: Subset<T, User$bibliothecaireArgs<ExtArgs>>): Prisma__BibliothecaireClient<$Result.GetResult<Prisma.$BibliothecairePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    administrateur<T extends User$administrateurArgs<ExtArgs> = {}>(args?: Subset<T, User$administrateurArgs<ExtArgs>>): Prisma__AdministrateurClient<$Result.GetResult<Prisma.$AdministrateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     sanctions<T extends User$sanctionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sanctionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -17407,30 +17222,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.reservations
-   */
-  export type User$reservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    where?: ReservationWhereInput
-    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
-    cursor?: ReservationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
-  }
-
-  /**
    * User.emprunts
    */
   export type User$empruntsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17551,9 +17342,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.etudiants
+   * User.etudiant
    */
-  export type User$etudiantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$etudiantArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Etudiant
      */
@@ -17567,17 +17358,12 @@ export namespace Prisma {
      */
     include?: EtudiantInclude<ExtArgs> | null
     where?: EtudiantWhereInput
-    orderBy?: EtudiantOrderByWithRelationInput | EtudiantOrderByWithRelationInput[]
-    cursor?: EtudiantWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EtudiantScalarFieldEnum | EtudiantScalarFieldEnum[]
   }
 
   /**
-   * User.enseignants
+   * User.enseignant
    */
-  export type User$enseignantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$enseignantArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Enseignant
      */
@@ -17591,17 +17377,12 @@ export namespace Prisma {
      */
     include?: EnseignantInclude<ExtArgs> | null
     where?: EnseignantWhereInput
-    orderBy?: EnseignantOrderByWithRelationInput | EnseignantOrderByWithRelationInput[]
-    cursor?: EnseignantWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EnseignantScalarFieldEnum | EnseignantScalarFieldEnum[]
   }
 
   /**
-   * User.bibliothecaires
+   * User.bibliothecaire
    */
-  export type User$bibliothecairesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$bibliothecaireArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Bibliothecaire
      */
@@ -17615,17 +17396,12 @@ export namespace Prisma {
      */
     include?: BibliothecaireInclude<ExtArgs> | null
     where?: BibliothecaireWhereInput
-    orderBy?: BibliothecaireOrderByWithRelationInput | BibliothecaireOrderByWithRelationInput[]
-    cursor?: BibliothecaireWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BibliothecaireScalarFieldEnum | BibliothecaireScalarFieldEnum[]
   }
 
   /**
-   * User.administrateurs
+   * User.administrateur
    */
-  export type User$administrateursArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$administrateurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Administrateur
      */
@@ -17639,11 +17415,6 @@ export namespace Prisma {
      */
     include?: AdministrateurInclude<ExtArgs> | null
     where?: AdministrateurWhereInput
-    orderBy?: AdministrateurOrderByWithRelationInput | AdministrateurOrderByWithRelationInput[]
-    cursor?: AdministrateurWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AdministrateurScalarFieldEnum | AdministrateurScalarFieldEnum[]
   }
 
   /**
@@ -17704,7 +17475,6 @@ export namespace Prisma {
     userId: string | null
     codePermanent: string | null
     dateNaissance: Date | null
-    dateInscription: Date | null
     filiereId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -17715,7 +17485,6 @@ export namespace Prisma {
     userId: string | null
     codePermanent: string | null
     dateNaissance: Date | null
-    dateInscription: Date | null
     filiereId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -17726,7 +17495,6 @@ export namespace Prisma {
     userId: number
     codePermanent: number
     dateNaissance: number
-    dateInscription: number
     filiereId: number
     createdAt: number
     updatedAt: number
@@ -17739,7 +17507,6 @@ export namespace Prisma {
     userId?: true
     codePermanent?: true
     dateNaissance?: true
-    dateInscription?: true
     filiereId?: true
     createdAt?: true
     updatedAt?: true
@@ -17750,7 +17517,6 @@ export namespace Prisma {
     userId?: true
     codePermanent?: true
     dateNaissance?: true
-    dateInscription?: true
     filiereId?: true
     createdAt?: true
     updatedAt?: true
@@ -17761,7 +17527,6 @@ export namespace Prisma {
     userId?: true
     codePermanent?: true
     dateNaissance?: true
-    dateInscription?: true
     filiereId?: true
     createdAt?: true
     updatedAt?: true
@@ -17845,7 +17610,6 @@ export namespace Prisma {
     userId: string
     codePermanent: string
     dateNaissance: Date
-    dateInscription: Date
     filiereId: string
     createdAt: Date
     updatedAt: Date
@@ -17873,7 +17637,6 @@ export namespace Prisma {
     userId?: boolean
     codePermanent?: boolean
     dateNaissance?: boolean
-    dateInscription?: boolean
     filiereId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -17888,13 +17651,12 @@ export namespace Prisma {
     userId?: boolean
     codePermanent?: boolean
     dateNaissance?: boolean
-    dateInscription?: boolean
     filiereId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EtudiantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "codePermanent" | "dateNaissance" | "dateInscription" | "filiereId" | "createdAt" | "updatedAt", ExtArgs["result"]["etudiant"]>
+  export type EtudiantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "codePermanent" | "dateNaissance" | "filiereId" | "createdAt" | "updatedAt", ExtArgs["result"]["etudiant"]>
   export type EtudiantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     filiere?: boolean | FiliereDefaultArgs<ExtArgs>
@@ -17911,7 +17673,6 @@ export namespace Prisma {
       userId: string
       codePermanent: string
       dateNaissance: Date
-      dateInscription: Date
       filiereId: string
       createdAt: Date
       updatedAt: Date
@@ -18290,7 +18051,6 @@ export namespace Prisma {
     readonly userId: FieldRef<"Etudiant", 'String'>
     readonly codePermanent: FieldRef<"Etudiant", 'String'>
     readonly dateNaissance: FieldRef<"Etudiant", 'DateTime'>
-    readonly dateInscription: FieldRef<"Etudiant", 'DateTime'>
     readonly filiereId: FieldRef<"Etudiant", 'String'>
     readonly createdAt: FieldRef<"Etudiant", 'DateTime'>
     readonly updatedAt: FieldRef<"Etudiant", 'DateTime'>
@@ -19620,10 +19380,6 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     numeroBibliothecaire: string | null
-    dateNaissance: Date | null
-    adresse: string | null
-    ville: string | null
-    pays: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -19632,10 +19388,6 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     numeroBibliothecaire: string | null
-    dateNaissance: Date | null
-    adresse: string | null
-    ville: string | null
-    pays: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -19644,10 +19396,6 @@ export namespace Prisma {
     id: number
     userId: number
     numeroBibliothecaire: number
-    dateNaissance: number
-    adresse: number
-    ville: number
-    pays: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -19658,10 +19406,6 @@ export namespace Prisma {
     id?: true
     userId?: true
     numeroBibliothecaire?: true
-    dateNaissance?: true
-    adresse?: true
-    ville?: true
-    pays?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -19670,10 +19414,6 @@ export namespace Prisma {
     id?: true
     userId?: true
     numeroBibliothecaire?: true
-    dateNaissance?: true
-    adresse?: true
-    ville?: true
-    pays?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -19682,10 +19422,6 @@ export namespace Prisma {
     id?: true
     userId?: true
     numeroBibliothecaire?: true
-    dateNaissance?: true
-    adresse?: true
-    ville?: true
-    pays?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -19767,10 +19503,6 @@ export namespace Prisma {
     id: string
     userId: string
     numeroBibliothecaire: string
-    dateNaissance: Date
-    adresse: string | null
-    ville: string | null
-    pays: string | null
     createdAt: Date
     updatedAt: Date
     _count: BibliothecaireCountAggregateOutputType | null
@@ -19796,15 +19528,9 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     numeroBibliothecaire?: boolean
-    dateNaissance?: boolean
-    adresse?: boolean
-    ville?: boolean
-    pays?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    reservations?: boolean | Bibliothecaire$reservationsArgs<ExtArgs>
-    _count?: boolean | BibliothecaireCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bibliothecaire"]>
 
 
@@ -19813,35 +19539,24 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     numeroBibliothecaire?: boolean
-    dateNaissance?: boolean
-    adresse?: boolean
-    ville?: boolean
-    pays?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type BibliothecaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "numeroBibliothecaire" | "dateNaissance" | "adresse" | "ville" | "pays" | "createdAt" | "updatedAt", ExtArgs["result"]["bibliothecaire"]>
+  export type BibliothecaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "numeroBibliothecaire" | "createdAt" | "updatedAt", ExtArgs["result"]["bibliothecaire"]>
   export type BibliothecaireInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    reservations?: boolean | Bibliothecaire$reservationsArgs<ExtArgs>
-    _count?: boolean | BibliothecaireCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $BibliothecairePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Bibliothecaire"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
-      reservations: Prisma.$ReservationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
       numeroBibliothecaire: string
-      dateNaissance: Date
-      adresse: string | null
-      ville: string | null
-      pays: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["bibliothecaire"]>
@@ -20185,7 +19900,6 @@ export namespace Prisma {
   export interface Prisma__BibliothecaireClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    reservations<T extends Bibliothecaire$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, Bibliothecaire$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20218,10 +19932,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Bibliothecaire", 'String'>
     readonly userId: FieldRef<"Bibliothecaire", 'String'>
     readonly numeroBibliothecaire: FieldRef<"Bibliothecaire", 'String'>
-    readonly dateNaissance: FieldRef<"Bibliothecaire", 'DateTime'>
-    readonly adresse: FieldRef<"Bibliothecaire", 'String'>
-    readonly ville: FieldRef<"Bibliothecaire", 'String'>
-    readonly pays: FieldRef<"Bibliothecaire", 'String'>
     readonly createdAt: FieldRef<"Bibliothecaire", 'DateTime'>
     readonly updatedAt: FieldRef<"Bibliothecaire", 'DateTime'>
   }
@@ -20567,30 +20277,6 @@ export namespace Prisma {
   }
 
   /**
-   * Bibliothecaire.reservations
-   */
-  export type Bibliothecaire$reservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    where?: ReservationWhereInput
-    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
-    cursor?: ReservationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
-  }
-
-  /**
    * Bibliothecaire without action
    */
   export type BibliothecaireDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20623,30 +20309,18 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     numeroAdmin: string | null
-    dateNaissance: Date | null
-    adresse: string | null
-    ville: string | null
-    pays: string | null
   }
 
   export type AdministrateurMaxAggregateOutputType = {
     id: string | null
     userId: string | null
     numeroAdmin: string | null
-    dateNaissance: Date | null
-    adresse: string | null
-    ville: string | null
-    pays: string | null
   }
 
   export type AdministrateurCountAggregateOutputType = {
     id: number
     userId: number
     numeroAdmin: number
-    dateNaissance: number
-    adresse: number
-    ville: number
-    pays: number
     _all: number
   }
 
@@ -20655,30 +20329,18 @@ export namespace Prisma {
     id?: true
     userId?: true
     numeroAdmin?: true
-    dateNaissance?: true
-    adresse?: true
-    ville?: true
-    pays?: true
   }
 
   export type AdministrateurMaxAggregateInputType = {
     id?: true
     userId?: true
     numeroAdmin?: true
-    dateNaissance?: true
-    adresse?: true
-    ville?: true
-    pays?: true
   }
 
   export type AdministrateurCountAggregateInputType = {
     id?: true
     userId?: true
     numeroAdmin?: true
-    dateNaissance?: true
-    adresse?: true
-    ville?: true
-    pays?: true
     _all?: true
   }
 
@@ -20758,10 +20420,6 @@ export namespace Prisma {
     id: string
     userId: string
     numeroAdmin: string
-    dateNaissance: Date
-    adresse: string | null
-    ville: string | null
-    pays: string | null
     _count: AdministrateurCountAggregateOutputType | null
     _min: AdministrateurMinAggregateOutputType | null
     _max: AdministrateurMaxAggregateOutputType | null
@@ -20785,10 +20443,6 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     numeroAdmin?: boolean
-    dateNaissance?: boolean
-    adresse?: boolean
-    ville?: boolean
-    pays?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["administrateur"]>
 
@@ -20798,13 +20452,9 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     numeroAdmin?: boolean
-    dateNaissance?: boolean
-    adresse?: boolean
-    ville?: boolean
-    pays?: boolean
   }
 
-  export type AdministrateurOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "numeroAdmin" | "dateNaissance" | "adresse" | "ville" | "pays", ExtArgs["result"]["administrateur"]>
+  export type AdministrateurOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "numeroAdmin", ExtArgs["result"]["administrateur"]>
   export type AdministrateurInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -20818,10 +20468,6 @@ export namespace Prisma {
       id: string
       userId: string
       numeroAdmin: string
-      dateNaissance: Date
-      adresse: string | null
-      ville: string | null
-      pays: string | null
     }, ExtArgs["result"]["administrateur"]>
     composites: {}
   }
@@ -21195,10 +20841,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Administrateur", 'String'>
     readonly userId: FieldRef<"Administrateur", 'String'>
     readonly numeroAdmin: FieldRef<"Administrateur", 'String'>
-    readonly dateNaissance: FieldRef<"Administrateur", 'DateTime'>
-    readonly adresse: FieldRef<"Administrateur", 'String'>
-    readonly ville: FieldRef<"Administrateur", 'String'>
-    readonly pays: FieldRef<"Administrateur", 'String'>
   }
     
 
@@ -21574,10 +21216,8 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     ressourceId: string | null
-    dateAjout: Date | null
-    note: string | null
-    universiteSrc: string | null
-    universiteUser: string | null
+    externalRessourceId: string | null
+    universiteRess: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -21586,10 +21226,8 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     ressourceId: string | null
-    dateAjout: Date | null
-    note: string | null
-    universiteSrc: string | null
-    universiteUser: string | null
+    externalRessourceId: string | null
+    universiteRess: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -21598,10 +21236,8 @@ export namespace Prisma {
     id: number
     userId: number
     ressourceId: number
-    dateAjout: number
-    note: number
-    universiteSrc: number
-    universiteUser: number
+    externalRessourceId: number
+    universiteRess: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -21612,10 +21248,8 @@ export namespace Prisma {
     id?: true
     userId?: true
     ressourceId?: true
-    dateAjout?: true
-    note?: true
-    universiteSrc?: true
-    universiteUser?: true
+    externalRessourceId?: true
+    universiteRess?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -21624,10 +21258,8 @@ export namespace Prisma {
     id?: true
     userId?: true
     ressourceId?: true
-    dateAjout?: true
-    note?: true
-    universiteSrc?: true
-    universiteUser?: true
+    externalRessourceId?: true
+    universiteRess?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -21636,10 +21268,8 @@ export namespace Prisma {
     id?: true
     userId?: true
     ressourceId?: true
-    dateAjout?: true
-    note?: true
-    universiteSrc?: true
-    universiteUser?: true
+    externalRessourceId?: true
+    universiteRess?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -21720,11 +21350,9 @@ export namespace Prisma {
   export type FavoriGroupByOutputType = {
     id: string
     userId: string
-    ressourceId: string
-    dateAjout: Date
-    note: string | null
-    universiteSrc: string | null
-    universiteUser: string | null
+    ressourceId: string | null
+    externalRessourceId: string | null
+    universiteRess: string | null
     createdAt: Date
     updatedAt: Date
     _count: FavoriCountAggregateOutputType | null
@@ -21750,14 +21378,12 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     ressourceId?: boolean
-    dateAjout?: boolean
-    note?: boolean
-    universiteSrc?: boolean
-    universiteUser?: boolean
+    externalRessourceId?: boolean
+    universiteRess?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    ressource?: boolean | RessourceDefaultArgs<ExtArgs>
+    ressource?: boolean | Favori$ressourceArgs<ExtArgs>
+    user?: boolean | Favori$userArgs<ExtArgs>
   }, ExtArgs["result"]["favori"]>
 
 
@@ -21766,34 +21392,30 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     ressourceId?: boolean
-    dateAjout?: boolean
-    note?: boolean
-    universiteSrc?: boolean
-    universiteUser?: boolean
+    externalRessourceId?: boolean
+    universiteRess?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type FavoriOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "dateAjout" | "note" | "universiteSrc" | "universiteUser" | "createdAt" | "updatedAt", ExtArgs["result"]["favori"]>
+  export type FavoriOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "externalRessourceId" | "universiteRess" | "createdAt" | "updatedAt", ExtArgs["result"]["favori"]>
   export type FavoriInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    ressource?: boolean | RessourceDefaultArgs<ExtArgs>
+    ressource?: boolean | Favori$ressourceArgs<ExtArgs>
+    user?: boolean | Favori$userArgs<ExtArgs>
   }
 
   export type $FavoriPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Favori"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      ressource: Prisma.$RessourcePayload<ExtArgs>
+      ressource: Prisma.$RessourcePayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      ressourceId: string
-      dateAjout: Date
-      note: string | null
-      universiteSrc: string | null
-      universiteUser: string | null
+      ressourceId: string | null
+      externalRessourceId: string | null
+      universiteRess: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["favori"]>
@@ -22136,8 +21758,8 @@ export namespace Prisma {
    */
   export interface Prisma__FavoriClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    ressource<T extends RessourceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RessourceDefaultArgs<ExtArgs>>): Prisma__RessourceClient<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    ressource<T extends Favori$ressourceArgs<ExtArgs> = {}>(args?: Subset<T, Favori$ressourceArgs<ExtArgs>>): Prisma__RessourceClient<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends Favori$userArgs<ExtArgs> = {}>(args?: Subset<T, Favori$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22170,10 +21792,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Favori", 'String'>
     readonly userId: FieldRef<"Favori", 'String'>
     readonly ressourceId: FieldRef<"Favori", 'String'>
-    readonly dateAjout: FieldRef<"Favori", 'DateTime'>
-    readonly note: FieldRef<"Favori", 'String'>
-    readonly universiteSrc: FieldRef<"Favori", 'String'>
-    readonly universiteUser: FieldRef<"Favori", 'String'>
+    readonly externalRessourceId: FieldRef<"Favori", 'String'>
+    readonly universiteRess: FieldRef<"Favori", 'String'>
     readonly createdAt: FieldRef<"Favori", 'DateTime'>
     readonly updatedAt: FieldRef<"Favori", 'DateTime'>
   }
@@ -22516,6 +22136,44 @@ export namespace Prisma {
      * Limit how many Favoris to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Favori.ressource
+   */
+  export type Favori$ressourceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ressource
+     */
+    select?: RessourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ressource
+     */
+    omit?: RessourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RessourceInclude<ExtArgs> | null
+    where?: RessourceWhereInput
+  }
+
+  /**
+   * Favori.user
+   */
+  export type Favori$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -23705,7 +23363,7 @@ export namespace Prisma {
 
   export type NotationGroupByOutputType = {
     id: string
-    userId: string
+    userId: string | null
     ressourceId: string
     note: number
     dateNotation: Date
@@ -23744,7 +23402,7 @@ export namespace Prisma {
     universiteUser?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Notation$userArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["notation"]>
 
@@ -23764,19 +23422,19 @@ export namespace Prisma {
 
   export type NotationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "note" | "dateNotation" | "universiteSrc" | "universiteUser" | "createdAt" | "updatedAt", ExtArgs["result"]["notation"]>
   export type NotationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Notation$userArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
   }
 
   export type $NotationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Notation"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs> | null
       ressource: Prisma.$RessourcePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
+      userId: string | null
       ressourceId: string
       note: number
       dateNotation: Date
@@ -24124,7 +23782,7 @@ export namespace Prisma {
    */
   export interface Prisma__NotationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends Notation$userArgs<ExtArgs> = {}>(args?: Subset<T, Notation$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     ressource<T extends RessourceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RessourceDefaultArgs<ExtArgs>>): Prisma__RessourceClient<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -24507,6 +24165,25 @@ export namespace Prisma {
   }
 
   /**
+   * Notation.user
+   */
+  export type Notation$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Notation without action
    */
   export type NotationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -24539,10 +24216,9 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     ressourceId: string | null
-    dateAcces: Date | null
     typeAcces: $Enums.TypeAcces | null
-    universiteSrc: string | null
-    universiteUser: string | null
+    universiteRess: string | null
+    externRessourceId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -24551,10 +24227,9 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     ressourceId: string | null
-    dateAcces: Date | null
     typeAcces: $Enums.TypeAcces | null
-    universiteSrc: string | null
-    universiteUser: string | null
+    universiteRess: string | null
+    externRessourceId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -24563,10 +24238,9 @@ export namespace Prisma {
     id: number
     userId: number
     ressourceId: number
-    dateAcces: number
     typeAcces: number
-    universiteSrc: number
-    universiteUser: number
+    universiteRess: number
+    externRessourceId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -24577,10 +24251,9 @@ export namespace Prisma {
     id?: true
     userId?: true
     ressourceId?: true
-    dateAcces?: true
     typeAcces?: true
-    universiteSrc?: true
-    universiteUser?: true
+    universiteRess?: true
+    externRessourceId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -24589,10 +24262,9 @@ export namespace Prisma {
     id?: true
     userId?: true
     ressourceId?: true
-    dateAcces?: true
     typeAcces?: true
-    universiteSrc?: true
-    universiteUser?: true
+    universiteRess?: true
+    externRessourceId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -24601,10 +24273,9 @@ export namespace Prisma {
     id?: true
     userId?: true
     ressourceId?: true
-    dateAcces?: true
     typeAcces?: true
-    universiteSrc?: true
-    universiteUser?: true
+    universiteRess?: true
+    externRessourceId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -24685,11 +24356,10 @@ export namespace Prisma {
   export type HistoriqueAccesGroupByOutputType = {
     id: string
     userId: string
-    ressourceId: string
-    dateAcces: Date
+    ressourceId: string | null
     typeAcces: $Enums.TypeAcces
-    universiteSrc: string | null
-    universiteUser: string | null
+    universiteRess: string
+    externRessourceId: string | null
     createdAt: Date
     updatedAt: Date
     _count: HistoriqueAccesCountAggregateOutputType | null
@@ -24715,14 +24385,13 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     ressourceId?: boolean
-    dateAcces?: boolean
     typeAcces?: boolean
-    universiteSrc?: boolean
-    universiteUser?: boolean
+    universiteRess?: boolean
+    externRessourceId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    ressource?: boolean | RessourceDefaultArgs<ExtArgs>
+    ressource?: boolean | HistoriqueAcces$ressourceArgs<ExtArgs>
   }, ExtArgs["result"]["historiqueAcces"]>
 
 
@@ -24731,34 +24400,32 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     ressourceId?: boolean
-    dateAcces?: boolean
     typeAcces?: boolean
-    universiteSrc?: boolean
-    universiteUser?: boolean
+    universiteRess?: boolean
+    externRessourceId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type HistoriqueAccesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "dateAcces" | "typeAcces" | "universiteSrc" | "universiteUser" | "createdAt" | "updatedAt", ExtArgs["result"]["historiqueAcces"]>
+  export type HistoriqueAccesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "typeAcces" | "universiteRess" | "externRessourceId" | "createdAt" | "updatedAt", ExtArgs["result"]["historiqueAcces"]>
   export type HistoriqueAccesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    ressource?: boolean | RessourceDefaultArgs<ExtArgs>
+    ressource?: boolean | HistoriqueAcces$ressourceArgs<ExtArgs>
   }
 
   export type $HistoriqueAccesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "HistoriqueAcces"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
-      ressource: Prisma.$RessourcePayload<ExtArgs>
+      ressource: Prisma.$RessourcePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      ressourceId: string
-      dateAcces: Date
+      ressourceId: string | null
       typeAcces: $Enums.TypeAcces
-      universiteSrc: string | null
-      universiteUser: string | null
+      universiteRess: string
+      externRessourceId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["historiqueAcces"]>
@@ -25102,7 +24769,7 @@ export namespace Prisma {
   export interface Prisma__HistoriqueAccesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    ressource<T extends RessourceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RessourceDefaultArgs<ExtArgs>>): Prisma__RessourceClient<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    ressource<T extends HistoriqueAcces$ressourceArgs<ExtArgs> = {}>(args?: Subset<T, HistoriqueAcces$ressourceArgs<ExtArgs>>): Prisma__RessourceClient<$Result.GetResult<Prisma.$RessourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -25135,10 +24802,9 @@ export namespace Prisma {
     readonly id: FieldRef<"HistoriqueAcces", 'String'>
     readonly userId: FieldRef<"HistoriqueAcces", 'String'>
     readonly ressourceId: FieldRef<"HistoriqueAcces", 'String'>
-    readonly dateAcces: FieldRef<"HistoriqueAcces", 'DateTime'>
     readonly typeAcces: FieldRef<"HistoriqueAcces", 'TypeAcces'>
-    readonly universiteSrc: FieldRef<"HistoriqueAcces", 'String'>
-    readonly universiteUser: FieldRef<"HistoriqueAcces", 'String'>
+    readonly universiteRess: FieldRef<"HistoriqueAcces", 'String'>
+    readonly externRessourceId: FieldRef<"HistoriqueAcces", 'String'>
     readonly createdAt: FieldRef<"HistoriqueAcces", 'DateTime'>
     readonly updatedAt: FieldRef<"HistoriqueAcces", 'DateTime'>
   }
@@ -25481,6 +25147,25 @@ export namespace Prisma {
      * Limit how many HistoriqueAcces to delete.
      */
     limit?: number
+  }
+
+  /**
+   * HistoriqueAcces.ressource
+   */
+  export type HistoriqueAcces$ressourceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ressource
+     */
+    select?: RessourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ressource
+     */
+    omit?: RessourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RessourceInclude<ExtArgs> | null
+    where?: RessourceWhereInput
   }
 
   /**
@@ -28422,8 +28107,22 @@ export namespace Prisma {
 
   export type AggregateRessource = {
     _count: RessourceCountAggregateOutputType | null
+    _avg: RessourceAvgAggregateOutputType | null
+    _sum: RessourceSumAggregateOutputType | null
     _min: RessourceMinAggregateOutputType | null
     _max: RessourceMaxAggregateOutputType | null
+  }
+
+  export type RessourceAvgAggregateOutputType = {
+    telechargements: number | null
+    vues: number | null
+    noteMoyenne: number | null
+  }
+
+  export type RessourceSumAggregateOutputType = {
+    telechargements: number | null
+    vues: number | null
+    noteMoyenne: number | null
   }
 
   export type RessourceMinAggregateOutputType = {
@@ -28440,7 +28139,13 @@ export namespace Prisma {
     datePublication: Date | null
     motsCles: string | null
     auteurId: string | null
+    nomAuteur: string | null
+    telechargements: number | null
+    vues: number | null
     estArchive: boolean | null
+    noteMoyenne: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
     categorieId: string | null
   }
 
@@ -28458,7 +28163,13 @@ export namespace Prisma {
     datePublication: Date | null
     motsCles: string | null
     auteurId: string | null
+    nomAuteur: string | null
+    telechargements: number | null
+    vues: number | null
     estArchive: boolean | null
+    noteMoyenne: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
     categorieId: string | null
   }
 
@@ -28476,11 +28187,29 @@ export namespace Prisma {
     datePublication: number
     motsCles: number
     auteurId: number
+    nomAuteur: number
+    telechargements: number
+    vues: number
     estArchive: number
+    noteMoyenne: number
+    createdAt: number
+    updatedAt: number
     categorieId: number
     _all: number
   }
 
+
+  export type RessourceAvgAggregateInputType = {
+    telechargements?: true
+    vues?: true
+    noteMoyenne?: true
+  }
+
+  export type RessourceSumAggregateInputType = {
+    telechargements?: true
+    vues?: true
+    noteMoyenne?: true
+  }
 
   export type RessourceMinAggregateInputType = {
     id?: true
@@ -28496,7 +28225,13 @@ export namespace Prisma {
     datePublication?: true
     motsCles?: true
     auteurId?: true
+    nomAuteur?: true
+    telechargements?: true
+    vues?: true
     estArchive?: true
+    noteMoyenne?: true
+    createdAt?: true
+    updatedAt?: true
     categorieId?: true
   }
 
@@ -28514,7 +28249,13 @@ export namespace Prisma {
     datePublication?: true
     motsCles?: true
     auteurId?: true
+    nomAuteur?: true
+    telechargements?: true
+    vues?: true
     estArchive?: true
+    noteMoyenne?: true
+    createdAt?: true
+    updatedAt?: true
     categorieId?: true
   }
 
@@ -28532,7 +28273,13 @@ export namespace Prisma {
     datePublication?: true
     motsCles?: true
     auteurId?: true
+    nomAuteur?: true
+    telechargements?: true
+    vues?: true
     estArchive?: true
+    noteMoyenne?: true
+    createdAt?: true
+    updatedAt?: true
     categorieId?: true
     _all?: true
   }
@@ -28575,6 +28322,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: RessourceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RessourceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: RessourceMinAggregateInputType
@@ -28605,6 +28364,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: RessourceCountAggregateInputType | true
+    _avg?: RessourceAvgAggregateInputType
+    _sum?: RessourceSumAggregateInputType
     _min?: RessourceMinAggregateInputType
     _max?: RessourceMaxAggregateInputType
   }
@@ -28622,10 +28383,18 @@ export namespace Prisma {
     niveauAcces: $Enums.NiveauAcces
     datePublication: Date | null
     motsCles: string
-    auteurId: string
+    auteurId: string | null
+    nomAuteur: string | null
+    telechargements: number
+    vues: number
     estArchive: boolean
+    noteMoyenne: number
+    createdAt: Date
+    updatedAt: Date
     categorieId: string
     _count: RessourceCountAggregateOutputType | null
+    _avg: RessourceAvgAggregateOutputType | null
+    _sum: RessourceSumAggregateOutputType | null
     _min: RessourceMinAggregateOutputType | null
     _max: RessourceMaxAggregateOutputType | null
   }
@@ -28658,16 +28427,21 @@ export namespace Prisma {
     datePublication?: boolean
     motsCles?: boolean
     auteurId?: boolean
+    nomAuteur?: boolean
+    telechargements?: boolean
+    vues?: boolean
     estArchive?: boolean
+    noteMoyenne?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     categorieId?: boolean
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    auteur?: boolean | Ressource$auteurArgs<ExtArgs>
     favoris?: boolean | Ressource$favorisArgs<ExtArgs>
     commentaires?: boolean | Ressource$commentairesArgs<ExtArgs>
     notations?: boolean | Ressource$notationsArgs<ExtArgs>
     historiques?: boolean | Ressource$historiquesArgs<ExtArgs>
     collections?: boolean | Ressource$collectionsArgs<ExtArgs>
-    exemplaires?: boolean | Ressource$exemplairesArgs<ExtArgs>
-    reservations?: boolean | Ressource$reservationsArgs<ExtArgs>
+    exemplaire?: boolean | Ressource$exemplaireArgs<ExtArgs>
     recommandations?: boolean | Ressource$recommandationsArgs<ExtArgs>
     donneesRecommandations?: boolean | Ressource$donneesRecommandationsArgs<ExtArgs>
     categorie?: boolean | Ressource$categorieArgs<ExtArgs>
@@ -28690,20 +28464,25 @@ export namespace Prisma {
     datePublication?: boolean
     motsCles?: boolean
     auteurId?: boolean
+    nomAuteur?: boolean
+    telechargements?: boolean
+    vues?: boolean
     estArchive?: boolean
+    noteMoyenne?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     categorieId?: boolean
   }
 
-  export type RessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "isbnglobale" | "description" | "langue" | "urlFichier" | "urlFichierLocal" | "format" | "image" | "niveauAcces" | "datePublication" | "motsCles" | "auteurId" | "estArchive" | "categorieId", ExtArgs["result"]["ressource"]>
+  export type RessourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "isbnglobale" | "description" | "langue" | "urlFichier" | "urlFichierLocal" | "format" | "image" | "niveauAcces" | "datePublication" | "motsCles" | "auteurId" | "nomAuteur" | "telechargements" | "vues" | "estArchive" | "noteMoyenne" | "createdAt" | "updatedAt" | "categorieId", ExtArgs["result"]["ressource"]>
   export type RessourceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    auteur?: boolean | Ressource$auteurArgs<ExtArgs>
     favoris?: boolean | Ressource$favorisArgs<ExtArgs>
     commentaires?: boolean | Ressource$commentairesArgs<ExtArgs>
     notations?: boolean | Ressource$notationsArgs<ExtArgs>
     historiques?: boolean | Ressource$historiquesArgs<ExtArgs>
     collections?: boolean | Ressource$collectionsArgs<ExtArgs>
-    exemplaires?: boolean | Ressource$exemplairesArgs<ExtArgs>
-    reservations?: boolean | Ressource$reservationsArgs<ExtArgs>
+    exemplaire?: boolean | Ressource$exemplaireArgs<ExtArgs>
     recommandations?: boolean | Ressource$recommandationsArgs<ExtArgs>
     donneesRecommandations?: boolean | Ressource$donneesRecommandationsArgs<ExtArgs>
     categorie?: boolean | Ressource$categorieArgs<ExtArgs>
@@ -28713,14 +28492,13 @@ export namespace Prisma {
   export type $RessourcePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Ressource"
     objects: {
-      auteur: Prisma.$UserPayload<ExtArgs>
+      auteur: Prisma.$UserPayload<ExtArgs> | null
       favoris: Prisma.$FavoriPayload<ExtArgs>[]
       commentaires: Prisma.$CommentairePayload<ExtArgs>[]
       notations: Prisma.$NotationPayload<ExtArgs>[]
       historiques: Prisma.$HistoriqueAccesPayload<ExtArgs>[]
       collections: Prisma.$CollectionRessourcePayload<ExtArgs>[]
-      exemplaires: Prisma.$ExemplairePhysiquePayload<ExtArgs>[]
-      reservations: Prisma.$ReservationPayload<ExtArgs>[]
+      exemplaire: Prisma.$ExemplairePhysiquePayload<ExtArgs> | null
       recommandations: Prisma.$RecommandationPayload<ExtArgs>[]
       donneesRecommandations: Prisma.$DonneesRecommandationPayload<ExtArgs>[]
       categorie: Prisma.$CategoriePayload<ExtArgs> | null
@@ -28738,8 +28516,14 @@ export namespace Prisma {
       niveauAcces: $Enums.NiveauAcces
       datePublication: Date | null
       motsCles: string
-      auteurId: string
+      auteurId: string | null
+      nomAuteur: string | null
+      telechargements: number
+      vues: number
       estArchive: boolean
+      noteMoyenne: number
+      createdAt: Date
+      updatedAt: Date
       categorieId: string
     }, ExtArgs["result"]["ressource"]>
     composites: {}
@@ -29081,14 +28865,13 @@ export namespace Prisma {
    */
   export interface Prisma__RessourceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    auteur<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    auteur<T extends Ressource$auteurArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$auteurArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     favoris<T extends Ressource$favorisArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$favorisArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoriPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     commentaires<T extends Ressource$commentairesArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$commentairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notations<T extends Ressource$notationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$notationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     historiques<T extends Ressource$historiquesArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$historiquesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoriqueAccesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     collections<T extends Ressource$collectionsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollectionRessourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    exemplaires<T extends Ressource$exemplairesArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$exemplairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExemplairePhysiquePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    reservations<T extends Ressource$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    exemplaire<T extends Ressource$exemplaireArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$exemplaireArgs<ExtArgs>>): Prisma__ExemplairePhysiqueClient<$Result.GetResult<Prisma.$ExemplairePhysiquePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     recommandations<T extends Ressource$recommandationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$recommandationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecommandationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     donneesRecommandations<T extends Ressource$donneesRecommandationsArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$donneesRecommandationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonneesRecommandationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categorie<T extends Ressource$categorieArgs<ExtArgs> = {}>(args?: Subset<T, Ressource$categorieArgs<ExtArgs>>): Prisma__CategorieClient<$Result.GetResult<Prisma.$CategoriePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -29134,7 +28917,13 @@ export namespace Prisma {
     readonly datePublication: FieldRef<"Ressource", 'DateTime'>
     readonly motsCles: FieldRef<"Ressource", 'String'>
     readonly auteurId: FieldRef<"Ressource", 'String'>
+    readonly nomAuteur: FieldRef<"Ressource", 'String'>
+    readonly telechargements: FieldRef<"Ressource", 'Int'>
+    readonly vues: FieldRef<"Ressource", 'Int'>
     readonly estArchive: FieldRef<"Ressource", 'Boolean'>
+    readonly noteMoyenne: FieldRef<"Ressource", 'Float'>
+    readonly createdAt: FieldRef<"Ressource", 'DateTime'>
+    readonly updatedAt: FieldRef<"Ressource", 'DateTime'>
     readonly categorieId: FieldRef<"Ressource", 'String'>
   }
     
@@ -29479,6 +29268,25 @@ export namespace Prisma {
   }
 
   /**
+   * Ressource.auteur
+   */
+  export type Ressource$auteurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Ressource.favoris
    */
   export type Ressource$favorisArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -29599,9 +29407,9 @@ export namespace Prisma {
   }
 
   /**
-   * Ressource.exemplaires
+   * Ressource.exemplaire
    */
-  export type Ressource$exemplairesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Ressource$exemplaireArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ExemplairePhysique
      */
@@ -29615,35 +29423,6 @@ export namespace Prisma {
      */
     include?: ExemplairePhysiqueInclude<ExtArgs> | null
     where?: ExemplairePhysiqueWhereInput
-    orderBy?: ExemplairePhysiqueOrderByWithRelationInput | ExemplairePhysiqueOrderByWithRelationInput[]
-    cursor?: ExemplairePhysiqueWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ExemplairePhysiqueScalarFieldEnum | ExemplairePhysiqueScalarFieldEnum[]
-  }
-
-  /**
-   * Ressource.reservations
-   */
-  export type Ressource$reservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reservation
-     */
-    omit?: ReservationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    where?: ReservationWhereInput
-    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
-    cursor?: ReservationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
   }
 
   /**
@@ -33837,35 +33616,15 @@ export namespace Prisma {
   export type SanctionUtilisateurScalarFieldEnum = (typeof SanctionUtilisateurScalarFieldEnum)[keyof typeof SanctionUtilisateurScalarFieldEnum]
 
 
-  export const ReservationScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    ressourceId: 'ressourceId',
-    dateReservation: 'dateReservation',
-    dateDebut: 'dateDebut',
-    dateFin: 'dateFin',
-    statut: 'statut',
-    commentaire: 'commentaire',
-    universiteEmprunteur: 'universiteEmprunteur',
-    validePar: 'validePar',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type ReservationScalarFieldEnum = (typeof ReservationScalarFieldEnum)[keyof typeof ReservationScalarFieldEnum]
-
-
   export const ExemplairePhysiqueScalarFieldEnum: {
     id: 'id',
     ressourceId: 'ressourceId',
-    cote: 'cote',
     etat: 'etat',
-    disponible: 'disponible',
     localisation: 'localisation',
     dateAcquisition: 'dateAcquisition',
     qrCode: 'qrCode',
-    dureeMaxEmpruntExterne: 'dureeMaxEmpruntExterne',
-    nbMaxExemplairesExterne: 'nbMaxExemplairesExterne',
+    nombre: 'nombre',
+    nombreDisponible: 'nombreDisponible',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -33881,15 +33640,28 @@ export namespace Prisma {
     dateRetourPrevue: 'dateRetourPrevue',
     dateRetourEffective: 'dateRetourEffective',
     statut: 'statut',
-    commentaire: 'commentaire',
     universiteEmprunteur: 'universiteEmprunteur',
-    motifEmprunt: 'motifEmprunt',
-    validePar: 'validePar',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type EmpruntScalarFieldEnum = (typeof EmpruntScalarFieldEnum)[keyof typeof EmpruntScalarFieldEnum]
+
+
+  export const EmpruntExemplaireScalarFieldEnum: {
+    id: 'id',
+    empruntId: 'empruntId',
+    exemplaireId: 'exemplaireId',
+    dateEmprunt: 'dateEmprunt',
+    dateRetourPrevue: 'dateRetourPrevue',
+    dateRetourEffective: 'dateRetourEffective',
+    statut: 'statut',
+    commentaire: 'commentaire',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EmpruntExemplaireScalarFieldEnum = (typeof EmpruntExemplaireScalarFieldEnum)[keyof typeof EmpruntExemplaireScalarFieldEnum]
 
 
   export const RecommandationScalarFieldEnum: {
@@ -33985,7 +33757,6 @@ export namespace Prisma {
     userId: 'userId',
     codePermanent: 'codePermanent',
     dateNaissance: 'dateNaissance',
-    dateInscription: 'dateInscription',
     filiereId: 'filiereId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -34011,10 +33782,6 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     numeroBibliothecaire: 'numeroBibliothecaire',
-    dateNaissance: 'dateNaissance',
-    adresse: 'adresse',
-    ville: 'ville',
-    pays: 'pays',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -34025,11 +33792,7 @@ export namespace Prisma {
   export const AdministrateurScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
-    numeroAdmin: 'numeroAdmin',
-    dateNaissance: 'dateNaissance',
-    adresse: 'adresse',
-    ville: 'ville',
-    pays: 'pays'
+    numeroAdmin: 'numeroAdmin'
   };
 
   export type AdministrateurScalarFieldEnum = (typeof AdministrateurScalarFieldEnum)[keyof typeof AdministrateurScalarFieldEnum]
@@ -34039,10 +33802,8 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     ressourceId: 'ressourceId',
-    dateAjout: 'dateAjout',
-    note: 'note',
-    universiteSrc: 'universiteSrc',
-    universiteUser: 'universiteUser',
+    externalRessourceId: 'externalRessourceId',
+    universiteRess: 'universiteRess',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -34084,10 +33845,9 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     ressourceId: 'ressourceId',
-    dateAcces: 'dateAcces',
     typeAcces: 'typeAcces',
-    universiteSrc: 'universiteSrc',
-    universiteUser: 'universiteUser',
+    universiteRess: 'universiteRess',
+    externRessourceId: 'externRessourceId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -34147,7 +33907,13 @@ export namespace Prisma {
     datePublication: 'datePublication',
     motsCles: 'motsCles',
     auteurId: 'auteurId',
+    nomAuteur: 'nomAuteur',
+    telechargements: 'telechargements',
+    vues: 'vues',
     estArchive: 'estArchive',
+    noteMoyenne: 'noteMoyenne',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     categorieId: 'categorieId'
   };
 
@@ -34279,22 +34045,9 @@ export namespace Prisma {
   export type SanctionUtilisateurOrderByRelevanceFieldEnum = (typeof SanctionUtilisateurOrderByRelevanceFieldEnum)[keyof typeof SanctionUtilisateurOrderByRelevanceFieldEnum]
 
 
-  export const ReservationOrderByRelevanceFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    ressourceId: 'ressourceId',
-    commentaire: 'commentaire',
-    universiteEmprunteur: 'universiteEmprunteur',
-    validePar: 'validePar'
-  };
-
-  export type ReservationOrderByRelevanceFieldEnum = (typeof ReservationOrderByRelevanceFieldEnum)[keyof typeof ReservationOrderByRelevanceFieldEnum]
-
-
   export const ExemplairePhysiqueOrderByRelevanceFieldEnum: {
     id: 'id',
     ressourceId: 'ressourceId',
-    cote: 'cote',
     localisation: 'localisation',
     qrCode: 'qrCode'
   };
@@ -34306,13 +34059,20 @@ export namespace Prisma {
     id: 'id',
     exemplaireId: 'exemplaireId',
     userId: 'userId',
-    commentaire: 'commentaire',
-    universiteEmprunteur: 'universiteEmprunteur',
-    motifEmprunt: 'motifEmprunt',
-    validePar: 'validePar'
+    universiteEmprunteur: 'universiteEmprunteur'
   };
 
   export type EmpruntOrderByRelevanceFieldEnum = (typeof EmpruntOrderByRelevanceFieldEnum)[keyof typeof EmpruntOrderByRelevanceFieldEnum]
+
+
+  export const EmpruntExemplaireOrderByRelevanceFieldEnum: {
+    id: 'id',
+    empruntId: 'empruntId',
+    exemplaireId: 'exemplaireId',
+    commentaire: 'commentaire'
+  };
+
+  export type EmpruntExemplaireOrderByRelevanceFieldEnum = (typeof EmpruntExemplaireOrderByRelevanceFieldEnum)[keyof typeof EmpruntExemplaireOrderByRelevanceFieldEnum]
 
 
   export const RecommandationOrderByRelevanceFieldEnum: {
@@ -34404,10 +34164,7 @@ export namespace Prisma {
   export const BibliothecaireOrderByRelevanceFieldEnum: {
     id: 'id',
     userId: 'userId',
-    numeroBibliothecaire: 'numeroBibliothecaire',
-    adresse: 'adresse',
-    ville: 'ville',
-    pays: 'pays'
+    numeroBibliothecaire: 'numeroBibliothecaire'
   };
 
   export type BibliothecaireOrderByRelevanceFieldEnum = (typeof BibliothecaireOrderByRelevanceFieldEnum)[keyof typeof BibliothecaireOrderByRelevanceFieldEnum]
@@ -34416,10 +34173,7 @@ export namespace Prisma {
   export const AdministrateurOrderByRelevanceFieldEnum: {
     id: 'id',
     userId: 'userId',
-    numeroAdmin: 'numeroAdmin',
-    adresse: 'adresse',
-    ville: 'ville',
-    pays: 'pays'
+    numeroAdmin: 'numeroAdmin'
   };
 
   export type AdministrateurOrderByRelevanceFieldEnum = (typeof AdministrateurOrderByRelevanceFieldEnum)[keyof typeof AdministrateurOrderByRelevanceFieldEnum]
@@ -34429,9 +34183,8 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     ressourceId: 'ressourceId',
-    note: 'note',
-    universiteSrc: 'universiteSrc',
-    universiteUser: 'universiteUser'
+    externalRessourceId: 'externalRessourceId',
+    universiteRess: 'universiteRess'
   };
 
   export type FavoriOrderByRelevanceFieldEnum = (typeof FavoriOrderByRelevanceFieldEnum)[keyof typeof FavoriOrderByRelevanceFieldEnum]
@@ -34464,8 +34217,8 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     ressourceId: 'ressourceId',
-    universiteSrc: 'universiteSrc',
-    universiteUser: 'universiteUser'
+    universiteRess: 'universiteRess',
+    externRessourceId: 'externRessourceId'
   };
 
   export type HistoriqueAccesOrderByRelevanceFieldEnum = (typeof HistoriqueAccesOrderByRelevanceFieldEnum)[keyof typeof HistoriqueAccesOrderByRelevanceFieldEnum]
@@ -34512,6 +34265,7 @@ export namespace Prisma {
     image: 'image',
     motsCles: 'motsCles',
     auteurId: 'auteurId',
+    nomAuteur: 'nomAuteur',
     categorieId: 'categorieId'
   };
 
@@ -34627,13 +34381,6 @@ export namespace Prisma {
    * Reference to a field of type 'TypeSanction'
    */
   export type EnumTypeSanctionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeSanction'>
-    
-
-
-  /**
-   * Reference to a field of type 'StatutReservation'
-   */
-  export type EnumStatutReservationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutReservation'>
     
 
 
@@ -35047,172 +34794,67 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"SanctionUtilisateur"> | Date | string
   }
 
-  export type ReservationWhereInput = {
-    AND?: ReservationWhereInput | ReservationWhereInput[]
-    OR?: ReservationWhereInput[]
-    NOT?: ReservationWhereInput | ReservationWhereInput[]
-    id?: StringFilter<"Reservation"> | string
-    userId?: StringNullableFilter<"Reservation"> | string | null
-    ressourceId?: StringFilter<"Reservation"> | string
-    dateReservation?: DateTimeFilter<"Reservation"> | Date | string
-    dateDebut?: DateTimeFilter<"Reservation"> | Date | string
-    dateFin?: DateTimeFilter<"Reservation"> | Date | string
-    statut?: EnumStatutReservationFilter<"Reservation"> | $Enums.StatutReservation
-    commentaire?: StringNullableFilter<"Reservation"> | string | null
-    universiteEmprunteur?: StringFilter<"Reservation"> | string
-    validePar?: StringNullableFilter<"Reservation"> | string | null
-    createdAt?: DateTimeFilter<"Reservation"> | Date | string
-    updatedAt?: DateTimeFilter<"Reservation"> | Date | string
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
-    valideur?: XOR<BibliothecaireNullableScalarRelationFilter, BibliothecaireWhereInput> | null
-  }
-
-  export type ReservationOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrderInput | SortOrder
-    ressourceId?: SortOrder
-    dateReservation?: SortOrder
-    dateDebut?: SortOrder
-    dateFin?: SortOrder
-    statut?: SortOrder
-    commentaire?: SortOrderInput | SortOrder
-    universiteEmprunteur?: SortOrder
-    validePar?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-    ressource?: RessourceOrderByWithRelationInput
-    valideur?: BibliothecaireOrderByWithRelationInput
-    _relevance?: ReservationOrderByRelevanceInput
-  }
-
-  export type ReservationWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: ReservationWhereInput | ReservationWhereInput[]
-    OR?: ReservationWhereInput[]
-    NOT?: ReservationWhereInput | ReservationWhereInput[]
-    userId?: StringNullableFilter<"Reservation"> | string | null
-    ressourceId?: StringFilter<"Reservation"> | string
-    dateReservation?: DateTimeFilter<"Reservation"> | Date | string
-    dateDebut?: DateTimeFilter<"Reservation"> | Date | string
-    dateFin?: DateTimeFilter<"Reservation"> | Date | string
-    statut?: EnumStatutReservationFilter<"Reservation"> | $Enums.StatutReservation
-    commentaire?: StringNullableFilter<"Reservation"> | string | null
-    universiteEmprunteur?: StringFilter<"Reservation"> | string
-    validePar?: StringNullableFilter<"Reservation"> | string | null
-    createdAt?: DateTimeFilter<"Reservation"> | Date | string
-    updatedAt?: DateTimeFilter<"Reservation"> | Date | string
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
-    valideur?: XOR<BibliothecaireNullableScalarRelationFilter, BibliothecaireWhereInput> | null
-  }, "id">
-
-  export type ReservationOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrderInput | SortOrder
-    ressourceId?: SortOrder
-    dateReservation?: SortOrder
-    dateDebut?: SortOrder
-    dateFin?: SortOrder
-    statut?: SortOrder
-    commentaire?: SortOrderInput | SortOrder
-    universiteEmprunteur?: SortOrder
-    validePar?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: ReservationCountOrderByAggregateInput
-    _max?: ReservationMaxOrderByAggregateInput
-    _min?: ReservationMinOrderByAggregateInput
-  }
-
-  export type ReservationScalarWhereWithAggregatesInput = {
-    AND?: ReservationScalarWhereWithAggregatesInput | ReservationScalarWhereWithAggregatesInput[]
-    OR?: ReservationScalarWhereWithAggregatesInput[]
-    NOT?: ReservationScalarWhereWithAggregatesInput | ReservationScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Reservation"> | string
-    userId?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
-    ressourceId?: StringWithAggregatesFilter<"Reservation"> | string
-    dateReservation?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
-    dateDebut?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
-    dateFin?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
-    statut?: EnumStatutReservationWithAggregatesFilter<"Reservation"> | $Enums.StatutReservation
-    commentaire?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
-    universiteEmprunteur?: StringWithAggregatesFilter<"Reservation"> | string
-    validePar?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
-  }
-
   export type ExemplairePhysiqueWhereInput = {
     AND?: ExemplairePhysiqueWhereInput | ExemplairePhysiqueWhereInput[]
     OR?: ExemplairePhysiqueWhereInput[]
     NOT?: ExemplairePhysiqueWhereInput | ExemplairePhysiqueWhereInput[]
     id?: StringFilter<"ExemplairePhysique"> | string
     ressourceId?: StringFilter<"ExemplairePhysique"> | string
-    cote?: StringFilter<"ExemplairePhysique"> | string
     etat?: EnumEtatExemplaireFilter<"ExemplairePhysique"> | $Enums.EtatExemplaire
-    disponible?: BoolFilter<"ExemplairePhysique"> | boolean
     localisation?: StringFilter<"ExemplairePhysique"> | string
     dateAcquisition?: DateTimeNullableFilter<"ExemplairePhysique"> | Date | string | null
     qrCode?: StringNullableFilter<"ExemplairePhysique"> | string | null
-    dureeMaxEmpruntExterne?: IntFilter<"ExemplairePhysique"> | number
-    nbMaxExemplairesExterne?: IntFilter<"ExemplairePhysique"> | number
+    nombre?: IntFilter<"ExemplairePhysique"> | number
+    nombreDisponible?: IntFilter<"ExemplairePhysique"> | number
     createdAt?: DateTimeFilter<"ExemplairePhysique"> | Date | string
     updatedAt?: DateTimeFilter<"ExemplairePhysique"> | Date | string
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
-    emprunts?: EmpruntListRelationFilter
+    empruntExemplaires?: EmpruntExemplaireListRelationFilter
   }
 
   export type ExemplairePhysiqueOrderByWithRelationInput = {
     id?: SortOrder
     ressourceId?: SortOrder
-    cote?: SortOrder
     etat?: SortOrder
-    disponible?: SortOrder
     localisation?: SortOrder
     dateAcquisition?: SortOrderInput | SortOrder
     qrCode?: SortOrderInput | SortOrder
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
+    nombre?: SortOrder
+    nombreDisponible?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ressource?: RessourceOrderByWithRelationInput
-    emprunts?: EmpruntOrderByRelationAggregateInput
+    empruntExemplaires?: EmpruntExemplaireOrderByRelationAggregateInput
     _relevance?: ExemplairePhysiqueOrderByRelevanceInput
   }
 
   export type ExemplairePhysiqueWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    ressourceId?: string
     AND?: ExemplairePhysiqueWhereInput | ExemplairePhysiqueWhereInput[]
     OR?: ExemplairePhysiqueWhereInput[]
     NOT?: ExemplairePhysiqueWhereInput | ExemplairePhysiqueWhereInput[]
-    ressourceId?: StringFilter<"ExemplairePhysique"> | string
-    cote?: StringFilter<"ExemplairePhysique"> | string
     etat?: EnumEtatExemplaireFilter<"ExemplairePhysique"> | $Enums.EtatExemplaire
-    disponible?: BoolFilter<"ExemplairePhysique"> | boolean
     localisation?: StringFilter<"ExemplairePhysique"> | string
     dateAcquisition?: DateTimeNullableFilter<"ExemplairePhysique"> | Date | string | null
     qrCode?: StringNullableFilter<"ExemplairePhysique"> | string | null
-    dureeMaxEmpruntExterne?: IntFilter<"ExemplairePhysique"> | number
-    nbMaxExemplairesExterne?: IntFilter<"ExemplairePhysique"> | number
+    nombre?: IntFilter<"ExemplairePhysique"> | number
+    nombreDisponible?: IntFilter<"ExemplairePhysique"> | number
     createdAt?: DateTimeFilter<"ExemplairePhysique"> | Date | string
     updatedAt?: DateTimeFilter<"ExemplairePhysique"> | Date | string
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
-    emprunts?: EmpruntListRelationFilter
-  }, "id">
+    empruntExemplaires?: EmpruntExemplaireListRelationFilter
+  }, "id" | "ressourceId">
 
   export type ExemplairePhysiqueOrderByWithAggregationInput = {
     id?: SortOrder
     ressourceId?: SortOrder
-    cote?: SortOrder
     etat?: SortOrder
-    disponible?: SortOrder
     localisation?: SortOrder
     dateAcquisition?: SortOrderInput | SortOrder
     qrCode?: SortOrderInput | SortOrder
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
+    nombre?: SortOrder
+    nombreDisponible?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ExemplairePhysiqueCountOrderByAggregateInput
@@ -35228,14 +34870,12 @@ export namespace Prisma {
     NOT?: ExemplairePhysiqueScalarWhereWithAggregatesInput | ExemplairePhysiqueScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"ExemplairePhysique"> | string
     ressourceId?: StringWithAggregatesFilter<"ExemplairePhysique"> | string
-    cote?: StringWithAggregatesFilter<"ExemplairePhysique"> | string
     etat?: EnumEtatExemplaireWithAggregatesFilter<"ExemplairePhysique"> | $Enums.EtatExemplaire
-    disponible?: BoolWithAggregatesFilter<"ExemplairePhysique"> | boolean
     localisation?: StringWithAggregatesFilter<"ExemplairePhysique"> | string
     dateAcquisition?: DateTimeNullableWithAggregatesFilter<"ExemplairePhysique"> | Date | string | null
     qrCode?: StringNullableWithAggregatesFilter<"ExemplairePhysique"> | string | null
-    dureeMaxEmpruntExterne?: IntWithAggregatesFilter<"ExemplairePhysique"> | number
-    nbMaxExemplairesExterne?: IntWithAggregatesFilter<"ExemplairePhysique"> | number
+    nombre?: IntWithAggregatesFilter<"ExemplairePhysique"> | number
+    nombreDisponible?: IntWithAggregatesFilter<"ExemplairePhysique"> | number
     createdAt?: DateTimeWithAggregatesFilter<"ExemplairePhysique"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ExemplairePhysique"> | Date | string
   }
@@ -35246,39 +34886,33 @@ export namespace Prisma {
     NOT?: EmpruntWhereInput | EmpruntWhereInput[]
     id?: StringFilter<"Emprunt"> | string
     exemplaireId?: StringFilter<"Emprunt"> | string
-    userId?: StringFilter<"Emprunt"> | string
+    userId?: StringNullableFilter<"Emprunt"> | string | null
     dateEmprunt?: DateTimeFilter<"Emprunt"> | Date | string
     dateRetourPrevue?: DateTimeFilter<"Emprunt"> | Date | string
     dateRetourEffective?: DateTimeNullableFilter<"Emprunt"> | Date | string | null
     statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
-    commentaire?: StringNullableFilter<"Emprunt"> | string | null
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
-    motifEmprunt?: StringNullableFilter<"Emprunt"> | string | null
-    validePar?: StringNullableFilter<"Emprunt"> | string | null
     createdAt?: DateTimeFilter<"Emprunt"> | Date | string
     updatedAt?: DateTimeFilter<"Emprunt"> | Date | string
-    exemplaire?: XOR<ExemplairePhysiqueScalarRelationFilter, ExemplairePhysiqueWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     SanctionUtilisateur?: SanctionUtilisateurListRelationFilter
+    empruntExemplaires?: EmpruntExemplaireListRelationFilter
   }
 
   export type EmpruntOrderByWithRelationInput = {
     id?: SortOrder
     exemplaireId?: SortOrder
-    userId?: SortOrder
+    userId?: SortOrderInput | SortOrder
     dateEmprunt?: SortOrder
     dateRetourPrevue?: SortOrder
     dateRetourEffective?: SortOrderInput | SortOrder
     statut?: SortOrder
-    commentaire?: SortOrderInput | SortOrder
     universiteEmprunteur?: SortOrder
-    motifEmprunt?: SortOrderInput | SortOrder
-    validePar?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    exemplaire?: ExemplairePhysiqueOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     SanctionUtilisateur?: SanctionUtilisateurOrderByRelationAggregateInput
+    empruntExemplaires?: EmpruntExemplaireOrderByRelationAggregateInput
     _relevance?: EmpruntOrderByRelevanceInput
   }
 
@@ -35288,34 +34922,28 @@ export namespace Prisma {
     OR?: EmpruntWhereInput[]
     NOT?: EmpruntWhereInput | EmpruntWhereInput[]
     exemplaireId?: StringFilter<"Emprunt"> | string
-    userId?: StringFilter<"Emprunt"> | string
+    userId?: StringNullableFilter<"Emprunt"> | string | null
     dateEmprunt?: DateTimeFilter<"Emprunt"> | Date | string
     dateRetourPrevue?: DateTimeFilter<"Emprunt"> | Date | string
     dateRetourEffective?: DateTimeNullableFilter<"Emprunt"> | Date | string | null
     statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
-    commentaire?: StringNullableFilter<"Emprunt"> | string | null
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
-    motifEmprunt?: StringNullableFilter<"Emprunt"> | string | null
-    validePar?: StringNullableFilter<"Emprunt"> | string | null
     createdAt?: DateTimeFilter<"Emprunt"> | Date | string
     updatedAt?: DateTimeFilter<"Emprunt"> | Date | string
-    exemplaire?: XOR<ExemplairePhysiqueScalarRelationFilter, ExemplairePhysiqueWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     SanctionUtilisateur?: SanctionUtilisateurListRelationFilter
+    empruntExemplaires?: EmpruntExemplaireListRelationFilter
   }, "id">
 
   export type EmpruntOrderByWithAggregationInput = {
     id?: SortOrder
     exemplaireId?: SortOrder
-    userId?: SortOrder
+    userId?: SortOrderInput | SortOrder
     dateEmprunt?: SortOrder
     dateRetourPrevue?: SortOrder
     dateRetourEffective?: SortOrderInput | SortOrder
     statut?: SortOrder
-    commentaire?: SortOrderInput | SortOrder
     universiteEmprunteur?: SortOrder
-    motifEmprunt?: SortOrderInput | SortOrder
-    validePar?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EmpruntCountOrderByAggregateInput
@@ -35329,17 +34957,98 @@ export namespace Prisma {
     NOT?: EmpruntScalarWhereWithAggregatesInput | EmpruntScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Emprunt"> | string
     exemplaireId?: StringWithAggregatesFilter<"Emprunt"> | string
-    userId?: StringWithAggregatesFilter<"Emprunt"> | string
+    userId?: StringNullableWithAggregatesFilter<"Emprunt"> | string | null
     dateEmprunt?: DateTimeWithAggregatesFilter<"Emprunt"> | Date | string
     dateRetourPrevue?: DateTimeWithAggregatesFilter<"Emprunt"> | Date | string
     dateRetourEffective?: DateTimeNullableWithAggregatesFilter<"Emprunt"> | Date | string | null
     statut?: EnumStatutEmpruntWithAggregatesFilter<"Emprunt"> | $Enums.StatutEmprunt
-    commentaire?: StringNullableWithAggregatesFilter<"Emprunt"> | string | null
     universiteEmprunteur?: StringWithAggregatesFilter<"Emprunt"> | string
-    motifEmprunt?: StringNullableWithAggregatesFilter<"Emprunt"> | string | null
-    validePar?: StringNullableWithAggregatesFilter<"Emprunt"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Emprunt"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Emprunt"> | Date | string
+  }
+
+  export type EmpruntExemplaireWhereInput = {
+    AND?: EmpruntExemplaireWhereInput | EmpruntExemplaireWhereInput[]
+    OR?: EmpruntExemplaireWhereInput[]
+    NOT?: EmpruntExemplaireWhereInput | EmpruntExemplaireWhereInput[]
+    id?: StringFilter<"EmpruntExemplaire"> | string
+    empruntId?: StringFilter<"EmpruntExemplaire"> | string
+    exemplaireId?: StringFilter<"EmpruntExemplaire"> | string
+    dateEmprunt?: DateTimeFilter<"EmpruntExemplaire"> | Date | string
+    dateRetourPrevue?: DateTimeFilter<"EmpruntExemplaire"> | Date | string
+    dateRetourEffective?: DateTimeNullableFilter<"EmpruntExemplaire"> | Date | string | null
+    statut?: EnumStatutEmpruntFilter<"EmpruntExemplaire"> | $Enums.StatutEmprunt
+    commentaire?: StringNullableFilter<"EmpruntExemplaire"> | string | null
+    createdAt?: DateTimeFilter<"EmpruntExemplaire"> | Date | string
+    updatedAt?: DateTimeFilter<"EmpruntExemplaire"> | Date | string
+    emprunt?: XOR<EmpruntScalarRelationFilter, EmpruntWhereInput>
+    exemplaire?: XOR<ExemplairePhysiqueScalarRelationFilter, ExemplairePhysiqueWhereInput>
+  }
+
+  export type EmpruntExemplaireOrderByWithRelationInput = {
+    id?: SortOrder
+    empruntId?: SortOrder
+    exemplaireId?: SortOrder
+    dateEmprunt?: SortOrder
+    dateRetourPrevue?: SortOrder
+    dateRetourEffective?: SortOrderInput | SortOrder
+    statut?: SortOrder
+    commentaire?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    emprunt?: EmpruntOrderByWithRelationInput
+    exemplaire?: ExemplairePhysiqueOrderByWithRelationInput
+    _relevance?: EmpruntExemplaireOrderByRelevanceInput
+  }
+
+  export type EmpruntExemplaireWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmpruntExemplaireWhereInput | EmpruntExemplaireWhereInput[]
+    OR?: EmpruntExemplaireWhereInput[]
+    NOT?: EmpruntExemplaireWhereInput | EmpruntExemplaireWhereInput[]
+    empruntId?: StringFilter<"EmpruntExemplaire"> | string
+    exemplaireId?: StringFilter<"EmpruntExemplaire"> | string
+    dateEmprunt?: DateTimeFilter<"EmpruntExemplaire"> | Date | string
+    dateRetourPrevue?: DateTimeFilter<"EmpruntExemplaire"> | Date | string
+    dateRetourEffective?: DateTimeNullableFilter<"EmpruntExemplaire"> | Date | string | null
+    statut?: EnumStatutEmpruntFilter<"EmpruntExemplaire"> | $Enums.StatutEmprunt
+    commentaire?: StringNullableFilter<"EmpruntExemplaire"> | string | null
+    createdAt?: DateTimeFilter<"EmpruntExemplaire"> | Date | string
+    updatedAt?: DateTimeFilter<"EmpruntExemplaire"> | Date | string
+    emprunt?: XOR<EmpruntScalarRelationFilter, EmpruntWhereInput>
+    exemplaire?: XOR<ExemplairePhysiqueScalarRelationFilter, ExemplairePhysiqueWhereInput>
+  }, "id">
+
+  export type EmpruntExemplaireOrderByWithAggregationInput = {
+    id?: SortOrder
+    empruntId?: SortOrder
+    exemplaireId?: SortOrder
+    dateEmprunt?: SortOrder
+    dateRetourPrevue?: SortOrder
+    dateRetourEffective?: SortOrderInput | SortOrder
+    statut?: SortOrder
+    commentaire?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EmpruntExemplaireCountOrderByAggregateInput
+    _max?: EmpruntExemplaireMaxOrderByAggregateInput
+    _min?: EmpruntExemplaireMinOrderByAggregateInput
+  }
+
+  export type EmpruntExemplaireScalarWhereWithAggregatesInput = {
+    AND?: EmpruntExemplaireScalarWhereWithAggregatesInput | EmpruntExemplaireScalarWhereWithAggregatesInput[]
+    OR?: EmpruntExemplaireScalarWhereWithAggregatesInput[]
+    NOT?: EmpruntExemplaireScalarWhereWithAggregatesInput | EmpruntExemplaireScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmpruntExemplaire"> | string
+    empruntId?: StringWithAggregatesFilter<"EmpruntExemplaire"> | string
+    exemplaireId?: StringWithAggregatesFilter<"EmpruntExemplaire"> | string
+    dateEmprunt?: DateTimeWithAggregatesFilter<"EmpruntExemplaire"> | Date | string
+    dateRetourPrevue?: DateTimeWithAggregatesFilter<"EmpruntExemplaire"> | Date | string
+    dateRetourEffective?: DateTimeNullableWithAggregatesFilter<"EmpruntExemplaire"> | Date | string | null
+    statut?: EnumStatutEmpruntWithAggregatesFilter<"EmpruntExemplaire"> | $Enums.StatutEmprunt
+    commentaire?: StringNullableWithAggregatesFilter<"EmpruntExemplaire"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"EmpruntExemplaire"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EmpruntExemplaire"> | Date | string
   }
 
   export type RecommandationWhereInput = {
@@ -35734,16 +35443,15 @@ export namespace Prisma {
     notations?: NotationListRelationFilter
     historiques?: HistoriqueAccesListRelationFilter
     collections?: CollectionListRelationFilter
-    reservations?: ReservationListRelationFilter
     emprunts?: EmpruntListRelationFilter
     recommandations?: RecommandationListRelationFilter
     JournalAudit?: JournalAuditListRelationFilter
     donneesRecommandations?: DonneesRecommandationListRelationFilter
     notifications?: NotificationListRelationFilter
-    etudiants?: EtudiantListRelationFilter
-    enseignants?: EnseignantListRelationFilter
-    bibliothecaires?: BibliothecaireListRelationFilter
-    administrateurs?: AdministrateurListRelationFilter
+    etudiant?: XOR<EtudiantNullableScalarRelationFilter, EtudiantWhereInput> | null
+    enseignant?: XOR<EnseignantNullableScalarRelationFilter, EnseignantWhereInput> | null
+    bibliothecaire?: XOR<BibliothecaireNullableScalarRelationFilter, BibliothecaireWhereInput> | null
+    administrateur?: XOR<AdministrateurNullableScalarRelationFilter, AdministrateurWhereInput> | null
     sanctions?: SanctionUtilisateurListRelationFilter
   }
 
@@ -35768,16 +35476,15 @@ export namespace Prisma {
     notations?: NotationOrderByRelationAggregateInput
     historiques?: HistoriqueAccesOrderByRelationAggregateInput
     collections?: CollectionOrderByRelationAggregateInput
-    reservations?: ReservationOrderByRelationAggregateInput
     emprunts?: EmpruntOrderByRelationAggregateInput
     recommandations?: RecommandationOrderByRelationAggregateInput
     JournalAudit?: JournalAuditOrderByRelationAggregateInput
     donneesRecommandations?: DonneesRecommandationOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
-    etudiants?: EtudiantOrderByRelationAggregateInput
-    enseignants?: EnseignantOrderByRelationAggregateInput
-    bibliothecaires?: BibliothecaireOrderByRelationAggregateInput
-    administrateurs?: AdministrateurOrderByRelationAggregateInput
+    etudiant?: EtudiantOrderByWithRelationInput
+    enseignant?: EnseignantOrderByWithRelationInput
+    bibliothecaire?: BibliothecaireOrderByWithRelationInput
+    administrateur?: AdministrateurOrderByWithRelationInput
     sanctions?: SanctionUtilisateurOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
@@ -35806,16 +35513,15 @@ export namespace Prisma {
     notations?: NotationListRelationFilter
     historiques?: HistoriqueAccesListRelationFilter
     collections?: CollectionListRelationFilter
-    reservations?: ReservationListRelationFilter
     emprunts?: EmpruntListRelationFilter
     recommandations?: RecommandationListRelationFilter
     JournalAudit?: JournalAuditListRelationFilter
     donneesRecommandations?: DonneesRecommandationListRelationFilter
     notifications?: NotificationListRelationFilter
-    etudiants?: EtudiantListRelationFilter
-    enseignants?: EnseignantListRelationFilter
-    bibliothecaires?: BibliothecaireListRelationFilter
-    administrateurs?: AdministrateurListRelationFilter
+    etudiant?: XOR<EtudiantNullableScalarRelationFilter, EtudiantWhereInput> | null
+    enseignant?: XOR<EnseignantNullableScalarRelationFilter, EnseignantWhereInput> | null
+    bibliothecaire?: XOR<BibliothecaireNullableScalarRelationFilter, BibliothecaireWhereInput> | null
+    administrateur?: XOR<AdministrateurNullableScalarRelationFilter, AdministrateurWhereInput> | null
     sanctions?: SanctionUtilisateurListRelationFilter
   }, "id" | "email">
 
@@ -35867,7 +35573,6 @@ export namespace Prisma {
     userId?: StringFilter<"Etudiant"> | string
     codePermanent?: StringFilter<"Etudiant"> | string
     dateNaissance?: DateTimeFilter<"Etudiant"> | Date | string
-    dateInscription?: DateTimeFilter<"Etudiant"> | Date | string
     filiereId?: StringFilter<"Etudiant"> | string
     createdAt?: DateTimeFilter<"Etudiant"> | Date | string
     updatedAt?: DateTimeFilter<"Etudiant"> | Date | string
@@ -35880,7 +35585,6 @@ export namespace Prisma {
     userId?: SortOrder
     codePermanent?: SortOrder
     dateNaissance?: SortOrder
-    dateInscription?: SortOrder
     filiereId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -35891,26 +35595,24 @@ export namespace Prisma {
 
   export type EtudiantWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    userId?: string
     codePermanent?: string
     AND?: EtudiantWhereInput | EtudiantWhereInput[]
     OR?: EtudiantWhereInput[]
     NOT?: EtudiantWhereInput | EtudiantWhereInput[]
-    userId?: StringFilter<"Etudiant"> | string
     dateNaissance?: DateTimeFilter<"Etudiant"> | Date | string
-    dateInscription?: DateTimeFilter<"Etudiant"> | Date | string
     filiereId?: StringFilter<"Etudiant"> | string
     createdAt?: DateTimeFilter<"Etudiant"> | Date | string
     updatedAt?: DateTimeFilter<"Etudiant"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     filiere?: XOR<FiliereScalarRelationFilter, FiliereWhereInput>
-  }, "id" | "codePermanent">
+  }, "id" | "userId" | "codePermanent">
 
   export type EtudiantOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     codePermanent?: SortOrder
     dateNaissance?: SortOrder
-    dateInscription?: SortOrder
     filiereId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -35927,7 +35629,6 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Etudiant"> | string
     codePermanent?: StringWithAggregatesFilter<"Etudiant"> | string
     dateNaissance?: DateTimeWithAggregatesFilter<"Etudiant"> | Date | string
-    dateInscription?: DateTimeWithAggregatesFilter<"Etudiant"> | Date | string
     filiereId?: StringWithAggregatesFilter<"Etudiant"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Etudiant"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Etudiant"> | Date | string
@@ -35961,17 +35662,17 @@ export namespace Prisma {
 
   export type EnseignantWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    userId?: string
     numeroEnseignant?: string
     AND?: EnseignantWhereInput | EnseignantWhereInput[]
     OR?: EnseignantWhereInput[]
     NOT?: EnseignantWhereInput | EnseignantWhereInput[]
-    userId?: StringFilter<"Enseignant"> | string
     dateNaissance?: DateTimeFilter<"Enseignant"> | Date | string
     specialite?: StringNullableFilter<"Enseignant"> | string | null
     createdAt?: DateTimeFilter<"Enseignant"> | Date | string
     updatedAt?: DateTimeFilter<"Enseignant"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "numeroEnseignant">
+  }, "id" | "userId" | "numeroEnseignant">
 
   export type EnseignantOrderByWithAggregationInput = {
     id?: SortOrder
@@ -36006,56 +35707,37 @@ export namespace Prisma {
     id?: StringFilter<"Bibliothecaire"> | string
     userId?: StringFilter<"Bibliothecaire"> | string
     numeroBibliothecaire?: StringFilter<"Bibliothecaire"> | string
-    dateNaissance?: DateTimeFilter<"Bibliothecaire"> | Date | string
-    adresse?: StringNullableFilter<"Bibliothecaire"> | string | null
-    ville?: StringNullableFilter<"Bibliothecaire"> | string | null
-    pays?: StringNullableFilter<"Bibliothecaire"> | string | null
     createdAt?: DateTimeFilter<"Bibliothecaire"> | Date | string
     updatedAt?: DateTimeFilter<"Bibliothecaire"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    reservations?: ReservationListRelationFilter
   }
 
   export type BibliothecaireOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
     numeroBibliothecaire?: SortOrder
-    dateNaissance?: SortOrder
-    adresse?: SortOrderInput | SortOrder
-    ville?: SortOrderInput | SortOrder
-    pays?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
-    reservations?: ReservationOrderByRelationAggregateInput
     _relevance?: BibliothecaireOrderByRelevanceInput
   }
 
   export type BibliothecaireWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    userId?: string
     numeroBibliothecaire?: string
     AND?: BibliothecaireWhereInput | BibliothecaireWhereInput[]
     OR?: BibliothecaireWhereInput[]
     NOT?: BibliothecaireWhereInput | BibliothecaireWhereInput[]
-    userId?: StringFilter<"Bibliothecaire"> | string
-    dateNaissance?: DateTimeFilter<"Bibliothecaire"> | Date | string
-    adresse?: StringNullableFilter<"Bibliothecaire"> | string | null
-    ville?: StringNullableFilter<"Bibliothecaire"> | string | null
-    pays?: StringNullableFilter<"Bibliothecaire"> | string | null
     createdAt?: DateTimeFilter<"Bibliothecaire"> | Date | string
     updatedAt?: DateTimeFilter<"Bibliothecaire"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    reservations?: ReservationListRelationFilter
-  }, "id" | "numeroBibliothecaire">
+  }, "id" | "userId" | "numeroBibliothecaire">
 
   export type BibliothecaireOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     numeroBibliothecaire?: SortOrder
-    dateNaissance?: SortOrder
-    adresse?: SortOrderInput | SortOrder
-    ville?: SortOrderInput | SortOrder
-    pays?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: BibliothecaireCountOrderByAggregateInput
@@ -36070,10 +35752,6 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Bibliothecaire"> | string
     userId?: StringWithAggregatesFilter<"Bibliothecaire"> | string
     numeroBibliothecaire?: StringWithAggregatesFilter<"Bibliothecaire"> | string
-    dateNaissance?: DateTimeWithAggregatesFilter<"Bibliothecaire"> | Date | string
-    adresse?: StringNullableWithAggregatesFilter<"Bibliothecaire"> | string | null
-    ville?: StringNullableWithAggregatesFilter<"Bibliothecaire"> | string | null
-    pays?: StringNullableWithAggregatesFilter<"Bibliothecaire"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Bibliothecaire"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Bibliothecaire"> | Date | string
   }
@@ -36085,10 +35763,6 @@ export namespace Prisma {
     id?: StringFilter<"Administrateur"> | string
     userId?: StringFilter<"Administrateur"> | string
     numeroAdmin?: StringFilter<"Administrateur"> | string
-    dateNaissance?: DateTimeFilter<"Administrateur"> | Date | string
-    adresse?: StringNullableFilter<"Administrateur"> | string | null
-    ville?: StringNullableFilter<"Administrateur"> | string | null
-    pays?: StringNullableFilter<"Administrateur"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -36096,36 +35770,24 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     numeroAdmin?: SortOrder
-    dateNaissance?: SortOrder
-    adresse?: SortOrderInput | SortOrder
-    ville?: SortOrderInput | SortOrder
-    pays?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     _relevance?: AdministrateurOrderByRelevanceInput
   }
 
   export type AdministrateurWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    userId?: string
     numeroAdmin?: string
     AND?: AdministrateurWhereInput | AdministrateurWhereInput[]
     OR?: AdministrateurWhereInput[]
     NOT?: AdministrateurWhereInput | AdministrateurWhereInput[]
-    userId?: StringFilter<"Administrateur"> | string
-    dateNaissance?: DateTimeFilter<"Administrateur"> | Date | string
-    adresse?: StringNullableFilter<"Administrateur"> | string | null
-    ville?: StringNullableFilter<"Administrateur"> | string | null
-    pays?: StringNullableFilter<"Administrateur"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "numeroAdmin">
+  }, "id" | "userId" | "numeroAdmin">
 
   export type AdministrateurOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     numeroAdmin?: SortOrder
-    dateNaissance?: SortOrder
-    adresse?: SortOrderInput | SortOrder
-    ville?: SortOrderInput | SortOrder
-    pays?: SortOrderInput | SortOrder
     _count?: AdministrateurCountOrderByAggregateInput
     _max?: AdministrateurMaxOrderByAggregateInput
     _min?: AdministrateurMinOrderByAggregateInput
@@ -36138,10 +35800,6 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Administrateur"> | string
     userId?: StringWithAggregatesFilter<"Administrateur"> | string
     numeroAdmin?: StringWithAggregatesFilter<"Administrateur"> | string
-    dateNaissance?: DateTimeWithAggregatesFilter<"Administrateur"> | Date | string
-    adresse?: StringNullableWithAggregatesFilter<"Administrateur"> | string | null
-    ville?: StringNullableWithAggregatesFilter<"Administrateur"> | string | null
-    pays?: StringNullableWithAggregatesFilter<"Administrateur"> | string | null
   }
 
   export type FavoriWhereInput = {
@@ -36150,58 +35808,51 @@ export namespace Prisma {
     NOT?: FavoriWhereInput | FavoriWhereInput[]
     id?: StringFilter<"Favori"> | string
     userId?: StringFilter<"Favori"> | string
-    ressourceId?: StringFilter<"Favori"> | string
-    dateAjout?: DateTimeFilter<"Favori"> | Date | string
-    note?: StringNullableFilter<"Favori"> | string | null
-    universiteSrc?: StringNullableFilter<"Favori"> | string | null
-    universiteUser?: StringNullableFilter<"Favori"> | string | null
+    ressourceId?: StringNullableFilter<"Favori"> | string | null
+    externalRessourceId?: StringNullableFilter<"Favori"> | string | null
+    universiteRess?: StringNullableFilter<"Favori"> | string | null
     createdAt?: DateTimeFilter<"Favori"> | Date | string
     updatedAt?: DateTimeFilter<"Favori"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
+    ressource?: XOR<RessourceNullableScalarRelationFilter, RessourceWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type FavoriOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    ressourceId?: SortOrder
-    dateAjout?: SortOrder
-    note?: SortOrderInput | SortOrder
-    universiteSrc?: SortOrderInput | SortOrder
-    universiteUser?: SortOrderInput | SortOrder
+    ressourceId?: SortOrderInput | SortOrder
+    externalRessourceId?: SortOrderInput | SortOrder
+    universiteRess?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
     ressource?: RessourceOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
     _relevance?: FavoriOrderByRelevanceInput
   }
 
   export type FavoriWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     userId_ressourceId?: FavoriUserIdRessourceIdCompoundUniqueInput
+    userId_externalRessourceId_universiteRess?: FavoriUserIdExternalRessourceIdUniversiteRessCompoundUniqueInput
     AND?: FavoriWhereInput | FavoriWhereInput[]
     OR?: FavoriWhereInput[]
     NOT?: FavoriWhereInput | FavoriWhereInput[]
     userId?: StringFilter<"Favori"> | string
-    ressourceId?: StringFilter<"Favori"> | string
-    dateAjout?: DateTimeFilter<"Favori"> | Date | string
-    note?: StringNullableFilter<"Favori"> | string | null
-    universiteSrc?: StringNullableFilter<"Favori"> | string | null
-    universiteUser?: StringNullableFilter<"Favori"> | string | null
+    ressourceId?: StringNullableFilter<"Favori"> | string | null
+    externalRessourceId?: StringNullableFilter<"Favori"> | string | null
+    universiteRess?: StringNullableFilter<"Favori"> | string | null
     createdAt?: DateTimeFilter<"Favori"> | Date | string
     updatedAt?: DateTimeFilter<"Favori"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
-  }, "id" | "userId_ressourceId">
+    ressource?: XOR<RessourceNullableScalarRelationFilter, RessourceWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id" | "userId_ressourceId" | "userId_externalRessourceId_universiteRess">
 
   export type FavoriOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    ressourceId?: SortOrder
-    dateAjout?: SortOrder
-    note?: SortOrderInput | SortOrder
-    universiteSrc?: SortOrderInput | SortOrder
-    universiteUser?: SortOrderInput | SortOrder
+    ressourceId?: SortOrderInput | SortOrder
+    externalRessourceId?: SortOrderInput | SortOrder
+    universiteRess?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: FavoriCountOrderByAggregateInput
@@ -36215,11 +35866,9 @@ export namespace Prisma {
     NOT?: FavoriScalarWhereWithAggregatesInput | FavoriScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Favori"> | string
     userId?: StringWithAggregatesFilter<"Favori"> | string
-    ressourceId?: StringWithAggregatesFilter<"Favori"> | string
-    dateAjout?: DateTimeWithAggregatesFilter<"Favori"> | Date | string
-    note?: StringNullableWithAggregatesFilter<"Favori"> | string | null
-    universiteSrc?: StringNullableWithAggregatesFilter<"Favori"> | string | null
-    universiteUser?: StringNullableWithAggregatesFilter<"Favori"> | string | null
+    ressourceId?: StringNullableWithAggregatesFilter<"Favori"> | string | null
+    externalRessourceId?: StringNullableWithAggregatesFilter<"Favori"> | string | null
+    universiteRess?: StringNullableWithAggregatesFilter<"Favori"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Favori"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Favori"> | Date | string
   }
@@ -36308,7 +35957,7 @@ export namespace Prisma {
     OR?: NotationWhereInput[]
     NOT?: NotationWhereInput | NotationWhereInput[]
     id?: StringFilter<"Notation"> | string
-    userId?: StringFilter<"Notation"> | string
+    userId?: StringNullableFilter<"Notation"> | string | null
     ressourceId?: StringFilter<"Notation"> | string
     note?: IntFilter<"Notation"> | number
     dateNotation?: DateTimeFilter<"Notation"> | Date | string
@@ -36316,13 +35965,13 @@ export namespace Prisma {
     universiteUser?: StringNullableFilter<"Notation"> | string | null
     createdAt?: DateTimeFilter<"Notation"> | Date | string
     updatedAt?: DateTimeFilter<"Notation"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }
 
   export type NotationOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userId?: SortOrderInput | SortOrder
     ressourceId?: SortOrder
     note?: SortOrder
     dateNotation?: SortOrder
@@ -36341,7 +35990,7 @@ export namespace Prisma {
     AND?: NotationWhereInput | NotationWhereInput[]
     OR?: NotationWhereInput[]
     NOT?: NotationWhereInput | NotationWhereInput[]
-    userId?: StringFilter<"Notation"> | string
+    userId?: StringNullableFilter<"Notation"> | string | null
     ressourceId?: StringFilter<"Notation"> | string
     note?: IntFilter<"Notation"> | number
     dateNotation?: DateTimeFilter<"Notation"> | Date | string
@@ -36349,13 +35998,13 @@ export namespace Prisma {
     universiteUser?: StringNullableFilter<"Notation"> | string | null
     createdAt?: DateTimeFilter<"Notation"> | Date | string
     updatedAt?: DateTimeFilter<"Notation"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
   }, "id" | "userId_ressourceId">
 
   export type NotationOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userId?: SortOrderInput | SortOrder
     ressourceId?: SortOrder
     note?: SortOrder
     dateNotation?: SortOrder
@@ -36375,7 +36024,7 @@ export namespace Prisma {
     OR?: NotationScalarWhereWithAggregatesInput[]
     NOT?: NotationScalarWhereWithAggregatesInput | NotationScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Notation"> | string
-    userId?: StringWithAggregatesFilter<"Notation"> | string
+    userId?: StringNullableWithAggregatesFilter<"Notation"> | string | null
     ressourceId?: StringWithAggregatesFilter<"Notation"> | string
     note?: IntWithAggregatesFilter<"Notation"> | number
     dateNotation?: DateTimeWithAggregatesFilter<"Notation"> | Date | string
@@ -36391,25 +36040,23 @@ export namespace Prisma {
     NOT?: HistoriqueAccesWhereInput | HistoriqueAccesWhereInput[]
     id?: StringFilter<"HistoriqueAcces"> | string
     userId?: StringFilter<"HistoriqueAcces"> | string
-    ressourceId?: StringFilter<"HistoriqueAcces"> | string
-    dateAcces?: DateTimeFilter<"HistoriqueAcces"> | Date | string
+    ressourceId?: StringNullableFilter<"HistoriqueAcces"> | string | null
     typeAcces?: EnumTypeAccesFilter<"HistoriqueAcces"> | $Enums.TypeAcces
-    universiteSrc?: StringNullableFilter<"HistoriqueAcces"> | string | null
-    universiteUser?: StringNullableFilter<"HistoriqueAcces"> | string | null
+    universiteRess?: StringFilter<"HistoriqueAcces"> | string
+    externRessourceId?: StringNullableFilter<"HistoriqueAcces"> | string | null
     createdAt?: DateTimeFilter<"HistoriqueAcces"> | Date | string
     updatedAt?: DateTimeFilter<"HistoriqueAcces"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
+    ressource?: XOR<RessourceNullableScalarRelationFilter, RessourceWhereInput> | null
   }
 
   export type HistoriqueAccesOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    ressourceId?: SortOrder
-    dateAcces?: SortOrder
+    ressourceId?: SortOrderInput | SortOrder
     typeAcces?: SortOrder
-    universiteSrc?: SortOrderInput | SortOrder
-    universiteUser?: SortOrderInput | SortOrder
+    universiteRess?: SortOrder
+    externRessourceId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -36423,25 +36070,23 @@ export namespace Prisma {
     OR?: HistoriqueAccesWhereInput[]
     NOT?: HistoriqueAccesWhereInput | HistoriqueAccesWhereInput[]
     userId?: StringFilter<"HistoriqueAcces"> | string
-    ressourceId?: StringFilter<"HistoriqueAcces"> | string
-    dateAcces?: DateTimeFilter<"HistoriqueAcces"> | Date | string
+    ressourceId?: StringNullableFilter<"HistoriqueAcces"> | string | null
     typeAcces?: EnumTypeAccesFilter<"HistoriqueAcces"> | $Enums.TypeAcces
-    universiteSrc?: StringNullableFilter<"HistoriqueAcces"> | string | null
-    universiteUser?: StringNullableFilter<"HistoriqueAcces"> | string | null
+    universiteRess?: StringFilter<"HistoriqueAcces"> | string
+    externRessourceId?: StringNullableFilter<"HistoriqueAcces"> | string | null
     createdAt?: DateTimeFilter<"HistoriqueAcces"> | Date | string
     updatedAt?: DateTimeFilter<"HistoriqueAcces"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
+    ressource?: XOR<RessourceNullableScalarRelationFilter, RessourceWhereInput> | null
   }, "id">
 
   export type HistoriqueAccesOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    ressourceId?: SortOrder
-    dateAcces?: SortOrder
+    ressourceId?: SortOrderInput | SortOrder
     typeAcces?: SortOrder
-    universiteSrc?: SortOrderInput | SortOrder
-    universiteUser?: SortOrderInput | SortOrder
+    universiteRess?: SortOrder
+    externRessourceId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: HistoriqueAccesCountOrderByAggregateInput
@@ -36455,11 +36100,10 @@ export namespace Prisma {
     NOT?: HistoriqueAccesScalarWhereWithAggregatesInput | HistoriqueAccesScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"HistoriqueAcces"> | string
     userId?: StringWithAggregatesFilter<"HistoriqueAcces"> | string
-    ressourceId?: StringWithAggregatesFilter<"HistoriqueAcces"> | string
-    dateAcces?: DateTimeWithAggregatesFilter<"HistoriqueAcces"> | Date | string
+    ressourceId?: StringNullableWithAggregatesFilter<"HistoriqueAcces"> | string | null
     typeAcces?: EnumTypeAccesWithAggregatesFilter<"HistoriqueAcces"> | $Enums.TypeAcces
-    universiteSrc?: StringNullableWithAggregatesFilter<"HistoriqueAcces"> | string | null
-    universiteUser?: StringNullableWithAggregatesFilter<"HistoriqueAcces"> | string | null
+    universiteRess?: StringWithAggregatesFilter<"HistoriqueAcces"> | string
+    externRessourceId?: StringNullableWithAggregatesFilter<"HistoriqueAcces"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"HistoriqueAcces"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"HistoriqueAcces"> | Date | string
   }
@@ -36685,17 +36329,22 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFilter<"Ressource"> | $Enums.NiveauAcces
     datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
     motsCles?: StringFilter<"Ressource"> | string
-    auteurId?: StringFilter<"Ressource"> | string
+    auteurId?: StringNullableFilter<"Ressource"> | string | null
+    nomAuteur?: StringNullableFilter<"Ressource"> | string | null
+    telechargements?: IntFilter<"Ressource"> | number
+    vues?: IntFilter<"Ressource"> | number
     estArchive?: BoolFilter<"Ressource"> | boolean
+    noteMoyenne?: FloatFilter<"Ressource"> | number
+    createdAt?: DateTimeFilter<"Ressource"> | Date | string
+    updatedAt?: DateTimeFilter<"Ressource"> | Date | string
     categorieId?: StringFilter<"Ressource"> | string
-    auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
+    auteur?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     favoris?: FavoriListRelationFilter
     commentaires?: CommentaireListRelationFilter
     notations?: NotationListRelationFilter
     historiques?: HistoriqueAccesListRelationFilter
     collections?: CollectionRessourceListRelationFilter
-    exemplaires?: ExemplairePhysiqueListRelationFilter
-    reservations?: ReservationListRelationFilter
+    exemplaire?: XOR<ExemplairePhysiqueNullableScalarRelationFilter, ExemplairePhysiqueWhereInput> | null
     recommandations?: RecommandationListRelationFilter
     donneesRecommandations?: DonneesRecommandationListRelationFilter
     categorie?: XOR<CategorieNullableScalarRelationFilter, CategorieWhereInput> | null
@@ -36714,8 +36363,14 @@ export namespace Prisma {
     niveauAcces?: SortOrder
     datePublication?: SortOrderInput | SortOrder
     motsCles?: SortOrder
-    auteurId?: SortOrder
+    auteurId?: SortOrderInput | SortOrder
+    nomAuteur?: SortOrderInput | SortOrder
+    telechargements?: SortOrder
+    vues?: SortOrder
     estArchive?: SortOrder
+    noteMoyenne?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     categorieId?: SortOrder
     auteur?: UserOrderByWithRelationInput
     favoris?: FavoriOrderByRelationAggregateInput
@@ -36723,8 +36378,7 @@ export namespace Prisma {
     notations?: NotationOrderByRelationAggregateInput
     historiques?: HistoriqueAccesOrderByRelationAggregateInput
     collections?: CollectionRessourceOrderByRelationAggregateInput
-    exemplaires?: ExemplairePhysiqueOrderByRelationAggregateInput
-    reservations?: ReservationOrderByRelationAggregateInput
+    exemplaire?: ExemplairePhysiqueOrderByWithRelationInput
     recommandations?: RecommandationOrderByRelationAggregateInput
     donneesRecommandations?: DonneesRecommandationOrderByRelationAggregateInput
     categorie?: CategorieOrderByWithRelationInput
@@ -36747,17 +36401,22 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFilter<"Ressource"> | $Enums.NiveauAcces
     datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
     motsCles?: StringFilter<"Ressource"> | string
-    auteurId?: StringFilter<"Ressource"> | string
+    auteurId?: StringNullableFilter<"Ressource"> | string | null
+    nomAuteur?: StringNullableFilter<"Ressource"> | string | null
+    telechargements?: IntFilter<"Ressource"> | number
+    vues?: IntFilter<"Ressource"> | number
     estArchive?: BoolFilter<"Ressource"> | boolean
+    noteMoyenne?: FloatFilter<"Ressource"> | number
+    createdAt?: DateTimeFilter<"Ressource"> | Date | string
+    updatedAt?: DateTimeFilter<"Ressource"> | Date | string
     categorieId?: StringFilter<"Ressource"> | string
-    auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
+    auteur?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     favoris?: FavoriListRelationFilter
     commentaires?: CommentaireListRelationFilter
     notations?: NotationListRelationFilter
     historiques?: HistoriqueAccesListRelationFilter
     collections?: CollectionRessourceListRelationFilter
-    exemplaires?: ExemplairePhysiqueListRelationFilter
-    reservations?: ReservationListRelationFilter
+    exemplaire?: XOR<ExemplairePhysiqueNullableScalarRelationFilter, ExemplairePhysiqueWhereInput> | null
     recommandations?: RecommandationListRelationFilter
     donneesRecommandations?: DonneesRecommandationListRelationFilter
     categorie?: XOR<CategorieNullableScalarRelationFilter, CategorieWhereInput> | null
@@ -36776,12 +36435,20 @@ export namespace Prisma {
     niveauAcces?: SortOrder
     datePublication?: SortOrderInput | SortOrder
     motsCles?: SortOrder
-    auteurId?: SortOrder
+    auteurId?: SortOrderInput | SortOrder
+    nomAuteur?: SortOrderInput | SortOrder
+    telechargements?: SortOrder
+    vues?: SortOrder
     estArchive?: SortOrder
+    noteMoyenne?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     categorieId?: SortOrder
     _count?: RessourceCountOrderByAggregateInput
+    _avg?: RessourceAvgOrderByAggregateInput
     _max?: RessourceMaxOrderByAggregateInput
     _min?: RessourceMinOrderByAggregateInput
+    _sum?: RessourceSumOrderByAggregateInput
   }
 
   export type RessourceScalarWhereWithAggregatesInput = {
@@ -36800,8 +36467,14 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesWithAggregatesFilter<"Ressource"> | $Enums.NiveauAcces
     datePublication?: DateTimeNullableWithAggregatesFilter<"Ressource"> | Date | string | null
     motsCles?: StringWithAggregatesFilter<"Ressource"> | string
-    auteurId?: StringWithAggregatesFilter<"Ressource"> | string
+    auteurId?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
+    nomAuteur?: StringNullableWithAggregatesFilter<"Ressource"> | string | null
+    telechargements?: IntWithAggregatesFilter<"Ressource"> | number
+    vues?: IntWithAggregatesFilter<"Ressource"> | number
     estArchive?: BoolWithAggregatesFilter<"Ressource"> | boolean
+    noteMoyenne?: FloatWithAggregatesFilter<"Ressource"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Ressource"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Ressource"> | Date | string
     categorieId?: StringWithAggregatesFilter<"Ressource"> | string
   }
 
@@ -37480,197 +37153,83 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ReservationCreateInput = {
-    id?: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    universiteEmprunteur: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutReservationsInput
-    ressource: RessourceCreateNestedOneWithoutReservationsInput
-    valideur?: BibliothecaireCreateNestedOneWithoutReservationsInput
-  }
-
-  export type ReservationUncheckedCreateInput = {
-    id?: string
-    userId?: string | null
-    ressourceId: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    universiteEmprunteur: string
-    validePar?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ReservationUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutReservationsNestedInput
-    ressource?: RessourceUpdateOneRequiredWithoutReservationsNestedInput
-    valideur?: BibliothecaireUpdateOneWithoutReservationsNestedInput
-  }
-
-  export type ReservationUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ReservationCreateManyInput = {
-    id?: string
-    userId?: string | null
-    ressourceId: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    universiteEmprunteur: string
-    validePar?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ReservationUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ReservationUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type ExemplairePhysiqueCreateInput = {
     id?: string
-    cote: string
     etat?: $Enums.EtatExemplaire
-    disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
     qrCode?: string | null
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
+    nombre?: number
+    nombreDisponible?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    ressource: RessourceCreateNestedOneWithoutExemplairesInput
-    emprunts?: EmpruntCreateNestedManyWithoutExemplaireInput
+    ressource: RessourceCreateNestedOneWithoutExemplaireInput
+    empruntExemplaires?: EmpruntExemplaireCreateNestedManyWithoutExemplaireInput
   }
 
   export type ExemplairePhysiqueUncheckedCreateInput = {
     id?: string
     ressourceId: string
-    cote: string
     etat?: $Enums.EtatExemplaire
-    disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
     qrCode?: string | null
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
+    nombre?: number
+    nombreDisponible?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutExemplaireInput
+    empruntExemplaires?: EmpruntExemplaireUncheckedCreateNestedManyWithoutExemplaireInput
   }
 
   export type ExemplairePhysiqueUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cote?: StringFieldUpdateOperationsInput | string
     etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
-    disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    nombre?: IntFieldUpdateOperationsInput | number
+    nombreDisponible?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ressource?: RessourceUpdateOneRequiredWithoutExemplairesNestedInput
-    emprunts?: EmpruntUpdateManyWithoutExemplaireNestedInput
+    ressource?: RessourceUpdateOneRequiredWithoutExemplaireNestedInput
+    empruntExemplaires?: EmpruntExemplaireUpdateManyWithoutExemplaireNestedInput
   }
 
   export type ExemplairePhysiqueUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     ressourceId?: StringFieldUpdateOperationsInput | string
-    cote?: StringFieldUpdateOperationsInput | string
     etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
-    disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    nombre?: IntFieldUpdateOperationsInput | number
+    nombreDisponible?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emprunts?: EmpruntUncheckedUpdateManyWithoutExemplaireNestedInput
+    empruntExemplaires?: EmpruntExemplaireUncheckedUpdateManyWithoutExemplaireNestedInput
   }
 
   export type ExemplairePhysiqueCreateManyInput = {
     id?: string
     ressourceId: string
-    cote: string
     etat?: $Enums.EtatExemplaire
-    disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
     qrCode?: string | null
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
+    nombre?: number
+    nombreDisponible?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type ExemplairePhysiqueUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    cote?: StringFieldUpdateOperationsInput | string
     etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
-    disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    nombre?: IntFieldUpdateOperationsInput | number
+    nombreDisponible?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37678,112 +37237,97 @@ export namespace Prisma {
   export type ExemplairePhysiqueUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     ressourceId?: StringFieldUpdateOperationsInput | string
-    cote?: StringFieldUpdateOperationsInput | string
     etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
-    disponible?: BoolFieldUpdateOperationsInput | boolean
     localisation?: StringFieldUpdateOperationsInput | string
     dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     qrCode?: NullableStringFieldUpdateOperationsInput | string | null
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
+    nombre?: IntFieldUpdateOperationsInput | number
+    nombreDisponible?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmpruntCreateInput = {
     id?: string
+    exemplaireId: string
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
-    commentaire?: string | null
     universiteEmprunteur: string
-    motifEmprunt?: string | null
-    validePar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    exemplaire: ExemplairePhysiqueCreateNestedOneWithoutEmpruntsInput
     user?: UserCreateNestedOneWithoutEmpruntsInput
     SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
+    empruntExemplaires?: EmpruntExemplaireCreateNestedManyWithoutEmpruntInput
   }
 
   export type EmpruntUncheckedCreateInput = {
     id?: string
     exemplaireId: string
-    userId: string
+    userId?: string | null
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
-    commentaire?: string | null
     universiteEmprunteur: string
-    motifEmprunt?: string | null
-    validePar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
+    empruntExemplaires?: EmpruntExemplaireUncheckedCreateNestedManyWithoutEmpruntInput
   }
 
   export type EmpruntUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    exemplaireId?: StringFieldUpdateOperationsInput | string
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    exemplaire?: ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntsNestedInput
     user?: UserUpdateOneWithoutEmpruntsNestedInput
     SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
+    empruntExemplaires?: EmpruntExemplaireUpdateManyWithoutEmpruntNestedInput
   }
 
   export type EmpruntUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     exemplaireId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
+    empruntExemplaires?: EmpruntExemplaireUncheckedUpdateManyWithoutEmpruntNestedInput
   }
 
   export type EmpruntCreateManyInput = {
     id?: string
     exemplaireId: string
-    userId: string
+    userId?: string | null
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
-    commentaire?: string | null
     universiteEmprunteur: string
-    motifEmprunt?: string | null
-    validePar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type EmpruntUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    exemplaireId?: StringFieldUpdateOperationsInput | string
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37791,15 +37335,101 @@ export namespace Prisma {
   export type EmpruntUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     exemplaireId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmpruntExemplaireCreateInput = {
+    id?: string
+    dateEmprunt?: Date | string
+    dateRetourPrevue: Date | string
+    dateRetourEffective?: Date | string | null
+    statut?: $Enums.StatutEmprunt
+    commentaire?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emprunt: EmpruntCreateNestedOneWithoutEmpruntExemplairesInput
+    exemplaire: ExemplairePhysiqueCreateNestedOneWithoutEmpruntExemplairesInput
+  }
+
+  export type EmpruntExemplaireUncheckedCreateInput = {
+    id?: string
+    empruntId: string
+    exemplaireId: string
+    dateEmprunt?: Date | string
+    dateRetourPrevue: Date | string
+    dateRetourEffective?: Date | string | null
+    statut?: $Enums.StatutEmprunt
+    commentaire?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmpruntExemplaireUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emprunt?: EmpruntUpdateOneRequiredWithoutEmpruntExemplairesNestedInput
+    exemplaire?: ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntExemplairesNestedInput
+  }
+
+  export type EmpruntExemplaireUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    empruntId?: StringFieldUpdateOperationsInput | string
+    exemplaireId?: StringFieldUpdateOperationsInput | string
+    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
+    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmpruntExemplaireCreateManyInput = {
+    id?: string
+    empruntId: string
+    exemplaireId: string
+    dateEmprunt?: Date | string
+    dateRetourPrevue: Date | string
+    dateRetourEffective?: Date | string | null
+    statut?: $Enums.StatutEmprunt
+    commentaire?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmpruntExemplaireUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
+    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmpruntExemplaireUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    empruntId?: StringFieldUpdateOperationsInput | string
+    exemplaireId?: StringFieldUpdateOperationsInput | string
+    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
+    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38219,16 +37849,15 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
@@ -38253,16 +37882,15 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -38287,16 +37915,15 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
@@ -38321,16 +37948,15 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -38389,10 +38015,9 @@ export namespace Prisma {
     id?: string
     codePermanent: string
     dateNaissance: Date | string
-    dateInscription?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutEtudiantsInput
+    user: UserCreateNestedOneWithoutEtudiantInput
     filiere: FiliereCreateNestedOneWithoutEtudiantsInput
   }
 
@@ -38401,7 +38026,6 @@ export namespace Prisma {
     userId: string
     codePermanent: string
     dateNaissance: Date | string
-    dateInscription?: Date | string
     filiereId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38411,10 +38035,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutEtudiantsNestedInput
+    user?: UserUpdateOneRequiredWithoutEtudiantNestedInput
     filiere?: FiliereUpdateOneRequiredWithoutEtudiantsNestedInput
   }
 
@@ -38423,7 +38046,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
     filiereId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38434,7 +38056,6 @@ export namespace Prisma {
     userId: string
     codePermanent: string
     dateNaissance: Date | string
-    dateInscription?: Date | string
     filiereId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38444,7 +38065,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38454,7 +38074,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
     filiereId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38467,7 +38086,7 @@ export namespace Prisma {
     specialite?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutEnseignantsInput
+    user: UserCreateNestedOneWithoutEnseignantInput
   }
 
   export type EnseignantUncheckedCreateInput = {
@@ -38487,7 +38106,7 @@ export namespace Prisma {
     specialite?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutEnseignantsNestedInput
+    user?: UserUpdateOneRequiredWithoutEnseignantNestedInput
   }
 
   export type EnseignantUncheckedUpdateInput = {
@@ -38532,63 +38151,39 @@ export namespace Prisma {
   export type BibliothecaireCreateInput = {
     id?: string
     numeroBibliothecaire: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutBibliothecairesInput
-    reservations?: ReservationCreateNestedManyWithoutValideurInput
+    user: UserCreateNestedOneWithoutBibliothecaireInput
   }
 
   export type BibliothecaireUncheckedCreateInput = {
     id?: string
     userId: string
     numeroBibliothecaire: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    reservations?: ReservationUncheckedCreateNestedManyWithoutValideurInput
   }
 
   export type BibliothecaireUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     numeroBibliothecaire?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutBibliothecairesNestedInput
-    reservations?: ReservationUpdateManyWithoutValideurNestedInput
+    user?: UserUpdateOneRequiredWithoutBibliothecaireNestedInput
   }
 
   export type BibliothecaireUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     numeroBibliothecaire?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reservations?: ReservationUncheckedUpdateManyWithoutValideurNestedInput
   }
 
   export type BibliothecaireCreateManyInput = {
     id?: string
     userId: string
     numeroBibliothecaire: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -38596,10 +38191,6 @@ export namespace Prisma {
   export type BibliothecaireUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     numeroBibliothecaire?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38608,10 +38199,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     numeroBibliothecaire?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38619,116 +38206,80 @@ export namespace Prisma {
   export type AdministrateurCreateInput = {
     id?: string
     numeroAdmin: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
-    user: UserCreateNestedOneWithoutAdministrateursInput
+    user: UserCreateNestedOneWithoutAdministrateurInput
   }
 
   export type AdministrateurUncheckedCreateInput = {
     id?: string
     userId: string
     numeroAdmin: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
   }
 
   export type AdministrateurUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     numeroAdmin?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutAdministrateursNestedInput
+    user?: UserUpdateOneRequiredWithoutAdministrateurNestedInput
   }
 
   export type AdministrateurUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     numeroAdmin?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AdministrateurCreateManyInput = {
     id?: string
     userId: string
     numeroAdmin: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
   }
 
   export type AdministrateurUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     numeroAdmin?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AdministrateurUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     numeroAdmin?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FavoriCreateInput = {
     id?: string
-    dateAjout?: Date | string
-    note?: string | null
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    externalRessourceId?: string | null
+    universiteRess?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutFavorisInput
-    ressource: RessourceCreateNestedOneWithoutFavorisInput
+    ressource?: RessourceCreateNestedOneWithoutFavorisInput
+    user?: UserCreateNestedOneWithoutFavorisInput
   }
 
   export type FavoriUncheckedCreateInput = {
     id?: string
     userId: string
-    ressourceId: string
-    dateAjout?: Date | string
-    note?: string | null
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    ressourceId?: string | null
+    externalRessourceId?: string | null
+    universiteRess?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type FavoriUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    externalRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutFavorisNestedInput
-    ressource?: RessourceUpdateOneRequiredWithoutFavorisNestedInput
+    ressource?: RessourceUpdateOneWithoutFavorisNestedInput
+    user?: UserUpdateOneWithoutFavorisNestedInput
   }
 
   export type FavoriUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38736,21 +38287,17 @@ export namespace Prisma {
   export type FavoriCreateManyInput = {
     id?: string
     userId: string
-    ressourceId: string
-    dateAjout?: Date | string
-    note?: string | null
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    ressourceId?: string | null
+    externalRessourceId?: string | null
+    universiteRess?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type FavoriUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    externalRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38758,11 +38305,9 @@ export namespace Prisma {
   export type FavoriUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38857,13 +38402,13 @@ export namespace Prisma {
     universiteUser?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutNotationsInput
+    user?: UserCreateNestedOneWithoutNotationsInput
     ressource: RessourceCreateNestedOneWithoutNotationsInput
   }
 
   export type NotationUncheckedCreateInput = {
     id?: string
-    userId: string
+    userId?: string | null
     ressourceId: string
     note: number
     dateNotation?: Date | string
@@ -38881,13 +38426,13 @@ export namespace Prisma {
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutNotationsNestedInput
+    user?: UserUpdateOneWithoutNotationsNestedInput
     ressource?: RessourceUpdateOneRequiredWithoutNotationsNestedInput
   }
 
   export type NotationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     ressourceId?: StringFieldUpdateOperationsInput | string
     note?: IntFieldUpdateOperationsInput | number
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38899,7 +38444,7 @@ export namespace Prisma {
 
   export type NotationCreateManyInput = {
     id?: string
-    userId: string
+    userId?: string | null
     ressourceId: string
     note: number
     dateNotation?: Date | string
@@ -38921,7 +38466,7 @@ export namespace Prisma {
 
   export type NotationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     ressourceId?: StringFieldUpdateOperationsInput | string
     note?: IntFieldUpdateOperationsInput | number
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38933,48 +38478,44 @@ export namespace Prisma {
 
   export type HistoriqueAccesCreateInput = {
     id?: string
-    dateAcces?: Date | string
     typeAcces: $Enums.TypeAcces
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    universiteRess: string
+    externRessourceId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutHistoriquesInput
-    ressource: RessourceCreateNestedOneWithoutHistoriquesInput
+    ressource?: RessourceCreateNestedOneWithoutHistoriquesInput
   }
 
   export type HistoriqueAccesUncheckedCreateInput = {
     id?: string
     userId: string
-    ressourceId: string
-    dateAcces?: Date | string
+    ressourceId?: string | null
     typeAcces: $Enums.TypeAcces
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    universiteRess: string
+    externRessourceId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type HistoriqueAccesUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: StringFieldUpdateOperationsInput | string
+    externRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutHistoriquesNestedInput
-    ressource?: RessourceUpdateOneRequiredWithoutHistoriquesNestedInput
+    ressource?: RessourceUpdateOneWithoutHistoriquesNestedInput
   }
 
   export type HistoriqueAccesUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
+    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: StringFieldUpdateOperationsInput | string
+    externRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38982,21 +38523,19 @@ export namespace Prisma {
   export type HistoriqueAccesCreateManyInput = {
     id?: string
     userId: string
-    ressourceId: string
-    dateAcces?: Date | string
+    ressourceId?: string | null
     typeAcces: $Enums.TypeAcces
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    universiteRess: string
+    externRessourceId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type HistoriqueAccesUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: StringFieldUpdateOperationsInput | string
+    externRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39004,11 +38543,10 @@ export namespace Prisma {
   export type HistoriqueAccesUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
+    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: StringFieldUpdateOperationsInput | string
+    externRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39228,15 +38766,20 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
@@ -39255,16 +38798,21 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    auteurId: string
+    auteurId?: string | null
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueUncheckedCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
   }
@@ -39282,15 +38830,20 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
@@ -39309,16 +38862,21 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUncheckedUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
   }
@@ -39336,8 +38894,14 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    auteurId: string
+    auteurId?: string | null
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     categorieId: string
   }
 
@@ -39354,7 +38918,13 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RessourceUncheckedUpdateManyInput = {
@@ -39370,8 +38940,14 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categorieId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -40159,89 +39735,6 @@ export namespace Prisma {
     _max?: NestedEnumTypeSanctionFilter<$PrismaModel>
   }
 
-  export type EnumStatutReservationFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatutReservation | EnumStatutReservationFieldRefInput<$PrismaModel>
-    in?: $Enums.StatutReservation[]
-    notIn?: $Enums.StatutReservation[]
-    not?: NestedEnumStatutReservationFilter<$PrismaModel> | $Enums.StatutReservation
-  }
-
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
-  }
-
-  export type RessourceScalarRelationFilter = {
-    is?: RessourceWhereInput
-    isNot?: RessourceWhereInput
-  }
-
-  export type BibliothecaireNullableScalarRelationFilter = {
-    is?: BibliothecaireWhereInput | null
-    isNot?: BibliothecaireWhereInput | null
-  }
-
-  export type ReservationOrderByRelevanceInput = {
-    fields: ReservationOrderByRelevanceFieldEnum | ReservationOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type ReservationCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    ressourceId?: SortOrder
-    dateReservation?: SortOrder
-    dateDebut?: SortOrder
-    dateFin?: SortOrder
-    statut?: SortOrder
-    commentaire?: SortOrder
-    universiteEmprunteur?: SortOrder
-    validePar?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ReservationMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    ressourceId?: SortOrder
-    dateReservation?: SortOrder
-    dateDebut?: SortOrder
-    dateFin?: SortOrder
-    statut?: SortOrder
-    commentaire?: SortOrder
-    universiteEmprunteur?: SortOrder
-    validePar?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ReservationMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    ressourceId?: SortOrder
-    dateReservation?: SortOrder
-    dateDebut?: SortOrder
-    dateFin?: SortOrder
-    statut?: SortOrder
-    commentaire?: SortOrder
-    universiteEmprunteur?: SortOrder
-    validePar?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type EnumStatutReservationWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatutReservation | EnumStatutReservationFieldRefInput<$PrismaModel>
-    in?: $Enums.StatutReservation[]
-    notIn?: $Enums.StatutReservation[]
-    not?: NestedEnumStatutReservationWithAggregatesFilter<$PrismaModel> | $Enums.StatutReservation
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatutReservationFilter<$PrismaModel>
-    _max?: NestedEnumStatutReservationFilter<$PrismaModel>
-  }
-
   export type EnumEtatExemplaireFilter<$PrismaModel = never> = {
     equals?: $Enums.EtatExemplaire | EnumEtatExemplaireFieldRefInput<$PrismaModel>
     in?: $Enums.EtatExemplaire[]
@@ -40249,13 +39742,18 @@ export namespace Prisma {
     not?: NestedEnumEtatExemplaireFilter<$PrismaModel> | $Enums.EtatExemplaire
   }
 
-  export type EmpruntListRelationFilter = {
-    every?: EmpruntWhereInput
-    some?: EmpruntWhereInput
-    none?: EmpruntWhereInput
+  export type RessourceScalarRelationFilter = {
+    is?: RessourceWhereInput
+    isNot?: RessourceWhereInput
   }
 
-  export type EmpruntOrderByRelationAggregateInput = {
+  export type EmpruntExemplaireListRelationFilter = {
+    every?: EmpruntExemplaireWhereInput
+    some?: EmpruntExemplaireWhereInput
+    none?: EmpruntExemplaireWhereInput
+  }
+
+  export type EmpruntExemplaireOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -40268,34 +39766,30 @@ export namespace Prisma {
   export type ExemplairePhysiqueCountOrderByAggregateInput = {
     id?: SortOrder
     ressourceId?: SortOrder
-    cote?: SortOrder
     etat?: SortOrder
-    disponible?: SortOrder
     localisation?: SortOrder
     dateAcquisition?: SortOrder
     qrCode?: SortOrder
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
+    nombre?: SortOrder
+    nombreDisponible?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type ExemplairePhysiqueAvgOrderByAggregateInput = {
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
+    nombre?: SortOrder
+    nombreDisponible?: SortOrder
   }
 
   export type ExemplairePhysiqueMaxOrderByAggregateInput = {
     id?: SortOrder
     ressourceId?: SortOrder
-    cote?: SortOrder
     etat?: SortOrder
-    disponible?: SortOrder
     localisation?: SortOrder
     dateAcquisition?: SortOrder
     qrCode?: SortOrder
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
+    nombre?: SortOrder
+    nombreDisponible?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -40303,21 +39797,19 @@ export namespace Prisma {
   export type ExemplairePhysiqueMinOrderByAggregateInput = {
     id?: SortOrder
     ressourceId?: SortOrder
-    cote?: SortOrder
     etat?: SortOrder
-    disponible?: SortOrder
     localisation?: SortOrder
     dateAcquisition?: SortOrder
     qrCode?: SortOrder
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
+    nombre?: SortOrder
+    nombreDisponible?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type ExemplairePhysiqueSumOrderByAggregateInput = {
-    dureeMaxEmpruntExterne?: SortOrder
-    nbMaxExemplairesExterne?: SortOrder
+    nombre?: SortOrder
+    nombreDisponible?: SortOrder
   }
 
   export type EnumEtatExemplaireWithAggregatesFilter<$PrismaModel = never> = {
@@ -40337,9 +39829,9 @@ export namespace Prisma {
     not?: NestedEnumStatutEmpruntFilter<$PrismaModel> | $Enums.StatutEmprunt
   }
 
-  export type ExemplairePhysiqueScalarRelationFilter = {
-    is?: ExemplairePhysiqueWhereInput
-    isNot?: ExemplairePhysiqueWhereInput
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type SanctionUtilisateurListRelationFilter = {
@@ -40366,10 +39858,7 @@ export namespace Prisma {
     dateRetourPrevue?: SortOrder
     dateRetourEffective?: SortOrder
     statut?: SortOrder
-    commentaire?: SortOrder
     universiteEmprunteur?: SortOrder
-    motifEmprunt?: SortOrder
-    validePar?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -40382,10 +39871,7 @@ export namespace Prisma {
     dateRetourPrevue?: SortOrder
     dateRetourEffective?: SortOrder
     statut?: SortOrder
-    commentaire?: SortOrder
     universiteEmprunteur?: SortOrder
-    motifEmprunt?: SortOrder
-    validePar?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -40398,10 +39884,7 @@ export namespace Prisma {
     dateRetourPrevue?: SortOrder
     dateRetourEffective?: SortOrder
     statut?: SortOrder
-    commentaire?: SortOrder
     universiteEmprunteur?: SortOrder
-    motifEmprunt?: SortOrder
-    validePar?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -40414,6 +39897,61 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutEmpruntFilter<$PrismaModel>
     _max?: NestedEnumStatutEmpruntFilter<$PrismaModel>
+  }
+
+  export type EmpruntScalarRelationFilter = {
+    is?: EmpruntWhereInput
+    isNot?: EmpruntWhereInput
+  }
+
+  export type ExemplairePhysiqueScalarRelationFilter = {
+    is?: ExemplairePhysiqueWhereInput
+    isNot?: ExemplairePhysiqueWhereInput
+  }
+
+  export type EmpruntExemplaireOrderByRelevanceInput = {
+    fields: EmpruntExemplaireOrderByRelevanceFieldEnum | EmpruntExemplaireOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type EmpruntExemplaireCountOrderByAggregateInput = {
+    id?: SortOrder
+    empruntId?: SortOrder
+    exemplaireId?: SortOrder
+    dateEmprunt?: SortOrder
+    dateRetourPrevue?: SortOrder
+    dateRetourEffective?: SortOrder
+    statut?: SortOrder
+    commentaire?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmpruntExemplaireMaxOrderByAggregateInput = {
+    id?: SortOrder
+    empruntId?: SortOrder
+    exemplaireId?: SortOrder
+    dateEmprunt?: SortOrder
+    dateRetourPrevue?: SortOrder
+    dateRetourEffective?: SortOrder
+    statut?: SortOrder
+    commentaire?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmpruntExemplaireMinOrderByAggregateInput = {
+    id?: SortOrder
+    empruntId?: SortOrder
+    exemplaireId?: SortOrder
+    dateEmprunt?: SortOrder
+    dateRetourPrevue?: SortOrder
+    dateRetourEffective?: SortOrder
+    statut?: SortOrder
+    commentaire?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -40797,10 +40335,10 @@ export namespace Prisma {
     none?: CollectionWhereInput
   }
 
-  export type ReservationListRelationFilter = {
-    every?: ReservationWhereInput
-    some?: ReservationWhereInput
-    none?: ReservationWhereInput
+  export type EmpruntListRelationFilter = {
+    every?: EmpruntWhereInput
+    some?: EmpruntWhereInput
+    none?: EmpruntWhereInput
   }
 
   export type RecommandationListRelationFilter = {
@@ -40827,22 +40365,24 @@ export namespace Prisma {
     none?: NotificationWhereInput
   }
 
-  export type EnseignantListRelationFilter = {
-    every?: EnseignantWhereInput
-    some?: EnseignantWhereInput
-    none?: EnseignantWhereInput
+  export type EtudiantNullableScalarRelationFilter = {
+    is?: EtudiantWhereInput | null
+    isNot?: EtudiantWhereInput | null
   }
 
-  export type BibliothecaireListRelationFilter = {
-    every?: BibliothecaireWhereInput
-    some?: BibliothecaireWhereInput
-    none?: BibliothecaireWhereInput
+  export type EnseignantNullableScalarRelationFilter = {
+    is?: EnseignantWhereInput | null
+    isNot?: EnseignantWhereInput | null
   }
 
-  export type AdministrateurListRelationFilter = {
-    every?: AdministrateurWhereInput
-    some?: AdministrateurWhereInput
-    none?: AdministrateurWhereInput
+  export type BibliothecaireNullableScalarRelationFilter = {
+    is?: BibliothecaireWhereInput | null
+    isNot?: BibliothecaireWhereInput | null
+  }
+
+  export type AdministrateurNullableScalarRelationFilter = {
+    is?: AdministrateurWhereInput | null
+    isNot?: AdministrateurWhereInput | null
   }
 
   export type RessourceOrderByRelationAggregateInput = {
@@ -40869,7 +40409,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type ReservationOrderByRelationAggregateInput = {
+  export type EmpruntOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -40886,18 +40426,6 @@ export namespace Prisma {
   }
 
   export type NotificationOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type EnseignantOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type BibliothecaireOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type AdministrateurOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -40984,7 +40512,6 @@ export namespace Prisma {
     userId?: SortOrder
     codePermanent?: SortOrder
     dateNaissance?: SortOrder
-    dateInscription?: SortOrder
     filiereId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -40995,7 +40522,6 @@ export namespace Prisma {
     userId?: SortOrder
     codePermanent?: SortOrder
     dateNaissance?: SortOrder
-    dateInscription?: SortOrder
     filiereId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -41006,7 +40532,6 @@ export namespace Prisma {
     userId?: SortOrder
     codePermanent?: SortOrder
     dateNaissance?: SortOrder
-    dateInscription?: SortOrder
     filiereId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -41058,10 +40583,6 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     numeroBibliothecaire?: SortOrder
-    dateNaissance?: SortOrder
-    adresse?: SortOrder
-    ville?: SortOrder
-    pays?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41070,10 +40591,6 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     numeroBibliothecaire?: SortOrder
-    dateNaissance?: SortOrder
-    adresse?: SortOrder
-    ville?: SortOrder
-    pays?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41082,10 +40599,6 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     numeroBibliothecaire?: SortOrder
-    dateNaissance?: SortOrder
-    adresse?: SortOrder
-    ville?: SortOrder
-    pays?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41100,30 +40613,23 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     numeroAdmin?: SortOrder
-    dateNaissance?: SortOrder
-    adresse?: SortOrder
-    ville?: SortOrder
-    pays?: SortOrder
   }
 
   export type AdministrateurMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     numeroAdmin?: SortOrder
-    dateNaissance?: SortOrder
-    adresse?: SortOrder
-    ville?: SortOrder
-    pays?: SortOrder
   }
 
   export type AdministrateurMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     numeroAdmin?: SortOrder
-    dateNaissance?: SortOrder
-    adresse?: SortOrder
-    ville?: SortOrder
-    pays?: SortOrder
+  }
+
+  export type RessourceNullableScalarRelationFilter = {
+    is?: RessourceWhereInput | null
+    isNot?: RessourceWhereInput | null
   }
 
   export type FavoriOrderByRelevanceInput = {
@@ -41137,14 +40643,18 @@ export namespace Prisma {
     ressourceId: string
   }
 
+  export type FavoriUserIdExternalRessourceIdUniversiteRessCompoundUniqueInput = {
+    userId: string
+    externalRessourceId: string
+    universiteRess: string
+  }
+
   export type FavoriCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     ressourceId?: SortOrder
-    dateAjout?: SortOrder
-    note?: SortOrder
-    universiteSrc?: SortOrder
-    universiteUser?: SortOrder
+    externalRessourceId?: SortOrder
+    universiteRess?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41153,10 +40663,8 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     ressourceId?: SortOrder
-    dateAjout?: SortOrder
-    note?: SortOrder
-    universiteSrc?: SortOrder
-    universiteUser?: SortOrder
+    externalRessourceId?: SortOrder
+    universiteRess?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41165,10 +40673,8 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     ressourceId?: SortOrder
-    dateAjout?: SortOrder
-    note?: SortOrder
-    universiteSrc?: SortOrder
-    universiteUser?: SortOrder
+    externalRessourceId?: SortOrder
+    universiteRess?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41287,10 +40793,9 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     ressourceId?: SortOrder
-    dateAcces?: SortOrder
     typeAcces?: SortOrder
-    universiteSrc?: SortOrder
-    universiteUser?: SortOrder
+    universiteRess?: SortOrder
+    externRessourceId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41299,10 +40804,9 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     ressourceId?: SortOrder
-    dateAcces?: SortOrder
     typeAcces?: SortOrder
-    universiteSrc?: SortOrder
-    universiteUser?: SortOrder
+    universiteRess?: SortOrder
+    externRessourceId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41311,10 +40815,9 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     ressourceId?: SortOrder
-    dateAcces?: SortOrder
     typeAcces?: SortOrder
-    universiteSrc?: SortOrder
-    universiteUser?: SortOrder
+    universiteRess?: SortOrder
+    externRessourceId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41486,19 +40989,14 @@ export namespace Prisma {
     not?: NestedEnumNiveauAccesFilter<$PrismaModel> | $Enums.NiveauAcces
   }
 
-  export type ExemplairePhysiqueListRelationFilter = {
-    every?: ExemplairePhysiqueWhereInput
-    some?: ExemplairePhysiqueWhereInput
-    none?: ExemplairePhysiqueWhereInput
+  export type ExemplairePhysiqueNullableScalarRelationFilter = {
+    is?: ExemplairePhysiqueWhereInput | null
+    isNot?: ExemplairePhysiqueWhereInput | null
   }
 
   export type CategorieNullableScalarRelationFilter = {
     is?: CategorieWhereInput | null
     isNot?: CategorieWhereInput | null
-  }
-
-  export type ExemplairePhysiqueOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type RessourceOrderByRelevanceInput = {
@@ -41521,8 +41019,20 @@ export namespace Prisma {
     datePublication?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
+    nomAuteur?: SortOrder
+    telechargements?: SortOrder
+    vues?: SortOrder
     estArchive?: SortOrder
+    noteMoyenne?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     categorieId?: SortOrder
+  }
+
+  export type RessourceAvgOrderByAggregateInput = {
+    telechargements?: SortOrder
+    vues?: SortOrder
+    noteMoyenne?: SortOrder
   }
 
   export type RessourceMaxOrderByAggregateInput = {
@@ -41539,7 +41049,13 @@ export namespace Prisma {
     datePublication?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
+    nomAuteur?: SortOrder
+    telechargements?: SortOrder
+    vues?: SortOrder
     estArchive?: SortOrder
+    noteMoyenne?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     categorieId?: SortOrder
   }
 
@@ -41557,8 +41073,20 @@ export namespace Prisma {
     datePublication?: SortOrder
     motsCles?: SortOrder
     auteurId?: SortOrder
+    nomAuteur?: SortOrder
+    telechargements?: SortOrder
+    vues?: SortOrder
     estArchive?: SortOrder
+    noteMoyenne?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     categorieId?: SortOrder
+  }
+
+  export type RessourceSumOrderByAggregateInput = {
+    telechargements?: SortOrder
+    vues?: SortOrder
+    noteMoyenne?: SortOrder
   }
 
   export type EnumNiveauAccesWithAggregatesFilter<$PrismaModel = never> = {
@@ -41965,120 +41493,64 @@ export namespace Prisma {
     update?: XOR<XOR<EmpruntUpdateToOneWithWhereWithoutSanctionUtilisateurInput, EmpruntUpdateWithoutSanctionUtilisateurInput>, EmpruntUncheckedUpdateWithoutSanctionUtilisateurInput>
   }
 
-  export type UserCreateNestedOneWithoutReservationsInput = {
-    create?: XOR<UserCreateWithoutReservationsInput, UserUncheckedCreateWithoutReservationsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutReservationsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type RessourceCreateNestedOneWithoutReservationsInput = {
-    create?: XOR<RessourceCreateWithoutReservationsInput, RessourceUncheckedCreateWithoutReservationsInput>
-    connectOrCreate?: RessourceCreateOrConnectWithoutReservationsInput
+  export type RessourceCreateNestedOneWithoutExemplaireInput = {
+    create?: XOR<RessourceCreateWithoutExemplaireInput, RessourceUncheckedCreateWithoutExemplaireInput>
+    connectOrCreate?: RessourceCreateOrConnectWithoutExemplaireInput
     connect?: RessourceWhereUniqueInput
   }
 
-  export type BibliothecaireCreateNestedOneWithoutReservationsInput = {
-    create?: XOR<BibliothecaireCreateWithoutReservationsInput, BibliothecaireUncheckedCreateWithoutReservationsInput>
-    connectOrCreate?: BibliothecaireCreateOrConnectWithoutReservationsInput
-    connect?: BibliothecaireWhereUniqueInput
+  export type EmpruntExemplaireCreateNestedManyWithoutExemplaireInput = {
+    create?: XOR<EmpruntExemplaireCreateWithoutExemplaireInput, EmpruntExemplaireUncheckedCreateWithoutExemplaireInput> | EmpruntExemplaireCreateWithoutExemplaireInput[] | EmpruntExemplaireUncheckedCreateWithoutExemplaireInput[]
+    connectOrCreate?: EmpruntExemplaireCreateOrConnectWithoutExemplaireInput | EmpruntExemplaireCreateOrConnectWithoutExemplaireInput[]
+    createMany?: EmpruntExemplaireCreateManyExemplaireInputEnvelope
+    connect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
   }
 
-  export type EnumStatutReservationFieldUpdateOperationsInput = {
-    set?: $Enums.StatutReservation
-  }
-
-  export type UserUpdateOneWithoutReservationsNestedInput = {
-    create?: XOR<UserCreateWithoutReservationsInput, UserUncheckedCreateWithoutReservationsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutReservationsInput
-    upsert?: UserUpsertWithoutReservationsInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReservationsInput, UserUpdateWithoutReservationsInput>, UserUncheckedUpdateWithoutReservationsInput>
-  }
-
-  export type RessourceUpdateOneRequiredWithoutReservationsNestedInput = {
-    create?: XOR<RessourceCreateWithoutReservationsInput, RessourceUncheckedCreateWithoutReservationsInput>
-    connectOrCreate?: RessourceCreateOrConnectWithoutReservationsInput
-    upsert?: RessourceUpsertWithoutReservationsInput
-    connect?: RessourceWhereUniqueInput
-    update?: XOR<XOR<RessourceUpdateToOneWithWhereWithoutReservationsInput, RessourceUpdateWithoutReservationsInput>, RessourceUncheckedUpdateWithoutReservationsInput>
-  }
-
-  export type BibliothecaireUpdateOneWithoutReservationsNestedInput = {
-    create?: XOR<BibliothecaireCreateWithoutReservationsInput, BibliothecaireUncheckedCreateWithoutReservationsInput>
-    connectOrCreate?: BibliothecaireCreateOrConnectWithoutReservationsInput
-    upsert?: BibliothecaireUpsertWithoutReservationsInput
-    disconnect?: BibliothecaireWhereInput | boolean
-    delete?: BibliothecaireWhereInput | boolean
-    connect?: BibliothecaireWhereUniqueInput
-    update?: XOR<XOR<BibliothecaireUpdateToOneWithWhereWithoutReservationsInput, BibliothecaireUpdateWithoutReservationsInput>, BibliothecaireUncheckedUpdateWithoutReservationsInput>
-  }
-
-  export type RessourceCreateNestedOneWithoutExemplairesInput = {
-    create?: XOR<RessourceCreateWithoutExemplairesInput, RessourceUncheckedCreateWithoutExemplairesInput>
-    connectOrCreate?: RessourceCreateOrConnectWithoutExemplairesInput
-    connect?: RessourceWhereUniqueInput
-  }
-
-  export type EmpruntCreateNestedManyWithoutExemplaireInput = {
-    create?: XOR<EmpruntCreateWithoutExemplaireInput, EmpruntUncheckedCreateWithoutExemplaireInput> | EmpruntCreateWithoutExemplaireInput[] | EmpruntUncheckedCreateWithoutExemplaireInput[]
-    connectOrCreate?: EmpruntCreateOrConnectWithoutExemplaireInput | EmpruntCreateOrConnectWithoutExemplaireInput[]
-    createMany?: EmpruntCreateManyExemplaireInputEnvelope
-    connect?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-  }
-
-  export type EmpruntUncheckedCreateNestedManyWithoutExemplaireInput = {
-    create?: XOR<EmpruntCreateWithoutExemplaireInput, EmpruntUncheckedCreateWithoutExemplaireInput> | EmpruntCreateWithoutExemplaireInput[] | EmpruntUncheckedCreateWithoutExemplaireInput[]
-    connectOrCreate?: EmpruntCreateOrConnectWithoutExemplaireInput | EmpruntCreateOrConnectWithoutExemplaireInput[]
-    createMany?: EmpruntCreateManyExemplaireInputEnvelope
-    connect?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
+  export type EmpruntExemplaireUncheckedCreateNestedManyWithoutExemplaireInput = {
+    create?: XOR<EmpruntExemplaireCreateWithoutExemplaireInput, EmpruntExemplaireUncheckedCreateWithoutExemplaireInput> | EmpruntExemplaireCreateWithoutExemplaireInput[] | EmpruntExemplaireUncheckedCreateWithoutExemplaireInput[]
+    connectOrCreate?: EmpruntExemplaireCreateOrConnectWithoutExemplaireInput | EmpruntExemplaireCreateOrConnectWithoutExemplaireInput[]
+    createMany?: EmpruntExemplaireCreateManyExemplaireInputEnvelope
+    connect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
   }
 
   export type EnumEtatExemplaireFieldUpdateOperationsInput = {
     set?: $Enums.EtatExemplaire
   }
 
-  export type RessourceUpdateOneRequiredWithoutExemplairesNestedInput = {
-    create?: XOR<RessourceCreateWithoutExemplairesInput, RessourceUncheckedCreateWithoutExemplairesInput>
-    connectOrCreate?: RessourceCreateOrConnectWithoutExemplairesInput
-    upsert?: RessourceUpsertWithoutExemplairesInput
+  export type RessourceUpdateOneRequiredWithoutExemplaireNestedInput = {
+    create?: XOR<RessourceCreateWithoutExemplaireInput, RessourceUncheckedCreateWithoutExemplaireInput>
+    connectOrCreate?: RessourceCreateOrConnectWithoutExemplaireInput
+    upsert?: RessourceUpsertWithoutExemplaireInput
     connect?: RessourceWhereUniqueInput
-    update?: XOR<XOR<RessourceUpdateToOneWithWhereWithoutExemplairesInput, RessourceUpdateWithoutExemplairesInput>, RessourceUncheckedUpdateWithoutExemplairesInput>
+    update?: XOR<XOR<RessourceUpdateToOneWithWhereWithoutExemplaireInput, RessourceUpdateWithoutExemplaireInput>, RessourceUncheckedUpdateWithoutExemplaireInput>
   }
 
-  export type EmpruntUpdateManyWithoutExemplaireNestedInput = {
-    create?: XOR<EmpruntCreateWithoutExemplaireInput, EmpruntUncheckedCreateWithoutExemplaireInput> | EmpruntCreateWithoutExemplaireInput[] | EmpruntUncheckedCreateWithoutExemplaireInput[]
-    connectOrCreate?: EmpruntCreateOrConnectWithoutExemplaireInput | EmpruntCreateOrConnectWithoutExemplaireInput[]
-    upsert?: EmpruntUpsertWithWhereUniqueWithoutExemplaireInput | EmpruntUpsertWithWhereUniqueWithoutExemplaireInput[]
-    createMany?: EmpruntCreateManyExemplaireInputEnvelope
-    set?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    disconnect?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    delete?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    connect?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    update?: EmpruntUpdateWithWhereUniqueWithoutExemplaireInput | EmpruntUpdateWithWhereUniqueWithoutExemplaireInput[]
-    updateMany?: EmpruntUpdateManyWithWhereWithoutExemplaireInput | EmpruntUpdateManyWithWhereWithoutExemplaireInput[]
-    deleteMany?: EmpruntScalarWhereInput | EmpruntScalarWhereInput[]
+  export type EmpruntExemplaireUpdateManyWithoutExemplaireNestedInput = {
+    create?: XOR<EmpruntExemplaireCreateWithoutExemplaireInput, EmpruntExemplaireUncheckedCreateWithoutExemplaireInput> | EmpruntExemplaireCreateWithoutExemplaireInput[] | EmpruntExemplaireUncheckedCreateWithoutExemplaireInput[]
+    connectOrCreate?: EmpruntExemplaireCreateOrConnectWithoutExemplaireInput | EmpruntExemplaireCreateOrConnectWithoutExemplaireInput[]
+    upsert?: EmpruntExemplaireUpsertWithWhereUniqueWithoutExemplaireInput | EmpruntExemplaireUpsertWithWhereUniqueWithoutExemplaireInput[]
+    createMany?: EmpruntExemplaireCreateManyExemplaireInputEnvelope
+    set?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    disconnect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    delete?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    connect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    update?: EmpruntExemplaireUpdateWithWhereUniqueWithoutExemplaireInput | EmpruntExemplaireUpdateWithWhereUniqueWithoutExemplaireInput[]
+    updateMany?: EmpruntExemplaireUpdateManyWithWhereWithoutExemplaireInput | EmpruntExemplaireUpdateManyWithWhereWithoutExemplaireInput[]
+    deleteMany?: EmpruntExemplaireScalarWhereInput | EmpruntExemplaireScalarWhereInput[]
   }
 
-  export type EmpruntUncheckedUpdateManyWithoutExemplaireNestedInput = {
-    create?: XOR<EmpruntCreateWithoutExemplaireInput, EmpruntUncheckedCreateWithoutExemplaireInput> | EmpruntCreateWithoutExemplaireInput[] | EmpruntUncheckedCreateWithoutExemplaireInput[]
-    connectOrCreate?: EmpruntCreateOrConnectWithoutExemplaireInput | EmpruntCreateOrConnectWithoutExemplaireInput[]
-    upsert?: EmpruntUpsertWithWhereUniqueWithoutExemplaireInput | EmpruntUpsertWithWhereUniqueWithoutExemplaireInput[]
-    createMany?: EmpruntCreateManyExemplaireInputEnvelope
-    set?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    disconnect?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    delete?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    connect?: EmpruntWhereUniqueInput | EmpruntWhereUniqueInput[]
-    update?: EmpruntUpdateWithWhereUniqueWithoutExemplaireInput | EmpruntUpdateWithWhereUniqueWithoutExemplaireInput[]
-    updateMany?: EmpruntUpdateManyWithWhereWithoutExemplaireInput | EmpruntUpdateManyWithWhereWithoutExemplaireInput[]
-    deleteMany?: EmpruntScalarWhereInput | EmpruntScalarWhereInput[]
-  }
-
-  export type ExemplairePhysiqueCreateNestedOneWithoutEmpruntsInput = {
-    create?: XOR<ExemplairePhysiqueCreateWithoutEmpruntsInput, ExemplairePhysiqueUncheckedCreateWithoutEmpruntsInput>
-    connectOrCreate?: ExemplairePhysiqueCreateOrConnectWithoutEmpruntsInput
-    connect?: ExemplairePhysiqueWhereUniqueInput
+  export type EmpruntExemplaireUncheckedUpdateManyWithoutExemplaireNestedInput = {
+    create?: XOR<EmpruntExemplaireCreateWithoutExemplaireInput, EmpruntExemplaireUncheckedCreateWithoutExemplaireInput> | EmpruntExemplaireCreateWithoutExemplaireInput[] | EmpruntExemplaireUncheckedCreateWithoutExemplaireInput[]
+    connectOrCreate?: EmpruntExemplaireCreateOrConnectWithoutExemplaireInput | EmpruntExemplaireCreateOrConnectWithoutExemplaireInput[]
+    upsert?: EmpruntExemplaireUpsertWithWhereUniqueWithoutExemplaireInput | EmpruntExemplaireUpsertWithWhereUniqueWithoutExemplaireInput[]
+    createMany?: EmpruntExemplaireCreateManyExemplaireInputEnvelope
+    set?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    disconnect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    delete?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    connect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    update?: EmpruntExemplaireUpdateWithWhereUniqueWithoutExemplaireInput | EmpruntExemplaireUpdateWithWhereUniqueWithoutExemplaireInput[]
+    updateMany?: EmpruntExemplaireUpdateManyWithWhereWithoutExemplaireInput | EmpruntExemplaireUpdateManyWithWhereWithoutExemplaireInput[]
+    deleteMany?: EmpruntExemplaireScalarWhereInput | EmpruntExemplaireScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutEmpruntsInput = {
@@ -42094,6 +41566,13 @@ export namespace Prisma {
     connect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
   }
 
+  export type EmpruntExemplaireCreateNestedManyWithoutEmpruntInput = {
+    create?: XOR<EmpruntExemplaireCreateWithoutEmpruntInput, EmpruntExemplaireUncheckedCreateWithoutEmpruntInput> | EmpruntExemplaireCreateWithoutEmpruntInput[] | EmpruntExemplaireUncheckedCreateWithoutEmpruntInput[]
+    connectOrCreate?: EmpruntExemplaireCreateOrConnectWithoutEmpruntInput | EmpruntExemplaireCreateOrConnectWithoutEmpruntInput[]
+    createMany?: EmpruntExemplaireCreateManyEmpruntInputEnvelope
+    connect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+  }
+
   export type SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput = {
     create?: XOR<SanctionUtilisateurCreateWithoutEmpruntInput, SanctionUtilisateurUncheckedCreateWithoutEmpruntInput> | SanctionUtilisateurCreateWithoutEmpruntInput[] | SanctionUtilisateurUncheckedCreateWithoutEmpruntInput[]
     connectOrCreate?: SanctionUtilisateurCreateOrConnectWithoutEmpruntInput | SanctionUtilisateurCreateOrConnectWithoutEmpruntInput[]
@@ -42101,16 +41580,15 @@ export namespace Prisma {
     connect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
   }
 
-  export type EnumStatutEmpruntFieldUpdateOperationsInput = {
-    set?: $Enums.StatutEmprunt
+  export type EmpruntExemplaireUncheckedCreateNestedManyWithoutEmpruntInput = {
+    create?: XOR<EmpruntExemplaireCreateWithoutEmpruntInput, EmpruntExemplaireUncheckedCreateWithoutEmpruntInput> | EmpruntExemplaireCreateWithoutEmpruntInput[] | EmpruntExemplaireUncheckedCreateWithoutEmpruntInput[]
+    connectOrCreate?: EmpruntExemplaireCreateOrConnectWithoutEmpruntInput | EmpruntExemplaireCreateOrConnectWithoutEmpruntInput[]
+    createMany?: EmpruntExemplaireCreateManyEmpruntInputEnvelope
+    connect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
   }
 
-  export type ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntsNestedInput = {
-    create?: XOR<ExemplairePhysiqueCreateWithoutEmpruntsInput, ExemplairePhysiqueUncheckedCreateWithoutEmpruntsInput>
-    connectOrCreate?: ExemplairePhysiqueCreateOrConnectWithoutEmpruntsInput
-    upsert?: ExemplairePhysiqueUpsertWithoutEmpruntsInput
-    connect?: ExemplairePhysiqueWhereUniqueInput
-    update?: XOR<XOR<ExemplairePhysiqueUpdateToOneWithWhereWithoutEmpruntsInput, ExemplairePhysiqueUpdateWithoutEmpruntsInput>, ExemplairePhysiqueUncheckedUpdateWithoutEmpruntsInput>
+  export type EnumStatutEmpruntFieldUpdateOperationsInput = {
+    set?: $Enums.StatutEmprunt
   }
 
   export type UserUpdateOneWithoutEmpruntsNestedInput = {
@@ -42137,6 +41615,20 @@ export namespace Prisma {
     deleteMany?: SanctionUtilisateurScalarWhereInput | SanctionUtilisateurScalarWhereInput[]
   }
 
+  export type EmpruntExemplaireUpdateManyWithoutEmpruntNestedInput = {
+    create?: XOR<EmpruntExemplaireCreateWithoutEmpruntInput, EmpruntExemplaireUncheckedCreateWithoutEmpruntInput> | EmpruntExemplaireCreateWithoutEmpruntInput[] | EmpruntExemplaireUncheckedCreateWithoutEmpruntInput[]
+    connectOrCreate?: EmpruntExemplaireCreateOrConnectWithoutEmpruntInput | EmpruntExemplaireCreateOrConnectWithoutEmpruntInput[]
+    upsert?: EmpruntExemplaireUpsertWithWhereUniqueWithoutEmpruntInput | EmpruntExemplaireUpsertWithWhereUniqueWithoutEmpruntInput[]
+    createMany?: EmpruntExemplaireCreateManyEmpruntInputEnvelope
+    set?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    disconnect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    delete?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    connect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    update?: EmpruntExemplaireUpdateWithWhereUniqueWithoutEmpruntInput | EmpruntExemplaireUpdateWithWhereUniqueWithoutEmpruntInput[]
+    updateMany?: EmpruntExemplaireUpdateManyWithWhereWithoutEmpruntInput | EmpruntExemplaireUpdateManyWithWhereWithoutEmpruntInput[]
+    deleteMany?: EmpruntExemplaireScalarWhereInput | EmpruntExemplaireScalarWhereInput[]
+  }
+
   export type SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput = {
     create?: XOR<SanctionUtilisateurCreateWithoutEmpruntInput, SanctionUtilisateurUncheckedCreateWithoutEmpruntInput> | SanctionUtilisateurCreateWithoutEmpruntInput[] | SanctionUtilisateurUncheckedCreateWithoutEmpruntInput[]
     connectOrCreate?: SanctionUtilisateurCreateOrConnectWithoutEmpruntInput | SanctionUtilisateurCreateOrConnectWithoutEmpruntInput[]
@@ -42149,6 +41641,48 @@ export namespace Prisma {
     update?: SanctionUtilisateurUpdateWithWhereUniqueWithoutEmpruntInput | SanctionUtilisateurUpdateWithWhereUniqueWithoutEmpruntInput[]
     updateMany?: SanctionUtilisateurUpdateManyWithWhereWithoutEmpruntInput | SanctionUtilisateurUpdateManyWithWhereWithoutEmpruntInput[]
     deleteMany?: SanctionUtilisateurScalarWhereInput | SanctionUtilisateurScalarWhereInput[]
+  }
+
+  export type EmpruntExemplaireUncheckedUpdateManyWithoutEmpruntNestedInput = {
+    create?: XOR<EmpruntExemplaireCreateWithoutEmpruntInput, EmpruntExemplaireUncheckedCreateWithoutEmpruntInput> | EmpruntExemplaireCreateWithoutEmpruntInput[] | EmpruntExemplaireUncheckedCreateWithoutEmpruntInput[]
+    connectOrCreate?: EmpruntExemplaireCreateOrConnectWithoutEmpruntInput | EmpruntExemplaireCreateOrConnectWithoutEmpruntInput[]
+    upsert?: EmpruntExemplaireUpsertWithWhereUniqueWithoutEmpruntInput | EmpruntExemplaireUpsertWithWhereUniqueWithoutEmpruntInput[]
+    createMany?: EmpruntExemplaireCreateManyEmpruntInputEnvelope
+    set?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    disconnect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    delete?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    connect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
+    update?: EmpruntExemplaireUpdateWithWhereUniqueWithoutEmpruntInput | EmpruntExemplaireUpdateWithWhereUniqueWithoutEmpruntInput[]
+    updateMany?: EmpruntExemplaireUpdateManyWithWhereWithoutEmpruntInput | EmpruntExemplaireUpdateManyWithWhereWithoutEmpruntInput[]
+    deleteMany?: EmpruntExemplaireScalarWhereInput | EmpruntExemplaireScalarWhereInput[]
+  }
+
+  export type EmpruntCreateNestedOneWithoutEmpruntExemplairesInput = {
+    create?: XOR<EmpruntCreateWithoutEmpruntExemplairesInput, EmpruntUncheckedCreateWithoutEmpruntExemplairesInput>
+    connectOrCreate?: EmpruntCreateOrConnectWithoutEmpruntExemplairesInput
+    connect?: EmpruntWhereUniqueInput
+  }
+
+  export type ExemplairePhysiqueCreateNestedOneWithoutEmpruntExemplairesInput = {
+    create?: XOR<ExemplairePhysiqueCreateWithoutEmpruntExemplairesInput, ExemplairePhysiqueUncheckedCreateWithoutEmpruntExemplairesInput>
+    connectOrCreate?: ExemplairePhysiqueCreateOrConnectWithoutEmpruntExemplairesInput
+    connect?: ExemplairePhysiqueWhereUniqueInput
+  }
+
+  export type EmpruntUpdateOneRequiredWithoutEmpruntExemplairesNestedInput = {
+    create?: XOR<EmpruntCreateWithoutEmpruntExemplairesInput, EmpruntUncheckedCreateWithoutEmpruntExemplairesInput>
+    connectOrCreate?: EmpruntCreateOrConnectWithoutEmpruntExemplairesInput
+    upsert?: EmpruntUpsertWithoutEmpruntExemplairesInput
+    connect?: EmpruntWhereUniqueInput
+    update?: XOR<XOR<EmpruntUpdateToOneWithWhereWithoutEmpruntExemplairesInput, EmpruntUpdateWithoutEmpruntExemplairesInput>, EmpruntUncheckedUpdateWithoutEmpruntExemplairesInput>
+  }
+
+  export type ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntExemplairesNestedInput = {
+    create?: XOR<ExemplairePhysiqueCreateWithoutEmpruntExemplairesInput, ExemplairePhysiqueUncheckedCreateWithoutEmpruntExemplairesInput>
+    connectOrCreate?: ExemplairePhysiqueCreateOrConnectWithoutEmpruntExemplairesInput
+    upsert?: ExemplairePhysiqueUpsertWithoutEmpruntExemplairesInput
+    connect?: ExemplairePhysiqueWhereUniqueInput
+    update?: XOR<XOR<ExemplairePhysiqueUpdateToOneWithWhereWithoutEmpruntExemplairesInput, ExemplairePhysiqueUpdateWithoutEmpruntExemplairesInput>, ExemplairePhysiqueUncheckedUpdateWithoutEmpruntExemplairesInput>
   }
 
   export type UserCreateNestedOneWithoutRecommandationsInput = {
@@ -42573,13 +42107,6 @@ export namespace Prisma {
     connect?: CollectionWhereUniqueInput | CollectionWhereUniqueInput[]
   }
 
-  export type ReservationCreateNestedManyWithoutUserInput = {
-    create?: XOR<ReservationCreateWithoutUserInput, ReservationUncheckedCreateWithoutUserInput> | ReservationCreateWithoutUserInput[] | ReservationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutUserInput | ReservationCreateOrConnectWithoutUserInput[]
-    createMany?: ReservationCreateManyUserInputEnvelope
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-  }
-
   export type EmpruntCreateNestedManyWithoutUserInput = {
     create?: XOR<EmpruntCreateWithoutUserInput, EmpruntUncheckedCreateWithoutUserInput> | EmpruntCreateWithoutUserInput[] | EmpruntUncheckedCreateWithoutUserInput[]
     connectOrCreate?: EmpruntCreateOrConnectWithoutUserInput | EmpruntCreateOrConnectWithoutUserInput[]
@@ -42615,32 +42142,28 @@ export namespace Prisma {
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
-  export type EtudiantCreateNestedManyWithoutUserInput = {
-    create?: XOR<EtudiantCreateWithoutUserInput, EtudiantUncheckedCreateWithoutUserInput> | EtudiantCreateWithoutUserInput[] | EtudiantUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EtudiantCreateOrConnectWithoutUserInput | EtudiantCreateOrConnectWithoutUserInput[]
-    createMany?: EtudiantCreateManyUserInputEnvelope
-    connect?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
+  export type EtudiantCreateNestedOneWithoutUserInput = {
+    create?: XOR<EtudiantCreateWithoutUserInput, EtudiantUncheckedCreateWithoutUserInput>
+    connectOrCreate?: EtudiantCreateOrConnectWithoutUserInput
+    connect?: EtudiantWhereUniqueInput
   }
 
-  export type EnseignantCreateNestedManyWithoutUserInput = {
-    create?: XOR<EnseignantCreateWithoutUserInput, EnseignantUncheckedCreateWithoutUserInput> | EnseignantCreateWithoutUserInput[] | EnseignantUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EnseignantCreateOrConnectWithoutUserInput | EnseignantCreateOrConnectWithoutUserInput[]
-    createMany?: EnseignantCreateManyUserInputEnvelope
-    connect?: EnseignantWhereUniqueInput | EnseignantWhereUniqueInput[]
+  export type EnseignantCreateNestedOneWithoutUserInput = {
+    create?: XOR<EnseignantCreateWithoutUserInput, EnseignantUncheckedCreateWithoutUserInput>
+    connectOrCreate?: EnseignantCreateOrConnectWithoutUserInput
+    connect?: EnseignantWhereUniqueInput
   }
 
-  export type BibliothecaireCreateNestedManyWithoutUserInput = {
-    create?: XOR<BibliothecaireCreateWithoutUserInput, BibliothecaireUncheckedCreateWithoutUserInput> | BibliothecaireCreateWithoutUserInput[] | BibliothecaireUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BibliothecaireCreateOrConnectWithoutUserInput | BibliothecaireCreateOrConnectWithoutUserInput[]
-    createMany?: BibliothecaireCreateManyUserInputEnvelope
-    connect?: BibliothecaireWhereUniqueInput | BibliothecaireWhereUniqueInput[]
+  export type BibliothecaireCreateNestedOneWithoutUserInput = {
+    create?: XOR<BibliothecaireCreateWithoutUserInput, BibliothecaireUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BibliothecaireCreateOrConnectWithoutUserInput
+    connect?: BibliothecaireWhereUniqueInput
   }
 
-  export type AdministrateurCreateNestedManyWithoutUserInput = {
-    create?: XOR<AdministrateurCreateWithoutUserInput, AdministrateurUncheckedCreateWithoutUserInput> | AdministrateurCreateWithoutUserInput[] | AdministrateurUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AdministrateurCreateOrConnectWithoutUserInput | AdministrateurCreateOrConnectWithoutUserInput[]
-    createMany?: AdministrateurCreateManyUserInputEnvelope
-    connect?: AdministrateurWhereUniqueInput | AdministrateurWhereUniqueInput[]
+  export type AdministrateurCreateNestedOneWithoutUserInput = {
+    create?: XOR<AdministrateurCreateWithoutUserInput, AdministrateurUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AdministrateurCreateOrConnectWithoutUserInput
+    connect?: AdministrateurWhereUniqueInput
   }
 
   export type SanctionUtilisateurCreateNestedManyWithoutUserInput = {
@@ -42692,13 +42215,6 @@ export namespace Prisma {
     connect?: CollectionWhereUniqueInput | CollectionWhereUniqueInput[]
   }
 
-  export type ReservationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ReservationCreateWithoutUserInput, ReservationUncheckedCreateWithoutUserInput> | ReservationCreateWithoutUserInput[] | ReservationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutUserInput | ReservationCreateOrConnectWithoutUserInput[]
-    createMany?: ReservationCreateManyUserInputEnvelope
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-  }
-
   export type EmpruntUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<EmpruntCreateWithoutUserInput, EmpruntUncheckedCreateWithoutUserInput> | EmpruntCreateWithoutUserInput[] | EmpruntUncheckedCreateWithoutUserInput[]
     connectOrCreate?: EmpruntCreateOrConnectWithoutUserInput | EmpruntCreateOrConnectWithoutUserInput[]
@@ -42734,32 +42250,28 @@ export namespace Prisma {
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
-  export type EtudiantUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<EtudiantCreateWithoutUserInput, EtudiantUncheckedCreateWithoutUserInput> | EtudiantCreateWithoutUserInput[] | EtudiantUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EtudiantCreateOrConnectWithoutUserInput | EtudiantCreateOrConnectWithoutUserInput[]
-    createMany?: EtudiantCreateManyUserInputEnvelope
-    connect?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
+  export type EtudiantUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<EtudiantCreateWithoutUserInput, EtudiantUncheckedCreateWithoutUserInput>
+    connectOrCreate?: EtudiantCreateOrConnectWithoutUserInput
+    connect?: EtudiantWhereUniqueInput
   }
 
-  export type EnseignantUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<EnseignantCreateWithoutUserInput, EnseignantUncheckedCreateWithoutUserInput> | EnseignantCreateWithoutUserInput[] | EnseignantUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EnseignantCreateOrConnectWithoutUserInput | EnseignantCreateOrConnectWithoutUserInput[]
-    createMany?: EnseignantCreateManyUserInputEnvelope
-    connect?: EnseignantWhereUniqueInput | EnseignantWhereUniqueInput[]
+  export type EnseignantUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<EnseignantCreateWithoutUserInput, EnseignantUncheckedCreateWithoutUserInput>
+    connectOrCreate?: EnseignantCreateOrConnectWithoutUserInput
+    connect?: EnseignantWhereUniqueInput
   }
 
-  export type BibliothecaireUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<BibliothecaireCreateWithoutUserInput, BibliothecaireUncheckedCreateWithoutUserInput> | BibliothecaireCreateWithoutUserInput[] | BibliothecaireUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BibliothecaireCreateOrConnectWithoutUserInput | BibliothecaireCreateOrConnectWithoutUserInput[]
-    createMany?: BibliothecaireCreateManyUserInputEnvelope
-    connect?: BibliothecaireWhereUniqueInput | BibliothecaireWhereUniqueInput[]
+  export type BibliothecaireUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<BibliothecaireCreateWithoutUserInput, BibliothecaireUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BibliothecaireCreateOrConnectWithoutUserInput
+    connect?: BibliothecaireWhereUniqueInput
   }
 
-  export type AdministrateurUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<AdministrateurCreateWithoutUserInput, AdministrateurUncheckedCreateWithoutUserInput> | AdministrateurCreateWithoutUserInput[] | AdministrateurUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AdministrateurCreateOrConnectWithoutUserInput | AdministrateurCreateOrConnectWithoutUserInput[]
-    createMany?: AdministrateurCreateManyUserInputEnvelope
-    connect?: AdministrateurWhereUniqueInput | AdministrateurWhereUniqueInput[]
+  export type AdministrateurUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<AdministrateurCreateWithoutUserInput, AdministrateurUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AdministrateurCreateOrConnectWithoutUserInput
+    connect?: AdministrateurWhereUniqueInput
   }
 
   export type SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput = {
@@ -42857,20 +42369,6 @@ export namespace Prisma {
     deleteMany?: CollectionScalarWhereInput | CollectionScalarWhereInput[]
   }
 
-  export type ReservationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ReservationCreateWithoutUserInput, ReservationUncheckedCreateWithoutUserInput> | ReservationCreateWithoutUserInput[] | ReservationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutUserInput | ReservationCreateOrConnectWithoutUserInput[]
-    upsert?: ReservationUpsertWithWhereUniqueWithoutUserInput | ReservationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ReservationCreateManyUserInputEnvelope
-    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    update?: ReservationUpdateWithWhereUniqueWithoutUserInput | ReservationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ReservationUpdateManyWithWhereWithoutUserInput | ReservationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-  }
-
   export type EmpruntUpdateManyWithoutUserNestedInput = {
     create?: XOR<EmpruntCreateWithoutUserInput, EmpruntUncheckedCreateWithoutUserInput> | EmpruntCreateWithoutUserInput[] | EmpruntUncheckedCreateWithoutUserInput[]
     connectOrCreate?: EmpruntCreateOrConnectWithoutUserInput | EmpruntCreateOrConnectWithoutUserInput[]
@@ -42941,60 +42439,44 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
-  export type EtudiantUpdateManyWithoutUserNestedInput = {
-    create?: XOR<EtudiantCreateWithoutUserInput, EtudiantUncheckedCreateWithoutUserInput> | EtudiantCreateWithoutUserInput[] | EtudiantUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EtudiantCreateOrConnectWithoutUserInput | EtudiantCreateOrConnectWithoutUserInput[]
-    upsert?: EtudiantUpsertWithWhereUniqueWithoutUserInput | EtudiantUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: EtudiantCreateManyUserInputEnvelope
-    set?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
-    disconnect?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
-    delete?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
-    connect?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
-    update?: EtudiantUpdateWithWhereUniqueWithoutUserInput | EtudiantUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: EtudiantUpdateManyWithWhereWithoutUserInput | EtudiantUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: EtudiantScalarWhereInput | EtudiantScalarWhereInput[]
+  export type EtudiantUpdateOneWithoutUserNestedInput = {
+    create?: XOR<EtudiantCreateWithoutUserInput, EtudiantUncheckedCreateWithoutUserInput>
+    connectOrCreate?: EtudiantCreateOrConnectWithoutUserInput
+    upsert?: EtudiantUpsertWithoutUserInput
+    disconnect?: EtudiantWhereInput | boolean
+    delete?: EtudiantWhereInput | boolean
+    connect?: EtudiantWhereUniqueInput
+    update?: XOR<XOR<EtudiantUpdateToOneWithWhereWithoutUserInput, EtudiantUpdateWithoutUserInput>, EtudiantUncheckedUpdateWithoutUserInput>
   }
 
-  export type EnseignantUpdateManyWithoutUserNestedInput = {
-    create?: XOR<EnseignantCreateWithoutUserInput, EnseignantUncheckedCreateWithoutUserInput> | EnseignantCreateWithoutUserInput[] | EnseignantUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EnseignantCreateOrConnectWithoutUserInput | EnseignantCreateOrConnectWithoutUserInput[]
-    upsert?: EnseignantUpsertWithWhereUniqueWithoutUserInput | EnseignantUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: EnseignantCreateManyUserInputEnvelope
-    set?: EnseignantWhereUniqueInput | EnseignantWhereUniqueInput[]
-    disconnect?: EnseignantWhereUniqueInput | EnseignantWhereUniqueInput[]
-    delete?: EnseignantWhereUniqueInput | EnseignantWhereUniqueInput[]
-    connect?: EnseignantWhereUniqueInput | EnseignantWhereUniqueInput[]
-    update?: EnseignantUpdateWithWhereUniqueWithoutUserInput | EnseignantUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: EnseignantUpdateManyWithWhereWithoutUserInput | EnseignantUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: EnseignantScalarWhereInput | EnseignantScalarWhereInput[]
+  export type EnseignantUpdateOneWithoutUserNestedInput = {
+    create?: XOR<EnseignantCreateWithoutUserInput, EnseignantUncheckedCreateWithoutUserInput>
+    connectOrCreate?: EnseignantCreateOrConnectWithoutUserInput
+    upsert?: EnseignantUpsertWithoutUserInput
+    disconnect?: EnseignantWhereInput | boolean
+    delete?: EnseignantWhereInput | boolean
+    connect?: EnseignantWhereUniqueInput
+    update?: XOR<XOR<EnseignantUpdateToOneWithWhereWithoutUserInput, EnseignantUpdateWithoutUserInput>, EnseignantUncheckedUpdateWithoutUserInput>
   }
 
-  export type BibliothecaireUpdateManyWithoutUserNestedInput = {
-    create?: XOR<BibliothecaireCreateWithoutUserInput, BibliothecaireUncheckedCreateWithoutUserInput> | BibliothecaireCreateWithoutUserInput[] | BibliothecaireUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BibliothecaireCreateOrConnectWithoutUserInput | BibliothecaireCreateOrConnectWithoutUserInput[]
-    upsert?: BibliothecaireUpsertWithWhereUniqueWithoutUserInput | BibliothecaireUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: BibliothecaireCreateManyUserInputEnvelope
-    set?: BibliothecaireWhereUniqueInput | BibliothecaireWhereUniqueInput[]
-    disconnect?: BibliothecaireWhereUniqueInput | BibliothecaireWhereUniqueInput[]
-    delete?: BibliothecaireWhereUniqueInput | BibliothecaireWhereUniqueInput[]
-    connect?: BibliothecaireWhereUniqueInput | BibliothecaireWhereUniqueInput[]
-    update?: BibliothecaireUpdateWithWhereUniqueWithoutUserInput | BibliothecaireUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: BibliothecaireUpdateManyWithWhereWithoutUserInput | BibliothecaireUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: BibliothecaireScalarWhereInput | BibliothecaireScalarWhereInput[]
+  export type BibliothecaireUpdateOneWithoutUserNestedInput = {
+    create?: XOR<BibliothecaireCreateWithoutUserInput, BibliothecaireUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BibliothecaireCreateOrConnectWithoutUserInput
+    upsert?: BibliothecaireUpsertWithoutUserInput
+    disconnect?: BibliothecaireWhereInput | boolean
+    delete?: BibliothecaireWhereInput | boolean
+    connect?: BibliothecaireWhereUniqueInput
+    update?: XOR<XOR<BibliothecaireUpdateToOneWithWhereWithoutUserInput, BibliothecaireUpdateWithoutUserInput>, BibliothecaireUncheckedUpdateWithoutUserInput>
   }
 
-  export type AdministrateurUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AdministrateurCreateWithoutUserInput, AdministrateurUncheckedCreateWithoutUserInput> | AdministrateurCreateWithoutUserInput[] | AdministrateurUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AdministrateurCreateOrConnectWithoutUserInput | AdministrateurCreateOrConnectWithoutUserInput[]
-    upsert?: AdministrateurUpsertWithWhereUniqueWithoutUserInput | AdministrateurUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AdministrateurCreateManyUserInputEnvelope
-    set?: AdministrateurWhereUniqueInput | AdministrateurWhereUniqueInput[]
-    disconnect?: AdministrateurWhereUniqueInput | AdministrateurWhereUniqueInput[]
-    delete?: AdministrateurWhereUniqueInput | AdministrateurWhereUniqueInput[]
-    connect?: AdministrateurWhereUniqueInput | AdministrateurWhereUniqueInput[]
-    update?: AdministrateurUpdateWithWhereUniqueWithoutUserInput | AdministrateurUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AdministrateurUpdateManyWithWhereWithoutUserInput | AdministrateurUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AdministrateurScalarWhereInput | AdministrateurScalarWhereInput[]
+  export type AdministrateurUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AdministrateurCreateWithoutUserInput, AdministrateurUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AdministrateurCreateOrConnectWithoutUserInput
+    upsert?: AdministrateurUpsertWithoutUserInput
+    disconnect?: AdministrateurWhereInput | boolean
+    delete?: AdministrateurWhereInput | boolean
+    connect?: AdministrateurWhereUniqueInput
+    update?: XOR<XOR<AdministrateurUpdateToOneWithWhereWithoutUserInput, AdministrateurUpdateWithoutUserInput>, AdministrateurUncheckedUpdateWithoutUserInput>
   }
 
   export type SanctionUtilisateurUpdateManyWithoutUserNestedInput = {
@@ -43095,20 +42577,6 @@ export namespace Prisma {
     deleteMany?: CollectionScalarWhereInput | CollectionScalarWhereInput[]
   }
 
-  export type ReservationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ReservationCreateWithoutUserInput, ReservationUncheckedCreateWithoutUserInput> | ReservationCreateWithoutUserInput[] | ReservationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutUserInput | ReservationCreateOrConnectWithoutUserInput[]
-    upsert?: ReservationUpsertWithWhereUniqueWithoutUserInput | ReservationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ReservationCreateManyUserInputEnvelope
-    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    update?: ReservationUpdateWithWhereUniqueWithoutUserInput | ReservationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ReservationUpdateManyWithWhereWithoutUserInput | ReservationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-  }
-
   export type EmpruntUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<EmpruntCreateWithoutUserInput, EmpruntUncheckedCreateWithoutUserInput> | EmpruntCreateWithoutUserInput[] | EmpruntUncheckedCreateWithoutUserInput[]
     connectOrCreate?: EmpruntCreateOrConnectWithoutUserInput | EmpruntCreateOrConnectWithoutUserInput[]
@@ -43179,60 +42647,44 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
-  export type EtudiantUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<EtudiantCreateWithoutUserInput, EtudiantUncheckedCreateWithoutUserInput> | EtudiantCreateWithoutUserInput[] | EtudiantUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EtudiantCreateOrConnectWithoutUserInput | EtudiantCreateOrConnectWithoutUserInput[]
-    upsert?: EtudiantUpsertWithWhereUniqueWithoutUserInput | EtudiantUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: EtudiantCreateManyUserInputEnvelope
-    set?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
-    disconnect?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
-    delete?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
-    connect?: EtudiantWhereUniqueInput | EtudiantWhereUniqueInput[]
-    update?: EtudiantUpdateWithWhereUniqueWithoutUserInput | EtudiantUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: EtudiantUpdateManyWithWhereWithoutUserInput | EtudiantUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: EtudiantScalarWhereInput | EtudiantScalarWhereInput[]
+  export type EtudiantUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<EtudiantCreateWithoutUserInput, EtudiantUncheckedCreateWithoutUserInput>
+    connectOrCreate?: EtudiantCreateOrConnectWithoutUserInput
+    upsert?: EtudiantUpsertWithoutUserInput
+    disconnect?: EtudiantWhereInput | boolean
+    delete?: EtudiantWhereInput | boolean
+    connect?: EtudiantWhereUniqueInput
+    update?: XOR<XOR<EtudiantUpdateToOneWithWhereWithoutUserInput, EtudiantUpdateWithoutUserInput>, EtudiantUncheckedUpdateWithoutUserInput>
   }
 
-  export type EnseignantUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<EnseignantCreateWithoutUserInput, EnseignantUncheckedCreateWithoutUserInput> | EnseignantCreateWithoutUserInput[] | EnseignantUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EnseignantCreateOrConnectWithoutUserInput | EnseignantCreateOrConnectWithoutUserInput[]
-    upsert?: EnseignantUpsertWithWhereUniqueWithoutUserInput | EnseignantUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: EnseignantCreateManyUserInputEnvelope
-    set?: EnseignantWhereUniqueInput | EnseignantWhereUniqueInput[]
-    disconnect?: EnseignantWhereUniqueInput | EnseignantWhereUniqueInput[]
-    delete?: EnseignantWhereUniqueInput | EnseignantWhereUniqueInput[]
-    connect?: EnseignantWhereUniqueInput | EnseignantWhereUniqueInput[]
-    update?: EnseignantUpdateWithWhereUniqueWithoutUserInput | EnseignantUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: EnseignantUpdateManyWithWhereWithoutUserInput | EnseignantUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: EnseignantScalarWhereInput | EnseignantScalarWhereInput[]
+  export type EnseignantUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<EnseignantCreateWithoutUserInput, EnseignantUncheckedCreateWithoutUserInput>
+    connectOrCreate?: EnseignantCreateOrConnectWithoutUserInput
+    upsert?: EnseignantUpsertWithoutUserInput
+    disconnect?: EnseignantWhereInput | boolean
+    delete?: EnseignantWhereInput | boolean
+    connect?: EnseignantWhereUniqueInput
+    update?: XOR<XOR<EnseignantUpdateToOneWithWhereWithoutUserInput, EnseignantUpdateWithoutUserInput>, EnseignantUncheckedUpdateWithoutUserInput>
   }
 
-  export type BibliothecaireUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<BibliothecaireCreateWithoutUserInput, BibliothecaireUncheckedCreateWithoutUserInput> | BibliothecaireCreateWithoutUserInput[] | BibliothecaireUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BibliothecaireCreateOrConnectWithoutUserInput | BibliothecaireCreateOrConnectWithoutUserInput[]
-    upsert?: BibliothecaireUpsertWithWhereUniqueWithoutUserInput | BibliothecaireUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: BibliothecaireCreateManyUserInputEnvelope
-    set?: BibliothecaireWhereUniqueInput | BibliothecaireWhereUniqueInput[]
-    disconnect?: BibliothecaireWhereUniqueInput | BibliothecaireWhereUniqueInput[]
-    delete?: BibliothecaireWhereUniqueInput | BibliothecaireWhereUniqueInput[]
-    connect?: BibliothecaireWhereUniqueInput | BibliothecaireWhereUniqueInput[]
-    update?: BibliothecaireUpdateWithWhereUniqueWithoutUserInput | BibliothecaireUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: BibliothecaireUpdateManyWithWhereWithoutUserInput | BibliothecaireUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: BibliothecaireScalarWhereInput | BibliothecaireScalarWhereInput[]
+  export type BibliothecaireUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<BibliothecaireCreateWithoutUserInput, BibliothecaireUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BibliothecaireCreateOrConnectWithoutUserInput
+    upsert?: BibliothecaireUpsertWithoutUserInput
+    disconnect?: BibliothecaireWhereInput | boolean
+    delete?: BibliothecaireWhereInput | boolean
+    connect?: BibliothecaireWhereUniqueInput
+    update?: XOR<XOR<BibliothecaireUpdateToOneWithWhereWithoutUserInput, BibliothecaireUpdateWithoutUserInput>, BibliothecaireUncheckedUpdateWithoutUserInput>
   }
 
-  export type AdministrateurUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AdministrateurCreateWithoutUserInput, AdministrateurUncheckedCreateWithoutUserInput> | AdministrateurCreateWithoutUserInput[] | AdministrateurUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AdministrateurCreateOrConnectWithoutUserInput | AdministrateurCreateOrConnectWithoutUserInput[]
-    upsert?: AdministrateurUpsertWithWhereUniqueWithoutUserInput | AdministrateurUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AdministrateurCreateManyUserInputEnvelope
-    set?: AdministrateurWhereUniqueInput | AdministrateurWhereUniqueInput[]
-    disconnect?: AdministrateurWhereUniqueInput | AdministrateurWhereUniqueInput[]
-    delete?: AdministrateurWhereUniqueInput | AdministrateurWhereUniqueInput[]
-    connect?: AdministrateurWhereUniqueInput | AdministrateurWhereUniqueInput[]
-    update?: AdministrateurUpdateWithWhereUniqueWithoutUserInput | AdministrateurUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AdministrateurUpdateManyWithWhereWithoutUserInput | AdministrateurUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AdministrateurScalarWhereInput | AdministrateurScalarWhereInput[]
+  export type AdministrateurUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AdministrateurCreateWithoutUserInput, AdministrateurUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AdministrateurCreateOrConnectWithoutUserInput
+    upsert?: AdministrateurUpsertWithoutUserInput
+    disconnect?: AdministrateurWhereInput | boolean
+    delete?: AdministrateurWhereInput | boolean
+    connect?: AdministrateurWhereUniqueInput
+    update?: XOR<XOR<AdministrateurUpdateToOneWithWhereWithoutUserInput, AdministrateurUpdateWithoutUserInput>, AdministrateurUncheckedUpdateWithoutUserInput>
   }
 
   export type SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput = {
@@ -43249,9 +42701,9 @@ export namespace Prisma {
     deleteMany?: SanctionUtilisateurScalarWhereInput | SanctionUtilisateurScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutEtudiantsInput = {
-    create?: XOR<UserCreateWithoutEtudiantsInput, UserUncheckedCreateWithoutEtudiantsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutEtudiantsInput
+  export type UserCreateNestedOneWithoutEtudiantInput = {
+    create?: XOR<UserCreateWithoutEtudiantInput, UserUncheckedCreateWithoutEtudiantInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEtudiantInput
     connect?: UserWhereUniqueInput
   }
 
@@ -43261,12 +42713,12 @@ export namespace Prisma {
     connect?: FiliereWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutEtudiantsNestedInput = {
-    create?: XOR<UserCreateWithoutEtudiantsInput, UserUncheckedCreateWithoutEtudiantsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutEtudiantsInput
-    upsert?: UserUpsertWithoutEtudiantsInput
+  export type UserUpdateOneRequiredWithoutEtudiantNestedInput = {
+    create?: XOR<UserCreateWithoutEtudiantInput, UserUncheckedCreateWithoutEtudiantInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEtudiantInput
+    upsert?: UserUpsertWithoutEtudiantInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEtudiantsInput, UserUpdateWithoutEtudiantsInput>, UserUncheckedUpdateWithoutEtudiantsInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEtudiantInput, UserUpdateWithoutEtudiantInput>, UserUncheckedUpdateWithoutEtudiantInput>
   }
 
   export type FiliereUpdateOneRequiredWithoutEtudiantsNestedInput = {
@@ -43277,94 +42729,46 @@ export namespace Prisma {
     update?: XOR<XOR<FiliereUpdateToOneWithWhereWithoutEtudiantsInput, FiliereUpdateWithoutEtudiantsInput>, FiliereUncheckedUpdateWithoutEtudiantsInput>
   }
 
-  export type UserCreateNestedOneWithoutEnseignantsInput = {
-    create?: XOR<UserCreateWithoutEnseignantsInput, UserUncheckedCreateWithoutEnseignantsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutEnseignantsInput
+  export type UserCreateNestedOneWithoutEnseignantInput = {
+    create?: XOR<UserCreateWithoutEnseignantInput, UserUncheckedCreateWithoutEnseignantInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEnseignantInput
     connect?: UserWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutEnseignantsNestedInput = {
-    create?: XOR<UserCreateWithoutEnseignantsInput, UserUncheckedCreateWithoutEnseignantsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutEnseignantsInput
-    upsert?: UserUpsertWithoutEnseignantsInput
+  export type UserUpdateOneRequiredWithoutEnseignantNestedInput = {
+    create?: XOR<UserCreateWithoutEnseignantInput, UserUncheckedCreateWithoutEnseignantInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEnseignantInput
+    upsert?: UserUpsertWithoutEnseignantInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEnseignantsInput, UserUpdateWithoutEnseignantsInput>, UserUncheckedUpdateWithoutEnseignantsInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEnseignantInput, UserUpdateWithoutEnseignantInput>, UserUncheckedUpdateWithoutEnseignantInput>
   }
 
-  export type UserCreateNestedOneWithoutBibliothecairesInput = {
-    create?: XOR<UserCreateWithoutBibliothecairesInput, UserUncheckedCreateWithoutBibliothecairesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutBibliothecairesInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type ReservationCreateNestedManyWithoutValideurInput = {
-    create?: XOR<ReservationCreateWithoutValideurInput, ReservationUncheckedCreateWithoutValideurInput> | ReservationCreateWithoutValideurInput[] | ReservationUncheckedCreateWithoutValideurInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutValideurInput | ReservationCreateOrConnectWithoutValideurInput[]
-    createMany?: ReservationCreateManyValideurInputEnvelope
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-  }
-
-  export type ReservationUncheckedCreateNestedManyWithoutValideurInput = {
-    create?: XOR<ReservationCreateWithoutValideurInput, ReservationUncheckedCreateWithoutValideurInput> | ReservationCreateWithoutValideurInput[] | ReservationUncheckedCreateWithoutValideurInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutValideurInput | ReservationCreateOrConnectWithoutValideurInput[]
-    createMany?: ReservationCreateManyValideurInputEnvelope
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-  }
-
-  export type UserUpdateOneRequiredWithoutBibliothecairesNestedInput = {
-    create?: XOR<UserCreateWithoutBibliothecairesInput, UserUncheckedCreateWithoutBibliothecairesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutBibliothecairesInput
-    upsert?: UserUpsertWithoutBibliothecairesInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBibliothecairesInput, UserUpdateWithoutBibliothecairesInput>, UserUncheckedUpdateWithoutBibliothecairesInput>
-  }
-
-  export type ReservationUpdateManyWithoutValideurNestedInput = {
-    create?: XOR<ReservationCreateWithoutValideurInput, ReservationUncheckedCreateWithoutValideurInput> | ReservationCreateWithoutValideurInput[] | ReservationUncheckedCreateWithoutValideurInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutValideurInput | ReservationCreateOrConnectWithoutValideurInput[]
-    upsert?: ReservationUpsertWithWhereUniqueWithoutValideurInput | ReservationUpsertWithWhereUniqueWithoutValideurInput[]
-    createMany?: ReservationCreateManyValideurInputEnvelope
-    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    update?: ReservationUpdateWithWhereUniqueWithoutValideurInput | ReservationUpdateWithWhereUniqueWithoutValideurInput[]
-    updateMany?: ReservationUpdateManyWithWhereWithoutValideurInput | ReservationUpdateManyWithWhereWithoutValideurInput[]
-    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-  }
-
-  export type ReservationUncheckedUpdateManyWithoutValideurNestedInput = {
-    create?: XOR<ReservationCreateWithoutValideurInput, ReservationUncheckedCreateWithoutValideurInput> | ReservationCreateWithoutValideurInput[] | ReservationUncheckedCreateWithoutValideurInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutValideurInput | ReservationCreateOrConnectWithoutValideurInput[]
-    upsert?: ReservationUpsertWithWhereUniqueWithoutValideurInput | ReservationUpsertWithWhereUniqueWithoutValideurInput[]
-    createMany?: ReservationCreateManyValideurInputEnvelope
-    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    update?: ReservationUpdateWithWhereUniqueWithoutValideurInput | ReservationUpdateWithWhereUniqueWithoutValideurInput[]
-    updateMany?: ReservationUpdateManyWithWhereWithoutValideurInput | ReservationUpdateManyWithWhereWithoutValideurInput[]
-    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-  }
-
-  export type UserCreateNestedOneWithoutAdministrateursInput = {
-    create?: XOR<UserCreateWithoutAdministrateursInput, UserUncheckedCreateWithoutAdministrateursInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAdministrateursInput
+  export type UserCreateNestedOneWithoutBibliothecaireInput = {
+    create?: XOR<UserCreateWithoutBibliothecaireInput, UserUncheckedCreateWithoutBibliothecaireInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBibliothecaireInput
     connect?: UserWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutAdministrateursNestedInput = {
-    create?: XOR<UserCreateWithoutAdministrateursInput, UserUncheckedCreateWithoutAdministrateursInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAdministrateursInput
-    upsert?: UserUpsertWithoutAdministrateursInput
+  export type UserUpdateOneRequiredWithoutBibliothecaireNestedInput = {
+    create?: XOR<UserCreateWithoutBibliothecaireInput, UserUncheckedCreateWithoutBibliothecaireInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBibliothecaireInput
+    upsert?: UserUpsertWithoutBibliothecaireInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdministrateursInput, UserUpdateWithoutAdministrateursInput>, UserUncheckedUpdateWithoutAdministrateursInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBibliothecaireInput, UserUpdateWithoutBibliothecaireInput>, UserUncheckedUpdateWithoutBibliothecaireInput>
   }
 
-  export type UserCreateNestedOneWithoutFavorisInput = {
-    create?: XOR<UserCreateWithoutFavorisInput, UserUncheckedCreateWithoutFavorisInput>
-    connectOrCreate?: UserCreateOrConnectWithoutFavorisInput
+  export type UserCreateNestedOneWithoutAdministrateurInput = {
+    create?: XOR<UserCreateWithoutAdministrateurInput, UserUncheckedCreateWithoutAdministrateurInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdministrateurInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAdministrateurNestedInput = {
+    create?: XOR<UserCreateWithoutAdministrateurInput, UserUncheckedCreateWithoutAdministrateurInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdministrateurInput
+    upsert?: UserUpsertWithoutAdministrateurInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdministrateurInput, UserUpdateWithoutAdministrateurInput>, UserUncheckedUpdateWithoutAdministrateurInput>
   }
 
   export type RessourceCreateNestedOneWithoutFavorisInput = {
@@ -43373,20 +42777,30 @@ export namespace Prisma {
     connect?: RessourceWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutFavorisNestedInput = {
+  export type UserCreateNestedOneWithoutFavorisInput = {
     create?: XOR<UserCreateWithoutFavorisInput, UserUncheckedCreateWithoutFavorisInput>
     connectOrCreate?: UserCreateOrConnectWithoutFavorisInput
-    upsert?: UserUpsertWithoutFavorisInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFavorisInput, UserUpdateWithoutFavorisInput>, UserUncheckedUpdateWithoutFavorisInput>
   }
 
-  export type RessourceUpdateOneRequiredWithoutFavorisNestedInput = {
+  export type RessourceUpdateOneWithoutFavorisNestedInput = {
     create?: XOR<RessourceCreateWithoutFavorisInput, RessourceUncheckedCreateWithoutFavorisInput>
     connectOrCreate?: RessourceCreateOrConnectWithoutFavorisInput
     upsert?: RessourceUpsertWithoutFavorisInput
+    disconnect?: RessourceWhereInput | boolean
+    delete?: RessourceWhereInput | boolean
     connect?: RessourceWhereUniqueInput
     update?: XOR<XOR<RessourceUpdateToOneWithWhereWithoutFavorisInput, RessourceUpdateWithoutFavorisInput>, RessourceUncheckedUpdateWithoutFavorisInput>
+  }
+
+  export type UserUpdateOneWithoutFavorisNestedInput = {
+    create?: XOR<UserCreateWithoutFavorisInput, UserUncheckedCreateWithoutFavorisInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFavorisInput
+    upsert?: UserUpsertWithoutFavorisInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFavorisInput, UserUpdateWithoutFavorisInput>, UserUncheckedUpdateWithoutFavorisInput>
   }
 
   export type UserCreateNestedOneWithoutCommentairesInput = {
@@ -43429,10 +42843,12 @@ export namespace Prisma {
     connect?: RessourceWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutNotationsNestedInput = {
+  export type UserUpdateOneWithoutNotationsNestedInput = {
     create?: XOR<UserCreateWithoutNotationsInput, UserUncheckedCreateWithoutNotationsInput>
     connectOrCreate?: UserCreateOrConnectWithoutNotationsInput
     upsert?: UserUpsertWithoutNotationsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotationsInput, UserUpdateWithoutNotationsInput>, UserUncheckedUpdateWithoutNotationsInput>
   }
@@ -43469,10 +42885,12 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutHistoriquesInput, UserUpdateWithoutHistoriquesInput>, UserUncheckedUpdateWithoutHistoriquesInput>
   }
 
-  export type RessourceUpdateOneRequiredWithoutHistoriquesNestedInput = {
+  export type RessourceUpdateOneWithoutHistoriquesNestedInput = {
     create?: XOR<RessourceCreateWithoutHistoriquesInput, RessourceUncheckedCreateWithoutHistoriquesInput>
     connectOrCreate?: RessourceCreateOrConnectWithoutHistoriquesInput
     upsert?: RessourceUpsertWithoutHistoriquesInput
+    disconnect?: RessourceWhereInput | boolean
+    delete?: RessourceWhereInput | boolean
     connect?: RessourceWhereUniqueInput
     update?: XOR<XOR<RessourceUpdateToOneWithWhereWithoutHistoriquesInput, RessourceUpdateWithoutHistoriquesInput>, RessourceUncheckedUpdateWithoutHistoriquesInput>
   }
@@ -43634,18 +43052,10 @@ export namespace Prisma {
     connect?: CollectionRessourceWhereUniqueInput | CollectionRessourceWhereUniqueInput[]
   }
 
-  export type ExemplairePhysiqueCreateNestedManyWithoutRessourceInput = {
-    create?: XOR<ExemplairePhysiqueCreateWithoutRessourceInput, ExemplairePhysiqueUncheckedCreateWithoutRessourceInput> | ExemplairePhysiqueCreateWithoutRessourceInput[] | ExemplairePhysiqueUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: ExemplairePhysiqueCreateOrConnectWithoutRessourceInput | ExemplairePhysiqueCreateOrConnectWithoutRessourceInput[]
-    createMany?: ExemplairePhysiqueCreateManyRessourceInputEnvelope
-    connect?: ExemplairePhysiqueWhereUniqueInput | ExemplairePhysiqueWhereUniqueInput[]
-  }
-
-  export type ReservationCreateNestedManyWithoutRessourceInput = {
-    create?: XOR<ReservationCreateWithoutRessourceInput, ReservationUncheckedCreateWithoutRessourceInput> | ReservationCreateWithoutRessourceInput[] | ReservationUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutRessourceInput | ReservationCreateOrConnectWithoutRessourceInput[]
-    createMany?: ReservationCreateManyRessourceInputEnvelope
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  export type ExemplairePhysiqueCreateNestedOneWithoutRessourceInput = {
+    create?: XOR<ExemplairePhysiqueCreateWithoutRessourceInput, ExemplairePhysiqueUncheckedCreateWithoutRessourceInput>
+    connectOrCreate?: ExemplairePhysiqueCreateOrConnectWithoutRessourceInput
+    connect?: ExemplairePhysiqueWhereUniqueInput
   }
 
   export type RecommandationCreateNestedManyWithoutRessourceInput = {
@@ -43703,18 +43113,10 @@ export namespace Prisma {
     connect?: CollectionRessourceWhereUniqueInput | CollectionRessourceWhereUniqueInput[]
   }
 
-  export type ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput = {
-    create?: XOR<ExemplairePhysiqueCreateWithoutRessourceInput, ExemplairePhysiqueUncheckedCreateWithoutRessourceInput> | ExemplairePhysiqueCreateWithoutRessourceInput[] | ExemplairePhysiqueUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: ExemplairePhysiqueCreateOrConnectWithoutRessourceInput | ExemplairePhysiqueCreateOrConnectWithoutRessourceInput[]
-    createMany?: ExemplairePhysiqueCreateManyRessourceInputEnvelope
-    connect?: ExemplairePhysiqueWhereUniqueInput | ExemplairePhysiqueWhereUniqueInput[]
-  }
-
-  export type ReservationUncheckedCreateNestedManyWithoutRessourceInput = {
-    create?: XOR<ReservationCreateWithoutRessourceInput, ReservationUncheckedCreateWithoutRessourceInput> | ReservationCreateWithoutRessourceInput[] | ReservationUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutRessourceInput | ReservationCreateOrConnectWithoutRessourceInput[]
-    createMany?: ReservationCreateManyRessourceInputEnvelope
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  export type ExemplairePhysiqueUncheckedCreateNestedOneWithoutRessourceInput = {
+    create?: XOR<ExemplairePhysiqueCreateWithoutRessourceInput, ExemplairePhysiqueUncheckedCreateWithoutRessourceInput>
+    connectOrCreate?: ExemplairePhysiqueCreateOrConnectWithoutRessourceInput
+    connect?: ExemplairePhysiqueWhereUniqueInput
   }
 
   export type RecommandationUncheckedCreateNestedManyWithoutRessourceInput = {
@@ -43735,10 +43137,12 @@ export namespace Prisma {
     set?: $Enums.NiveauAcces
   }
 
-  export type UserUpdateOneRequiredWithoutContributionsNestedInput = {
+  export type UserUpdateOneWithoutContributionsNestedInput = {
     create?: XOR<UserCreateWithoutContributionsInput, UserUncheckedCreateWithoutContributionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutContributionsInput
     upsert?: UserUpsertWithoutContributionsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContributionsInput, UserUpdateWithoutContributionsInput>, UserUncheckedUpdateWithoutContributionsInput>
   }
@@ -43813,32 +43217,14 @@ export namespace Prisma {
     deleteMany?: CollectionRessourceScalarWhereInput | CollectionRessourceScalarWhereInput[]
   }
 
-  export type ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput = {
-    create?: XOR<ExemplairePhysiqueCreateWithoutRessourceInput, ExemplairePhysiqueUncheckedCreateWithoutRessourceInput> | ExemplairePhysiqueCreateWithoutRessourceInput[] | ExemplairePhysiqueUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: ExemplairePhysiqueCreateOrConnectWithoutRessourceInput | ExemplairePhysiqueCreateOrConnectWithoutRessourceInput[]
-    upsert?: ExemplairePhysiqueUpsertWithWhereUniqueWithoutRessourceInput | ExemplairePhysiqueUpsertWithWhereUniqueWithoutRessourceInput[]
-    createMany?: ExemplairePhysiqueCreateManyRessourceInputEnvelope
-    set?: ExemplairePhysiqueWhereUniqueInput | ExemplairePhysiqueWhereUniqueInput[]
-    disconnect?: ExemplairePhysiqueWhereUniqueInput | ExemplairePhysiqueWhereUniqueInput[]
-    delete?: ExemplairePhysiqueWhereUniqueInput | ExemplairePhysiqueWhereUniqueInput[]
-    connect?: ExemplairePhysiqueWhereUniqueInput | ExemplairePhysiqueWhereUniqueInput[]
-    update?: ExemplairePhysiqueUpdateWithWhereUniqueWithoutRessourceInput | ExemplairePhysiqueUpdateWithWhereUniqueWithoutRessourceInput[]
-    updateMany?: ExemplairePhysiqueUpdateManyWithWhereWithoutRessourceInput | ExemplairePhysiqueUpdateManyWithWhereWithoutRessourceInput[]
-    deleteMany?: ExemplairePhysiqueScalarWhereInput | ExemplairePhysiqueScalarWhereInput[]
-  }
-
-  export type ReservationUpdateManyWithoutRessourceNestedInput = {
-    create?: XOR<ReservationCreateWithoutRessourceInput, ReservationUncheckedCreateWithoutRessourceInput> | ReservationCreateWithoutRessourceInput[] | ReservationUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutRessourceInput | ReservationCreateOrConnectWithoutRessourceInput[]
-    upsert?: ReservationUpsertWithWhereUniqueWithoutRessourceInput | ReservationUpsertWithWhereUniqueWithoutRessourceInput[]
-    createMany?: ReservationCreateManyRessourceInputEnvelope
-    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    update?: ReservationUpdateWithWhereUniqueWithoutRessourceInput | ReservationUpdateWithWhereUniqueWithoutRessourceInput[]
-    updateMany?: ReservationUpdateManyWithWhereWithoutRessourceInput | ReservationUpdateManyWithWhereWithoutRessourceInput[]
-    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  export type ExemplairePhysiqueUpdateOneWithoutRessourceNestedInput = {
+    create?: XOR<ExemplairePhysiqueCreateWithoutRessourceInput, ExemplairePhysiqueUncheckedCreateWithoutRessourceInput>
+    connectOrCreate?: ExemplairePhysiqueCreateOrConnectWithoutRessourceInput
+    upsert?: ExemplairePhysiqueUpsertWithoutRessourceInput
+    disconnect?: ExemplairePhysiqueWhereInput | boolean
+    delete?: ExemplairePhysiqueWhereInput | boolean
+    connect?: ExemplairePhysiqueWhereUniqueInput
+    update?: XOR<XOR<ExemplairePhysiqueUpdateToOneWithWhereWithoutRessourceInput, ExemplairePhysiqueUpdateWithoutRessourceInput>, ExemplairePhysiqueUncheckedUpdateWithoutRessourceInput>
   }
 
   export type RecommandationUpdateManyWithoutRessourceNestedInput = {
@@ -43949,32 +43335,14 @@ export namespace Prisma {
     deleteMany?: CollectionRessourceScalarWhereInput | CollectionRessourceScalarWhereInput[]
   }
 
-  export type ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput = {
-    create?: XOR<ExemplairePhysiqueCreateWithoutRessourceInput, ExemplairePhysiqueUncheckedCreateWithoutRessourceInput> | ExemplairePhysiqueCreateWithoutRessourceInput[] | ExemplairePhysiqueUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: ExemplairePhysiqueCreateOrConnectWithoutRessourceInput | ExemplairePhysiqueCreateOrConnectWithoutRessourceInput[]
-    upsert?: ExemplairePhysiqueUpsertWithWhereUniqueWithoutRessourceInput | ExemplairePhysiqueUpsertWithWhereUniqueWithoutRessourceInput[]
-    createMany?: ExemplairePhysiqueCreateManyRessourceInputEnvelope
-    set?: ExemplairePhysiqueWhereUniqueInput | ExemplairePhysiqueWhereUniqueInput[]
-    disconnect?: ExemplairePhysiqueWhereUniqueInput | ExemplairePhysiqueWhereUniqueInput[]
-    delete?: ExemplairePhysiqueWhereUniqueInput | ExemplairePhysiqueWhereUniqueInput[]
-    connect?: ExemplairePhysiqueWhereUniqueInput | ExemplairePhysiqueWhereUniqueInput[]
-    update?: ExemplairePhysiqueUpdateWithWhereUniqueWithoutRessourceInput | ExemplairePhysiqueUpdateWithWhereUniqueWithoutRessourceInput[]
-    updateMany?: ExemplairePhysiqueUpdateManyWithWhereWithoutRessourceInput | ExemplairePhysiqueUpdateManyWithWhereWithoutRessourceInput[]
-    deleteMany?: ExemplairePhysiqueScalarWhereInput | ExemplairePhysiqueScalarWhereInput[]
-  }
-
-  export type ReservationUncheckedUpdateManyWithoutRessourceNestedInput = {
-    create?: XOR<ReservationCreateWithoutRessourceInput, ReservationUncheckedCreateWithoutRessourceInput> | ReservationCreateWithoutRessourceInput[] | ReservationUncheckedCreateWithoutRessourceInput[]
-    connectOrCreate?: ReservationCreateOrConnectWithoutRessourceInput | ReservationCreateOrConnectWithoutRessourceInput[]
-    upsert?: ReservationUpsertWithWhereUniqueWithoutRessourceInput | ReservationUpsertWithWhereUniqueWithoutRessourceInput[]
-    createMany?: ReservationCreateManyRessourceInputEnvelope
-    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-    update?: ReservationUpdateWithWhereUniqueWithoutRessourceInput | ReservationUpdateWithWhereUniqueWithoutRessourceInput[]
-    updateMany?: ReservationUpdateManyWithWhereWithoutRessourceInput | ReservationUpdateManyWithWhereWithoutRessourceInput[]
-    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  export type ExemplairePhysiqueUncheckedUpdateOneWithoutRessourceNestedInput = {
+    create?: XOR<ExemplairePhysiqueCreateWithoutRessourceInput, ExemplairePhysiqueUncheckedCreateWithoutRessourceInput>
+    connectOrCreate?: ExemplairePhysiqueCreateOrConnectWithoutRessourceInput
+    upsert?: ExemplairePhysiqueUpsertWithoutRessourceInput
+    disconnect?: ExemplairePhysiqueWhereInput | boolean
+    delete?: ExemplairePhysiqueWhereInput | boolean
+    connect?: ExemplairePhysiqueWhereUniqueInput
+    update?: XOR<XOR<ExemplairePhysiqueUpdateToOneWithWhereWithoutRessourceInput, ExemplairePhysiqueUpdateWithoutRessourceInput>, ExemplairePhysiqueUncheckedUpdateWithoutRessourceInput>
   }
 
   export type RecommandationUncheckedUpdateManyWithoutRessourceNestedInput = {
@@ -44330,23 +43698,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTypeSanctionFilter<$PrismaModel>
     _max?: NestedEnumTypeSanctionFilter<$PrismaModel>
-  }
-
-  export type NestedEnumStatutReservationFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatutReservation | EnumStatutReservationFieldRefInput<$PrismaModel>
-    in?: $Enums.StatutReservation[]
-    notIn?: $Enums.StatutReservation[]
-    not?: NestedEnumStatutReservationFilter<$PrismaModel> | $Enums.StatutReservation
-  }
-
-  export type NestedEnumStatutReservationWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatutReservation | EnumStatutReservationFieldRefInput<$PrismaModel>
-    in?: $Enums.StatutReservation[]
-    notIn?: $Enums.StatutReservation[]
-    not?: NestedEnumStatutReservationWithAggregatesFilter<$PrismaModel> | $Enums.StatutReservation
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatutReservationFilter<$PrismaModel>
-    _max?: NestedEnumStatutReservationFilter<$PrismaModel>
   }
 
   export type NestedEnumEtatExemplaireFilter<$PrismaModel = never> = {
@@ -44725,16 +44076,15 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSanctionsInput = {
@@ -44758,16 +44108,15 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSanctionsInput = {
@@ -44777,34 +44126,30 @@ export namespace Prisma {
 
   export type EmpruntCreateWithoutSanctionUtilisateurInput = {
     id?: string
+    exemplaireId: string
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
-    commentaire?: string | null
     universiteEmprunteur: string
-    motifEmprunt?: string | null
-    validePar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    exemplaire: ExemplairePhysiqueCreateNestedOneWithoutEmpruntsInput
     user?: UserCreateNestedOneWithoutEmpruntsInput
+    empruntExemplaires?: EmpruntExemplaireCreateNestedManyWithoutEmpruntInput
   }
 
   export type EmpruntUncheckedCreateWithoutSanctionUtilisateurInput = {
     id?: string
     exemplaireId: string
-    userId: string
+    userId?: string | null
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
-    commentaire?: string | null
     universiteEmprunteur: string
-    motifEmprunt?: string | null
-    validePar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    empruntExemplaires?: EmpruntExemplaireUncheckedCreateNestedManyWithoutEmpruntInput
   }
 
   export type EmpruntCreateOrConnectWithoutSanctionUtilisateurInput = {
@@ -44844,16 +44189,15 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSanctionsInput = {
@@ -44877,16 +44221,15 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type EmpruntUpsertWithoutSanctionUtilisateurInput = {
@@ -44902,108 +44245,33 @@ export namespace Prisma {
 
   export type EmpruntUpdateWithoutSanctionUtilisateurInput = {
     id?: StringFieldUpdateOperationsInput | string
+    exemplaireId?: StringFieldUpdateOperationsInput | string
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    exemplaire?: ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntsNestedInput
     user?: UserUpdateOneWithoutEmpruntsNestedInput
+    empruntExemplaires?: EmpruntExemplaireUpdateManyWithoutEmpruntNestedInput
   }
 
   export type EmpruntUncheckedUpdateWithoutSanctionUtilisateurInput = {
     id?: StringFieldUpdateOperationsInput | string
     exemplaireId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    empruntExemplaires?: EmpruntExemplaireUncheckedUpdateManyWithoutEmpruntNestedInput
   }
 
-  export type UserCreateWithoutReservationsInput = {
-    id?: string
-    email: string
-    motDePasse: string
-    nom: string
-    telephone?: string | null
-    prenom: string
-    image?: string | null
-    role: $Enums.RoleUser
-    derniereConnexion?: Date | string | null
-    estActif?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    preferencesRecommandation?: string | null
-    frequenceRecommandation?: $Enums.FrequenceRecommandation
-    contributions?: RessourceCreateNestedManyWithoutAuteurInput
-    favoris?: FavoriCreateNestedManyWithoutUserInput
-    commentaires?: CommentaireCreateNestedManyWithoutUserInput
-    notations?: NotationCreateNestedManyWithoutUserInput
-    historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
-    collections?: CollectionCreateNestedManyWithoutUserInput
-    emprunts?: EmpruntCreateNestedManyWithoutUserInput
-    recommandations?: RecommandationCreateNestedManyWithoutUserInput
-    JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
-    donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutReservationsInput = {
-    id?: string
-    email: string
-    motDePasse: string
-    nom: string
-    telephone?: string | null
-    prenom: string
-    image?: string | null
-    role: $Enums.RoleUser
-    derniereConnexion?: Date | string | null
-    estActif?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    preferencesRecommandation?: string | null
-    frequenceRecommandation?: $Enums.FrequenceRecommandation
-    contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
-    favoris?: FavoriUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentaireUncheckedCreateNestedManyWithoutUserInput
-    notations?: NotationUncheckedCreateNestedManyWithoutUserInput
-    historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
-    collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
-    recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
-    JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
-    donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutReservationsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutReservationsInput, UserUncheckedCreateWithoutReservationsInput>
-  }
-
-  export type RessourceCreateWithoutReservationsInput = {
+  export type RessourceCreateWithoutExemplaireInput = {
     id?: string
     titre: string
     isbnglobale: string
@@ -45016,20 +44284,25 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
 
-  export type RessourceUncheckedCreateWithoutReservationsInput = {
+  export type RessourceUncheckedCreateWithoutExemplaireInput = {
     id?: string
     titre: string
     isbnglobale: string
@@ -45042,339 +44315,75 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    auteurId: string
+    auteurId?: string | null
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
-  export type RessourceCreateOrConnectWithoutReservationsInput = {
+  export type RessourceCreateOrConnectWithoutExemplaireInput = {
     where: RessourceWhereUniqueInput
-    create: XOR<RessourceCreateWithoutReservationsInput, RessourceUncheckedCreateWithoutReservationsInput>
+    create: XOR<RessourceCreateWithoutExemplaireInput, RessourceUncheckedCreateWithoutExemplaireInput>
   }
 
-  export type BibliothecaireCreateWithoutReservationsInput = {
-    id?: string
-    numeroBibliothecaire: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutBibliothecairesInput
-  }
-
-  export type BibliothecaireUncheckedCreateWithoutReservationsInput = {
-    id?: string
-    userId: string
-    numeroBibliothecaire: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type BibliothecaireCreateOrConnectWithoutReservationsInput = {
-    where: BibliothecaireWhereUniqueInput
-    create: XOR<BibliothecaireCreateWithoutReservationsInput, BibliothecaireUncheckedCreateWithoutReservationsInput>
-  }
-
-  export type UserUpsertWithoutReservationsInput = {
-    update: XOR<UserUpdateWithoutReservationsInput, UserUncheckedUpdateWithoutReservationsInput>
-    create: XOR<UserCreateWithoutReservationsInput, UserUncheckedCreateWithoutReservationsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutReservationsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutReservationsInput, UserUncheckedUpdateWithoutReservationsInput>
-  }
-
-  export type UserUpdateWithoutReservationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    motDePasse?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    prenom?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
-    derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActif?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
-    frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    contributions?: RessourceUpdateManyWithoutAuteurNestedInput
-    favoris?: FavoriUpdateManyWithoutUserNestedInput
-    commentaires?: CommentaireUpdateManyWithoutUserNestedInput
-    notations?: NotationUpdateManyWithoutUserNestedInput
-    historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
-    collections?: CollectionUpdateManyWithoutUserNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUserNestedInput
-    recommandations?: RecommandationUpdateManyWithoutUserNestedInput
-    JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
-    donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutReservationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    motDePasse?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    prenom?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
-    derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActif?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
-    frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
-    favoris?: FavoriUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentaireUncheckedUpdateManyWithoutUserNestedInput
-    notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
-    historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
-    collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
-    recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
-    JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
-    donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type RessourceUpsertWithoutReservationsInput = {
-    update: XOR<RessourceUpdateWithoutReservationsInput, RessourceUncheckedUpdateWithoutReservationsInput>
-    create: XOR<RessourceCreateWithoutReservationsInput, RessourceUncheckedCreateWithoutReservationsInput>
-    where?: RessourceWhereInput
-  }
-
-  export type RessourceUpdateToOneWithWhereWithoutReservationsInput = {
-    where?: RessourceWhereInput
-    data: XOR<RessourceUpdateWithoutReservationsInput, RessourceUncheckedUpdateWithoutReservationsInput>
-  }
-
-  export type RessourceUpdateWithoutReservationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    isbnglobale?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
-    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
-    format?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
-    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    motsCles?: StringFieldUpdateOperationsInput | string
-    estArchive?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
-    favoris?: FavoriUpdateManyWithoutRessourceNestedInput
-    commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
-    notations?: NotationUpdateManyWithoutRessourceNestedInput
-    historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
-    collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
-    donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
-  }
-
-  export type RessourceUncheckedUpdateWithoutReservationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    isbnglobale?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
-    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
-    format?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
-    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
-    estArchive?: BoolFieldUpdateOperationsInput | boolean
-    categorieId?: StringFieldUpdateOperationsInput | string
-    favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
-    commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
-    notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
-    historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
-    collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-  }
-
-  export type BibliothecaireUpsertWithoutReservationsInput = {
-    update: XOR<BibliothecaireUpdateWithoutReservationsInput, BibliothecaireUncheckedUpdateWithoutReservationsInput>
-    create: XOR<BibliothecaireCreateWithoutReservationsInput, BibliothecaireUncheckedCreateWithoutReservationsInput>
-    where?: BibliothecaireWhereInput
-  }
-
-  export type BibliothecaireUpdateToOneWithWhereWithoutReservationsInput = {
-    where?: BibliothecaireWhereInput
-    data: XOR<BibliothecaireUpdateWithoutReservationsInput, BibliothecaireUncheckedUpdateWithoutReservationsInput>
-  }
-
-  export type BibliothecaireUpdateWithoutReservationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    numeroBibliothecaire?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutBibliothecairesNestedInput
-  }
-
-  export type BibliothecaireUncheckedUpdateWithoutReservationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    numeroBibliothecaire?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type RessourceCreateWithoutExemplairesInput = {
-    id?: string
-    titre: string
-    isbnglobale: string
-    description: string
-    langue?: string
-    urlFichier?: string | null
-    urlFichierLocal?: string | null
-    format: string
-    image?: string | null
-    niveauAcces?: $Enums.NiveauAcces
-    datePublication?: Date | string | null
-    motsCles: string
-    estArchive?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
-    favoris?: FavoriCreateNestedManyWithoutRessourceInput
-    commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
-    notations?: NotationCreateNestedManyWithoutRessourceInput
-    historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
-    collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
-    recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
-    donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
-  }
-
-  export type RessourceUncheckedCreateWithoutExemplairesInput = {
-    id?: string
-    titre: string
-    isbnglobale: string
-    description: string
-    langue?: string
-    urlFichier?: string | null
-    urlFichierLocal?: string | null
-    format: string
-    image?: string | null
-    niveauAcces?: $Enums.NiveauAcces
-    datePublication?: Date | string | null
-    motsCles: string
-    auteurId: string
-    estArchive?: boolean
-    categorieId: string
-    favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
-    commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
-    notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
-    historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
-    collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
-    recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-  }
-
-  export type RessourceCreateOrConnectWithoutExemplairesInput = {
-    where: RessourceWhereUniqueInput
-    create: XOR<RessourceCreateWithoutExemplairesInput, RessourceUncheckedCreateWithoutExemplairesInput>
-  }
-
-  export type EmpruntCreateWithoutExemplaireInput = {
+  export type EmpruntExemplaireCreateWithoutExemplaireInput = {
     id?: string
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
-    universiteEmprunteur: string
-    motifEmprunt?: string | null
-    validePar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutEmpruntsInput
-    SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
+    emprunt: EmpruntCreateNestedOneWithoutEmpruntExemplairesInput
   }
 
-  export type EmpruntUncheckedCreateWithoutExemplaireInput = {
+  export type EmpruntExemplaireUncheckedCreateWithoutExemplaireInput = {
     id?: string
-    userId: string
+    empruntId: string
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
-    universiteEmprunteur: string
-    motifEmprunt?: string | null
-    validePar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
   }
 
-  export type EmpruntCreateOrConnectWithoutExemplaireInput = {
-    where: EmpruntWhereUniqueInput
-    create: XOR<EmpruntCreateWithoutExemplaireInput, EmpruntUncheckedCreateWithoutExemplaireInput>
+  export type EmpruntExemplaireCreateOrConnectWithoutExemplaireInput = {
+    where: EmpruntExemplaireWhereUniqueInput
+    create: XOR<EmpruntExemplaireCreateWithoutExemplaireInput, EmpruntExemplaireUncheckedCreateWithoutExemplaireInput>
   }
 
-  export type EmpruntCreateManyExemplaireInputEnvelope = {
-    data: EmpruntCreateManyExemplaireInput | EmpruntCreateManyExemplaireInput[]
+  export type EmpruntExemplaireCreateManyExemplaireInputEnvelope = {
+    data: EmpruntExemplaireCreateManyExemplaireInput | EmpruntExemplaireCreateManyExemplaireInput[]
     skipDuplicates?: boolean
   }
 
-  export type RessourceUpsertWithoutExemplairesInput = {
-    update: XOR<RessourceUpdateWithoutExemplairesInput, RessourceUncheckedUpdateWithoutExemplairesInput>
-    create: XOR<RessourceCreateWithoutExemplairesInput, RessourceUncheckedCreateWithoutExemplairesInput>
+  export type RessourceUpsertWithoutExemplaireInput = {
+    update: XOR<RessourceUpdateWithoutExemplaireInput, RessourceUncheckedUpdateWithoutExemplaireInput>
+    create: XOR<RessourceCreateWithoutExemplaireInput, RessourceUncheckedCreateWithoutExemplaireInput>
     where?: RessourceWhereInput
   }
 
-  export type RessourceUpdateToOneWithWhereWithoutExemplairesInput = {
+  export type RessourceUpdateToOneWithWhereWithoutExemplaireInput = {
     where?: RessourceWhereInput
-    data: XOR<RessourceUpdateWithoutExemplairesInput, RessourceUncheckedUpdateWithoutExemplairesInput>
+    data: XOR<RessourceUpdateWithoutExemplaireInput, RessourceUncheckedUpdateWithoutExemplaireInput>
   }
 
-  export type RessourceUpdateWithoutExemplairesInput = {
+  export type RessourceUpdateWithoutExemplaireInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     isbnglobale?: StringFieldUpdateOperationsInput | string
@@ -45387,20 +44396,25 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
 
-  export type RessourceUncheckedUpdateWithoutExemplairesInput = {
+  export type RessourceUncheckedUpdateWithoutExemplaireInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     isbnglobale?: StringFieldUpdateOperationsInput | string
@@ -45413,87 +44427,54 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
-  export type EmpruntUpsertWithWhereUniqueWithoutExemplaireInput = {
-    where: EmpruntWhereUniqueInput
-    update: XOR<EmpruntUpdateWithoutExemplaireInput, EmpruntUncheckedUpdateWithoutExemplaireInput>
-    create: XOR<EmpruntCreateWithoutExemplaireInput, EmpruntUncheckedCreateWithoutExemplaireInput>
+  export type EmpruntExemplaireUpsertWithWhereUniqueWithoutExemplaireInput = {
+    where: EmpruntExemplaireWhereUniqueInput
+    update: XOR<EmpruntExemplaireUpdateWithoutExemplaireInput, EmpruntExemplaireUncheckedUpdateWithoutExemplaireInput>
+    create: XOR<EmpruntExemplaireCreateWithoutExemplaireInput, EmpruntExemplaireUncheckedCreateWithoutExemplaireInput>
   }
 
-  export type EmpruntUpdateWithWhereUniqueWithoutExemplaireInput = {
-    where: EmpruntWhereUniqueInput
-    data: XOR<EmpruntUpdateWithoutExemplaireInput, EmpruntUncheckedUpdateWithoutExemplaireInput>
+  export type EmpruntExemplaireUpdateWithWhereUniqueWithoutExemplaireInput = {
+    where: EmpruntExemplaireWhereUniqueInput
+    data: XOR<EmpruntExemplaireUpdateWithoutExemplaireInput, EmpruntExemplaireUncheckedUpdateWithoutExemplaireInput>
   }
 
-  export type EmpruntUpdateManyWithWhereWithoutExemplaireInput = {
-    where: EmpruntScalarWhereInput
-    data: XOR<EmpruntUpdateManyMutationInput, EmpruntUncheckedUpdateManyWithoutExemplaireInput>
+  export type EmpruntExemplaireUpdateManyWithWhereWithoutExemplaireInput = {
+    where: EmpruntExemplaireScalarWhereInput
+    data: XOR<EmpruntExemplaireUpdateManyMutationInput, EmpruntExemplaireUncheckedUpdateManyWithoutExemplaireInput>
   }
 
-  export type EmpruntScalarWhereInput = {
-    AND?: EmpruntScalarWhereInput | EmpruntScalarWhereInput[]
-    OR?: EmpruntScalarWhereInput[]
-    NOT?: EmpruntScalarWhereInput | EmpruntScalarWhereInput[]
-    id?: StringFilter<"Emprunt"> | string
-    exemplaireId?: StringFilter<"Emprunt"> | string
-    userId?: StringFilter<"Emprunt"> | string
-    dateEmprunt?: DateTimeFilter<"Emprunt"> | Date | string
-    dateRetourPrevue?: DateTimeFilter<"Emprunt"> | Date | string
-    dateRetourEffective?: DateTimeNullableFilter<"Emprunt"> | Date | string | null
-    statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
-    commentaire?: StringNullableFilter<"Emprunt"> | string | null
-    universiteEmprunteur?: StringFilter<"Emprunt"> | string
-    motifEmprunt?: StringNullableFilter<"Emprunt"> | string | null
-    validePar?: StringNullableFilter<"Emprunt"> | string | null
-    createdAt?: DateTimeFilter<"Emprunt"> | Date | string
-    updatedAt?: DateTimeFilter<"Emprunt"> | Date | string
-  }
-
-  export type ExemplairePhysiqueCreateWithoutEmpruntsInput = {
-    id?: string
-    cote: string
-    etat?: $Enums.EtatExemplaire
-    disponible?: boolean
-    localisation: string
-    dateAcquisition?: Date | string | null
-    qrCode?: string | null
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ressource: RessourceCreateNestedOneWithoutExemplairesInput
-  }
-
-  export type ExemplairePhysiqueUncheckedCreateWithoutEmpruntsInput = {
-    id?: string
-    ressourceId: string
-    cote: string
-    etat?: $Enums.EtatExemplaire
-    disponible?: boolean
-    localisation: string
-    dateAcquisition?: Date | string | null
-    qrCode?: string | null
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ExemplairePhysiqueCreateOrConnectWithoutEmpruntsInput = {
-    where: ExemplairePhysiqueWhereUniqueInput
-    create: XOR<ExemplairePhysiqueCreateWithoutEmpruntsInput, ExemplairePhysiqueUncheckedCreateWithoutEmpruntsInput>
+  export type EmpruntExemplaireScalarWhereInput = {
+    AND?: EmpruntExemplaireScalarWhereInput | EmpruntExemplaireScalarWhereInput[]
+    OR?: EmpruntExemplaireScalarWhereInput[]
+    NOT?: EmpruntExemplaireScalarWhereInput | EmpruntExemplaireScalarWhereInput[]
+    id?: StringFilter<"EmpruntExemplaire"> | string
+    empruntId?: StringFilter<"EmpruntExemplaire"> | string
+    exemplaireId?: StringFilter<"EmpruntExemplaire"> | string
+    dateEmprunt?: DateTimeFilter<"EmpruntExemplaire"> | Date | string
+    dateRetourPrevue?: DateTimeFilter<"EmpruntExemplaire"> | Date | string
+    dateRetourEffective?: DateTimeNullableFilter<"EmpruntExemplaire"> | Date | string | null
+    statut?: EnumStatutEmpruntFilter<"EmpruntExemplaire"> | $Enums.StatutEmprunt
+    commentaire?: StringNullableFilter<"EmpruntExemplaire"> | string | null
+    createdAt?: DateTimeFilter<"EmpruntExemplaire"> | Date | string
+    updatedAt?: DateTimeFilter<"EmpruntExemplaire"> | Date | string
   }
 
   export type UserCreateWithoutEmpruntsInput = {
@@ -45517,15 +44498,14 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
@@ -45550,15 +44530,14 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -45601,45 +44580,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ExemplairePhysiqueUpsertWithoutEmpruntsInput = {
-    update: XOR<ExemplairePhysiqueUpdateWithoutEmpruntsInput, ExemplairePhysiqueUncheckedUpdateWithoutEmpruntsInput>
-    create: XOR<ExemplairePhysiqueCreateWithoutEmpruntsInput, ExemplairePhysiqueUncheckedCreateWithoutEmpruntsInput>
-    where?: ExemplairePhysiqueWhereInput
+  export type EmpruntExemplaireCreateWithoutEmpruntInput = {
+    id?: string
+    dateEmprunt?: Date | string
+    dateRetourPrevue: Date | string
+    dateRetourEffective?: Date | string | null
+    statut?: $Enums.StatutEmprunt
+    commentaire?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    exemplaire: ExemplairePhysiqueCreateNestedOneWithoutEmpruntExemplairesInput
   }
 
-  export type ExemplairePhysiqueUpdateToOneWithWhereWithoutEmpruntsInput = {
-    where?: ExemplairePhysiqueWhereInput
-    data: XOR<ExemplairePhysiqueUpdateWithoutEmpruntsInput, ExemplairePhysiqueUncheckedUpdateWithoutEmpruntsInput>
+  export type EmpruntExemplaireUncheckedCreateWithoutEmpruntInput = {
+    id?: string
+    exemplaireId: string
+    dateEmprunt?: Date | string
+    dateRetourPrevue: Date | string
+    dateRetourEffective?: Date | string | null
+    statut?: $Enums.StatutEmprunt
+    commentaire?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type ExemplairePhysiqueUpdateWithoutEmpruntsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    cote?: StringFieldUpdateOperationsInput | string
-    etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
-    disponible?: BoolFieldUpdateOperationsInput | boolean
-    localisation?: StringFieldUpdateOperationsInput | string
-    dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    qrCode?: NullableStringFieldUpdateOperationsInput | string | null
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ressource?: RessourceUpdateOneRequiredWithoutExemplairesNestedInput
+  export type EmpruntExemplaireCreateOrConnectWithoutEmpruntInput = {
+    where: EmpruntExemplaireWhereUniqueInput
+    create: XOR<EmpruntExemplaireCreateWithoutEmpruntInput, EmpruntExemplaireUncheckedCreateWithoutEmpruntInput>
   }
 
-  export type ExemplairePhysiqueUncheckedUpdateWithoutEmpruntsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    cote?: StringFieldUpdateOperationsInput | string
-    etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
-    disponible?: BoolFieldUpdateOperationsInput | boolean
-    localisation?: StringFieldUpdateOperationsInput | string
-    dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    qrCode?: NullableStringFieldUpdateOperationsInput | string | null
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type EmpruntExemplaireCreateManyEmpruntInputEnvelope = {
+    data: EmpruntExemplaireCreateManyEmpruntInput | EmpruntExemplaireCreateManyEmpruntInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutEmpruntsInput = {
@@ -45674,15 +44646,14 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
@@ -45707,15 +44678,14 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -45751,6 +44721,162 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
   }
 
+  export type EmpruntExemplaireUpsertWithWhereUniqueWithoutEmpruntInput = {
+    where: EmpruntExemplaireWhereUniqueInput
+    update: XOR<EmpruntExemplaireUpdateWithoutEmpruntInput, EmpruntExemplaireUncheckedUpdateWithoutEmpruntInput>
+    create: XOR<EmpruntExemplaireCreateWithoutEmpruntInput, EmpruntExemplaireUncheckedCreateWithoutEmpruntInput>
+  }
+
+  export type EmpruntExemplaireUpdateWithWhereUniqueWithoutEmpruntInput = {
+    where: EmpruntExemplaireWhereUniqueInput
+    data: XOR<EmpruntExemplaireUpdateWithoutEmpruntInput, EmpruntExemplaireUncheckedUpdateWithoutEmpruntInput>
+  }
+
+  export type EmpruntExemplaireUpdateManyWithWhereWithoutEmpruntInput = {
+    where: EmpruntExemplaireScalarWhereInput
+    data: XOR<EmpruntExemplaireUpdateManyMutationInput, EmpruntExemplaireUncheckedUpdateManyWithoutEmpruntInput>
+  }
+
+  export type EmpruntCreateWithoutEmpruntExemplairesInput = {
+    id?: string
+    exemplaireId: string
+    dateEmprunt?: Date | string
+    dateRetourPrevue: Date | string
+    dateRetourEffective?: Date | string | null
+    statut?: $Enums.StatutEmprunt
+    universiteEmprunteur: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutEmpruntsInput
+    SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
+  }
+
+  export type EmpruntUncheckedCreateWithoutEmpruntExemplairesInput = {
+    id?: string
+    exemplaireId: string
+    userId?: string | null
+    dateEmprunt?: Date | string
+    dateRetourPrevue: Date | string
+    dateRetourEffective?: Date | string | null
+    statut?: $Enums.StatutEmprunt
+    universiteEmprunteur: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
+  }
+
+  export type EmpruntCreateOrConnectWithoutEmpruntExemplairesInput = {
+    where: EmpruntWhereUniqueInput
+    create: XOR<EmpruntCreateWithoutEmpruntExemplairesInput, EmpruntUncheckedCreateWithoutEmpruntExemplairesInput>
+  }
+
+  export type ExemplairePhysiqueCreateWithoutEmpruntExemplairesInput = {
+    id?: string
+    etat?: $Enums.EtatExemplaire
+    localisation: string
+    dateAcquisition?: Date | string | null
+    qrCode?: string | null
+    nombre?: number
+    nombreDisponible?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ressource: RessourceCreateNestedOneWithoutExemplaireInput
+  }
+
+  export type ExemplairePhysiqueUncheckedCreateWithoutEmpruntExemplairesInput = {
+    id?: string
+    ressourceId: string
+    etat?: $Enums.EtatExemplaire
+    localisation: string
+    dateAcquisition?: Date | string | null
+    qrCode?: string | null
+    nombre?: number
+    nombreDisponible?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExemplairePhysiqueCreateOrConnectWithoutEmpruntExemplairesInput = {
+    where: ExemplairePhysiqueWhereUniqueInput
+    create: XOR<ExemplairePhysiqueCreateWithoutEmpruntExemplairesInput, ExemplairePhysiqueUncheckedCreateWithoutEmpruntExemplairesInput>
+  }
+
+  export type EmpruntUpsertWithoutEmpruntExemplairesInput = {
+    update: XOR<EmpruntUpdateWithoutEmpruntExemplairesInput, EmpruntUncheckedUpdateWithoutEmpruntExemplairesInput>
+    create: XOR<EmpruntCreateWithoutEmpruntExemplairesInput, EmpruntUncheckedCreateWithoutEmpruntExemplairesInput>
+    where?: EmpruntWhereInput
+  }
+
+  export type EmpruntUpdateToOneWithWhereWithoutEmpruntExemplairesInput = {
+    where?: EmpruntWhereInput
+    data: XOR<EmpruntUpdateWithoutEmpruntExemplairesInput, EmpruntUncheckedUpdateWithoutEmpruntExemplairesInput>
+  }
+
+  export type EmpruntUpdateWithoutEmpruntExemplairesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    exemplaireId?: StringFieldUpdateOperationsInput | string
+    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutEmpruntsNestedInput
+    SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
+  }
+
+  export type EmpruntUncheckedUpdateWithoutEmpruntExemplairesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    exemplaireId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
+    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
+  }
+
+  export type ExemplairePhysiqueUpsertWithoutEmpruntExemplairesInput = {
+    update: XOR<ExemplairePhysiqueUpdateWithoutEmpruntExemplairesInput, ExemplairePhysiqueUncheckedUpdateWithoutEmpruntExemplairesInput>
+    create: XOR<ExemplairePhysiqueCreateWithoutEmpruntExemplairesInput, ExemplairePhysiqueUncheckedCreateWithoutEmpruntExemplairesInput>
+    where?: ExemplairePhysiqueWhereInput
+  }
+
+  export type ExemplairePhysiqueUpdateToOneWithWhereWithoutEmpruntExemplairesInput = {
+    where?: ExemplairePhysiqueWhereInput
+    data: XOR<ExemplairePhysiqueUpdateWithoutEmpruntExemplairesInput, ExemplairePhysiqueUncheckedUpdateWithoutEmpruntExemplairesInput>
+  }
+
+  export type ExemplairePhysiqueUpdateWithoutEmpruntExemplairesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
+    localisation?: StringFieldUpdateOperationsInput | string
+    dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    nombre?: IntFieldUpdateOperationsInput | number
+    nombreDisponible?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ressource?: RessourceUpdateOneRequiredWithoutExemplaireNestedInput
+  }
+
+  export type ExemplairePhysiqueUncheckedUpdateWithoutEmpruntExemplairesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ressourceId?: StringFieldUpdateOperationsInput | string
+    etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
+    localisation?: StringFieldUpdateOperationsInput | string
+    dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    nombre?: IntFieldUpdateOperationsInput | number
+    nombreDisponible?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutRecommandationsInput = {
     id?: string
     email: string
@@ -45772,15 +44898,14 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
@@ -45805,15 +44930,14 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -45835,15 +44959,20 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueCreateNestedOneWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
@@ -45861,16 +44990,21 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    auteurId: string
+    auteurId?: string | null
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueUncheckedCreateNestedOneWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
@@ -45911,15 +45045,14 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
@@ -45944,15 +45077,14 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -45980,15 +45112,20 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUpdateOneWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
@@ -46006,16 +45143,21 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUncheckedUpdateOneWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
@@ -46549,10 +45691,9 @@ export namespace Prisma {
     id?: string
     codePermanent: string
     dateNaissance: Date | string
-    dateInscription?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutEtudiantsInput
+    user: UserCreateNestedOneWithoutEtudiantInput
   }
 
   export type EtudiantUncheckedCreateWithoutFiliereInput = {
@@ -46560,7 +45701,6 @@ export namespace Prisma {
     userId: string
     codePermanent: string
     dateNaissance: Date | string
-    dateInscription?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -46630,7 +45770,6 @@ export namespace Prisma {
     userId?: StringFilter<"Etudiant"> | string
     codePermanent?: StringFilter<"Etudiant"> | string
     dateNaissance?: DateTimeFilter<"Etudiant"> | Date | string
-    dateInscription?: DateTimeFilter<"Etudiant"> | Date | string
     filiereId?: StringFilter<"Etudiant"> | string
     createdAt?: DateTimeFilter<"Etudiant"> | Date | string
     updatedAt?: DateTimeFilter<"Etudiant"> | Date | string
@@ -46649,14 +45788,19 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
@@ -46675,15 +45819,20 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueUncheckedCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
   }
@@ -46700,22 +45849,18 @@ export namespace Prisma {
 
   export type FavoriCreateWithoutUserInput = {
     id?: string
-    dateAjout?: Date | string
-    note?: string | null
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    externalRessourceId?: string | null
+    universiteRess?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    ressource: RessourceCreateNestedOneWithoutFavorisInput
+    ressource?: RessourceCreateNestedOneWithoutFavorisInput
   }
 
   export type FavoriUncheckedCreateWithoutUserInput = {
     id?: string
-    ressourceId: string
-    dateAjout?: Date | string
-    note?: string | null
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    ressourceId?: string | null
+    externalRessourceId?: string | null
+    universiteRess?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -46796,22 +45941,20 @@ export namespace Prisma {
 
   export type HistoriqueAccesCreateWithoutUserInput = {
     id?: string
-    dateAcces?: Date | string
     typeAcces: $Enums.TypeAcces
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    universiteRess: string
+    externRessourceId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    ressource: RessourceCreateNestedOneWithoutHistoriquesInput
+    ressource?: RessourceCreateNestedOneWithoutHistoriquesInput
   }
 
   export type HistoriqueAccesUncheckedCreateWithoutUserInput = {
     id?: string
-    ressourceId: string
-    dateAcces?: Date | string
+    ressourceId?: string | null
     typeAcces: $Enums.TypeAcces
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    universiteRess: string
+    externRessourceId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -46852,58 +45995,18 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ReservationCreateWithoutUserInput = {
-    id?: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    universiteEmprunteur: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ressource: RessourceCreateNestedOneWithoutReservationsInput
-    valideur?: BibliothecaireCreateNestedOneWithoutReservationsInput
-  }
-
-  export type ReservationUncheckedCreateWithoutUserInput = {
-    id?: string
-    ressourceId: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    universiteEmprunteur: string
-    validePar?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ReservationCreateOrConnectWithoutUserInput = {
-    where: ReservationWhereUniqueInput
-    create: XOR<ReservationCreateWithoutUserInput, ReservationUncheckedCreateWithoutUserInput>
-  }
-
-  export type ReservationCreateManyUserInputEnvelope = {
-    data: ReservationCreateManyUserInput | ReservationCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type EmpruntCreateWithoutUserInput = {
     id?: string
+    exemplaireId: string
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
-    commentaire?: string | null
     universiteEmprunteur: string
-    motifEmprunt?: string | null
-    validePar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    exemplaire: ExemplairePhysiqueCreateNestedOneWithoutEmpruntsInput
     SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
+    empruntExemplaires?: EmpruntExemplaireCreateNestedManyWithoutEmpruntInput
   }
 
   export type EmpruntUncheckedCreateWithoutUserInput = {
@@ -46913,13 +46016,11 @@ export namespace Prisma {
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
-    commentaire?: string | null
     universiteEmprunteur: string
-    motifEmprunt?: string | null
-    validePar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
+    empruntExemplaires?: EmpruntExemplaireUncheckedCreateNestedManyWithoutEmpruntInput
   }
 
   export type EmpruntCreateOrConnectWithoutUserInput = {
@@ -47068,7 +46169,6 @@ export namespace Prisma {
     id?: string
     codePermanent: string
     dateNaissance: Date | string
-    dateInscription?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     filiere: FiliereCreateNestedOneWithoutEtudiantsInput
@@ -47078,7 +46178,6 @@ export namespace Prisma {
     id?: string
     codePermanent: string
     dateNaissance: Date | string
-    dateInscription?: Date | string
     filiereId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47087,11 +46186,6 @@ export namespace Prisma {
   export type EtudiantCreateOrConnectWithoutUserInput = {
     where: EtudiantWhereUniqueInput
     create: XOR<EtudiantCreateWithoutUserInput, EtudiantUncheckedCreateWithoutUserInput>
-  }
-
-  export type EtudiantCreateManyUserInputEnvelope = {
-    data: EtudiantCreateManyUserInput | EtudiantCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type EnseignantCreateWithoutUserInput = {
@@ -47117,33 +46211,18 @@ export namespace Prisma {
     create: XOR<EnseignantCreateWithoutUserInput, EnseignantUncheckedCreateWithoutUserInput>
   }
 
-  export type EnseignantCreateManyUserInputEnvelope = {
-    data: EnseignantCreateManyUserInput | EnseignantCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type BibliothecaireCreateWithoutUserInput = {
     id?: string
     numeroBibliothecaire: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    reservations?: ReservationCreateNestedManyWithoutValideurInput
   }
 
   export type BibliothecaireUncheckedCreateWithoutUserInput = {
     id?: string
     numeroBibliothecaire: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    reservations?: ReservationUncheckedCreateNestedManyWithoutValideurInput
   }
 
   export type BibliothecaireCreateOrConnectWithoutUserInput = {
@@ -47151,37 +46230,19 @@ export namespace Prisma {
     create: XOR<BibliothecaireCreateWithoutUserInput, BibliothecaireUncheckedCreateWithoutUserInput>
   }
 
-  export type BibliothecaireCreateManyUserInputEnvelope = {
-    data: BibliothecaireCreateManyUserInput | BibliothecaireCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type AdministrateurCreateWithoutUserInput = {
     id?: string
     numeroAdmin: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
   }
 
   export type AdministrateurUncheckedCreateWithoutUserInput = {
     id?: string
     numeroAdmin: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
   }
 
   export type AdministrateurCreateOrConnectWithoutUserInput = {
     where: AdministrateurWhereUniqueInput
     create: XOR<AdministrateurCreateWithoutUserInput, AdministrateurUncheckedCreateWithoutUserInput>
-  }
-
-  export type AdministrateurCreateManyUserInputEnvelope = {
-    data: AdministrateurCreateManyUserInput | AdministrateurCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type SanctionUtilisateurCreateWithoutUserInput = {
@@ -47250,8 +46311,14 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFilter<"Ressource"> | $Enums.NiveauAcces
     datePublication?: DateTimeNullableFilter<"Ressource"> | Date | string | null
     motsCles?: StringFilter<"Ressource"> | string
-    auteurId?: StringFilter<"Ressource"> | string
+    auteurId?: StringNullableFilter<"Ressource"> | string | null
+    nomAuteur?: StringNullableFilter<"Ressource"> | string | null
+    telechargements?: IntFilter<"Ressource"> | number
+    vues?: IntFilter<"Ressource"> | number
     estArchive?: BoolFilter<"Ressource"> | boolean
+    noteMoyenne?: FloatFilter<"Ressource"> | number
+    createdAt?: DateTimeFilter<"Ressource"> | Date | string
+    updatedAt?: DateTimeFilter<"Ressource"> | Date | string
     categorieId?: StringFilter<"Ressource"> | string
   }
 
@@ -47277,11 +46344,9 @@ export namespace Prisma {
     NOT?: FavoriScalarWhereInput | FavoriScalarWhereInput[]
     id?: StringFilter<"Favori"> | string
     userId?: StringFilter<"Favori"> | string
-    ressourceId?: StringFilter<"Favori"> | string
-    dateAjout?: DateTimeFilter<"Favori"> | Date | string
-    note?: StringNullableFilter<"Favori"> | string | null
-    universiteSrc?: StringNullableFilter<"Favori"> | string | null
-    universiteUser?: StringNullableFilter<"Favori"> | string | null
+    ressourceId?: StringNullableFilter<"Favori"> | string | null
+    externalRessourceId?: StringNullableFilter<"Favori"> | string | null
+    universiteRess?: StringNullableFilter<"Favori"> | string | null
     createdAt?: DateTimeFilter<"Favori"> | Date | string
     updatedAt?: DateTimeFilter<"Favori"> | Date | string
   }
@@ -47338,7 +46403,7 @@ export namespace Prisma {
     OR?: NotationScalarWhereInput[]
     NOT?: NotationScalarWhereInput | NotationScalarWhereInput[]
     id?: StringFilter<"Notation"> | string
-    userId?: StringFilter<"Notation"> | string
+    userId?: StringNullableFilter<"Notation"> | string | null
     ressourceId?: StringFilter<"Notation"> | string
     note?: IntFilter<"Notation"> | number
     dateNotation?: DateTimeFilter<"Notation"> | Date | string
@@ -47370,11 +46435,10 @@ export namespace Prisma {
     NOT?: HistoriqueAccesScalarWhereInput | HistoriqueAccesScalarWhereInput[]
     id?: StringFilter<"HistoriqueAcces"> | string
     userId?: StringFilter<"HistoriqueAcces"> | string
-    ressourceId?: StringFilter<"HistoriqueAcces"> | string
-    dateAcces?: DateTimeFilter<"HistoriqueAcces"> | Date | string
+    ressourceId?: StringNullableFilter<"HistoriqueAcces"> | string | null
     typeAcces?: EnumTypeAccesFilter<"HistoriqueAcces"> | $Enums.TypeAcces
-    universiteSrc?: StringNullableFilter<"HistoriqueAcces"> | string | null
-    universiteUser?: StringNullableFilter<"HistoriqueAcces"> | string | null
+    universiteRess?: StringFilter<"HistoriqueAcces"> | string
+    externRessourceId?: StringNullableFilter<"HistoriqueAcces"> | string | null
     createdAt?: DateTimeFilter<"HistoriqueAcces"> | Date | string
     updatedAt?: DateTimeFilter<"HistoriqueAcces"> | Date | string
   }
@@ -47406,40 +46470,6 @@ export namespace Prisma {
     dateCreation?: DateTimeFilter<"Collection"> | Date | string
   }
 
-  export type ReservationUpsertWithWhereUniqueWithoutUserInput = {
-    where: ReservationWhereUniqueInput
-    update: XOR<ReservationUpdateWithoutUserInput, ReservationUncheckedUpdateWithoutUserInput>
-    create: XOR<ReservationCreateWithoutUserInput, ReservationUncheckedCreateWithoutUserInput>
-  }
-
-  export type ReservationUpdateWithWhereUniqueWithoutUserInput = {
-    where: ReservationWhereUniqueInput
-    data: XOR<ReservationUpdateWithoutUserInput, ReservationUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ReservationUpdateManyWithWhereWithoutUserInput = {
-    where: ReservationScalarWhereInput
-    data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type ReservationScalarWhereInput = {
-    AND?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-    OR?: ReservationScalarWhereInput[]
-    NOT?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-    id?: StringFilter<"Reservation"> | string
-    userId?: StringNullableFilter<"Reservation"> | string | null
-    ressourceId?: StringFilter<"Reservation"> | string
-    dateReservation?: DateTimeFilter<"Reservation"> | Date | string
-    dateDebut?: DateTimeFilter<"Reservation"> | Date | string
-    dateFin?: DateTimeFilter<"Reservation"> | Date | string
-    statut?: EnumStatutReservationFilter<"Reservation"> | $Enums.StatutReservation
-    commentaire?: StringNullableFilter<"Reservation"> | string | null
-    universiteEmprunteur?: StringFilter<"Reservation"> | string
-    validePar?: StringNullableFilter<"Reservation"> | string | null
-    createdAt?: DateTimeFilter<"Reservation"> | Date | string
-    updatedAt?: DateTimeFilter<"Reservation"> | Date | string
-  }
-
   export type EmpruntUpsertWithWhereUniqueWithoutUserInput = {
     where: EmpruntWhereUniqueInput
     update: XOR<EmpruntUpdateWithoutUserInput, EmpruntUncheckedUpdateWithoutUserInput>
@@ -47454,6 +46484,22 @@ export namespace Prisma {
   export type EmpruntUpdateManyWithWhereWithoutUserInput = {
     where: EmpruntScalarWhereInput
     data: XOR<EmpruntUpdateManyMutationInput, EmpruntUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type EmpruntScalarWhereInput = {
+    AND?: EmpruntScalarWhereInput | EmpruntScalarWhereInput[]
+    OR?: EmpruntScalarWhereInput[]
+    NOT?: EmpruntScalarWhereInput | EmpruntScalarWhereInput[]
+    id?: StringFilter<"Emprunt"> | string
+    exemplaireId?: StringFilter<"Emprunt"> | string
+    userId?: StringNullableFilter<"Emprunt"> | string | null
+    dateEmprunt?: DateTimeFilter<"Emprunt"> | Date | string
+    dateRetourPrevue?: DateTimeFilter<"Emprunt"> | Date | string
+    dateRetourEffective?: DateTimeNullableFilter<"Emprunt"> | Date | string | null
+    statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
+    universiteEmprunteur?: StringFilter<"Emprunt"> | string
+    createdAt?: DateTimeFilter<"Emprunt"> | Date | string
+    updatedAt?: DateTimeFilter<"Emprunt"> | Date | string
   }
 
   export type RecommandationUpsertWithWhereUniqueWithoutUserInput = {
@@ -47582,109 +46628,108 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Notification"> | Date | string
   }
 
-  export type EtudiantUpsertWithWhereUniqueWithoutUserInput = {
-    where: EtudiantWhereUniqueInput
+  export type EtudiantUpsertWithoutUserInput = {
     update: XOR<EtudiantUpdateWithoutUserInput, EtudiantUncheckedUpdateWithoutUserInput>
     create: XOR<EtudiantCreateWithoutUserInput, EtudiantUncheckedCreateWithoutUserInput>
+    where?: EtudiantWhereInput
   }
 
-  export type EtudiantUpdateWithWhereUniqueWithoutUserInput = {
-    where: EtudiantWhereUniqueInput
+  export type EtudiantUpdateToOneWithWhereWithoutUserInput = {
+    where?: EtudiantWhereInput
     data: XOR<EtudiantUpdateWithoutUserInput, EtudiantUncheckedUpdateWithoutUserInput>
   }
 
-  export type EtudiantUpdateManyWithWhereWithoutUserInput = {
-    where: EtudiantScalarWhereInput
-    data: XOR<EtudiantUpdateManyMutationInput, EtudiantUncheckedUpdateManyWithoutUserInput>
+  export type EtudiantUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    codePermanent?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    filiere?: FiliereUpdateOneRequiredWithoutEtudiantsNestedInput
   }
 
-  export type EnseignantUpsertWithWhereUniqueWithoutUserInput = {
-    where: EnseignantWhereUniqueInput
+  export type EtudiantUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    codePermanent?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
+    filiereId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnseignantUpsertWithoutUserInput = {
     update: XOR<EnseignantUpdateWithoutUserInput, EnseignantUncheckedUpdateWithoutUserInput>
     create: XOR<EnseignantCreateWithoutUserInput, EnseignantUncheckedCreateWithoutUserInput>
+    where?: EnseignantWhereInput
   }
 
-  export type EnseignantUpdateWithWhereUniqueWithoutUserInput = {
-    where: EnseignantWhereUniqueInput
+  export type EnseignantUpdateToOneWithWhereWithoutUserInput = {
+    where?: EnseignantWhereInput
     data: XOR<EnseignantUpdateWithoutUserInput, EnseignantUncheckedUpdateWithoutUserInput>
   }
 
-  export type EnseignantUpdateManyWithWhereWithoutUserInput = {
-    where: EnseignantScalarWhereInput
-    data: XOR<EnseignantUpdateManyMutationInput, EnseignantUncheckedUpdateManyWithoutUserInput>
+  export type EnseignantUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numeroEnseignant?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
+    specialite?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EnseignantScalarWhereInput = {
-    AND?: EnseignantScalarWhereInput | EnseignantScalarWhereInput[]
-    OR?: EnseignantScalarWhereInput[]
-    NOT?: EnseignantScalarWhereInput | EnseignantScalarWhereInput[]
-    id?: StringFilter<"Enseignant"> | string
-    userId?: StringFilter<"Enseignant"> | string
-    numeroEnseignant?: StringFilter<"Enseignant"> | string
-    dateNaissance?: DateTimeFilter<"Enseignant"> | Date | string
-    specialite?: StringNullableFilter<"Enseignant"> | string | null
-    createdAt?: DateTimeFilter<"Enseignant"> | Date | string
-    updatedAt?: DateTimeFilter<"Enseignant"> | Date | string
+  export type EnseignantUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numeroEnseignant?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
+    specialite?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type BibliothecaireUpsertWithWhereUniqueWithoutUserInput = {
-    where: BibliothecaireWhereUniqueInput
+  export type BibliothecaireUpsertWithoutUserInput = {
     update: XOR<BibliothecaireUpdateWithoutUserInput, BibliothecaireUncheckedUpdateWithoutUserInput>
     create: XOR<BibliothecaireCreateWithoutUserInput, BibliothecaireUncheckedCreateWithoutUserInput>
+    where?: BibliothecaireWhereInput
   }
 
-  export type BibliothecaireUpdateWithWhereUniqueWithoutUserInput = {
-    where: BibliothecaireWhereUniqueInput
+  export type BibliothecaireUpdateToOneWithWhereWithoutUserInput = {
+    where?: BibliothecaireWhereInput
     data: XOR<BibliothecaireUpdateWithoutUserInput, BibliothecaireUncheckedUpdateWithoutUserInput>
   }
 
-  export type BibliothecaireUpdateManyWithWhereWithoutUserInput = {
-    where: BibliothecaireScalarWhereInput
-    data: XOR<BibliothecaireUpdateManyMutationInput, BibliothecaireUncheckedUpdateManyWithoutUserInput>
+  export type BibliothecaireUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numeroBibliothecaire?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type BibliothecaireScalarWhereInput = {
-    AND?: BibliothecaireScalarWhereInput | BibliothecaireScalarWhereInput[]
-    OR?: BibliothecaireScalarWhereInput[]
-    NOT?: BibliothecaireScalarWhereInput | BibliothecaireScalarWhereInput[]
-    id?: StringFilter<"Bibliothecaire"> | string
-    userId?: StringFilter<"Bibliothecaire"> | string
-    numeroBibliothecaire?: StringFilter<"Bibliothecaire"> | string
-    dateNaissance?: DateTimeFilter<"Bibliothecaire"> | Date | string
-    adresse?: StringNullableFilter<"Bibliothecaire"> | string | null
-    ville?: StringNullableFilter<"Bibliothecaire"> | string | null
-    pays?: StringNullableFilter<"Bibliothecaire"> | string | null
-    createdAt?: DateTimeFilter<"Bibliothecaire"> | Date | string
-    updatedAt?: DateTimeFilter<"Bibliothecaire"> | Date | string
+  export type BibliothecaireUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numeroBibliothecaire?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type AdministrateurUpsertWithWhereUniqueWithoutUserInput = {
-    where: AdministrateurWhereUniqueInput
+  export type AdministrateurUpsertWithoutUserInput = {
     update: XOR<AdministrateurUpdateWithoutUserInput, AdministrateurUncheckedUpdateWithoutUserInput>
     create: XOR<AdministrateurCreateWithoutUserInput, AdministrateurUncheckedCreateWithoutUserInput>
+    where?: AdministrateurWhereInput
   }
 
-  export type AdministrateurUpdateWithWhereUniqueWithoutUserInput = {
-    where: AdministrateurWhereUniqueInput
+  export type AdministrateurUpdateToOneWithWhereWithoutUserInput = {
+    where?: AdministrateurWhereInput
     data: XOR<AdministrateurUpdateWithoutUserInput, AdministrateurUncheckedUpdateWithoutUserInput>
   }
 
-  export type AdministrateurUpdateManyWithWhereWithoutUserInput = {
-    where: AdministrateurScalarWhereInput
-    data: XOR<AdministrateurUpdateManyMutationInput, AdministrateurUncheckedUpdateManyWithoutUserInput>
+  export type AdministrateurUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numeroAdmin?: StringFieldUpdateOperationsInput | string
   }
 
-  export type AdministrateurScalarWhereInput = {
-    AND?: AdministrateurScalarWhereInput | AdministrateurScalarWhereInput[]
-    OR?: AdministrateurScalarWhereInput[]
-    NOT?: AdministrateurScalarWhereInput | AdministrateurScalarWhereInput[]
-    id?: StringFilter<"Administrateur"> | string
-    userId?: StringFilter<"Administrateur"> | string
-    numeroAdmin?: StringFilter<"Administrateur"> | string
-    dateNaissance?: DateTimeFilter<"Administrateur"> | Date | string
-    adresse?: StringNullableFilter<"Administrateur"> | string | null
-    ville?: StringNullableFilter<"Administrateur"> | string | null
-    pays?: StringNullableFilter<"Administrateur"> | string | null
+  export type AdministrateurUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    numeroAdmin?: StringFieldUpdateOperationsInput | string
   }
 
   export type SanctionUtilisateurUpsertWithWhereUniqueWithoutUserInput = {
@@ -47703,7 +46748,7 @@ export namespace Prisma {
     data: XOR<SanctionUtilisateurUpdateManyMutationInput, SanctionUtilisateurUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type UserCreateWithoutEtudiantsInput = {
+  export type UserCreateWithoutEtudiantInput = {
     id?: string
     email: string
     motDePasse: string
@@ -47724,19 +46769,18 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutEtudiantsInput = {
+  export type UserUncheckedCreateWithoutEtudiantInput = {
     id?: string
     email: string
     motDePasse: string
@@ -47757,21 +46801,20 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutEtudiantsInput = {
+  export type UserCreateOrConnectWithoutEtudiantInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutEtudiantsInput, UserUncheckedCreateWithoutEtudiantsInput>
+    create: XOR<UserCreateWithoutEtudiantInput, UserUncheckedCreateWithoutEtudiantInput>
   }
 
   export type FiliereCreateWithoutEtudiantsInput = {
@@ -47799,18 +46842,18 @@ export namespace Prisma {
     create: XOR<FiliereCreateWithoutEtudiantsInput, FiliereUncheckedCreateWithoutEtudiantsInput>
   }
 
-  export type UserUpsertWithoutEtudiantsInput = {
-    update: XOR<UserUpdateWithoutEtudiantsInput, UserUncheckedUpdateWithoutEtudiantsInput>
-    create: XOR<UserCreateWithoutEtudiantsInput, UserUncheckedCreateWithoutEtudiantsInput>
+  export type UserUpsertWithoutEtudiantInput = {
+    update: XOR<UserUpdateWithoutEtudiantInput, UserUncheckedUpdateWithoutEtudiantInput>
+    create: XOR<UserCreateWithoutEtudiantInput, UserUncheckedCreateWithoutEtudiantInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutEtudiantsInput = {
+  export type UserUpdateToOneWithWhereWithoutEtudiantInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutEtudiantsInput, UserUncheckedUpdateWithoutEtudiantsInput>
+    data: XOR<UserUpdateWithoutEtudiantInput, UserUncheckedUpdateWithoutEtudiantInput>
   }
 
-  export type UserUpdateWithoutEtudiantsInput = {
+  export type UserUpdateWithoutEtudiantInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     motDePasse?: StringFieldUpdateOperationsInput | string
@@ -47831,19 +46874,18 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutEtudiantsInput = {
+  export type UserUncheckedUpdateWithoutEtudiantInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     motDePasse?: StringFieldUpdateOperationsInput | string
@@ -47864,15 +46906,14 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -47907,7 +46948,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserCreateWithoutEnseignantsInput = {
+  export type UserCreateWithoutEnseignantInput = {
     id?: string
     email: string
     motDePasse: string
@@ -47928,19 +46969,18 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutEnseignantsInput = {
+  export type UserUncheckedCreateWithoutEnseignantInput = {
     id?: string
     email: string
     motDePasse: string
@@ -47961,35 +47001,34 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutEnseignantsInput = {
+  export type UserCreateOrConnectWithoutEnseignantInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutEnseignantsInput, UserUncheckedCreateWithoutEnseignantsInput>
+    create: XOR<UserCreateWithoutEnseignantInput, UserUncheckedCreateWithoutEnseignantInput>
   }
 
-  export type UserUpsertWithoutEnseignantsInput = {
-    update: XOR<UserUpdateWithoutEnseignantsInput, UserUncheckedUpdateWithoutEnseignantsInput>
-    create: XOR<UserCreateWithoutEnseignantsInput, UserUncheckedCreateWithoutEnseignantsInput>
+  export type UserUpsertWithoutEnseignantInput = {
+    update: XOR<UserUpdateWithoutEnseignantInput, UserUncheckedUpdateWithoutEnseignantInput>
+    create: XOR<UserCreateWithoutEnseignantInput, UserUncheckedCreateWithoutEnseignantInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutEnseignantsInput = {
+  export type UserUpdateToOneWithWhereWithoutEnseignantInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutEnseignantsInput, UserUncheckedUpdateWithoutEnseignantsInput>
+    data: XOR<UserUpdateWithoutEnseignantInput, UserUncheckedUpdateWithoutEnseignantInput>
   }
 
-  export type UserUpdateWithoutEnseignantsInput = {
+  export type UserUpdateWithoutEnseignantInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     motDePasse?: StringFieldUpdateOperationsInput | string
@@ -48010,19 +47049,18 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutEnseignantsInput = {
+  export type UserUncheckedUpdateWithoutEnseignantInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     motDePasse?: StringFieldUpdateOperationsInput | string
@@ -48043,19 +47081,18 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutBibliothecairesInput = {
+  export type UserCreateWithoutBibliothecaireInput = {
     id?: string
     email: string
     motDePasse: string
@@ -48076,19 +47113,18 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutBibliothecairesInput = {
+  export type UserUncheckedCreateWithoutBibliothecaireInput = {
     id?: string
     email: string
     motDePasse: string
@@ -48109,73 +47145,34 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutBibliothecairesInput = {
+  export type UserCreateOrConnectWithoutBibliothecaireInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutBibliothecairesInput, UserUncheckedCreateWithoutBibliothecairesInput>
+    create: XOR<UserCreateWithoutBibliothecaireInput, UserUncheckedCreateWithoutBibliothecaireInput>
   }
 
-  export type ReservationCreateWithoutValideurInput = {
-    id?: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    universiteEmprunteur: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutReservationsInput
-    ressource: RessourceCreateNestedOneWithoutReservationsInput
-  }
-
-  export type ReservationUncheckedCreateWithoutValideurInput = {
-    id?: string
-    userId?: string | null
-    ressourceId: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    universiteEmprunteur: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ReservationCreateOrConnectWithoutValideurInput = {
-    where: ReservationWhereUniqueInput
-    create: XOR<ReservationCreateWithoutValideurInput, ReservationUncheckedCreateWithoutValideurInput>
-  }
-
-  export type ReservationCreateManyValideurInputEnvelope = {
-    data: ReservationCreateManyValideurInput | ReservationCreateManyValideurInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type UserUpsertWithoutBibliothecairesInput = {
-    update: XOR<UserUpdateWithoutBibliothecairesInput, UserUncheckedUpdateWithoutBibliothecairesInput>
-    create: XOR<UserCreateWithoutBibliothecairesInput, UserUncheckedCreateWithoutBibliothecairesInput>
+  export type UserUpsertWithoutBibliothecaireInput = {
+    update: XOR<UserUpdateWithoutBibliothecaireInput, UserUncheckedUpdateWithoutBibliothecaireInput>
+    create: XOR<UserCreateWithoutBibliothecaireInput, UserUncheckedCreateWithoutBibliothecaireInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutBibliothecairesInput = {
+  export type UserUpdateToOneWithWhereWithoutBibliothecaireInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutBibliothecairesInput, UserUncheckedUpdateWithoutBibliothecairesInput>
+    data: XOR<UserUpdateWithoutBibliothecaireInput, UserUncheckedUpdateWithoutBibliothecaireInput>
   }
 
-  export type UserUpdateWithoutBibliothecairesInput = {
+  export type UserUpdateWithoutBibliothecaireInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     motDePasse?: StringFieldUpdateOperationsInput | string
@@ -48196,19 +47193,18 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutBibliothecairesInput = {
+  export type UserUncheckedUpdateWithoutBibliothecaireInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     motDePasse?: StringFieldUpdateOperationsInput | string
@@ -48229,35 +47225,18 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type ReservationUpsertWithWhereUniqueWithoutValideurInput = {
-    where: ReservationWhereUniqueInput
-    update: XOR<ReservationUpdateWithoutValideurInput, ReservationUncheckedUpdateWithoutValideurInput>
-    create: XOR<ReservationCreateWithoutValideurInput, ReservationUncheckedCreateWithoutValideurInput>
-  }
-
-  export type ReservationUpdateWithWhereUniqueWithoutValideurInput = {
-    where: ReservationWhereUniqueInput
-    data: XOR<ReservationUpdateWithoutValideurInput, ReservationUncheckedUpdateWithoutValideurInput>
-  }
-
-  export type ReservationUpdateManyWithWhereWithoutValideurInput = {
-    where: ReservationScalarWhereInput
-    data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyWithoutValideurInput>
-  }
-
-  export type UserCreateWithoutAdministrateursInput = {
+  export type UserCreateWithoutAdministrateurInput = {
     id?: string
     email: string
     motDePasse: string
@@ -48278,19 +47257,18 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutAdministrateursInput = {
+  export type UserUncheckedCreateWithoutAdministrateurInput = {
     id?: string
     email: string
     motDePasse: string
@@ -48311,35 +47289,34 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutAdministrateursInput = {
+  export type UserCreateOrConnectWithoutAdministrateurInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutAdministrateursInput, UserUncheckedCreateWithoutAdministrateursInput>
+    create: XOR<UserCreateWithoutAdministrateurInput, UserUncheckedCreateWithoutAdministrateurInput>
   }
 
-  export type UserUpsertWithoutAdministrateursInput = {
-    update: XOR<UserUpdateWithoutAdministrateursInput, UserUncheckedUpdateWithoutAdministrateursInput>
-    create: XOR<UserCreateWithoutAdministrateursInput, UserUncheckedCreateWithoutAdministrateursInput>
+  export type UserUpsertWithoutAdministrateurInput = {
+    update: XOR<UserUpdateWithoutAdministrateurInput, UserUncheckedUpdateWithoutAdministrateurInput>
+    create: XOR<UserCreateWithoutAdministrateurInput, UserUncheckedCreateWithoutAdministrateurInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutAdministrateursInput = {
+  export type UserUpdateToOneWithWhereWithoutAdministrateurInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutAdministrateursInput, UserUncheckedUpdateWithoutAdministrateursInput>
+    data: XOR<UserUpdateWithoutAdministrateurInput, UserUncheckedUpdateWithoutAdministrateurInput>
   }
 
-  export type UserUpdateWithoutAdministrateursInput = {
+  export type UserUpdateWithoutAdministrateurInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     motDePasse?: StringFieldUpdateOperationsInput | string
@@ -48360,19 +47337,18 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutAdministrateursInput = {
+  export type UserUncheckedUpdateWithoutAdministrateurInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     motDePasse?: StringFieldUpdateOperationsInput | string
@@ -48393,16 +47369,82 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type RessourceCreateWithoutFavorisInput = {
+    id?: string
+    titre: string
+    isbnglobale: string
+    description: string
+    langue?: string
+    urlFichier?: string | null
+    urlFichierLocal?: string | null
+    format: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
+    estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auteur?: UserCreateNestedOneWithoutContributionsInput
+    commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
+    notations?: NotationCreateNestedManyWithoutRessourceInput
+    historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
+    collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueCreateNestedOneWithoutRessourceInput
+    recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
+    donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
+    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
+  }
+
+  export type RessourceUncheckedCreateWithoutFavorisInput = {
+    id?: string
+    titre: string
+    isbnglobale: string
+    description: string
+    langue?: string
+    urlFichier?: string | null
+    urlFichierLocal?: string | null
+    format: string
+    image?: string | null
+    niveauAcces?: $Enums.NiveauAcces
+    datePublication?: Date | string | null
+    motsCles: string
+    auteurId?: string | null
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
+    estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    categorieId: string
+    commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
+    notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
+    historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
+    collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueUncheckedCreateNestedOneWithoutRessourceInput
+    recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
+    donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
+  }
+
+  export type RessourceCreateOrConnectWithoutFavorisInput = {
+    where: RessourceWhereUniqueInput
+    create: XOR<RessourceCreateWithoutFavorisInput, RessourceUncheckedCreateWithoutFavorisInput>
   }
 
   export type UserCreateWithoutFavorisInput = {
@@ -48425,16 +47467,15 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
@@ -48458,16 +47499,15 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -48476,61 +47516,77 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutFavorisInput, UserUncheckedCreateWithoutFavorisInput>
   }
 
-  export type RessourceCreateWithoutFavorisInput = {
-    id?: string
-    titre: string
-    isbnglobale: string
-    description: string
-    langue?: string
-    urlFichier?: string | null
-    urlFichierLocal?: string | null
-    format: string
-    image?: string | null
-    niveauAcces?: $Enums.NiveauAcces
-    datePublication?: Date | string | null
-    motsCles: string
-    estArchive?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
-    commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
-    notations?: NotationCreateNestedManyWithoutRessourceInput
-    historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
-    collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
-    recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
-    donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
-    categorie?: CategorieCreateNestedOneWithoutRessourcesInput
-  }
-
-  export type RessourceUncheckedCreateWithoutFavorisInput = {
-    id?: string
-    titre: string
-    isbnglobale: string
-    description: string
-    langue?: string
-    urlFichier?: string | null
-    urlFichierLocal?: string | null
-    format: string
-    image?: string | null
-    niveauAcces?: $Enums.NiveauAcces
-    datePublication?: Date | string | null
-    motsCles: string
-    auteurId: string
-    estArchive?: boolean
-    categorieId: string
-    commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
-    notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
-    historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
-    collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
-    recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
-    donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
-  }
-
-  export type RessourceCreateOrConnectWithoutFavorisInput = {
-    where: RessourceWhereUniqueInput
+  export type RessourceUpsertWithoutFavorisInput = {
+    update: XOR<RessourceUpdateWithoutFavorisInput, RessourceUncheckedUpdateWithoutFavorisInput>
     create: XOR<RessourceCreateWithoutFavorisInput, RessourceUncheckedCreateWithoutFavorisInput>
+    where?: RessourceWhereInput
+  }
+
+  export type RessourceUpdateToOneWithWhereWithoutFavorisInput = {
+    where?: RessourceWhereInput
+    data: XOR<RessourceUpdateWithoutFavorisInput, RessourceUncheckedUpdateWithoutFavorisInput>
+  }
+
+  export type RessourceUpdateWithoutFavorisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    langue?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
+    format?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
+    commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
+    notations?: NotationUpdateManyWithoutRessourceNestedInput
+    historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
+    collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUpdateOneWithoutRessourceNestedInput
+    recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
+    donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
+    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
+  }
+
+  export type RessourceUncheckedUpdateWithoutFavorisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    isbnglobale?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    langue?: StringFieldUpdateOperationsInput | string
+    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
+    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
+    format?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
+    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    motsCles?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
+    estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categorieId?: StringFieldUpdateOperationsInput | string
+    commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
+    notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
+    historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
+    collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUncheckedUpdateOneWithoutRessourceNestedInput
+    recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
+    donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type UserUpsertWithoutFavorisInput = {
@@ -48564,16 +47620,15 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
@@ -48597,80 +47652,16 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type RessourceUpsertWithoutFavorisInput = {
-    update: XOR<RessourceUpdateWithoutFavorisInput, RessourceUncheckedUpdateWithoutFavorisInput>
-    create: XOR<RessourceCreateWithoutFavorisInput, RessourceUncheckedCreateWithoutFavorisInput>
-    where?: RessourceWhereInput
-  }
-
-  export type RessourceUpdateToOneWithWhereWithoutFavorisInput = {
-    where?: RessourceWhereInput
-    data: XOR<RessourceUpdateWithoutFavorisInput, RessourceUncheckedUpdateWithoutFavorisInput>
-  }
-
-  export type RessourceUpdateWithoutFavorisInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    isbnglobale?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
-    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
-    format?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
-    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    motsCles?: StringFieldUpdateOperationsInput | string
-    estArchive?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
-    commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
-    notations?: NotationUpdateManyWithoutRessourceNestedInput
-    historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
-    collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
-    recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
-    donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
-    categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
-  }
-
-  export type RessourceUncheckedUpdateWithoutFavorisInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titre?: StringFieldUpdateOperationsInput | string
-    isbnglobale?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    langue?: StringFieldUpdateOperationsInput | string
-    urlFichier?: NullableStringFieldUpdateOperationsInput | string | null
-    urlFichierLocal?: NullableStringFieldUpdateOperationsInput | string | null
-    format?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
-    datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
-    estArchive?: BoolFieldUpdateOperationsInput | boolean
-    categorieId?: StringFieldUpdateOperationsInput | string
-    commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
-    notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
-    historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
-    collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
-    recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
-    donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
   export type UserCreateWithoutCommentairesInput = {
@@ -48693,16 +47684,15 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
@@ -48726,16 +47716,15 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -48757,14 +47746,19 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
@@ -48783,15 +47777,20 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    auteurId: string
+    auteurId?: string | null
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueUncheckedCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
   }
@@ -48832,16 +47831,15 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
@@ -48865,16 +47863,15 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -48902,14 +47899,19 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
@@ -48928,15 +47930,20 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUncheckedUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
   }
@@ -48961,16 +47968,15 @@ export namespace Prisma {
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
@@ -48994,16 +48000,15 @@ export namespace Prisma {
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -49025,14 +48030,19 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
@@ -49051,15 +48061,20 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    auteurId: string
+    auteurId?: string | null
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueUncheckedCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
   }
@@ -49100,16 +48115,15 @@ export namespace Prisma {
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
@@ -49133,16 +48147,15 @@ export namespace Prisma {
     commentaires?: CommentaireUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -49170,14 +48183,19 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
@@ -49196,15 +48214,20 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUncheckedUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
   }
@@ -49229,16 +48252,15 @@ export namespace Prisma {
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
     notations?: NotationCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
@@ -49262,16 +48284,15 @@ export namespace Prisma {
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutUserInput
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -49293,14 +48314,19 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
@@ -49319,15 +48345,20 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    auteurId: string
+    auteurId?: string | null
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueUncheckedCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
   }
@@ -49368,16 +48399,15 @@ export namespace Prisma {
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
     notations?: NotationUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
@@ -49401,16 +48431,15 @@ export namespace Prisma {
     commentaires?: CommentaireUncheckedUpdateManyWithoutUserNestedInput
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -49438,14 +48467,19 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
@@ -49464,15 +48498,20 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUncheckedUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
   }
@@ -49498,15 +48537,14 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
@@ -49531,15 +48569,14 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -49561,15 +48598,20 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
   }
@@ -49587,16 +48629,21 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    auteurId: string
+    auteurId?: string | null
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueUncheckedCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
   }
 
@@ -49637,15 +48684,14 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
@@ -49670,15 +48716,14 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -49706,15 +48751,20 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
   }
@@ -49732,16 +48782,21 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUncheckedUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
   }
 
@@ -49765,16 +48820,15 @@ export namespace Prisma {
     commentaires?: CommentaireCreateNestedManyWithoutUserInput
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
@@ -49798,16 +48852,15 @@ export namespace Prisma {
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutUserInput
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -49875,16 +48928,15 @@ export namespace Prisma {
     commentaires?: CommentaireUpdateManyWithoutUserNestedInput
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
@@ -49908,16 +48960,15 @@ export namespace Prisma {
     commentaires?: CommentaireUncheckedUpdateManyWithoutUserNestedInput
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -49984,14 +49035,19 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
     categorie?: CategorieCreateNestedOneWithoutRessourcesInput
@@ -50010,15 +49066,20 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    auteurId: string
+    auteurId?: string | null
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     categorieId: string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueUncheckedCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
   }
@@ -50079,14 +49140,19 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
@@ -50105,15 +49171,20 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUncheckedUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
   }
@@ -50138,16 +49209,15 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
@@ -50171,16 +49241,15 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -50191,22 +49260,18 @@ export namespace Prisma {
 
   export type FavoriCreateWithoutRessourceInput = {
     id?: string
-    dateAjout?: Date | string
-    note?: string | null
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    externalRessourceId?: string | null
+    universiteRess?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutFavorisInput
+    user?: UserCreateNestedOneWithoutFavorisInput
   }
 
   export type FavoriUncheckedCreateWithoutRessourceInput = {
     id?: string
     userId: string
-    dateAjout?: Date | string
-    note?: string | null
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    externalRessourceId?: string | null
+    universiteRess?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -50261,12 +49326,12 @@ export namespace Prisma {
     universiteUser?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutNotationsInput
+    user?: UserCreateNestedOneWithoutNotationsInput
   }
 
   export type NotationUncheckedCreateWithoutRessourceInput = {
     id?: string
-    userId: string
+    userId?: string | null
     note: number
     dateNotation?: Date | string
     universiteSrc?: string | null
@@ -50287,10 +49352,9 @@ export namespace Prisma {
 
   export type HistoriqueAccesCreateWithoutRessourceInput = {
     id?: string
-    dateAcces?: Date | string
     typeAcces: $Enums.TypeAcces
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    universiteRess: string
+    externRessourceId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutHistoriquesInput
@@ -50299,10 +49363,9 @@ export namespace Prisma {
   export type HistoriqueAccesUncheckedCreateWithoutRessourceInput = {
     id?: string
     userId: string
-    dateAcces?: Date | string
     typeAcces: $Enums.TypeAcces
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    universiteRess: string
+    externRessourceId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -50347,80 +49410,33 @@ export namespace Prisma {
 
   export type ExemplairePhysiqueCreateWithoutRessourceInput = {
     id?: string
-    cote: string
     etat?: $Enums.EtatExemplaire
-    disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
     qrCode?: string | null
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
+    nombre?: number
+    nombreDisponible?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    emprunts?: EmpruntCreateNestedManyWithoutExemplaireInput
+    empruntExemplaires?: EmpruntExemplaireCreateNestedManyWithoutExemplaireInput
   }
 
   export type ExemplairePhysiqueUncheckedCreateWithoutRessourceInput = {
     id?: string
-    cote: string
     etat?: $Enums.EtatExemplaire
-    disponible?: boolean
     localisation: string
     dateAcquisition?: Date | string | null
     qrCode?: string | null
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
+    nombre?: number
+    nombreDisponible?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutExemplaireInput
+    empruntExemplaires?: EmpruntExemplaireUncheckedCreateNestedManyWithoutExemplaireInput
   }
 
   export type ExemplairePhysiqueCreateOrConnectWithoutRessourceInput = {
     where: ExemplairePhysiqueWhereUniqueInput
     create: XOR<ExemplairePhysiqueCreateWithoutRessourceInput, ExemplairePhysiqueUncheckedCreateWithoutRessourceInput>
-  }
-
-  export type ExemplairePhysiqueCreateManyRessourceInputEnvelope = {
-    data: ExemplairePhysiqueCreateManyRessourceInput | ExemplairePhysiqueCreateManyRessourceInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ReservationCreateWithoutRessourceInput = {
-    id?: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    universiteEmprunteur: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutReservationsInput
-    valideur?: BibliothecaireCreateNestedOneWithoutReservationsInput
-  }
-
-  export type ReservationUncheckedCreateWithoutRessourceInput = {
-    id?: string
-    userId?: string | null
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    universiteEmprunteur: string
-    validePar?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ReservationCreateOrConnectWithoutRessourceInput = {
-    where: ReservationWhereUniqueInput
-    create: XOR<ReservationCreateWithoutRessourceInput, ReservationUncheckedCreateWithoutRessourceInput>
-  }
-
-  export type ReservationCreateManyRessourceInputEnvelope = {
-    data: ReservationCreateManyRessourceInput | ReservationCreateManyRessourceInput[]
-    skipDuplicates?: boolean
   }
 
   export type RecommandationCreateWithoutRessourceInput = {
@@ -50543,16 +49559,15 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
@@ -50576,16 +49591,15 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -50669,54 +49683,41 @@ export namespace Prisma {
     data: XOR<CollectionRessourceUpdateManyMutationInput, CollectionRessourceUncheckedUpdateManyWithoutRessourceInput>
   }
 
-  export type ExemplairePhysiqueUpsertWithWhereUniqueWithoutRessourceInput = {
-    where: ExemplairePhysiqueWhereUniqueInput
+  export type ExemplairePhysiqueUpsertWithoutRessourceInput = {
     update: XOR<ExemplairePhysiqueUpdateWithoutRessourceInput, ExemplairePhysiqueUncheckedUpdateWithoutRessourceInput>
     create: XOR<ExemplairePhysiqueCreateWithoutRessourceInput, ExemplairePhysiqueUncheckedCreateWithoutRessourceInput>
+    where?: ExemplairePhysiqueWhereInput
   }
 
-  export type ExemplairePhysiqueUpdateWithWhereUniqueWithoutRessourceInput = {
-    where: ExemplairePhysiqueWhereUniqueInput
+  export type ExemplairePhysiqueUpdateToOneWithWhereWithoutRessourceInput = {
+    where?: ExemplairePhysiqueWhereInput
     data: XOR<ExemplairePhysiqueUpdateWithoutRessourceInput, ExemplairePhysiqueUncheckedUpdateWithoutRessourceInput>
   }
 
-  export type ExemplairePhysiqueUpdateManyWithWhereWithoutRessourceInput = {
-    where: ExemplairePhysiqueScalarWhereInput
-    data: XOR<ExemplairePhysiqueUpdateManyMutationInput, ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceInput>
+  export type ExemplairePhysiqueUpdateWithoutRessourceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
+    localisation?: StringFieldUpdateOperationsInput | string
+    dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    nombre?: IntFieldUpdateOperationsInput | number
+    nombreDisponible?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    empruntExemplaires?: EmpruntExemplaireUpdateManyWithoutExemplaireNestedInput
   }
 
-  export type ExemplairePhysiqueScalarWhereInput = {
-    AND?: ExemplairePhysiqueScalarWhereInput | ExemplairePhysiqueScalarWhereInput[]
-    OR?: ExemplairePhysiqueScalarWhereInput[]
-    NOT?: ExemplairePhysiqueScalarWhereInput | ExemplairePhysiqueScalarWhereInput[]
-    id?: StringFilter<"ExemplairePhysique"> | string
-    ressourceId?: StringFilter<"ExemplairePhysique"> | string
-    cote?: StringFilter<"ExemplairePhysique"> | string
-    etat?: EnumEtatExemplaireFilter<"ExemplairePhysique"> | $Enums.EtatExemplaire
-    disponible?: BoolFilter<"ExemplairePhysique"> | boolean
-    localisation?: StringFilter<"ExemplairePhysique"> | string
-    dateAcquisition?: DateTimeNullableFilter<"ExemplairePhysique"> | Date | string | null
-    qrCode?: StringNullableFilter<"ExemplairePhysique"> | string | null
-    dureeMaxEmpruntExterne?: IntFilter<"ExemplairePhysique"> | number
-    nbMaxExemplairesExterne?: IntFilter<"ExemplairePhysique"> | number
-    createdAt?: DateTimeFilter<"ExemplairePhysique"> | Date | string
-    updatedAt?: DateTimeFilter<"ExemplairePhysique"> | Date | string
-  }
-
-  export type ReservationUpsertWithWhereUniqueWithoutRessourceInput = {
-    where: ReservationWhereUniqueInput
-    update: XOR<ReservationUpdateWithoutRessourceInput, ReservationUncheckedUpdateWithoutRessourceInput>
-    create: XOR<ReservationCreateWithoutRessourceInput, ReservationUncheckedCreateWithoutRessourceInput>
-  }
-
-  export type ReservationUpdateWithWhereUniqueWithoutRessourceInput = {
-    where: ReservationWhereUniqueInput
-    data: XOR<ReservationUpdateWithoutRessourceInput, ReservationUncheckedUpdateWithoutRessourceInput>
-  }
-
-  export type ReservationUpdateManyWithWhereWithoutRessourceInput = {
-    where: ReservationScalarWhereInput
-    data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyWithoutRessourceInput>
+  export type ExemplairePhysiqueUncheckedUpdateWithoutRessourceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
+    localisation?: StringFieldUpdateOperationsInput | string
+    dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    qrCode?: NullableStringFieldUpdateOperationsInput | string | null
+    nombre?: IntFieldUpdateOperationsInput | number
+    nombreDisponible?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    empruntExemplaires?: EmpruntExemplaireUncheckedUpdateManyWithoutExemplaireNestedInput
   }
 
   export type RecommandationUpsertWithWhereUniqueWithoutRessourceInput = {
@@ -50793,15 +49794,20 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
-    auteur: UserCreateNestedOneWithoutContributionsInput
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auteur?: UserCreateNestedOneWithoutContributionsInput
     favoris?: FavoriCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireCreateNestedManyWithoutRessourceInput
     notations?: NotationCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutRessourceInput
   }
@@ -50819,15 +49825,20 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    auteurId: string
+    auteurId?: string | null
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     favoris?: FavoriUncheckedCreateNestedManyWithoutRessourceInput
     commentaires?: CommentaireUncheckedCreateNestedManyWithoutRessourceInput
     notations?: NotationUncheckedCreateNestedManyWithoutRessourceInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutRessourceInput
     collections?: CollectionRessourceUncheckedCreateNestedManyWithoutRessourceInput
-    exemplaires?: ExemplairePhysiqueUncheckedCreateNestedManyWithoutRessourceInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRessourceInput
+    exemplaire?: ExemplairePhysiqueUncheckedCreateNestedOneWithoutRessourceInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutRessourceInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutRessourceInput
   }
@@ -50947,15 +49958,14 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
@@ -50980,15 +49990,14 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -51029,15 +50038,14 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
@@ -51062,15 +50070,14 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -51095,15 +50102,14 @@ export namespace Prisma {
     notations?: NotationCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
     emprunts?: EmpruntCreateNestedManyWithoutUserInput
     recommandations?: RecommandationCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
@@ -51128,15 +50134,14 @@ export namespace Prisma {
     notations?: NotationUncheckedCreateNestedManyWithoutUserInput
     historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
     emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
     recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
     donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiants?: EtudiantUncheckedCreateNestedManyWithoutUserInput
-    enseignants?: EnseignantUncheckedCreateNestedManyWithoutUserInput
-    bibliothecaires?: BibliothecaireUncheckedCreateNestedManyWithoutUserInput
-    administrateurs?: AdministrateurUncheckedCreateNestedManyWithoutUserInput
+    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
+    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
+    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
+    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
     sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -51177,15 +50182,14 @@ export namespace Prisma {
     notations?: NotationUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
@@ -51210,76 +50214,61 @@ export namespace Prisma {
     notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
     emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiants?: EtudiantUncheckedUpdateManyWithoutUserNestedInput
-    enseignants?: EnseignantUncheckedUpdateManyWithoutUserNestedInput
-    bibliothecaires?: BibliothecaireUncheckedUpdateManyWithoutUserNestedInput
-    administrateurs?: AdministrateurUncheckedUpdateManyWithoutUserNestedInput
+    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
+    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
+    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
+    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
     sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type EmpruntCreateManyExemplaireInput = {
+  export type EmpruntExemplaireCreateManyExemplaireInput = {
     id?: string
-    userId: string
+    empruntId: string
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
     commentaire?: string | null
-    universiteEmprunteur: string
-    motifEmprunt?: string | null
-    validePar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type EmpruntUpdateWithoutExemplaireInput = {
+  export type EmpruntExemplaireUpdateWithoutExemplaireInput = {
     id?: StringFieldUpdateOperationsInput | string
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutEmpruntsNestedInput
-    SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
+    emprunt?: EmpruntUpdateOneRequiredWithoutEmpruntExemplairesNestedInput
   }
 
-  export type EmpruntUncheckedUpdateWithoutExemplaireInput = {
+  export type EmpruntExemplaireUncheckedUpdateWithoutExemplaireInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    empruntId?: StringFieldUpdateOperationsInput | string
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
   }
 
-  export type EmpruntUncheckedUpdateManyWithoutExemplaireInput = {
+  export type EmpruntExemplaireUncheckedUpdateManyWithoutExemplaireInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    empruntId?: StringFieldUpdateOperationsInput | string
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -51292,6 +50281,18 @@ export namespace Prisma {
     dateFin: Date | string
     motif: string
     estActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmpruntExemplaireCreateManyEmpruntInput = {
+    id?: string
+    exemplaireId: string
+    dateEmprunt?: Date | string
+    dateRetourPrevue: Date | string
+    dateRetourEffective?: Date | string | null
+    statut?: $Enums.StatutEmprunt
+    commentaire?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -51328,6 +50329,42 @@ export namespace Prisma {
     dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
     motif?: StringFieldUpdateOperationsInput | string
     estActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmpruntExemplaireUpdateWithoutEmpruntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
+    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    exemplaire?: ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntExemplairesNestedInput
+  }
+
+  export type EmpruntExemplaireUncheckedUpdateWithoutEmpruntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    exemplaireId?: StringFieldUpdateOperationsInput | string
+    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
+    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmpruntExemplaireUncheckedUpdateManyWithoutEmpruntInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    exemplaireId?: StringFieldUpdateOperationsInput | string
+    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
+    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -51603,7 +50640,6 @@ export namespace Prisma {
     userId: string
     codePermanent: string
     dateNaissance: Date | string
-    dateInscription?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -51612,10 +50648,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutEtudiantsNestedInput
+    user?: UserUpdateOneRequiredWithoutEtudiantNestedInput
   }
 
   export type EtudiantUncheckedUpdateWithoutFiliereInput = {
@@ -51623,7 +50658,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -51633,7 +50667,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     codePermanent?: StringFieldUpdateOperationsInput | string
     dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -51651,17 +50684,21 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     categorieId: string
   }
 
   export type FavoriCreateManyUserInput = {
     id?: string
-    ressourceId: string
-    dateAjout?: Date | string
-    note?: string | null
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    ressourceId?: string | null
+    externalRessourceId?: string | null
+    universiteRess?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -51690,11 +50727,10 @@ export namespace Prisma {
 
   export type HistoriqueAccesCreateManyUserInput = {
     id?: string
-    ressourceId: string
-    dateAcces?: Date | string
+    ressourceId?: string | null
     typeAcces: $Enums.TypeAcces
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    universiteRess: string
+    externRessourceId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -51706,20 +50742,6 @@ export namespace Prisma {
     dateCreation?: Date | string
   }
 
-  export type ReservationCreateManyUserInput = {
-    id?: string
-    ressourceId: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    universiteEmprunteur: string
-    validePar?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type EmpruntCreateManyUserInput = {
     id?: string
     exemplaireId: string
@@ -51727,10 +50749,7 @@ export namespace Prisma {
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
     statut?: $Enums.StatutEmprunt
-    commentaire?: string | null
     universiteEmprunteur: string
-    motifEmprunt?: string | null
-    validePar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -51781,45 +50800,6 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type EtudiantCreateManyUserInput = {
-    id?: string
-    codePermanent: string
-    dateNaissance: Date | string
-    dateInscription?: Date | string
-    filiereId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type EnseignantCreateManyUserInput = {
-    id?: string
-    numeroEnseignant: string
-    dateNaissance: Date | string
-    specialite?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type BibliothecaireCreateManyUserInput = {
-    id?: string
-    numeroBibliothecaire: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type AdministrateurCreateManyUserInput = {
-    id?: string
-    numeroAdmin: string
-    dateNaissance: Date | string
-    adresse?: string | null
-    ville?: string | null
-    pays?: string | null
-  }
-
   export type SanctionUtilisateurCreateManyUserInput = {
     id?: string
     typeRestriction: $Enums.TypeSanction
@@ -51845,14 +50825,19 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
     categorie?: CategorieUpdateOneWithoutRessourcesNestedInput
@@ -51871,15 +50856,20 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categorieId?: StringFieldUpdateOperationsInput | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUncheckedUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
   }
@@ -51897,39 +50887,39 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categorieId?: StringFieldUpdateOperationsInput | string
   }
 
   export type FavoriUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    externalRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ressource?: RessourceUpdateOneRequiredWithoutFavorisNestedInput
+    ressource?: RessourceUpdateOneWithoutFavorisNestedInput
   }
 
   export type FavoriUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FavoriUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -52002,33 +50992,30 @@ export namespace Prisma {
 
   export type HistoriqueAccesUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: StringFieldUpdateOperationsInput | string
+    externRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ressource?: RessourceUpdateOneRequiredWithoutHistoriquesNestedInput
+    ressource?: RessourceUpdateOneWithoutHistoriquesNestedInput
   }
 
   export type HistoriqueAccesUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
+    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: StringFieldUpdateOperationsInput | string
+    externRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoriqueAccesUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
+    ressourceId?: NullableStringFieldUpdateOperationsInput | string | null
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: StringFieldUpdateOperationsInput | string
+    externRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -52056,62 +51043,18 @@ export namespace Prisma {
     dateCreation?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ReservationUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ressource?: RessourceUpdateOneRequiredWithoutReservationsNestedInput
-    valideur?: BibliothecaireUpdateOneWithoutReservationsNestedInput
-  }
-
-  export type ReservationUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ReservationUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type EmpruntUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    exemplaireId?: StringFieldUpdateOperationsInput | string
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    exemplaire?: ExemplairePhysiqueUpdateOneRequiredWithoutEmpruntsNestedInput
     SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
+    empruntExemplaires?: EmpruntExemplaireUpdateManyWithoutEmpruntNestedInput
   }
 
   export type EmpruntUncheckedUpdateWithoutUserInput = {
@@ -52121,13 +51064,11 @@ export namespace Prisma {
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
+    empruntExemplaires?: EmpruntExemplaireUncheckedUpdateManyWithoutEmpruntNestedInput
   }
 
   export type EmpruntUncheckedUpdateManyWithoutUserInput = {
@@ -52137,10 +51078,7 @@ export namespace Prisma {
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    motifEmprunt?: NullableStringFieldUpdateOperationsInput | string | null
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -52283,125 +51221,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EtudiantUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    codePermanent?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    filiere?: FiliereUpdateOneRequiredWithoutEtudiantsNestedInput
-  }
-
-  export type EtudiantUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    codePermanent?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    filiereId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EtudiantUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    codePermanent?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateInscription?: DateTimeFieldUpdateOperationsInput | Date | string
-    filiereId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EnseignantUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    numeroEnseignant?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    specialite?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EnseignantUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    numeroEnseignant?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    specialite?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EnseignantUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    numeroEnseignant?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    specialite?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BibliothecaireUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    numeroBibliothecaire?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reservations?: ReservationUpdateManyWithoutValideurNestedInput
-  }
-
-  export type BibliothecaireUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    numeroBibliothecaire?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reservations?: ReservationUncheckedUpdateManyWithoutValideurNestedInput
-  }
-
-  export type BibliothecaireUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    numeroBibliothecaire?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AdministrateurUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    numeroAdmin?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type AdministrateurUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    numeroAdmin?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type AdministrateurUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    numeroAdmin?: StringFieldUpdateOperationsInput | string
-    dateNaissance?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: NullableStringFieldUpdateOperationsInput | string | null
-    ville?: NullableStringFieldUpdateOperationsInput | string | null
-    pays?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type SanctionUtilisateurUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     typeRestriction?: EnumTypeSanctionFieldUpdateOperationsInput | $Enums.TypeSanction
@@ -52434,62 +51253,6 @@ export namespace Prisma {
     motif?: StringFieldUpdateOperationsInput | string
     empruntId?: NullableStringFieldUpdateOperationsInput | string | null
     estActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ReservationCreateManyValideurInput = {
-    id?: string
-    userId?: string | null
-    ressourceId: string
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    universiteEmprunteur: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ReservationUpdateWithoutValideurInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutReservationsNestedInput
-    ressource?: RessourceUpdateOneRequiredWithoutReservationsNestedInput
-  }
-
-  export type ReservationUncheckedUpdateWithoutValideurInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ReservationUncheckedUpdateManyWithoutValideurInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    ressourceId?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -52533,10 +51296,8 @@ export namespace Prisma {
   export type FavoriCreateManyRessourceInput = {
     id?: string
     userId: string
-    dateAjout?: Date | string
-    note?: string | null
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    externalRessourceId?: string | null
+    universiteRess?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -52554,7 +51315,7 @@ export namespace Prisma {
 
   export type NotationCreateManyRessourceInput = {
     id?: string
-    userId: string
+    userId?: string | null
     note: number
     dateNotation?: Date | string
     universiteSrc?: string | null
@@ -52566,10 +51327,9 @@ export namespace Prisma {
   export type HistoriqueAccesCreateManyRessourceInput = {
     id?: string
     userId: string
-    dateAcces?: Date | string
     typeAcces: $Enums.TypeAcces
-    universiteSrc?: string | null
-    universiteUser?: string | null
+    universiteRess: string
+    externRessourceId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -52579,34 +51339,6 @@ export namespace Prisma {
     collectionId: string
     dateAjout?: Date | string
     notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ExemplairePhysiqueCreateManyRessourceInput = {
-    id?: string
-    cote: string
-    etat?: $Enums.EtatExemplaire
-    disponible?: boolean
-    localisation: string
-    dateAcquisition?: Date | string | null
-    qrCode?: string | null
-    dureeMaxEmpruntExterne?: number
-    nbMaxExemplairesExterne?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ReservationCreateManyRessourceInput = {
-    id?: string
-    userId?: string | null
-    dateReservation?: Date | string
-    dateDebut: Date | string
-    dateFin: Date | string
-    statut?: $Enums.StatutReservation
-    commentaire?: string | null
-    universiteEmprunteur: string
-    validePar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -52636,22 +51368,18 @@ export namespace Prisma {
 
   export type FavoriUpdateWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
-    dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    externalRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutFavorisNestedInput
+    user?: UserUpdateOneWithoutFavorisNestedInput
   }
 
   export type FavoriUncheckedUpdateWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    externalRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -52659,10 +51387,8 @@ export namespace Prisma {
   export type FavoriUncheckedUpdateManyWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    externalRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -52708,12 +51434,12 @@ export namespace Prisma {
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutNotationsNestedInput
+    user?: UserUpdateOneWithoutNotationsNestedInput
   }
 
   export type NotationUncheckedUpdateWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52724,7 +51450,7 @@ export namespace Prisma {
 
   export type NotationUncheckedUpdateManyWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
     dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
     universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52735,10 +51461,9 @@ export namespace Prisma {
 
   export type HistoriqueAccesUpdateWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: StringFieldUpdateOperationsInput | string
+    externRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutHistoriquesNestedInput
@@ -52747,10 +51472,9 @@ export namespace Prisma {
   export type HistoriqueAccesUncheckedUpdateWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: StringFieldUpdateOperationsInput | string
+    externRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -52758,10 +51482,9 @@ export namespace Prisma {
   export type HistoriqueAccesUncheckedUpdateManyWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    dateAcces?: DateTimeFieldUpdateOperationsInput | Date | string
     typeAcces?: EnumTypeAccesFieldUpdateOperationsInput | $Enums.TypeAcces
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteRess?: StringFieldUpdateOperationsInput | string
+    externRessourceId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -52789,92 +51512,6 @@ export namespace Prisma {
     collectionId?: StringFieldUpdateOperationsInput | string
     dateAjout?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ExemplairePhysiqueUpdateWithoutRessourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    cote?: StringFieldUpdateOperationsInput | string
-    etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
-    disponible?: BoolFieldUpdateOperationsInput | boolean
-    localisation?: StringFieldUpdateOperationsInput | string
-    dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    qrCode?: NullableStringFieldUpdateOperationsInput | string | null
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emprunts?: EmpruntUpdateManyWithoutExemplaireNestedInput
-  }
-
-  export type ExemplairePhysiqueUncheckedUpdateWithoutRessourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    cote?: StringFieldUpdateOperationsInput | string
-    etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
-    disponible?: BoolFieldUpdateOperationsInput | boolean
-    localisation?: StringFieldUpdateOperationsInput | string
-    dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    qrCode?: NullableStringFieldUpdateOperationsInput | string | null
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emprunts?: EmpruntUncheckedUpdateManyWithoutExemplaireNestedInput
-  }
-
-  export type ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    cote?: StringFieldUpdateOperationsInput | string
-    etat?: EnumEtatExemplaireFieldUpdateOperationsInput | $Enums.EtatExemplaire
-    disponible?: BoolFieldUpdateOperationsInput | boolean
-    localisation?: StringFieldUpdateOperationsInput | string
-    dateAcquisition?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    qrCode?: NullableStringFieldUpdateOperationsInput | string | null
-    dureeMaxEmpruntExterne?: IntFieldUpdateOperationsInput | number
-    nbMaxExemplairesExterne?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ReservationUpdateWithoutRessourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutReservationsNestedInput
-    valideur?: BibliothecaireUpdateOneWithoutReservationsNestedInput
-  }
-
-  export type ReservationUncheckedUpdateWithoutRessourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ReservationUncheckedUpdateManyWithoutRessourceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    dateReservation?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
-    commentaire?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    validePar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -52961,8 +51598,14 @@ export namespace Prisma {
     niveauAcces?: $Enums.NiveauAcces
     datePublication?: Date | string | null
     motsCles: string
-    auteurId: string
+    auteurId?: string | null
+    nomAuteur?: string | null
+    telechargements?: number
+    vues?: number
     estArchive?: boolean
+    noteMoyenne?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type RessourceUpdateWithoutCategorieInput = {
@@ -52978,15 +51621,20 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
-    auteur?: UserUpdateOneRequiredWithoutContributionsNestedInput
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auteur?: UserUpdateOneWithoutContributionsNestedInput
     favoris?: FavoriUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUpdateManyWithoutRessourceNestedInput
     notations?: NotationUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUpdateManyWithoutRessourceNestedInput
   }
@@ -53004,15 +51652,20 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     favoris?: FavoriUncheckedUpdateManyWithoutRessourceNestedInput
     commentaires?: CommentaireUncheckedUpdateManyWithoutRessourceNestedInput
     notations?: NotationUncheckedUpdateManyWithoutRessourceNestedInput
     historiques?: HistoriqueAccesUncheckedUpdateManyWithoutRessourceNestedInput
     collections?: CollectionRessourceUncheckedUpdateManyWithoutRessourceNestedInput
-    exemplaires?: ExemplairePhysiqueUncheckedUpdateManyWithoutRessourceNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutRessourceNestedInput
+    exemplaire?: ExemplairePhysiqueUncheckedUpdateOneWithoutRessourceNestedInput
     recommandations?: RecommandationUncheckedUpdateManyWithoutRessourceNestedInput
     donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutRessourceNestedInput
   }
@@ -53030,8 +51683,14 @@ export namespace Prisma {
     niveauAcces?: EnumNiveauAccesFieldUpdateOperationsInput | $Enums.NiveauAcces
     datePublication?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     motsCles?: StringFieldUpdateOperationsInput | string
-    auteurId?: StringFieldUpdateOperationsInput | string
+    auteurId?: NullableStringFieldUpdateOperationsInput | string | null
+    nomAuteur?: NullableStringFieldUpdateOperationsInput | string | null
+    telechargements?: IntFieldUpdateOperationsInput | number
+    vues?: IntFieldUpdateOperationsInput | number
     estArchive?: BoolFieldUpdateOperationsInput | boolean
+    noteMoyenne?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

@@ -15,7 +15,6 @@ const class_validator_1 = require("class-validator");
 class CreateUfrDto {
     nom;
     description;
-    universiteId;
 }
 exports.CreateUfrDto = CreateUfrDto;
 __decorate([
@@ -41,16 +40,6 @@ __decorate([
     (0, class_validator_1.MaxLength)(1000, { message: 'La description ne peut pas dépasser 1000 caractères' }),
     __metadata("design:type", String)
 ], CreateUfrDto.prototype, "description", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'ID de l\'université à laquelle appartient l\'UFR',
-        example: 'uuid-universite-example',
-    }),
-    (0, class_validator_1.IsString)({ message: 'L\'ID de l\'université doit être une chaîne de caractères' }),
-    (0, class_validator_1.IsNotEmpty)({ message: 'L\'ID de l\'université est obligatoire' }),
-    (0, class_validator_1.IsUUID)(4, { message: 'L\'ID de l\'université doit être un UUID valide' }),
-    __metadata("design:type", String)
-], CreateUfrDto.prototype, "universiteId", void 0);
 class UpdateUfrDto extends (0, swagger_1.PartialType)(CreateUfrDto) {
     nom;
     description;

@@ -27,7 +27,7 @@ let EtudiantService = class EtudiantService {
         let isUnique = false;
         while (!isUnique) {
             const randomNumber = Math.floor(100000 + Math.random() * 900000);
-            numeroEtudiant = `UAD-${currentYear}-${randomNumber}`;
+            numeroEtudiant = `UADB-${currentYear}-${randomNumber}`;
             const existingEtudiant = await this.prisma.etudiant.findUnique({
                 where: { codePermanent: numeroEtudiant }
             });
@@ -44,14 +44,14 @@ let EtudiantService = class EtudiantService {
                 prenom: createEtudiantDto.prenom,
                 email: createEtudiantDto.email,
                 dateInscription: new Date(),
-                derniereConnexion: new Date(),
-                estValide: true,
-                estActif: true,
+                telephone: createEtudiantDto.telephone || null,
                 motDePasse: 'MotDePasse123',
                 role: prisma_1.RoleUser.ETUDIANT,
-                telephone: createEtudiantDto.telephone || null,
                 image: createEtudiantDto.image || 'https://example.com/default-avatar.png',
             };
+            if (createEtudiantDto.telephone === null) {
+                userData.telephone = null;
+            }
             const user = await this.utilisateursService.create(userData);
             if (!user || !user.id) {
                 throw new common_1.BadRequestException('Erreur lors de la création de l\'utilisateur');
@@ -144,7 +144,7 @@ let EtudiantService = class EtudiantService {
             this.prisma.etudiant.findMany({
                 where: whereConditions,
                 skip,
-                take: limit,
+                take: +limit,
                 include: {
                     user: {
                         select: {
@@ -153,14 +153,16 @@ let EtudiantService = class EtudiantService {
                             nom: true,
                             prenom: true,
                             telephone: true,
+                            image: true,
                             role: true,
                             estActif: true,
                             derniereConnexion: true,
                         }
-                    }
+                    },
+                    filiere: true,
                 },
                 orderBy: {
-                    dateInscription: 'desc'
+                    createdAt: 'desc'
                 }
             }),
             this.prisma.etudiant.count({ where: whereConditions })

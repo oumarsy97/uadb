@@ -7,6 +7,7 @@ import {
   CreateUtilisateurDto,
   LoginDataDto,
 } from './dto/create-utilisateur.dto';
+import { SmsService } from 'src/meservices/sms/sms.service';
 
 @Injectable()
 export class UtilisateursService {
@@ -14,9 +15,11 @@ export class UtilisateursService {
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
     private readonly emailService: EmailService, // Injection du service email
+   private readonly smsService: SmsService, // Optionnel : si vous souhaitez envoyer des SMS
   ) {}
 
-  async create(createUtilisateurDto: CreateUtilisateurDto) {
+ // Partie modifiée de votre UtilisateursService
+async create(createUtilisateurDto: CreateUtilisateurDto) {
     const { email } = createUtilisateurDto;
 
     // Vérifier si l'email existe déjà
@@ -34,6 +37,7 @@ export class UtilisateursService {
         nom: createUtilisateurDto.nom,
         prenom: createUtilisateurDto.prenom,
         email: createUtilisateurDto.email,
+        telephone: createUtilisateurDto.telephone || null,
         motDePasse: hashedPassword,
         role: createUtilisateurDto.role,
         image: createUtilisateurDto.image,
@@ -42,14 +46,49 @@ export class UtilisateursService {
 
     // Envoi de l'email de bienvenue
     try {
-      await this.emailService.sendWelcomeEmail(
+      await this.emailService.sendJokkoChainWelcomeEmail(
         newUser.email,
-        `${newUser.prenom} ${newUser.nom}`
+        `${newUser.prenom} ${newUser.nom}`,
+        newUser.email,
+        createUtilisateurDto.motDePasse,
       );
+      console.log('Email de bienvenue envoyé avec succès');
     } catch (error) {
-      // Log l'erreur mais ne fait pas échouer la création de l'utilisateur
       console.error('Erreur lors de l\'envoi de l\'email de bienvenue:', error);
     }
+
+    // Envoi d'un SMS de bienvenue (si numéro de téléphone fourni)
+    // if (createUtilisateurDto.telephone) {
+    //   try {
+    //     console.log('=== DÉBUT ENVOI SMS DE BIENVENUE ===');
+    //     console.log('Numéro de téléphone:', createUtilisateurDto.telephone);
+        
+    //     const smsData = {
+    //       to: createUtilisateurDto.telephone,
+    //       text: `Bienvenue ${newUser.prenom} ${newUser.nom} sur Jokko-Chain! Votre compte a été créé avec succès. Vos identifiants sont : Email: ${newUser.email}, Mot de passe: ${createUtilisateurDto.motDePasse}.`
+    //     };
+        
+    //     console.log('Données SMS préparées:', smsData);
+        
+    //     const smsResult = await this.smsService.sendSMS(smsData);
+    //     console.log('Résultat SMS:', smsResult);
+    //     console.log('=== SMS DE BIENVENUE ENVOYÉ AVEC SUCCÈS ===');
+        
+    //   } catch (error) {
+    //     console.error('=== ERREUR ENVOI SMS DE BIENVENUE ===');
+    //     console.error('Type d\'erreur:', error.constructor.name);
+    //     console.error('Message d\'erreur:', error.message);
+    //     console.error('Stack complet:', error.stack);
+        
+    //     // Log détaillé pour le débogage
+    //     if (error.response) {
+    //       console.error('Réponse HTTP:', error.response.status, error.response.statusText);
+    //       console.error('Données de réponse:', error.response.data);
+    //     }
+    //   }
+    // } else {
+    //   console.log('Aucun numéro de téléphone fourni, SMS non envoyé');
+    // }
 
     // Retourner l'utilisateur sans le mot de passe
     const { motDePasse, ...userWithoutPassword } = newUser;
@@ -57,7 +96,6 @@ export class UtilisateursService {
   }
 
   async login(loginData: LoginDataDto) {
-    console.log('Login attempt with data:', loginData);
     // Trouver l'utilisateur par email
     const user = await this.prisma.user.findUnique({
       where: { email: loginData.email },
@@ -189,41 +227,54 @@ export class UtilisateursService {
     }
   }
 
-  async findAll(options: { page?: number; limit?: number; search?: string } = {}) {
-    const { page = 1, limit = 10, search = '' } = options;
-    const skip = (page - 1) * limit;
+ async findAll(options: { 
+  page?: number | string; 
+  limit?: number | string; 
+  search?: string 
+} = {}) {
+  const { page = 1, limit = 10, search = '' } = options;
+  
+  // Convertir en nombres entiers
+  const pageNum = typeof page === 'string' ? parseInt(page, 10) : page;
+  const limitNum = typeof limit === 'string' ? parseInt(limit, 10) : limit;
 
-    const where = search
-      ? {
-          OR: [
-            { nom: { contains: search, mode: 'insensitive' } },
-            { prenom: { contains: search, mode: 'insensitive' } },
-            { email: { contains: search, mode: 'insensitive' } },
-          ],
-        }
-      : {};
+  // Validation des valeurs
+  const validPage = Math.max(1, pageNum || 1);
+  const validLimit = Math.max(1, Math.min(100, limitNum || 10)); // Limite max de 100
 
-    const [users, total] = await Promise.all([
-      this.prisma.user.findMany({
-        where,
-        skip,
-        take: +limit,
-      }),
-      this.prisma.user.count({ where }),
-    ]);
+  const skip = (validPage - 1) * validLimit;
 
-    const sanitizedUsers = users.map(({ motDePasse,  ...user }) => user);
+  const where = search
+    ? {
+        OR: [
+          { nom: { contains: search } },
+          { prenom: { contains: search } },
+          { email: { contains: search } },
+        ],
+      }
+    : {};
 
-    return {
-      data: sanitizedUsers,
-      pagination: {
-        page,
-        limit,
-        total,
-        totalPages: Math.ceil(total / limit),
-      },
-    };
-  }
+  const [users, total] = await Promise.all([
+    this.prisma.user.findMany({
+      where,
+      skip,
+      take: validLimit, // Utiliser la valeur numérique validée
+    }),
+    this.prisma.user.count({ where }),
+  ]);
+
+  const sanitizedUsers = users.map(({ motDePasse, ...user }) => user);
+
+  return {
+    data: sanitizedUsers,
+    pagination: {
+      page: validPage,
+      limit: validLimit,
+      total,
+      totalPages: Math.ceil(total / validLimit),
+    },
+  };
+}
 
   async findOne(id: string) {
     const user = await this.prisma.user.findUnique({

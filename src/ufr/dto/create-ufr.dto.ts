@@ -30,14 +30,7 @@ export class CreateUfrDto {
   @MaxLength(1000, { message: 'La description ne peut pas dépasser 1000 caractères' })
   description?: string;
 
-  @ApiProperty({
-    description: 'ID de l\'université à laquelle appartient l\'UFR',
-    example: 'uuid-universite-example',
-  })
-  @IsString({ message: 'L\'ID de l\'université doit être une chaîne de caractères' })
-  @IsNotEmpty({ message: 'L\'ID de l\'université est obligatoire' })
-  @IsUUID(4, { message: 'L\'ID de l\'université doit être un UUID valide' })
-  universiteId: string;
+ 
 }
 
 export class UpdateUfrDto extends PartialType(CreateUfrDto) {

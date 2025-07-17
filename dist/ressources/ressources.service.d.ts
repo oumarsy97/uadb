@@ -1,49 +1,65 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateRessourceDto, UpdateRessourceDto, SearchRessourceDto } from './dto/create-ressource.dto';
-import { Ressource, TypeAcces } from 'generated/prisma';
+import { Prisma, Ressource, TypeAcces } from 'generated/prisma';
+import { HistoriqueAccesService } from 'src/interactions/historique-acces/historique-acces.service';
 export declare class RessourcesService {
     private readonly prisma;
+    private readonly historiqueAccesService;
     private readonly logger;
-    constructor(prisma: PrismaService);
+    constructor(prisma: PrismaService, historiqueAccesService: HistoriqueAccesService);
     create(createRessourceDto: CreateRessourceDto): Promise<Ressource>;
     private getOrCreateDefaultCategory;
     findAll(options?: SearchRessourceDto): Promise<{
         data: {
             noteMoyenne: number;
-            auteur: {
-                id: string;
-                nom: string;
-                prenom: string;
-                role: import("generated/prisma").$Enums.RoleUser;
-            };
             categorie: {
-                id: string;
                 description: string | null;
+                id: string;
                 libelle: string;
             } | null;
             _count: {
-                favoris: number;
                 commentaires: number;
                 notations: number;
                 historiques: number;
-                exemplaires: number;
-                reservations: number;
             };
-            id: string;
-            titre: string;
-            isbnglobale: string;
+            auteur: {
+                nom: string;
+                prenom: string;
+                role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+            } | null;
+            exemplaire: {
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                ressourceId: string;
+                etat: import("generated/prisma").$Enums.EtatExemplaire;
+                localisation: string;
+                dateAcquisition: Date | null;
+                qrCode: string | null;
+                nombre: number;
+                nombreDisponible: number;
+            } | null;
+            image: string | null;
             description: string;
+            format: string;
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            titre: string;
             langue: string;
             urlFichier: string | null;
             urlFichierLocal: string | null;
-            format: string;
-            image: string | null;
             niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
             datePublication: Date | null;
             motsCles: string;
-            auteurId: string;
-            estArchive: boolean;
+            nomAuteur: string | null;
+            auteurId: string | null;
             categorieId: string;
+            estArchive: boolean;
+            isbnglobale: string;
+            telechargements: number;
+            vues: number;
         }[];
         meta: {
             total: number;
@@ -52,156 +68,169 @@ export declare class RessourcesService {
             pages: number;
         };
     }>;
-    findOne(id: string): Promise<{
-        noteMoyenne: number;
-        auteur: {
+    findOne(id: string, userId?: string): Promise<{
+        categorie: {
+            description: string | null;
             id: string;
-            nom: string;
-            prenom: string;
-            role: import("generated/prisma").$Enums.RoleUser;
-        };
+            libelle: string;
+        } | null;
         commentaires: ({
             user: {
-                id: string;
                 nom: string;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
             };
         } & {
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            dateCreation: Date;
             userId: string;
             ressourceId: string;
+            dateCreation: Date;
             universiteSrc: string | null;
             universiteUser: string | null;
             contenu: string;
         })[];
         notations: {
-            userId: string;
+            userId: string | null;
             note: number;
             dateNotation: Date;
         }[];
-        reservations: ({
-            user: {
-                id: string;
-                nom: string;
-                prenom: string;
-            } | null;
-        } & {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            userId: string | null;
-            ressourceId: string;
-            commentaire: string | null;
-            dateReservation: Date;
-            dateDebut: Date;
-            dateFin: Date;
-            statut: import("generated/prisma").$Enums.StatutReservation;
-            universiteEmprunteur: string;
-            validePar: string | null;
-        })[];
-        categorie: {
-            id: string;
-            description: string | null;
-            libelle: string;
-        } | null;
         _count: {
-            favoris: number;
             commentaires: number;
             notations: number;
             historiques: number;
-            exemplaires: number;
-            reservations: number;
         };
-        id: string;
-        titre: string;
-        isbnglobale: string;
-        description: string;
-        langue: string;
-        urlFichier: string | null;
-        urlFichierLocal: string | null;
-        format: string;
-        image: string | null;
-        niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
-        datePublication: Date | null;
-        motsCles: string;
-        auteurId: string;
-        estArchive: boolean;
-        categorieId: string;
-    }>;
-    update(id: string, updateRessourceDto: UpdateRessourceDto): Promise<{
         auteur: {
-            id: string;
             nom: string;
             prenom: string;
             role: import("generated/prisma").$Enums.RoleUser;
-        };
-        categorie: {
             id: string;
-            description: string | null;
-            libelle: string;
         } | null;
     } & {
-        id: string;
-        titre: string;
-        isbnglobale: string;
+        image: string | null;
         description: string;
+        format: string;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        titre: string;
         langue: string;
         urlFichier: string | null;
         urlFichierLocal: string | null;
-        format: string;
-        image: string | null;
         niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
         datePublication: Date | null;
         motsCles: string;
-        auteurId: string;
-        estArchive: boolean;
+        nomAuteur: string | null;
+        auteurId: string | null;
         categorieId: string;
+        estArchive: boolean;
+        isbnglobale: string;
+        telechargements: number;
+        vues: number;
+        noteMoyenne: number;
     }>;
-    remove(id: string): Promise<{
+    downloadRessource(id: string, userId: string): Promise<{
+        message: string;
+        ressource: {
+            id: string;
+            titre: string;
+            urlFichier: string | null;
+            urlFichierLocal: string | null;
+            format: string;
+        };
+    }>;
+    update(id: string, updateRessourceDto: UpdateRessourceDto, userId?: string): Promise<{
+        categorie: {
+            description: string | null;
+            id: string;
+            libelle: string;
+        } | null;
+        auteur: {
+            nom: string;
+            prenom: string;
+            role: import("generated/prisma").$Enums.RoleUser;
+            id: string;
+        } | null;
+    } & {
+        image: string | null;
+        description: string;
+        format: string;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        titre: string;
+        langue: string;
+        urlFichier: string | null;
+        urlFichierLocal: string | null;
+        niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
+        datePublication: Date | null;
+        motsCles: string;
+        nomAuteur: string | null;
+        auteurId: string | null;
+        categorieId: string;
+        estArchive: boolean;
+        isbnglobale: string;
+        telechargements: number;
+        vues: number;
+        noteMoyenne: number;
+    }>;
+    remove(id: string, userId?: string): Promise<{
         id: string;
         message: string;
     }>;
     findByAuteur(auteurId: string, options?: SearchRessourceDto): Promise<{
         data: {
             noteMoyenne: number;
-            auteur: {
-                id: string;
-                nom: string;
-                prenom: string;
-                role: import("generated/prisma").$Enums.RoleUser;
-            };
             categorie: {
-                id: string;
                 description: string | null;
+                id: string;
                 libelle: string;
             } | null;
             _count: {
-                favoris: number;
                 commentaires: number;
                 notations: number;
                 historiques: number;
-                exemplaires: number;
-                reservations: number;
             };
-            id: string;
-            titre: string;
-            isbnglobale: string;
+            auteur: {
+                nom: string;
+                prenom: string;
+                role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+            } | null;
+            exemplaire: {
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                ressourceId: string;
+                etat: import("generated/prisma").$Enums.EtatExemplaire;
+                localisation: string;
+                dateAcquisition: Date | null;
+                qrCode: string | null;
+                nombre: number;
+                nombreDisponible: number;
+            } | null;
+            image: string | null;
             description: string;
+            format: string;
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            titre: string;
             langue: string;
             urlFichier: string | null;
             urlFichierLocal: string | null;
-            format: string;
-            image: string | null;
             niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
             datePublication: Date | null;
             motsCles: string;
-            auteurId: string;
-            estArchive: boolean;
+            nomAuteur: string | null;
+            auteurId: string | null;
             categorieId: string;
+            estArchive: boolean;
+            isbnglobale: string;
+            telechargements: number;
+            vues: number;
         }[];
         meta: {
             total: number;
@@ -213,40 +242,54 @@ export declare class RessourcesService {
     findByUniversite(universiteId: string, options?: SearchRessourceDto): Promise<{
         data: {
             noteMoyenne: number;
-            auteur: {
-                id: string;
-                nom: string;
-                prenom: string;
-                role: import("generated/prisma").$Enums.RoleUser;
-            };
             categorie: {
-                id: string;
                 description: string | null;
+                id: string;
                 libelle: string;
             } | null;
             _count: {
-                favoris: number;
                 commentaires: number;
                 notations: number;
                 historiques: number;
-                exemplaires: number;
-                reservations: number;
             };
-            id: string;
-            titre: string;
-            isbnglobale: string;
+            auteur: {
+                nom: string;
+                prenom: string;
+                role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+            } | null;
+            exemplaire: {
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                ressourceId: string;
+                etat: import("generated/prisma").$Enums.EtatExemplaire;
+                localisation: string;
+                dateAcquisition: Date | null;
+                qrCode: string | null;
+                nombre: number;
+                nombreDisponible: number;
+            } | null;
+            image: string | null;
             description: string;
+            format: string;
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            titre: string;
             langue: string;
             urlFichier: string | null;
             urlFichierLocal: string | null;
-            format: string;
-            image: string | null;
             niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
             datePublication: Date | null;
             motsCles: string;
-            auteurId: string;
-            estArchive: boolean;
+            nomAuteur: string | null;
+            auteurId: string | null;
             categorieId: string;
+            estArchive: boolean;
+            isbnglobale: string;
+            telechargements: number;
+            vues: number;
         }[];
         meta: {
             total: number;
@@ -258,40 +301,54 @@ export declare class RessourcesService {
     findByCategorie(categorieId: string, options?: SearchRessourceDto): Promise<{
         data: {
             noteMoyenne: number;
-            auteur: {
-                id: string;
-                nom: string;
-                prenom: string;
-                role: import("generated/prisma").$Enums.RoleUser;
-            };
             categorie: {
-                id: string;
                 description: string | null;
+                id: string;
                 libelle: string;
             } | null;
             _count: {
-                favoris: number;
                 commentaires: number;
                 notations: number;
                 historiques: number;
-                exemplaires: number;
-                reservations: number;
             };
-            id: string;
-            titre: string;
-            isbnglobale: string;
+            auteur: {
+                nom: string;
+                prenom: string;
+                role: import("generated/prisma").$Enums.RoleUser;
+                id: string;
+            } | null;
+            exemplaire: {
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                ressourceId: string;
+                etat: import("generated/prisma").$Enums.EtatExemplaire;
+                localisation: string;
+                dateAcquisition: Date | null;
+                qrCode: string | null;
+                nombre: number;
+                nombreDisponible: number;
+            } | null;
+            image: string | null;
             description: string;
+            format: string;
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            titre: string;
             langue: string;
             urlFichier: string | null;
             urlFichierLocal: string | null;
-            format: string;
-            image: string | null;
             niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
             datePublication: Date | null;
             motsCles: string;
-            auteurId: string;
-            estArchive: boolean;
+            nomAuteur: string | null;
+            auteurId: string | null;
             categorieId: string;
+            estArchive: boolean;
+            isbnglobale: string;
+            telechargements: number;
+            vues: number;
         }[];
         meta: {
             total: number;
@@ -300,43 +357,117 @@ export declare class RessourcesService {
             pages: number;
         };
     }>;
-    toggleArchivage(id: string): Promise<{
-        id: string;
-        titre: string;
-        isbnglobale: string;
-        description: string;
-        langue: string;
-        urlFichier: string | null;
-        urlFichierLocal: string | null;
-        format: string;
+    toggleArchivage(id: string, userId?: string): Promise<{
         image: string | null;
-        niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
-        datePublication: Date | null;
-        motsCles: string;
-        auteurId: string;
-        estArchive: boolean;
-        categorieId: string;
-    }>;
-    enregistrerAcces(data: {
-        userId: string;
-        ressourceId: string;
-        typeAcces: TypeAcces;
-        ipAcces: string;
-        universiteSrc?: string;
-    }): Promise<{
+        description: string;
+        format: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        ressourceId: string;
-        universiteSrc: string | null;
-        universiteUser: string | null;
-        dateAcces: Date;
-        typeAcces: import("generated/prisma").$Enums.TypeAcces;
+        titre: string;
+        langue: string;
+        urlFichier: string | null;
+        urlFichierLocal: string | null;
+        niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
+        datePublication: Date | null;
+        motsCles: string;
+        nomAuteur: string | null;
+        auteurId: string | null;
+        categorieId: string;
+        estArchive: boolean;
+        isbnglobale: string;
+        telechargements: number;
+        vues: number;
+        noteMoyenne: number;
     }>;
     getStatistiques(ressourceId: string): Promise<{
         totalAcces: number;
         parType: Record<string, number>;
     }>;
     private generateIsbnCode;
+    findTopRated(options?: SearchRessourceDto): Promise<{
+        noteMoyenne: number;
+        _count: {
+            commentaires: number;
+            notations: number;
+            historiques: number;
+        };
+        auteur: {
+            nom: string;
+            prenom: string;
+            role: import("generated/prisma").$Enums.RoleUser;
+            id: string;
+        } | null;
+        image: string | null;
+        description: string;
+        format: string;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        titre: string;
+        langue: string;
+        urlFichier: string | null;
+        urlFichierLocal: string | null;
+        niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
+        datePublication: Date | null;
+        motsCles: string;
+        nomAuteur: string | null;
+        auteurId: string | null;
+        categorieId: string;
+        estArchive: boolean;
+        isbnglobale: string;
+        telechargements: number;
+        vues: number;
+    }[]>;
+    findRecentlyAccessed(limit?: number): Promise<(({
+        categorie: {
+            description: string | null;
+            id: string;
+            libelle: string;
+        } | null;
+        auteur: {
+            nom: string;
+            prenom: string;
+            role: import("generated/prisma").$Enums.RoleUser;
+            id: string;
+        } | null;
+    } & {
+        image: string | null;
+        description: string;
+        format: string;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        titre: string;
+        langue: string;
+        urlFichier: string | null;
+        urlFichierLocal: string | null;
+        niveauAcces: import("generated/prisma").$Enums.NiveauAcces;
+        datePublication: Date | null;
+        motsCles: string;
+        nomAuteur: string | null;
+        auteurId: string | null;
+        categorieId: string;
+        estArchive: boolean;
+        isbnglobale: string;
+        telechargements: number;
+        vues: number;
+        noteMoyenne: number;
+    }) | null)[]>;
+    findTopAccessed(options?: SearchRessourceDto): Promise<(Prisma.PickEnumerable<Prisma.HistoriqueAccesGroupByOutputType, "ressourceId"[]> & {
+        _count: {
+            ressourceId: number;
+        };
+    })[]>;
+    getHistoriqueRessource(ressourceId: string, limit?: number): Promise<{
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        userId: string;
+        ressourceId: string | null;
+        typeAcces: import("generated/prisma").$Enums.TypeAcces;
+        universiteRess: string;
+        externRessourceId: string | null;
+    }[]>;
+    compterAccesRessource(ressourceId: string, typeAcces?: TypeAcces): Promise<number>;
 }

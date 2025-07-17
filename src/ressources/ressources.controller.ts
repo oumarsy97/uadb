@@ -214,36 +214,15 @@ export class RessourcesController {
     }
   }
 
-  @MessagePattern('enregistrerAccesRessource')
-  async enregistrerAcces(@Payload() data: { 
-    ressourceId: string; 
-    typeAcces: 'CONSULTATION' | 'TELECHARGEMENT' | 'CITATION' | 'PARTAGE';
-    ipAcces: string;
-    universiteSrc?: string;
-    token: string;
-  }) {
-    try {
-      const { ressourceId, typeAcces, ipAcces, universiteSrc, token } = data;
-      
-      // Extraire l'ID utilisateur depuis le token
-      const userId = this.extractUserIdFromToken(token);
-      
-      const accessData = {
-        userId,
-        ressourceId,
-        typeAcces,
-        ipAcces,
-        universiteSrc
-      };
-      
-      return await this.ressourcesService.enregistrerAcces(accessData);
-    } catch (error) {
-      return {
-        error: true,
-        message: error.message,
-        statusCode: error.status || 500
-      };
-    }
+  //les n ressources les mieux noté
+  @MessagePattern('findTopRatedRessources')
+  async findTopRatedRessources(options?: SearchRessourceDto) {
+    return await this.ressourcesService.findTopRated(options);
+  }
+  // les n ressources les plus consultées
+  @MessagePattern('findTopAccessedRessources')
+  async findTopAccessedRessources(options?: SearchRessourceDto) {
+    return await this.ressourcesService.findTopAccessed(options);
   }
 
   

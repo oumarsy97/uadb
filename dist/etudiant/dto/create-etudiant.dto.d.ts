@@ -9,7 +9,6 @@ export declare class CreateEtudiantDto {
     image?: string;
     role: RoleUser;
     dateNaissance: string;
-    niveauEtudes?: NiveauEtudes;
     filiereId: string;
 }
 export declare class UpdateEtudiantDto {

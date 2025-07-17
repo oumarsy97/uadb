@@ -6,8 +6,6 @@ const microservices_1 = require("@nestjs/microservices");
 const dotenv = require("dotenv");
 async function bootstrap() {
     dotenv.config();
-    console.log("JWT_SECRET:", process.env.JWT_SECRET);
-    console.log("Environment:", process.env.NODE_ENV);
     const app = await core_1.NestFactory.createMicroservice(app_module_1.AppModule, {
         transport: microservices_1.Transport.TCP,
         options: {

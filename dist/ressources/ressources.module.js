@@ -12,13 +12,14 @@ const ressources_service_1 = require("./ressources.service");
 const ressources_controller_1 = require("./ressources.controller");
 const prisma_service_1 = require("../prisma/prisma.service");
 const jwt_1 = require("@nestjs/jwt");
+const historique_acces_service_1 = require("../interactions/historique-acces/historique-acces.service");
 let RessourcesModule = class RessourcesModule {
 };
 exports.RessourcesModule = RessourcesModule;
 exports.RessourcesModule = RessourcesModule = __decorate([
     (0, common_1.Module)({
         controllers: [ressources_controller_1.RessourcesController],
-        providers: [ressources_service_1.RessourcesService, prisma_service_1.PrismaService, jwt_1.JwtService],
+        providers: [ressources_service_1.RessourcesService, prisma_service_1.PrismaService, jwt_1.JwtService, historique_acces_service_1.HistoriqueAccesService,],
         exports: [ressources_service_1.RessourcesService],
     })
 ], RessourcesModule);

@@ -8,16 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.InteractionsModule = void 0;
 const common_1 = require("@nestjs/common");
-const favoris_module_1 = require("./favoris/favoris.module");
 const commentaires_module_1 = require("./commentaires/commentaires.module");
 const notations_module_1 = require("./notations/notations.module");
 const historique_acces_module_1 = require("./historique-acces/historique-acces.module");
+const favoris_module_1 = require("./favoris/favoris.module");
+const prisma_service_1 = require("../prisma/prisma.service");
 let InteractionsModule = class InteractionsModule {
 };
 exports.InteractionsModule = InteractionsModule;
 exports.InteractionsModule = InteractionsModule = __decorate([
     (0, common_1.Module)({
-        imports: [favoris_module_1.FavorisModule, commentaires_module_1.CommentairesModule, notations_module_1.NotationsModule, historique_acces_module_1.HistoriqueAccesModule]
+        imports: [favoris_module_1.FavorisModule, commentaires_module_1.CommentairesModule, notations_module_1.NotationsModule, historique_acces_module_1.HistoriqueAccesModule],
+        exports: [favoris_module_1.FavorisModule, commentaires_module_1.CommentairesModule, notations_module_1.NotationsModule, historique_acces_module_1.HistoriqueAccesModule],
+        controllers: [],
+        providers: [prisma_service_1.PrismaService,],
     })
 ], InteractionsModule);
 //# sourceMappingURL=interactions.module.js.map

@@ -24,7 +24,6 @@ let EtudiantController = class EtudiantController {
     }
     async create(createEtudiantDto) {
         try {
-            console.log('Received createEtudiant request:', createEtudiantDto);
             return await this.etudiantService.create(createEtudiantDto);
         }
         catch (error) {

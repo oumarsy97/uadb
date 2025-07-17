@@ -6,6 +6,7 @@ export declare class CreateUtilisateurDto {
     prenom: string;
     image?: string;
     role: RoleUser;
+    telephone: string;
 }
 export declare class LoginDataDto {
     email: string;

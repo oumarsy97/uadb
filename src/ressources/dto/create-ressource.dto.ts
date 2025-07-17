@@ -1,5 +1,5 @@
 // dto/create-ressource.dto.ts
-import { IsString, IsOptional, IsEnum, IsUUID, IsBoolean, IsDateString, IsNotEmpty } from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsUUID, IsBoolean, IsDateString, IsNotEmpty, IsNumber } from 'class-validator';
 import { NiveauAcces } from 'generated/prisma';
 
 export enum TypeValidation {
@@ -48,6 +48,10 @@ export class CreateRessourceDto {
   @IsString()
   @IsNotEmpty()
   motsCles: string;
+
+  @IsString()
+  @IsOptional()
+  nomAuteur?: string;
 
   @IsUUID()
   @IsNotEmpty() // ✅ Obligatoire

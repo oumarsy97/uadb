@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ExemplairePhysiqueService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const prisma_1 = require("../../generated/prisma/index.js");
 const ressources_service_1 = require("../ressources/ressources.service");
 let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePhysiqueService {
     prisma;
@@ -26,14 +27,22 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
         try {
             this.logger.log(`Création d'un exemplaire physique par l'utilisateur: ${userId}`);
             this.logger.log(`Création d'un exemplaire physique: ${JSON.stringify(createExemplairePhysiqueDto, null, 2)}`);
-            if (!createExemplairePhysiqueDto.cote) {
-                throw new common_1.BadRequestException('La cote est obligatoire');
-            }
-            const existingExemplaire = await this.prisma.exemplairePhysique.findFirst({
-                where: {
-                    cote: createExemplairePhysiqueDto.cote,
-                },
+            const userExists = await this.prisma.user.findUnique({
+                where: { id: userId }
             });
+            if (!userExists) {
+                throw new common_1.BadRequestException('L\'utilisateur spécifié n\'existe pas');
+            }
+            let finalAuteurId;
+            let finalNomAuteur;
+            if (userExists.role === 'ENSEIGNANT') {
+                finalAuteurId = userId;
+                finalNomAuteur = `${userExists.prenom} ${userExists.nom}`;
+            }
+            else {
+                finalAuteurId = null;
+                finalNomAuteur = createExemplairePhysiqueDto.nomAuteur || `${userExists.prenom} ${userExists.nom}`;
+            }
             const ressource = await this.ressourcesService.create({
                 titre: createExemplairePhysiqueDto.titre,
                 description: createExemplairePhysiqueDto.description,
@@ -45,25 +54,19 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
                 datePublication: createExemplairePhysiqueDto.datePublication || new Date(),
                 motsCles: createExemplairePhysiqueDto.motsCles,
                 auteurId: userId,
+                nomAuteur: finalNomAuteur,
                 categorieId: createExemplairePhysiqueDto.categorieId,
             });
             const ressourceId = ressource.id;
-            if (existingExemplaire) {
-                throw new common_1.BadRequestException('Un exemplaire avec cette cote existe déjà');
-            }
             const qrCode = await this.generateQRCode();
             const exemplaireData = {
                 id: ressourceId,
-                cote: createExemplairePhysiqueDto.cote,
-                etat: createExemplairePhysiqueDto.etat || 'BON',
-                disponible: createExemplairePhysiqueDto.disponible ?? true,
-                localisation: createExemplairePhysiqueDto.localisation || 'Non spécifiée',
-                dateAcquisition: createExemplairePhysiqueDto.dateAcquisition || new Date(),
+                localisation: createExemplairePhysiqueDto.localisation || 'Tiroir 1, Etagère 2',
                 qrCode,
-                dureeMaxEmpruntExterne: createExemplairePhysiqueDto.dureeMaxEmpruntExterne != null ? +createExemplairePhysiqueDto.dureeMaxEmpruntExterne : 14,
-                nbMaxExemplairesExterne: createExemplairePhysiqueDto.nbMaxExemplairesExterne !== undefined && createExemplairePhysiqueDto.nbMaxExemplairesExterne !== null
-                    ? +createExemplairePhysiqueDto.nbMaxExemplairesExterne
-                    : 1,
+                nombre: createExemplairePhysiqueDto.nombre || 1,
+                nombreDisponible: createExemplairePhysiqueDto.nombre || 1,
+                etat: prisma_1.EtatExemplaire.BON,
+                dateAcquisition: new Date(),
                 ressource: {
                     connect: { id: ressourceId }
                 },
@@ -77,13 +80,15 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
                             id: true,
                             titre: true,
                             isbnglobale: true,
-                            auteur: {
+                            nomAuteur: true,
+                            auteur: finalAuteurId ? {
                                 select: {
                                     id: true,
                                     nom: true,
                                     prenom: true,
+                                    role: true,
                                 }
-                            },
+                            } : undefined,
                             categorie: {
                                 select: {
                                     id: true,
@@ -104,16 +109,16 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
         }
     }
     async findAll(options = {}) {
-        const { page = 1, limit = 10, search = '', etat, disponible, ressourceId, localisation, orderBy = 'dateAcquisition', orderDirection = 'desc', } = options;
+        const { page = 1, limit = 10, search = '', etat, ressourceId, localisation, orderBy = 'dateAcquisition', orderDirection = 'desc', } = options;
         const skip = (page - 1) * limit;
         const where = {};
         if (search) {
             where.OR = [
-                { cote: { contains: search } },
                 { localisation: { contains: search } },
                 { qrCode: { contains: search } },
                 { ressource: { titre: { contains: search } } },
                 { ressource: { isbnglobale: { contains: search } } },
+                { ressource: { nomAuteur: { contains: search } } },
             ];
         }
         if (etat)
@@ -135,11 +140,14 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
                             id: true,
                             titre: true,
                             isbnglobale: true,
+                            image: true,
+                            nomAuteur: true,
                             auteur: {
                                 select: {
                                     id: true,
                                     nom: true,
                                     prenom: true,
+                                    role: true,
                                 }
                             },
                             categorie: {
@@ -152,7 +160,7 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
                     },
                     _count: {
                         select: {
-                            emprunts: true,
+                            empruntExemplaires: true,
                         },
                     },
                 },
@@ -196,15 +204,19 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
                             }
                         }
                     },
-                    emprunts: {
+                    empruntExemplaires: {
                         include: {
-                            user: {
-                                select: {
-                                    id: true,
-                                    nom: true,
-                                    prenom: true,
+                            emprunt: {
+                                include: {
+                                    user: {
+                                        select: {
+                                            id: true,
+                                            nom: true,
+                                            prenom: true,
+                                        }
+                                    }
                                 }
-                            }
+                            },
                         },
                         orderBy: {
                             dateEmprunt: 'desc'
@@ -213,7 +225,7 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
                     },
                     _count: {
                         select: {
-                            emprunts: true,
+                            empruntExemplaires: true,
                         },
                     },
                 },
@@ -236,17 +248,7 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
             if (!exemplaireExists) {
                 throw new common_1.NotFoundException(`Exemplaire physique avec l'ID ${id} non trouvé`);
             }
-            if (updateExemplairePhysiqueDto.cote && updateExemplairePhysiqueDto.cote !== exemplaireExists.cote) {
-                const existingWithSameCote = await this.prisma.exemplairePhysique.findFirst({
-                    where: {
-                        cote: updateExemplairePhysiqueDto.cote,
-                        id: { not: id }
-                    },
-                });
-                if (existingWithSameCote) {
-                    throw new common_1.BadRequestException('Un exemplaire avec cette cote existe déjà');
-                }
-            }
+            this.logger.log(`Mise à jour de l'exemplaire physique ${id} avec les données: ${JSON.stringify(updateExemplairePhysiqueDto, null, 2)}`);
             const updateData = { ...updateExemplairePhysiqueDto };
             if (updateExemplairePhysiqueDto.ressourceId) {
                 const ressourceExists = await this.prisma.ressource.findUnique({
@@ -267,11 +269,13 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
                             id: true,
                             titre: true,
                             isbnglobale: true,
+                            nomAuteur: true,
                             auteur: {
                                 select: {
                                     id: true,
                                     nom: true,
                                     prenom: true,
+                                    role: true,
                                 }
                             },
                             categorie: {
@@ -297,7 +301,7 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
                 include: {
                     _count: {
                         select: {
-                            emprunts: true,
+                            empruntExemplaires: true,
                         }
                     }
                 }
@@ -343,6 +347,7 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
                                     id: true,
                                     nom: true,
                                     prenom: true,
+                                    role: true,
                                 }
                             },
                             categorie: {
@@ -365,7 +370,7 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
             throw error;
         }
     }
-    async toggleDisponibilite(id) {
+    async updateDisponibilite(id, quantite) {
         try {
             const exemplairePhysique = await this.prisma.exemplairePhysique.findUnique({
                 where: { id },
@@ -373,24 +378,48 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
             if (!exemplairePhysique) {
                 throw new common_1.NotFoundException(`Exemplaire physique avec l'ID ${id} non trouvé`);
             }
+            const nouveauNombreDisponible = exemplairePhysique.nombreDisponible + quantite;
+            if (nouveauNombreDisponible > exemplairePhysique.nombre) {
+                throw new common_1.BadRequestException('Le nombre disponible ne peut pas dépasser le nombre total d\'exemplaires');
+            }
+            if (nouveauNombreDisponible < 0) {
+                throw new common_1.BadRequestException('Le nombre disponible ne peut pas être négatif');
+            }
             return await this.prisma.exemplairePhysique.update({
                 where: { id },
+                data: {
+                    nombreDisponible: nouveauNombreDisponible
+                },
                 include: {
                     ressource: {
                         select: {
                             id: true,
                             titre: true,
+                            nomAuteur: true,
                         }
                     }
-                },
-                data: {
-                    disponible: !exemplairePhysique.disponible
                 }
             });
         }
         catch (error) {
-            this.logger.error(`Erreur lors du changement de disponibilité de l'exemplaire physique ${id}: ${error.message}`);
+            this.logger.error(`Erreur lors de la mise à jour de la disponibilité de l'exemplaire physique ${id}: ${error.message}`);
             throw error;
+        }
+    }
+    async isDisponible(id, quantiteDemandee = 1) {
+        try {
+            const exemplairePhysique = await this.prisma.exemplairePhysique.findUnique({
+                where: { id },
+                select: { nombreDisponible: true }
+            });
+            if (!exemplairePhysique) {
+                return false;
+            }
+            return exemplairePhysique.nombreDisponible >= quantiteDemandee;
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de la vérification de disponibilité de l'exemplaire physique ${id}: ${error.message}`);
+            return false;
         }
     }
     async getStatistiques(ressourceId) {
@@ -404,16 +433,25 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
                     etat: true,
                 },
             });
-            const disponibles = await this.prisma.exemplairePhysique.count({
-                where: { ...where, disponible: true }
+            const exemplaires = await this.prisma.exemplairePhysique.findMany({
+                where,
+                select: {
+                    nombre: true,
+                    nombreDisponible: true,
+                }
             });
-            const nonDisponibles = await this.prisma.exemplairePhysique.count({
-                where: { ...where, disponible: false }
-            });
+            const totalStock = exemplaires.reduce((sum, ex) => sum + ex.nombre, 0);
+            const totalDisponible = exemplaires.reduce((sum, ex) => sum + ex.nombreDisponible, 0);
+            const totalEmprunte = totalStock - totalDisponible;
+            const exemplairesDispo = exemplaires.filter(ex => ex.nombreDisponible > 0).length;
+            const exemplairesEpuises = exemplaires.filter(ex => ex.nombreDisponible === 0).length;
             return {
                 totalExemplaires,
-                disponibles,
-                nonDisponibles,
+                totalStock,
+                totalDisponible,
+                totalEmprunte,
+                exemplairesDispo,
+                exemplairesEpuises,
                 parEtat: parEtat.reduce((acc, stat) => {
                     acc[stat.etat] = stat._count.etat;
                     return acc;
@@ -422,6 +460,41 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
         }
         catch (error) {
             this.logger.error(`Erreur lors de la récupération des statistiques: ${error.message}`);
+            throw error;
+        }
+    }
+    async ajusterStock(id, nouveauNombre) {
+        try {
+            const exemplairePhysique = await this.prisma.exemplairePhysique.findUnique({
+                where: { id },
+            });
+            if (!exemplairePhysique) {
+                throw new common_1.NotFoundException(`Exemplaire physique avec l'ID ${id} non trouvé`);
+            }
+            if (nouveauNombre < 0) {
+                throw new common_1.BadRequestException('Le nombre d\'exemplaires ne peut pas être négatif');
+            }
+            const difference = nouveauNombre - exemplairePhysique.nombre;
+            const nouveauNombreDisponible = Math.max(0, exemplairePhysique.nombreDisponible + difference);
+            return await this.prisma.exemplairePhysique.update({
+                where: { id },
+                data: {
+                    nombre: nouveauNombre,
+                    nombreDisponible: nouveauNombreDisponible
+                },
+                include: {
+                    ressource: {
+                        select: {
+                            id: true,
+                            titre: true,
+                            nomAuteur: true,
+                        }
+                    }
+                }
+            });
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de l'ajustement du stock de l'exemplaire physique ${id}: ${error.message}`);
             throw error;
         }
     }
@@ -437,6 +510,163 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
         }
         this.logger.log(`Génération du QR Code: ${qrCode}`);
         return qrCode;
+    }
+    toggleDisponibilite(id) {
+        return this.prisma.exemplairePhysique.update({
+            where: { id },
+            data: {
+                nombreDisponible: {
+                    decrement: 1
+                }
+            },
+            include: {
+                ressource: {
+                    select: {
+                        id: true,
+                        titre: true,
+                        nomAuteur: true,
+                        auteur: {
+                            select: {
+                                id: true,
+                                nom: true,
+                                prenom: true,
+                                role: true,
+                            }
+                        },
+                        categorie: {
+                            select: {
+                                id: true,
+                                libelle: true,
+                            }
+                        }
+                    }
+                }
+            },
+        });
+    }
+    async findByLocalisation(localisation) {
+        try {
+            const exemplaires = await this.prisma.exemplairePhysique.findMany({
+                where: {
+                    localisation: {
+                        contains: localisation
+                    }
+                },
+                include: {
+                    ressource: {
+                        select: {
+                            id: true,
+                            titre: true,
+                            isbnglobale: true,
+                            nomAuteur: true,
+                            auteur: {
+                                select: {
+                                    id: true,
+                                    nom: true,
+                                    prenom: true,
+                                    role: true,
+                                }
+                            },
+                            categorie: {
+                                select: {
+                                    id: true,
+                                    libelle: true,
+                                }
+                            }
+                        }
+                    },
+                },
+            });
+            if (exemplaires.length === 0) {
+                throw new common_1.NotFoundException(`Aucun exemplaire physique trouvé pour la localisation "${localisation}"`);
+            }
+            return exemplaires;
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de la recherche par localisation "${localisation}": ${error.message}`);
+            throw error;
+        }
+    }
+    async findByEtat(etat) {
+        try {
+            const exemplaires = await this.prisma.exemplairePhysique.findMany({
+                where: { etat },
+                include: {
+                    ressource: {
+                        select: {
+                            id: true,
+                            titre: true,
+                            isbnglobale: true,
+                            nomAuteur: true,
+                            auteur: {
+                                select: {
+                                    id: true,
+                                    nom: true,
+                                    prenom: true,
+                                    role: true,
+                                }
+                            },
+                            categorie: {
+                                select: {
+                                    id: true,
+                                    libelle: true,
+                                }
+                            }
+                        }
+                    },
+                },
+            });
+            if (exemplaires.length === 0) {
+                throw new common_1.NotFoundException(`Aucun exemplaire physique trouvé pour l'état "${etat}"`);
+            }
+            return exemplaires;
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de la recherche par état "${etat}": ${error.message}`);
+            throw error;
+        }
+    }
+    async findByRessourceAndEtat(ressourceId, etat) {
+        try {
+            const exemplaires = await this.prisma.exemplairePhysique.findMany({
+                where: {
+                    ressourceId,
+                    etat,
+                },
+                include: {
+                    ressource: {
+                        select: {
+                            id: true,
+                            titre: true,
+                            isbnglobale: true,
+                            nomAuteur: true,
+                            auteur: {
+                                select: {
+                                    id: true,
+                                    nom: true,
+                                    prenom: true,
+                                    role: true,
+                                }
+                            },
+                            categorie: {
+                                select: {
+                                    id: true,
+                                    libelle: true,
+                                }
+                            }
+                        }
+                    },
+                },
+            });
+            if (exemplaires.length === 0) {
+                throw new common_1.NotFoundException(`Aucun exemplaire physique trouvé pour la ressource ID "${ressourceId}" et l'état "${etat}"`);
+            }
+            return exemplaires;
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de la recherche par ressource ID "${ressourceId}" et état "${etat}": ${error.message}`);
+            throw error;
+        }
     }
 };
 exports.ExemplairePhysiqueService = ExemplairePhysiqueService;

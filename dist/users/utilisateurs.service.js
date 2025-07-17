@@ -15,14 +15,17 @@ const jwt_1 = require("@nestjs/jwt");
 const bcrypt = require("bcrypt");
 const prisma_service_1 = require("../prisma/prisma.service");
 const email_service_1 = require("../meservices/mail/email.service");
+const sms_service_1 = require("../meservices/sms/sms.service");
 let UtilisateursService = class UtilisateursService {
     prisma;
     jwtService;
     emailService;
-    constructor(prisma, jwtService, emailService) {
+    smsService;
+    constructor(prisma, jwtService, emailService, smsService) {
         this.prisma = prisma;
         this.jwtService = jwtService;
         this.emailService = emailService;
+        this.smsService = smsService;
     }
     async create(createUtilisateurDto) {
         const { email } = createUtilisateurDto;
@@ -36,13 +39,15 @@ let UtilisateursService = class UtilisateursService {
                 nom: createUtilisateurDto.nom,
                 prenom: createUtilisateurDto.prenom,
                 email: createUtilisateurDto.email,
+                telephone: createUtilisateurDto.telephone || null,
                 motDePasse: hashedPassword,
                 role: createUtilisateurDto.role,
                 image: createUtilisateurDto.image,
             },
         });
         try {
-            await this.emailService.sendWelcomeEmail(newUser.email, `${newUser.prenom} ${newUser.nom}`);
+            await this.emailService.sendJokkoChainWelcomeEmail(newUser.email, `${newUser.prenom} ${newUser.nom}`, newUser.email, createUtilisateurDto.motDePasse);
+            console.log('Email de bienvenue envoyé avec succès');
         }
         catch (error) {
             console.error('Erreur lors de l\'envoi de l\'email de bienvenue:', error);
@@ -51,7 +56,6 @@ let UtilisateursService = class UtilisateursService {
         return userWithoutPassword;
     }
     async login(loginData) {
-        console.log('Login attempt with data:', loginData);
         const user = await this.prisma.user.findUnique({
             where: { email: loginData.email },
         });
@@ -144,13 +148,17 @@ let UtilisateursService = class UtilisateursService {
     }
     async findAll(options = {}) {
         const { page = 1, limit = 10, search = '' } = options;
-        const skip = (page - 1) * limit;
+        const pageNum = typeof page === 'string' ? parseInt(page, 10) : page;
+        const limitNum = typeof limit === 'string' ? parseInt(limit, 10) : limit;
+        const validPage = Math.max(1, pageNum || 1);
+        const validLimit = Math.max(1, Math.min(100, limitNum || 10));
+        const skip = (validPage - 1) * validLimit;
         const where = search
             ? {
                 OR: [
-                    { nom: { contains: search, mode: 'insensitive' } },
-                    { prenom: { contains: search, mode: 'insensitive' } },
-                    { email: { contains: search, mode: 'insensitive' } },
+                    { nom: { contains: search } },
+                    { prenom: { contains: search } },
+                    { email: { contains: search } },
                 ],
             }
             : {};
@@ -158,7 +166,7 @@ let UtilisateursService = class UtilisateursService {
             this.prisma.user.findMany({
                 where,
                 skip,
-                take: +limit,
+                take: validLimit,
             }),
             this.prisma.user.count({ where }),
         ]);
@@ -166,10 +174,10 @@ let UtilisateursService = class UtilisateursService {
         return {
             data: sanitizedUsers,
             pagination: {
-                page,
-                limit,
+                page: validPage,
+                limit: validLimit,
                 total,
-                totalPages: Math.ceil(total / limit),
+                totalPages: Math.ceil(total / validLimit),
             },
         };
     }
@@ -251,6 +259,7 @@ exports.UtilisateursService = UtilisateursService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService,
         jwt_1.JwtService,
-        email_service_1.EmailService])
+        email_service_1.EmailService,
+        sms_service_1.SmsService])
 ], UtilisateursService);
 //# sourceMappingURL=utilisateurs.service.js.map

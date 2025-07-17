@@ -1,4 +1,4 @@
-import { EtatExemplaire, NiveauAcces } from 'generated/prisma';
+import { NiveauAcces } from 'generated/prisma';
 export declare class CreateExemplairePhysiqueDto {
     titre: string;
     description: string;
@@ -13,11 +13,7 @@ export declare class CreateExemplairePhysiqueDto {
     categorieId: string;
     auteurId?: string;
     ressourceId?: string;
-    cote: string;
-    etat?: EtatExemplaire;
-    disponible?: boolean;
     localisation?: string;
-    dateAcquisition?: Date;
-    dureeMaxEmpruntExterne?: number;
-    nbMaxExemplairesExterne?: number;
+    nombre: number;
+    nomAuteur: string;
 }

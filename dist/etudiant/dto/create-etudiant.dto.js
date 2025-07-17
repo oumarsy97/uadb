@@ -21,7 +21,6 @@ class CreateEtudiantDto {
     image;
     role;
     dateNaissance;
-    niveauEtudes;
     filiereId;
 }
 exports.CreateEtudiantDto = CreateEtudiantDto;
@@ -60,11 +59,6 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'La date de naissance est requise' }),
     __metadata("design:type", String)
 ], CreateEtudiantDto.prototype, "dateNaissance", void 0);
-__decorate([
-    (0, class_validator_1.IsEnum)(prisma_1.NiveauEtudes, { message: 'Le niveau d\'études doit être valide (LICENCE, MASTER, DOCTORAT, POSTDOCTORAT)' }),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
-], CreateEtudiantDto.prototype, "niveauEtudes", void 0);
 __decorate([
     (0, class_validator_1.IsString)({ message: 'L\'ID de la filière doit être une chaîne de caractères' }),
     __metadata("design:type", String)

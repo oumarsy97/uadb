@@ -29,6 +29,7 @@ class CreateRessourceDto {
     niveauAcces = prisma_1.NiveauAcces.PUBLIC;
     datePublication;
     motsCles;
+    nomAuteur;
     auteurId;
     categorieId;
     estArchive = false;
@@ -84,6 +85,11 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateRessourceDto.prototype, "motsCles", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], CreateRessourceDto.prototype, "nomAuteur", void 0);
 __decorate([
     (0, class_validator_1.IsUUID)(),
     (0, class_validator_1.IsNotEmpty)(),

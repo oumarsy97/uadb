@@ -8,15 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FavorisModule = void 0;
 const common_1 = require("@nestjs/common");
-const favoris_controller_1 = require("./favoris.controller");
 const favoris_service_1 = require("./favoris.service");
+const favoris_controller_1 = require("./favoris.controller");
+const prisma_service_1 = require("../../prisma/prisma.service");
+const JwtHelper_service_1 = require("../../JwtHelper.service");
+const jwt_1 = require("@nestjs/jwt");
 let FavorisModule = class FavorisModule {
 };
 exports.FavorisModule = FavorisModule;
 exports.FavorisModule = FavorisModule = __decorate([
     (0, common_1.Module)({
         controllers: [favoris_controller_1.FavorisController],
-        providers: [favoris_service_1.FavorisService]
+        providers: [favoris_service_1.FavorisService, prisma_service_1.PrismaService, JwtHelper_service_1.JwtHelperService, jwt_1.JwtService],
+        exports: [favoris_service_1.FavorisService, JwtHelper_service_1.JwtHelperService],
     })
 ], FavorisModule);
 //# sourceMappingURL=favoris.module.js.map

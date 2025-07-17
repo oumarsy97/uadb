@@ -1,7 +1,6 @@
 export declare class CreateUfrDto {
     nom: string;
     description?: string;
-    universiteId: string;
 }
 declare const UpdateUfrDto_base: import("@nestjs/common").Type<Partial<CreateUfrDto>>;
 export declare class UpdateUfrDto extends UpdateUfrDto_base {

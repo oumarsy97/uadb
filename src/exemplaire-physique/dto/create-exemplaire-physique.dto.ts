@@ -53,16 +53,6 @@ export class CreateExemplairePhysiqueDto {
     @IsString()
     ressourceId?: string;
 
-  @IsString()
-  cote: string;
-
-  @IsOptional()
-  @IsEnum(EtatExemplaire)
-  etat?: EtatExemplaire;
-
-  @IsOptional()
-  @IsBoolean()
-  disponible?: boolean;
 
   @IsOptional()
   @IsString()
@@ -70,18 +60,8 @@ export class CreateExemplairePhysiqueDto {
 
   @IsOptional()
   @IsDateString()
-  dateAcquisition?: Date;
+  nombre: number;
+  nomAuteur: string;
 
-  @IsOptional()
-  @IsInt()
-  @Min(1)
-  @Max(365)
-  dureeMaxEmpruntExterne?: number;
-
-  @IsOptional()
-  @IsInt()
-  @Min(1)
-  @Max(10)
-  nbMaxExemplairesExterne?: number;
 }
 

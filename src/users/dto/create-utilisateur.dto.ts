@@ -21,6 +21,7 @@ export class CreateUtilisateurDto {
 
   @IsEnum(RoleUser)
   role: RoleUser;
+  telephone: string;
 
  
 }

@@ -168,32 +168,15 @@ exports.Prisma.SanctionUtilisateurScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ReservationScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  ressourceId: 'ressourceId',
-  dateReservation: 'dateReservation',
-  dateDebut: 'dateDebut',
-  dateFin: 'dateFin',
-  statut: 'statut',
-  commentaire: 'commentaire',
-  universiteEmprunteur: 'universiteEmprunteur',
-  validePar: 'validePar',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.ExemplairePhysiqueScalarFieldEnum = {
   id: 'id',
   ressourceId: 'ressourceId',
-  cote: 'cote',
   etat: 'etat',
-  disponible: 'disponible',
   localisation: 'localisation',
   dateAcquisition: 'dateAcquisition',
   qrCode: 'qrCode',
-  dureeMaxEmpruntExterne: 'dureeMaxEmpruntExterne',
-  nbMaxExemplairesExterne: 'nbMaxExemplairesExterne',
+  nombre: 'nombre',
+  nombreDisponible: 'nombreDisponible',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -206,10 +189,20 @@ exports.Prisma.EmpruntScalarFieldEnum = {
   dateRetourPrevue: 'dateRetourPrevue',
   dateRetourEffective: 'dateRetourEffective',
   statut: 'statut',
-  commentaire: 'commentaire',
   universiteEmprunteur: 'universiteEmprunteur',
-  motifEmprunt: 'motifEmprunt',
-  validePar: 'validePar',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmpruntExemplaireScalarFieldEnum = {
+  id: 'id',
+  empruntId: 'empruntId',
+  exemplaireId: 'exemplaireId',
+  dateEmprunt: 'dateEmprunt',
+  dateRetourPrevue: 'dateRetourPrevue',
+  dateRetourEffective: 'dateRetourEffective',
+  statut: 'statut',
+  commentaire: 'commentaire',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -289,7 +282,6 @@ exports.Prisma.EtudiantScalarFieldEnum = {
   userId: 'userId',
   codePermanent: 'codePermanent',
   dateNaissance: 'dateNaissance',
-  dateInscription: 'dateInscription',
   filiereId: 'filiereId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -309,10 +301,6 @@ exports.Prisma.BibliothecaireScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   numeroBibliothecaire: 'numeroBibliothecaire',
-  dateNaissance: 'dateNaissance',
-  adresse: 'adresse',
-  ville: 'ville',
-  pays: 'pays',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -320,21 +308,15 @@ exports.Prisma.BibliothecaireScalarFieldEnum = {
 exports.Prisma.AdministrateurScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  numeroAdmin: 'numeroAdmin',
-  dateNaissance: 'dateNaissance',
-  adresse: 'adresse',
-  ville: 'ville',
-  pays: 'pays'
+  numeroAdmin: 'numeroAdmin'
 };
 
 exports.Prisma.FavoriScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   ressourceId: 'ressourceId',
-  dateAjout: 'dateAjout',
-  note: 'note',
-  universiteSrc: 'universiteSrc',
-  universiteUser: 'universiteUser',
+  externalRessourceId: 'externalRessourceId',
+  universiteRess: 'universiteRess',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -367,10 +349,9 @@ exports.Prisma.HistoriqueAccesScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   ressourceId: 'ressourceId',
-  dateAcces: 'dateAcces',
   typeAcces: 'typeAcces',
-  universiteSrc: 'universiteSrc',
-  universiteUser: 'universiteUser',
+  universiteRess: 'universiteRess',
+  externRessourceId: 'externRessourceId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -418,7 +399,13 @@ exports.Prisma.RessourceScalarFieldEnum = {
   datePublication: 'datePublication',
   motsCles: 'motsCles',
   auteurId: 'auteurId',
+  nomAuteur: 'nomAuteur',
+  telechargements: 'telechargements',
+  vues: 'vues',
   estArchive: 'estArchive',
+  noteMoyenne: 'noteMoyenne',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   categorieId: 'categorieId'
 };
 
@@ -514,19 +501,9 @@ exports.Prisma.SanctionUtilisateurOrderByRelevanceFieldEnum = {
   empruntId: 'empruntId'
 };
 
-exports.Prisma.ReservationOrderByRelevanceFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  ressourceId: 'ressourceId',
-  commentaire: 'commentaire',
-  universiteEmprunteur: 'universiteEmprunteur',
-  validePar: 'validePar'
-};
-
 exports.Prisma.ExemplairePhysiqueOrderByRelevanceFieldEnum = {
   id: 'id',
   ressourceId: 'ressourceId',
-  cote: 'cote',
   localisation: 'localisation',
   qrCode: 'qrCode'
 };
@@ -535,10 +512,14 @@ exports.Prisma.EmpruntOrderByRelevanceFieldEnum = {
   id: 'id',
   exemplaireId: 'exemplaireId',
   userId: 'userId',
-  commentaire: 'commentaire',
-  universiteEmprunteur: 'universiteEmprunteur',
-  motifEmprunt: 'motifEmprunt',
-  validePar: 'validePar'
+  universiteEmprunteur: 'universiteEmprunteur'
+};
+
+exports.Prisma.EmpruntExemplaireOrderByRelevanceFieldEnum = {
+  id: 'id',
+  empruntId: 'empruntId',
+  exemplaireId: 'exemplaireId',
+  commentaire: 'commentaire'
 };
 
 exports.Prisma.RecommandationOrderByRelevanceFieldEnum = {
@@ -606,28 +587,21 @@ exports.Prisma.EnseignantOrderByRelevanceFieldEnum = {
 exports.Prisma.BibliothecaireOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
-  numeroBibliothecaire: 'numeroBibliothecaire',
-  adresse: 'adresse',
-  ville: 'ville',
-  pays: 'pays'
+  numeroBibliothecaire: 'numeroBibliothecaire'
 };
 
 exports.Prisma.AdministrateurOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
-  numeroAdmin: 'numeroAdmin',
-  adresse: 'adresse',
-  ville: 'ville',
-  pays: 'pays'
+  numeroAdmin: 'numeroAdmin'
 };
 
 exports.Prisma.FavoriOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
   ressourceId: 'ressourceId',
-  note: 'note',
-  universiteSrc: 'universiteSrc',
-  universiteUser: 'universiteUser'
+  externalRessourceId: 'externalRessourceId',
+  universiteRess: 'universiteRess'
 };
 
 exports.Prisma.CommentaireOrderByRelevanceFieldEnum = {
@@ -651,8 +625,8 @@ exports.Prisma.HistoriqueAccesOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
   ressourceId: 'ressourceId',
-  universiteSrc: 'universiteSrc',
-  universiteUser: 'universiteUser'
+  universiteRess: 'universiteRess',
+  externRessourceId: 'externRessourceId'
 };
 
 exports.Prisma.DonneesRecommandationOrderByRelevanceFieldEnum = {
@@ -687,6 +661,7 @@ exports.Prisma.RessourceOrderByRelevanceFieldEnum = {
   image: 'image',
   motsCles: 'motsCles',
   auteurId: 'auteurId',
+  nomAuteur: 'nomAuteur',
   categorieId: 'categorieId'
 };
 
@@ -750,14 +725,6 @@ exports.TypeSanction = exports.$Enums.TypeSanction = {
   AMENDE_FINANCIERE: 'AMENDE_FINANCIERE'
 };
 
-exports.StatutReservation = exports.$Enums.StatutReservation = {
-  EN_ATTENTE: 'EN_ATTENTE',
-  CONFIRMEE: 'CONFIRMEE',
-  ANNULEE: 'ANNULEE',
-  TERMINEE: 'TERMINEE',
-  RETARD: 'RETARD'
-};
-
 exports.EtatExemplaire = exports.$Enums.EtatExemplaire = {
   NEUF: 'NEUF',
   BON: 'BON',
@@ -800,6 +767,7 @@ exports.FrequenceRecommandation = exports.$Enums.FrequenceRecommandation = {
 exports.TypeAcces = exports.$Enums.TypeAcces = {
   CONSULTATION: 'CONSULTATION',
   TELECHARGEMENT: 'TELECHARGEMENT',
+  FAVORIS: 'FAVORIS',
   CITATION: 'CITATION',
   PARTAGE: 'PARTAGE'
 };
@@ -816,9 +784,7 @@ exports.TypeInteraction = exports.$Enums.TypeInteraction = {
 
 exports.NiveauAcces = exports.$Enums.NiveauAcces = {
   PUBLIC: 'PUBLIC',
-  AUTHENTIFIE: 'AUTHENTIFIE',
-  UNIVERSITE_ORIGINE: 'UNIVERSITE_ORIGINE',
-  PRIVE: 'PRIVE'
+  UNIVERSITE_ORIGINE: 'UNIVERSITE_ORIGINE'
 };
 
 exports.TypeNotification = exports.$Enums.TypeNotification = {
@@ -837,9 +803,9 @@ exports.Prisma.ModelName = {
   ReglePret: 'ReglePret',
   PolitiqueBibliotheque: 'PolitiqueBibliotheque',
   SanctionUtilisateur: 'SanctionUtilisateur',
-  Reservation: 'Reservation',
   ExemplairePhysique: 'ExemplairePhysique',
   Emprunt: 'Emprunt',
+  EmpruntExemplaire: 'EmpruntExemplaire',
   Recommandation: 'Recommandation',
   Universite: 'Universite',
   Ufr: 'Ufr',

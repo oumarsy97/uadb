@@ -18,6 +18,12 @@ import { FiliereModule } from './filiere/filiere.module';
 import { EmailModule } from './meservices/mail/email.module';
 import { NotificationModule } from './notification/notification.module';
 import { ExemplairePhysiqueModule } from './exemplaire-physique/exemplaire-physique.module';
+import { EmprunteModule } from './emprunte/emprunte.module';
+import { PolitiqueBibliothequeModule } from './politique-bibliotheque/politique-bibliotheque.module';
+import { ReglePretModule } from './regle-pret/regle-pret.module';
+import { AdministrateurModule } from './administrateur/administrateur.module';
+import { EnseignantModule } from './enseignant/enseignant.module';
+import { BibliothecaireModule } from './bibliothecaire/bibliothecaire.module';
 
 @Module({
   imports: [
@@ -34,8 +40,15 @@ import { ExemplairePhysiqueModule } from './exemplaire-physique/exemplaire-physi
     DepartementModule,
     FiliereModule,
     EmailModule,
+   // SmsModule, // Assurez-vous que SmsModule est importé ici
     NotificationModule,
     ExemplairePhysiqueModule,
+    EmprunteModule,
+    PolitiqueBibliothequeModule,
+    ReglePretModule,
+    AdministrateurModule,
+    EnseignantModule,
+    BibliothecaireModule,
   ],
   controllers: [AppController],
   providers: [AppService,],

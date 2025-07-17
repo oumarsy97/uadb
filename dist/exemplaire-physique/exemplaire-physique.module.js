@@ -14,6 +14,7 @@ const prisma_service_1 = require("../prisma/prisma.service");
 const ressources_service_1 = require("../ressources/ressources.service");
 const JwtHelper_service_1 = require("../JwtHelper.service");
 const jwt_1 = require("@nestjs/jwt");
+const historique_acces_service_1 = require("../interactions/historique-acces/historique-acces.service");
 let ExemplairePhysiqueModule = class ExemplairePhysiqueModule {
 };
 exports.ExemplairePhysiqueModule = ExemplairePhysiqueModule;
@@ -21,7 +22,7 @@ exports.ExemplairePhysiqueModule = ExemplairePhysiqueModule = __decorate([
     (0, common_1.Module)({
         imports: [],
         controllers: [exemplaire_physique_controller_1.ExemplairePhysiqueController],
-        providers: [exemplaire_physique_service_1.ExemplairePhysiqueService, prisma_service_1.PrismaService, ressources_service_1.RessourcesService, JwtHelper_service_1.JwtHelperService, jwt_1.JwtService],
+        providers: [exemplaire_physique_service_1.ExemplairePhysiqueService, prisma_service_1.PrismaService, ressources_service_1.RessourcesService, JwtHelper_service_1.JwtHelperService, jwt_1.JwtService, historique_acces_service_1.HistoriqueAccesService],
         exports: [exemplaire_physique_service_1.ExemplairePhysiqueService, JwtHelper_service_1.JwtHelperService],
     })
 ], ExemplairePhysiqueModule);

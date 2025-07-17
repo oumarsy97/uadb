@@ -58,7 +58,6 @@ export declare class EtudiantController {
             dateNaissance: Date;
             filiereId: string;
             codePermanent: string;
-            dateInscription: Date;
         };
     } | {
         success: boolean;
@@ -77,10 +76,20 @@ export declare class EtudiantController {
     }): Promise<{
         success: boolean;
         data: ({
+            filiere: {
+                nom: string;
+                description: string | null;
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
+                departementId: string;
+            };
             user: {
                 email: string;
                 nom: string;
                 prenom: string;
+                image: string | null;
                 role: import("generated/prisma").$Enums.RoleUser;
                 id: string;
                 telephone: string | null;
@@ -95,7 +104,6 @@ export declare class EtudiantController {
             dateNaissance: Date;
             filiereId: string;
             codePermanent: string;
-            dateInscription: Date;
         })[];
         pagination: {
             page: number;
@@ -130,7 +138,6 @@ export declare class EtudiantController {
             dateNaissance: Date;
             filiereId: string;
             codePermanent: string;
-            dateInscription: Date;
         };
     } | {
         success: boolean;
@@ -159,7 +166,6 @@ export declare class EtudiantController {
             dateNaissance: Date;
             filiereId: string;
             codePermanent: string;
-            dateInscription: Date;
         };
     } | {
         success: boolean;
@@ -188,7 +194,6 @@ export declare class EtudiantController {
             dateNaissance: Date;
             filiereId: string;
             codePermanent: string;
-            dateInscription: Date;
         };
     } | {
         success: boolean;
@@ -220,7 +225,6 @@ export declare class EtudiantController {
             dateNaissance: Date;
             filiereId: string;
             codePermanent: string;
-            dateInscription: Date;
         };
     } | {
         success: boolean;

@@ -116,25 +116,24 @@ enum TypeValidation {
 }
 
 // Système de réservation des ressources
-model Reservation {
-  id                   String            @id @default(uuid())
-  userId               String?           @map("user_id")
-  ressourceId          String            @map("ressource_id")
-  dateReservation      DateTime          @default(now()) @map("date_reservation")
-  dateDebut            DateTime          @map("date_debut")
-  dateFin              DateTime          @map("date_fin")
-  statut               StatutReservation @default(EN_ATTENTE)
-  commentaire          String?           @db.Text
-  universiteEmprunteur String            @map("universite_emprunteur") // Université d'origine du réservateur
-  validePar            String?           @map("valide_par") // ID de l'administrateur qui a validé la réservation externe
-  user                 User?             @relation(fields: [userId], references: [id])
-  ressource            Ressource         @relation(fields: [ressourceId], references: [id])
-  valideur             Bibliothecaire?   @relation(fields: [validePar], references: [id]) // ID de l'administrateur qui a validé la réservation
-  createdAt            DateTime          @default(now())
-  updatedAt            DateTime          @updatedAt
-
-  @@index([dateDebut, dateFin]) // Index pour optimiser les recherches par date
-}
+// model Reservation {
+//   id                String              @id @default(uuid())
+//   userId            String?              @map("user_id")
+//   ressourceId       String              @map("ressource_id")
+//   dateReservation   DateTime            @default(now()) @map("date_reservation")
+//   dateDebut         DateTime            @map("date_debut")
+//   dateFin           DateTime            @map("date_fin")
+//   statut            StatutReservation   @default(EN_ATTENTE)
+//   commentaire       String?             @db.Text
+//   universiteEmprunteur String           @map("universite_emprunteur") // Université d'origine du réservateur
+//   validePar         String?             @map("valide_par") // ID de l'administrateur qui a validé la réservation externe
+//   user              User?                @relation(fields: [userId], references: [id])
+//   ressource         Ressource           @relation(fields: [ressourceId], references: [id])
+//   valideur Bibliothecaire? @relation(fields: [validePar], references: [id]) // ID de l'administrateur qui a validé la réservation
+//   createdAt         DateTime       @default(now())
+//   updatedAt         DateTime       @updatedAt
+//   @@index([dateDebut, dateFin]) // Index pour optimiser les recherches par date
+// }
 
 enum StatutReservation {
   EN_ATTENTE
@@ -146,26 +145,20 @@ enum StatutReservation {
 
 // Gestion des exemplaires physiques
 model ExemplairePhysique {
-  id              String         @id @default(uuid())
-  ressourceId     String         @map("ressource_id")
-  cote            String // Référence bibliothécaire
-  etat            EtatExemplaire @default(BON)
-  disponible      Boolean        @default(true)
-  localisation    String // Salle, étage, étagère
-  dateAcquisition DateTime?      @default(now()) @map("date_acquisition")
-  qrCode          String?        @map("qr_code") // QR code pour identification
-
-  // Champs pour emprunts inter-universitaires
-  dureeMaxEmpruntExterne  Int @default(14) @map("duree_max_emprunt_externe") // Durée en jours
-  nbMaxExemplairesExterne Int @default(1) @map("nb_max_exemplaires_externe") // Nombre max d'exemplaires pour emprunt externe
-
-  ressource Ressource @relation(fields: [ressourceId], references: [id])
-  emprunts  Emprunt[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id                 String              @id @default(uuid())
+  ressourceId        String              @unique @map("ressource_id")
+  etat               EtatExemplaire      @default(BON)
+  localisation       String // Salle, étage, étagère
+  dateAcquisition    DateTime?           @default(now()) @map("date_acquisition")
+  qrCode             String?             @map("qr_code") // QR code pour identification
+  nombre             Int                 @default(1)
+  nombreDisponible   Int                 @default(1) // Nombre d'exemplaires disponibles
+  ressource          Ressource           @relation(fields: [ressourceId], references: [id], onDelete: Cascade)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  empruntExemplaires EmpruntExemplaire[]
 
   @@index([ressourceId])
-  @@index([disponible])
   @@index([etat])
   @@index([qrCode])
 }
@@ -182,23 +175,40 @@ enum EtatExemplaire {
 model Emprunt {
   id                   String                @id @default(uuid())
   exemplaireId         String                @map("exemplaire_id")
-  userId               String                @map("user_id")
+  userId               String?               @map("user_id")
   dateEmprunt          DateTime              @default(now()) @map("date_emprunt")
   dateRetourPrevue     DateTime              @map("date_retour_prevue")
   dateRetourEffective  DateTime?             @map("date_retour_effective")
   statut               StatutEmprunt         @default(EN_COURS)
-  commentaire          String?               @db.Text
   universiteEmprunteur String                @map("universite_emprunteur") // Université d'origine de l'emprunteur
-  motifEmprunt         String?               @map("motif_emprunt") // Justification pour emprunt externe
-  validePar            String?               @map("valide_par") // ID de l'administrateur qui a validé l'emprunt externe
-  exemplaire           ExemplairePhysique    @relation(fields: [exemplaireId], references: [id])
   user                 User?                 @relation(fields: [userId], references: [id])
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
   SanctionUtilisateur  SanctionUtilisateur[]
+  empruntExemplaires   EmpruntExemplaire[]
 
   @@index([dateEmprunt, dateRetourPrevue])
   @@index([statut])
+}
+
+// Table de liaison entre Emprunt et ExemplairePhysique
+model EmpruntExemplaire {
+  id                  String        @id @default(uuid())
+  empruntId           String        @map("emprunt_id")
+  exemplaireId        String        @map("exemplaire_id")
+  dateEmprunt         DateTime      @default(now()) @map("date_emprunt")
+  dateRetourPrevue    DateTime      @map("date_retour_prevue")
+  dateRetourEffective DateTime?     @map("date_retour_effective")
+  statut              StatutEmprunt @default(EN_COURS)
+  commentaire         String?       @db.Text
+
+  emprunt    Emprunt            @relation(fields: [empruntId], references: [id])
+  exemplaire ExemplairePhysique @relation(fields: [exemplaireId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([empruntId, exemplaireId])
 }
 
 enum StatutEmprunt {
@@ -336,7 +346,7 @@ model User {
   notations                 Notation[]
   historiques               HistoriqueAcces[]
   collections               Collection[]
-  reservations              Reservation[]
+  // reservations      Reservation[]
   emprunts                  Emprunt[]
   recommandations           Recommandation[]
   // Nouveaux champs pour recommandations
@@ -345,10 +355,10 @@ model User {
   JournalAudit              JournalAudit[]
   donneesRecommandations    DonneesRecommandation[]
   notifications             Notification[]
-  etudiants                 Etudiant[]
-  enseignants               Enseignant[]
-  bibliothecaires           Bibliothecaire[]
-  administrateurs           Administrateur[]
+  etudiant                  Etudiant?
+  enseignant                Enseignant?
+  bibliothecaire            Bibliothecaire?
+  administrateur            Administrateur?
   sanctions                 SanctionUtilisateur[]
 
   @@index([preferencesRecommandation])
@@ -358,23 +368,22 @@ model User {
 }
 
 model Etudiant {
-  id              String   @id @default(uuid())
-  userId          String   @map("user_id")
-  codePermanent   String   @unique @map("numero_etudiant")
-  dateNaissance   DateTime @map("date_naissance")
-  dateInscription DateTime @default(now()) @map("date_inscription")
-  user            User     @relation(fields: [userId], references: [id])
-  filiereId       String   @map("filiere_id")
-  filiere         Filiere  @relation(fields: [filiereId], references: [id])
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id            String   @id @default(uuid())
+  userId        String   @unique @map("user_id")
+  codePermanent String   @unique @map("numero_etudiant")
+  dateNaissance DateTime @map("date_naissance")
+  user          User     @relation(fields: [userId], references: [id])
+  filiereId     String   @map("filiere_id")
+  filiere       Filiere  @relation(fields: [filiereId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@index([userId])
 }
 
 model Enseignant {
   id               String   @id @default(uuid())
-  userId           String   @map("user_id")
+  userId           String   @unique @map("user_id")
   numeroEnseignant String   @unique @map("numero_enseignant")
   dateNaissance    DateTime @map("date_naissance")
   specialite       String?
@@ -386,29 +395,21 @@ model Enseignant {
 }
 
 model Bibliothecaire {
-  id                   String        @id @default(uuid())
-  userId               String        @map("user_id")
-  numeroBibliothecaire String        @unique @map("numero_bibliothecaire")
-  dateNaissance        DateTime      @map("date_naissance")
-  adresse              String?
-  ville                String?
-  pays                 String?
-  user                 User          @relation(fields: [userId], references: [id])
-  createdAt            DateTime      @default(now())
-  updatedAt            DateTime      @updatedAt
-  reservations         Reservation[]
+  id                   String   @id @default(uuid())
+  userId               String   @unique @map("user_id")
+  numeroBibliothecaire String   @unique @map("numero_bibliothecaire")
+  user                 User     @relation(fields: [userId], references: [id])
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  // reservations      Reservation[]
 
   @@index([userId])
 }
 
 model Administrateur {
-  id            String   @id @default(uuid())
-  userId        String   @map("user_id")
-  numeroAdmin   String   @unique @map("numero_administrateur")
-  dateNaissance DateTime @map("date_naissance")
-  adresse       String?
-  ville         String?
-  pays          String?
+  id          String @id @default(uuid())
+  userId      String @unique @map("user_id")
+  numeroAdmin String @unique @map("numero_administrateur")
 
   user User @relation(fields: [userId], references: [id])
 
@@ -423,22 +424,25 @@ enum FrequenceRecommandation {
 }
 
 model Favori {
-  id             String    @id @default(uuid())
-  userId         String    @map("user_id")
-  ressourceId    String    @map("ressource_id")
-  dateAjout      DateTime  @default(now()) @map("date_ajout")
-  note           String?   @db.Text
-  user           User      @relation(fields: [userId], references: [id])
-  ressource      Ressource @relation(fields: [ressourceId], references: [id])
-  universiteSrc  String?   @map("universite_source") // Si favori externe
-  universiteUser String?   @map("universite_utilisateur") // Université de l'utilisateur
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  id     String @id @default(uuid())
+  userId String @map("user_id")
+
+  // Pour les ressources locales
+  ressourceId String?    @map("ressource_id")
+  ressource   Ressource? @relation(fields: [ressourceId], references: [id])
+
+  // Pour les ressources externes
+  externalRessourceId String? @map("external_ressource_id")
+  universiteRess      String? @map("universite_source")
+
+  user User? @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([userId, ressourceId])
-  @@index([dateAjout])
-  @@index([universiteSrc])
-  @@index([universiteUser])
+  @@unique([userId, externalRessourceId, universiteRess])
+  @@map("favoris")
 }
 
 model Commentaire {
@@ -461,11 +465,11 @@ model Commentaire {
 
 model Notation {
   id             String    @id @default(uuid())
-  userId         String    @map("user_id")
+  userId         String?   @map("user_id")
   ressourceId    String    @map("ressource_id")
   note           Int // 1-5
   dateNotation   DateTime  @default(now()) @map("date_notation")
-  user           User      @relation(fields: [userId], references: [id])
+  user           User?     @relation(fields: [userId], references: [id])
   ressource      Ressource @relation(fields: [ressourceId], references: [id])
   universiteSrc  String?   @map("universite_source") // Si notation externe
   universiteUser String?   @map("universite_utilisateur") // Université de l'utilisateur
@@ -479,26 +483,25 @@ model Notation {
 }
 
 model HistoriqueAcces {
-  id             String    @id @default(uuid())
-  userId         String    @map("user_id")
-  ressourceId    String    @map("ressource_id")
-  dateAcces      DateTime  @default(now()) @map("date_acces")
-  typeAcces      TypeAcces
-  universiteSrc  String?   @map("universite_source") // Si accès externe
-  universiteUser String?   @map("universite_utilisateur") // Université de l'utilisateur
+  id                String     @id @default(uuid())
+  userId            String     @map("user_id")
+  ressourceId       String?    @map("ressource_id")
+  typeAcces         TypeAcces
+  universiteRess    String     @map("universite_source") // Si accès externe
+  externRessourceId String?    @map("external_ressource_id") // ID de la ressource externe si applicable
+  user              User       @relation(fields: [userId], references: [id])
+  ressource         Ressource? @relation(fields: [ressourceId], references: [id])
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
 
-  user      User      @relation(fields: [userId], references: [id])
-  ressource Ressource @relation(fields: [ressourceId], references: [id])
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-
-  @@index([dateAcces])
+  @@index([createdAt])
   @@index([ressourceId, typeAcces])
 }
 
 enum TypeAcces {
   CONSULTATION
   TELECHARGEMENT
+  FAVORIS
   CITATION
   PARTAGE
 }
@@ -576,9 +579,7 @@ enum StatutTransaction {
 
 enum NiveauAcces {
   PUBLIC // Accessible à tous
-  AUTHENTIFIE // Accessible aux utilisateurs authentifiés
   UNIVERSITE_ORIGINE // Réservé aux membres de l'université d'origine
-  PRIVE // Accès limité (créateur et administrateurs)
 }
 
 // Modèle Ressource pour bibliothèque
@@ -596,11 +597,17 @@ model Ressource {
   niveauAcces     NiveauAcces @default(PUBLIC) @map("niveau_acces")
   datePublication DateTime?   @default(now()) @map("date_publication")
   motsCles        String      @map("mots_cles")
-  auteurId        String      @map("auteur_id")
+  auteurId        String?     @map("auteur_id")
+  nomAuteur       String?     @map("nom_auteur") // Nom de l'auteur si pas de relation
+  telechargements Int         @default(0) @map("telechargements")
+  vues            Int         @default(0) @map("vues")
   estArchive      Boolean     @default(false) @map("est_archive")
+  noteMoyenne     Float       @default(0) @map("note_moyenne")
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 
   // Relations
-  auteur User @relation(fields: [auteurId], references: [id])
+  auteur User? @relation(fields: [auteurId], references: [id])
 
   favoris                Favori[]
   commentaires           Commentaire[]
@@ -608,8 +615,8 @@ model Ressource {
   historiques            HistoriqueAcces[]
   collections            CollectionRessource[]
   // partages          PartageUniversite[]
-  exemplaires            ExemplairePhysique[]
-  reservations           Reservation[]
+  exemplaire             ExemplairePhysique?
+  // reservations      Reservation[]
   recommandations        Recommandation[]
   donneesRecommandations DonneesRecommandation[]
   categorieId            String

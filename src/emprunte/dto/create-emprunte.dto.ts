@@ -1,0 +1,31 @@
+import { EtatExemplaire } from "generated/prisma";
+
+// DTOs
+export class CreateEmpruntDto {
+  exemplaireIds: string[];
+  userId: string;
+  empreunteurId: string; // ID de l'utilisateur externe
+  dureeEmprunt?: number; // en jours
+  universiteEmprunteur?: string;
+}
+
+export class ReturnEmpruntDto {
+  empruntId: string;
+  exemplaireIds: string[];
+  commentaire?: string;
+  nouvelEtat?: EtatExemplaire;
+}
+
+export class ExtendEmpruntDto {
+  empruntId: string;
+  nouvelleDuree: number; // en jours
+  motif?: string;
+}
+
+export interface EmpruntStats {
+  totalEmprunts: number;
+  empruntsEnCours: number;
+  empruntsEnRetard: number;
+  empruntsRetournes: number;
+  empruntsExternes: number;
+}

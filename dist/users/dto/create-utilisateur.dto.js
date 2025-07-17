@@ -20,6 +20,7 @@ class CreateUtilisateurDto {
     prenom;
     image;
     role;
+    telephone;
 }
 exports.CreateUtilisateurDto = CreateUtilisateurDto;
 __decorate([

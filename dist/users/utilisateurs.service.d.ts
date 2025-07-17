@@ -2,11 +2,13 @@ import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../prisma/prisma.service';
 import { EmailService } from '../meservices/mail/email.service';
 import { CreateUtilisateurDto, LoginDataDto } from './dto/create-utilisateur.dto';
+import { SmsService } from 'src/meservices/sms/sms.service';
 export declare class UtilisateursService {
     private readonly prisma;
     private readonly jwtService;
     private readonly emailService;
-    constructor(prisma: PrismaService, jwtService: JwtService, emailService: EmailService);
+    private readonly smsService;
+    constructor(prisma: PrismaService, jwtService: JwtService, emailService: EmailService, smsService: SmsService);
     create(createUtilisateurDto: CreateUtilisateurDto): Promise<{
         email: string;
         nom: string;
@@ -50,8 +52,8 @@ export declare class UtilisateursService {
         };
     }>;
     findAll(options?: {
-        page?: number;
-        limit?: number;
+        page?: number | string;
+        limit?: number | string;
         search?: string;
     }): Promise<{
         data: {

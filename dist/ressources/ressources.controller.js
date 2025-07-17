@@ -16,6 +16,7 @@ exports.RessourcesController = void 0;
 const common_1 = require("@nestjs/common");
 const microservices_1 = require("@nestjs/microservices");
 const ressources_service_1 = require("./ressources.service");
+const create_ressource_dto_1 = require("./dto/create-ressource.dto");
 const jwt_1 = require("@nestjs/jwt");
 let RessourcesController = class RessourcesController {
     ressourcesService;
@@ -170,26 +171,11 @@ let RessourcesController = class RessourcesController {
             };
         }
     }
-    async enregistrerAcces(data) {
-        try {
-            const { ressourceId, typeAcces, ipAcces, universiteSrc, token } = data;
-            const userId = this.extractUserIdFromToken(token);
-            const accessData = {
-                userId,
-                ressourceId,
-                typeAcces,
-                ipAcces,
-                universiteSrc
-            };
-            return await this.ressourcesService.enregistrerAcces(accessData);
-        }
-        catch (error) {
-            return {
-                error: true,
-                message: error.message,
-                statusCode: error.status || 500
-            };
-        }
+    async findTopRatedRessources(options) {
+        return await this.ressourcesService.findTopRated(options);
+    }
+    async findTopAccessedRessources(options) {
+        return await this.ressourcesService.findTopAccessed(options);
     }
 };
 exports.RessourcesController = RessourcesController;
@@ -250,12 +236,17 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], RessourcesController.prototype, "toggleArchivage", null);
 __decorate([
-    (0, microservices_1.MessagePattern)('enregistrerAccesRessource'),
-    __param(0, (0, microservices_1.Payload)()),
+    (0, microservices_1.MessagePattern)('findTopRatedRessources'),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [create_ressource_dto_1.SearchRessourceDto]),
     __metadata("design:returntype", Promise)
-], RessourcesController.prototype, "enregistrerAcces", null);
+], RessourcesController.prototype, "findTopRatedRessources", null);
+__decorate([
+    (0, microservices_1.MessagePattern)('findTopAccessedRessources'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_ressource_dto_1.SearchRessourceDto]),
+    __metadata("design:returntype", Promise)
+], RessourcesController.prototype, "findTopAccessedRessources", null);
 exports.RessourcesController = RessourcesController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [ressources_service_1.RessourcesService,

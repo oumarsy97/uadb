@@ -11,7 +11,6 @@ export class EtudiantController {
   @MessagePattern('createEtudiant')
   async create(@Payload() createEtudiantDto: CreateEtudiantDto) {
     try {
-      console.log('Received createEtudiant request:', createEtudiantDto);
       return await this.etudiantService.create(createEtudiantDto);
     } catch (error) {
       return {

@@ -31,13 +31,6 @@ export class CreateEtudiantDto {
   @IsNotEmpty({ message: 'La date de naissance est requise' })
   dateNaissance: string;
 
- 
-
- 
-
-  @IsEnum(NiveauEtudes, { message: 'Le niveau d\'études doit être valide (LICENCE, MASTER, DOCTORAT, POSTDOCTORAT)' })
-  @IsOptional()
-  niveauEtudes?: NiveauEtudes;
   @IsString({ message: 'L\'ID de la filière doit être une chaîne de caractères' })
   filiereId: string;
 }

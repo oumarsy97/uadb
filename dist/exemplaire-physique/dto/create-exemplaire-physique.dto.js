@@ -26,13 +26,9 @@ class CreateExemplairePhysiqueDto {
     categorieId;
     auteurId;
     ressourceId;
-    cote;
-    etat;
-    disponible;
     localisation;
-    dateAcquisition;
-    dureeMaxEmpruntExterne;
-    nbMaxExemplairesExterne;
+    nombre;
+    nomAuteur;
 }
 exports.CreateExemplairePhysiqueDto = CreateExemplairePhysiqueDto;
 __decorate([
@@ -99,20 +95,6 @@ __decorate([
     __metadata("design:type", String)
 ], CreateExemplairePhysiqueDto.prototype, "ressourceId", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateExemplairePhysiqueDto.prototype, "cote", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(prisma_1.EtatExemplaire),
-    __metadata("design:type", String)
-], CreateExemplairePhysiqueDto.prototype, "etat", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
-], CreateExemplairePhysiqueDto.prototype, "disponible", void 0);
-__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -120,20 +102,6 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
-    __metadata("design:type", Date)
-], CreateExemplairePhysiqueDto.prototype, "dateAcquisition", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.Min)(1),
-    (0, class_validator_1.Max)(365),
     __metadata("design:type", Number)
-], CreateExemplairePhysiqueDto.prototype, "dureeMaxEmpruntExterne", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.Min)(1),
-    (0, class_validator_1.Max)(10),
-    __metadata("design:type", Number)
-], CreateExemplairePhysiqueDto.prototype, "nbMaxExemplairesExterne", void 0);
+], CreateExemplairePhysiqueDto.prototype, "nombre", void 0);
 //# sourceMappingURL=create-exemplaire-physique.dto.js.map

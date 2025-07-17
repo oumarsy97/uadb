@@ -6,9 +6,7 @@ import * as dotenv from 'dotenv';
 
 async function bootstrap() {
   dotenv.config();
-  console.log("JWT_SECRET:", process.env.JWT_SECRET);
-  console.log("Environment:", process.env.NODE_ENV);
-  
+ 
   // 🔧 SOLUTION PURE : Créer uniquement un microservice (sans HTTP)
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
     transport: Transport.TCP,

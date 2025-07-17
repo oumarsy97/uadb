@@ -23,7 +23,7 @@ export class EtudiantService {
 
     while (!isUnique) {
       const randomNumber = Math.floor(100000 + Math.random() * 900000);
-      numeroEtudiant = `UAD-${currentYear}-${randomNumber}`;
+      numeroEtudiant = `UADB-${currentYear}-${randomNumber}`;
       
       // Vérifier l'unicité dans la base de données
       const existingEtudiant = await this.prisma.etudiant.findUnique({
@@ -38,34 +38,25 @@ export class EtudiantService {
     return numeroEtudiant;
   }
 
-  /**
-   * Crée un nouvel étudiant avec son utilisateur associé
-   */
- /**
- * Crée un nouvel étudiant avec son utilisateur associé
- */
-/**
- * Crée un nouvel étudiant avec son utilisateur associé
- */
-/**
- * Crée un nouvel étudiant avec son utilisateur associé
- */
+  
 async create(createEtudiantDto: CreateEtudiantDto) {
   try {
     // 1. Créer d'abord l'utilisateur avec le rôle ETUDIANT
-    const userData = {
+    const userData: any = {
       nom: createEtudiantDto.nom,
       prenom: createEtudiantDto.prenom,
       email: createEtudiantDto.email,
       dateInscription: new Date(),
-      derniereConnexion: new Date(),
-      estValide: true,
-      estActif: true,
+      telephone: createEtudiantDto.telephone || null, // Si téléphone est null, le laisser tel quel
       motDePasse: 'MotDePasse123', // Assurez-vous que le mot de passe est hashé avant de l'envoyer
       role: RoleUser.ETUDIANT,
-      telephone: createEtudiantDto.telephone || null,
       image: createEtudiantDto.image || 'https://example.com/default-avatar.png', // URL par défaut pour l'image
     };
+
+    // Ajoutez la propriété 'telephone' uniquement si elle est null
+    if (createEtudiantDto.telephone === null) {
+      userData.telephone = null;
+    }
 
     const user = await this.utilisateursService.create(userData);
     
@@ -189,7 +180,7 @@ async create(createEtudiantDto: CreateEtudiantDto) {
       this.prisma.etudiant.findMany({
         where: whereConditions,
         skip,
-        take: limit,
+        take: +limit,
         include: {
           user: {
             select: {
@@ -198,14 +189,16 @@ async create(createEtudiantDto: CreateEtudiantDto) {
               nom: true,
               prenom: true,
               telephone: true,
+              image: true,
               role: true,
               estActif: true,
               derniereConnexion: true,
             }
-          }
+          },
+          filiere: true,
         },
         orderBy: {
-          dateInscription: 'desc'
+          createdAt: 'desc'
         }
       }),
       this.prisma.etudiant.count({ where: whereConditions })

@@ -12,13 +12,11 @@ export class UfrService {
   // Créer une UFR
   async create(createUfrDto: CreateUfrDto): Promise<Ufr> {
     try {
-      // Vérifier si l'université existe
-      const universite = await this.prisma.universite.findUnique({
-        where: { id: createUfrDto.universiteId }
-      });
+      //recuperer li'université associée
+      const universite = await this.prisma.universite.findFirst();
 
       if (!universite) {
-        throw new NotFoundException(`Université avec l'ID ${createUfrDto.universiteId} non trouvée`);
+        throw new NotFoundException(`Université avec non trouvée`);
       }
 
       // Créer l'UFR
@@ -26,7 +24,7 @@ export class UfrService {
         data: {
           nom: createUfrDto.nom,
           description: createUfrDto.description,
-          universiteId: createUfrDto.universiteId,
+          universiteId: universite.id,
         },
         include: {
           universite: true,
@@ -148,16 +146,13 @@ export class UfrService {
         throw new NotFoundException(`UFR avec l'ID ${id} non trouvée`);
       }
 
-      // Si on change d'université, vérifier qu'elle existe
-      if (updateUfrDto.universiteId && updateUfrDto.universiteId !== existingUfr.universiteId) {
-        const universite = await this.prisma.universite.findUnique({
-          where: { id: updateUfrDto.universiteId }
-        });
+      // Vérifier si l'université existe
+      const universite = await this.prisma.universite.findFirst();
 
         if (!universite) {
-          throw new NotFoundException(`Université avec l'ID ${updateUfrDto.universiteId} non trouvée`);
+          throw new NotFoundException(`Université avec non trouvée`);
         }
-      }
+      
 
       return await this.prisma.ufr.update({
         where: { id },

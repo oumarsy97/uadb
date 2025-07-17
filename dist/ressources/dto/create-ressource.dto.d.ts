@@ -15,6 +15,7 @@ export declare class CreateRessourceDto {
     niveauAcces?: NiveauAcces;
     datePublication?: Date;
     motsCles: string;
+    nomAuteur?: string;
     auteurId: string;
     categorieId: string;
     estArchive?: boolean;

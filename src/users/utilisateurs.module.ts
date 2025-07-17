@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MailService } from '@sendgrid/mail';
 import { EmailModule } from 'src/meservices/mail/email.module';
 import { EmailService } from 'src/meservices/mail/email.service';
+import { SmsService } from 'src/meservices/sms/sms.service';
 
 @Module({
   controllers: [UtilisateursController],
@@ -27,7 +28,7 @@ import { EmailService } from 'src/meservices/mail/email.service';
       inject: [ConfigService],
     }),
   ],
-  providers: [UtilisateursService, PrismaService, EmailService], // Retirez JwtService ici
+  providers: [UtilisateursService, PrismaService, EmailService, SmsService], // Retirez JwtService ici
   exports: [UtilisateursService],
 })
 export class UtilisateursModule {}

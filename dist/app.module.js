@@ -25,6 +25,12 @@ const filiere_module_1 = require("./filiere/filiere.module");
 const email_module_1 = require("./meservices/mail/email.module");
 const notification_module_1 = require("./notification/notification.module");
 const exemplaire_physique_module_1 = require("./exemplaire-physique/exemplaire-physique.module");
+const emprunte_module_1 = require("./emprunte/emprunte.module");
+const politique_bibliotheque_module_1 = require("./politique-bibliotheque/politique-bibliotheque.module");
+const regle_pret_module_1 = require("./regle-pret/regle-pret.module");
+const administrateur_module_1 = require("./administrateur/administrateur.module");
+const enseignant_module_1 = require("./enseignant/enseignant.module");
+const bibliothecaire_module_1 = require("./bibliothecaire/bibliothecaire.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -46,6 +52,12 @@ exports.AppModule = AppModule = __decorate([
             email_module_1.EmailModule,
             notification_module_1.NotificationModule,
             exemplaire_physique_module_1.ExemplairePhysiqueModule,
+            emprunte_module_1.EmprunteModule,
+            politique_bibliotheque_module_1.PolitiqueBibliothequeModule,
+            regle_pret_module_1.ReglePretModule,
+            administrateur_module_1.AdministrateurModule,
+            enseignant_module_1.EnseignantModule,
+            bibliothecaire_module_1.BibliothecaireModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService,],

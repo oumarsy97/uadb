@@ -39,4 +39,5 @@ export declare class EmailService {
         errors: string[];
     }>;
     verifyConnection(): Promise<boolean>;
+    sendJokkoChainWelcomeEmail(to: string, userName: string, userEmail: string, temporaryPassword: string): Promise<boolean>;
 }
