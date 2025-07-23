@@ -10,10 +10,10 @@ export declare class EmprunteController {
         success: boolean;
         data: {
             user: {
+                id: string;
                 email: string;
                 nom: string;
                 prenom: string;
-                id: string;
             } | null;
             empruntExemplaires: ({
                 exemplaire: {
@@ -22,26 +22,24 @@ export declare class EmprunteController {
                         titre: string;
                         isbnglobale: string;
                         auteur: {
+                            id: string;
+                            createdAt: Date;
+                            updatedAt: Date;
                             email: string;
                             motDePasse: string;
                             nom: string;
+                            telephone: string | null;
                             prenom: string;
                             image: string | null;
                             role: import("generated/prisma").$Enums.RoleUser;
-                            id: string;
-                            telephone: string | null;
                             derniereConnexion: Date | null;
                             estActif: boolean;
-                            createdAt: Date;
-                            updatedAt: Date;
                             preferencesRecommandation: string | null;
                             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
                         } | null;
                     };
                 } & {
                     id: string;
-                    createdAt: Date;
-                    updatedAt: Date;
                     ressourceId: string;
                     etat: import("generated/prisma").$Enums.EtatExemplaire;
                     localisation: string;
@@ -49,28 +47,30 @@ export declare class EmprunteController {
                     qrCode: string | null;
                     nombre: number;
                     nombreDisponible: number;
+                    createdAt: Date;
+                    updatedAt: Date;
                 };
             } & {
                 commentaire: string | null;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                dateEmprunt: Date;
                 exemplaireId: string;
-                dateRetourEffective: Date | null;
-                empruntId: string;
+                dateEmprunt: Date;
                 dateRetourPrevue: Date;
+                dateRetourEffective: Date | null;
                 statut: import("generated/prisma").$Enums.StatutEmprunt;
+                empruntId: string;
             })[];
         } & {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            exemplaireId: string;
             userId: string | null;
             dateEmprunt: Date;
-            exemplaireId: string;
-            dateRetourEffective: Date | null;
             dateRetourPrevue: Date;
+            dateRetourEffective: Date | null;
             statut: import("generated/prisma").$Enums.StatutEmprunt;
             universiteEmprunteur: string;
         };
@@ -90,10 +90,10 @@ export declare class EmprunteController {
         success: boolean;
         data: {
             user: {
+                id: string;
                 email: string;
                 nom: string;
                 prenom: string;
-                id: string;
             } | null;
             empruntExemplaires: ({
                 exemplaire: {
@@ -102,26 +102,24 @@ export declare class EmprunteController {
                         titre: string;
                         isbnglobale: string;
                         auteur: {
+                            id: string;
+                            createdAt: Date;
+                            updatedAt: Date;
                             email: string;
                             motDePasse: string;
                             nom: string;
+                            telephone: string | null;
                             prenom: string;
                             image: string | null;
                             role: import("generated/prisma").$Enums.RoleUser;
-                            id: string;
-                            telephone: string | null;
                             derniereConnexion: Date | null;
                             estActif: boolean;
-                            createdAt: Date;
-                            updatedAt: Date;
                             preferencesRecommandation: string | null;
                             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
                         } | null;
                     };
                 } & {
                     id: string;
-                    createdAt: Date;
-                    updatedAt: Date;
                     ressourceId: string;
                     etat: import("generated/prisma").$Enums.EtatExemplaire;
                     localisation: string;
@@ -129,28 +127,30 @@ export declare class EmprunteController {
                     qrCode: string | null;
                     nombre: number;
                     nombreDisponible: number;
+                    createdAt: Date;
+                    updatedAt: Date;
                 };
             } & {
                 commentaire: string | null;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                dateEmprunt: Date;
                 exemplaireId: string;
-                dateRetourEffective: Date | null;
-                empruntId: string;
+                dateEmprunt: Date;
                 dateRetourPrevue: Date;
+                dateRetourEffective: Date | null;
                 statut: import("generated/prisma").$Enums.StatutEmprunt;
+                empruntId: string;
             })[];
         } & {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            exemplaireId: string;
             userId: string | null;
             dateEmprunt: Date;
-            exemplaireId: string;
-            dateRetourEffective: Date | null;
             dateRetourPrevue: Date;
+            dateRetourEffective: Date | null;
             statut: import("generated/prisma").$Enums.StatutEmprunt;
             universiteEmprunteur: string;
         };
@@ -173,10 +173,10 @@ export declare class EmprunteController {
         success: boolean;
         data: ({
             user: {
+                id: string;
                 email: string;
                 nom: string;
                 prenom: string;
-                id: string;
             } | null;
             empruntExemplaires: ({
                 exemplaire: {
@@ -185,26 +185,24 @@ export declare class EmprunteController {
                         titre: string;
                         isbnglobale: string;
                         auteur: {
+                            id: string;
+                            createdAt: Date;
+                            updatedAt: Date;
                             email: string;
                             motDePasse: string;
                             nom: string;
+                            telephone: string | null;
                             prenom: string;
                             image: string | null;
                             role: import("generated/prisma").$Enums.RoleUser;
-                            id: string;
-                            telephone: string | null;
                             derniereConnexion: Date | null;
                             estActif: boolean;
-                            createdAt: Date;
-                            updatedAt: Date;
                             preferencesRecommandation: string | null;
                             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
                         } | null;
                     };
                 } & {
                     id: string;
-                    createdAt: Date;
-                    updatedAt: Date;
                     ressourceId: string;
                     etat: import("generated/prisma").$Enums.EtatExemplaire;
                     localisation: string;
@@ -212,28 +210,30 @@ export declare class EmprunteController {
                     qrCode: string | null;
                     nombre: number;
                     nombreDisponible: number;
+                    createdAt: Date;
+                    updatedAt: Date;
                 };
             } & {
                 commentaire: string | null;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                dateEmprunt: Date;
                 exemplaireId: string;
-                dateRetourEffective: Date | null;
-                empruntId: string;
+                dateEmprunt: Date;
                 dateRetourPrevue: Date;
+                dateRetourEffective: Date | null;
                 statut: import("generated/prisma").$Enums.StatutEmprunt;
+                empruntId: string;
             })[];
         } & {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            exemplaireId: string;
             userId: string | null;
             dateEmprunt: Date;
-            exemplaireId: string;
-            dateRetourEffective: Date | null;
             dateRetourPrevue: Date;
+            dateRetourEffective: Date | null;
             statut: import("generated/prisma").$Enums.StatutEmprunt;
             universiteEmprunteur: string;
         })[];
@@ -256,10 +256,10 @@ export declare class EmprunteController {
         success: boolean;
         data: {
             user: {
+                id: string;
                 email: string;
                 nom: string;
                 prenom: string;
-                id: string;
             } | null;
             empruntExemplaires: ({
                 exemplaire: {
@@ -268,26 +268,24 @@ export declare class EmprunteController {
                         titre: string;
                         isbnglobale: string;
                         auteur: {
+                            id: string;
+                            createdAt: Date;
+                            updatedAt: Date;
                             email: string;
                             motDePasse: string;
                             nom: string;
+                            telephone: string | null;
                             prenom: string;
                             image: string | null;
                             role: import("generated/prisma").$Enums.RoleUser;
-                            id: string;
-                            telephone: string | null;
                             derniereConnexion: Date | null;
                             estActif: boolean;
-                            createdAt: Date;
-                            updatedAt: Date;
                             preferencesRecommandation: string | null;
                             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
                         } | null;
                     };
                 } & {
                     id: string;
-                    createdAt: Date;
-                    updatedAt: Date;
                     ressourceId: string;
                     etat: import("generated/prisma").$Enums.EtatExemplaire;
                     localisation: string;
@@ -295,28 +293,30 @@ export declare class EmprunteController {
                     qrCode: string | null;
                     nombre: number;
                     nombreDisponible: number;
+                    createdAt: Date;
+                    updatedAt: Date;
                 };
             } & {
                 commentaire: string | null;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                dateEmprunt: Date;
                 exemplaireId: string;
-                dateRetourEffective: Date | null;
-                empruntId: string;
+                dateEmprunt: Date;
                 dateRetourPrevue: Date;
+                dateRetourEffective: Date | null;
                 statut: import("generated/prisma").$Enums.StatutEmprunt;
+                empruntId: string;
             })[];
         } & {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            exemplaireId: string;
             userId: string | null;
             dateEmprunt: Date;
-            exemplaireId: string;
-            dateRetourEffective: Date | null;
             dateRetourPrevue: Date;
+            dateRetourEffective: Date | null;
             statut: import("generated/prisma").$Enums.StatutEmprunt;
             universiteEmprunteur: string;
         };
@@ -334,10 +334,10 @@ export declare class EmprunteController {
         success: boolean;
         data: {
             user: {
+                id: string;
                 email: string;
                 nom: string;
                 prenom: string;
-                id: string;
             } | null;
             empruntExemplaires: ({
                 exemplaire: {
@@ -346,26 +346,24 @@ export declare class EmprunteController {
                         titre: string;
                         isbnglobale: string;
                         auteur: {
+                            id: string;
+                            createdAt: Date;
+                            updatedAt: Date;
                             email: string;
                             motDePasse: string;
                             nom: string;
+                            telephone: string | null;
                             prenom: string;
                             image: string | null;
                             role: import("generated/prisma").$Enums.RoleUser;
-                            id: string;
-                            telephone: string | null;
                             derniereConnexion: Date | null;
                             estActif: boolean;
-                            createdAt: Date;
-                            updatedAt: Date;
                             preferencesRecommandation: string | null;
                             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
                         } | null;
                     };
                 } & {
                     id: string;
-                    createdAt: Date;
-                    updatedAt: Date;
                     ressourceId: string;
                     etat: import("generated/prisma").$Enums.EtatExemplaire;
                     localisation: string;
@@ -373,28 +371,30 @@ export declare class EmprunteController {
                     qrCode: string | null;
                     nombre: number;
                     nombreDisponible: number;
+                    createdAt: Date;
+                    updatedAt: Date;
                 };
             } & {
                 commentaire: string | null;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                dateEmprunt: Date;
                 exemplaireId: string;
-                dateRetourEffective: Date | null;
-                empruntId: string;
+                dateEmprunt: Date;
                 dateRetourPrevue: Date;
+                dateRetourEffective: Date | null;
                 statut: import("generated/prisma").$Enums.StatutEmprunt;
+                empruntId: string;
             })[];
         } & {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            exemplaireId: string;
             userId: string | null;
             dateEmprunt: Date;
-            exemplaireId: string;
-            dateRetourEffective: Date | null;
             dateRetourPrevue: Date;
+            dateRetourEffective: Date | null;
             statut: import("generated/prisma").$Enums.StatutEmprunt;
             universiteEmprunteur: string;
         };
@@ -412,10 +412,10 @@ export declare class EmprunteController {
         success: boolean;
         data: ({
             user: {
+                id: string;
                 email: string;
                 nom: string;
                 prenom: string;
-                id: string;
             } | null;
             empruntExemplaires: ({
                 exemplaire: {
@@ -423,26 +423,24 @@ export declare class EmprunteController {
                         id: string;
                         titre: string;
                         auteur: {
+                            id: string;
+                            createdAt: Date;
+                            updatedAt: Date;
                             email: string;
                             motDePasse: string;
                             nom: string;
+                            telephone: string | null;
                             prenom: string;
                             image: string | null;
                             role: import("generated/prisma").$Enums.RoleUser;
-                            id: string;
-                            telephone: string | null;
                             derniereConnexion: Date | null;
                             estActif: boolean;
-                            createdAt: Date;
-                            updatedAt: Date;
                             preferencesRecommandation: string | null;
                             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
                         } | null;
                     };
                 } & {
                     id: string;
-                    createdAt: Date;
-                    updatedAt: Date;
                     ressourceId: string;
                     etat: import("generated/prisma").$Enums.EtatExemplaire;
                     localisation: string;
@@ -450,28 +448,30 @@ export declare class EmprunteController {
                     qrCode: string | null;
                     nombre: number;
                     nombreDisponible: number;
+                    createdAt: Date;
+                    updatedAt: Date;
                 };
             } & {
                 commentaire: string | null;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                dateEmprunt: Date;
                 exemplaireId: string;
-                dateRetourEffective: Date | null;
-                empruntId: string;
+                dateEmprunt: Date;
                 dateRetourPrevue: Date;
+                dateRetourEffective: Date | null;
                 statut: import("generated/prisma").$Enums.StatutEmprunt;
+                empruntId: string;
             })[];
         } & {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            exemplaireId: string;
             userId: string | null;
             dateEmprunt: Date;
-            exemplaireId: string;
-            dateRetourEffective: Date | null;
             dateRetourPrevue: Date;
+            dateRetourEffective: Date | null;
             statut: import("generated/prisma").$Enums.StatutEmprunt;
             universiteEmprunteur: string;
         })[];
@@ -494,10 +494,10 @@ export declare class EmprunteController {
         success: boolean;
         data: ({
             user: {
+                id: string;
                 email: string;
                 nom: string;
                 prenom: string;
-                id: string;
             } | null;
             empruntExemplaires: ({
                 exemplaire: {
@@ -506,26 +506,24 @@ export declare class EmprunteController {
                         titre: string;
                         isbnglobale: string;
                         auteur: {
+                            id: string;
+                            createdAt: Date;
+                            updatedAt: Date;
                             email: string;
                             motDePasse: string;
                             nom: string;
+                            telephone: string | null;
                             prenom: string;
                             image: string | null;
                             role: import("generated/prisma").$Enums.RoleUser;
-                            id: string;
-                            telephone: string | null;
                             derniereConnexion: Date | null;
                             estActif: boolean;
-                            createdAt: Date;
-                            updatedAt: Date;
                             preferencesRecommandation: string | null;
                             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
                         } | null;
                     };
                 } & {
                     id: string;
-                    createdAt: Date;
-                    updatedAt: Date;
                     ressourceId: string;
                     etat: import("generated/prisma").$Enums.EtatExemplaire;
                     localisation: string;
@@ -533,28 +531,30 @@ export declare class EmprunteController {
                     qrCode: string | null;
                     nombre: number;
                     nombreDisponible: number;
+                    createdAt: Date;
+                    updatedAt: Date;
                 };
             } & {
                 commentaire: string | null;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                dateEmprunt: Date;
                 exemplaireId: string;
-                dateRetourEffective: Date | null;
-                empruntId: string;
+                dateEmprunt: Date;
                 dateRetourPrevue: Date;
+                dateRetourEffective: Date | null;
                 statut: import("generated/prisma").$Enums.StatutEmprunt;
+                empruntId: string;
             })[];
         } & {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            exemplaireId: string;
             userId: string | null;
             dateEmprunt: Date;
-            exemplaireId: string;
-            dateRetourEffective: Date | null;
             dateRetourPrevue: Date;
+            dateRetourEffective: Date | null;
             statut: import("generated/prisma").$Enums.StatutEmprunt;
             universiteEmprunteur: string;
         })[];
@@ -587,26 +587,24 @@ export declare class EmprunteController {
                         titre: string;
                         isbnglobale: string;
                         auteur: {
+                            id: string;
+                            createdAt: Date;
+                            updatedAt: Date;
                             email: string;
                             motDePasse: string;
                             nom: string;
+                            telephone: string | null;
                             prenom: string;
                             image: string | null;
                             role: import("generated/prisma").$Enums.RoleUser;
-                            id: string;
-                            telephone: string | null;
                             derniereConnexion: Date | null;
                             estActif: boolean;
-                            createdAt: Date;
-                            updatedAt: Date;
                             preferencesRecommandation: string | null;
                             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
                         } | null;
                     };
                 } & {
                     id: string;
-                    createdAt: Date;
-                    updatedAt: Date;
                     ressourceId: string;
                     etat: import("generated/prisma").$Enums.EtatExemplaire;
                     localisation: string;
@@ -614,28 +612,30 @@ export declare class EmprunteController {
                     qrCode: string | null;
                     nombre: number;
                     nombreDisponible: number;
+                    createdAt: Date;
+                    updatedAt: Date;
                 };
             } & {
                 commentaire: string | null;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                dateEmprunt: Date;
                 exemplaireId: string;
-                dateRetourEffective: Date | null;
-                empruntId: string;
+                dateEmprunt: Date;
                 dateRetourPrevue: Date;
+                dateRetourEffective: Date | null;
                 statut: import("generated/prisma").$Enums.StatutEmprunt;
+                empruntId: string;
             })[];
         } & {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            exemplaireId: string;
             userId: string | null;
             dateEmprunt: Date;
-            exemplaireId: string;
-            dateRetourEffective: Date | null;
             dateRetourPrevue: Date;
+            dateRetourEffective: Date | null;
             statut: import("generated/prisma").$Enums.StatutEmprunt;
             universiteEmprunteur: string;
         })[];

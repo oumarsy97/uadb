@@ -6,7 +6,7 @@ import { EtatExemplaire , StatutEmprunt } from 'generated/prisma';
 
 @Injectable()
 export class EmprunteService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService,) {}
 
   /**
    * Créer un nouvel emprunt
@@ -262,12 +262,15 @@ export class EmprunteService {
  /**
  * Lister les emprunts avec filtres
  */
+/**
+ * Solution pour MySQL - Version simplifiée sans recherche complexe
+ */
 async getEmprunts(params: {
   userId?: string;
   statut?: StatutEmprunt;
   universiteEmprunteur?: string;
-  page?: number | string;  // Accepter string aussi
-  limit?: number | string; // Accepter string aussi
+  page?: number | string;
+  limit?: number | string;
   search?: string;
 }) {
   const {
@@ -285,7 +288,7 @@ async getEmprunts(params: {
 
   // Validation des valeurs
   const validPage = Math.max(1, pageNum || 1);
-  const validLimit = Math.max(1, Math.min(100, limitNum || 10)); // Limite max de 100
+  const validLimit = Math.max(1, Math.min(100, limitNum || 10));
 
   const skip = (validPage - 1) * validLimit;
 
@@ -295,30 +298,22 @@ async getEmprunts(params: {
   if (statut) where.statut = statut;
   if (universiteEmprunteur) where.universiteEmprunteur = universiteEmprunteur;
 
+  // VERSION 1: Recherche simple (testez d'abord celle-ci)
   if (search) {
     where.OR = [
       {
         user: {
-          OR: [
-            { nom: { contains: search, mode: 'insensitive' } },
-            { prenom: { contains: search, mode: 'insensitive' } },
-            { email: { contains: search, mode: 'insensitive' } }
-          ]
+          nom: { contains: search }
         }
       },
       {
-        empruntExemplaires: {
-          some: {
-            exemplaire: {
-              ressource: {
-                OR: [
-                  { titre: { contains: search, mode: 'insensitive' } },
-                  { auteur: { contains: search, mode: 'insensitive' } },
-                  { isbn: { contains: search, mode: 'insensitive' } }
-                ]
-              }
-            }
-          }
+        user: {
+          prenom: { contains: search }
+        }
+      },
+      {
+        user: {
+          email: { contains: search }
         }
       }
     ];
@@ -354,7 +349,7 @@ async getEmprunts(params: {
         }
       },
       skip,
-      take: validLimit, // Utiliser la valeur numérique validée
+      take: validLimit,
       orderBy: { dateEmprunt: 'desc' }
     }),
     this.prisma.emprunt.count({ where })

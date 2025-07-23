@@ -162,6 +162,7 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                 take: +limit,
                 orderBy: { [orderBy]: orderDirection },
                 include: {
+                    favoris: true,
                     auteur: {
                         select: {
                             id: true,
@@ -567,6 +568,30 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
         }
         catch (error) {
             this.logger.error(`Erreur lors du comptage des accès de la ressource ${ressourceId}: ${error.message}`);
+            throw error;
+        }
+    }
+    async incrementVue(ressourceId) {
+        try {
+            return await this.prisma.ressource.update({
+                where: { id: ressourceId },
+                data: { vues: { increment: 1 } },
+            });
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de l'incrementation des vues de la ressource ${ressourceId}: ${error.message}`);
+            throw error;
+        }
+    }
+    async incrementTelechargement(ressourceId) {
+        try {
+            return await this.prisma.ressource.update({
+                where: { id: ressourceId },
+                data: { telechargements: { increment: 1 } },
+            });
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de l'incrementation des téléchargements de la ressource ${ressourceId}: ${error.message}`);
             throw error;
         }
     }

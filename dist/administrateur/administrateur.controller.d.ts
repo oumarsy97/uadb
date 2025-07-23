@@ -6,27 +6,27 @@ export declare class AdministrateurController {
     constructor(administrateurService: AdministrateurService);
     createAdministrateur(createAdministrateurDto: CreateUtilisateurDto): Promise<{
         universite: {
-            nom: string;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
             ville: string;
             adresse: string | null;
             siteWeb: string | null;
         } | null;
         user: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
+            telephone: string | null;
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            id: string;
-            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
-            createdAt: Date;
-            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
@@ -40,18 +40,18 @@ export declare class AdministrateurController {
         search?: string;
     }): Promise<({
         user: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
+            telephone: string | null;
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            id: string;
-            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
-            createdAt: Date;
-            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
@@ -62,18 +62,18 @@ export declare class AdministrateurController {
     })[]>;
     findOne(id: string): Promise<({
         user: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
+            telephone: string | null;
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            id: string;
-            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
-            createdAt: Date;
-            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };

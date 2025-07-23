@@ -7,11 +7,11 @@ export declare class UfrController {
     create(createUfrDto: CreateUfrDto): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             universiteId: string;
         };
         message: string;
@@ -28,11 +28,11 @@ export declare class UfrController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             universiteId: string;
         }[];
         meta: {
@@ -54,11 +54,11 @@ export declare class UfrController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             universiteId: string;
         };
         message: string;
@@ -74,11 +74,11 @@ export declare class UfrController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             universiteId: string;
         }[];
         message: string;
@@ -95,11 +95,11 @@ export declare class UfrController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             universiteId: string;
         };
         message: string;
@@ -128,11 +128,11 @@ export declare class UfrController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             universiteId: string;
         }[];
         message: string;

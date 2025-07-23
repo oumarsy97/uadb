@@ -40,4 +40,15 @@ export declare class EmailService {
     }>;
     verifyConnection(): Promise<boolean>;
     sendJokkoChainWelcomeEmail(to: string, userName: string, userEmail: string, temporaryPassword: string): Promise<boolean>;
+    sendEmpruntReminderEmail(to: string, userName: string, emprunts: Array<{
+        id: string;
+        dateRetourPrevue: Date;
+        exemplaires: Array<{
+            titre: string;
+            auteur: string;
+            isbn?: string;
+        }>;
+        joursRetard?: number;
+        isEnRetard: boolean;
+    }>, typeRappel?: 'avant_echeance' | 'echeance_proche' | 'en_retard' | 'retard_grave'): Promise<boolean>;
 }

@@ -225,5 +225,50 @@ export class RessourcesController {
     return await this.ressourcesService.findTopAccessed(options);
   }
 
+  //incrementer le nombre de vues d'une ressource
+  @MessagePattern('incrementRessourceViews')
+  async incrementRessourceViews(@Payload() data: { id: string; token?: string }) {
+    try {
+      const { id, token } = data;
+      
+      // Si un token est fourni, extraire l'ID utilisateur pour loguer
+      if (token) {
+        const userId = this.extractUserIdFromToken(token);
+        console.log('Incrémentation de vues par utilisateur:', userId);
+      }
+      
+      return await this.ressourcesService.incrementVue(id);
+    }
+    catch (error) {
+      return {
+        error: true,
+        message: error.message,
+        statusCode: error.status || 500
+      };
+    }
+  }
+
+  // incrementer le nombre de téléchargements d'une ressource
+  @MessagePattern('incrementRessourceDownloads')
+  async incrementRessourceDownloads(@Payload() data: { id: string; token?: string }) {
+    try {
+      const { id, token } = data;
+      
+      // Si un token est fourni, extraire l'ID utilisateur pour loguer
+      if (token) {
+        const userId = this.extractUserIdFromToken(token);
+      }
+      
+      return await this.ressourcesService.incrementTelechargement(id);
+    }
+    catch (error) {
+      return {
+        error: true,
+        message: error.message,
+        statusCode: error.status || 500
+      };
+    }
+  }
+
   
 }

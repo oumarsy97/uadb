@@ -13,42 +13,42 @@ export declare class EtudiantController {
                 departement: {
                     ufr: {
                         universite: {
-                            nom: string;
                             id: string;
+                            nom: string;
                         };
                     } & {
-                        nom: string;
-                        description: string | null;
                         id: string;
                         createdAt: Date;
                         updatedAt: Date;
+                        nom: string;
+                        description: string | null;
                         universiteId: string;
                     };
                 } & {
-                    nom: string;
-                    description: string | null;
                     id: string;
                     createdAt: Date;
                     updatedAt: Date;
+                    nom: string;
+                    description: string | null;
                     ufrId: string;
                     responsable: string | null;
                 };
             } & {
-                nom: string;
-                description: string | null;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
+                nom: string;
+                description: string | null;
                 niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
                 departementId: string;
             };
             user: {
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 estActif: boolean;
             };
             id: string;
@@ -77,22 +77,22 @@ export declare class EtudiantController {
         success: boolean;
         data: ({
             filiere: {
-                nom: string;
-                description: string | null;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
+                nom: string;
+                description: string | null;
                 niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
                 departementId: string;
             };
             user: {
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 image: string | null;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
@@ -121,12 +121,12 @@ export declare class EtudiantController {
         success: boolean;
         data: {
             user: {
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
@@ -149,12 +149,12 @@ export declare class EtudiantController {
         success: boolean;
         data: {
             user: {
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
@@ -177,12 +177,12 @@ export declare class EtudiantController {
         success: boolean;
         data: {
             user: {
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
@@ -209,12 +209,12 @@ export declare class EtudiantController {
         message: string;
         data: {
             user: {
+                id: string;
                 email: string;
                 nom: string;
+                telephone: string | null;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
-                id: string;
-                telephone: string | null;
                 estActif: boolean;
             };
         } & {

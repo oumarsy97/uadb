@@ -39,7 +39,7 @@ export declare class ConventionService {
         dateFin: Date | null;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-    } | null, null, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
+    } | null, null, import("generated/prisma/runtime/library").DefaultArgs>;
     update(id: string, updateConventionDto: UpdateConventionDto): import("generated/prisma").Prisma.Prisma__ConventionInteruniversitaireClient<{
         id: string;
         createdAt: Date;
@@ -51,7 +51,7 @@ export declare class ConventionService {
         dateFin: Date | null;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-    }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
+    }, never, import("generated/prisma/runtime/library").DefaultArgs>;
     remove(id: string): import("generated/prisma").Prisma.Prisma__ConventionInteruniversitaireClient<{
         id: string;
         createdAt: Date;
@@ -63,7 +63,7 @@ export declare class ConventionService {
         dateFin: Date | null;
         typeConvention: import("generated/prisma").$Enums.TypeConvention;
         detailsConvention: string | null;
-    }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
+    }, never, import("generated/prisma/runtime/library").DefaultArgs>;
     findActiveConventions(): Promise<{
         id: string;
         createdAt: Date;

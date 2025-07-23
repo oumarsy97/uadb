@@ -28,7 +28,7 @@ let HistoriqueAccesService = class HistoriqueAccesService {
             if (!userExists) {
                 throw new Error('Utilisateur non trouvé');
             }
-            const isInternalResource = universiteRess === process.env.CURRENT_UNIVERSITY || universiteRess === 'uadb';
+            const isInternalResource = universiteRess === process.env.CURRENT_UNIVERSITY?.toLowerCase() || universiteRess === 'uadb'.toLowerCase();
             let historiqueData = {
                 userId,
                 typeAcces: typeacces,
@@ -43,7 +43,6 @@ let HistoriqueAccesService = class HistoriqueAccesService {
             const historique = await this.prismaService.historiqueAcces.create({
                 data: historiqueData,
             });
-            console.log(`Accès enregistré pour ressource ${isInternalResource ? 'interne' : 'externe'}:`, historique);
             return historique;
         }
         catch (error) {

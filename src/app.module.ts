@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksModule } from './tasks/tasks.module';
 
 // Modules personnalisés
 import { PrismaModule } from './prisma/prisma.module';
@@ -49,6 +51,8 @@ import { BibliothecaireModule } from './bibliothecaire/bibliothecaire.module';
     AdministrateurModule,
     EnseignantModule,
     BibliothecaireModule,
+    ScheduleModule.forRoot(), // Ajoutez cette ligne
+    TasksModule, // Ajoutez cette ligne
   ],
   controllers: [AppController],
   providers: [AppService,],

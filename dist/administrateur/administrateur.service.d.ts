@@ -8,27 +8,27 @@ export declare class AdministrateurService {
     constructor(prismaService: PrismaService, utilisateursService: UtilisateursService);
     create(createAdministrateurDto: CreateUtilisateurDto): Promise<{
         universite: {
-            nom: string;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
             ville: string;
             adresse: string | null;
             siteWeb: string | null;
         } | null;
         user: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
+            telephone: string | null;
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            id: string;
-            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
-            createdAt: Date;
-            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
@@ -42,18 +42,18 @@ export declare class AdministrateurService {
         search?: string;
     }): import("generated/prisma").Prisma.PrismaPromise<({
         user: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
+            telephone: string | null;
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            id: string;
-            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
-            createdAt: Date;
-            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
@@ -64,18 +64,18 @@ export declare class AdministrateurService {
     })[]>;
     findOne(id: string): Promise<({
         user: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
+            telephone: string | null;
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            id: string;
-            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
-            createdAt: Date;
-            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
@@ -88,11 +88,11 @@ export declare class AdministrateurService {
         id: string;
         userId: string;
         numeroAdmin: string;
-    }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
+    }, never, import("generated/prisma/runtime/library").DefaultArgs>;
     remove(id: string): import("generated/prisma").Prisma.Prisma__AdministrateurClient<{
         id: string;
         userId: string;
         numeroAdmin: string;
-    }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
+    }, never, import("generated/prisma/runtime/library").DefaultArgs>;
     private generateNumero;
 }

@@ -177,6 +177,39 @@ let RessourcesController = class RessourcesController {
     async findTopAccessedRessources(options) {
         return await this.ressourcesService.findTopAccessed(options);
     }
+    async incrementRessourceViews(data) {
+        try {
+            const { id, token } = data;
+            if (token) {
+                const userId = this.extractUserIdFromToken(token);
+                console.log('Incrémentation de vues par utilisateur:', userId);
+            }
+            return await this.ressourcesService.incrementVue(id);
+        }
+        catch (error) {
+            return {
+                error: true,
+                message: error.message,
+                statusCode: error.status || 500
+            };
+        }
+    }
+    async incrementRessourceDownloads(data) {
+        try {
+            const { id, token } = data;
+            if (token) {
+                const userId = this.extractUserIdFromToken(token);
+            }
+            return await this.ressourcesService.incrementTelechargement(id);
+        }
+        catch (error) {
+            return {
+                error: true,
+                message: error.message,
+                statusCode: error.status || 500
+            };
+        }
+    }
 };
 exports.RessourcesController = RessourcesController;
 __decorate([
@@ -247,6 +280,20 @@ __decorate([
     __metadata("design:paramtypes", [create_ressource_dto_1.SearchRessourceDto]),
     __metadata("design:returntype", Promise)
 ], RessourcesController.prototype, "findTopAccessedRessources", null);
+__decorate([
+    (0, microservices_1.MessagePattern)('incrementRessourceViews'),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], RessourcesController.prototype, "incrementRessourceViews", null);
+__decorate([
+    (0, microservices_1.MessagePattern)('incrementRessourceDownloads'),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], RessourcesController.prototype, "incrementRessourceDownloads", null);
 exports.RessourcesController = RessourcesController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [ressources_service_1.RessourcesService,

@@ -211,26 +211,17 @@ let EmprunteService = class EmprunteService {
             where.OR = [
                 {
                     user: {
-                        OR: [
-                            { nom: { contains: search, mode: 'insensitive' } },
-                            { prenom: { contains: search, mode: 'insensitive' } },
-                            { email: { contains: search, mode: 'insensitive' } }
-                        ]
+                        nom: { contains: search }
                     }
                 },
                 {
-                    empruntExemplaires: {
-                        some: {
-                            exemplaire: {
-                                ressource: {
-                                    OR: [
-                                        { titre: { contains: search, mode: 'insensitive' } },
-                                        { auteur: { contains: search, mode: 'insensitive' } },
-                                        { isbn: { contains: search, mode: 'insensitive' } }
-                                    ]
-                                }
-                            }
-                        }
+                    user: {
+                        prenom: { contains: search }
+                    }
+                },
+                {
+                    user: {
+                        email: { contains: search }
                     }
                 }
             ];

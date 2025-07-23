@@ -37,7 +37,7 @@ export class HistoriqueAccesService {
             }
 
             // Déterminer si c'est une ressource interne ou externe
-            const isInternalResource = universiteRess === process.env.CURRENT_UNIVERSITY || universiteRess === 'uadb';
+            const isInternalResource = universiteRess === process.env.CURRENT_UNIVERSITY?.toLowerCase() || universiteRess === 'uadb'.toLowerCase();
             
             let historiqueData: any = {
                 userId,
@@ -66,10 +66,7 @@ export class HistoriqueAccesService {
                 data: historiqueData,
             });
 
-            console.log(
-                `Accès enregistré pour ressource ${isInternalResource ? 'interne' : 'externe'}:`, 
-                historique
-            );
+           
             
             return historique;
             

@@ -9,24 +9,24 @@ export declare class EnseignantService {
     create(createEnseignantDto: CreateEnseignantDto): Promise<{
         user: {
             role: string;
-            email: string;
-            nom: string;
-            prenom: string;
-            image: string | null;
             id: string;
-            telephone: string | null;
-            derniereConnexion: Date | null;
-            estActif: boolean;
             createdAt: Date;
             updatedAt: Date;
+            email: string;
+            nom: string;
+            telephone: string | null;
+            prenom: string;
+            image: string | null;
+            derniereConnexion: Date | null;
+            estActif: boolean;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
         universite: {
-            nom: string;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
             ville: string;
             adresse: string | null;
             siteWeb: string | null;
@@ -45,18 +45,18 @@ export declare class EnseignantService {
         search?: string;
     }): import("generated/prisma").Prisma.PrismaPromise<({
         user: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
+            telephone: string | null;
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            id: string;
-            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
-            createdAt: Date;
-            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
@@ -71,18 +71,18 @@ export declare class EnseignantService {
     })[]>;
     findOne(id: string): import("generated/prisma").Prisma.Prisma__EnseignantClient<({
         user: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
+            telephone: string | null;
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            id: string;
-            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
-            createdAt: Date;
-            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
@@ -94,21 +94,21 @@ export declare class EnseignantService {
         dateNaissance: Date;
         specialite: string | null;
         numeroEnseignant: string;
-    }) | null, null, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
+    }) | null, null, import("generated/prisma/runtime/library").DefaultArgs>;
     update(id: string, updateEnseignantDto: UpdateEnseignantDto): import("generated/prisma").Prisma.Prisma__EnseignantClient<{
         user: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
+            telephone: string | null;
             prenom: string;
             image: string | null;
             role: import("generated/prisma").$Enums.RoleUser;
-            id: string;
-            telephone: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
-            createdAt: Date;
-            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
@@ -120,7 +120,7 @@ export declare class EnseignantService {
         dateNaissance: Date;
         specialite: string | null;
         numeroEnseignant: string;
-    }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
+    }, never, import("generated/prisma/runtime/library").DefaultArgs>;
     remove(id: string): import("generated/prisma").Prisma.Prisma__EnseignantClient<{
         id: string;
         createdAt: Date;
@@ -129,6 +129,6 @@ export declare class EnseignantService {
         dateNaissance: Date;
         specialite: string | null;
         numeroEnseignant: string;
-    }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
+    }, never, import("generated/prisma/runtime/library").DefaultArgs>;
     private generateNumeroEnseignant;
 }

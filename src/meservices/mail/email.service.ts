@@ -738,4 +738,491 @@ private initializeGmail() {
     text: textVersion,
   });
 }
+
+// email.service.ts - Ajout du template de rappel d'emprunt
+
+// Ajoutez cette méthode à votre classe EmailService existante
+
+/**
+ * Envoyer un email de rappel de retour d'emprunt
+ */
+async sendEmpruntReminderEmail(
+  to: string,
+  userName: string,
+  emprunts: Array<{
+    id: string;
+    dateRetourPrevue: Date;
+    exemplaires: Array<{
+      titre: string;
+      auteur: string;
+      isbn?: string;
+    }>;
+    joursRetard?: number;
+    isEnRetard: boolean;
+  }>,
+  typeRappel: 'avant_echeance' | 'echeance_proche' | 'en_retard' | 'retard_grave' = 'echeance_proche'
+): Promise<boolean> {
+  
+  // Configuration des messages selon le type de rappel
+  const rappelConfig = {
+    avant_echeance: {
+      subject: '📅 Rappel : Retour d\'emprunt dans 3 jours',
+      title: 'Rappel de retour d\'emprunt',
+      urgence: 'info',
+      color: '#2196f3',
+      icon: '📅',
+      message: 'Nous vous rappelons que vous avez des ouvrages à retourner prochainement.'
+    },
+    echeance_proche: {
+      subject: '⏰ Urgent : Retour d\'emprunt demain',
+      title: 'Retour d\'emprunt imminent',
+      urgence: 'warning',
+      color: '#ff9800',
+      icon: '⏰',
+      message: 'Attention ! Vos emprunts arrivent à échéance très bientôt.'
+    },
+    en_retard: {
+      subject: '🚨 Emprunts en retard - Action requise',
+      title: 'Emprunts en retard',
+      urgence: 'error',
+      color: '#f44336',
+      icon: '🚨',
+      message: 'Vos emprunts sont en retard. Merci de les retourner dans les plus brefs délais.'
+    },
+    retard_grave: {
+      subject: '⚠️ Emprunts en retard critique - Dernière relance',
+      title: 'Emprunts en retard critique',
+      urgence: 'critical',
+      color: '#d32f2f',
+      icon: '⚠️',
+      message: 'Ceci est un dernier rappel concernant vos emprunts en retard critique.'
+    }
+  };
+
+  const config = rappelConfig[typeRappel];
+  const loginUrl = this.configService.get('FRONTEND_URL', 'http://localhost:3000') + '/mes-emprunts';
+
+  const html = `
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>${config.subject}</title>
+      <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+          min-height: 100vh;
+          padding: 20px;
+          color: #333;
+        }
+        
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          background: #ffffff;
+          border-radius: 15px;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
+        }
+        
+        .header {
+          background: linear-gradient(135deg, ${config.color} 0%, ${config.color}dd 100%);
+          color: white;
+          padding: 30px;
+          text-align: center;
+          position: relative;
+        }
+        
+        .header::before {
+          content: '${config.icon}';
+          font-size: 48px;
+          display: block;
+          margin-bottom: 15px;
+          opacity: 0.9;
+        }
+        
+        .header h1 {
+          font-size: 26px;
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
+        
+        .header p {
+          font-size: 16px;
+          opacity: 0.9;
+        }
+        
+        .urgence-badge {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          padding: 6px 12px;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+        
+        .content {
+          padding: 30px;
+        }
+        
+        .greeting {
+          font-size: 18px;
+          margin-bottom: 20px;
+          color: #333;
+        }
+        
+        .message {
+          background: ${config.color}10;
+          border-left: 4px solid ${config.color};
+          padding: 20px;
+          margin: 20px 0;
+          border-radius: 0 8px 8px 0;
+        }
+        
+        .emprunts-list {
+          margin: 25px 0;
+        }
+        
+        .emprunt-card {
+          background: #f8f9fa;
+          border: 1px solid #e9ecef;
+          border-radius: 12px;
+          padding: 20px;
+          margin: 15px 0;
+          transition: all 0.3s ease;
+        }
+        
+        .emprunt-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .emprunt-card.retard {
+          border-color: #f44336;
+          background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+        }
+        
+        .emprunt-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 15px;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        
+        .emprunt-id {
+          font-family: 'Courier New', monospace;
+          background: ${config.color}20;
+          padding: 4px 8px;
+          border-radius: 6px;
+          font-size: 12px;
+          color: ${config.color};
+          font-weight: 600;
+        }
+        
+        .date-retour {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-weight: 600;
+        }
+        
+        .date-retour.retard {
+          color: #f44336;
+        }
+        
+        .date-retour.proche {
+          color: #ff9800;
+        }
+        
+        .date-retour.normal {
+          color: #4caf50;
+        }
+        
+        .retard-badge {
+          background: #f44336;
+          color: white;
+          padding: 4px 8px;
+          border-radius: 12px;
+          font-size: 11px;
+          font-weight: 600;
+        }
+        
+        .livre-info {
+          padding: 12px 0;
+          border-top: 1px solid #e0e0e0;
+        }
+        
+        .livre-info:first-child {
+          border-top: none;
+          padding-top: 0;
+        }
+        
+        .livre-titre {
+          font-weight: 600;
+          color: #1976d2;
+          margin-bottom: 4px;
+          font-size: 16px;
+        }
+        
+        .livre-auteur {
+          color: #666;
+          font-style: italic;
+          margin-bottom: 4px;
+        }
+        
+        .livre-isbn {
+          font-family: 'Courier New', monospace;
+          font-size: 12px;
+          color: #999;
+        }
+        
+        .action-button {
+          display: block;
+          width: fit-content;
+          margin: 25px auto;
+          padding: 15px 30px;
+          background: linear-gradient(135deg, ${config.color} 0%, ${config.color}dd 100%);
+          color: white;
+          text-decoration: none;
+          border-radius: 10px;
+          font-weight: 600;
+          font-size: 16px;
+          text-align: center;
+          transition: all 0.3s ease;
+          box-shadow: 0 8px 20px ${config.color}30;
+        }
+        
+        .action-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 12px 30px ${config.color}40;
+        }
+        
+        .info-section {
+          background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+          border-radius: 10px;
+          padding: 20px;
+          margin: 25px 0;
+          border-left: 4px solid #2196f3;
+        }
+        
+        .info-section h3 {
+          color: #1565c0;
+          margin-bottom: 12px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        
+        .info-list {
+          list-style: none;
+          padding: 0;
+        }
+        
+        .info-list li {
+          padding: 6px 0;
+          color: #0277bd;
+          position: relative;
+          padding-left: 20px;
+        }
+        
+        .info-list li::before {
+          content: '•';
+          position: absolute;
+          left: 0;
+          color: #2196f3;
+          font-weight: bold;
+        }
+        
+        .footer {
+          background: #f8f9fa;
+          padding: 25px;
+          text-align: center;
+          border-top: 1px solid #e9ecef;
+        }
+        
+        .footer p {
+          color: #666;
+          font-size: 14px;
+          line-height: 1.6;
+          margin-bottom: 8px;
+        }
+        
+        .contact-info {
+          margin-top: 15px;
+          padding-top: 15px;
+          border-top: 1px solid #dee2e6;
+          font-size: 13px;
+          color: #999;
+        }
+        
+        @media (max-width: 600px) {
+          .container {
+            margin: 10px;
+            border-radius: 10px;
+          }
+          
+          .header, .content, .footer {
+            padding: 20px 15px;
+          }
+          
+          .emprunt-header {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          
+          .action-button {
+            width: 100%;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <div class="urgence-badge">${config.urgence.toUpperCase()}</div>
+          <h1>${config.title}</h1>
+          <p>Jokko-Chain - Bibliothèque Numérique</p>
+        </div>
+        
+        <div class="content">
+          <div class="greeting">Bonjour ${userName},</div>
+          
+          <div class="message">
+            <p>${config.message}</p>
+          </div>
+          
+          <div class="emprunts-list">
+            ${emprunts.map(emprunt => {
+              const dateRetour = new Date(emprunt.dateRetourPrevue);
+              const dateFormatted = dateRetour.toLocaleDateString('fr-FR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              });
+              
+              let dateClass = 'normal';
+              let dateIcon = '📅';
+              
+              if (emprunt.isEnRetard) {
+                dateClass = 'retard';
+                dateIcon = '🚨';
+              } else {
+                const joursRestants = Math.ceil((dateRetour.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+                if (joursRestants <= 1) {
+                  dateClass = 'proche';
+                  dateIcon = '⏰';
+                }
+              }
+              
+              return `
+                <div class="emprunt-card ${emprunt.isEnRetard ? 'retard' : ''}">
+                  <div class="emprunt-header">
+                    <span class="emprunt-id">Emprunt #${emprunt.id.substring(0, 8)}</span>
+                    <div class="date-retour ${dateClass}">
+                      ${dateIcon} ${emprunt.isEnRetard ? 'En retard depuis' : 'À retourner le'} ${dateFormatted}
+                      ${emprunt.joursRetard ? `<span class="retard-badge">${emprunt.joursRetard} jour(s) de retard</span>` : ''}
+                    </div>
+                  </div>
+                  
+                  ${emprunt.exemplaires.map(livre => `
+                    <div class="livre-info">
+                      <div class="livre-titre">${livre.titre}</div>
+                      <div class="livre-auteur">par ${livre.auteur}</div>
+                      ${livre.isbn ? `<div class="livre-isbn">ISBN: ${livre.isbn}</div>` : ''}
+                    </div>
+                  `).join('')}
+                </div>
+              `;
+            }).join('')}
+          </div>
+          
+          <a href="${loginUrl}" class="action-button">
+            📚 Voir mes emprunts
+          </a>
+          
+          <div class="info-section">
+            <h3>💡 Informations importantes</h3>
+            <ul class="info-list">
+              <li>Vous pouvez prolonger vos emprunts depuis votre espace personnel</li>
+              <li>En cas de retard, des pénalités peuvent s'appliquer</li>
+              <li>Les ouvrages endommagés doivent être signalés</li>
+              <li>Contactez-nous pour toute difficulté de retour</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer">
+          <p><strong>Bibliothèque Jokko-Chain</strong></p>
+          <p>Votre partenaire pour l'accès au savoir numérique</p>
+          
+          <div class="contact-info">
+            <p>📧 Contact: bibliotheque@jokko-chain.com</p>
+            <p>📞 Téléphone: +221 78180 72 29</p>
+            <p>🌐 Web: www.jokko-chain.com</p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  const textVersion = `
+    ${config.title} - Jokko-Chain
+    
+    Bonjour ${userName},
+    
+    ${config.message}
+    
+    DÉTAILS DE VOS EMPRUNTS :
+    ========================
+    
+    ${emprunts.map(emprunt => {
+      const dateRetour = new Date(emprunt.dateRetourPrevue);
+      const dateFormatted = dateRetour.toLocaleDateString('fr-FR');
+      
+      return `
+    Emprunt #${emprunt.id.substring(0, 8)}
+    ${emprunt.isEnRetard ? '🚨 EN RETARD' : '📅 À retourner'} le ${dateFormatted}
+    ${emprunt.joursRetard ? `⚠️ Retard de ${emprunt.joursRetard} jour(s)` : ''}
+    
+    Ouvrages :
+    ${emprunt.exemplaires.map(livre => `    • ${livre.titre} - ${livre.auteur}`).join('\n')}
+    
+    `;
+    }).join('')}
+    
+    ACTIONS RECOMMANDÉES :
+    ======================
+    • Connectez-vous à votre espace : ${loginUrl}
+    • Prolongez vos emprunts si possible
+    • Retournez les ouvrages en bibliothèque
+    • Contactez-nous en cas de problème
+    
+    Contact : bibliotheque@jokko-chain.com
+    
+    Cordialement,
+    L'équipe Jokko-Chain
+  `;
+
+  return this.sendEmail({
+    to,
+    subject: config.subject,
+    html,
+    text: textVersion,
+  });
+}
 }

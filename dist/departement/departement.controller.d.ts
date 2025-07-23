@@ -8,11 +8,11 @@ export declare class DepartementController {
     create(createDepartementDto: CreateDepartementDto): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             ufrId: string;
             responsable: string | null;
         };
@@ -31,11 +31,11 @@ export declare class DepartementController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             ufrId: string;
             responsable: string | null;
         }[];
@@ -59,11 +59,11 @@ export declare class DepartementController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             ufrId: string;
             responsable: string | null;
         };
@@ -80,11 +80,11 @@ export declare class DepartementController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             ufrId: string;
             responsable: string | null;
         }[];
@@ -101,11 +101,11 @@ export declare class DepartementController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             ufrId: string;
             responsable: string | null;
         };
@@ -123,11 +123,11 @@ export declare class DepartementController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             ufrId: string;
             responsable: string | null;
         };
@@ -159,11 +159,11 @@ export declare class DepartementController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             ufrId: string;
             responsable: string | null;
         }[];

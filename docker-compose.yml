@@ -36,7 +36,7 @@ services:
     environment:
       DATABASE_URL: "mysql://root@mysql-db:3306/dbuadb"
       FRONTEND_URL: "http://localhost:3000"
-      
+     
 
     depends_on:
       mysql:

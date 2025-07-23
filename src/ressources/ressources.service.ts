@@ -189,6 +189,7 @@ export class RessourcesService {
         take: +limit,
         orderBy: { [orderBy]: orderDirection },
         include: {
+          favoris: true,
           auteur: {
             select: {
               id: true,
@@ -658,6 +659,32 @@ export class RessourcesService {
       return await this.historiqueAccesService.compterAcces(ressourceId, false, typeAcces);
     } catch (error) {
       this.logger.error(`Erreur lors du comptage des accès de la ressource ${ressourceId}: ${error.message}`);
+      throw error;
+    }
+  }
+
+  //increment vue
+  async incrementVue(ressourceId: string) {
+    try {
+      return await this.prisma.ressource.update({
+        where: { id: ressourceId },
+        data: { vues: { increment: 1 } },
+      });
+    } catch (error) {
+      this.logger.error(`Erreur lors de l'incrementation des vues de la ressource ${ressourceId}: ${error.message}`);
+      throw error;
+    }
+  }
+
+  //incrementer le nombre de téléchargements d'une ressource
+  async incrementTelechargement(ressourceId: string) {
+    try {
+      return await this.prisma.ressource.update({
+        where: { id: ressourceId },
+        data: { telechargements: { increment: 1 } },
+      });
+    } catch (error) {
+      this.logger.error(`Erreur lors de l'incrementation des téléchargements de la ressource ${ressourceId}: ${error.message}`);
       throw error;
     }
   }

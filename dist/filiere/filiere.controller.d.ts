@@ -8,11 +8,11 @@ export declare class FiliereController {
     create(createFiliereDto: CreateFiliereDto): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         };
@@ -31,11 +31,11 @@ export declare class FiliereController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         }[];
@@ -59,11 +59,11 @@ export declare class FiliereController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         };
@@ -80,11 +80,11 @@ export declare class FiliereController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         }[];
@@ -101,11 +101,11 @@ export declare class FiliereController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         };
@@ -123,11 +123,11 @@ export declare class FiliereController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         };
@@ -159,11 +159,11 @@ export declare class FiliereController {
     }): Promise<{
         success: boolean;
         data: {
-            nom: string;
-            description: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            nom: string;
+            description: string | null;
             niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
             departementId: string;
         }[];
