@@ -77,8 +77,6 @@ export class HistoriqueAccesController {
             // Extraire l'ID utilisateur depuis le token
             const userId = this.extractUserIdFromToken(token);
             
-            console.log('Enregistrement d\'accès par utilisateur:', userId);
-            console.log('Données d\'accès:', enregistrerAccesDto);
             
             // Utiliser l'ID utilisateur du token ou celui fourni dans le DTO
             const finalUserId = enregistrerAccesDto.userId || userId;
@@ -109,7 +107,6 @@ export class HistoriqueAccesController {
             // Extraire l'ID utilisateur depuis le token
             const userId = this.extractUserIdFromToken(token);
             
-            console.log('Consultation historique par utilisateur:', userId);
             
             // Utiliser l'ID utilisateur du token ou celui fourni dans le DTO
             const finalUserId = historiqueDto.userId || userId;
@@ -135,7 +132,6 @@ export class HistoriqueAccesController {
             
             if (token) {
                 const userId = this.extractUserIdFromToken(token);
-                console.log('Consultation historique ressource par utilisateur:', userId);
             }
             
             const { ressourceId, isExternal = false, limit = 50 } = historiqueRessourceDto;
@@ -164,7 +160,6 @@ export class HistoriqueAccesController {
             
             if (token) {
                 const userId = this.extractUserIdFromToken(token);
-                console.log('Comptage accès par utilisateur:', userId);
             }
             
             const { ressourceId, isExternal = false, typeAcces } = compterAccesDto;
@@ -194,7 +189,6 @@ export class HistoriqueAccesController {
             // Extraire l'ID utilisateur depuis le token
             const tokenUserId = this.extractUserIdFromToken(token);
             
-            console.log('Consultation statistiques par utilisateur:', tokenUserId);
             
             // Utiliser l'ID utilisateur du token ou celui fourni
             const finalUserId = userId || tokenUserId;

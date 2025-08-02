@@ -9,10 +9,11 @@ services:
     environment:
       MYSQL_DATABASE: "dbuadb"
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_ROOT_PASSWORD: ""
     volumes:
       - mysql_data:/var/lib/mysql
     restart: unless-stopped
+    networks:
+      - gateway-network
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root"]
       timeout: 20s
@@ -29,20 +30,36 @@ services:
     ports:
       - "4000:4000"
     volumes:
-      - .:/app
+      - ./src:/app/src
       - /app/node_modules
     env_file:
       - .env
     environment:
       DATABASE_URL: "mysql://root@mysql-db:3306/dbuadb"
       FRONTEND_URL: "http://localhost:3000"
-     
-
+      # ... vos autres variables
     depends_on:
       mysql:
         condition: service_healthy
     restart: unless-stopped
-    command: sh -c "sleep 10 && npx prisma generate && npx prisma db push && npm run start:uadb"
+    networks:
+      - gateway-network  # ⭐ Utilise le réseau externe
+    command: >
+      sh -c "
+        echo '🔄 Attente de la base de données...' &&
+        sleep 15 &&
+        echo '🔧 Génération du client Prisma...' &&
+        npx prisma generate &&
+        echo '📊 Application du schéma...' &&
+        npx prisma db push --accept-data-loss &&
+        echo '🚀 Démarrage de l application...' &&
+        npm run start:uadb
+      "
 
 volumes:
   mysql_data:
+
+networks:
+  gateway-network:
+    external: true  # ⭐ Utilise le réseau créé manuellement
+

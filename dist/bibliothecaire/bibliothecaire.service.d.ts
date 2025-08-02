@@ -88,7 +88,7 @@ export declare class BibliothecaireService {
         updatedAt: Date;
         userId: string;
         numeroBibliothecaire: string;
-    }) | null, null, import("generated/prisma/runtime/library").DefaultArgs>;
+    }) | null, null, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     update(id: string, updateBibliothecaireDto: UpdateBibliothecaireDto): Promise<{
         user: {
             id: string;
@@ -119,6 +119,6 @@ export declare class BibliothecaireService {
         updatedAt: Date;
         userId: string;
         numeroBibliothecaire: string;
-    }, never, import("generated/prisma/runtime/library").DefaultArgs>;
+    }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     private generateNumero;
 }

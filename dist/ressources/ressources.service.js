@@ -57,7 +57,7 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             }
             else {
                 finalAuteurId = null;
-                finalNomAuteur = createRessourceDto.nomAuteur || `${auteurExists.prenom} ${auteurExists.nom}`;
+                finalNomAuteur = createRessourceDto.nomAuteur || '';
             }
             const isbnglobale = await this.generateIsbnCode();
             const data = {

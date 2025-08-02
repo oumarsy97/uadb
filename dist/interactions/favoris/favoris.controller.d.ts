@@ -118,7 +118,7 @@ export declare class FavorisController {
         userId: string;
         universiteRess: string | null;
         externalRessourceId: string | null;
-    }) | null, null, import("generated/prisma/runtime/library").DefaultArgs>;
+    }) | null, null, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     update(data: {
         updateFavorisDto: UpdateFavorisDto;
         token: string;

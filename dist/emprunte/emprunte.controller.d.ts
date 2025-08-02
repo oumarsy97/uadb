@@ -2,10 +2,185 @@ import { RmqContext } from '@nestjs/microservices';
 import { CreateEmpruntDto, ReturnEmpruntDto, ExtendEmpruntDto } from './dto/create-emprunte.dto';
 import { EmprunteService } from './emprunte.service';
 import { StatutEmprunt } from 'generated/prisma';
+import { JwtService } from '@nestjs/jwt';
 export declare class EmprunteController {
     private readonly empruntService;
+    private readonly jwtService;
     private readonly logger;
-    constructor(empruntService: EmprunteService);
+    constructor(empruntService: EmprunteService, jwtService: JwtService);
+    private extractUserIdFromToken;
+    getCurrentUserHistory(data: {
+        token: string;
+        page?: number;
+        limit?: number;
+    }): Promise<{
+        success: boolean;
+        data: ({
+            empruntExemplaires: ({
+                exemplaire: {
+                    ressource: {
+                        id: string;
+                        titre: string;
+                        isbnglobale: string;
+                        auteur: {
+                            id: string;
+                            createdAt: Date;
+                            updatedAt: Date;
+                            email: string;
+                            motDePasse: string;
+                            nom: string;
+                            telephone: string | null;
+                            prenom: string;
+                            image: string | null;
+                            role: import("generated/prisma").$Enums.RoleUser;
+                            derniereConnexion: Date | null;
+                            estActif: boolean;
+                            preferencesRecommandation: string | null;
+                            frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
+                        } | null;
+                    };
+                } & {
+                    id: string;
+                    ressourceId: string;
+                    etat: import("generated/prisma").$Enums.EtatExemplaire;
+                    localisation: string;
+                    dateAcquisition: Date | null;
+                    qrCode: string | null;
+                    nombre: number;
+                    nombreDisponible: number;
+                    createdAt: Date;
+                    updatedAt: Date;
+                };
+            } & {
+                commentaire: string | null;
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                exemplaireId: string;
+                dateEmprunt: Date;
+                dateRetourPrevue: Date;
+                dateRetourEffective: Date | null;
+                statut: import("generated/prisma").$Enums.StatutEmprunt;
+                empruntId: string;
+            })[];
+        } & {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            exemplaireId: string;
+            userId: string | null;
+            dateEmprunt: Date;
+            dateRetourPrevue: Date;
+            dateRetourEffective: Date | null;
+            statut: import("generated/prisma").$Enums.StatutEmprunt;
+            universiteEmprunteur: string;
+        })[];
+        meta: {
+            total: number;
+            page: number;
+            limit: number;
+            totalPages: number;
+        };
+        userId: string;
+        error?: undefined;
+        code?: undefined;
+    } | {
+        success: boolean;
+        error: any;
+        code: any;
+        data?: undefined;
+        meta?: undefined;
+        userId?: undefined;
+    }>;
+    getCurrentUserActiveEmprunts(data: {
+        token: string;
+        page?: number;
+        limit?: number;
+    }): Promise<{
+        success: boolean;
+        data: ({
+            user: {
+                id: string;
+                email: string;
+                nom: string;
+                prenom: string;
+            } | null;
+            empruntExemplaires: ({
+                exemplaire: {
+                    ressource: {
+                        id: string;
+                        titre: string;
+                        isbnglobale: string;
+                        auteur: {
+                            id: string;
+                            createdAt: Date;
+                            updatedAt: Date;
+                            email: string;
+                            motDePasse: string;
+                            nom: string;
+                            telephone: string | null;
+                            prenom: string;
+                            image: string | null;
+                            role: import("generated/prisma").$Enums.RoleUser;
+                            derniereConnexion: Date | null;
+                            estActif: boolean;
+                            preferencesRecommandation: string | null;
+                            frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
+                        } | null;
+                    };
+                } & {
+                    id: string;
+                    ressourceId: string;
+                    etat: import("generated/prisma").$Enums.EtatExemplaire;
+                    localisation: string;
+                    dateAcquisition: Date | null;
+                    qrCode: string | null;
+                    nombre: number;
+                    nombreDisponible: number;
+                    createdAt: Date;
+                    updatedAt: Date;
+                };
+            } & {
+                commentaire: string | null;
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                exemplaireId: string;
+                dateEmprunt: Date;
+                dateRetourPrevue: Date;
+                dateRetourEffective: Date | null;
+                statut: import("generated/prisma").$Enums.StatutEmprunt;
+                empruntId: string;
+            })[];
+        } & {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            exemplaireId: string;
+            userId: string | null;
+            dateEmprunt: Date;
+            dateRetourPrevue: Date;
+            dateRetourEffective: Date | null;
+            statut: import("generated/prisma").$Enums.StatutEmprunt;
+            universiteEmprunteur: string;
+        })[];
+        meta: {
+            total: number;
+            page: number;
+            limit: number;
+            totalPages: number;
+        };
+        userId: string;
+        error?: undefined;
+        code?: undefined;
+    } | {
+        success: boolean;
+        error: any;
+        code: any;
+        data?: undefined;
+        meta?: undefined;
+        userId?: undefined;
+    }>;
     createEmprunt(data: CreateEmpruntDto): Promise<{
         success: boolean;
         data: {
@@ -490,7 +665,7 @@ export declare class EmprunteController {
         statut?: StatutEmprunt;
         page?: number;
         limit?: number;
-    }, context: RmqContext): Promise<{
+    }): Promise<{
         success: boolean;
         data: ({
             user: {

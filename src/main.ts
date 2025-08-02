@@ -1,3 +1,16 @@
+// ===============================================
+// POLYFILL CRYPTO POUR DOCKER - À AJOUTER EN HAUT
+// ===============================================
+import { webcrypto } from 'node:crypto';
+
+// Polyfill global crypto pour Docker
+if (!globalThis.crypto) {
+  (globalThis as any).crypto = webcrypto;
+}
+
+// ===============================================
+// VOTRE CODE NESTJS HABITUEL
+// ===============================================
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';

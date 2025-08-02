@@ -61,7 +61,7 @@ export class RessourcesService {
         finalNomAuteur = `${auteurExists.prenom} ${auteurExists.nom}`;
       } else {
         finalAuteurId = null;
-        finalNomAuteur = createRessourceDto.nomAuteur || `${auteurExists.prenom} ${auteurExists.nom}`;
+        finalNomAuteur = createRessourceDto.nomAuteur || '';
       }
 
       // Générer un ISBN global unique

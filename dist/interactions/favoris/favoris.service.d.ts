@@ -344,7 +344,7 @@ export declare class FavorisService {
         userId: string;
         universiteRess: string | null;
         externalRessourceId: string | null;
-    }) | null, null, import("generated/prisma/runtime/library").DefaultArgs>;
+    }) | null, null, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     update(id: string, updateFavorisDto: UpdateFavorisDto): Promise<{
         id: string;
         ressourceId: string | null;

@@ -3,7 +3,7 @@ import { MessagePattern, EventPattern, Payload, Ctx, RmqContext } from '@nestjs/
 import {  CreateEmpruntDto, ReturnEmpruntDto, ExtendEmpruntDto } from './dto/create-emprunte.dto';
 import { EmprunteService } from './emprunte.service';
 import { StatutEmprunt } from 'generated/prisma';
-
+import { JwtService } from '@nestjs/jwt';
 
 
 
@@ -11,7 +11,103 @@ import { StatutEmprunt } from 'generated/prisma';
 export class EmprunteController {
   private readonly logger = new Logger(EmprunteController.name);
 
-  constructor(private readonly empruntService: EmprunteService) {}
+  constructor(private readonly empruntService: EmprunteService,
+    private readonly jwtService: JwtService
+  ) {}
+
+  private extractUserIdFromToken(token: string): string {
+    try {
+      // Enlever le préfixe "Bearer " s'il existe
+      const cleanToken = token.replace(/^Bearer\s+/, '');
+      
+      // Décoder le token
+      const payload = this.jwtService.decode(cleanToken) as any;
+      
+      if (!payload || (!payload.sub && !payload.id && !payload.userId)) {
+        throw new Error('Token invalide: ID utilisateur non trouvé');
+      }
+      
+      // Retourner l'ID utilisateur (peut être dans sub, id, ou userId selon votre implémentation)
+      return payload.sub || payload.id || payload.userId;
+    } catch (error) {
+      throw new Error(`Erreur lors de l'extraction de l'ID utilisateur: ${error.message}`);
+    }
+  }
+
+   @MessagePattern('emprunt.user.current.history')
+  async getCurrentUserHistory(@Payload() data: {
+    token: string;
+    page?: number;
+    limit?: number;
+  }) {
+    this.logger.log('Getting history for current user');
+    
+    try {
+      // Extraire l'ID utilisateur du token
+      const userId = this.extractUserIdFromToken(data.token);
+      
+      this.logger.log(`Getting history for authenticated user: ${userId}`);
+      
+      const result = await this.empruntService.getUserEmpruntHistory(
+        userId,
+        data.page,
+        data.limit
+      );
+      
+      return {
+        success: true,
+        data: result.data,
+        meta: result.meta,
+        userId: userId
+      };
+    } catch (error) {
+      this.logger.error(`Error getting current user history: ${error.message}`, error.stack);
+      
+      return {
+        success: false,
+        error: error.message,
+        code: error.constructor.name
+      };
+    }
+  }
+
+  @MessagePattern('emprunt.user.current.active')
+  async getCurrentUserActiveEmprunts(@Payload() data: {
+    token: string;
+    page?: number;
+    limit?: number;
+  }) {
+    this.logger.log('Getting active emprunts for current user');
+    
+    try {
+      // Extraire l'ID utilisateur du token
+      const userId = this.extractUserIdFromToken(data.token);
+      
+      this.logger.log(`Getting active emprunts for authenticated user: ${userId}`);
+      
+      const result = await this.empruntService.getEmprunts({
+        userId: userId,
+        statut: StatutEmprunt.EN_COURS, // Seulement les emprunts actifs
+        page: data.page,
+        limit: data.limit
+      });
+      
+      return {
+        success: true,
+        data: result.data,
+        meta: result.meta,
+        userId: userId
+      };
+    } catch (error) {
+      this.logger.error(`Error getting current user active emprunts: ${error.message}`, error.stack);
+      
+      return {
+        success: false,
+        error: error.message,
+        code: error.constructor.name
+      };
+    }
+  }
 
   // ===== GESTION DES EMPRUNTS =====
 
@@ -207,7 +303,7 @@ export class EmprunteController {
     statut?: StatutEmprunt;
     page?: number;
     limit?: number;
-  }, @Ctx() context: RmqContext) {
+  }) {
     this.logger.log(`Getting emprunts for user: ${data.userId}`);
     
     try {
@@ -217,10 +313,7 @@ export class EmprunteController {
         page: data.page,
         limit: data.limit
       });
-      
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
+     
       
       return {
         success: true,
@@ -229,10 +322,6 @@ export class EmprunteController {
       };
     } catch (error) {
       this.logger.error(`Error getting user emprunts: ${error.message}`, error.stack);
-      
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
       
       return {
         success: false,

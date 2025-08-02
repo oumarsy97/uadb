@@ -1,24 +1,37 @@
-# Dockerfile pour développement avec hot reload
-FROM node:18-alpine
+# Utiliser une image Node.js standard au lieu d'Alpine
+FROM node:18-bullseye-slim
 
+# Installer les dépendances système nécessaires
+RUN apt-get update && apt-get install -y \
+    openssl \
+    ca-certificates \
+    libssl-dev \
+    procps \
+    netcat \
+    && rm -rf /var/lib/apt/lists/*
 
+# Définir les variables d'environnement pour OpenSSL
+ENV OPENSSL_CONF=""
+ENV PRISMA_CLI_BINARY_TARGETS="debian-openssl-1.1.x"
+ENV NODE_OPTIONS="--openssl-legacy-provider"
 
-# 2) Définir le répertoire de travail
+# Définir le répertoire de travail
 WORKDIR /app
 
-# 3) Copier et installer les dépendances (inclut les devDependencies)
+# Copier package.json et package-lock.json
 COPY package*.json ./
+
+# Installer les dépendances
 RUN npm ci
 
-# 4) Copier le schéma Prisma et générer le client
+# Copier le schema Prisma
 COPY prisma ./prisma/
-RUN npx prisma generate
 
-# 5) Copier le reste de votre code **après** l'installation pour profiter du cache
+# Copier le reste du code
 COPY . .
 
-# 6) Exposer le port sur lequel NestJS écoute
+# Exposer le port
 EXPOSE 4000
 
-# 7) Commande par défaut pour le hot‑reload
-CMD ["npm", "run", "start:dev"]
+# Commande par défaut
+CMD ["npm", "run", "start:uadb"]

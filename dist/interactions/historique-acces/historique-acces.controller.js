@@ -41,8 +41,6 @@ let HistoriqueAccesController = class HistoriqueAccesController {
         try {
             const { enregistrerAccesDto, token } = data;
             const userId = this.extractUserIdFromToken(token);
-            console.log('Enregistrement d\'accès par utilisateur:', userId);
-            console.log('Données d\'accès:', enregistrerAccesDto);
             const finalUserId = enregistrerAccesDto.userId || userId;
             return await this.historiqueAccesService.enregistrerAcces(finalUserId, enregistrerAccesDto.ressourceId, enregistrerAccesDto.typeacces, enregistrerAccesDto.universiteRess);
         }
@@ -58,7 +56,6 @@ let HistoriqueAccesController = class HistoriqueAccesController {
         try {
             const { historiqueDto, token } = data;
             const userId = this.extractUserIdFromToken(token);
-            console.log('Consultation historique par utilisateur:', userId);
             const finalUserId = historiqueDto.userId || userId;
             const limit = historiqueDto.limit || 50;
             return await this.historiqueAccesService.getHistoriqueUtilisateur(finalUserId, limit);
@@ -76,7 +73,6 @@ let HistoriqueAccesController = class HistoriqueAccesController {
             const { historiqueRessourceDto, token } = data;
             if (token) {
                 const userId = this.extractUserIdFromToken(token);
-                console.log('Consultation historique ressource par utilisateur:', userId);
             }
             const { ressourceId, isExternal = false, limit = 50 } = historiqueRessourceDto;
             return await this.historiqueAccesService.getHistoriqueRessource(ressourceId, isExternal, limit);
@@ -94,7 +90,6 @@ let HistoriqueAccesController = class HistoriqueAccesController {
             const { compterAccesDto, token } = data;
             if (token) {
                 const userId = this.extractUserIdFromToken(token);
-                console.log('Comptage accès par utilisateur:', userId);
             }
             const { ressourceId, isExternal = false, typeAcces } = compterAccesDto;
             return await this.historiqueAccesService.compterAcces(ressourceId, isExternal, typeAcces);
@@ -111,7 +106,6 @@ let HistoriqueAccesController = class HistoriqueAccesController {
         try {
             const { userId, token } = data;
             const tokenUserId = this.extractUserIdFromToken(token);
-            console.log('Consultation statistiques par utilisateur:', tokenUserId);
             const finalUserId = userId || tokenUserId;
             const historique = await this.historiqueAccesService.getHistoriqueUtilisateur(finalUserId, 1000);
             const stats = {

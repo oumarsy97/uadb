@@ -18,11 +18,77 @@ const common_1 = require("@nestjs/common");
 const microservices_1 = require("@nestjs/microservices");
 const create_emprunte_dto_1 = require("./dto/create-emprunte.dto");
 const emprunte_service_1 = require("./emprunte.service");
+const prisma_1 = require("../../generated/prisma/index.js");
+const jwt_1 = require("@nestjs/jwt");
 let EmprunteController = EmprunteController_1 = class EmprunteController {
     empruntService;
+    jwtService;
     logger = new common_1.Logger(EmprunteController_1.name);
-    constructor(empruntService) {
+    constructor(empruntService, jwtService) {
         this.empruntService = empruntService;
+        this.jwtService = jwtService;
+    }
+    extractUserIdFromToken(token) {
+        try {
+            const cleanToken = token.replace(/^Bearer\s+/, '');
+            const payload = this.jwtService.decode(cleanToken);
+            if (!payload || (!payload.sub && !payload.id && !payload.userId)) {
+                throw new Error('Token invalide: ID utilisateur non trouvé');
+            }
+            return payload.sub || payload.id || payload.userId;
+        }
+        catch (error) {
+            throw new Error(`Erreur lors de l'extraction de l'ID utilisateur: ${error.message}`);
+        }
+    }
+    async getCurrentUserHistory(data) {
+        this.logger.log('Getting history for current user');
+        try {
+            const userId = this.extractUserIdFromToken(data.token);
+            this.logger.log(`Getting history for authenticated user: ${userId}`);
+            const result = await this.empruntService.getUserEmpruntHistory(userId, data.page, data.limit);
+            return {
+                success: true,
+                data: result.data,
+                meta: result.meta,
+                userId: userId
+            };
+        }
+        catch (error) {
+            this.logger.error(`Error getting current user history: ${error.message}`, error.stack);
+            return {
+                success: false,
+                error: error.message,
+                code: error.constructor.name
+            };
+        }
+    }
+    async getCurrentUserActiveEmprunts(data) {
+        this.logger.log('Getting active emprunts for current user');
+        try {
+            const userId = this.extractUserIdFromToken(data.token);
+            this.logger.log(`Getting active emprunts for authenticated user: ${userId}`);
+            const result = await this.empruntService.getEmprunts({
+                userId: userId,
+                statut: prisma_1.StatutEmprunt.EN_COURS,
+                page: data.page,
+                limit: data.limit
+            });
+            return {
+                success: true,
+                data: result.data,
+                meta: result.meta,
+                userId: userId
+            };
+        }
+        catch (error) {
+            this.logger.error(`Error getting current user active emprunts: ${error.message}`, error.stack);
+            return {
+                success: false,
+                error: error.message,
+                code: error.constructor.name
+            };
+        }
     }
     async createEmprunt(data) {
         console.log(`Received createEmprunt request: ${JSON.stringify(data)}`);
@@ -152,7 +218,7 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
             };
         }
     }
-    async getUserEmprunts(data, context) {
+    async getUserEmprunts(data) {
         this.logger.log(`Getting emprunts for user: ${data.userId}`);
         try {
             const result = await this.empruntService.getEmprunts({
@@ -161,9 +227,6 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
                 page: data.page,
                 limit: data.limit
             });
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: true,
                 data: result.data,
@@ -172,9 +235,6 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         }
         catch (error) {
             this.logger.error(`Error getting user emprunts: ${error.message}`, error.stack);
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: false,
                 error: error.message,
@@ -337,6 +397,20 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
 };
 exports.EmprunteController = EmprunteController;
 __decorate([
+    (0, microservices_1.MessagePattern)('emprunt.user.current.history'),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], EmprunteController.prototype, "getCurrentUserHistory", null);
+__decorate([
+    (0, microservices_1.MessagePattern)('emprunt.user.current.active'),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], EmprunteController.prototype, "getCurrentUserActiveEmprunts", null);
+__decorate([
     (0, microservices_1.MessagePattern)('emprunt.create'),
     __param(0, (0, microservices_1.Payload)()),
     __metadata("design:type", Function),
@@ -383,9 +457,8 @@ __decorate([
 __decorate([
     (0, microservices_1.MessagePattern)('emprunt.user.list'),
     __param(0, (0, microservices_1.Payload)()),
-    __param(1, (0, microservices_1.Ctx)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, microservices_1.RmqContext]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], EmprunteController.prototype, "getUserEmprunts", null);
 __decorate([
@@ -450,6 +523,7 @@ __decorate([
 ], EmprunteController.prototype, "handleDailycheckRetards", null);
 exports.EmprunteController = EmprunteController = EmprunteController_1 = __decorate([
     (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [emprunte_service_1.EmprunteService])
+    __metadata("design:paramtypes", [emprunte_service_1.EmprunteService,
+        jwt_1.JwtService])
 ], EmprunteController);
 //# sourceMappingURL=emprunte.controller.js.map

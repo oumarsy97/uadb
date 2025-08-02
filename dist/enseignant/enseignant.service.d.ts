@@ -94,7 +94,7 @@ export declare class EnseignantService {
         dateNaissance: Date;
         specialite: string | null;
         numeroEnseignant: string;
-    }) | null, null, import("generated/prisma/runtime/library").DefaultArgs>;
+    }) | null, null, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     update(id: string, updateEnseignantDto: UpdateEnseignantDto): import("generated/prisma").Prisma.Prisma__EnseignantClient<{
         user: {
             id: string;
@@ -120,7 +120,7 @@ export declare class EnseignantService {
         dateNaissance: Date;
         specialite: string | null;
         numeroEnseignant: string;
-    }, never, import("generated/prisma/runtime/library").DefaultArgs>;
+    }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     remove(id: string): import("generated/prisma").Prisma.Prisma__EnseignantClient<{
         id: string;
         createdAt: Date;
@@ -129,6 +129,6 @@ export declare class EnseignantService {
         dateNaissance: Date;
         specialite: string | null;
         numeroEnseignant: string;
-    }, never, import("generated/prisma/runtime/library").DefaultArgs>;
+    }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     private generateNumeroEnseignant;
 }

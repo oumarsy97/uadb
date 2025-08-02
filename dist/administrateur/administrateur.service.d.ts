@@ -88,11 +88,11 @@ export declare class AdministrateurService {
         id: string;
         userId: string;
         numeroAdmin: string;
-    }, never, import("generated/prisma/runtime/library").DefaultArgs>;
+    }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     remove(id: string): import("generated/prisma").Prisma.Prisma__AdministrateurClient<{
         id: string;
         userId: string;
         numeroAdmin: string;
-    }, never, import("generated/prisma/runtime/library").DefaultArgs>;
+    }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     private generateNumero;
 }
