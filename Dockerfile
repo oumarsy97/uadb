@@ -1,33 +1,37 @@
-# Dockerfile optimisé pour Railway
-FROM node:18-alpine
+# Utiliser une image Node.js standard au lieu d'Alpine
+FROM node:18-bullseye-slim
 
-# Installer les dépendances système
-RUN apk add --no-cache openssl ca-certificates bash curl
+# Installer les dépendances système nécessaires
+RUN apt-get update && apt-get install -y \
+    openssl \
+    ca-certificates \
+    libssl-dev \
+    procps \
+    netcat \
+    && rm -rf /var/lib/apt/lists/*
 
-# Variables d'environnement
+# Définir les variables d'environnement pour OpenSSL
 ENV OPENSSL_CONF=""
-ENV PRISMA_CLI_BINARY_TARGETS="linux-musl"
+ENV PRISMA_CLI_BINARY_TARGETS="debian-openssl-1.1.x"
 ENV NODE_OPTIONS="--openssl-legacy-provider"
 
+# Définir le répertoire de travail
 WORKDIR /app
 
-# Copier package.json
+# Copier package.json et package-lock.json
 COPY package*.json ./
 
-# Installer dépendances
-RUN npm ci --only=production && npm cache clean --force
+# Installer les dépendances
+RUN npm ci
 
-# Copier Prisma
+# Copier le schema Prisma
 COPY prisma ./prisma/
 
-# Générer client Prisma
-RUN npx prisma generate
-
-# Copier le code
+# Copier le reste du code
 COPY . .
 
-# Exposer le port (Railway utilise PORT)
-EXPOSE $PORT
+# Exposer le port
+EXPOSE 4000
 
-# Commande de démarrage
-CMD ["sh", "-c", "npx prisma db push --accept-data-loss && npm run start:uadb"]
+# Commande par défaut
+CMD ["npm", "run", "start:uadb"]
