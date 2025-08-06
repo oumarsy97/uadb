@@ -1,42 +1,37 @@
-# ATTENTION: Cette approche n'est pas recommandée en production
-FROM node:18-bullseye-slim
+# Version minimale sans MySQL client local
+FROM node:18-alpine
 
-# Installer Node.js et MySQL
-RUN apt-get update && apt-get install -y \
+# Installer seulement les dépendances essentielles
+RUN apk add --no-cache \
     openssl \
     ca-certificates \
-    libssl-dev \
-    procps \
-    netcat \
-    mysql-server \
-    mysql-client \
-    && rm -rf /var/lib/apt/lists/*
-
-# Configuration MySQL
-RUN usermod -d /var/lib/mysql/ mysql
-RUN mkdir -p /var/run/mysqld && chown mysql:mysql /var/run/mysqld
+    bash
 
 # Variables d'environnement
 ENV OPENSSL_CONF=""
-ENV PRISMA_CLI_BINARY_TARGETS="debian-openssl-1.1.x"
+ENV PRISMA_CLI_BINARY_TARGETS="linux-musl"
 ENV NODE_OPTIONS="--openssl-legacy-provider"
-ENV DATABASE_URL="mysql://root@localhost:3306/dbuadb"
 
+# Répertoire de travail
 WORKDIR /app
 
-# Copier et installer les dépendances
+# Copier et installer dépendances
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci --only=production && npm cache clean --force
 
-# Copier Prisma et code
+# Copier Prisma
 COPY prisma ./prisma/
 RUN npx prisma generate
+
+# Copier le code
 COPY . .
 
+# Script de démarrage
+COPY start-simple.sh ./start.sh
+RUN chmod +x start.sh
+
+# Port
 EXPOSE ${PORT:-4000}
 
-# Script de démarrage qui lance MySQL puis l'app
-COPY start-with-mysql.sh ./
-RUN chmod +x start-with-mysql.sh
-
-CMD ["./start-with-mysql.sh"]
+# Démarrage
+CMD ["./start.sh"]
