@@ -1,37 +1,19 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Démarrage de MySQL et de l'application..."
+echo "🚀 Démarrage de l'application..."
 
-# Initialiser MySQL si nécessaire
-if [ ! -d "/var/lib/mysql/mysql" ]; then
-    echo "📊 Initialisation de MySQL..."
-    mysqld --initialize-insecure --user=mysql --datadir=/var/lib/mysql
+# Vérifier DATABASE_URL
+if [ -z "$DATABASE_URL" ]; then
+    echo "❌ DATABASE_URL requis!"
+    exit 1
 fi
 
-# Démarrer MySQL en arrière-plan
-echo "🔄 Démarrage de MySQL..."
-mysqld --user=mysql --datadir=/var/lib/mysql --socket=/var/run/mysqld/mysqld.sock &
-
-# Attendre que MySQL soit prêt
-echo "⏳ Attente de MySQL..."
-while ! mysqladmin ping -h localhost --silent; do
-    sleep 1
-done
-
-echo "✅ MySQL est prêt!"
-
-# Créer la base de données
-echo "📋 Création de la base de données..."
-mysql -u root -e "CREATE DATABASE IF NOT EXISTS dbuadb;"
-
-# Variables d'environnement
-export DATABASE_URL="mysql://root@localhost:3306/dbuadb"
-
-# Générer Prisma et appliquer le schéma
-echo "⚙️ Configuration de Prisma..."
+echo "⚙️ Génération Prisma..."
 npx prisma generate
-npx prisma db push --accept-data-loss
 
-echo "🚀 Démarrage de l'application..."
+echo "📊 Synchronisation base de données..."
+npx prisma db push --accept-data-loss || echo "⚠️ Erreur DB - continuons"
+
+echo "✅ Lancement application..."
 exec npm run start:uadb
