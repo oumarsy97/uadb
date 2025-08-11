@@ -35,13 +35,7 @@ services:
     environment:
       DATABASE_URL: "mysql://root@mysql-db:3306/dbuadb"
       FRONTEND_URL: "http://localhost:3000"
-      EMAIL_PROVIDER: "smtp"
-      SMTP_HOST: "smtp.gmail.com"
-      SMTP_PORT: 587
-      SMTP_SECURE: "false"
-      SMTP_USER: "syoumar505@gmail.com"
-      SMTP_PASS: "mxwtzlgyusfqfyil"
-      SMTP_TLS_REJECT_UNAUTHORIZED: "false"
+      
       # ... vos autres variables
     depends_on:
       mysql:
