@@ -33,6 +33,25 @@ export class ExemplairePhysiqueController {
       };
     }
   }
+  @MessagePattern('findExemplairesPhysiquesDisponilbles')
+  async findDisponibles(@Payload() data: { options?: SearchExemplairePhysiqueDto; token?: string }) {
+    try {
+      const { options = {}, token } = data;
+      
+      if (token) {
+        const userId = this.jwtHelperService.extractUserIdFromToken(token);
+        console.log('Recherche d\'exemplaires physiques disponibles effectuée par utilisateur:', userId);
+      }
+      
+      return await this.exemplairePhysiqueService.findDisponibles();
+    } catch (error) {
+      return {
+        error: true,
+        message: error.message,
+        statusCode: error.status || 500
+      };
+    }
+  }
 
   @MessagePattern('findAllExemplairesPhysiques')
   async findAll(@Payload() data: { options?: SearchExemplairePhysiqueDto; token?: string }) {

@@ -62,6 +62,7 @@ export class CreateExemplairePhysiqueDto {
   @IsDateString()
   nombre: number;
   nomAuteur: string;
+  id: string;
 
 }
 

@@ -158,19 +158,6 @@ exports.Prisma.PolitiqueBibliothequeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.SanctionUtilisateurScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  typeRestriction: 'typeRestriction',
-  dateDebut: 'dateDebut',
-  dateFin: 'dateFin',
-  motif: 'motif',
-  empruntId: 'empruntId',
-  estActive: 'estActive',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.ExemplairePhysiqueScalarFieldEnum = {
   id: 'id',
   ressourceId: 'ressourceId',
@@ -191,6 +178,7 @@ exports.Prisma.EmpruntScalarFieldEnum = {
   dateEmprunt: 'dateEmprunt',
   dateRetourPrevue: 'dateRetourPrevue',
   dateRetourEffective: 'dateRetourEffective',
+  renouvellement: 'renouvellement',
   statut: 'statut',
   universiteEmprunteur: 'universiteEmprunteur',
   createdAt: 'createdAt',
@@ -339,11 +327,10 @@ exports.Prisma.CommentaireScalarFieldEnum = {
 exports.Prisma.NotationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  externUserId: 'externUserId',
+  universiteUser: 'universiteUser',
   ressourceId: 'ressourceId',
   note: 'note',
-  dateNotation: 'dateNotation',
-  universiteSrc: 'universiteSrc',
-  universiteUser: 'universiteUser',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -497,13 +484,6 @@ exports.Prisma.PolitiqueBibliothequeOrderByRelevanceFieldEnum = {
   penaliteRetard: 'penaliteRetard'
 };
 
-exports.Prisma.SanctionUtilisateurOrderByRelevanceFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  motif: 'motif',
-  empruntId: 'empruntId'
-};
-
 exports.Prisma.ExemplairePhysiqueOrderByRelevanceFieldEnum = {
   id: 'id',
   ressourceId: 'ressourceId',
@@ -619,9 +599,9 @@ exports.Prisma.CommentaireOrderByRelevanceFieldEnum = {
 exports.Prisma.NotationOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
-  ressourceId: 'ressourceId',
-  universiteSrc: 'universiteSrc',
-  universiteUser: 'universiteUser'
+  externUserId: 'externUserId',
+  universiteUser: 'universiteUser',
+  ressourceId: 'ressourceId'
 };
 
 exports.Prisma.HistoriqueAccesOrderByRelevanceFieldEnum = {
@@ -721,13 +701,6 @@ exports.RoleUser = exports.$Enums.RoleUser = {
   ADMIN: 'ADMIN'
 };
 
-exports.TypeSanction = exports.$Enums.TypeSanction = {
-  INTERDICTION_EMPRUNT: 'INTERDICTION_EMPRUNT',
-  LIMITATION_SERVICES: 'LIMITATION_SERVICES',
-  SUSPENSION_COMPTE: 'SUSPENSION_COMPTE',
-  AMENDE_FINANCIERE: 'AMENDE_FINANCIERE'
-};
-
 exports.EtatExemplaire = exports.$Enums.EtatExemplaire = {
   NEUF: 'NEUF',
   BON: 'BON',
@@ -805,7 +778,6 @@ exports.Prisma.ModelName = {
   ConventionInteruniversitaire: 'ConventionInteruniversitaire',
   ReglePret: 'ReglePret',
   PolitiqueBibliotheque: 'PolitiqueBibliotheque',
-  SanctionUtilisateur: 'SanctionUtilisateur',
   ExemplairePhysique: 'ExemplairePhysique',
   Emprunt: 'Emprunt',
   EmpruntExemplaire: 'EmpruntExemplaire',

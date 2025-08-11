@@ -64,6 +64,7 @@ export class CreateRessourceDto {
   @IsBoolean()
   @IsOptional()
   estArchive?: boolean = false;
+  id: string ;
 }
 
 export class UpdateRessourceDto {

@@ -45,6 +45,7 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                 throw new common_1.BadRequestException('Une ressource avec le même titre existe déjà pour cet auteur');
             }
             let categorieId = createRessourceDto.categorieId;
+            console.log('ID de la catégorie:', categorieId);
             if (!categorieId) {
                 this.logger.log('Aucune catégorie spécifiée, utilisation de la catégorie par défaut');
                 categorieId = await this.getOrCreateDefaultCategory();

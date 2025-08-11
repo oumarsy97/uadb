@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider      = "prisma-client-js"
   output        = "../generated/prisma"
@@ -11,8 +8,6 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
-// Modèle pour les transactions inter-universitaires
 
 // Modèle pour les conventions entre universités
 model ConventionInteruniversitaire {
@@ -74,26 +69,6 @@ model PolitiqueBibliotheque {
   @@index([universiteId])
 }
 
-model SanctionUtilisateur {
-  id              String       @id @default(uuid())
-  userId          String       @map("user_id")
-  typeRestriction TypeSanction @map("type_restriction")
-  dateDebut       DateTime     @default(now()) @map("date_debut")
-  dateFin         DateTime     @map("date_fin") // Calculée automatiquement selon la règle
-  motif           String       @db.Text
-  empruntId       String?      @map("emprunt_id") // Lien vers l'emprunt en retard ou perdu
-  estActive       Boolean      @default(true) @map("est_active")
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
-
-  // Relations
-  user    User     @relation(fields: [userId], references: [id])
-  emprunt Emprunt? @relation(fields: [empruntId], references: [id])
-
-  @@index([userId, estActive])
-  @@index([dateFin])
-}
-
 enum TypeSanction {
   INTERDICTION_EMPRUNT
   LIMITATION_SERVICES
@@ -114,26 +89,6 @@ enum TypeValidation {
   REJETEE
   ANNULEE
 }
-
-// Système de réservation des ressources
-// model Reservation {
-//   id                String              @id @default(uuid())
-//   userId            String?              @map("user_id")
-//   ressourceId       String              @map("ressource_id")
-//   dateReservation   DateTime            @default(now()) @map("date_reservation")
-//   dateDebut         DateTime            @map("date_debut")
-//   dateFin           DateTime            @map("date_fin")
-//   statut            StatutReservation   @default(EN_ATTENTE)
-//   commentaire       String?             @db.Text
-//   universiteEmprunteur String           @map("universite_emprunteur") // Université d'origine du réservateur
-//   validePar         String?             @map("valide_par") // ID de l'administrateur qui a validé la réservation externe
-//   user              User?                @relation(fields: [userId], references: [id])
-//   ressource         Ressource           @relation(fields: [ressourceId], references: [id])
-//   valideur Bibliothecaire? @relation(fields: [validePar], references: [id]) // ID de l'administrateur qui a validé la réservation
-//   createdAt         DateTime       @default(now())
-//   updatedAt         DateTime       @updatedAt
-//   @@index([dateDebut, dateFin]) // Index pour optimiser les recherches par date
-// }
 
 enum StatutReservation {
   EN_ATTENTE
@@ -173,18 +128,18 @@ enum EtatExemplaire {
 
 // Gestion des emprunts physiques
 model Emprunt {
-  id                   String                @id @default(uuid())
-  exemplaireId         String                @map("exemplaire_id")
-  userId               String?               @map("user_id")
-  dateEmprunt          DateTime              @default(now()) @map("date_emprunt")
-  dateRetourPrevue     DateTime              @map("date_retour_prevue")
-  dateRetourEffective  DateTime?             @map("date_retour_effective")
-  statut               StatutEmprunt         @default(EN_COURS)
-  universiteEmprunteur String                @map("universite_emprunteur") // Université d'origine de l'emprunteur
-  user                 User?                 @relation(fields: [userId], references: [id])
-  createdAt            DateTime              @default(now())
-  updatedAt            DateTime              @updatedAt
-  SanctionUtilisateur  SanctionUtilisateur[]
+  id                   String              @id @default(uuid())
+  exemplaireId         String              @map("exemplaire_id")
+  userId               String?             @map("user_id")
+  dateEmprunt          DateTime            @default(now()) @map("date_emprunt")
+  dateRetourPrevue     DateTime            @map("date_retour_prevue")
+  dateRetourEffective  DateTime?           @map("date_retour_effective")
+  renouvellement       Int                 @default(0)
+  statut               StatutEmprunt       @default(EN_COURS)
+  universiteEmprunteur String              @map("universite_emprunteur") // Université d'origine de l'emprunteur
+  user                 User?               @relation(fields: [userId], references: [id])
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
   empruntExemplaires   EmpruntExemplaire[]
 
   @@index([dateEmprunt, dateRetourPrevue])
@@ -193,20 +148,18 @@ model Emprunt {
 
 // Table de liaison entre Emprunt et ExemplairePhysique
 model EmpruntExemplaire {
-  id                  String        @id @default(uuid())
-  empruntId           String        @map("emprunt_id")
-  exemplaireId        String        @map("exemplaire_id")
-  dateEmprunt         DateTime      @default(now()) @map("date_emprunt")
-  dateRetourPrevue    DateTime      @map("date_retour_prevue")
-  dateRetourEffective DateTime?     @map("date_retour_effective")
-  statut              StatutEmprunt @default(EN_COURS)
-  commentaire         String?       @db.Text
-
-  emprunt    Emprunt            @relation(fields: [empruntId], references: [id])
-  exemplaire ExemplairePhysique @relation(fields: [exemplaireId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                  String             @id @default(uuid())
+  empruntId           String             @map("emprunt_id")
+  exemplaireId        String             @map("exemplaire_id")
+  dateEmprunt         DateTime           @default(now()) @map("date_emprunt")
+  dateRetourPrevue    DateTime           @map("date_retour_prevue")
+  dateRetourEffective DateTime?          @map("date_retour_effective")
+  statut              StatutEmprunt      @default(EN_COURS)
+  commentaire         String?            @db.Text
+  emprunt             Emprunt            @relation(fields: [empruntId], references: [id])
+  exemplaire          ExemplairePhysique @relation(fields: [exemplaireId], references: [id])
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
 
   @@index([empruntId, exemplaireId])
 }
@@ -229,11 +182,10 @@ model Recommandation {
   estVue                Boolean             @default(false) @map("est_vue")
   estInteruniversitaire Boolean             @default(false) @map("est_interuniversitaire") // Recommandation qui vient d'une autre université
   universiteSource      String?             @map("universite_source") // ID de l'université source pour recommandations interuniversitaires
-
-  user      User      @relation(fields: [userId], references: [id])
-  ressource Ressource @relation(fields: [ressourceId], references: [id])
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  user                  User                @relation(fields: [userId], references: [id])
+  ressource             Ressource           @relation(fields: [ressourceId], references: [id])
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
 
   @@index([userId, estVue])
   @@index([ressourceId])
@@ -359,7 +311,6 @@ model User {
   enseignant                Enseignant?
   bibliothecaire            Bibliothecaire?
   administrateur            Administrateur?
-  sanctions                 SanctionUtilisateur[]
 
   @@index([preferencesRecommandation])
   @@index([frequenceRecommandation])
@@ -401,7 +352,6 @@ model Bibliothecaire {
   user                 User     @relation(fields: [userId], references: [id])
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
-  // reservations      Reservation[]
 
   @@index([userId])
 }
@@ -410,8 +360,7 @@ model Administrateur {
   id          String @id @default(uuid())
   userId      String @unique @map("user_id")
   numeroAdmin String @unique @map("numero_administrateur")
-
-  user User @relation(fields: [userId], references: [id])
+  user        User   @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
@@ -424,9 +373,8 @@ enum FrequenceRecommandation {
 }
 
 model Favori {
-  id     String @id @default(uuid())
-  userId String @map("user_id")
-
+  id          String     @id @default(uuid())
+  userId      String     @map("user_id")
   // Pour les ressources locales
   ressourceId String?    @map("ressource_id")
   ressource   Ressource? @relation(fields: [ressourceId], references: [id])
@@ -466,19 +414,17 @@ model Commentaire {
 model Notation {
   id             String    @id @default(uuid())
   userId         String?   @map("user_id")
+  externUserId   String?   @map("external_user_id")
+  universiteUser String?   @map("universite_utilisateur") // Université de l'utilisateur
   ressourceId    String    @map("ressource_id")
   note           Int // 1-5
-  dateNotation   DateTime  @default(now()) @map("date_notation")
   user           User?     @relation(fields: [userId], references: [id])
   ressource      Ressource @relation(fields: [ressourceId], references: [id])
-  universiteSrc  String?   @map("universite_source") // Si notation externe
-  universiteUser String?   @map("universite_utilisateur") // Université de l'utilisateur
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 
   @@unique([userId, ressourceId])
   @@index([ressourceId])
-  @@index([universiteSrc])
   @@index([universiteUser])
 }
 

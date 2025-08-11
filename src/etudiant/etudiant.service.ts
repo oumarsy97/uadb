@@ -70,6 +70,7 @@ async create(createEtudiantDto: CreateEtudiantDto) {
     // 3. Créer l'étudiant avec les données spécifiques
     const etudiant = await this.prisma.etudiant.create({
       data: {
+        id: user.id,
         userId: user.id,
         codePermanent: numeroEtudiant,
         dateNaissance: new Date(createEtudiantDto.dateNaissance),

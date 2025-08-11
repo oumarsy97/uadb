@@ -29,11 +29,6 @@ export type ReglePret = $Result.DefaultSelection<Prisma.$ReglePretPayload>
  */
 export type PolitiqueBibliotheque = $Result.DefaultSelection<Prisma.$PolitiqueBibliothequePayload>
 /**
- * Model SanctionUtilisateur
- * 
- */
-export type SanctionUtilisateur = $Result.DefaultSelection<Prisma.$SanctionUtilisateurPayload>
-/**
  * Model ExemplairePhysique
  * 
  */
@@ -566,16 +561,6 @@ export class PrismaClient<
     * ```
     */
   get politiqueBibliotheque(): Prisma.PolitiqueBibliothequeDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.sanctionUtilisateur`: Exposes CRUD operations for the **SanctionUtilisateur** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more SanctionUtilisateurs
-    * const sanctionUtilisateurs = await prisma.sanctionUtilisateur.findMany()
-    * ```
-    */
-  get sanctionUtilisateur(): Prisma.SanctionUtilisateurDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.exemplairePhysique`: Exposes CRUD operations for the **ExemplairePhysique** model.
@@ -1269,7 +1254,6 @@ export namespace Prisma {
     ConventionInteruniversitaire: 'ConventionInteruniversitaire',
     ReglePret: 'ReglePret',
     PolitiqueBibliotheque: 'PolitiqueBibliotheque',
-    SanctionUtilisateur: 'SanctionUtilisateur',
     ExemplairePhysique: 'ExemplairePhysique',
     Emprunt: 'Emprunt',
     EmpruntExemplaire: 'EmpruntExemplaire',
@@ -1313,7 +1297,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "conventionInteruniversitaire" | "reglePret" | "politiqueBibliotheque" | "sanctionUtilisateur" | "exemplairePhysique" | "emprunt" | "empruntExemplaire" | "recommandation" | "universite" | "ufr" | "departement" | "filiere" | "user" | "etudiant" | "enseignant" | "bibliothecaire" | "administrateur" | "favori" | "commentaire" | "notation" | "historiqueAcces" | "donneesRecommandation" | "collection" | "collectionRessource" | "ressource" | "categorie" | "statistiqueBibliotheque" | "notification" | "journalAudit"
+      modelProps: "conventionInteruniversitaire" | "reglePret" | "politiqueBibliotheque" | "exemplairePhysique" | "emprunt" | "empruntExemplaire" | "recommandation" | "universite" | "ufr" | "departement" | "filiere" | "user" | "etudiant" | "enseignant" | "bibliothecaire" | "administrateur" | "favori" | "commentaire" | "notation" | "historiqueAcces" | "donneesRecommandation" | "collection" | "collectionRessource" | "ressource" | "categorie" | "statistiqueBibliotheque" | "notification" | "journalAudit"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1512,72 +1496,6 @@ export namespace Prisma {
           count: {
             args: Prisma.PolitiqueBibliothequeCountArgs<ExtArgs>
             result: $Utils.Optional<PolitiqueBibliothequeCountAggregateOutputType> | number
-          }
-        }
-      }
-      SanctionUtilisateur: {
-        payload: Prisma.$SanctionUtilisateurPayload<ExtArgs>
-        fields: Prisma.SanctionUtilisateurFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.SanctionUtilisateurFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SanctionUtilisateurPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.SanctionUtilisateurFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SanctionUtilisateurPayload>
-          }
-          findFirst: {
-            args: Prisma.SanctionUtilisateurFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SanctionUtilisateurPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.SanctionUtilisateurFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SanctionUtilisateurPayload>
-          }
-          findMany: {
-            args: Prisma.SanctionUtilisateurFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SanctionUtilisateurPayload>[]
-          }
-          create: {
-            args: Prisma.SanctionUtilisateurCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SanctionUtilisateurPayload>
-          }
-          createMany: {
-            args: Prisma.SanctionUtilisateurCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.SanctionUtilisateurDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SanctionUtilisateurPayload>
-          }
-          update: {
-            args: Prisma.SanctionUtilisateurUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SanctionUtilisateurPayload>
-          }
-          deleteMany: {
-            args: Prisma.SanctionUtilisateurDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.SanctionUtilisateurUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.SanctionUtilisateurUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SanctionUtilisateurPayload>
-          }
-          aggregate: {
-            args: Prisma.SanctionUtilisateurAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateSanctionUtilisateur>
-          }
-          groupBy: {
-            args: Prisma.SanctionUtilisateurGroupByArgs<ExtArgs>
-            result: $Utils.Optional<SanctionUtilisateurGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.SanctionUtilisateurCountArgs<ExtArgs>
-            result: $Utils.Optional<SanctionUtilisateurCountAggregateOutputType> | number
           }
         }
       }
@@ -3326,7 +3244,6 @@ export namespace Prisma {
     conventionInteruniversitaire?: ConventionInteruniversitaireOmit
     reglePret?: ReglePretOmit
     politiqueBibliotheque?: PolitiqueBibliothequeOmit
-    sanctionUtilisateur?: SanctionUtilisateurOmit
     exemplairePhysique?: ExemplairePhysiqueOmit
     emprunt?: EmpruntOmit
     empruntExemplaire?: EmpruntExemplaireOmit
@@ -3482,12 +3399,10 @@ export namespace Prisma {
    */
 
   export type EmpruntCountOutputType = {
-    SanctionUtilisateur: number
     empruntExemplaires: number
   }
 
   export type EmpruntCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    SanctionUtilisateur?: boolean | EmpruntCountOutputTypeCountSanctionUtilisateurArgs
     empruntExemplaires?: boolean | EmpruntCountOutputTypeCountEmpruntExemplairesArgs
   }
 
@@ -3500,13 +3415,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the EmpruntCountOutputType
      */
     select?: EmpruntCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * EmpruntCountOutputType without action
-   */
-  export type EmpruntCountOutputTypeCountSanctionUtilisateurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SanctionUtilisateurWhereInput
   }
 
   /**
@@ -3684,7 +3592,6 @@ export namespace Prisma {
     JournalAudit: number
     donneesRecommandations: number
     notifications: number
-    sanctions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3699,7 +3606,6 @@ export namespace Prisma {
     JournalAudit?: boolean | UserCountOutputTypeCountJournalAuditArgs
     donneesRecommandations?: boolean | UserCountOutputTypeCountDonneesRecommandationsArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
-    sanctions?: boolean | UserCountOutputTypeCountSanctionsArgs
   }
 
   // Custom InputTypes
@@ -3788,13 +3694,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NotificationWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountSanctionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SanctionUtilisateurWhereInput
   }
 
 
@@ -6886,1013 +6785,6 @@ export namespace Prisma {
 
 
   /**
-   * Model SanctionUtilisateur
-   */
-
-  export type AggregateSanctionUtilisateur = {
-    _count: SanctionUtilisateurCountAggregateOutputType | null
-    _min: SanctionUtilisateurMinAggregateOutputType | null
-    _max: SanctionUtilisateurMaxAggregateOutputType | null
-  }
-
-  export type SanctionUtilisateurMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    typeRestriction: $Enums.TypeSanction | null
-    dateDebut: Date | null
-    dateFin: Date | null
-    motif: string | null
-    empruntId: string | null
-    estActive: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type SanctionUtilisateurMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    typeRestriction: $Enums.TypeSanction | null
-    dateDebut: Date | null
-    dateFin: Date | null
-    motif: string | null
-    empruntId: string | null
-    estActive: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type SanctionUtilisateurCountAggregateOutputType = {
-    id: number
-    userId: number
-    typeRestriction: number
-    dateDebut: number
-    dateFin: number
-    motif: number
-    empruntId: number
-    estActive: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type SanctionUtilisateurMinAggregateInputType = {
-    id?: true
-    userId?: true
-    typeRestriction?: true
-    dateDebut?: true
-    dateFin?: true
-    motif?: true
-    empruntId?: true
-    estActive?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type SanctionUtilisateurMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    typeRestriction?: true
-    dateDebut?: true
-    dateFin?: true
-    motif?: true
-    empruntId?: true
-    estActive?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type SanctionUtilisateurCountAggregateInputType = {
-    id?: true
-    userId?: true
-    typeRestriction?: true
-    dateDebut?: true
-    dateFin?: true
-    motif?: true
-    empruntId?: true
-    estActive?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type SanctionUtilisateurAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which SanctionUtilisateur to aggregate.
-     */
-    where?: SanctionUtilisateurWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SanctionUtilisateurs to fetch.
-     */
-    orderBy?: SanctionUtilisateurOrderByWithRelationInput | SanctionUtilisateurOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: SanctionUtilisateurWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SanctionUtilisateurs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SanctionUtilisateurs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned SanctionUtilisateurs
-    **/
-    _count?: true | SanctionUtilisateurCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: SanctionUtilisateurMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: SanctionUtilisateurMaxAggregateInputType
-  }
-
-  export type GetSanctionUtilisateurAggregateType<T extends SanctionUtilisateurAggregateArgs> = {
-        [P in keyof T & keyof AggregateSanctionUtilisateur]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateSanctionUtilisateur[P]>
-      : GetScalarType<T[P], AggregateSanctionUtilisateur[P]>
-  }
-
-
-
-
-  export type SanctionUtilisateurGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SanctionUtilisateurWhereInput
-    orderBy?: SanctionUtilisateurOrderByWithAggregationInput | SanctionUtilisateurOrderByWithAggregationInput[]
-    by: SanctionUtilisateurScalarFieldEnum[] | SanctionUtilisateurScalarFieldEnum
-    having?: SanctionUtilisateurScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: SanctionUtilisateurCountAggregateInputType | true
-    _min?: SanctionUtilisateurMinAggregateInputType
-    _max?: SanctionUtilisateurMaxAggregateInputType
-  }
-
-  export type SanctionUtilisateurGroupByOutputType = {
-    id: string
-    userId: string
-    typeRestriction: $Enums.TypeSanction
-    dateDebut: Date
-    dateFin: Date
-    motif: string
-    empruntId: string | null
-    estActive: boolean
-    createdAt: Date
-    updatedAt: Date
-    _count: SanctionUtilisateurCountAggregateOutputType | null
-    _min: SanctionUtilisateurMinAggregateOutputType | null
-    _max: SanctionUtilisateurMaxAggregateOutputType | null
-  }
-
-  type GetSanctionUtilisateurGroupByPayload<T extends SanctionUtilisateurGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<SanctionUtilisateurGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof SanctionUtilisateurGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], SanctionUtilisateurGroupByOutputType[P]>
-            : GetScalarType<T[P], SanctionUtilisateurGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type SanctionUtilisateurSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    typeRestriction?: boolean
-    dateDebut?: boolean
-    dateFin?: boolean
-    motif?: boolean
-    empruntId?: boolean
-    estActive?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    emprunt?: boolean | SanctionUtilisateur$empruntArgs<ExtArgs>
-  }, ExtArgs["result"]["sanctionUtilisateur"]>
-
-
-
-  export type SanctionUtilisateurSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    typeRestriction?: boolean
-    dateDebut?: boolean
-    dateFin?: boolean
-    motif?: boolean
-    empruntId?: boolean
-    estActive?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type SanctionUtilisateurOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "typeRestriction" | "dateDebut" | "dateFin" | "motif" | "empruntId" | "estActive" | "createdAt" | "updatedAt", ExtArgs["result"]["sanctionUtilisateur"]>
-  export type SanctionUtilisateurInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    emprunt?: boolean | SanctionUtilisateur$empruntArgs<ExtArgs>
-  }
-
-  export type $SanctionUtilisateurPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "SanctionUtilisateur"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      emprunt: Prisma.$EmpruntPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      typeRestriction: $Enums.TypeSanction
-      dateDebut: Date
-      dateFin: Date
-      motif: string
-      empruntId: string | null
-      estActive: boolean
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["sanctionUtilisateur"]>
-    composites: {}
-  }
-
-  type SanctionUtilisateurGetPayload<S extends boolean | null | undefined | SanctionUtilisateurDefaultArgs> = $Result.GetResult<Prisma.$SanctionUtilisateurPayload, S>
-
-  type SanctionUtilisateurCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SanctionUtilisateurFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: SanctionUtilisateurCountAggregateInputType | true
-    }
-
-  export interface SanctionUtilisateurDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SanctionUtilisateur'], meta: { name: 'SanctionUtilisateur' } }
-    /**
-     * Find zero or one SanctionUtilisateur that matches the filter.
-     * @param {SanctionUtilisateurFindUniqueArgs} args - Arguments to find a SanctionUtilisateur
-     * @example
-     * // Get one SanctionUtilisateur
-     * const sanctionUtilisateur = await prisma.sanctionUtilisateur.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends SanctionUtilisateurFindUniqueArgs>(args: SelectSubset<T, SanctionUtilisateurFindUniqueArgs<ExtArgs>>): Prisma__SanctionUtilisateurClient<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one SanctionUtilisateur that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {SanctionUtilisateurFindUniqueOrThrowArgs} args - Arguments to find a SanctionUtilisateur
-     * @example
-     * // Get one SanctionUtilisateur
-     * const sanctionUtilisateur = await prisma.sanctionUtilisateur.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends SanctionUtilisateurFindUniqueOrThrowArgs>(args: SelectSubset<T, SanctionUtilisateurFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SanctionUtilisateurClient<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first SanctionUtilisateur that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SanctionUtilisateurFindFirstArgs} args - Arguments to find a SanctionUtilisateur
-     * @example
-     * // Get one SanctionUtilisateur
-     * const sanctionUtilisateur = await prisma.sanctionUtilisateur.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends SanctionUtilisateurFindFirstArgs>(args?: SelectSubset<T, SanctionUtilisateurFindFirstArgs<ExtArgs>>): Prisma__SanctionUtilisateurClient<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first SanctionUtilisateur that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SanctionUtilisateurFindFirstOrThrowArgs} args - Arguments to find a SanctionUtilisateur
-     * @example
-     * // Get one SanctionUtilisateur
-     * const sanctionUtilisateur = await prisma.sanctionUtilisateur.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends SanctionUtilisateurFindFirstOrThrowArgs>(args?: SelectSubset<T, SanctionUtilisateurFindFirstOrThrowArgs<ExtArgs>>): Prisma__SanctionUtilisateurClient<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more SanctionUtilisateurs that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SanctionUtilisateurFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all SanctionUtilisateurs
-     * const sanctionUtilisateurs = await prisma.sanctionUtilisateur.findMany()
-     * 
-     * // Get first 10 SanctionUtilisateurs
-     * const sanctionUtilisateurs = await prisma.sanctionUtilisateur.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const sanctionUtilisateurWithIdOnly = await prisma.sanctionUtilisateur.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends SanctionUtilisateurFindManyArgs>(args?: SelectSubset<T, SanctionUtilisateurFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a SanctionUtilisateur.
-     * @param {SanctionUtilisateurCreateArgs} args - Arguments to create a SanctionUtilisateur.
-     * @example
-     * // Create one SanctionUtilisateur
-     * const SanctionUtilisateur = await prisma.sanctionUtilisateur.create({
-     *   data: {
-     *     // ... data to create a SanctionUtilisateur
-     *   }
-     * })
-     * 
-     */
-    create<T extends SanctionUtilisateurCreateArgs>(args: SelectSubset<T, SanctionUtilisateurCreateArgs<ExtArgs>>): Prisma__SanctionUtilisateurClient<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many SanctionUtilisateurs.
-     * @param {SanctionUtilisateurCreateManyArgs} args - Arguments to create many SanctionUtilisateurs.
-     * @example
-     * // Create many SanctionUtilisateurs
-     * const sanctionUtilisateur = await prisma.sanctionUtilisateur.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends SanctionUtilisateurCreateManyArgs>(args?: SelectSubset<T, SanctionUtilisateurCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a SanctionUtilisateur.
-     * @param {SanctionUtilisateurDeleteArgs} args - Arguments to delete one SanctionUtilisateur.
-     * @example
-     * // Delete one SanctionUtilisateur
-     * const SanctionUtilisateur = await prisma.sanctionUtilisateur.delete({
-     *   where: {
-     *     // ... filter to delete one SanctionUtilisateur
-     *   }
-     * })
-     * 
-     */
-    delete<T extends SanctionUtilisateurDeleteArgs>(args: SelectSubset<T, SanctionUtilisateurDeleteArgs<ExtArgs>>): Prisma__SanctionUtilisateurClient<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one SanctionUtilisateur.
-     * @param {SanctionUtilisateurUpdateArgs} args - Arguments to update one SanctionUtilisateur.
-     * @example
-     * // Update one SanctionUtilisateur
-     * const sanctionUtilisateur = await prisma.sanctionUtilisateur.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends SanctionUtilisateurUpdateArgs>(args: SelectSubset<T, SanctionUtilisateurUpdateArgs<ExtArgs>>): Prisma__SanctionUtilisateurClient<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more SanctionUtilisateurs.
-     * @param {SanctionUtilisateurDeleteManyArgs} args - Arguments to filter SanctionUtilisateurs to delete.
-     * @example
-     * // Delete a few SanctionUtilisateurs
-     * const { count } = await prisma.sanctionUtilisateur.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends SanctionUtilisateurDeleteManyArgs>(args?: SelectSubset<T, SanctionUtilisateurDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more SanctionUtilisateurs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SanctionUtilisateurUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many SanctionUtilisateurs
-     * const sanctionUtilisateur = await prisma.sanctionUtilisateur.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends SanctionUtilisateurUpdateManyArgs>(args: SelectSubset<T, SanctionUtilisateurUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one SanctionUtilisateur.
-     * @param {SanctionUtilisateurUpsertArgs} args - Arguments to update or create a SanctionUtilisateur.
-     * @example
-     * // Update or create a SanctionUtilisateur
-     * const sanctionUtilisateur = await prisma.sanctionUtilisateur.upsert({
-     *   create: {
-     *     // ... data to create a SanctionUtilisateur
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the SanctionUtilisateur we want to update
-     *   }
-     * })
-     */
-    upsert<T extends SanctionUtilisateurUpsertArgs>(args: SelectSubset<T, SanctionUtilisateurUpsertArgs<ExtArgs>>): Prisma__SanctionUtilisateurClient<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of SanctionUtilisateurs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SanctionUtilisateurCountArgs} args - Arguments to filter SanctionUtilisateurs to count.
-     * @example
-     * // Count the number of SanctionUtilisateurs
-     * const count = await prisma.sanctionUtilisateur.count({
-     *   where: {
-     *     // ... the filter for the SanctionUtilisateurs we want to count
-     *   }
-     * })
-    **/
-    count<T extends SanctionUtilisateurCountArgs>(
-      args?: Subset<T, SanctionUtilisateurCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], SanctionUtilisateurCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a SanctionUtilisateur.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SanctionUtilisateurAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends SanctionUtilisateurAggregateArgs>(args: Subset<T, SanctionUtilisateurAggregateArgs>): Prisma.PrismaPromise<GetSanctionUtilisateurAggregateType<T>>
-
-    /**
-     * Group by SanctionUtilisateur.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SanctionUtilisateurGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends SanctionUtilisateurGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SanctionUtilisateurGroupByArgs['orderBy'] }
-        : { orderBy?: SanctionUtilisateurGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, SanctionUtilisateurGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSanctionUtilisateurGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the SanctionUtilisateur model
-   */
-  readonly fields: SanctionUtilisateurFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for SanctionUtilisateur.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__SanctionUtilisateurClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    emprunt<T extends SanctionUtilisateur$empruntArgs<ExtArgs> = {}>(args?: Subset<T, SanctionUtilisateur$empruntArgs<ExtArgs>>): Prisma__EmpruntClient<$Result.GetResult<Prisma.$EmpruntPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the SanctionUtilisateur model
-   */
-  interface SanctionUtilisateurFieldRefs {
-    readonly id: FieldRef<"SanctionUtilisateur", 'String'>
-    readonly userId: FieldRef<"SanctionUtilisateur", 'String'>
-    readonly typeRestriction: FieldRef<"SanctionUtilisateur", 'TypeSanction'>
-    readonly dateDebut: FieldRef<"SanctionUtilisateur", 'DateTime'>
-    readonly dateFin: FieldRef<"SanctionUtilisateur", 'DateTime'>
-    readonly motif: FieldRef<"SanctionUtilisateur", 'String'>
-    readonly empruntId: FieldRef<"SanctionUtilisateur", 'String'>
-    readonly estActive: FieldRef<"SanctionUtilisateur", 'Boolean'>
-    readonly createdAt: FieldRef<"SanctionUtilisateur", 'DateTime'>
-    readonly updatedAt: FieldRef<"SanctionUtilisateur", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * SanctionUtilisateur findUnique
-   */
-  export type SanctionUtilisateurFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SanctionUtilisateur
-     */
-    select?: SanctionUtilisateurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SanctionUtilisateur
-     */
-    omit?: SanctionUtilisateurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SanctionUtilisateurInclude<ExtArgs> | null
-    /**
-     * Filter, which SanctionUtilisateur to fetch.
-     */
-    where: SanctionUtilisateurWhereUniqueInput
-  }
-
-  /**
-   * SanctionUtilisateur findUniqueOrThrow
-   */
-  export type SanctionUtilisateurFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SanctionUtilisateur
-     */
-    select?: SanctionUtilisateurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SanctionUtilisateur
-     */
-    omit?: SanctionUtilisateurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SanctionUtilisateurInclude<ExtArgs> | null
-    /**
-     * Filter, which SanctionUtilisateur to fetch.
-     */
-    where: SanctionUtilisateurWhereUniqueInput
-  }
-
-  /**
-   * SanctionUtilisateur findFirst
-   */
-  export type SanctionUtilisateurFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SanctionUtilisateur
-     */
-    select?: SanctionUtilisateurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SanctionUtilisateur
-     */
-    omit?: SanctionUtilisateurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SanctionUtilisateurInclude<ExtArgs> | null
-    /**
-     * Filter, which SanctionUtilisateur to fetch.
-     */
-    where?: SanctionUtilisateurWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SanctionUtilisateurs to fetch.
-     */
-    orderBy?: SanctionUtilisateurOrderByWithRelationInput | SanctionUtilisateurOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for SanctionUtilisateurs.
-     */
-    cursor?: SanctionUtilisateurWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SanctionUtilisateurs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SanctionUtilisateurs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of SanctionUtilisateurs.
-     */
-    distinct?: SanctionUtilisateurScalarFieldEnum | SanctionUtilisateurScalarFieldEnum[]
-  }
-
-  /**
-   * SanctionUtilisateur findFirstOrThrow
-   */
-  export type SanctionUtilisateurFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SanctionUtilisateur
-     */
-    select?: SanctionUtilisateurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SanctionUtilisateur
-     */
-    omit?: SanctionUtilisateurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SanctionUtilisateurInclude<ExtArgs> | null
-    /**
-     * Filter, which SanctionUtilisateur to fetch.
-     */
-    where?: SanctionUtilisateurWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SanctionUtilisateurs to fetch.
-     */
-    orderBy?: SanctionUtilisateurOrderByWithRelationInput | SanctionUtilisateurOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for SanctionUtilisateurs.
-     */
-    cursor?: SanctionUtilisateurWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SanctionUtilisateurs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SanctionUtilisateurs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of SanctionUtilisateurs.
-     */
-    distinct?: SanctionUtilisateurScalarFieldEnum | SanctionUtilisateurScalarFieldEnum[]
-  }
-
-  /**
-   * SanctionUtilisateur findMany
-   */
-  export type SanctionUtilisateurFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SanctionUtilisateur
-     */
-    select?: SanctionUtilisateurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SanctionUtilisateur
-     */
-    omit?: SanctionUtilisateurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SanctionUtilisateurInclude<ExtArgs> | null
-    /**
-     * Filter, which SanctionUtilisateurs to fetch.
-     */
-    where?: SanctionUtilisateurWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SanctionUtilisateurs to fetch.
-     */
-    orderBy?: SanctionUtilisateurOrderByWithRelationInput | SanctionUtilisateurOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing SanctionUtilisateurs.
-     */
-    cursor?: SanctionUtilisateurWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SanctionUtilisateurs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SanctionUtilisateurs.
-     */
-    skip?: number
-    distinct?: SanctionUtilisateurScalarFieldEnum | SanctionUtilisateurScalarFieldEnum[]
-  }
-
-  /**
-   * SanctionUtilisateur create
-   */
-  export type SanctionUtilisateurCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SanctionUtilisateur
-     */
-    select?: SanctionUtilisateurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SanctionUtilisateur
-     */
-    omit?: SanctionUtilisateurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SanctionUtilisateurInclude<ExtArgs> | null
-    /**
-     * The data needed to create a SanctionUtilisateur.
-     */
-    data: XOR<SanctionUtilisateurCreateInput, SanctionUtilisateurUncheckedCreateInput>
-  }
-
-  /**
-   * SanctionUtilisateur createMany
-   */
-  export type SanctionUtilisateurCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many SanctionUtilisateurs.
-     */
-    data: SanctionUtilisateurCreateManyInput | SanctionUtilisateurCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * SanctionUtilisateur update
-   */
-  export type SanctionUtilisateurUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SanctionUtilisateur
-     */
-    select?: SanctionUtilisateurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SanctionUtilisateur
-     */
-    omit?: SanctionUtilisateurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SanctionUtilisateurInclude<ExtArgs> | null
-    /**
-     * The data needed to update a SanctionUtilisateur.
-     */
-    data: XOR<SanctionUtilisateurUpdateInput, SanctionUtilisateurUncheckedUpdateInput>
-    /**
-     * Choose, which SanctionUtilisateur to update.
-     */
-    where: SanctionUtilisateurWhereUniqueInput
-  }
-
-  /**
-   * SanctionUtilisateur updateMany
-   */
-  export type SanctionUtilisateurUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update SanctionUtilisateurs.
-     */
-    data: XOR<SanctionUtilisateurUpdateManyMutationInput, SanctionUtilisateurUncheckedUpdateManyInput>
-    /**
-     * Filter which SanctionUtilisateurs to update
-     */
-    where?: SanctionUtilisateurWhereInput
-    /**
-     * Limit how many SanctionUtilisateurs to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * SanctionUtilisateur upsert
-   */
-  export type SanctionUtilisateurUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SanctionUtilisateur
-     */
-    select?: SanctionUtilisateurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SanctionUtilisateur
-     */
-    omit?: SanctionUtilisateurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SanctionUtilisateurInclude<ExtArgs> | null
-    /**
-     * The filter to search for the SanctionUtilisateur to update in case it exists.
-     */
-    where: SanctionUtilisateurWhereUniqueInput
-    /**
-     * In case the SanctionUtilisateur found by the `where` argument doesn't exist, create a new SanctionUtilisateur with this data.
-     */
-    create: XOR<SanctionUtilisateurCreateInput, SanctionUtilisateurUncheckedCreateInput>
-    /**
-     * In case the SanctionUtilisateur was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<SanctionUtilisateurUpdateInput, SanctionUtilisateurUncheckedUpdateInput>
-  }
-
-  /**
-   * SanctionUtilisateur delete
-   */
-  export type SanctionUtilisateurDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SanctionUtilisateur
-     */
-    select?: SanctionUtilisateurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SanctionUtilisateur
-     */
-    omit?: SanctionUtilisateurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SanctionUtilisateurInclude<ExtArgs> | null
-    /**
-     * Filter which SanctionUtilisateur to delete.
-     */
-    where: SanctionUtilisateurWhereUniqueInput
-  }
-
-  /**
-   * SanctionUtilisateur deleteMany
-   */
-  export type SanctionUtilisateurDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which SanctionUtilisateurs to delete
-     */
-    where?: SanctionUtilisateurWhereInput
-    /**
-     * Limit how many SanctionUtilisateurs to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * SanctionUtilisateur.emprunt
-   */
-  export type SanctionUtilisateur$empruntArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Emprunt
-     */
-    select?: EmpruntSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Emprunt
-     */
-    omit?: EmpruntOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmpruntInclude<ExtArgs> | null
-    where?: EmpruntWhereInput
-  }
-
-  /**
-   * SanctionUtilisateur without action
-   */
-  export type SanctionUtilisateurDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SanctionUtilisateur
-     */
-    select?: SanctionUtilisateurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SanctionUtilisateur
-     */
-    omit?: SanctionUtilisateurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SanctionUtilisateurInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model ExemplairePhysique
    */
 
@@ -8950,8 +7842,18 @@ export namespace Prisma {
 
   export type AggregateEmprunt = {
     _count: EmpruntCountAggregateOutputType | null
+    _avg: EmpruntAvgAggregateOutputType | null
+    _sum: EmpruntSumAggregateOutputType | null
     _min: EmpruntMinAggregateOutputType | null
     _max: EmpruntMaxAggregateOutputType | null
+  }
+
+  export type EmpruntAvgAggregateOutputType = {
+    renouvellement: number | null
+  }
+
+  export type EmpruntSumAggregateOutputType = {
+    renouvellement: number | null
   }
 
   export type EmpruntMinAggregateOutputType = {
@@ -8961,6 +7863,7 @@ export namespace Prisma {
     dateEmprunt: Date | null
     dateRetourPrevue: Date | null
     dateRetourEffective: Date | null
+    renouvellement: number | null
     statut: $Enums.StatutEmprunt | null
     universiteEmprunteur: string | null
     createdAt: Date | null
@@ -8974,6 +7877,7 @@ export namespace Prisma {
     dateEmprunt: Date | null
     dateRetourPrevue: Date | null
     dateRetourEffective: Date | null
+    renouvellement: number | null
     statut: $Enums.StatutEmprunt | null
     universiteEmprunteur: string | null
     createdAt: Date | null
@@ -8987,6 +7891,7 @@ export namespace Prisma {
     dateEmprunt: number
     dateRetourPrevue: number
     dateRetourEffective: number
+    renouvellement: number
     statut: number
     universiteEmprunteur: number
     createdAt: number
@@ -8995,6 +7900,14 @@ export namespace Prisma {
   }
 
 
+  export type EmpruntAvgAggregateInputType = {
+    renouvellement?: true
+  }
+
+  export type EmpruntSumAggregateInputType = {
+    renouvellement?: true
+  }
+
   export type EmpruntMinAggregateInputType = {
     id?: true
     exemplaireId?: true
@@ -9002,6 +7915,7 @@ export namespace Prisma {
     dateEmprunt?: true
     dateRetourPrevue?: true
     dateRetourEffective?: true
+    renouvellement?: true
     statut?: true
     universiteEmprunteur?: true
     createdAt?: true
@@ -9015,6 +7929,7 @@ export namespace Prisma {
     dateEmprunt?: true
     dateRetourPrevue?: true
     dateRetourEffective?: true
+    renouvellement?: true
     statut?: true
     universiteEmprunteur?: true
     createdAt?: true
@@ -9028,6 +7943,7 @@ export namespace Prisma {
     dateEmprunt?: true
     dateRetourPrevue?: true
     dateRetourEffective?: true
+    renouvellement?: true
     statut?: true
     universiteEmprunteur?: true
     createdAt?: true
@@ -9073,6 +7989,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: EmpruntAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EmpruntSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: EmpruntMinAggregateInputType
@@ -9103,6 +8031,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: EmpruntCountAggregateInputType | true
+    _avg?: EmpruntAvgAggregateInputType
+    _sum?: EmpruntSumAggregateInputType
     _min?: EmpruntMinAggregateInputType
     _max?: EmpruntMaxAggregateInputType
   }
@@ -9114,11 +8044,14 @@ export namespace Prisma {
     dateEmprunt: Date
     dateRetourPrevue: Date
     dateRetourEffective: Date | null
+    renouvellement: number
     statut: $Enums.StatutEmprunt
     universiteEmprunteur: string
     createdAt: Date
     updatedAt: Date
     _count: EmpruntCountAggregateOutputType | null
+    _avg: EmpruntAvgAggregateOutputType | null
+    _sum: EmpruntSumAggregateOutputType | null
     _min: EmpruntMinAggregateOutputType | null
     _max: EmpruntMaxAggregateOutputType | null
   }
@@ -9144,12 +8077,12 @@ export namespace Prisma {
     dateEmprunt?: boolean
     dateRetourPrevue?: boolean
     dateRetourEffective?: boolean
+    renouvellement?: boolean
     statut?: boolean
     universiteEmprunteur?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | Emprunt$userArgs<ExtArgs>
-    SanctionUtilisateur?: boolean | Emprunt$SanctionUtilisateurArgs<ExtArgs>
     empruntExemplaires?: boolean | Emprunt$empruntExemplairesArgs<ExtArgs>
     _count?: boolean | EmpruntCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emprunt"]>
@@ -9163,16 +8096,16 @@ export namespace Prisma {
     dateEmprunt?: boolean
     dateRetourPrevue?: boolean
     dateRetourEffective?: boolean
+    renouvellement?: boolean
     statut?: boolean
     universiteEmprunteur?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EmpruntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "exemplaireId" | "userId" | "dateEmprunt" | "dateRetourPrevue" | "dateRetourEffective" | "statut" | "universiteEmprunteur" | "createdAt" | "updatedAt", ExtArgs["result"]["emprunt"]>
+  export type EmpruntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "exemplaireId" | "userId" | "dateEmprunt" | "dateRetourPrevue" | "dateRetourEffective" | "renouvellement" | "statut" | "universiteEmprunteur" | "createdAt" | "updatedAt", ExtArgs["result"]["emprunt"]>
   export type EmpruntInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Emprunt$userArgs<ExtArgs>
-    SanctionUtilisateur?: boolean | Emprunt$SanctionUtilisateurArgs<ExtArgs>
     empruntExemplaires?: boolean | Emprunt$empruntExemplairesArgs<ExtArgs>
     _count?: boolean | EmpruntCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -9181,7 +8114,6 @@ export namespace Prisma {
     name: "Emprunt"
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null
-      SanctionUtilisateur: Prisma.$SanctionUtilisateurPayload<ExtArgs>[]
       empruntExemplaires: Prisma.$EmpruntExemplairePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -9191,6 +8123,7 @@ export namespace Prisma {
       dateEmprunt: Date
       dateRetourPrevue: Date
       dateRetourEffective: Date | null
+      renouvellement: number
       statut: $Enums.StatutEmprunt
       universiteEmprunteur: string
       createdAt: Date
@@ -9536,7 +8469,6 @@ export namespace Prisma {
   export interface Prisma__EmpruntClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends Emprunt$userArgs<ExtArgs> = {}>(args?: Subset<T, Emprunt$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    SanctionUtilisateur<T extends Emprunt$SanctionUtilisateurArgs<ExtArgs> = {}>(args?: Subset<T, Emprunt$SanctionUtilisateurArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     empruntExemplaires<T extends Emprunt$empruntExemplairesArgs<ExtArgs> = {}>(args?: Subset<T, Emprunt$empruntExemplairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmpruntExemplairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -9573,6 +8505,7 @@ export namespace Prisma {
     readonly dateEmprunt: FieldRef<"Emprunt", 'DateTime'>
     readonly dateRetourPrevue: FieldRef<"Emprunt", 'DateTime'>
     readonly dateRetourEffective: FieldRef<"Emprunt", 'DateTime'>
+    readonly renouvellement: FieldRef<"Emprunt", 'Int'>
     readonly statut: FieldRef<"Emprunt", 'StatutEmprunt'>
     readonly universiteEmprunteur: FieldRef<"Emprunt", 'String'>
     readonly createdAt: FieldRef<"Emprunt", 'DateTime'>
@@ -9936,30 +8869,6 @@ export namespace Prisma {
      */
     include?: UserInclude<ExtArgs> | null
     where?: UserWhereInput
-  }
-
-  /**
-   * Emprunt.SanctionUtilisateur
-   */
-  export type Emprunt$SanctionUtilisateurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SanctionUtilisateur
-     */
-    select?: SanctionUtilisateurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SanctionUtilisateur
-     */
-    omit?: SanctionUtilisateurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SanctionUtilisateurInclude<ExtArgs> | null
-    where?: SanctionUtilisateurWhereInput
-    orderBy?: SanctionUtilisateurOrderByWithRelationInput | SanctionUtilisateurOrderByWithRelationInput[]
-    cursor?: SanctionUtilisateurWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SanctionUtilisateurScalarFieldEnum | SanctionUtilisateurScalarFieldEnum[]
   }
 
   /**
@@ -16270,7 +15179,6 @@ export namespace Prisma {
     enseignant?: boolean | User$enseignantArgs<ExtArgs>
     bibliothecaire?: boolean | User$bibliothecaireArgs<ExtArgs>
     administrateur?: boolean | User$administrateurArgs<ExtArgs>
-    sanctions?: boolean | User$sanctionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -16310,7 +15218,6 @@ export namespace Prisma {
     enseignant?: boolean | User$enseignantArgs<ExtArgs>
     bibliothecaire?: boolean | User$bibliothecaireArgs<ExtArgs>
     administrateur?: boolean | User$administrateurArgs<ExtArgs>
-    sanctions?: boolean | User$sanctionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -16332,7 +15239,6 @@ export namespace Prisma {
       enseignant: Prisma.$EnseignantPayload<ExtArgs> | null
       bibliothecaire: Prisma.$BibliothecairePayload<ExtArgs> | null
       administrateur: Prisma.$AdministrateurPayload<ExtArgs> | null
-      sanctions: Prisma.$SanctionUtilisateurPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -16704,7 +15610,6 @@ export namespace Prisma {
     enseignant<T extends User$enseignantArgs<ExtArgs> = {}>(args?: Subset<T, User$enseignantArgs<ExtArgs>>): Prisma__EnseignantClient<$Result.GetResult<Prisma.$EnseignantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     bibliothecaire<T extends User$bibliothecaireArgs<ExtArgs> = {}>(args?: Subset<T, User$bibliothecaireArgs<ExtArgs>>): Prisma__BibliothecaireClient<$Result.GetResult<Prisma.$BibliothecairePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     administrateur<T extends User$administrateurArgs<ExtArgs> = {}>(args?: Subset<T, User$administrateurArgs<ExtArgs>>): Prisma__AdministrateurClient<$Result.GetResult<Prisma.$AdministrateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    sanctions<T extends User$sanctionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sanctionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SanctionUtilisateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17428,30 +16333,6 @@ export namespace Prisma {
      */
     include?: AdministrateurInclude<ExtArgs> | null
     where?: AdministrateurWhereInput
-  }
-
-  /**
-   * User.sanctions
-   */
-  export type User$sanctionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SanctionUtilisateur
-     */
-    select?: SanctionUtilisateurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SanctionUtilisateur
-     */
-    omit?: SanctionUtilisateurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SanctionUtilisateurInclude<ExtArgs> | null
-    where?: SanctionUtilisateurWhereInput
-    orderBy?: SanctionUtilisateurOrderByWithRelationInput | SanctionUtilisateurOrderByWithRelationInput[]
-    cursor?: SanctionUtilisateurWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SanctionUtilisateurScalarFieldEnum | SanctionUtilisateurScalarFieldEnum[]
   }
 
   /**
@@ -23208,11 +22089,10 @@ export namespace Prisma {
   export type NotationMinAggregateOutputType = {
     id: string | null
     userId: string | null
+    externUserId: string | null
+    universiteUser: string | null
     ressourceId: string | null
     note: number | null
-    dateNotation: Date | null
-    universiteSrc: string | null
-    universiteUser: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -23220,11 +22100,10 @@ export namespace Prisma {
   export type NotationMaxAggregateOutputType = {
     id: string | null
     userId: string | null
+    externUserId: string | null
+    universiteUser: string | null
     ressourceId: string | null
     note: number | null
-    dateNotation: Date | null
-    universiteSrc: string | null
-    universiteUser: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -23232,11 +22111,10 @@ export namespace Prisma {
   export type NotationCountAggregateOutputType = {
     id: number
     userId: number
+    externUserId: number
+    universiteUser: number
     ressourceId: number
     note: number
-    dateNotation: number
-    universiteSrc: number
-    universiteUser: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -23254,11 +22132,10 @@ export namespace Prisma {
   export type NotationMinAggregateInputType = {
     id?: true
     userId?: true
+    externUserId?: true
+    universiteUser?: true
     ressourceId?: true
     note?: true
-    dateNotation?: true
-    universiteSrc?: true
-    universiteUser?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -23266,11 +22143,10 @@ export namespace Prisma {
   export type NotationMaxAggregateInputType = {
     id?: true
     userId?: true
+    externUserId?: true
+    universiteUser?: true
     ressourceId?: true
     note?: true
-    dateNotation?: true
-    universiteSrc?: true
-    universiteUser?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -23278,11 +22154,10 @@ export namespace Prisma {
   export type NotationCountAggregateInputType = {
     id?: true
     userId?: true
+    externUserId?: true
+    universiteUser?: true
     ressourceId?: true
     note?: true
-    dateNotation?: true
-    universiteSrc?: true
-    universiteUser?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -23377,11 +22252,10 @@ export namespace Prisma {
   export type NotationGroupByOutputType = {
     id: string
     userId: string | null
+    externUserId: string | null
+    universiteUser: string | null
     ressourceId: string
     note: number
-    dateNotation: Date
-    universiteSrc: string | null
-    universiteUser: string | null
     createdAt: Date
     updatedAt: Date
     _count: NotationCountAggregateOutputType | null
@@ -23408,11 +22282,10 @@ export namespace Prisma {
   export type NotationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    externUserId?: boolean
+    universiteUser?: boolean
     ressourceId?: boolean
     note?: boolean
-    dateNotation?: boolean
-    universiteSrc?: boolean
-    universiteUser?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | Notation$userArgs<ExtArgs>
@@ -23424,16 +22297,15 @@ export namespace Prisma {
   export type NotationSelectScalar = {
     id?: boolean
     userId?: boolean
+    externUserId?: boolean
+    universiteUser?: boolean
     ressourceId?: boolean
     note?: boolean
-    dateNotation?: boolean
-    universiteSrc?: boolean
-    universiteUser?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type NotationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "ressourceId" | "note" | "dateNotation" | "universiteSrc" | "universiteUser" | "createdAt" | "updatedAt", ExtArgs["result"]["notation"]>
+  export type NotationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "externUserId" | "universiteUser" | "ressourceId" | "note" | "createdAt" | "updatedAt", ExtArgs["result"]["notation"]>
   export type NotationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Notation$userArgs<ExtArgs>
     ressource?: boolean | RessourceDefaultArgs<ExtArgs>
@@ -23448,11 +22320,10 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string | null
+      externUserId: string | null
+      universiteUser: string | null
       ressourceId: string
       note: number
-      dateNotation: Date
-      universiteSrc: string | null
-      universiteUser: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["notation"]>
@@ -23828,11 +22699,10 @@ export namespace Prisma {
   interface NotationFieldRefs {
     readonly id: FieldRef<"Notation", 'String'>
     readonly userId: FieldRef<"Notation", 'String'>
+    readonly externUserId: FieldRef<"Notation", 'String'>
+    readonly universiteUser: FieldRef<"Notation", 'String'>
     readonly ressourceId: FieldRef<"Notation", 'String'>
     readonly note: FieldRef<"Notation", 'Int'>
-    readonly dateNotation: FieldRef<"Notation", 'DateTime'>
-    readonly universiteSrc: FieldRef<"Notation", 'String'>
-    readonly universiteUser: FieldRef<"Notation", 'String'>
     readonly createdAt: FieldRef<"Notation", 'DateTime'>
     readonly updatedAt: FieldRef<"Notation", 'DateTime'>
   }
@@ -33613,22 +32483,6 @@ export namespace Prisma {
   export type PolitiqueBibliothequeScalarFieldEnum = (typeof PolitiqueBibliothequeScalarFieldEnum)[keyof typeof PolitiqueBibliothequeScalarFieldEnum]
 
 
-  export const SanctionUtilisateurScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    typeRestriction: 'typeRestriction',
-    dateDebut: 'dateDebut',
-    dateFin: 'dateFin',
-    motif: 'motif',
-    empruntId: 'empruntId',
-    estActive: 'estActive',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type SanctionUtilisateurScalarFieldEnum = (typeof SanctionUtilisateurScalarFieldEnum)[keyof typeof SanctionUtilisateurScalarFieldEnum]
-
-
   export const ExemplairePhysiqueScalarFieldEnum: {
     id: 'id',
     ressourceId: 'ressourceId',
@@ -33652,6 +32506,7 @@ export namespace Prisma {
     dateEmprunt: 'dateEmprunt',
     dateRetourPrevue: 'dateRetourPrevue',
     dateRetourEffective: 'dateRetourEffective',
+    renouvellement: 'renouvellement',
     statut: 'statut',
     universiteEmprunteur: 'universiteEmprunteur',
     createdAt: 'createdAt',
@@ -33842,11 +32697,10 @@ export namespace Prisma {
   export const NotationScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
+    externUserId: 'externUserId',
+    universiteUser: 'universiteUser',
     ressourceId: 'ressourceId',
     note: 'note',
-    dateNotation: 'dateNotation',
-    universiteSrc: 'universiteSrc',
-    universiteUser: 'universiteUser',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -34048,16 +32902,6 @@ export namespace Prisma {
   export type PolitiqueBibliothequeOrderByRelevanceFieldEnum = (typeof PolitiqueBibliothequeOrderByRelevanceFieldEnum)[keyof typeof PolitiqueBibliothequeOrderByRelevanceFieldEnum]
 
 
-  export const SanctionUtilisateurOrderByRelevanceFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    motif: 'motif',
-    empruntId: 'empruntId'
-  };
-
-  export type SanctionUtilisateurOrderByRelevanceFieldEnum = (typeof SanctionUtilisateurOrderByRelevanceFieldEnum)[keyof typeof SanctionUtilisateurOrderByRelevanceFieldEnum]
-
-
   export const ExemplairePhysiqueOrderByRelevanceFieldEnum: {
     id: 'id',
     ressourceId: 'ressourceId',
@@ -34218,9 +33062,9 @@ export namespace Prisma {
   export const NotationOrderByRelevanceFieldEnum: {
     id: 'id',
     userId: 'userId',
-    ressourceId: 'ressourceId',
-    universiteSrc: 'universiteSrc',
-    universiteUser: 'universiteUser'
+    externUserId: 'externUserId',
+    universiteUser: 'universiteUser',
+    ressourceId: 'ressourceId'
   };
 
   export type NotationOrderByRelevanceFieldEnum = (typeof NotationOrderByRelevanceFieldEnum)[keyof typeof NotationOrderByRelevanceFieldEnum]
@@ -34387,13 +33231,6 @@ export namespace Prisma {
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'TypeSanction'
-   */
-  export type EnumTypeSanctionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeSanction'>
     
 
 
@@ -34723,90 +33560,6 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"PolitiqueBibliotheque"> | Date | string
   }
 
-  export type SanctionUtilisateurWhereInput = {
-    AND?: SanctionUtilisateurWhereInput | SanctionUtilisateurWhereInput[]
-    OR?: SanctionUtilisateurWhereInput[]
-    NOT?: SanctionUtilisateurWhereInput | SanctionUtilisateurWhereInput[]
-    id?: StringFilter<"SanctionUtilisateur"> | string
-    userId?: StringFilter<"SanctionUtilisateur"> | string
-    typeRestriction?: EnumTypeSanctionFilter<"SanctionUtilisateur"> | $Enums.TypeSanction
-    dateDebut?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
-    dateFin?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
-    motif?: StringFilter<"SanctionUtilisateur"> | string
-    empruntId?: StringNullableFilter<"SanctionUtilisateur"> | string | null
-    estActive?: BoolFilter<"SanctionUtilisateur"> | boolean
-    createdAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
-    updatedAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    emprunt?: XOR<EmpruntNullableScalarRelationFilter, EmpruntWhereInput> | null
-  }
-
-  export type SanctionUtilisateurOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    typeRestriction?: SortOrder
-    dateDebut?: SortOrder
-    dateFin?: SortOrder
-    motif?: SortOrder
-    empruntId?: SortOrderInput | SortOrder
-    estActive?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-    emprunt?: EmpruntOrderByWithRelationInput
-    _relevance?: SanctionUtilisateurOrderByRelevanceInput
-  }
-
-  export type SanctionUtilisateurWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: SanctionUtilisateurWhereInput | SanctionUtilisateurWhereInput[]
-    OR?: SanctionUtilisateurWhereInput[]
-    NOT?: SanctionUtilisateurWhereInput | SanctionUtilisateurWhereInput[]
-    userId?: StringFilter<"SanctionUtilisateur"> | string
-    typeRestriction?: EnumTypeSanctionFilter<"SanctionUtilisateur"> | $Enums.TypeSanction
-    dateDebut?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
-    dateFin?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
-    motif?: StringFilter<"SanctionUtilisateur"> | string
-    empruntId?: StringNullableFilter<"SanctionUtilisateur"> | string | null
-    estActive?: BoolFilter<"SanctionUtilisateur"> | boolean
-    createdAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
-    updatedAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    emprunt?: XOR<EmpruntNullableScalarRelationFilter, EmpruntWhereInput> | null
-  }, "id">
-
-  export type SanctionUtilisateurOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    typeRestriction?: SortOrder
-    dateDebut?: SortOrder
-    dateFin?: SortOrder
-    motif?: SortOrder
-    empruntId?: SortOrderInput | SortOrder
-    estActive?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: SanctionUtilisateurCountOrderByAggregateInput
-    _max?: SanctionUtilisateurMaxOrderByAggregateInput
-    _min?: SanctionUtilisateurMinOrderByAggregateInput
-  }
-
-  export type SanctionUtilisateurScalarWhereWithAggregatesInput = {
-    AND?: SanctionUtilisateurScalarWhereWithAggregatesInput | SanctionUtilisateurScalarWhereWithAggregatesInput[]
-    OR?: SanctionUtilisateurScalarWhereWithAggregatesInput[]
-    NOT?: SanctionUtilisateurScalarWhereWithAggregatesInput | SanctionUtilisateurScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"SanctionUtilisateur"> | string
-    userId?: StringWithAggregatesFilter<"SanctionUtilisateur"> | string
-    typeRestriction?: EnumTypeSanctionWithAggregatesFilter<"SanctionUtilisateur"> | $Enums.TypeSanction
-    dateDebut?: DateTimeWithAggregatesFilter<"SanctionUtilisateur"> | Date | string
-    dateFin?: DateTimeWithAggregatesFilter<"SanctionUtilisateur"> | Date | string
-    motif?: StringWithAggregatesFilter<"SanctionUtilisateur"> | string
-    empruntId?: StringNullableWithAggregatesFilter<"SanctionUtilisateur"> | string | null
-    estActive?: BoolWithAggregatesFilter<"SanctionUtilisateur"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"SanctionUtilisateur"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"SanctionUtilisateur"> | Date | string
-  }
-
   export type ExemplairePhysiqueWhereInput = {
     AND?: ExemplairePhysiqueWhereInput | ExemplairePhysiqueWhereInput[]
     OR?: ExemplairePhysiqueWhereInput[]
@@ -34903,12 +33656,12 @@ export namespace Prisma {
     dateEmprunt?: DateTimeFilter<"Emprunt"> | Date | string
     dateRetourPrevue?: DateTimeFilter<"Emprunt"> | Date | string
     dateRetourEffective?: DateTimeNullableFilter<"Emprunt"> | Date | string | null
+    renouvellement?: IntFilter<"Emprunt"> | number
     statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
     createdAt?: DateTimeFilter<"Emprunt"> | Date | string
     updatedAt?: DateTimeFilter<"Emprunt"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    SanctionUtilisateur?: SanctionUtilisateurListRelationFilter
     empruntExemplaires?: EmpruntExemplaireListRelationFilter
   }
 
@@ -34919,12 +33672,12 @@ export namespace Prisma {
     dateEmprunt?: SortOrder
     dateRetourPrevue?: SortOrder
     dateRetourEffective?: SortOrderInput | SortOrder
+    renouvellement?: SortOrder
     statut?: SortOrder
     universiteEmprunteur?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
-    SanctionUtilisateur?: SanctionUtilisateurOrderByRelationAggregateInput
     empruntExemplaires?: EmpruntExemplaireOrderByRelationAggregateInput
     _relevance?: EmpruntOrderByRelevanceInput
   }
@@ -34939,12 +33692,12 @@ export namespace Prisma {
     dateEmprunt?: DateTimeFilter<"Emprunt"> | Date | string
     dateRetourPrevue?: DateTimeFilter<"Emprunt"> | Date | string
     dateRetourEffective?: DateTimeNullableFilter<"Emprunt"> | Date | string | null
+    renouvellement?: IntFilter<"Emprunt"> | number
     statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
     createdAt?: DateTimeFilter<"Emprunt"> | Date | string
     updatedAt?: DateTimeFilter<"Emprunt"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    SanctionUtilisateur?: SanctionUtilisateurListRelationFilter
     empruntExemplaires?: EmpruntExemplaireListRelationFilter
   }, "id">
 
@@ -34955,13 +33708,16 @@ export namespace Prisma {
     dateEmprunt?: SortOrder
     dateRetourPrevue?: SortOrder
     dateRetourEffective?: SortOrderInput | SortOrder
+    renouvellement?: SortOrder
     statut?: SortOrder
     universiteEmprunteur?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EmpruntCountOrderByAggregateInput
+    _avg?: EmpruntAvgOrderByAggregateInput
     _max?: EmpruntMaxOrderByAggregateInput
     _min?: EmpruntMinOrderByAggregateInput
+    _sum?: EmpruntSumOrderByAggregateInput
   }
 
   export type EmpruntScalarWhereWithAggregatesInput = {
@@ -34974,6 +33730,7 @@ export namespace Prisma {
     dateEmprunt?: DateTimeWithAggregatesFilter<"Emprunt"> | Date | string
     dateRetourPrevue?: DateTimeWithAggregatesFilter<"Emprunt"> | Date | string
     dateRetourEffective?: DateTimeNullableWithAggregatesFilter<"Emprunt"> | Date | string | null
+    renouvellement?: IntWithAggregatesFilter<"Emprunt"> | number
     statut?: EnumStatutEmpruntWithAggregatesFilter<"Emprunt"> | $Enums.StatutEmprunt
     universiteEmprunteur?: StringWithAggregatesFilter<"Emprunt"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Emprunt"> | Date | string
@@ -35465,7 +34222,6 @@ export namespace Prisma {
     enseignant?: XOR<EnseignantNullableScalarRelationFilter, EnseignantWhereInput> | null
     bibliothecaire?: XOR<BibliothecaireNullableScalarRelationFilter, BibliothecaireWhereInput> | null
     administrateur?: XOR<AdministrateurNullableScalarRelationFilter, AdministrateurWhereInput> | null
-    sanctions?: SanctionUtilisateurListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -35498,7 +34254,6 @@ export namespace Prisma {
     enseignant?: EnseignantOrderByWithRelationInput
     bibliothecaire?: BibliothecaireOrderByWithRelationInput
     administrateur?: AdministrateurOrderByWithRelationInput
-    sanctions?: SanctionUtilisateurOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -35535,7 +34290,6 @@ export namespace Prisma {
     enseignant?: XOR<EnseignantNullableScalarRelationFilter, EnseignantWhereInput> | null
     bibliothecaire?: XOR<BibliothecaireNullableScalarRelationFilter, BibliothecaireWhereInput> | null
     administrateur?: XOR<AdministrateurNullableScalarRelationFilter, AdministrateurWhereInput> | null
-    sanctions?: SanctionUtilisateurListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -35971,11 +34725,10 @@ export namespace Prisma {
     NOT?: NotationWhereInput | NotationWhereInput[]
     id?: StringFilter<"Notation"> | string
     userId?: StringNullableFilter<"Notation"> | string | null
+    externUserId?: StringNullableFilter<"Notation"> | string | null
+    universiteUser?: StringNullableFilter<"Notation"> | string | null
     ressourceId?: StringFilter<"Notation"> | string
     note?: IntFilter<"Notation"> | number
-    dateNotation?: DateTimeFilter<"Notation"> | Date | string
-    universiteSrc?: StringNullableFilter<"Notation"> | string | null
-    universiteUser?: StringNullableFilter<"Notation"> | string | null
     createdAt?: DateTimeFilter<"Notation"> | Date | string
     updatedAt?: DateTimeFilter<"Notation"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -35985,11 +34738,10 @@ export namespace Prisma {
   export type NotationOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrderInput | SortOrder
+    externUserId?: SortOrderInput | SortOrder
+    universiteUser?: SortOrderInput | SortOrder
     ressourceId?: SortOrder
     note?: SortOrder
-    dateNotation?: SortOrder
-    universiteSrc?: SortOrderInput | SortOrder
-    universiteUser?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -36004,11 +34756,10 @@ export namespace Prisma {
     OR?: NotationWhereInput[]
     NOT?: NotationWhereInput | NotationWhereInput[]
     userId?: StringNullableFilter<"Notation"> | string | null
+    externUserId?: StringNullableFilter<"Notation"> | string | null
+    universiteUser?: StringNullableFilter<"Notation"> | string | null
     ressourceId?: StringFilter<"Notation"> | string
     note?: IntFilter<"Notation"> | number
-    dateNotation?: DateTimeFilter<"Notation"> | Date | string
-    universiteSrc?: StringNullableFilter<"Notation"> | string | null
-    universiteUser?: StringNullableFilter<"Notation"> | string | null
     createdAt?: DateTimeFilter<"Notation"> | Date | string
     updatedAt?: DateTimeFilter<"Notation"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -36018,11 +34769,10 @@ export namespace Prisma {
   export type NotationOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrderInput | SortOrder
+    externUserId?: SortOrderInput | SortOrder
+    universiteUser?: SortOrderInput | SortOrder
     ressourceId?: SortOrder
     note?: SortOrder
-    dateNotation?: SortOrder
-    universiteSrc?: SortOrderInput | SortOrder
-    universiteUser?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: NotationCountOrderByAggregateInput
@@ -36038,11 +34788,10 @@ export namespace Prisma {
     NOT?: NotationScalarWhereWithAggregatesInput | NotationScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Notation"> | string
     userId?: StringNullableWithAggregatesFilter<"Notation"> | string | null
+    externUserId?: StringNullableWithAggregatesFilter<"Notation"> | string | null
+    universiteUser?: StringNullableWithAggregatesFilter<"Notation"> | string | null
     ressourceId?: StringWithAggregatesFilter<"Notation"> | string
     note?: IntWithAggregatesFilter<"Notation"> | number
-    dateNotation?: DateTimeWithAggregatesFilter<"Notation"> | Date | string
-    universiteSrc?: StringNullableWithAggregatesFilter<"Notation"> | string | null
-    universiteUser?: StringNullableWithAggregatesFilter<"Notation"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Notation"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Notation"> | Date | string
   }
@@ -37077,95 +35826,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SanctionUtilisateurCreateInput = {
-    id?: string
-    typeRestriction: $Enums.TypeSanction
-    dateDebut?: Date | string
-    dateFin: Date | string
-    motif: string
-    estActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutSanctionsInput
-    emprunt?: EmpruntCreateNestedOneWithoutSanctionUtilisateurInput
-  }
-
-  export type SanctionUtilisateurUncheckedCreateInput = {
-    id?: string
-    userId: string
-    typeRestriction: $Enums.TypeSanction
-    dateDebut?: Date | string
-    dateFin: Date | string
-    motif: string
-    empruntId?: string | null
-    estActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SanctionUtilisateurUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    typeRestriction?: EnumTypeSanctionFieldUpdateOperationsInput | $Enums.TypeSanction
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    motif?: StringFieldUpdateOperationsInput | string
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutSanctionsNestedInput
-    emprunt?: EmpruntUpdateOneWithoutSanctionUtilisateurNestedInput
-  }
-
-  export type SanctionUtilisateurUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    typeRestriction?: EnumTypeSanctionFieldUpdateOperationsInput | $Enums.TypeSanction
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    motif?: StringFieldUpdateOperationsInput | string
-    empruntId?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SanctionUtilisateurCreateManyInput = {
-    id?: string
-    userId: string
-    typeRestriction: $Enums.TypeSanction
-    dateDebut?: Date | string
-    dateFin: Date | string
-    motif: string
-    empruntId?: string | null
-    estActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SanctionUtilisateurUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    typeRestriction?: EnumTypeSanctionFieldUpdateOperationsInput | $Enums.TypeSanction
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    motif?: StringFieldUpdateOperationsInput | string
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SanctionUtilisateurUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    typeRestriction?: EnumTypeSanctionFieldUpdateOperationsInput | $Enums.TypeSanction
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    motif?: StringFieldUpdateOperationsInput | string
-    empruntId?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type ExemplairePhysiqueCreateInput = {
     id?: string
     etat?: $Enums.EtatExemplaire
@@ -37266,12 +35926,12 @@ export namespace Prisma {
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
+    renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutEmpruntsInput
-    SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
     empruntExemplaires?: EmpruntExemplaireCreateNestedManyWithoutEmpruntInput
   }
 
@@ -37282,11 +35942,11 @@ export namespace Prisma {
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
+    renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
     empruntExemplaires?: EmpruntExemplaireUncheckedCreateNestedManyWithoutEmpruntInput
   }
 
@@ -37296,12 +35956,12 @@ export namespace Prisma {
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutEmpruntsNestedInput
-    SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
     empruntExemplaires?: EmpruntExemplaireUpdateManyWithoutEmpruntNestedInput
   }
 
@@ -37312,11 +35972,11 @@ export namespace Prisma {
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
     empruntExemplaires?: EmpruntExemplaireUncheckedUpdateManyWithoutEmpruntNestedInput
   }
 
@@ -37327,6 +35987,7 @@ export namespace Prisma {
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
+    renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
     createdAt?: Date | string
@@ -37339,6 +36000,7 @@ export namespace Prisma {
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37352,6 +36014,7 @@ export namespace Prisma {
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37871,7 +36534,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -37904,7 +36566,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -37937,7 +36598,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -37970,7 +36630,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -38409,10 +37068,9 @@ export namespace Prisma {
 
   export type NotationCreateInput = {
     id?: string
-    note: number
-    dateNotation?: Date | string
-    universiteSrc?: string | null
+    externUserId?: string | null
     universiteUser?: string | null
+    note: number
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutNotationsInput
@@ -38422,21 +37080,19 @@ export namespace Prisma {
   export type NotationUncheckedCreateInput = {
     id?: string
     userId?: string | null
+    externUserId?: string | null
+    universiteUser?: string | null
     ressourceId: string
     note: number
-    dateNotation?: Date | string
-    universiteSrc?: string | null
-    universiteUser?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type NotationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    note?: IntFieldUpdateOperationsInput | number
-    dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutNotationsNestedInput
@@ -38446,11 +37102,10 @@ export namespace Prisma {
   export type NotationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     ressourceId?: StringFieldUpdateOperationsInput | string
     note?: IntFieldUpdateOperationsInput | number
-    dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38458,21 +37113,19 @@ export namespace Prisma {
   export type NotationCreateManyInput = {
     id?: string
     userId?: string | null
+    externUserId?: string | null
+    universiteUser?: string | null
     ressourceId: string
     note: number
-    dateNotation?: Date | string
-    universiteSrc?: string | null
-    universiteUser?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type NotationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    note?: IntFieldUpdateOperationsInput | number
-    dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38480,11 +37133,10 @@ export namespace Prisma {
   export type NotationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     ressourceId?: StringFieldUpdateOperationsInput | string
     note?: IntFieldUpdateOperationsInput | number
-    dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39676,78 +38328,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type EnumTypeSanctionFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeSanction | EnumTypeSanctionFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeSanction[]
-    notIn?: $Enums.TypeSanction[]
-    not?: NestedEnumTypeSanctionFilter<$PrismaModel> | $Enums.TypeSanction
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
-  export type EmpruntNullableScalarRelationFilter = {
-    is?: EmpruntWhereInput | null
-    isNot?: EmpruntWhereInput | null
-  }
-
-  export type SanctionUtilisateurOrderByRelevanceInput = {
-    fields: SanctionUtilisateurOrderByRelevanceFieldEnum | SanctionUtilisateurOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type SanctionUtilisateurCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    typeRestriction?: SortOrder
-    dateDebut?: SortOrder
-    dateFin?: SortOrder
-    motif?: SortOrder
-    empruntId?: SortOrder
-    estActive?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type SanctionUtilisateurMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    typeRestriction?: SortOrder
-    dateDebut?: SortOrder
-    dateFin?: SortOrder
-    motif?: SortOrder
-    empruntId?: SortOrder
-    estActive?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type SanctionUtilisateurMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    typeRestriction?: SortOrder
-    dateDebut?: SortOrder
-    dateFin?: SortOrder
-    motif?: SortOrder
-    empruntId?: SortOrder
-    estActive?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type EnumTypeSanctionWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeSanction | EnumTypeSanctionFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeSanction[]
-    notIn?: $Enums.TypeSanction[]
-    not?: NestedEnumTypeSanctionWithAggregatesFilter<$PrismaModel> | $Enums.TypeSanction
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeSanctionFilter<$PrismaModel>
-    _max?: NestedEnumTypeSanctionFilter<$PrismaModel>
-  }
-
   export type EnumEtatExemplaireFilter<$PrismaModel = never> = {
     equals?: $Enums.EtatExemplaire | EnumEtatExemplaireFieldRefInput<$PrismaModel>
     in?: $Enums.EtatExemplaire[]
@@ -39847,16 +38427,6 @@ export namespace Prisma {
     isNot?: UserWhereInput | null
   }
 
-  export type SanctionUtilisateurListRelationFilter = {
-    every?: SanctionUtilisateurWhereInput
-    some?: SanctionUtilisateurWhereInput
-    none?: SanctionUtilisateurWhereInput
-  }
-
-  export type SanctionUtilisateurOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type EmpruntOrderByRelevanceInput = {
     fields: EmpruntOrderByRelevanceFieldEnum | EmpruntOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -39870,10 +38440,15 @@ export namespace Prisma {
     dateEmprunt?: SortOrder
     dateRetourPrevue?: SortOrder
     dateRetourEffective?: SortOrder
+    renouvellement?: SortOrder
     statut?: SortOrder
     universiteEmprunteur?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EmpruntAvgOrderByAggregateInput = {
+    renouvellement?: SortOrder
   }
 
   export type EmpruntMaxOrderByAggregateInput = {
@@ -39883,6 +38458,7 @@ export namespace Prisma {
     dateEmprunt?: SortOrder
     dateRetourPrevue?: SortOrder
     dateRetourEffective?: SortOrder
+    renouvellement?: SortOrder
     statut?: SortOrder
     universiteEmprunteur?: SortOrder
     createdAt?: SortOrder
@@ -39896,10 +38472,15 @@ export namespace Prisma {
     dateEmprunt?: SortOrder
     dateRetourPrevue?: SortOrder
     dateRetourEffective?: SortOrder
+    renouvellement?: SortOrder
     statut?: SortOrder
     universiteEmprunteur?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EmpruntSumOrderByAggregateInput = {
+    renouvellement?: SortOrder
   }
 
   export type EnumStatutEmpruntWithAggregatesFilter<$PrismaModel = never> = {
@@ -39983,6 +38564,11 @@ export namespace Prisma {
     in?: $Enums.MotifRecommandation[]
     notIn?: $Enums.MotifRecommandation[]
     not?: NestedEnumMotifRecommandationFilter<$PrismaModel> | $Enums.MotifRecommandation
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
   export type RecommandationOrderByRelevanceInput = {
@@ -40748,11 +39334,10 @@ export namespace Prisma {
   export type NotationCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    externUserId?: SortOrder
+    universiteUser?: SortOrder
     ressourceId?: SortOrder
     note?: SortOrder
-    dateNotation?: SortOrder
-    universiteSrc?: SortOrder
-    universiteUser?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -40764,11 +39349,10 @@ export namespace Prisma {
   export type NotationMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    externUserId?: SortOrder
+    universiteUser?: SortOrder
     ressourceId?: SortOrder
     note?: SortOrder
-    dateNotation?: SortOrder
-    universiteSrc?: SortOrder
-    universiteUser?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -40776,11 +39360,10 @@ export namespace Prisma {
   export type NotationMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    externUserId?: SortOrder
+    universiteUser?: SortOrder
     ressourceId?: SortOrder
     note?: SortOrder
-    dateNotation?: SortOrder
-    universiteSrc?: SortOrder
-    universiteUser?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41472,40 +40055,6 @@ export namespace Prisma {
     update?: XOR<XOR<UniversiteUpdateToOneWithWhereWithoutPolitiqueBibliothequesInput, UniversiteUpdateWithoutPolitiqueBibliothequesInput>, UniversiteUncheckedUpdateWithoutPolitiqueBibliothequesInput>
   }
 
-  export type UserCreateNestedOneWithoutSanctionsInput = {
-    create?: XOR<UserCreateWithoutSanctionsInput, UserUncheckedCreateWithoutSanctionsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutSanctionsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type EmpruntCreateNestedOneWithoutSanctionUtilisateurInput = {
-    create?: XOR<EmpruntCreateWithoutSanctionUtilisateurInput, EmpruntUncheckedCreateWithoutSanctionUtilisateurInput>
-    connectOrCreate?: EmpruntCreateOrConnectWithoutSanctionUtilisateurInput
-    connect?: EmpruntWhereUniqueInput
-  }
-
-  export type EnumTypeSanctionFieldUpdateOperationsInput = {
-    set?: $Enums.TypeSanction
-  }
-
-  export type UserUpdateOneRequiredWithoutSanctionsNestedInput = {
-    create?: XOR<UserCreateWithoutSanctionsInput, UserUncheckedCreateWithoutSanctionsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutSanctionsInput
-    upsert?: UserUpsertWithoutSanctionsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSanctionsInput, UserUpdateWithoutSanctionsInput>, UserUncheckedUpdateWithoutSanctionsInput>
-  }
-
-  export type EmpruntUpdateOneWithoutSanctionUtilisateurNestedInput = {
-    create?: XOR<EmpruntCreateWithoutSanctionUtilisateurInput, EmpruntUncheckedCreateWithoutSanctionUtilisateurInput>
-    connectOrCreate?: EmpruntCreateOrConnectWithoutSanctionUtilisateurInput
-    upsert?: EmpruntUpsertWithoutSanctionUtilisateurInput
-    disconnect?: EmpruntWhereInput | boolean
-    delete?: EmpruntWhereInput | boolean
-    connect?: EmpruntWhereUniqueInput
-    update?: XOR<XOR<EmpruntUpdateToOneWithWhereWithoutSanctionUtilisateurInput, EmpruntUpdateWithoutSanctionUtilisateurInput>, EmpruntUncheckedUpdateWithoutSanctionUtilisateurInput>
-  }
-
   export type RessourceCreateNestedOneWithoutExemplaireInput = {
     create?: XOR<RessourceCreateWithoutExemplaireInput, RessourceUncheckedCreateWithoutExemplaireInput>
     connectOrCreate?: RessourceCreateOrConnectWithoutExemplaireInput
@@ -41572,25 +40121,11 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type SanctionUtilisateurCreateNestedManyWithoutEmpruntInput = {
-    create?: XOR<SanctionUtilisateurCreateWithoutEmpruntInput, SanctionUtilisateurUncheckedCreateWithoutEmpruntInput> | SanctionUtilisateurCreateWithoutEmpruntInput[] | SanctionUtilisateurUncheckedCreateWithoutEmpruntInput[]
-    connectOrCreate?: SanctionUtilisateurCreateOrConnectWithoutEmpruntInput | SanctionUtilisateurCreateOrConnectWithoutEmpruntInput[]
-    createMany?: SanctionUtilisateurCreateManyEmpruntInputEnvelope
-    connect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-  }
-
   export type EmpruntExemplaireCreateNestedManyWithoutEmpruntInput = {
     create?: XOR<EmpruntExemplaireCreateWithoutEmpruntInput, EmpruntExemplaireUncheckedCreateWithoutEmpruntInput> | EmpruntExemplaireCreateWithoutEmpruntInput[] | EmpruntExemplaireUncheckedCreateWithoutEmpruntInput[]
     connectOrCreate?: EmpruntExemplaireCreateOrConnectWithoutEmpruntInput | EmpruntExemplaireCreateOrConnectWithoutEmpruntInput[]
     createMany?: EmpruntExemplaireCreateManyEmpruntInputEnvelope
     connect?: EmpruntExemplaireWhereUniqueInput | EmpruntExemplaireWhereUniqueInput[]
-  }
-
-  export type SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput = {
-    create?: XOR<SanctionUtilisateurCreateWithoutEmpruntInput, SanctionUtilisateurUncheckedCreateWithoutEmpruntInput> | SanctionUtilisateurCreateWithoutEmpruntInput[] | SanctionUtilisateurUncheckedCreateWithoutEmpruntInput[]
-    connectOrCreate?: SanctionUtilisateurCreateOrConnectWithoutEmpruntInput | SanctionUtilisateurCreateOrConnectWithoutEmpruntInput[]
-    createMany?: SanctionUtilisateurCreateManyEmpruntInputEnvelope
-    connect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
   }
 
   export type EmpruntExemplaireUncheckedCreateNestedManyWithoutEmpruntInput = {
@@ -41614,20 +40149,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEmpruntsInput, UserUpdateWithoutEmpruntsInput>, UserUncheckedUpdateWithoutEmpruntsInput>
   }
 
-  export type SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput = {
-    create?: XOR<SanctionUtilisateurCreateWithoutEmpruntInput, SanctionUtilisateurUncheckedCreateWithoutEmpruntInput> | SanctionUtilisateurCreateWithoutEmpruntInput[] | SanctionUtilisateurUncheckedCreateWithoutEmpruntInput[]
-    connectOrCreate?: SanctionUtilisateurCreateOrConnectWithoutEmpruntInput | SanctionUtilisateurCreateOrConnectWithoutEmpruntInput[]
-    upsert?: SanctionUtilisateurUpsertWithWhereUniqueWithoutEmpruntInput | SanctionUtilisateurUpsertWithWhereUniqueWithoutEmpruntInput[]
-    createMany?: SanctionUtilisateurCreateManyEmpruntInputEnvelope
-    set?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    disconnect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    delete?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    connect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    update?: SanctionUtilisateurUpdateWithWhereUniqueWithoutEmpruntInput | SanctionUtilisateurUpdateWithWhereUniqueWithoutEmpruntInput[]
-    updateMany?: SanctionUtilisateurUpdateManyWithWhereWithoutEmpruntInput | SanctionUtilisateurUpdateManyWithWhereWithoutEmpruntInput[]
-    deleteMany?: SanctionUtilisateurScalarWhereInput | SanctionUtilisateurScalarWhereInput[]
-  }
-
   export type EmpruntExemplaireUpdateManyWithoutEmpruntNestedInput = {
     create?: XOR<EmpruntExemplaireCreateWithoutEmpruntInput, EmpruntExemplaireUncheckedCreateWithoutEmpruntInput> | EmpruntExemplaireCreateWithoutEmpruntInput[] | EmpruntExemplaireUncheckedCreateWithoutEmpruntInput[]
     connectOrCreate?: EmpruntExemplaireCreateOrConnectWithoutEmpruntInput | EmpruntExemplaireCreateOrConnectWithoutEmpruntInput[]
@@ -41640,20 +40161,6 @@ export namespace Prisma {
     update?: EmpruntExemplaireUpdateWithWhereUniqueWithoutEmpruntInput | EmpruntExemplaireUpdateWithWhereUniqueWithoutEmpruntInput[]
     updateMany?: EmpruntExemplaireUpdateManyWithWhereWithoutEmpruntInput | EmpruntExemplaireUpdateManyWithWhereWithoutEmpruntInput[]
     deleteMany?: EmpruntExemplaireScalarWhereInput | EmpruntExemplaireScalarWhereInput[]
-  }
-
-  export type SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput = {
-    create?: XOR<SanctionUtilisateurCreateWithoutEmpruntInput, SanctionUtilisateurUncheckedCreateWithoutEmpruntInput> | SanctionUtilisateurCreateWithoutEmpruntInput[] | SanctionUtilisateurUncheckedCreateWithoutEmpruntInput[]
-    connectOrCreate?: SanctionUtilisateurCreateOrConnectWithoutEmpruntInput | SanctionUtilisateurCreateOrConnectWithoutEmpruntInput[]
-    upsert?: SanctionUtilisateurUpsertWithWhereUniqueWithoutEmpruntInput | SanctionUtilisateurUpsertWithWhereUniqueWithoutEmpruntInput[]
-    createMany?: SanctionUtilisateurCreateManyEmpruntInputEnvelope
-    set?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    disconnect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    delete?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    connect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    update?: SanctionUtilisateurUpdateWithWhereUniqueWithoutEmpruntInput | SanctionUtilisateurUpdateWithWhereUniqueWithoutEmpruntInput[]
-    updateMany?: SanctionUtilisateurUpdateManyWithWhereWithoutEmpruntInput | SanctionUtilisateurUpdateManyWithWhereWithoutEmpruntInput[]
-    deleteMany?: SanctionUtilisateurScalarWhereInput | SanctionUtilisateurScalarWhereInput[]
   }
 
   export type EmpruntExemplaireUncheckedUpdateManyWithoutEmpruntNestedInput = {
@@ -42179,13 +40686,6 @@ export namespace Prisma {
     connect?: AdministrateurWhereUniqueInput
   }
 
-  export type SanctionUtilisateurCreateNestedManyWithoutUserInput = {
-    create?: XOR<SanctionUtilisateurCreateWithoutUserInput, SanctionUtilisateurUncheckedCreateWithoutUserInput> | SanctionUtilisateurCreateWithoutUserInput[] | SanctionUtilisateurUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SanctionUtilisateurCreateOrConnectWithoutUserInput | SanctionUtilisateurCreateOrConnectWithoutUserInput[]
-    createMany?: SanctionUtilisateurCreateManyUserInputEnvelope
-    connect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-  }
-
   export type RessourceUncheckedCreateNestedManyWithoutAuteurInput = {
     create?: XOR<RessourceCreateWithoutAuteurInput, RessourceUncheckedCreateWithoutAuteurInput> | RessourceCreateWithoutAuteurInput[] | RessourceUncheckedCreateWithoutAuteurInput[]
     connectOrCreate?: RessourceCreateOrConnectWithoutAuteurInput | RessourceCreateOrConnectWithoutAuteurInput[]
@@ -42285,13 +40785,6 @@ export namespace Prisma {
     create?: XOR<AdministrateurCreateWithoutUserInput, AdministrateurUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdministrateurCreateOrConnectWithoutUserInput
     connect?: AdministrateurWhereUniqueInput
-  }
-
-  export type SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SanctionUtilisateurCreateWithoutUserInput, SanctionUtilisateurUncheckedCreateWithoutUserInput> | SanctionUtilisateurCreateWithoutUserInput[] | SanctionUtilisateurUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SanctionUtilisateurCreateOrConnectWithoutUserInput | SanctionUtilisateurCreateOrConnectWithoutUserInput[]
-    createMany?: SanctionUtilisateurCreateManyUserInputEnvelope
-    connect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
   }
 
   export type EnumFrequenceRecommandationFieldUpdateOperationsInput = {
@@ -42492,20 +40985,6 @@ export namespace Prisma {
     update?: XOR<XOR<AdministrateurUpdateToOneWithWhereWithoutUserInput, AdministrateurUpdateWithoutUserInput>, AdministrateurUncheckedUpdateWithoutUserInput>
   }
 
-  export type SanctionUtilisateurUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SanctionUtilisateurCreateWithoutUserInput, SanctionUtilisateurUncheckedCreateWithoutUserInput> | SanctionUtilisateurCreateWithoutUserInput[] | SanctionUtilisateurUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SanctionUtilisateurCreateOrConnectWithoutUserInput | SanctionUtilisateurCreateOrConnectWithoutUserInput[]
-    upsert?: SanctionUtilisateurUpsertWithWhereUniqueWithoutUserInput | SanctionUtilisateurUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SanctionUtilisateurCreateManyUserInputEnvelope
-    set?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    disconnect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    delete?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    connect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    update?: SanctionUtilisateurUpdateWithWhereUniqueWithoutUserInput | SanctionUtilisateurUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SanctionUtilisateurUpdateManyWithWhereWithoutUserInput | SanctionUtilisateurUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SanctionUtilisateurScalarWhereInput | SanctionUtilisateurScalarWhereInput[]
-  }
-
   export type RessourceUncheckedUpdateManyWithoutAuteurNestedInput = {
     create?: XOR<RessourceCreateWithoutAuteurInput, RessourceUncheckedCreateWithoutAuteurInput> | RessourceCreateWithoutAuteurInput[] | RessourceUncheckedCreateWithoutAuteurInput[]
     connectOrCreate?: RessourceCreateOrConnectWithoutAuteurInput | RessourceCreateOrConnectWithoutAuteurInput[]
@@ -42698,20 +41177,6 @@ export namespace Prisma {
     delete?: AdministrateurWhereInput | boolean
     connect?: AdministrateurWhereUniqueInput
     update?: XOR<XOR<AdministrateurUpdateToOneWithWhereWithoutUserInput, AdministrateurUpdateWithoutUserInput>, AdministrateurUncheckedUpdateWithoutUserInput>
-  }
-
-  export type SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SanctionUtilisateurCreateWithoutUserInput, SanctionUtilisateurUncheckedCreateWithoutUserInput> | SanctionUtilisateurCreateWithoutUserInput[] | SanctionUtilisateurUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SanctionUtilisateurCreateOrConnectWithoutUserInput | SanctionUtilisateurCreateOrConnectWithoutUserInput[]
-    upsert?: SanctionUtilisateurUpsertWithWhereUniqueWithoutUserInput | SanctionUtilisateurUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SanctionUtilisateurCreateManyUserInputEnvelope
-    set?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    disconnect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    delete?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    connect?: SanctionUtilisateurWhereUniqueInput | SanctionUtilisateurWhereUniqueInput[]
-    update?: SanctionUtilisateurUpdateWithWhereUniqueWithoutUserInput | SanctionUtilisateurUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SanctionUtilisateurUpdateManyWithWhereWithoutUserInput | SanctionUtilisateurUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SanctionUtilisateurScalarWhereInput | SanctionUtilisateurScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutEtudiantInput = {
@@ -43696,23 +42161,6 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedEnumTypeSanctionFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeSanction | EnumTypeSanctionFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeSanction[]
-    notIn?: $Enums.TypeSanction[]
-    not?: NestedEnumTypeSanctionFilter<$PrismaModel> | $Enums.TypeSanction
-  }
-
-  export type NestedEnumTypeSanctionWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeSanction | EnumTypeSanctionFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeSanction[]
-    notIn?: $Enums.TypeSanction[]
-    not?: NestedEnumTypeSanctionWithAggregatesFilter<$PrismaModel> | $Enums.TypeSanction
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeSanctionFilter<$PrismaModel>
-    _max?: NestedEnumTypeSanctionFilter<$PrismaModel>
-  }
-
   export type NestedEnumEtatExemplaireFilter<$PrismaModel = never> = {
     equals?: $Enums.EtatExemplaire | EnumEtatExemplaireFieldRefInput<$PrismaModel>
     in?: $Enums.EtatExemplaire[]
@@ -44068,222 +42516,6 @@ export namespace Prisma {
     ufrs?: UfrUncheckedUpdateManyWithoutUniversiteNestedInput
   }
 
-  export type UserCreateWithoutSanctionsInput = {
-    id?: string
-    email: string
-    motDePasse: string
-    nom: string
-    telephone?: string | null
-    prenom: string
-    image?: string | null
-    role: $Enums.RoleUser
-    derniereConnexion?: Date | string | null
-    estActif?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    preferencesRecommandation?: string | null
-    frequenceRecommandation?: $Enums.FrequenceRecommandation
-    contributions?: RessourceCreateNestedManyWithoutAuteurInput
-    favoris?: FavoriCreateNestedManyWithoutUserInput
-    commentaires?: CommentaireCreateNestedManyWithoutUserInput
-    notations?: NotationCreateNestedManyWithoutUserInput
-    historiques?: HistoriqueAccesCreateNestedManyWithoutUserInput
-    collections?: CollectionCreateNestedManyWithoutUserInput
-    emprunts?: EmpruntCreateNestedManyWithoutUserInput
-    recommandations?: RecommandationCreateNestedManyWithoutUserInput
-    JournalAudit?: JournalAuditCreateNestedManyWithoutUserInput
-    donneesRecommandations?: DonneesRecommandationCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    etudiant?: EtudiantCreateNestedOneWithoutUserInput
-    enseignant?: EnseignantCreateNestedOneWithoutUserInput
-    bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
-    administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutSanctionsInput = {
-    id?: string
-    email: string
-    motDePasse: string
-    nom: string
-    telephone?: string | null
-    prenom: string
-    image?: string | null
-    role: $Enums.RoleUser
-    derniereConnexion?: Date | string | null
-    estActif?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    preferencesRecommandation?: string | null
-    frequenceRecommandation?: $Enums.FrequenceRecommandation
-    contributions?: RessourceUncheckedCreateNestedManyWithoutAuteurInput
-    favoris?: FavoriUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentaireUncheckedCreateNestedManyWithoutUserInput
-    notations?: NotationUncheckedCreateNestedManyWithoutUserInput
-    historiques?: HistoriqueAccesUncheckedCreateNestedManyWithoutUserInput
-    collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
-    emprunts?: EmpruntUncheckedCreateNestedManyWithoutUserInput
-    recommandations?: RecommandationUncheckedCreateNestedManyWithoutUserInput
-    JournalAudit?: JournalAuditUncheckedCreateNestedManyWithoutUserInput
-    donneesRecommandations?: DonneesRecommandationUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
-    enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
-    bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
-    administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutSanctionsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutSanctionsInput, UserUncheckedCreateWithoutSanctionsInput>
-  }
-
-  export type EmpruntCreateWithoutSanctionUtilisateurInput = {
-    id?: string
-    exemplaireId: string
-    dateEmprunt?: Date | string
-    dateRetourPrevue: Date | string
-    dateRetourEffective?: Date | string | null
-    statut?: $Enums.StatutEmprunt
-    universiteEmprunteur: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutEmpruntsInput
-    empruntExemplaires?: EmpruntExemplaireCreateNestedManyWithoutEmpruntInput
-  }
-
-  export type EmpruntUncheckedCreateWithoutSanctionUtilisateurInput = {
-    id?: string
-    exemplaireId: string
-    userId?: string | null
-    dateEmprunt?: Date | string
-    dateRetourPrevue: Date | string
-    dateRetourEffective?: Date | string | null
-    statut?: $Enums.StatutEmprunt
-    universiteEmprunteur: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    empruntExemplaires?: EmpruntExemplaireUncheckedCreateNestedManyWithoutEmpruntInput
-  }
-
-  export type EmpruntCreateOrConnectWithoutSanctionUtilisateurInput = {
-    where: EmpruntWhereUniqueInput
-    create: XOR<EmpruntCreateWithoutSanctionUtilisateurInput, EmpruntUncheckedCreateWithoutSanctionUtilisateurInput>
-  }
-
-  export type UserUpsertWithoutSanctionsInput = {
-    update: XOR<UserUpdateWithoutSanctionsInput, UserUncheckedUpdateWithoutSanctionsInput>
-    create: XOR<UserCreateWithoutSanctionsInput, UserUncheckedCreateWithoutSanctionsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutSanctionsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutSanctionsInput, UserUncheckedUpdateWithoutSanctionsInput>
-  }
-
-  export type UserUpdateWithoutSanctionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    motDePasse?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    prenom?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
-    derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActif?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
-    frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    contributions?: RessourceUpdateManyWithoutAuteurNestedInput
-    favoris?: FavoriUpdateManyWithoutUserNestedInput
-    commentaires?: CommentaireUpdateManyWithoutUserNestedInput
-    notations?: NotationUpdateManyWithoutUserNestedInput
-    historiques?: HistoriqueAccesUpdateManyWithoutUserNestedInput
-    collections?: CollectionUpdateManyWithoutUserNestedInput
-    emprunts?: EmpruntUpdateManyWithoutUserNestedInput
-    recommandations?: RecommandationUpdateManyWithoutUserNestedInput
-    JournalAudit?: JournalAuditUpdateManyWithoutUserNestedInput
-    donneesRecommandations?: DonneesRecommandationUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    etudiant?: EtudiantUpdateOneWithoutUserNestedInput
-    enseignant?: EnseignantUpdateOneWithoutUserNestedInput
-    bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
-    administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutSanctionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    motDePasse?: StringFieldUpdateOperationsInput | string
-    nom?: StringFieldUpdateOperationsInput | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    prenom?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleUserFieldUpdateOperationsInput | $Enums.RoleUser
-    derniereConnexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estActif?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    preferencesRecommandation?: NullableStringFieldUpdateOperationsInput | string | null
-    frequenceRecommandation?: EnumFrequenceRecommandationFieldUpdateOperationsInput | $Enums.FrequenceRecommandation
-    contributions?: RessourceUncheckedUpdateManyWithoutAuteurNestedInput
-    favoris?: FavoriUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentaireUncheckedUpdateManyWithoutUserNestedInput
-    notations?: NotationUncheckedUpdateManyWithoutUserNestedInput
-    historiques?: HistoriqueAccesUncheckedUpdateManyWithoutUserNestedInput
-    collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
-    emprunts?: EmpruntUncheckedUpdateManyWithoutUserNestedInput
-    recommandations?: RecommandationUncheckedUpdateManyWithoutUserNestedInput
-    JournalAudit?: JournalAuditUncheckedUpdateManyWithoutUserNestedInput
-    donneesRecommandations?: DonneesRecommandationUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
-    enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
-    bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
-    administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-  }
-
-  export type EmpruntUpsertWithoutSanctionUtilisateurInput = {
-    update: XOR<EmpruntUpdateWithoutSanctionUtilisateurInput, EmpruntUncheckedUpdateWithoutSanctionUtilisateurInput>
-    create: XOR<EmpruntCreateWithoutSanctionUtilisateurInput, EmpruntUncheckedCreateWithoutSanctionUtilisateurInput>
-    where?: EmpruntWhereInput
-  }
-
-  export type EmpruntUpdateToOneWithWhereWithoutSanctionUtilisateurInput = {
-    where?: EmpruntWhereInput
-    data: XOR<EmpruntUpdateWithoutSanctionUtilisateurInput, EmpruntUncheckedUpdateWithoutSanctionUtilisateurInput>
-  }
-
-  export type EmpruntUpdateWithoutSanctionUtilisateurInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    exemplaireId?: StringFieldUpdateOperationsInput | string
-    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutEmpruntsNestedInput
-    empruntExemplaires?: EmpruntExemplaireUpdateManyWithoutEmpruntNestedInput
-  }
-
-  export type EmpruntUncheckedUpdateWithoutSanctionUtilisateurInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    exemplaireId?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
-    universiteEmprunteur?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    empruntExemplaires?: EmpruntExemplaireUncheckedUpdateManyWithoutEmpruntNestedInput
-  }
-
   export type RessourceCreateWithoutExemplaireInput = {
     id?: string
     titre: string
@@ -44519,7 +42751,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEmpruntsInput = {
@@ -44551,46 +42782,11 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEmpruntsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutEmpruntsInput, UserUncheckedCreateWithoutEmpruntsInput>
-  }
-
-  export type SanctionUtilisateurCreateWithoutEmpruntInput = {
-    id?: string
-    typeRestriction: $Enums.TypeSanction
-    dateDebut?: Date | string
-    dateFin: Date | string
-    motif: string
-    estActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutSanctionsInput
-  }
-
-  export type SanctionUtilisateurUncheckedCreateWithoutEmpruntInput = {
-    id?: string
-    userId: string
-    typeRestriction: $Enums.TypeSanction
-    dateDebut?: Date | string
-    dateFin: Date | string
-    motif: string
-    estActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SanctionUtilisateurCreateOrConnectWithoutEmpruntInput = {
-    where: SanctionUtilisateurWhereUniqueInput
-    create: XOR<SanctionUtilisateurCreateWithoutEmpruntInput, SanctionUtilisateurUncheckedCreateWithoutEmpruntInput>
-  }
-
-  export type SanctionUtilisateurCreateManyEmpruntInputEnvelope = {
-    data: SanctionUtilisateurCreateManyEmpruntInput | SanctionUtilisateurCreateManyEmpruntInput[]
-    skipDuplicates?: boolean
   }
 
   export type EmpruntExemplaireCreateWithoutEmpruntInput = {
@@ -44667,7 +42863,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEmpruntsInput = {
@@ -44699,39 +42894,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type SanctionUtilisateurUpsertWithWhereUniqueWithoutEmpruntInput = {
-    where: SanctionUtilisateurWhereUniqueInput
-    update: XOR<SanctionUtilisateurUpdateWithoutEmpruntInput, SanctionUtilisateurUncheckedUpdateWithoutEmpruntInput>
-    create: XOR<SanctionUtilisateurCreateWithoutEmpruntInput, SanctionUtilisateurUncheckedCreateWithoutEmpruntInput>
-  }
-
-  export type SanctionUtilisateurUpdateWithWhereUniqueWithoutEmpruntInput = {
-    where: SanctionUtilisateurWhereUniqueInput
-    data: XOR<SanctionUtilisateurUpdateWithoutEmpruntInput, SanctionUtilisateurUncheckedUpdateWithoutEmpruntInput>
-  }
-
-  export type SanctionUtilisateurUpdateManyWithWhereWithoutEmpruntInput = {
-    where: SanctionUtilisateurScalarWhereInput
-    data: XOR<SanctionUtilisateurUpdateManyMutationInput, SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntInput>
-  }
-
-  export type SanctionUtilisateurScalarWhereInput = {
-    AND?: SanctionUtilisateurScalarWhereInput | SanctionUtilisateurScalarWhereInput[]
-    OR?: SanctionUtilisateurScalarWhereInput[]
-    NOT?: SanctionUtilisateurScalarWhereInput | SanctionUtilisateurScalarWhereInput[]
-    id?: StringFilter<"SanctionUtilisateur"> | string
-    userId?: StringFilter<"SanctionUtilisateur"> | string
-    typeRestriction?: EnumTypeSanctionFilter<"SanctionUtilisateur"> | $Enums.TypeSanction
-    dateDebut?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
-    dateFin?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
-    motif?: StringFilter<"SanctionUtilisateur"> | string
-    empruntId?: StringNullableFilter<"SanctionUtilisateur"> | string | null
-    estActive?: BoolFilter<"SanctionUtilisateur"> | boolean
-    createdAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
-    updatedAt?: DateTimeFilter<"SanctionUtilisateur"> | Date | string
   }
 
   export type EmpruntExemplaireUpsertWithWhereUniqueWithoutEmpruntInput = {
@@ -44756,12 +42918,12 @@ export namespace Prisma {
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
+    renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutEmpruntsInput
-    SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
   }
 
   export type EmpruntUncheckedCreateWithoutEmpruntExemplairesInput = {
@@ -44771,11 +42933,11 @@ export namespace Prisma {
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
+    renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
   }
 
   export type EmpruntCreateOrConnectWithoutEmpruntExemplairesInput = {
@@ -44831,12 +42993,12 @@ export namespace Prisma {
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutEmpruntsNestedInput
-    SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
   }
 
   export type EmpruntUncheckedUpdateWithoutEmpruntExemplairesInput = {
@@ -44846,11 +43008,11 @@ export namespace Prisma {
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
   }
 
   export type ExemplairePhysiqueUpsertWithoutEmpruntExemplairesInput = {
@@ -44919,7 +43081,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRecommandationsInput = {
@@ -44951,7 +43112,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRecommandationsInput = {
@@ -45066,7 +43226,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRecommandationsInput = {
@@ -45098,7 +43257,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RessourceUpsertWithoutRecommandationsInput = {
@@ -45922,10 +44080,9 @@ export namespace Prisma {
 
   export type NotationCreateWithoutUserInput = {
     id?: string
-    note: number
-    dateNotation?: Date | string
-    universiteSrc?: string | null
+    externUserId?: string | null
     universiteUser?: string | null
+    note: number
     createdAt?: Date | string
     updatedAt?: Date | string
     ressource: RessourceCreateNestedOneWithoutNotationsInput
@@ -45933,11 +44090,10 @@ export namespace Prisma {
 
   export type NotationUncheckedCreateWithoutUserInput = {
     id?: string
+    externUserId?: string | null
+    universiteUser?: string | null
     ressourceId: string
     note: number
-    dateNotation?: Date | string
-    universiteSrc?: string | null
-    universiteUser?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -46014,11 +44170,11 @@ export namespace Prisma {
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
+    renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    SanctionUtilisateur?: SanctionUtilisateurCreateNestedManyWithoutEmpruntInput
     empruntExemplaires?: EmpruntExemplaireCreateNestedManyWithoutEmpruntInput
   }
 
@@ -46028,11 +44184,11 @@ export namespace Prisma {
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
+    renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    SanctionUtilisateur?: SanctionUtilisateurUncheckedCreateNestedManyWithoutEmpruntInput
     empruntExemplaires?: EmpruntExemplaireUncheckedCreateNestedManyWithoutEmpruntInput
   }
 
@@ -46258,40 +44414,6 @@ export namespace Prisma {
     create: XOR<AdministrateurCreateWithoutUserInput, AdministrateurUncheckedCreateWithoutUserInput>
   }
 
-  export type SanctionUtilisateurCreateWithoutUserInput = {
-    id?: string
-    typeRestriction: $Enums.TypeSanction
-    dateDebut?: Date | string
-    dateFin: Date | string
-    motif: string
-    estActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    emprunt?: EmpruntCreateNestedOneWithoutSanctionUtilisateurInput
-  }
-
-  export type SanctionUtilisateurUncheckedCreateWithoutUserInput = {
-    id?: string
-    typeRestriction: $Enums.TypeSanction
-    dateDebut?: Date | string
-    dateFin: Date | string
-    motif: string
-    empruntId?: string | null
-    estActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SanctionUtilisateurCreateOrConnectWithoutUserInput = {
-    where: SanctionUtilisateurWhereUniqueInput
-    create: XOR<SanctionUtilisateurCreateWithoutUserInput, SanctionUtilisateurUncheckedCreateWithoutUserInput>
-  }
-
-  export type SanctionUtilisateurCreateManyUserInputEnvelope = {
-    data: SanctionUtilisateurCreateManyUserInput | SanctionUtilisateurCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type RessourceUpsertWithWhereUniqueWithoutAuteurInput = {
     where: RessourceWhereUniqueInput
     update: XOR<RessourceUpdateWithoutAuteurInput, RessourceUncheckedUpdateWithoutAuteurInput>
@@ -46417,11 +44539,10 @@ export namespace Prisma {
     NOT?: NotationScalarWhereInput | NotationScalarWhereInput[]
     id?: StringFilter<"Notation"> | string
     userId?: StringNullableFilter<"Notation"> | string | null
+    externUserId?: StringNullableFilter<"Notation"> | string | null
+    universiteUser?: StringNullableFilter<"Notation"> | string | null
     ressourceId?: StringFilter<"Notation"> | string
     note?: IntFilter<"Notation"> | number
-    dateNotation?: DateTimeFilter<"Notation"> | Date | string
-    universiteSrc?: StringNullableFilter<"Notation"> | string | null
-    universiteUser?: StringNullableFilter<"Notation"> | string | null
     createdAt?: DateTimeFilter<"Notation"> | Date | string
     updatedAt?: DateTimeFilter<"Notation"> | Date | string
   }
@@ -46509,6 +44630,7 @@ export namespace Prisma {
     dateEmprunt?: DateTimeFilter<"Emprunt"> | Date | string
     dateRetourPrevue?: DateTimeFilter<"Emprunt"> | Date | string
     dateRetourEffective?: DateTimeNullableFilter<"Emprunt"> | Date | string | null
+    renouvellement?: IntFilter<"Emprunt"> | number
     statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
     createdAt?: DateTimeFilter<"Emprunt"> | Date | string
@@ -46745,22 +44867,6 @@ export namespace Prisma {
     numeroAdmin?: StringFieldUpdateOperationsInput | string
   }
 
-  export type SanctionUtilisateurUpsertWithWhereUniqueWithoutUserInput = {
-    where: SanctionUtilisateurWhereUniqueInput
-    update: XOR<SanctionUtilisateurUpdateWithoutUserInput, SanctionUtilisateurUncheckedUpdateWithoutUserInput>
-    create: XOR<SanctionUtilisateurCreateWithoutUserInput, SanctionUtilisateurUncheckedCreateWithoutUserInput>
-  }
-
-  export type SanctionUtilisateurUpdateWithWhereUniqueWithoutUserInput = {
-    where: SanctionUtilisateurWhereUniqueInput
-    data: XOR<SanctionUtilisateurUpdateWithoutUserInput, SanctionUtilisateurUncheckedUpdateWithoutUserInput>
-  }
-
-  export type SanctionUtilisateurUpdateManyWithWhereWithoutUserInput = {
-    where: SanctionUtilisateurScalarWhereInput
-    data: XOR<SanctionUtilisateurUpdateManyMutationInput, SanctionUtilisateurUncheckedUpdateManyWithoutUserInput>
-  }
-
   export type UserCreateWithoutEtudiantInput = {
     id?: string
     email: string
@@ -46790,7 +44896,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEtudiantInput = {
@@ -46822,7 +44927,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEtudiantInput = {
@@ -46895,7 +44999,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEtudiantInput = {
@@ -46927,7 +45030,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type FiliereUpsertWithoutEtudiantsInput = {
@@ -46990,7 +45092,6 @@ export namespace Prisma {
     etudiant?: EtudiantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEnseignantInput = {
@@ -47022,7 +45123,6 @@ export namespace Prisma {
     etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEnseignantInput = {
@@ -47070,7 +45170,6 @@ export namespace Prisma {
     etudiant?: EtudiantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEnseignantInput = {
@@ -47102,7 +45201,6 @@ export namespace Prisma {
     etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutBibliothecaireInput = {
@@ -47134,7 +45232,6 @@ export namespace Prisma {
     etudiant?: EtudiantCreateNestedOneWithoutUserInput
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBibliothecaireInput = {
@@ -47166,7 +45263,6 @@ export namespace Prisma {
     etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBibliothecaireInput = {
@@ -47214,7 +45310,6 @@ export namespace Prisma {
     etudiant?: EtudiantUpdateOneWithoutUserNestedInput
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBibliothecaireInput = {
@@ -47246,7 +45341,6 @@ export namespace Prisma {
     etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAdministrateurInput = {
@@ -47278,7 +45372,6 @@ export namespace Prisma {
     etudiant?: EtudiantCreateNestedOneWithoutUserInput
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdministrateurInput = {
@@ -47310,7 +45403,6 @@ export namespace Prisma {
     etudiant?: EtudiantUncheckedCreateNestedOneWithoutUserInput
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdministrateurInput = {
@@ -47358,7 +45450,6 @@ export namespace Prisma {
     etudiant?: EtudiantUpdateOneWithoutUserNestedInput
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdministrateurInput = {
@@ -47390,7 +45481,6 @@ export namespace Prisma {
     etudiant?: EtudiantUncheckedUpdateOneWithoutUserNestedInput
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RessourceCreateWithoutFavorisInput = {
@@ -47489,7 +45579,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFavorisInput = {
@@ -47521,7 +45610,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFavorisInput = {
@@ -47642,7 +45730,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFavorisInput = {
@@ -47674,7 +45761,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCommentairesInput = {
@@ -47706,7 +45792,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentairesInput = {
@@ -47738,7 +45823,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentairesInput = {
@@ -47853,7 +45937,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentairesInput = {
@@ -47885,7 +45968,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RessourceUpsertWithoutCommentairesInput = {
@@ -47990,7 +46072,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotationsInput = {
@@ -48022,7 +46103,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotationsInput = {
@@ -48137,7 +46217,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotationsInput = {
@@ -48169,7 +46248,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RessourceUpsertWithoutNotationsInput = {
@@ -48274,7 +46352,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutHistoriquesInput = {
@@ -48306,7 +46383,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutHistoriquesInput = {
@@ -48421,7 +46497,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHistoriquesInput = {
@@ -48453,7 +46528,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RessourceUpsertWithoutHistoriquesInput = {
@@ -48558,7 +46632,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDonneesRecommandationsInput = {
@@ -48590,7 +46663,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDonneesRecommandationsInput = {
@@ -48705,7 +46777,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDonneesRecommandationsInput = {
@@ -48737,7 +46808,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RessourceUpsertWithoutDonneesRecommandationsInput = {
@@ -48842,7 +46912,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCollectionsInput = {
@@ -48874,7 +46943,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCollectionsInput = {
@@ -48950,7 +47018,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCollectionsInput = {
@@ -48982,7 +47049,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CollectionRessourceUpsertWithWhereUniqueWithoutCollectionInput = {
@@ -49231,7 +47297,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutContributionsInput = {
@@ -49263,7 +47328,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutContributionsInput = {
@@ -49333,10 +47397,9 @@ export namespace Prisma {
 
   export type NotationCreateWithoutRessourceInput = {
     id?: string
-    note: number
-    dateNotation?: Date | string
-    universiteSrc?: string | null
+    externUserId?: string | null
     universiteUser?: string | null
+    note: number
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutNotationsInput
@@ -49345,10 +47408,9 @@ export namespace Prisma {
   export type NotationUncheckedCreateWithoutRessourceInput = {
     id?: string
     userId?: string | null
-    note: number
-    dateNotation?: Date | string
-    universiteSrc?: string | null
+    externUserId?: string | null
     universiteUser?: string | null
+    note: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -49581,7 +47643,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutContributionsInput = {
@@ -49613,7 +47674,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type FavoriUpsertWithWhereUniqueWithoutRessourceInput = {
@@ -49979,7 +48039,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -50011,7 +48070,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -50059,7 +48117,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -50091,7 +48148,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutJournalAuditInput = {
@@ -50123,7 +48179,6 @@ export namespace Prisma {
     enseignant?: EnseignantCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutJournalAuditInput = {
@@ -50155,7 +48210,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedCreateNestedOneWithoutUserInput
     bibliothecaire?: BibliothecaireUncheckedCreateNestedOneWithoutUserInput
     administrateur?: AdministrateurUncheckedCreateNestedOneWithoutUserInput
-    sanctions?: SanctionUtilisateurUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutJournalAuditInput = {
@@ -50203,7 +48257,6 @@ export namespace Prisma {
     enseignant?: EnseignantUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutJournalAuditInput = {
@@ -50235,7 +48288,6 @@ export namespace Prisma {
     enseignant?: EnseignantUncheckedUpdateOneWithoutUserNestedInput
     bibliothecaire?: BibliothecaireUncheckedUpdateOneWithoutUserNestedInput
     administrateur?: AdministrateurUncheckedUpdateOneWithoutUserNestedInput
-    sanctions?: SanctionUtilisateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type EmpruntExemplaireCreateManyExemplaireInput = {
@@ -50286,18 +48338,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SanctionUtilisateurCreateManyEmpruntInput = {
-    id?: string
-    userId: string
-    typeRestriction: $Enums.TypeSanction
-    dateDebut?: Date | string
-    dateFin: Date | string
-    motif: string
-    estActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type EmpruntExemplaireCreateManyEmpruntInput = {
     id?: string
     exemplaireId: string
@@ -50308,42 +48348,6 @@ export namespace Prisma {
     commentaire?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-  }
-
-  export type SanctionUtilisateurUpdateWithoutEmpruntInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    typeRestriction?: EnumTypeSanctionFieldUpdateOperationsInput | $Enums.TypeSanction
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    motif?: StringFieldUpdateOperationsInput | string
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutSanctionsNestedInput
-  }
-
-  export type SanctionUtilisateurUncheckedUpdateWithoutEmpruntInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    typeRestriction?: EnumTypeSanctionFieldUpdateOperationsInput | $Enums.TypeSanction
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    motif?: StringFieldUpdateOperationsInput | string
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    typeRestriction?: EnumTypeSanctionFieldUpdateOperationsInput | $Enums.TypeSanction
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    motif?: StringFieldUpdateOperationsInput | string
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmpruntExemplaireUpdateWithoutEmpruntInput = {
@@ -50729,11 +48733,10 @@ export namespace Prisma {
 
   export type NotationCreateManyUserInput = {
     id?: string
+    externUserId?: string | null
+    universiteUser?: string | null
     ressourceId: string
     note: number
-    dateNotation?: Date | string
-    universiteSrc?: string | null
-    universiteUser?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -50761,6 +48764,7 @@ export namespace Prisma {
     dateEmprunt?: Date | string
     dateRetourPrevue: Date | string
     dateRetourEffective?: Date | string | null
+    renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
     createdAt?: Date | string
@@ -50809,18 +48813,6 @@ export namespace Prisma {
     dateCreation?: Date | string
     estLue?: boolean
     typeNotification: $Enums.TypeNotification
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SanctionUtilisateurCreateManyUserInput = {
-    id?: string
-    typeRestriction: $Enums.TypeSanction
-    dateDebut?: Date | string
-    dateFin: Date | string
-    motif: string
-    empruntId?: string | null
-    estActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -50972,10 +48964,9 @@ export namespace Prisma {
 
   export type NotationUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    note?: IntFieldUpdateOperationsInput | number
-    dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ressource?: RessourceUpdateOneRequiredWithoutNotationsNestedInput
@@ -50983,22 +48974,20 @@ export namespace Prisma {
 
   export type NotationUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     ressourceId?: StringFieldUpdateOperationsInput | string
     note?: IntFieldUpdateOperationsInput | number
-    dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotationUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     ressourceId?: StringFieldUpdateOperationsInput | string
     note?: IntFieldUpdateOperationsInput | number
-    dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
-    universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -51062,11 +49051,11 @@ export namespace Prisma {
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    SanctionUtilisateur?: SanctionUtilisateurUpdateManyWithoutEmpruntNestedInput
     empruntExemplaires?: EmpruntExemplaireUpdateManyWithoutEmpruntNestedInput
   }
 
@@ -51076,11 +49065,11 @@ export namespace Prisma {
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    SanctionUtilisateur?: SanctionUtilisateurUncheckedUpdateManyWithoutEmpruntNestedInput
     empruntExemplaires?: EmpruntExemplaireUncheckedUpdateManyWithoutEmpruntNestedInput
   }
 
@@ -51090,6 +49079,7 @@ export namespace Prisma {
     dateEmprunt?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourPrevue?: DateTimeFieldUpdateOperationsInput | Date | string
     dateRetourEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -51234,42 +49224,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SanctionUtilisateurUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    typeRestriction?: EnumTypeSanctionFieldUpdateOperationsInput | $Enums.TypeSanction
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    motif?: StringFieldUpdateOperationsInput | string
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emprunt?: EmpruntUpdateOneWithoutSanctionUtilisateurNestedInput
-  }
-
-  export type SanctionUtilisateurUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    typeRestriction?: EnumTypeSanctionFieldUpdateOperationsInput | $Enums.TypeSanction
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    motif?: StringFieldUpdateOperationsInput | string
-    empruntId?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SanctionUtilisateurUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    typeRestriction?: EnumTypeSanctionFieldUpdateOperationsInput | $Enums.TypeSanction
-    dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateFin?: DateTimeFieldUpdateOperationsInput | Date | string
-    motif?: StringFieldUpdateOperationsInput | string
-    empruntId?: NullableStringFieldUpdateOperationsInput | string | null
-    estActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type CollectionRessourceCreateManyCollectionInput = {
     id?: string
     ressourceId: string
@@ -51329,10 +49283,9 @@ export namespace Prisma {
   export type NotationCreateManyRessourceInput = {
     id?: string
     userId?: string | null
-    note: number
-    dateNotation?: Date | string
-    universiteSrc?: string | null
+    externUserId?: string | null
     universiteUser?: string | null
+    note: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -51441,10 +49394,9 @@ export namespace Prisma {
 
   export type NotationUpdateWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
-    note?: IntFieldUpdateOperationsInput | number
-    dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutNotationsNestedInput
@@ -51453,10 +49405,9 @@ export namespace Prisma {
   export type NotationUncheckedUpdateWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
-    dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -51464,10 +49415,9 @@ export namespace Prisma {
   export type NotationUncheckedUpdateManyWithoutRessourceInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
-    dateNotation?: DateTimeFieldUpdateOperationsInput | Date | string
-    universiteSrc?: NullableStringFieldUpdateOperationsInput | string | null
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     universiteUser?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

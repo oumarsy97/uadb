@@ -219,6 +219,7 @@ export class EmprunteService {
    * Obtenir un emprunt par ID
    */
   async getEmpruntById(id: string) {
+    console.log('ID de l\'emprunt:', id);
     const emprunt = await this.prisma.emprunt.findUnique({
       where: { id },
       include: {

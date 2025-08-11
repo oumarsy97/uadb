@@ -46,6 +46,7 @@ export class RessourcesService {
 
       // Gestion de la catégorie - utiliser directement categorieId s'il est fourni
       let categorieId = createRessourceDto.categorieId;
+      console.log('ID de la catégorie:', categorieId);
       
       if (!categorieId) {
         this.logger.log('Aucune catégorie spécifiée, utilisation de la catégorie par défaut');
@@ -69,6 +70,7 @@ export class RessourcesService {
 
       // Préparer l'objet data avec tous les champs du modèle
       const data: Prisma.RessourceCreateInput = {
+        id: createRessourceDto.id,
         titre: createRessourceDto.titre,
         isbnglobale,
         description: createRessourceDto.description,
@@ -190,6 +192,7 @@ export class RessourcesService {
         orderBy: { [orderBy]: orderDirection },
         include: {
           favoris: true,
+          notations: true,
           auteur: {
             select: {
               id: true,
@@ -289,7 +292,6 @@ export class RessourcesService {
           notations: {
             select: {
               note: true,
-              dateNotation: true,
               userId: true,
             }
           },

@@ -45,6 +45,7 @@ export class ExemplairePhysiqueService {
 
       // Gérer la ressource : créer la ressource avec la logique d'auteur
       const ressource = await this.ressourcesService.create({
+        id: createExemplairePhysiqueDto.id,
         titre: createExemplairePhysiqueDto.titre,
         description: createExemplairePhysiqueDto.description,
         langue: createExemplairePhysiqueDto.langue || 'fr',
@@ -481,6 +482,36 @@ export class ExemplairePhysiqueService {
     } catch (error) {
       this.logger.error(`Erreur lors de la vérification de disponibilité de l'exemplaire physique ${id}: ${error.message}`);
       return false;
+    }
+  }
+   // Méthode pour recuperer les disponibles
+  async findDisponibles() {
+    try {
+      const exemplaires = await this.prisma.exemplairePhysique.findMany({
+        where: {
+          nombreDisponible: {
+            gt: 0, // Plus de 0 exemplaires disponibles
+          },
+        },
+        include: {
+          ressource: {
+            select: {
+              id: true,
+              titre: true,
+              nomAuteur: true,
+            }
+          }
+        },
+      });
+
+      if (exemplaires.length === 0) {
+        throw new NotFoundException(`Aucun exemplaire physique disponible pour la ressource `);
+      }
+
+      return exemplaires;
+    } catch (error) {
+      this.logger.error(`Erreur lors de la récupération des exemplaires disponibles pour la ressource : ${error.message}`);
+      throw error;
     }
   }
 
