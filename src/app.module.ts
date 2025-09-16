@@ -26,6 +26,7 @@ import { ReglePretModule } from './regle-pret/regle-pret.module';
 import { AdministrateurModule } from './administrateur/administrateur.module';
 import { EnseignantModule } from './enseignant/enseignant.module';
 import { BibliothecaireModule } from './bibliothecaire/bibliothecaire.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -52,7 +53,7 @@ import { BibliothecaireModule } from './bibliothecaire/bibliothecaire.module';
     EnseignantModule,
     BibliothecaireModule,
     ScheduleModule.forRoot(), // Ajoutez cette ligne
-    TasksModule, // Ajoutez cette ligne
+    TasksModule, DashboardModule, // Ajoutez cette ligne
   ],
   controllers: [AppController],
   providers: [AppService,],

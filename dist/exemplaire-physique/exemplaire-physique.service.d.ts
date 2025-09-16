@@ -10,18 +10,12 @@ export declare class ExemplairePhysiqueService {
     constructor(prisma: PrismaService, ressourcesService: RessourcesService);
     create(createExemplairePhysiqueDto: CreateExemplairePhysiqueDto, userId: string): Promise<{
         ressource: {
-            categorie: {
-                id: string;
-                libelle: string;
-            } | null;
             id: string;
             titre: string;
             isbnglobale: string;
             nomAuteur: string | null;
             auteur: {
                 id: string;
-                createdAt: Date;
-                updatedAt: Date;
                 email: string;
                 motDePasse: string;
                 nom: string;
@@ -31,12 +25,20 @@ export declare class ExemplairePhysiqueService {
                 role: import("generated/prisma").$Enums.RoleUser;
                 derniereConnexion: Date | null;
                 estActif: boolean;
+                createdAt: Date;
+                updatedAt: Date;
                 preferencesRecommandation: string | null;
                 frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
+            } | null;
+            categorie: {
+                id: string;
+                libelle: string;
             } | null;
         };
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ressourceId: string;
         etat: import("generated/prisma").$Enums.EtatExemplaire;
         localisation: string;
@@ -44,16 +46,13 @@ export declare class ExemplairePhysiqueService {
         qrCode: string | null;
         nombre: number;
         nombreDisponible: number;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     findAll(options?: SearchExemplairePhysiqueDto): Promise<{
         data: ({
+            _count: {
+                empruntExemplaires: number;
+            };
             ressource: {
-                categorie: {
-                    id: string;
-                    libelle: string;
-                } | null;
                 id: string;
                 image: string | null;
                 titre: string;
@@ -65,12 +64,15 @@ export declare class ExemplairePhysiqueService {
                     prenom: string;
                     role: import("generated/prisma").$Enums.RoleUser;
                 } | null;
-            };
-            _count: {
-                empruntExemplaires: number;
+                categorie: {
+                    id: string;
+                    libelle: string;
+                } | null;
             };
         } & {
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             ressourceId: string;
             etat: import("generated/prisma").$Enums.EtatExemplaire;
             localisation: string;
@@ -78,8 +80,6 @@ export declare class ExemplairePhysiqueService {
             qrCode: string | null;
             nombre: number;
             nombreDisponible: number;
-            createdAt: Date;
-            updatedAt: Date;
         })[];
         meta: {
             total: number;
@@ -89,23 +89,26 @@ export declare class ExemplairePhysiqueService {
         };
     }>;
     findOne(id: string): Promise<{
+        _count: {
+            empruntExemplaires: number;
+        };
         ressource: {
-            categorie: {
-                id: string;
-                description: string | null;
-                libelle: string;
-            } | null;
             auteur: {
                 id: string;
                 nom: string;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
             } | null;
+            categorie: {
+                id: string;
+                description: string | null;
+                libelle: string;
+            } | null;
         } & {
             id: string;
+            image: string | null;
             createdAt: Date;
             updatedAt: Date;
-            image: string | null;
             titre: string;
             isbnglobale: string;
             description: string;
@@ -132,34 +135,35 @@ export declare class ExemplairePhysiqueService {
                     prenom: string;
                 } | null;
             } & {
+                userId: string | null;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                exemplaireId: string;
-                userId: string | null;
                 dateEmprunt: Date;
+                exemplaireId: string;
                 dateRetourPrevue: Date;
                 dateRetourEffective: Date | null;
                 statut: import("generated/prisma").$Enums.StatutEmprunt;
+                renouvellement: number;
                 universiteEmprunteur: string;
+                externUserId: string | null;
             };
         } & {
-            commentaire: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            exemplaireId: string;
             dateEmprunt: Date;
+            empruntId: string;
+            exemplaireId: string;
             dateRetourPrevue: Date;
             dateRetourEffective: Date | null;
             statut: import("generated/prisma").$Enums.StatutEmprunt;
-            empruntId: string;
+            commentaire: string | null;
         })[];
-        _count: {
-            empruntExemplaires: number;
-        };
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ressourceId: string;
         etat: import("generated/prisma").$Enums.EtatExemplaire;
         localisation: string;
@@ -167,15 +171,9 @@ export declare class ExemplairePhysiqueService {
         qrCode: string | null;
         nombre: number;
         nombreDisponible: number;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     update(id: string, updateExemplairePhysiqueDto: UpdateExemplairePhysiqueDto): Promise<{
         ressource: {
-            categorie: {
-                id: string;
-                libelle: string;
-            } | null;
             id: string;
             titre: string;
             isbnglobale: string;
@@ -186,9 +184,15 @@ export declare class ExemplairePhysiqueService {
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
             } | null;
+            categorie: {
+                id: string;
+                libelle: string;
+            } | null;
         };
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ressourceId: string;
         etat: import("generated/prisma").$Enums.EtatExemplaire;
         localisation: string;
@@ -196,8 +200,6 @@ export declare class ExemplairePhysiqueService {
         qrCode: string | null;
         nombre: number;
         nombreDisponible: number;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     remove(id: string): Promise<{
         id: string;
@@ -205,11 +207,10 @@ export declare class ExemplairePhysiqueService {
     }>;
     findByRessource(ressourceId: string, options?: SearchExemplairePhysiqueDto): Promise<{
         data: ({
+            _count: {
+                empruntExemplaires: number;
+            };
             ressource: {
-                categorie: {
-                    id: string;
-                    libelle: string;
-                } | null;
                 id: string;
                 image: string | null;
                 titre: string;
@@ -221,12 +222,15 @@ export declare class ExemplairePhysiqueService {
                     prenom: string;
                     role: import("generated/prisma").$Enums.RoleUser;
                 } | null;
-            };
-            _count: {
-                empruntExemplaires: number;
+                categorie: {
+                    id: string;
+                    libelle: string;
+                } | null;
             };
         } & {
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             ressourceId: string;
             etat: import("generated/prisma").$Enums.EtatExemplaire;
             localisation: string;
@@ -234,8 +238,6 @@ export declare class ExemplairePhysiqueService {
             qrCode: string | null;
             nombre: number;
             nombreDisponible: number;
-            createdAt: Date;
-            updatedAt: Date;
         })[];
         meta: {
             total: number;
@@ -246,21 +248,21 @@ export declare class ExemplairePhysiqueService {
     }>;
     findByQRCode(qrCode: string): Promise<{
         ressource: {
-            categorie: {
-                id: string;
-                libelle: string;
-            } | null;
             auteur: {
                 id: string;
                 nom: string;
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
             } | null;
+            categorie: {
+                id: string;
+                libelle: string;
+            } | null;
         } & {
             id: string;
+            image: string | null;
             createdAt: Date;
             updatedAt: Date;
-            image: string | null;
             titre: string;
             isbnglobale: string;
             description: string;
@@ -281,6 +283,8 @@ export declare class ExemplairePhysiqueService {
         };
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ressourceId: string;
         etat: import("generated/prisma").$Enums.EtatExemplaire;
         localisation: string;
@@ -288,8 +292,6 @@ export declare class ExemplairePhysiqueService {
         qrCode: string | null;
         nombre: number;
         nombreDisponible: number;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     updateDisponibilite(id: string, quantite: number): Promise<{
         ressource: {
@@ -299,6 +301,8 @@ export declare class ExemplairePhysiqueService {
         };
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ressourceId: string;
         etat: import("generated/prisma").$Enums.EtatExemplaire;
         localisation: string;
@@ -306,10 +310,26 @@ export declare class ExemplairePhysiqueService {
         qrCode: string | null;
         nombre: number;
         nombreDisponible: number;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     isDisponible(id: string, quantiteDemandee?: number): Promise<boolean>;
+    findDisponibles(): Promise<({
+        ressource: {
+            id: string;
+            titre: string;
+            nomAuteur: string | null;
+        };
+    } & {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        ressourceId: string;
+        etat: import("generated/prisma").$Enums.EtatExemplaire;
+        localisation: string;
+        dateAcquisition: Date | null;
+        qrCode: string | null;
+        nombre: number;
+        nombreDisponible: number;
+    })[]>;
     getStatistiques(ressourceId?: string): Promise<{
         totalExemplaires: number;
         totalStock: number;
@@ -327,6 +347,8 @@ export declare class ExemplairePhysiqueService {
         };
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ressourceId: string;
         etat: import("generated/prisma").$Enums.EtatExemplaire;
         localisation: string;
@@ -334,16 +356,10 @@ export declare class ExemplairePhysiqueService {
         qrCode: string | null;
         nombre: number;
         nombreDisponible: number;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     private generateQRCode;
     toggleDisponibilite(id: string): Prisma.Prisma__ExemplairePhysiqueClient<{
         ressource: {
-            categorie: {
-                id: string;
-                libelle: string;
-            } | null;
             id: string;
             titre: string;
             nomAuteur: string | null;
@@ -353,9 +369,15 @@ export declare class ExemplairePhysiqueService {
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
             } | null;
+            categorie: {
+                id: string;
+                libelle: string;
+            } | null;
         };
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ressourceId: string;
         etat: import("generated/prisma").$Enums.EtatExemplaire;
         localisation: string;
@@ -363,15 +385,9 @@ export declare class ExemplairePhysiqueService {
         qrCode: string | null;
         nombre: number;
         nombreDisponible: number;
-        createdAt: Date;
-        updatedAt: Date;
     }, never, import("generated/prisma/runtime/library").DefaultArgs, Prisma.PrismaClientOptions>;
     findByLocalisation(localisation: string): Promise<({
         ressource: {
-            categorie: {
-                id: string;
-                libelle: string;
-            } | null;
             id: string;
             titre: string;
             isbnglobale: string;
@@ -382,9 +398,15 @@ export declare class ExemplairePhysiqueService {
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
             } | null;
+            categorie: {
+                id: string;
+                libelle: string;
+            } | null;
         };
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ressourceId: string;
         etat: import("generated/prisma").$Enums.EtatExemplaire;
         localisation: string;
@@ -392,15 +414,9 @@ export declare class ExemplairePhysiqueService {
         qrCode: string | null;
         nombre: number;
         nombreDisponible: number;
-        createdAt: Date;
-        updatedAt: Date;
     })[]>;
     findByEtat(etat: EtatExemplaire): Promise<({
         ressource: {
-            categorie: {
-                id: string;
-                libelle: string;
-            } | null;
             id: string;
             titre: string;
             isbnglobale: string;
@@ -411,9 +427,15 @@ export declare class ExemplairePhysiqueService {
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
             } | null;
+            categorie: {
+                id: string;
+                libelle: string;
+            } | null;
         };
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ressourceId: string;
         etat: import("generated/prisma").$Enums.EtatExemplaire;
         localisation: string;
@@ -421,15 +443,9 @@ export declare class ExemplairePhysiqueService {
         qrCode: string | null;
         nombre: number;
         nombreDisponible: number;
-        createdAt: Date;
-        updatedAt: Date;
     })[]>;
     findByRessourceAndEtat(ressourceId: string, etat: EtatExemplaire): Promise<({
         ressource: {
-            categorie: {
-                id: string;
-                libelle: string;
-            } | null;
             id: string;
             titre: string;
             isbnglobale: string;
@@ -440,9 +456,15 @@ export declare class ExemplairePhysiqueService {
                 prenom: string;
                 role: import("generated/prisma").$Enums.RoleUser;
             } | null;
+            categorie: {
+                id: string;
+                libelle: string;
+            } | null;
         };
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         ressourceId: string;
         etat: import("generated/prisma").$Enums.EtatExemplaire;
         localisation: string;
@@ -450,7 +472,5 @@ export declare class ExemplairePhysiqueService {
         qrCode: string | null;
         nombre: number;
         nombreDisponible: number;
-        createdAt: Date;
-        updatedAt: Date;
     })[]>;
 }

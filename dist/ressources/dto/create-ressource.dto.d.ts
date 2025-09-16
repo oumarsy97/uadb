@@ -19,6 +19,7 @@ export declare class CreateRessourceDto {
     auteurId: string;
     categorieId: string;
     estArchive?: boolean;
+    id: string;
 }
 export declare class UpdateRessourceDto {
     titre?: string;

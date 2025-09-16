@@ -33,6 +33,7 @@ class CreateRessourceDto {
     auteurId;
     categorieId;
     estArchive = false;
+    id;
 }
 exports.CreateRessourceDto = CreateRessourceDto;
 __decorate([

@@ -2,10 +2,36 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { UtilisateursService } from './utilisateurs.service';
 import { CreateUtilisateurDto, LoginDataDto } from './dto/create-utilisateur.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller()
 export class UtilisateursController {
-  constructor(private readonly utilisateursService: UtilisateursService) {}
+  constructor(private readonly utilisateursService: UtilisateursService,
+    private readonly jwtService: JwtService
+  ) {}
+/**
+   * Extrait l'ID utilisateur depuis le token JWT
+   * @param token - Le token JWT
+   * @returns L'ID de l'utilisateur
+   */
+  private extractUserIdFromToken(token: string): string {
+    try {
+      // Enlever le préfixe "Bearer " s'il existe
+      const cleanToken = token.replace(/^Bearer\s+/, '');
+      
+      // Décoder le token
+      const payload = this.jwtService.decode(cleanToken) as any;
+      
+      if (!payload || !payload.sub && !payload.id && !payload.userId) {
+        throw new Error('Token invalide: ID utilisateur non trouvé');
+      }
+      
+      // Retourner l'ID utilisateur (peut être dans sub, id, ou userId selon votre implémentation)
+      return payload.sub || payload.id || payload.userId;
+    } catch (error) {
+      throw new Error(`Erreur lors de l'extraction de l'ID utilisateur: ${error.message}`);
+    }
+  }
 
   @MessagePattern('createUtilisateur')
   async create(@Payload() createUtilisateurDto: CreateUtilisateurDto) {
@@ -62,5 +88,10 @@ export class UtilisateursController {
   @MessagePattern('updateDerniereConnexion')
   async updateDerniereConnexion(@Payload() data: { id: string }) {
     return this.utilisateursService.updateDerniereConnexion(data.id);
+  }
+  @MessagePattern('updateMotDePasse')
+  async updateMotDePasse(@Payload() data: { token: string; updateData: { motDePasse: string; confirmationMotDePasse: string } }) {
+    const userId = this.extractUserIdFromToken(data.token);
+    return this.utilisateursService.updateMotDePasse(userId, data.updateData);
   }
 }

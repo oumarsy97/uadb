@@ -9,22 +9,22 @@ export declare class FavorisController {
         createFavorisDto: CreateFavorisDto;
         token: string;
     }): Promise<{
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     }>;
     findAll(): Promise<{
         isRessourceExternal: boolean;
         resourceId: string | null;
         ressourceInfo: {
             id: string;
+            image: string | null;
             createdAt: Date;
             updatedAt: Date;
-            image: string | null;
             titre: string;
             isbnglobale: string;
             description: string;
@@ -53,9 +53,9 @@ export declare class FavorisController {
         } | null;
         ressource: {
             id: string;
+            image: string | null;
             createdAt: Date;
             updatedAt: Date;
-            image: string | null;
             titre: string;
             isbnglobale: string;
             description: string;
@@ -74,13 +74,13 @@ export declare class FavorisController {
             noteMoyenne: number;
             categorieId: string;
         } | null;
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     }[]>;
     findOne(id: string): import("generated/prisma").Prisma.Prisma__FavoriClient<({
         user: {
@@ -89,9 +89,9 @@ export declare class FavorisController {
         } | null;
         ressource: {
             id: string;
+            image: string | null;
             createdAt: Date;
             updatedAt: Date;
-            image: string | null;
             titre: string;
             isbnglobale: string;
             description: string;
@@ -111,37 +111,37 @@ export declare class FavorisController {
             categorieId: string;
         } | null;
     } & {
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     }) | null, null, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     update(data: {
         updateFavorisDto: UpdateFavorisDto;
         token: string;
     }): Promise<{
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     }>;
     remove(data: {
         id: string;
         token: string;
     }): Promise<{
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     }>;
     mesFavoris(data: {
         token: string;
@@ -151,9 +151,9 @@ export declare class FavorisController {
             resourceId: string | null;
             ressourceData: {
                 id: string;
+                image: string | null;
                 createdAt: Date;
                 updatedAt: Date;
-                image: string | null;
                 titre: string;
                 isbnglobale: string;
                 description: string;
@@ -175,8 +175,6 @@ export declare class FavorisController {
             isLocal: boolean;
             user: {
                 id: string;
-                createdAt: Date;
-                updatedAt: Date;
                 email: string;
                 motDePasse: string;
                 nom: string;
@@ -186,14 +184,16 @@ export declare class FavorisController {
                 role: import("generated/prisma").$Enums.RoleUser;
                 derniereConnexion: Date | null;
                 estActif: boolean;
+                createdAt: Date;
+                updatedAt: Date;
                 preferencesRecommandation: string | null;
                 frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
             } | null;
             ressource: {
                 id: string;
+                image: string | null;
                 createdAt: Date;
                 updatedAt: Date;
-                image: string | null;
                 titre: string;
                 isbnglobale: string;
                 description: string;
@@ -212,13 +212,13 @@ export declare class FavorisController {
                 noteMoyenne: number;
                 categorieId: string;
             } | null;
+            userId: string;
             id: string;
-            ressourceId: string | null;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
-            universiteRess: string | null;
+            ressourceId: string | null;
             externalRessourceId: string | null;
+            universiteRess: string | null;
         }[];
         favorisExternes: {
             type: string;
@@ -231,8 +231,6 @@ export declare class FavorisController {
             sourceUniversite: string | null;
             user: {
                 id: string;
-                createdAt: Date;
-                updatedAt: Date;
                 email: string;
                 motDePasse: string;
                 nom: string;
@@ -242,14 +240,16 @@ export declare class FavorisController {
                 role: import("generated/prisma").$Enums.RoleUser;
                 derniereConnexion: Date | null;
                 estActif: boolean;
+                createdAt: Date;
+                updatedAt: Date;
                 preferencesRecommandation: string | null;
                 frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
             } | null;
             ressource: {
                 id: string;
+                image: string | null;
                 createdAt: Date;
                 updatedAt: Date;
-                image: string | null;
                 titre: string;
                 isbnglobale: string;
                 description: string;
@@ -268,13 +268,13 @@ export declare class FavorisController {
                 noteMoyenne: number;
                 categorieId: string;
             } | null;
+            userId: string;
             id: string;
-            ressourceId: string | null;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
-            universiteRess: string | null;
+            ressourceId: string | null;
             externalRessourceId: string | null;
+            universiteRess: string | null;
         }[];
         total: number;
     }>;

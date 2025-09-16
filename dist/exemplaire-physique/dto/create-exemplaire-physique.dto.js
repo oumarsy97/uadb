@@ -29,6 +29,7 @@ class CreateExemplairePhysiqueDto {
     localisation;
     nombre;
     nomAuteur;
+    id;
 }
 exports.CreateExemplairePhysiqueDto = CreateExemplairePhysiqueDto;
 __decorate([

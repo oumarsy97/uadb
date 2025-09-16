@@ -10,13 +10,15 @@ exports.NotationsModule = void 0;
 const common_1 = require("@nestjs/common");
 const notations_controller_1 = require("./notations.controller");
 const notations_service_1 = require("./notations.service");
+const jwt_1 = require("@nestjs/jwt");
+const prisma_service_1 = require("../../prisma/prisma.service");
 let NotationsModule = class NotationsModule {
 };
 exports.NotationsModule = NotationsModule;
 exports.NotationsModule = NotationsModule = __decorate([
     (0, common_1.Module)({
         controllers: [notations_controller_1.NotationsController],
-        providers: [notations_service_1.NotationsService]
+        providers: [notations_service_1.NotationsService, jwt_1.JwtService, prisma_service_1.PrismaService]
     })
 ], NotationsModule);
 //# sourceMappingURL=notations.module.js.map

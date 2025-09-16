@@ -4,13 +4,13 @@ export declare class FavorisService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);
     create(createFavorisDto: CreateFavorisDto): Promise<{
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     }>;
     findAllByUser(userId: string): Promise<{
         favorisLocaux: {
@@ -18,9 +18,9 @@ export declare class FavorisService {
             resourceId: string | null;
             ressourceData: {
                 id: string;
+                image: string | null;
                 createdAt: Date;
                 updatedAt: Date;
-                image: string | null;
                 titre: string;
                 isbnglobale: string;
                 description: string;
@@ -42,8 +42,6 @@ export declare class FavorisService {
             isLocal: boolean;
             user: {
                 id: string;
-                createdAt: Date;
-                updatedAt: Date;
                 email: string;
                 motDePasse: string;
                 nom: string;
@@ -53,14 +51,16 @@ export declare class FavorisService {
                 role: import("generated/prisma").$Enums.RoleUser;
                 derniereConnexion: Date | null;
                 estActif: boolean;
+                createdAt: Date;
+                updatedAt: Date;
                 preferencesRecommandation: string | null;
                 frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
             } | null;
             ressource: {
                 id: string;
+                image: string | null;
                 createdAt: Date;
                 updatedAt: Date;
-                image: string | null;
                 titre: string;
                 isbnglobale: string;
                 description: string;
@@ -79,13 +79,13 @@ export declare class FavorisService {
                 noteMoyenne: number;
                 categorieId: string;
             } | null;
+            userId: string;
             id: string;
-            ressourceId: string | null;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
-            universiteRess: string | null;
+            ressourceId: string | null;
             externalRessourceId: string | null;
+            universiteRess: string | null;
         }[];
         favorisExternes: {
             type: string;
@@ -98,8 +98,6 @@ export declare class FavorisService {
             sourceUniversite: string | null;
             user: {
                 id: string;
-                createdAt: Date;
-                updatedAt: Date;
                 email: string;
                 motDePasse: string;
                 nom: string;
@@ -109,14 +107,16 @@ export declare class FavorisService {
                 role: import("generated/prisma").$Enums.RoleUser;
                 derniereConnexion: Date | null;
                 estActif: boolean;
+                createdAt: Date;
+                updatedAt: Date;
                 preferencesRecommandation: string | null;
                 frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
             } | null;
             ressource: {
                 id: string;
+                image: string | null;
                 createdAt: Date;
                 updatedAt: Date;
-                image: string | null;
                 titre: string;
                 isbnglobale: string;
                 description: string;
@@ -135,13 +135,13 @@ export declare class FavorisService {
                 noteMoyenne: number;
                 categorieId: string;
             } | null;
+            userId: string;
             id: string;
-            ressourceId: string | null;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
-            universiteRess: string | null;
+            ressourceId: string | null;
             externalRessourceId: string | null;
+            universiteRess: string | null;
         }[];
         total: number;
     }>;
@@ -150,9 +150,9 @@ export declare class FavorisService {
         resourceId: string | null;
         ressourceInfo: {
             id: string;
+            image: string | null;
             createdAt: Date;
             updatedAt: Date;
-            image: string | null;
             titre: string;
             isbnglobale: string;
             description: string;
@@ -181,9 +181,9 @@ export declare class FavorisService {
         } | null;
         ressource: {
             id: string;
+            image: string | null;
             createdAt: Date;
             updatedAt: Date;
-            image: string | null;
             titre: string;
             isbnglobale: string;
             description: string;
@@ -202,13 +202,13 @@ export declare class FavorisService {
             noteMoyenne: number;
             categorieId: string;
         } | null;
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     }[]>;
     isFavorite(userId: string, ressourceId: string, universiteRess?: string): Promise<boolean>;
     findByUniversite(universiteRess: string): Promise<({
@@ -218,9 +218,9 @@ export declare class FavorisService {
         } | null;
         ressource: {
             id: string;
+            image: string | null;
             createdAt: Date;
             updatedAt: Date;
-            image: string | null;
             titre: string;
             isbnglobale: string;
             description: string;
@@ -240,13 +240,13 @@ export declare class FavorisService {
             categorieId: string;
         } | null;
     } & {
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     })[]>;
     findExternalFavoris(): Promise<({
         user: {
@@ -254,13 +254,13 @@ export declare class FavorisService {
             email: string;
         } | null;
     } & {
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     })[]>;
     findLocalFavoris(): Promise<({
         user: {
@@ -269,9 +269,9 @@ export declare class FavorisService {
         } | null;
         ressource: {
             id: string;
+            image: string | null;
             createdAt: Date;
             updatedAt: Date;
-            image: string | null;
             titre: string;
             isbnglobale: string;
             description: string;
@@ -291,13 +291,13 @@ export declare class FavorisService {
             categorieId: string;
         } | null;
     } & {
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     })[]>;
     getStats(): Promise<{
         total: number;
@@ -315,9 +315,9 @@ export declare class FavorisService {
         } | null;
         ressource: {
             id: string;
+            image: string | null;
             createdAt: Date;
             updatedAt: Date;
-            image: string | null;
             titre: string;
             isbnglobale: string;
             description: string;
@@ -337,31 +337,31 @@ export declare class FavorisService {
             categorieId: string;
         } | null;
     } & {
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     }) | null, null, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     update(id: string, updateFavorisDto: UpdateFavorisDto): Promise<{
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     }>;
     remove(id: string): Promise<{
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     }>;
     removeAllByUser(userId: string): Promise<import("generated/prisma").Prisma.BatchPayload>;
     removeAllByRessource(ressourceId: string): Promise<import("generated/prisma").Prisma.BatchPayload>;
@@ -376,13 +376,13 @@ export declare class FavorisService {
             id: string;
             email: string;
         } | null;
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     }[]>;
     getFavoritesByExternalRessource(externalRessourceId: string, universiteRess: string): Promise<{
         userInfo: {
@@ -398,13 +398,13 @@ export declare class FavorisService {
             id: string;
             email: string;
         } | null;
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        universiteRess: string | null;
+        ressourceId: string | null;
         externalRessourceId: string | null;
+        universiteRess: string | null;
     }[]>;
     getResourceId(favori: any): string;
     isExternalFavorite(favori: any): boolean;

@@ -24,7 +24,7 @@ let EnseignantService = class EnseignantService {
         const numeroEnseignant = this.generateNumeroEnseignant();
         const user = await this.utilisateursService.create({
             email: createEnseignantDto.email,
-            motDePasse: createEnseignantDto.motDePasse,
+            motDePasse: 'MotDePasse123',
             nom: createEnseignantDto.nom,
             prenom: createEnseignantDto.prenom,
             image: createEnseignantDto.image,
@@ -96,6 +96,33 @@ let EnseignantService = class EnseignantService {
         return this.prismaService.enseignant.delete({
             where: { id },
         });
+    }
+    async findRessourcesByEnseignantId(enseignantId, options = {}) {
+        const { limit = 10, page = 1, search = '' } = options;
+        const skip = (page - 1) * limit;
+        const take = limit;
+        const result = await this.prismaService.ressource.findMany({
+            skip,
+            take,
+            where: {
+                auteurId: enseignantId,
+                OR: [
+                    { titre: { contains: search } },
+                    { description: { contains: search } },
+                ],
+            },
+            include: {
+                favoris: true
+            },
+        });
+        return {
+            meta: {
+                total: result.length,
+                skip,
+                take,
+            },
+            data: result
+        };
     }
     generateNumeroEnseignant() {
         const prefix = 'ENS';

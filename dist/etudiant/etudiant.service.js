@@ -59,6 +59,7 @@ let EtudiantService = class EtudiantService {
             const numeroEtudiant = await this.generatenumeroEtudiant();
             const etudiant = await this.prisma.etudiant.create({
                 data: {
+                    id: user.id,
                     userId: user.id,
                     codePermanent: numeroEtudiant,
                     dateNaissance: new Date(createEtudiantDto.dateNaissance),

@@ -138,6 +138,7 @@ model Emprunt {
   renouvellement Int @default(0)
   statut            StatutEmprunt   @default(EN_COURS)
   universiteEmprunteur String       @map("universite_emprunteur") // Université d'origine de l'emprunteur
+  externUserId      String?          @map("extern_user_id")
   user              User?            @relation(fields: [userId], references: [id])
   createdAt         DateTime       @default(now())
   updatedAt         DateTime       @updatedAt
@@ -416,6 +417,7 @@ model Notation {
   createdAt         DateTime       @default(now())
   updatedAt         DateTime       @updatedAt
   @@unique([userId, ressourceId])
+  @@unique([externUserId, ressourceId])
   @@index([ressourceId])
   @@index([universiteUser])
 }

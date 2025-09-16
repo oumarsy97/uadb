@@ -120,6 +120,12 @@ async create(createUtilisateurDto: CreateUtilisateurDto) {
         HttpStatus.UNAUTHORIZED,
       );
     }
+    if(!user.estActif){
+      return{
+        message:"votre compte est inactif veillez contacter votre administrateur pour plus d'information",
+        data:null,
+      }
+    }
 
     // Mettre à jour la dernière connexion
     await this.updateDerniereConnexion(user.id);
@@ -259,6 +265,10 @@ async create(createUtilisateurDto: CreateUtilisateurDto) {
       where,
       skip,
       take: validLimit, // Utiliser la valeur numérique validée
+      include: {
+       etudiant: true,
+       enseignant: true,
+      },
     }),
     this.prisma.user.count({ where }),
   ]);
@@ -279,6 +289,12 @@ async create(createUtilisateurDto: CreateUtilisateurDto) {
   async findOne(id: string) {
     const user = await this.prisma.user.findUnique({
       where: { id },
+      include: {
+        etudiant: true,
+        enseignant: true,
+        bibliothecaire: true,
+        administrateur: true,
+      },
     });
 
     if (!user) {
@@ -370,6 +386,20 @@ async create(createUtilisateurDto: CreateUtilisateurDto) {
     return this.prisma.user.update({
       where: { id },
       data: { derniereConnexion: new Date() },
+    });
+  }
+
+  //modifier mot de passe avec confirmation
+  async updateMotDePasse(id: string, updateData: { motDePasse: string; confirmationMotDePasse: string }) {
+    if (updateData.motDePasse !== updateData.confirmationMotDePasse) {
+      throw new HttpException('Les mots de passe ne correspondent pas.', HttpStatus.BAD_REQUEST);
+    }
+
+    const hashedPassword = await bcrypt.hash(updateData.motDePasse, 10);
+
+    return this.prisma.user.update({
+      where: { id },
+      data: { motDePasse: hashedPassword },
     });
   }
 }

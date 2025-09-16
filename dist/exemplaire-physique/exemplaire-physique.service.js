@@ -44,6 +44,7 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
                 finalNomAuteur = createExemplairePhysiqueDto.nomAuteur || `${userExists.prenom} ${userExists.nom}`;
             }
             const ressource = await this.ressourcesService.create({
+                id: createExemplairePhysiqueDto.id,
                 titre: createExemplairePhysiqueDto.titre,
                 description: createExemplairePhysiqueDto.description,
                 langue: createExemplairePhysiqueDto.langue || 'fr',
@@ -420,6 +421,34 @@ let ExemplairePhysiqueService = ExemplairePhysiqueService_1 = class ExemplairePh
         catch (error) {
             this.logger.error(`Erreur lors de la vérification de disponibilité de l'exemplaire physique ${id}: ${error.message}`);
             return false;
+        }
+    }
+    async findDisponibles() {
+        try {
+            const exemplaires = await this.prisma.exemplairePhysique.findMany({
+                where: {
+                    nombreDisponible: {
+                        gt: 0,
+                    },
+                },
+                include: {
+                    ressource: {
+                        select: {
+                            id: true,
+                            titre: true,
+                            nomAuteur: true,
+                        }
+                    }
+                },
+            });
+            if (exemplaires.length === 0) {
+                throw new common_1.NotFoundException(`Aucun exemplaire physique disponible pour la ressource `);
+            }
+            return exemplaires;
+        }
+        catch (error) {
+            this.logger.error(`Erreur lors de la récupération des exemplaires disponibles pour la ressource : ${error.message}`);
+            throw error;
         }
     }
     async getStatistiques(ressourceId) {

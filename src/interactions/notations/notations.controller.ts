@@ -8,9 +8,9 @@ interface CreateNotationPayload {
   ressourceId: string;
   note: number;
   universite: string;
+  universiteUser?: string;
   // Pour les utilisateurs externes
   externUserId?: string;
-  universiteUser?: string;
 }
 
 interface GetNotationsByRessourcePayload {
@@ -80,7 +80,9 @@ export class NotationsController {
   @MessagePattern('notation.create')
   async createNotation(@Payload() data: CreateNotationPayload) {
     this.logger.log(`Création d'une notation pour la ressource ${data.ressourceId}`);
-    
+    console.log(
+      `Données de notation reçues: ${JSON.stringify(data)}`
+    )
     try {
       // Pour les utilisateurs internes (avec token)
       if (data.token) {
@@ -89,7 +91,8 @@ export class NotationsController {
           userId,
           ressourceId: data.ressourceId,
           note: data.note,
-          universite: data.universite
+          universite: data.universite,
+          universiteUser: data.universiteUser, // Pour les utilisateurs externes
         });
         return result;
       }

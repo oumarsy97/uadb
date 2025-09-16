@@ -62,6 +62,7 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
             }
             const isbnglobale = await this.generateIsbnCode();
             const data = {
+                id: createRessourceDto.id,
                 titre: createRessourceDto.titre,
                 isbnglobale,
                 description: createRessourceDto.description,
@@ -164,6 +165,7 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                 orderBy: { [orderBy]: orderDirection },
                 include: {
                     favoris: true,
+                    notations: true,
                     auteur: {
                         select: {
                             id: true,
@@ -255,10 +257,10 @@ let RessourcesService = RessourcesService_1 = class RessourcesService {
                     notations: {
                         select: {
                             note: true,
-                            dateNotation: true,
                             userId: true,
                         }
                     },
+                    favoris: true,
                     _count: {
                         select: {
                             commentaires: true,

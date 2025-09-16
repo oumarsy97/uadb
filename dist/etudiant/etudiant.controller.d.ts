@@ -9,39 +9,6 @@ export declare class EtudiantController {
         message: string;
         data: {
             ufrId: any;
-            filiere: {
-                departement: {
-                    ufr: {
-                        universite: {
-                            id: string;
-                            nom: string;
-                        };
-                    } & {
-                        id: string;
-                        createdAt: Date;
-                        updatedAt: Date;
-                        nom: string;
-                        description: string | null;
-                        universiteId: string;
-                    };
-                } & {
-                    id: string;
-                    createdAt: Date;
-                    updatedAt: Date;
-                    nom: string;
-                    description: string | null;
-                    ufrId: string;
-                    responsable: string | null;
-                };
-            } & {
-                id: string;
-                createdAt: Date;
-                updatedAt: Date;
-                nom: string;
-                description: string | null;
-                niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-                departementId: string;
-            };
             user: {
                 id: string;
                 email: string;
@@ -51,13 +18,46 @@ export declare class EtudiantController {
                 role: import("generated/prisma").$Enums.RoleUser;
                 estActif: boolean;
             };
+            filiere: {
+                departement: {
+                    ufr: {
+                        universite: {
+                            id: string;
+                            nom: string;
+                        };
+                    } & {
+                        id: string;
+                        nom: string;
+                        createdAt: Date;
+                        updatedAt: Date;
+                        description: string | null;
+                        universiteId: string;
+                    };
+                } & {
+                    id: string;
+                    nom: string;
+                    createdAt: Date;
+                    updatedAt: Date;
+                    description: string | null;
+                    ufrId: string;
+                    responsable: string | null;
+                };
+            } & {
+                id: string;
+                nom: string;
+                createdAt: Date;
+                updatedAt: Date;
+                description: string | null;
+                niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
+                departementId: string;
+            };
+            userId: string;
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
             dateNaissance: Date;
-            filiereId: string;
             codePermanent: string;
+            filiereId: string;
         };
     } | {
         success: boolean;
@@ -76,15 +76,6 @@ export declare class EtudiantController {
     }): Promise<{
         success: boolean;
         data: ({
-            filiere: {
-                id: string;
-                createdAt: Date;
-                updatedAt: Date;
-                nom: string;
-                description: string | null;
-                niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
-                departementId: string;
-            };
             user: {
                 id: string;
                 email: string;
@@ -96,14 +87,23 @@ export declare class EtudiantController {
                 derniereConnexion: Date | null;
                 estActif: boolean;
             };
+            filiere: {
+                id: string;
+                nom: string;
+                createdAt: Date;
+                updatedAt: Date;
+                description: string | null;
+                niveauEtudes: import("generated/prisma").$Enums.NiveauEtudes;
+                departementId: string;
+            };
         } & {
+            userId: string;
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
             dateNaissance: Date;
-            filiereId: string;
             codePermanent: string;
+            filiereId: string;
         })[];
         pagination: {
             page: number;
@@ -131,13 +131,13 @@ export declare class EtudiantController {
                 estActif: boolean;
             };
         } & {
+            userId: string;
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
             dateNaissance: Date;
-            filiereId: string;
             codePermanent: string;
+            filiereId: string;
         };
     } | {
         success: boolean;
@@ -159,13 +159,13 @@ export declare class EtudiantController {
                 estActif: boolean;
             };
         } & {
+            userId: string;
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
             dateNaissance: Date;
-            filiereId: string;
             codePermanent: string;
+            filiereId: string;
         };
     } | {
         success: boolean;
@@ -187,13 +187,13 @@ export declare class EtudiantController {
                 estActif: boolean;
             };
         } & {
+            userId: string;
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
             dateNaissance: Date;
-            filiereId: string;
             codePermanent: string;
+            filiereId: string;
         };
     } | {
         success: boolean;
@@ -218,13 +218,13 @@ export declare class EtudiantController {
                 estActif: boolean;
             };
         } & {
+            userId: string;
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
             dateNaissance: Date;
-            filiereId: string;
             codePermanent: string;
+            filiereId: string;
         };
     } | {
         success: boolean;

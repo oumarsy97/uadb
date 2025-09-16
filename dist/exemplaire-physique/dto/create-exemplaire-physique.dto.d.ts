@@ -16,4 +16,5 @@ export declare class CreateExemplairePhysiqueDto {
     localisation?: string;
     nombre: number;
     nomAuteur: string;
+    id: string;
 }

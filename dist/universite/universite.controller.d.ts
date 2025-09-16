@@ -5,11 +5,11 @@ export declare class UniversiteController {
     constructor(universiteService: UniversiteService);
     create(createUniversiteDto: CreateUniversiteDto): Promise<{
         id: string;
+        nom: string;
         createdAt: Date;
         updatedAt: Date;
-        nom: string;
-        ville: string;
         adresse: string | null;
+        ville: string;
         siteWeb: string | null;
     }>;
     findAll(query: {
@@ -18,20 +18,20 @@ export declare class UniversiteController {
         search?: string;
     }): Promise<{
         id: string;
+        nom: string;
         createdAt: Date;
         updatedAt: Date;
-        nom: string;
-        ville: string;
         adresse: string | null;
+        ville: string;
         siteWeb: string | null;
     }[]>;
     findOne(id: string): Promise<{
         id: string;
+        nom: string;
         createdAt: Date;
         updatedAt: Date;
-        nom: string;
-        ville: string;
         adresse: string | null;
+        ville: string;
         siteWeb: string | null;
     } | null>;
     update(data: {
@@ -39,38 +39,38 @@ export declare class UniversiteController {
         updateData: Partial<UpdateUniversiteDto>;
     }): Promise<{
         id: string;
+        nom: string;
         createdAt: Date;
         updatedAt: Date;
-        nom: string;
-        ville: string;
         adresse: string | null;
+        ville: string;
         siteWeb: string | null;
     }>;
     remove(id: string): Promise<{
         id: string;
+        nom: string;
         createdAt: Date;
         updatedAt: Date;
-        nom: string;
-        ville: string;
         adresse: string | null;
+        ville: string;
         siteWeb: string | null;
     }>;
     getStatistics(id: string): Promise<{
         id: string;
+        nom: string;
         createdAt: Date;
         updatedAt: Date;
-        nom: string;
-        ville: string;
         adresse: string | null;
+        ville: string;
         siteWeb: string | null;
     } | null>;
     getTopUniversites(limit?: number): Promise<{
         id: string;
+        nom: string;
         createdAt: Date;
         updatedAt: Date;
-        nom: string;
-        ville: string;
         adresse: string | null;
+        ville: string;
         siteWeb: string | null;
     }[]>;
 }

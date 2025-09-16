@@ -18,20 +18,65 @@ let EmprunteService = class EmprunteService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async createEmprunt(dto) {
+    async createEmpruntExterne(dto) {
         const exemplaires = await this.prisma.exemplairePhysique.findMany({
             where: {
                 id: { in: dto.exemplaireIds },
                 nombreDisponible: { gt: 0 },
             }
         });
-        console.log(`Exemplaires trouvés: ${exemplaires.length}, demandés: ${dto.exemplaireIds.length}`);
+        if (exemplaires.length !== dto.exemplaireIds.length) {
+            throw new common_1.BadRequestException('Certains exemplaires ne sont pas disponibles pour emprunt externe');
+        }
+        const dureeEmpruntExterne = dto.dureeEmprunt || 7;
+        const dateRetourPrevue = new Date();
+        dateRetourPrevue.setDate(dateRetourPrevue.getDate() + dureeEmpruntExterne);
+        const result = await this.prisma.$transaction(async (prisma) => {
+            const emprunt = await prisma.emprunt.create({
+                data: {
+                    userId: null,
+                    externUserId: dto.externUserId,
+                    dateRetourPrevue,
+                    universiteEmprunteur: dto.universiteEmprunteur,
+                    statut: prisma_1.StatutEmprunt.EN_COURS,
+                    exemplaireId: exemplaires[0].id
+                }
+            });
+            const empruntExemplaires = await Promise.all(dto.exemplaireIds.map(exemplaireId => prisma.empruntExemplaire.create({
+                data: {
+                    empruntId: emprunt.id,
+                    exemplaireId,
+                    dateRetourPrevue
+                }
+            })));
+            await prisma.exemplairePhysique.updateMany({
+                where: { id: { in: dto.exemplaireIds } },
+                data: { nombreDisponible: { decrement: 1 } }
+            });
+            return { emprunt, empruntExemplaires };
+        });
+        return this.getEmpruntById(result.emprunt.id);
+    }
+    async createEmprunt(dto) {
+        if (dto.universiteEmprunteur && dto.universiteEmprunteur !== 'uadb') {
+            return this.createEmpruntExterne({
+                exemplaireIds: dto.exemplaireIds,
+                externUserId: dto.empreunteurId,
+                universiteEmprunteur: dto.universiteEmprunteur,
+                dureeEmprunt: dto.dureeEmprunt,
+                commentaire: dto.commentaire
+            });
+        }
+        const exemplaires = await this.prisma.exemplairePhysique.findMany({
+            where: {
+                id: { in: dto.exemplaireIds },
+                nombreDisponible: { gt: 0 },
+            }
+        });
         if (exemplaires.length !== dto.exemplaireIds.length) {
             throw new common_1.BadRequestException('Certains exemplaires ne sont pas disponibles');
         }
-        const isEmpruntExterne = dto.universiteEmprunteur && dto.universiteEmprunteur !== 'uadb';
         let dureeEmprunt = dto.dureeEmprunt || 14;
-        console.log(dto.empreunteurId);
         const dateRetourPrevue = new Date();
         dateRetourPrevue.setDate(dateRetourPrevue.getDate() + dureeEmprunt);
         const result = await this.prisma.$transaction(async (prisma) => {
@@ -39,7 +84,7 @@ let EmprunteService = class EmprunteService {
                 data: {
                     userId: dto.empreunteurId,
                     dateRetourPrevue,
-                    universiteEmprunteur: dto.universiteEmprunteur || 'LOCALE',
+                    universiteEmprunteur: 'uadb',
                     statut: prisma_1.StatutEmprunt.EN_COURS,
                     exemplaireId: exemplaires[0].id
                 }
@@ -100,7 +145,7 @@ let EmprunteService = class EmprunteService {
             else {
                 await prisma.exemplairePhysique.updateMany({
                     where: { id: { in: dto.exemplaireIds } },
-                    data: {}
+                    data: { nombreDisponible: { increment: 1 } }
                 });
             }
             const empruntsRestants = await prisma.empruntExemplaire.count({
@@ -119,7 +164,10 @@ let EmprunteService = class EmprunteService {
                 });
             }
         });
-        return this.getEmpruntById(dto.empruntId);
+        const result = await this.getEmpruntById(dto.empruntId);
+        return {
+            ...result,
+        };
     }
     async extendEmprunt(dto) {
         const emprunt = await this.prisma.emprunt.findUnique({
@@ -137,7 +185,7 @@ let EmprunteService = class EmprunteService {
         if (emprunt.statut !== prisma_1.StatutEmprunt.EN_COURS) {
             throw new common_1.BadRequestException('Cet emprunt ne peut pas être prolongé');
         }
-        const nouvelleDateRetour = new Date();
+        const nouvelleDateRetour = new Date(emprunt.dateRetourPrevue);
         nouvelleDateRetour.setDate(nouvelleDateRetour.getDate() + dto.nouvelleDuree);
         await this.prisma.$transaction(async (prisma) => {
             await prisma.emprunt.update({
@@ -156,9 +204,16 @@ let EmprunteService = class EmprunteService {
                 }
             });
         });
+        await this.prisma.emprunt.update({
+            where: { id: dto.empruntId },
+            data: {
+                renouvellement: { increment: 1 }
+            }
+        });
         return this.getEmpruntById(dto.empruntId);
     }
     async getEmpruntById(id) {
+        console.log('ID de l\'emprunt:', id);
         const emprunt = await this.prisma.emprunt.findUnique({
             where: { id },
             include: {
@@ -193,8 +248,120 @@ let EmprunteService = class EmprunteService {
         }
         return emprunt;
     }
+    async getMesEmprunts(params) {
+        const { userId, statut, externUserId, page = 1, limit = 10, search } = params;
+        if (!userId && !externUserId) {
+            throw new common_1.BadRequestException('userId ou externUserId est requis');
+        }
+        const pageNum = typeof page === 'string' ? parseInt(page, 10) : page;
+        const limitNum = typeof limit === 'string' ? parseInt(limit, 10) : limit;
+        const validPage = Math.max(1, pageNum || 1);
+        const validLimit = Math.max(1, Math.min(100, limitNum || 10));
+        const skip = (validPage - 1) * validLimit;
+        const take = validLimit;
+        const whereClause = {
+            OR: []
+        };
+        if (userId) {
+            whereClause.OR.push({ userId });
+        }
+        if (externUserId) {
+            whereClause.OR.push({ externUserId });
+        }
+        if (statut) {
+            whereClause.statut = statut;
+        }
+        if (search && search.trim()) {
+            whereClause.AND = [
+                {
+                    OR: [
+                        {
+                            user: {
+                                OR: [
+                                    { nom: { contains: search.trim(), mode: 'insensitive' } },
+                                    { prenom: { contains: search.trim(), mode: 'insensitive' } },
+                                    { email: { contains: search.trim(), mode: 'insensitive' } }
+                                ]
+                            }
+                        },
+                        {
+                            empruntExemplaires: {
+                                some: {
+                                    exemplaire: {
+                                        ressource: {
+                                            OR: [
+                                                { titre: { contains: search.trim(), mode: 'insensitive' } },
+                                                { auteur: { contains: search.trim(), mode: 'insensitive' } },
+                                                { isbnglobale: { contains: search.trim(), mode: 'insensitive' } }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            ];
+        }
+        try {
+            const [emprunts, total] = await Promise.all([
+                this.prisma.emprunt.findMany({
+                    where: whereClause,
+                    skip,
+                    take,
+                    include: {
+                        user: {
+                            select: {
+                                id: true,
+                                nom: true,
+                                prenom: true,
+                                email: true
+                            }
+                        },
+                        empruntExemplaires: {
+                            include: {
+                                exemplaire: {
+                                    include: {
+                                        ressource: {
+                                            select: {
+                                                id: true,
+                                                titre: true,
+                                                auteur: true,
+                                                isbnglobale: true,
+                                                image: true,
+                                                description: true,
+                                                nomAuteur: true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    orderBy: {
+                        createdAt: 'desc'
+                    }
+                }),
+                this.prisma.emprunt.count({
+                    where: whereClause
+                })
+            ]);
+            return {
+                data: emprunts,
+                meta: {
+                    total: Number(total),
+                    page: validPage,
+                    limit: validLimit,
+                    totalPages: Math.ceil(Number(total) / validLimit)
+                }
+            };
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException('Erreur lors de la récupération des emprunts: ' + error.message);
+        }
+    }
     async getEmprunts(params) {
-        const { userId, statut, universiteEmprunteur, page = 1, limit = 10, search } = params;
+        const { userId, statut, universiteEmprunteur, page = 1, limit = 10, search, externUserId } = params;
         const pageNum = typeof page === 'string' ? parseInt(page, 10) : page;
         const limitNum = typeof limit === 'string' ? parseInt(limit, 10) : limit;
         const validPage = Math.max(1, pageNum || 1);
@@ -207,6 +374,8 @@ let EmprunteService = class EmprunteService {
             where.statut = statut;
         if (universiteEmprunteur)
             where.universiteEmprunteur = universiteEmprunteur;
+        if (externUserId)
+            where.externUserId = externUserId;
         if (search) {
             where.OR = [
                 {
@@ -242,14 +411,7 @@ let EmprunteService = class EmprunteService {
                         include: {
                             exemplaire: {
                                 include: {
-                                    ressource: {
-                                        select: {
-                                            id: true,
-                                            titre: true,
-                                            auteur: true,
-                                            isbnglobale: true
-                                        }
-                                    }
+                                    ressource: true,
                                 }
                             }
                         }
@@ -387,7 +549,9 @@ let EmprunteService = class EmprunteService {
                                             id: true,
                                             titre: true,
                                             auteur: true,
-                                            isbnglobale: true
+                                            isbnglobale: true,
+                                            image: true,
+                                            description: true
                                         }
                                     }
                                 }

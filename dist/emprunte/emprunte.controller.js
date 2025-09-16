@@ -111,6 +111,26 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
             };
         }
     }
+    async createEmpruntExterne(data, context) {
+        this.logger.log(`Creating external emprunt for user: ${data.externUserId} from: ${data.universiteEmprunteur}`);
+        try {
+            const emprunt = await this.empruntService.createEmpruntExterne(data);
+            this.logger.log(`External emprunt created: ${emprunt.id}`);
+            return {
+                success: true,
+                data: emprunt,
+                message: 'Emprunt externe créé avec succès'
+            };
+        }
+        catch (error) {
+            this.logger.error(`Error creating external emprunt: ${error.message}`, error.stack);
+            return {
+                success: false,
+                error: error.message,
+                code: error.constructor.name
+            };
+        }
+    }
     async getEmprunt(data) {
         this.logger.log(`Getting emprunt: ${data.id}`);
         try {
@@ -130,6 +150,7 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         }
     }
     async getEmprunts(data) {
+        this.logger.log('Listing emprunts with filters');
         try {
             const result = await this.empruntService.getEmprunts(data);
             return {
@@ -150,12 +171,12 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
     async returnExemplaires(data) {
         this.logger.log(`Returning exemplaires for emprunt: ${data.empruntId}`);
         try {
-            const emprunt = await this.empruntService.returnExemplaires(data);
-            this.logger.log(`Exemplaires returned for emprunt: ${emprunt.id}`);
+            const result = await this.empruntService.returnExemplaires(data);
+            this.logger.log(`Exemplaires returned for emprunt: ${result.id}`);
             return {
                 success: true,
-                data: emprunt,
-                message: 'Exemplaires retournés avec succès'
+                data: result,
+                message: 'Exemplaires retournés avec succès',
             };
         }
         catch (error) {
@@ -172,9 +193,6 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         try {
             const emprunt = await this.empruntService.extendEmprunt(data);
             this.logger.log(`Emprunt extended: ${emprunt.id}`);
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: true,
                 data: emprunt,
@@ -183,9 +201,6 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         }
         catch (error) {
             this.logger.error(`Error extending emprunt: ${error.message}`, error.stack);
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: false,
                 error: error.message,
@@ -197,20 +212,21 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         this.logger.log('Getting emprunts en retard');
         try {
             const emprunts = await this.empruntService.getEmpruntsEnRetard();
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
+            let filteredEmprunts = emprunts;
+            if (data.includeExternal === false) {
+                filteredEmprunts = emprunts.filter(e => e.universiteEmprunteur === 'LOCALE');
+            }
+            else if (data.includeExternal === true) {
+                filteredEmprunts = emprunts.filter(e => e.universiteEmprunteur !== 'LOCALE');
+            }
             return {
                 success: true,
-                data: emprunts,
-                count: emprunts.length
+                data: filteredEmprunts,
+                count: filteredEmprunts.length
             };
         }
         catch (error) {
             this.logger.error(`Error getting emprunts en retard: ${error.message}`, error.stack);
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: false,
                 error: error.message,
@@ -219,13 +235,14 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         }
     }
     async getUserEmprunts(data) {
-        this.logger.log(`Getting emprunts for user: ${data.userId}`);
+        this.logger.log(`Getting emprunts for user: ${data.userId} ${data.externUserId}`);
         try {
-            const result = await this.empruntService.getEmprunts({
+            const result = await this.empruntService.getMesEmprunts({
                 userId: data.userId,
                 statut: data.statut,
                 page: data.page,
-                limit: data.limit
+                limit: data.limit,
+                externUserId: data.externUserId
             });
             return {
                 success: true,
@@ -246,9 +263,6 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         this.logger.log(`Getting history for user: ${data.userId}`);
         try {
             const result = await this.empruntService.getUserEmpruntHistory(data.userId, data.page, data.limit);
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: true,
                 data: result.data,
@@ -257,9 +271,6 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         }
         catch (error) {
             this.logger.error(`Error getting user history: ${error.message}`, error.stack);
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: false,
                 error: error.message,
@@ -271,9 +282,6 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         this.logger.log('Getting emprunt statistics');
         try {
             const stats = await this.empruntService.getEmpruntStats();
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: true,
                 data: stats
@@ -281,9 +289,6 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         }
         catch (error) {
             this.logger.error(`Error getting emprunt stats: ${error.message}`, error.stack);
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: false,
                 error: error.message,
@@ -295,9 +300,6 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         this.logger.log('Marking emprunts en retard');
         try {
             const result = await this.empruntService.markEmpruntsEnRetard();
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: true,
                 data: { count: result.count },
@@ -306,9 +308,6 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         }
         catch (error) {
             this.logger.error(`Error marking emprunts en retard: ${error.message}`, error.stack);
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: false,
                 error: error.message,
@@ -326,16 +325,15 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
                 select: {
                     id: true,
                     etat: true,
+                    nombreDisponible: true,
                 }
             });
             const availability = exemplaires.map(ex => ({
                 id: ex.id,
                 etat: ex.etat,
-                peutEtreEmprunte: ex.etat !== 'PERDU'
+                nombreDisponible: ex.nombreDisponible,
+                peutEtreEmprunte: ex.etat !== 'PERDU' && ex.nombreDisponible > 0
             }));
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: true,
                 data: availability
@@ -343,9 +341,6 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         }
         catch (error) {
             this.logger.error(`Error checking availability: ${error.message}`, error.stack);
-            const channel = context.getChannelRef();
-            const originalMsg = context.getMessage();
-            channel.ack(originalMsg);
             return {
                 success: false,
                 error: error.message,
@@ -360,6 +355,19 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
         }
         catch (error) {
             this.logger.error(`Error handling user suspension: ${error.message}`, error.stack);
+        }
+    }
+    async handleExternalUserBlocked(data) {
+        this.logger.log(`External user blocked: ${data.externUserId} from ${data.universiteEmprunteur}`);
+        try {
+            const empruntsEnCours = await this.empruntService.getEmprunts({
+                search: data.externUserId,
+                statut: prisma_1.StatutEmprunt.EN_COURS
+            });
+            this.logger.log(`Found ${empruntsEnCours.data.length} active emprunts for blocked external user`);
+        }
+        catch (error) {
+            this.logger.error(`Error handling external user blocking: ${error.message}`, error.stack);
         }
     }
     async handleExemplaireDamaged(data) {
@@ -380,13 +388,16 @@ let EmprunteController = EmprunteController_1 = class EmprunteController {
             this.logger.error(`Error handling exemplaire loss: ${error.message}`, error.stack);
         }
     }
-    async handleDailycheckRetards(data) {
+    async handleDailyCheckRetards(data) {
         this.logger.log('Running daily check for retards');
         try {
             const result = await this.empruntService.markEmpruntsEnRetard();
             if (result.count > 0) {
                 this.logger.log(`Found ${result.count} new retards`);
                 const empruntsEnRetard = await this.empruntService.getEmpruntsEnRetard();
+                const empruntsLocaux = empruntsEnRetard.filter(e => e.universiteEmprunteur === 'LOCALE');
+                const empruntsExternes = empruntsEnRetard.filter(e => e.universiteEmprunteur !== 'LOCALE');
+                this.logger.log(`Retards locaux: ${empruntsLocaux.length}, Retards externes: ${empruntsExternes.length}`);
             }
             this.logger.log('Daily retard check completed');
         }
@@ -417,6 +428,14 @@ __decorate([
     __metadata("design:paramtypes", [create_emprunte_dto_1.CreateEmpruntDto]),
     __metadata("design:returntype", Promise)
 ], EmprunteController.prototype, "createEmprunt", null);
+__decorate([
+    (0, microservices_1.MessagePattern)('emprunt.externe.create'),
+    __param(0, (0, microservices_1.Payload)()),
+    __param(1, (0, microservices_1.Ctx)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_emprunte_dto_1.CreateEmpruntExterneDto, microservices_1.RmqContext]),
+    __metadata("design:returntype", Promise)
+], EmprunteController.prototype, "createEmpruntExterne", null);
 __decorate([
     (0, microservices_1.MessagePattern)('emprunt.get'),
     __param(0, (0, microservices_1.Payload)()),
@@ -501,6 +520,13 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], EmprunteController.prototype, "handleUserSuspended", null);
 __decorate([
+    (0, microservices_1.EventPattern)('external.user.blocked'),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], EmprunteController.prototype, "handleExternalUserBlocked", null);
+__decorate([
     (0, microservices_1.EventPattern)('exemplaire.damaged'),
     __param(0, (0, microservices_1.Payload)()),
     __metadata("design:type", Function),
@@ -520,7 +546,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], EmprunteController.prototype, "handleDailycheckRetards", null);
+], EmprunteController.prototype, "handleDailyCheckRetards", null);
 exports.EmprunteController = EmprunteController = EmprunteController_1 = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [emprunte_service_1.EmprunteService,

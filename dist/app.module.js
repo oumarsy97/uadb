@@ -33,6 +33,7 @@ const regle_pret_module_1 = require("./regle-pret/regle-pret.module");
 const administrateur_module_1 = require("./administrateur/administrateur.module");
 const enseignant_module_1 = require("./enseignant/enseignant.module");
 const bibliothecaire_module_1 = require("./bibliothecaire/bibliothecaire.module");
+const dashboard_module_1 = require("./dashboard/dashboard.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -61,7 +62,7 @@ exports.AppModule = AppModule = __decorate([
             enseignant_module_1.EnseignantModule,
             bibliothecaire_module_1.BibliothecaireModule,
             schedule_1.ScheduleModule.forRoot(),
-            tasks_module_1.TasksModule,
+            tasks_module_1.TasksModule, dashboard_module_1.DashboardModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService,],

@@ -295,6 +295,7 @@ export class RessourcesService {
               userId: true,
             }
           },
+          favoris:true,
           _count: {
             select: {
               commentaires: true,

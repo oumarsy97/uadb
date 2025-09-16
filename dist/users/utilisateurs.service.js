@@ -66,6 +66,12 @@ let UtilisateursService = class UtilisateursService {
         if (!isPasswordValid) {
             throw new common_1.HttpException('Email ou mot de passe incorrect.', common_1.HttpStatus.UNAUTHORIZED);
         }
+        if (!user.estActif) {
+            return {
+                message: "votre compte est inactif veillez contacter votre administrateur pour plus d'information",
+                data: null,
+            };
+        }
         await this.updateDerniereConnexion(user.id);
         const payload = {
             sub: user.id,
@@ -167,6 +173,10 @@ let UtilisateursService = class UtilisateursService {
                 where,
                 skip,
                 take: validLimit,
+                include: {
+                    etudiant: true,
+                    enseignant: true,
+                },
             }),
             this.prisma.user.count({ where }),
         ]);
@@ -184,6 +194,12 @@ let UtilisateursService = class UtilisateursService {
     async findOne(id) {
         const user = await this.prisma.user.findUnique({
             where: { id },
+            include: {
+                etudiant: true,
+                enseignant: true,
+                bibliothecaire: true,
+                administrateur: true,
+            },
         });
         if (!user) {
             throw new common_1.HttpException('Utilisateur non trouvé.', common_1.HttpStatus.NOT_FOUND);
@@ -251,6 +267,16 @@ let UtilisateursService = class UtilisateursService {
         return this.prisma.user.update({
             where: { id },
             data: { derniereConnexion: new Date() },
+        });
+    }
+    async updateMotDePasse(id, updateData) {
+        if (updateData.motDePasse !== updateData.confirmationMotDePasse) {
+            throw new common_1.HttpException('Les mots de passe ne correspondent pas.', common_1.HttpStatus.BAD_REQUEST);
+        }
+        const hashedPassword = await bcrypt.hash(updateData.motDePasse, 10);
+        return this.prisma.user.update({
+            where: { id },
+            data: { motDePasse: hashedPassword },
         });
     }
 };

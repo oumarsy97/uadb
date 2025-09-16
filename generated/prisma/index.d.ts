@@ -7866,6 +7866,7 @@ export namespace Prisma {
     renouvellement: number | null
     statut: $Enums.StatutEmprunt | null
     universiteEmprunteur: string | null
+    externUserId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7880,6 +7881,7 @@ export namespace Prisma {
     renouvellement: number | null
     statut: $Enums.StatutEmprunt | null
     universiteEmprunteur: string | null
+    externUserId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7894,6 +7896,7 @@ export namespace Prisma {
     renouvellement: number
     statut: number
     universiteEmprunteur: number
+    externUserId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -7918,6 +7921,7 @@ export namespace Prisma {
     renouvellement?: true
     statut?: true
     universiteEmprunteur?: true
+    externUserId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7932,6 +7936,7 @@ export namespace Prisma {
     renouvellement?: true
     statut?: true
     universiteEmprunteur?: true
+    externUserId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7946,6 +7951,7 @@ export namespace Prisma {
     renouvellement?: true
     statut?: true
     universiteEmprunteur?: true
+    externUserId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -8047,6 +8053,7 @@ export namespace Prisma {
     renouvellement: number
     statut: $Enums.StatutEmprunt
     universiteEmprunteur: string
+    externUserId: string | null
     createdAt: Date
     updatedAt: Date
     _count: EmpruntCountAggregateOutputType | null
@@ -8080,6 +8087,7 @@ export namespace Prisma {
     renouvellement?: boolean
     statut?: boolean
     universiteEmprunteur?: boolean
+    externUserId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | Emprunt$userArgs<ExtArgs>
@@ -8099,11 +8107,12 @@ export namespace Prisma {
     renouvellement?: boolean
     statut?: boolean
     universiteEmprunteur?: boolean
+    externUserId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EmpruntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "exemplaireId" | "userId" | "dateEmprunt" | "dateRetourPrevue" | "dateRetourEffective" | "renouvellement" | "statut" | "universiteEmprunteur" | "createdAt" | "updatedAt", ExtArgs["result"]["emprunt"]>
+  export type EmpruntOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "exemplaireId" | "userId" | "dateEmprunt" | "dateRetourPrevue" | "dateRetourEffective" | "renouvellement" | "statut" | "universiteEmprunteur" | "externUserId" | "createdAt" | "updatedAt", ExtArgs["result"]["emprunt"]>
   export type EmpruntInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Emprunt$userArgs<ExtArgs>
     empruntExemplaires?: boolean | Emprunt$empruntExemplairesArgs<ExtArgs>
@@ -8126,6 +8135,7 @@ export namespace Prisma {
       renouvellement: number
       statut: $Enums.StatutEmprunt
       universiteEmprunteur: string
+      externUserId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["emprunt"]>
@@ -8508,6 +8518,7 @@ export namespace Prisma {
     readonly renouvellement: FieldRef<"Emprunt", 'Int'>
     readonly statut: FieldRef<"Emprunt", 'StatutEmprunt'>
     readonly universiteEmprunteur: FieldRef<"Emprunt", 'String'>
+    readonly externUserId: FieldRef<"Emprunt", 'String'>
     readonly createdAt: FieldRef<"Emprunt", 'DateTime'>
     readonly updatedAt: FieldRef<"Emprunt", 'DateTime'>
   }
@@ -32509,6 +32520,7 @@ export namespace Prisma {
     renouvellement: 'renouvellement',
     statut: 'statut',
     universiteEmprunteur: 'universiteEmprunteur',
+    externUserId: 'externUserId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -32916,7 +32928,8 @@ export namespace Prisma {
     id: 'id',
     exemplaireId: 'exemplaireId',
     userId: 'userId',
-    universiteEmprunteur: 'universiteEmprunteur'
+    universiteEmprunteur: 'universiteEmprunteur',
+    externUserId: 'externUserId'
   };
 
   export type EmpruntOrderByRelevanceFieldEnum = (typeof EmpruntOrderByRelevanceFieldEnum)[keyof typeof EmpruntOrderByRelevanceFieldEnum]
@@ -33659,6 +33672,7 @@ export namespace Prisma {
     renouvellement?: IntFilter<"Emprunt"> | number
     statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
+    externUserId?: StringNullableFilter<"Emprunt"> | string | null
     createdAt?: DateTimeFilter<"Emprunt"> | Date | string
     updatedAt?: DateTimeFilter<"Emprunt"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -33675,6 +33689,7 @@ export namespace Prisma {
     renouvellement?: SortOrder
     statut?: SortOrder
     universiteEmprunteur?: SortOrder
+    externUserId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -33695,6 +33710,7 @@ export namespace Prisma {
     renouvellement?: IntFilter<"Emprunt"> | number
     statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
+    externUserId?: StringNullableFilter<"Emprunt"> | string | null
     createdAt?: DateTimeFilter<"Emprunt"> | Date | string
     updatedAt?: DateTimeFilter<"Emprunt"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -33711,6 +33727,7 @@ export namespace Prisma {
     renouvellement?: SortOrder
     statut?: SortOrder
     universiteEmprunteur?: SortOrder
+    externUserId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EmpruntCountOrderByAggregateInput
@@ -33733,6 +33750,7 @@ export namespace Prisma {
     renouvellement?: IntWithAggregatesFilter<"Emprunt"> | number
     statut?: EnumStatutEmpruntWithAggregatesFilter<"Emprunt"> | $Enums.StatutEmprunt
     universiteEmprunteur?: StringWithAggregatesFilter<"Emprunt"> | string
+    externUserId?: StringNullableWithAggregatesFilter<"Emprunt"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Emprunt"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Emprunt"> | Date | string
   }
@@ -34752,6 +34770,7 @@ export namespace Prisma {
   export type NotationWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     userId_ressourceId?: NotationUserIdRessourceIdCompoundUniqueInput
+    externUserId_ressourceId?: NotationExternUserIdRessourceIdCompoundUniqueInput
     AND?: NotationWhereInput | NotationWhereInput[]
     OR?: NotationWhereInput[]
     NOT?: NotationWhereInput | NotationWhereInput[]
@@ -34764,7 +34783,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Notation"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     ressource?: XOR<RessourceScalarRelationFilter, RessourceWhereInput>
-  }, "id" | "userId_ressourceId">
+  }, "id" | "userId_ressourceId" | "externUserId_ressourceId">
 
   export type NotationOrderByWithAggregationInput = {
     id?: SortOrder
@@ -35929,6 +35948,7 @@ export namespace Prisma {
     renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
+    externUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutEmpruntsInput
@@ -35945,6 +35965,7 @@ export namespace Prisma {
     renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
+    externUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     empruntExemplaires?: EmpruntExemplaireUncheckedCreateNestedManyWithoutEmpruntInput
@@ -35959,6 +35980,7 @@ export namespace Prisma {
     renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutEmpruntsNestedInput
@@ -35975,6 +35997,7 @@ export namespace Prisma {
     renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     empruntExemplaires?: EmpruntExemplaireUncheckedUpdateManyWithoutEmpruntNestedInput
@@ -35990,6 +36013,7 @@ export namespace Prisma {
     renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
+    externUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -36003,6 +36027,7 @@ export namespace Prisma {
     renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -36017,6 +36042,7 @@ export namespace Prisma {
     renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38443,6 +38469,7 @@ export namespace Prisma {
     renouvellement?: SortOrder
     statut?: SortOrder
     universiteEmprunteur?: SortOrder
+    externUserId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -38461,6 +38488,7 @@ export namespace Prisma {
     renouvellement?: SortOrder
     statut?: SortOrder
     universiteEmprunteur?: SortOrder
+    externUserId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -38475,6 +38503,7 @@ export namespace Prisma {
     renouvellement?: SortOrder
     statut?: SortOrder
     universiteEmprunteur?: SortOrder
+    externUserId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -39328,6 +39357,11 @@ export namespace Prisma {
 
   export type NotationUserIdRessourceIdCompoundUniqueInput = {
     userId: string
+    ressourceId: string
+  }
+
+  export type NotationExternUserIdRessourceIdCompoundUniqueInput = {
+    externUserId: string
     ressourceId: string
   }
 
@@ -42921,6 +42955,7 @@ export namespace Prisma {
     renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
+    externUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutEmpruntsInput
@@ -42936,6 +42971,7 @@ export namespace Prisma {
     renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
+    externUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -42996,6 +43032,7 @@ export namespace Prisma {
     renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutEmpruntsNestedInput
@@ -43011,6 +43048,7 @@ export namespace Prisma {
     renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44173,6 +44211,7 @@ export namespace Prisma {
     renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
+    externUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     empruntExemplaires?: EmpruntExemplaireCreateNestedManyWithoutEmpruntInput
@@ -44187,6 +44226,7 @@ export namespace Prisma {
     renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
+    externUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     empruntExemplaires?: EmpruntExemplaireUncheckedCreateNestedManyWithoutEmpruntInput
@@ -44633,6 +44673,7 @@ export namespace Prisma {
     renouvellement?: IntFilter<"Emprunt"> | number
     statut?: EnumStatutEmpruntFilter<"Emprunt"> | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFilter<"Emprunt"> | string
+    externUserId?: StringNullableFilter<"Emprunt"> | string | null
     createdAt?: DateTimeFilter<"Emprunt"> | Date | string
     updatedAt?: DateTimeFilter<"Emprunt"> | Date | string
   }
@@ -48767,6 +48808,7 @@ export namespace Prisma {
     renouvellement?: number
     statut?: $Enums.StatutEmprunt
     universiteEmprunteur: string
+    externUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -49054,6 +49096,7 @@ export namespace Prisma {
     renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     empruntExemplaires?: EmpruntExemplaireUpdateManyWithoutEmpruntNestedInput
@@ -49068,6 +49111,7 @@ export namespace Prisma {
     renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     empruntExemplaires?: EmpruntExemplaireUncheckedUpdateManyWithoutEmpruntNestedInput
@@ -49082,6 +49126,7 @@ export namespace Prisma {
     renouvellement?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutEmpruntFieldUpdateOperationsInput | $Enums.StatutEmprunt
     universiteEmprunteur?: StringFieldUpdateOperationsInput | string
+    externUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

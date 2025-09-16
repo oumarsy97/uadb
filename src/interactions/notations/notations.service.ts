@@ -44,6 +44,7 @@ export class NotationsService {
 
     async createNotation(data: CreateNotationData) {
         try {
+            console.log(data.universiteUser);
             // Validation des données
             if (!data.ressourceId) {
                 throw new BadRequestException('ID de ressource requis');
@@ -63,8 +64,9 @@ export class NotationsService {
             }
 
             // Déterminer si c'est un utilisateur interne ou externe
-            const isInternalUser = !!data.userId;
-            const isExternalUser = !!data.externUserId;
+            const isInternalUser = process.env.CURRENT_UNIVERSITY?.toLowerCase()  === data.universiteUser?.toLowerCase();
+            const isExternalUser = !isInternalUser;
+            console.log(`isInternalUser: ${isInternalUser}, isExternalUser: ${isExternalUser}`);
 
             if (!isInternalUser && !isExternalUser) {
                 throw new BadRequestException('Utilisateur interne ou externe requis');
@@ -95,15 +97,13 @@ export class NotationsService {
             if (isInternalUser) {
                 // Utilisateur interne (connecté à cette université)
                 notationData.userId = data.userId;
-                // Pour les utilisateurs internes, on peut récupérer l'université depuis leur profil
-                const user = await this.prisma.user.findUnique({
-                    where: { id: data.userId },
-                });
+               
                
             } else {
                 // Utilisateur externe (venant d'une autre université)
-                notationData.externUserId = data.externUserId;
+                notationData.externUserId = data.userId
                 notationData.universiteUser = data.universiteUser;
+
             }
 
             const notation = await this.prisma.notation.create({

@@ -9,9 +9,9 @@ export declare class DepartementController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             ufrId: string;
             responsable: string | null;
@@ -32,9 +32,9 @@ export declare class DepartementController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             ufrId: string;
             responsable: string | null;
@@ -60,9 +60,9 @@ export declare class DepartementController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             ufrId: string;
             responsable: string | null;
@@ -81,9 +81,9 @@ export declare class DepartementController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             ufrId: string;
             responsable: string | null;
@@ -102,9 +102,9 @@ export declare class DepartementController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             ufrId: string;
             responsable: string | null;
@@ -124,9 +124,9 @@ export declare class DepartementController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             ufrId: string;
             responsable: string | null;
@@ -160,9 +160,9 @@ export declare class DepartementController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             ufrId: string;
             responsable: string | null;

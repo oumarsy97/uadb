@@ -181,6 +181,7 @@ exports.Prisma.EmpruntScalarFieldEnum = {
   renouvellement: 'renouvellement',
   statut: 'statut',
   universiteEmprunteur: 'universiteEmprunteur',
+  externUserId: 'externUserId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -495,7 +496,8 @@ exports.Prisma.EmpruntOrderByRelevanceFieldEnum = {
   id: 'id',
   exemplaireId: 'exemplaireId',
   userId: 'userId',
-  universiteEmprunteur: 'universiteEmprunteur'
+  universiteEmprunteur: 'universiteEmprunteur',
+  externUserId: 'externUserId'
 };
 
 exports.Prisma.EmpruntExemplaireOrderByRelevanceFieldEnum = {

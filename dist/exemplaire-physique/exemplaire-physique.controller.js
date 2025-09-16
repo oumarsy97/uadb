@@ -40,6 +40,23 @@ let ExemplairePhysiqueController = class ExemplairePhysiqueController {
             };
         }
     }
+    async findDisponibles(data) {
+        try {
+            const { options = {}, token } = data;
+            if (token) {
+                const userId = this.jwtHelperService.extractUserIdFromToken(token);
+                console.log('Recherche d\'exemplaires physiques disponibles effectuée par utilisateur:', userId);
+            }
+            return await this.exemplairePhysiqueService.findDisponibles();
+        }
+        catch (error) {
+            return {
+                error: true,
+                message: error.message,
+                statusCode: error.status || 500
+            };
+        }
+    }
     async findAll(data) {
         try {
             const { options = {}, token } = data;
@@ -278,6 +295,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ExemplairePhysiqueController.prototype, "create", null);
+__decorate([
+    (0, microservices_1.MessagePattern)('findExemplairesPhysiquesDisponilbles'),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ExemplairePhysiqueController.prototype, "findDisponibles", null);
 __decorate([
     (0, microservices_1.MessagePattern)('findAllExemplairesPhysiques'),
     __param(0, (0, microservices_1.Payload)()),

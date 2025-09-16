@@ -1,40 +1,39 @@
 import { Controller, Logger } from '@nestjs/common';
 import { MessagePattern, EventPattern, Payload, Ctx, RmqContext } from '@nestjs/microservices';
-import {  CreateEmpruntDto, ReturnEmpruntDto, ExtendEmpruntDto } from './dto/create-emprunte.dto';
+import { CreateEmpruntDto, CreateEmpruntExterneDto, ReturnEmpruntDto, ExtendEmpruntDto, GetEmpruntsExternesDto } from './dto/create-emprunte.dto';
 import { EmprunteService } from './emprunte.service';
 import { StatutEmprunt } from 'generated/prisma';
 import { JwtService } from '@nestjs/jwt';
-
-
 
 @Controller()
 export class EmprunteController {
   private readonly logger = new Logger(EmprunteController.name);
 
-  constructor(private readonly empruntService: EmprunteService,
+  constructor(
+    private readonly empruntService: EmprunteService,
     private readonly jwtService: JwtService
   ) {}
 
   private extractUserIdFromToken(token: string): string {
     try {
-      // Enlever le préfixe "Bearer " s'il existe
       const cleanToken = token.replace(/^Bearer\s+/, '');
-      
-      // Décoder le token
       const payload = this.jwtService.decode(cleanToken) as any;
       
       if (!payload || (!payload.sub && !payload.id && !payload.userId)) {
         throw new Error('Token invalide: ID utilisateur non trouvé');
       }
       
-      // Retourner l'ID utilisateur (peut être dans sub, id, ou userId selon votre implémentation)
       return payload.sub || payload.id || payload.userId;
     } catch (error) {
       throw new Error(`Erreur lors de l'extraction de l'ID utilisateur: ${error.message}`);
     }
   }
 
-   @MessagePattern('emprunt.user.current.history')
+  
+
+  // ===== EMPRUNTS UTILISATEURS CONNECTÉS =====
+
+  @MessagePattern('emprunt.user.current.history')
   async getCurrentUserHistory(@Payload() data: {
     token: string;
     page?: number;
@@ -43,9 +42,7 @@ export class EmprunteController {
     this.logger.log('Getting history for current user');
     
     try {
-      // Extraire l'ID utilisateur du token
       const userId = this.extractUserIdFromToken(data.token);
-      
       this.logger.log(`Getting history for authenticated user: ${userId}`);
       
       const result = await this.empruntService.getUserEmpruntHistory(
@@ -80,14 +77,12 @@ export class EmprunteController {
     this.logger.log('Getting active emprunts for current user');
     
     try {
-      // Extraire l'ID utilisateur du token
       const userId = this.extractUserIdFromToken(data.token);
-      
       this.logger.log(`Getting active emprunts for authenticated user: ${userId}`);
       
       const result = await this.empruntService.getEmprunts({
         userId: userId,
-        statut: StatutEmprunt.EN_COURS, // Seulement les emprunts actifs
+        statut: StatutEmprunt.EN_COURS,
         page: data.page,
         limit: data.limit
       });
@@ -109,7 +104,7 @@ export class EmprunteController {
     }
   }
 
-  // ===== GESTION DES EMPRUNTS =====
+  // ===== GESTION DES EMPRUNTS INTERNES =====
 
   @MessagePattern('emprunt.create')
   async createEmprunt(@Payload() data: CreateEmpruntDto) {
@@ -118,12 +113,7 @@ export class EmprunteController {
     
     try {
       const emprunt = await this.empruntService.createEmprunt(data);
-
-      // Émettre l'événement de création
-      // Note: Dans un vrai microservice, vous utiliseriez un EventEmitter ou un service de messagerie
       this.logger.log(`Emprunt created: ${emprunt.id}`);
-      
-     
       
       return {
         success: true,
@@ -133,6 +123,32 @@ export class EmprunteController {
     } catch (error) {
       this.logger.error(`Error creating emprunt: ${error.message}`, error.stack);
       
+      return {
+        success: false,
+        error: error.message,
+        code: error.constructor.name
+      };
+    }
+  }
+
+  // ===== GESTION DES EMPRUNTS EXTERNES =====
+
+  @MessagePattern('emprunt.externe.create')
+  async createEmpruntExterne(@Payload() data: CreateEmpruntExterneDto, @Ctx() context: RmqContext) {
+    this.logger.log(`Creating external emprunt for user: ${data.externUserId} from: ${data.universiteEmprunteur}`);
+    
+    try {
+      const emprunt = await this.empruntService.createEmpruntExterne(data);
+      this.logger.log(`External emprunt created: ${emprunt.id}`);
+      
+      
+      return {
+        success: true,
+        data: emprunt,
+        message: 'Emprunt externe créé avec succès'
+      };
+    } catch (error) {
+      this.logger.error(`Error creating external emprunt: ${error.message}`, error.stack);
       
       
       return {
@@ -143,6 +159,9 @@ export class EmprunteController {
     }
   }
 
+
+  // ===== GESTION COMMUNES DES EMPRUNTS =====
+
   @MessagePattern('emprunt.get')
   async getEmprunt(@Payload() data: { id: string }) {
     this.logger.log(`Getting emprunt: ${data.id}`);
@@ -150,16 +169,12 @@ export class EmprunteController {
     try {
       const emprunt = await this.empruntService.getEmpruntById(data.id);
       
-      
-      
       return {
         success: true,
         data: emprunt
       };
     } catch (error) {
       this.logger.error(`Error getting emprunt: ${error.message}`, error.stack);
-      
-     
       
       return {
         success: false,
@@ -177,12 +192,12 @@ export class EmprunteController {
     page?: number;
     limit?: number;
     search?: string;
+    includeExternal?: boolean; // Nouveau paramètre
   }) {
+    this.logger.log('Listing emprunts with filters');
     
     try {
       const result = await this.empruntService.getEmprunts(data);
-      
-      
       
       return {
         success: true,
@@ -191,8 +206,6 @@ export class EmprunteController {
       };
     } catch (error) {
       this.logger.error(`Error listing emprunts: ${error.message}`, error.stack);
-      
-     
       
       return {
         success: false,
@@ -207,21 +220,17 @@ export class EmprunteController {
     this.logger.log(`Returning exemplaires for emprunt: ${data.empruntId}`);
     
     try {
-      const emprunt = await this.empruntService.returnExemplaires(data);
-      
-      this.logger.log(`Exemplaires returned for emprunt: ${emprunt.id}`);
-      
-    
+      const result = await this.empruntService.returnExemplaires(data);
+      this.logger.log(`Exemplaires returned for emprunt: ${result.id}`);
       
       return {
         success: true,
-        data: emprunt,
-        message: 'Exemplaires retournés avec succès'
+        data: result,
+        message: 'Exemplaires retournés avec succès',
+       // penalites: result.penalites || null // Inclure les pénalités s'il y en a
       };
     } catch (error) {
       this.logger.error(`Error returning exemplaires: ${error.message}`, error.stack);
-      
-     
       
       return {
         success: false,
@@ -237,12 +246,8 @@ export class EmprunteController {
     
     try {
       const emprunt = await this.empruntService.extendEmprunt(data);
-      
       this.logger.log(`Emprunt extended: ${emprunt.id}`);
       
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
       
       return {
         success: true,
@@ -252,9 +257,6 @@ export class EmprunteController {
     } catch (error) {
       this.logger.error(`Error extending emprunt: ${error.message}`, error.stack);
       
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
       
       return {
         success: false,
@@ -267,27 +269,31 @@ export class EmprunteController {
   // ===== RECHERCHES SPÉCIFIQUES =====
 
   @MessagePattern('emprunt.retards')
-  async getEmpruntsEnRetard(@Payload() data: {}, @Ctx() context: RmqContext) {
+  async getEmpruntsEnRetard(@Payload() data: {
+    includeExternal?: boolean;
+  }, @Ctx() context: RmqContext) {
     this.logger.log('Getting emprunts en retard');
     
     try {
       const emprunts = await this.empruntService.getEmpruntsEnRetard();
       
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
+      // Filtrer par type si demandé
+      let filteredEmprunts = emprunts;
+      if (data.includeExternal === false) {
+        filteredEmprunts = emprunts.filter(e => e.universiteEmprunteur === 'LOCALE');
+      } else if (data.includeExternal === true) {
+        filteredEmprunts = emprunts.filter(e => e.universiteEmprunteur !== 'LOCALE');
+      }
+      
       
       return {
         success: true,
-        data: emprunts,
-        count: emprunts.length
+        data: filteredEmprunts,
+        count: filteredEmprunts.length
       };
     } catch (error) {
       this.logger.error(`Error getting emprunts en retard: ${error.message}`, error.stack);
       
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
       
       return {
         success: false,
@@ -303,17 +309,20 @@ export class EmprunteController {
     statut?: StatutEmprunt;
     page?: number;
     limit?: number;
+    externUserId?: string;
   }) {
-    this.logger.log(`Getting emprunts for user: ${data.userId}`);
+    this.logger.log(`Getting emprunts for user: ${data.userId} ${
+      data.externUserId
+    }`);
     
     try {
-      const result = await this.empruntService.getEmprunts({
+      const result = await this.empruntService.getMesEmprunts({
         userId: data.userId,
         statut: data.statut,
         page: data.page,
-        limit: data.limit
+        limit: data.limit,
+        externUserId: data.externUserId
       });
-     
       
       return {
         success: true,
@@ -346,9 +355,6 @@ export class EmprunteController {
         data.limit
       );
       
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
       
       return {
         success: true,
@@ -358,9 +364,6 @@ export class EmprunteController {
     } catch (error) {
       this.logger.error(`Error getting user history: ${error.message}`, error.stack);
       
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
       
       return {
         success: false,
@@ -379,9 +382,6 @@ export class EmprunteController {
     try {
       const stats = await this.empruntService.getEmpruntStats();
       
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
       
       return {
         success: true,
@@ -390,9 +390,6 @@ export class EmprunteController {
     } catch (error) {
       this.logger.error(`Error getting emprunt stats: ${error.message}`, error.stack);
       
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
       
       return {
         success: false,
@@ -411,9 +408,6 @@ export class EmprunteController {
     try {
       const result = await this.empruntService.markEmpruntsEnRetard();
       
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
       
       return {
         success: true,
@@ -423,9 +417,6 @@ export class EmprunteController {
     } catch (error) {
       this.logger.error(`Error marking emprunts en retard: ${error.message}`, error.stack);
       
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
       
       return {
         success: false,
@@ -442,7 +433,6 @@ export class EmprunteController {
     this.logger.log(`Checking availability for exemplaires: ${data.exemplaireIds.join(', ')}`);
     
     try {
-      // Cette logique pourrait être dans le service
       const exemplaires = await this.empruntService['prisma'].exemplairePhysique.findMany({
         where: {
           id: { in: data.exemplaireIds }
@@ -450,18 +440,17 @@ export class EmprunteController {
         select: {
           id: true,
           etat: true,
+          nombreDisponible: true,
         }
       });
       
       const availability = exemplaires.map(ex => ({
         id: ex.id,
         etat: ex.etat,
-        peutEtreEmprunte:  ex.etat !== 'PERDU'
+        nombreDisponible: ex.nombreDisponible,
+        peutEtreEmprunte: ex.etat !== 'PERDU' && ex.nombreDisponible > 0
       }));
       
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
       
       return {
         success: true,
@@ -470,9 +459,6 @@ export class EmprunteController {
     } catch (error) {
       this.logger.error(`Error checking availability: ${error.message}`, error.stack);
       
-      const channel = context.getChannelRef();
-      const originalMsg = context.getMessage();
-      channel.ack(originalMsg);
       
       return {
         success: false,
@@ -493,15 +479,34 @@ export class EmprunteController {
     this.logger.log(`User suspended: ${data.userId}, reason: ${data.reason}`);
     
     try {
-      // Logique pour gérer la suspension d'un utilisateur
-      // Par exemple, bloquer les nouveaux emprunts, envoyer des notifications, etc.
-      
-      // Optionnel: Marquer les emprunts en cours avec un flag spécial
-      // ou envoyer une notification aux bibliothécaires
-      
+      // Optionnel: Bloquer les nouveaux emprunts ou envoyer des notifications
       this.logger.log(`Handled user suspension for: ${data.userId}`);
     } catch (error) {
       this.logger.error(`Error handling user suspension: ${error.message}`, error.stack);
+    }
+  }
+
+  @EventPattern('external.user.blocked')
+  async handleExternalUserBlocked(@Payload() data: {
+    externUserId: string;
+    universiteEmprunteur: string;
+    reason: string;
+  }) {
+    this.logger.log(`External user blocked: ${data.externUserId} from ${data.universiteEmprunteur}`);
+    
+    try {
+      // Logique pour gérer le blocage d'un utilisateur externe
+      // Marquer tous ses emprunts en cours, envoyer des notifications
+      
+      const empruntsEnCours = await this.empruntService.getEmprunts({
+        search: data.externUserId,
+        statut: StatutEmprunt.EN_COURS
+      });
+      
+      this.logger.log(`Found ${empruntsEnCours.data.length} active emprunts for blocked external user`);
+      
+    } catch (error) {
+      this.logger.error(`Error handling external user blocking: ${error.message}`, error.stack);
     }
   }
 
@@ -515,8 +520,6 @@ export class EmprunteController {
     
     try {
       // Logique pour gérer un exemplaire endommagé
-      // Mettre à jour l'état, notifier les utilisateurs concernés, etc.
-      
       this.logger.log(`Handled exemplaire damage for: ${data.exemplaireId}`);
     } catch (error) {
       this.logger.error(`Error handling exemplaire damage: ${error.message}`, error.stack);
@@ -533,8 +536,6 @@ export class EmprunteController {
     
     try {
       // Logique pour gérer un exemplaire perdu
-      // Marquer comme perdu, calculer les pénalités, etc.
-      
       this.logger.log(`Handled exemplaire loss for: ${data.exemplaireId}`);
     } catch (error) {
       this.logger.error(`Error handling exemplaire loss: ${error.message}`, error.stack);
@@ -544,21 +545,22 @@ export class EmprunteController {
   // ===== TÂCHES PÉRIODIQUES =====
 
   @EventPattern('cron.daily.check.retards')
-  async handleDailycheckRetards(@Payload() data: {}) {
+  async handleDailyCheckRetards(@Payload() data: {}) {
     this.logger.log('Running daily check for retards');
     
     try {
       const result = await this.empruntService.markEmpruntsEnRetard();
       
       if (result.count > 0) {
-        // Émettre un événement pour notifier les autres services
         this.logger.log(`Found ${result.count} new retards`);
         
-        // Optionnel: Envoyer des notifications aux utilisateurs en retard
         const empruntsEnRetard = await this.empruntService.getEmpruntsEnRetard();
         
-        // Ici vous pourriez émettre des événements pour chaque utilisateur en retard
-        // pour déclencher l'envoi d'emails ou de notifications
+        // Séparer les emprunts locaux et externes pour différents traitements
+        const empruntsLocaux = empruntsEnRetard.filter(e => e.universiteEmprunteur === 'LOCALE');
+        const empruntsExternes = empruntsEnRetard.filter(e => e.universiteEmprunteur !== 'LOCALE');
+        
+        this.logger.log(`Retards locaux: ${empruntsLocaux.length}, Retards externes: ${empruntsExternes.length}`);
       }
       
       this.logger.log('Daily retard check completed');
@@ -566,4 +568,5 @@ export class EmprunteController {
       this.logger.error(`Error in daily retard check: ${error.message}`, error.stack);
     }
   }
+
 }

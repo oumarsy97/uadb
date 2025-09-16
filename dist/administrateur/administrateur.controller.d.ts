@@ -7,17 +7,15 @@ export declare class AdministrateurController {
     createAdministrateur(createAdministrateurDto: CreateUtilisateurDto): Promise<{
         universite: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
-            ville: string;
             adresse: string | null;
+            ville: string;
             siteWeb: string | null;
         } | null;
         user: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
@@ -27,11 +25,13 @@ export declare class AdministrateurController {
             role: import("generated/prisma").$Enums.RoleUser;
             derniereConnexion: Date | null;
             estActif: boolean;
+            createdAt: Date;
+            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
-        id: string;
         userId: string;
+        id: string;
         numeroAdmin: string;
     }>;
     findAll(options: {
@@ -41,8 +41,6 @@ export declare class AdministrateurController {
     }): Promise<({
         user: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
@@ -52,19 +50,19 @@ export declare class AdministrateurController {
             role: import("generated/prisma").$Enums.RoleUser;
             derniereConnexion: Date | null;
             estActif: boolean;
+            createdAt: Date;
+            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
     } & {
-        id: string;
         userId: string;
+        id: string;
         numeroAdmin: string;
     })[]>;
     findOne(id: string): Promise<({
         user: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
@@ -74,25 +72,27 @@ export declare class AdministrateurController {
             role: import("generated/prisma").$Enums.RoleUser;
             derniereConnexion: Date | null;
             estActif: boolean;
+            createdAt: Date;
+            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
     } & {
-        id: string;
         userId: string;
+        id: string;
         numeroAdmin: string;
     }) | null>;
     update(data: {
         id: string;
         updateData: Partial<UpdateAdministrateurDto>;
     }): Promise<{
-        id: string;
         userId: string;
+        id: string;
         numeroAdmin: string;
     }>;
     remove(id: string): Promise<{
-        id: string;
         userId: string;
+        id: string;
         numeroAdmin: string;
     }>;
 }

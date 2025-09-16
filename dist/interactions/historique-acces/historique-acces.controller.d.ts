@@ -30,13 +30,13 @@ export declare class HistoriqueAccesController {
         enregistrerAccesDto: EnregistrerAccesDto;
         token: string;
     }): Promise<{
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        typeAcces: import("generated/prisma").$Enums.TypeAcces;
+        ressourceId: string | null;
         universiteRess: string;
+        typeAcces: import("generated/prisma").$Enums.TypeAcces;
         externRessourceId: string | null;
     } | {
         error: boolean;
@@ -47,13 +47,13 @@ export declare class HistoriqueAccesController {
         historiqueDto: GetHistoriqueUtilisateurDto;
         token: string;
     }): Promise<{
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        typeAcces: import("generated/prisma").$Enums.TypeAcces;
+        ressourceId: string | null;
         universiteRess: string;
+        typeAcces: import("generated/prisma").$Enums.TypeAcces;
         externRessourceId: string | null;
     }[] | {
         error: boolean;
@@ -64,13 +64,13 @@ export declare class HistoriqueAccesController {
         historiqueRessourceDto: GetHistoriqueRessourceDto;
         token?: string;
     }): Promise<{
+        userId: string;
         id: string;
-        ressourceId: string | null;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-        typeAcces: import("generated/prisma").$Enums.TypeAcces;
+        ressourceId: string | null;
         universiteRess: string;
+        typeAcces: import("generated/prisma").$Enums.TypeAcces;
         externRessourceId: string | null;
     }[] | {
         error: boolean;

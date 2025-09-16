@@ -10,8 +10,6 @@ export declare class BibliothecaireService {
         user: {
             role: string;
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             nom: string;
             telephone: string | null;
@@ -19,22 +17,24 @@ export declare class BibliothecaireService {
             image: string | null;
             derniereConnexion: Date | null;
             estActif: boolean;
+            createdAt: Date;
+            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
         universite: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
-            ville: string;
             adresse: string | null;
+            ville: string;
             siteWeb: string | null;
         } | null;
+        userId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
         numeroBibliothecaire: string;
     }>;
     findAll(options?: {
@@ -44,8 +44,6 @@ export declare class BibliothecaireService {
     }): import("generated/prisma").Prisma.PrismaPromise<({
         user: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
@@ -55,21 +53,21 @@ export declare class BibliothecaireService {
             role: import("generated/prisma").$Enums.RoleUser;
             derniereConnexion: Date | null;
             estActif: boolean;
+            createdAt: Date;
+            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
     } & {
+        userId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
         numeroBibliothecaire: string;
     })[]>;
     findOne(id: string): import("generated/prisma").Prisma.Prisma__BibliothecaireClient<({
         user: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
@@ -79,21 +77,21 @@ export declare class BibliothecaireService {
             role: import("generated/prisma").$Enums.RoleUser;
             derniereConnexion: Date | null;
             estActif: boolean;
+            createdAt: Date;
+            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
     } & {
+        userId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
         numeroBibliothecaire: string;
     }) | null, null, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     update(id: string, updateBibliothecaireDto: UpdateBibliothecaireDto): Promise<{
         user: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             motDePasse: string;
             nom: string;
@@ -103,21 +101,23 @@ export declare class BibliothecaireService {
             role: import("generated/prisma").$Enums.RoleUser;
             derniereConnexion: Date | null;
             estActif: boolean;
+            createdAt: Date;
+            updatedAt: Date;
             preferencesRecommandation: string | null;
             frequenceRecommandation: import("generated/prisma").$Enums.FrequenceRecommandation;
         };
     } & {
+        userId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
         numeroBibliothecaire: string;
     }>;
     remove(id: string): import("generated/prisma").Prisma.Prisma__BibliothecaireClient<{
+        userId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
         numeroBibliothecaire: string;
     }, never, import("generated/prisma/runtime/library").DefaultArgs, import("generated/prisma").Prisma.PrismaClientOptions>;
     private generateNumero;

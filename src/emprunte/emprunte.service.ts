@@ -1,6 +1,6 @@
-import { Injectable, BadRequestException, NotFoundException, ForbiddenException } from '@nestjs/common';
+import { Injectable, BadRequestException, NotFoundException, ForbiddenException, InternalServerErrorException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateEmpruntDto, ReturnEmpruntDto, ExtendEmpruntDto, EmpruntStats } from './dto/create-emprunte.dto';
+import { CreateEmpruntDto, ReturnEmpruntDto, ExtendEmpruntDto, EmpruntStats, CreateEmpruntExterneDto } from './dto/create-emprunte.dto';
 import { EtatExemplaire , StatutEmprunt } from 'generated/prisma';
 
 
@@ -9,39 +9,97 @@ export class EmprunteService {
   constructor(private readonly prisma: PrismaService,) {}
 
   /**
-   * Créer un nouvel emprunt
+   * Créer un emprunt externe (pour utilisateurs d'autres universités)
+   */
+  async createEmpruntExterne(dto: CreateEmpruntExterneDto) {
+    // Vérifier la disponibilité des exemplaires
+    const exemplaires = await this.prisma.exemplairePhysique.findMany({
+      where: {
+        id: { in: dto.exemplaireIds },
+        nombreDisponible: { gt: 0 },
+        // Vérifier que les exemplaires sont autorisés pour emprunts externes
+        // autorisationEmpruntExterne: true // À ajouter dans votre modèle si nécessaire
+      }
+    });
+
+    if (exemplaires.length !== dto.exemplaireIds.length) {
+      throw new BadRequestException('Certains exemplaires ne sont pas disponibles pour emprunt externe');
+    }
+
+    // Durée spécifique pour emprunts externes (généralement plus courte)
+    const dureeEmpruntExterne = dto.dureeEmprunt || 7; // 7 jours par défaut pour externes
+    const dateRetourPrevue = new Date();
+    dateRetourPrevue.setDate(dateRetourPrevue.getDate() + dureeEmpruntExterne);
+
+    const result = await this.prisma.$transaction(async (prisma) => {
+      // Créer l'emprunt externe
+      const emprunt = await prisma.emprunt.create({
+        data: {
+          userId: null, // Pas d'utilisateur local
+          externUserId: dto.externUserId,
+          dateRetourPrevue,
+          universiteEmprunteur: dto.universiteEmprunteur,
+          statut: StatutEmprunt.EN_COURS,
+          exemplaireId: exemplaires[0].id
+        }
+      });
+
+      // Créer les relations emprunt-exemplaire
+      const empruntExemplaires = await Promise.all(
+        dto.exemplaireIds.map(exemplaireId =>
+          prisma.empruntExemplaire.create({
+            data: {
+              empruntId: emprunt.id,
+              exemplaireId,
+              dateRetourPrevue
+            }
+          })
+        )
+      );
+
+      // Marquer les exemplaires comme non disponibles
+      await prisma.exemplairePhysique.updateMany({
+        where: { id: { in: dto.exemplaireIds } },
+        data: { nombreDisponible: { decrement: 1 } }
+      });
+
+      return { emprunt, empruntExemplaires };
+    });
+
+    return this.getEmpruntById(result.emprunt.id);
+  }
+
+
+
+    /**
+   * Créer un nouvel emprunt (interne ou externe)
    */
   async createEmprunt(dto: CreateEmpruntDto) {
-    // Vérifier si l'utilisateur existe
-    // const user = await this.prisma.user.findUnique({
-    //   where: { id: dto.userId }
-    // });
-
-    // if (!user) {
-    //   throw new NotFoundException('Utilisateur non trouvé');
-    // }
+    // Si c'est un emprunt externe, utiliser la méthode dédiée
+    if (dto.universiteEmprunteur && dto.universiteEmprunteur !== 'uadb') {
+      return this.createEmpruntExterne({
+        exemplaireIds: dto.exemplaireIds,
+        externUserId: dto.empreunteurId, // Considéré comme ID externe
+        universiteEmprunteur: dto.universiteEmprunteur,
+        dureeEmprunt: dto.dureeEmprunt,
+        commentaire: dto.commentaire
+      });
+    }
 
     // Vérifier la disponibilité des exemplaires
     const exemplaires = await this.prisma.exemplairePhysique.findMany({
       where: {
         id: { in: dto.exemplaireIds },
-        nombreDisponible: { gt: 0 }, // Doit être disponible
+        nombreDisponible: { gt: 0 },
       }
     });
-    console.log(`Exemplaires trouvés: ${exemplaires.length}, demandés: ${dto.exemplaireIds.length}`);
 
     if (exemplaires.length !== dto.exemplaireIds.length) {
       throw new BadRequestException('Certains exemplaires ne sont pas disponibles');
     }
 
-    // Déterminer si c'est un emprunt externe
-    const isEmpruntExterne = dto.universiteEmprunteur && dto.universiteEmprunteur !== 'uadb';
-
-
     // Calculer la durée d'emprunt
     let dureeEmprunt = dto.dureeEmprunt || 14; // 14 jours par défaut
-    console.log(dto.empreunteurId);
-
     const dateRetourPrevue = new Date();
     dateRetourPrevue.setDate(dateRetourPrevue.getDate() + dureeEmprunt);
 
@@ -52,9 +110,9 @@ export class EmprunteService {
         data: {
           userId: dto.empreunteurId,
           dateRetourPrevue,
-          universiteEmprunteur: dto.universiteEmprunteur || 'LOCALE',
+          universiteEmprunteur: 'uadb',
           statut: StatutEmprunt.EN_COURS,
-          exemplaireId: exemplaires[0].id // Champ requis pour compatibilité
+          exemplaireId: exemplaires[0].id
         }
       });
 
@@ -84,7 +142,7 @@ export class EmprunteService {
   }
 
   /**
-   * Retourner des exemplaires d'un emprunt
+   * Retourner des exemplaires d'un emprunt (interne ou externe)
    */
   async returnExemplaires(dto: ReturnEmpruntDto) {
     const emprunt = await this.prisma.emprunt.findUnique({
@@ -110,6 +168,9 @@ export class EmprunteService {
 
     const dateRetourEffective = new Date();
 
+    // Calculer les pénalités pour emprunts en retard
+    //const penalites = await this.calculatePenalities(emprunt, exemplairesToReturn, dateRetourEffective);
+
     await this.prisma.$transaction(async (prisma) => {
       // Mettre à jour les relations emprunt-exemplaire
       await prisma.empruntExemplaire.updateMany({
@@ -124,20 +185,19 @@ export class EmprunteService {
         }
       });
 
-      // Mettre à jour l'état des exemplaires si spécifié
+      // Mettre à jour l'état des exemplaires
       if (dto.nouvelEtat) {
         await prisma.exemplairePhysique.updateMany({
           where: { id: { in: dto.exemplaireIds } },
           data: { 
             etat: dto.nouvelEtat,
-            nombreDisponible: { increment: 1 } // Incrémenter le nombre disponible
+            nombreDisponible: { increment: 1 }
           }
         });
       } else {
-        // Simplement marquer comme disponible
         await prisma.exemplairePhysique.updateMany({
           where: { id: { in: dto.exemplaireIds } },
-          data: {  }
+          data: { nombreDisponible: { increment: 1 } }
         });
       }
 
@@ -159,11 +219,19 @@ export class EmprunteService {
           }
         });
       }
+
+      // Enregistrer les pénalités s'il y en a
+      // if (penalites.montant > 0) {
+      //   await this.createPenalite(prisma, emprunt, penalites);
+      // }
     });
 
-    return this.getEmpruntById(dto.empruntId);
+    const result = await this.getEmpruntById(dto.empruntId);
+    return {
+      ...result,
+      //penalites: penalites.montant > 0 ? penalites : null
+    };
   }
-
   /**
    * Prolonger un emprunt
    */
@@ -186,9 +254,7 @@ export class EmprunteService {
       throw new BadRequestException('Cet emprunt ne peut pas être prolongé');
     }
 
-    
-
-    const nouvelleDateRetour = new Date();
+    const nouvelleDateRetour = new Date(emprunt.dateRetourPrevue);
     nouvelleDateRetour.setDate(nouvelleDateRetour.getDate() + dto.nouvelleDuree);
 
     await this.prisma.$transaction(async (prisma) => {
@@ -210,6 +276,13 @@ export class EmprunteService {
           dateRetourPrevue: nouvelleDateRetour
         }
       });
+    });
+    //incrementer renouvellement
+    await this.prisma.emprunt.update({
+      where: { id: dto.empruntId },
+      data: {
+        renouvellement: { increment: 1 }
+      }
     });
 
     return this.getEmpruntById(dto.empruntId);
@@ -257,6 +330,153 @@ export class EmprunteService {
     return emprunt;
   }
 
+ async getMesEmprunts(params: {
+  userId?: string;
+  statut?: StatutEmprunt;
+  externUserId?: string;
+  page?: number | string;
+  limit?: number | string;
+  search?: string;
+}) {
+  const {
+    userId,
+    statut,
+    externUserId,
+    page = 1,
+    limit = 10,
+    search
+  } = params;
+
+  // Vérification des paramètres requis
+  if (!userId && !externUserId) {
+    throw new BadRequestException('userId ou externUserId est requis');
+  }
+
+  // Conversion et validation des paramètres de pagination
+  const pageNum = typeof page === 'string' ? parseInt(page, 10) : page;
+  const limitNum = typeof limit === 'string' ? parseInt(limit, 10) : limit;
+  
+  const validPage = Math.max(1, pageNum || 1);
+  const validLimit = Math.max(1, Math.min(100, limitNum || 10));
+  
+  const skip = (validPage - 1) * validLimit;
+  const take = validLimit;
+
+  // Construction de la clause WHERE
+  const whereClause: any = {
+    OR: []
+  };
+
+  // Ajout des conditions pour userId ou externUserId
+  if (userId) {
+    whereClause.OR.push({ userId });
+  }
+  if (externUserId) {
+    whereClause.OR.push({ externUserId });
+  }
+
+  // Ajout du filtre statut si fourni
+  if (statut) {
+    whereClause.statut = statut;
+  }
+
+  // Ajout du filtre de recherche si fourni
+  if (search && search.trim()) {
+    whereClause.AND = [
+      {
+        OR: [
+          {
+            user: {
+              OR: [
+                { nom: { contains: search.trim(), mode: 'insensitive' } },
+                { prenom: { contains: search.trim(), mode: 'insensitive' } },
+                { email: { contains: search.trim(), mode: 'insensitive' } }
+              ]
+            }
+          },
+          {
+            empruntExemplaires: {
+              some: {
+                exemplaire: {
+                  ressource: {
+                    OR: [
+                      { titre: { contains: search.trim(), mode: 'insensitive' } },
+                      { auteur: { contains: search.trim(), mode: 'insensitive' } },
+                      { isbnglobale: { contains: search.trim(), mode: 'insensitive' } }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    ];
+  }
+
+  try {
+    // Exécution des requêtes en parallèle pour optimiser les performances
+    const [emprunts, total] = await Promise.all([
+      this.prisma.emprunt.findMany({
+        where: whereClause,
+        skip,
+        take,
+        include: {
+          user: {
+            select: {
+              id: true,
+              nom: true,
+              prenom: true,
+              email: true
+            }
+          },
+          empruntExemplaires: {
+            include: {
+              exemplaire: {
+                include: {
+                  ressource: {
+                    select: {
+                      id: true,
+                      titre: true,
+                      auteur: true,
+                      isbnglobale: true,
+                      image: true,
+                      description: true,
+                      nomAuteur: true
+
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        orderBy: {
+          createdAt: 'desc' // Tri par date de création décroissante
+        }
+      }),
+      this.prisma.emprunt.count({
+        where: whereClause
+      })
+    ]);
+
+    return {
+      data: emprunts,
+      meta: {
+        total: Number(total),
+        page: validPage,
+        limit: validLimit,
+        totalPages: Math.ceil(Number(total) / validLimit)
+      }
+    };
+
+  } catch (error) {
+    // Gestion des erreurs
+    throw new InternalServerErrorException(
+      'Erreur lors de la récupération des emprunts: ' + error.message
+    );
+  }
+}
   /**
    * Lister les emprunts avec filtres
    */
@@ -269,6 +489,7 @@ export class EmprunteService {
 async getEmprunts(params: {
   userId?: string;
   statut?: StatutEmprunt;
+  externUserId?: string;
   universiteEmprunteur?: string;
   page?: number | string;
   limit?: number | string;
@@ -280,7 +501,8 @@ async getEmprunts(params: {
     universiteEmprunteur,
     page = 1,
     limit = 10,
-    search
+    search,
+    externUserId
   } = params;
 
   // Convertir en nombres entiers
@@ -298,6 +520,7 @@ async getEmprunts(params: {
   if (userId) where.userId = userId;
   if (statut) where.statut = statut;
   if (universiteEmprunteur) where.universiteEmprunteur = universiteEmprunteur;
+  if (externUserId) where.externUserId = externUserId;
 
   // VERSION 1: Recherche simple (testez d'abord celle-ci)
   if (search) {
@@ -336,14 +559,7 @@ async getEmprunts(params: {
           include: {
             exemplaire: {
               include: {
-                ressource: {
-                  select: {
-                    id: true,
-                    titre: true,
-                    auteur: true,
-                    isbnglobale: true
-                  }
-                }
+                ressource: true,
               }
             }
           }
@@ -518,12 +734,15 @@ async getUserEmpruntHistory(userId: string, page: number | string = 1, limit: nu
           include: {
             exemplaire: {
               include: {
-                ressource: {
+                ressource:{
                   select: {
                     id: true,
                     titre: true,
                     auteur: true,
-                    isbnglobale: true
+                    isbnglobale: true,
+                    image: true,
+                    description: true
+
                   }
                 }
               }

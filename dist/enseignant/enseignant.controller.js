@@ -18,13 +18,37 @@ const microservices_1 = require("@nestjs/microservices");
 const enseignant_service_1 = require("./enseignant.service");
 const create_enseignant_dto_1 = require("./dto/create-enseignant.dto");
 const update_enseignant_dto_1 = require("./dto/update-enseignant.dto");
+const jwt_1 = require("@nestjs/jwt");
 let EnseignantController = class EnseignantController {
     enseignantService;
-    constructor(enseignantService) {
+    jwtService;
+    constructor(enseignantService, jwtService) {
         this.enseignantService = enseignantService;
+        this.jwtService = jwtService;
+    }
+    extractUserIdFromToken(token) {
+        try {
+            const cleanToken = token.replace(/^Bearer\s+/, '');
+            const payload = this.jwtService.decode(cleanToken);
+            if (!payload || !payload.sub && !payload.id && !payload.userId) {
+                throw new Error('Token invalide: ID utilisateur non trouvé');
+            }
+            return payload.sub || payload.id || payload.userId;
+        }
+        catch (error) {
+            throw new Error(`Erreur lors de l'extraction de l'ID utilisateur: ${error.message}`);
+        }
     }
     create(createEnseignantDto) {
         return this.enseignantService.create(createEnseignantDto);
+    }
+    findRessourcesByEnseignantId(data) {
+        const enseignantId = this.extractUserIdFromToken(data.token);
+        return this.enseignantService.findRessourcesByEnseignantId(enseignantId, {
+            limit: data.limit,
+            page: data.page,
+            search: data.search
+        });
     }
     findAll(options) {
         return this.enseignantService.findAll(options);
@@ -48,7 +72,14 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], EnseignantController.prototype, "create", null);
 __decorate([
-    (0, microservices_1.MessagePattern)('findAllEnseignant'),
+    (0, microservices_1.MessagePattern)('findRessourcesByEnseignantId'),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], EnseignantController.prototype, "findRessourcesByEnseignantId", null);
+__decorate([
+    (0, microservices_1.MessagePattern)('findAllEnseignants'),
     __param(0, (0, microservices_1.Payload)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -77,6 +108,7 @@ __decorate([
 ], EnseignantController.prototype, "remove", null);
 exports.EnseignantController = EnseignantController = __decorate([
     (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [enseignant_service_1.EnseignantService])
+    __metadata("design:paramtypes", [enseignant_service_1.EnseignantService,
+        jwt_1.JwtService])
 ], EnseignantController);
 //# sourceMappingURL=enseignant.controller.js.map

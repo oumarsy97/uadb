@@ -8,9 +8,9 @@ export declare class UfrController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             universiteId: string;
         };
@@ -29,9 +29,9 @@ export declare class UfrController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             universiteId: string;
         }[];
@@ -55,9 +55,9 @@ export declare class UfrController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             universiteId: string;
         };
@@ -75,9 +75,9 @@ export declare class UfrController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             universiteId: string;
         }[];
@@ -96,9 +96,9 @@ export declare class UfrController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             universiteId: string;
         };
@@ -129,9 +129,9 @@ export declare class UfrController {
         success: boolean;
         data: {
             id: string;
+            nom: string;
             createdAt: Date;
             updatedAt: Date;
-            nom: string;
             description: string | null;
             universiteId: string;
         }[];

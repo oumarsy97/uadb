@@ -17,10 +17,26 @@ const common_1 = require("@nestjs/common");
 const microservices_1 = require("@nestjs/microservices");
 const utilisateurs_service_1 = require("./utilisateurs.service");
 const create_utilisateur_dto_1 = require("./dto/create-utilisateur.dto");
+const jwt_1 = require("@nestjs/jwt");
 let UtilisateursController = class UtilisateursController {
     utilisateursService;
-    constructor(utilisateursService) {
+    jwtService;
+    constructor(utilisateursService, jwtService) {
         this.utilisateursService = utilisateursService;
+        this.jwtService = jwtService;
+    }
+    extractUserIdFromToken(token) {
+        try {
+            const cleanToken = token.replace(/^Bearer\s+/, '');
+            const payload = this.jwtService.decode(cleanToken);
+            if (!payload || !payload.sub && !payload.id && !payload.userId) {
+                throw new Error('Token invalide: ID utilisateur non trouvé');
+            }
+            return payload.sub || payload.id || payload.userId;
+        }
+        catch (error) {
+            throw new Error(`Erreur lors de l'extraction de l'ID utilisateur: ${error.message}`);
+        }
     }
     async create(createUtilisateurDto) {
         return this.utilisateursService.create(createUtilisateurDto);
@@ -60,6 +76,10 @@ let UtilisateursController = class UtilisateursController {
     }
     async updateDerniereConnexion(data) {
         return this.utilisateursService.updateDerniereConnexion(data.id);
+    }
+    async updateMotDePasse(data) {
+        const userId = this.extractUserIdFromToken(data.token);
+        return this.utilisateursService.updateMotDePasse(userId, data.updateData);
     }
 };
 exports.UtilisateursController = UtilisateursController;
@@ -126,8 +146,16 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UtilisateursController.prototype, "updateDerniereConnexion", null);
+__decorate([
+    (0, microservices_1.MessagePattern)('updateMotDePasse'),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UtilisateursController.prototype, "updateMotDePasse", null);
 exports.UtilisateursController = UtilisateursController = __decorate([
     (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [utilisateurs_service_1.UtilisateursService])
+    __metadata("design:paramtypes", [utilisateurs_service_1.UtilisateursService,
+        jwt_1.JwtService])
 ], UtilisateursController);
 //# sourceMappingURL=utilisateurs.controller.js.map
